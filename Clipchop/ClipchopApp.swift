@@ -8,6 +8,10 @@
 import SwiftUI
 import MenuBarExtraAccess
 
+func quit() {
+    NSApp.terminate(nil)
+}
+
 @main
 struct ClipchopApp: App {
     @State var isMenuBarItemInserted: Bool = true
@@ -25,10 +29,7 @@ struct ClipchopApp: App {
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: .constant(true)) {
-            SettingsLink {
-                Text("Settings…")
-            }
-            .keyboardShortcut(",", modifiers: .command)
+            MenuBarView()
         }
         .menuBarExtraStyle(.menu)
         .menuBarExtraAccess(isPresented: $isMenuBarItemInserted) { menuBarItem in

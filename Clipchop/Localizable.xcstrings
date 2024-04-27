@@ -1,0 +1,70 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ requires Accessibility Permissions to take over your clipboard. No data will be collected remotely." : {
+
+    },
+    "About" : {
+
+    },
+    "Accessibility Access" : {
+
+    },
+    "Accessibility Access Alert: Content" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ needs Accessibility Access to take over your clipboard. No data will be collected remotely."
+          }
+        }
+      }
+    },
+    "Accessibility Access Alert: Title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ needs Accessibility Access"
+          }
+        }
+      }
+    },
+    "Clipchop" : {
+
+    },
+    "Example" : {
+
+    },
+    "General" : {
+
+    },
+    "Grant" : {
+
+    },
+    "Granted" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Permissions" : {
+
+    },
+    "Quit" : {
+
+    },
+    "Quit %@" : {
+
+    },
+    "Recent Copied" : {
+
+    },
+    "Settings…" : {
+
+    }
+  },
+  "version" : "1.0"
+}

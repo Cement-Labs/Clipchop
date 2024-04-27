@@ -1,5 +1,5 @@
 {
-  "originHash" : "1f63e56e56f3ac24ee3fcebc245d2e0ab129406d8ccc6f80aeed771d3601be57",
+  "originHash" : "8044106da52f01bfc516e414529e72269dec12381977f2b032c1bdd059db1cb7",
   "pins" : [
     {
       "identity" : "defaults",
@@ -8,6 +8,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "1064186b3d1f225543aa8450927c20e3ee34ea16"
+      }
+    },
+    {
+      "identity" : "keyboardshortcuts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
+      "state" : {
+        "branch" : "main",
+        "revision" : "09e4a10ed6b65b3a40fe07b6bf0c84809313efc4"
       }
     },
     {
@@ -26,6 +35,15 @@
       "state" : {
         "revision" : "f5896b47e15e114975897354c7e1082c51a2bffd",
         "version" : "1.0.5"
+      }
+    },
+    {
+      "identity" : "sauce",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Clipy/Sauce",
+      "state" : {
+        "branch" : "master",
+        "revision" : "19c4448ffedb77d9642a198a8e03da6239a44dc4"
       }
     },
     {

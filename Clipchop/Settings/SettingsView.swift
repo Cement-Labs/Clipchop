@@ -8,6 +8,25 @@
 import SwiftUI
 import SFSafeSymbols
 
+@ViewBuilder
+func section(
+    _ titleKey: LocalizedStringKey,
+    @ViewBuilder content: () -> some View
+) -> some View {
+    Section {
+        content()
+    } header: {
+        HStack {
+            Text(titleKey)
+                .bold()
+                .font(.title)
+            
+            Spacer()
+        }
+    }
+    .padding(2)
+}
+
 struct SettingsView: View {
     @State var selectedNavigation: Int = 0
     
@@ -15,7 +34,7 @@ struct SettingsView: View {
     func navigationLink(
         _ titleKey: LocalizedStringKey,
         image: () -> Image,
-        content: () -> some View
+        @ViewBuilder content: () -> some View
     ) -> some View {
         NavigationLink {
             content()
@@ -56,7 +75,7 @@ struct SettingsView: View {
         .toolbarTitleDisplayMode(.inlineLarge)
         .toolbar {
             Button("Quit") {
-                
+                quit()
             }
             .controlSize(.extraLarge)
         }

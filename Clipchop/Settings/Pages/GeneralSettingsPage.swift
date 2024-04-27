@@ -9,16 +9,10 @@ import SwiftUI
 
 struct GeneralSettingsPage: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Section {
-                Text("Test")
-                Text("Test")
-            } header: {
-                Text("Permissions")
-                    .font(.title)
-                    .bold()
-            }
+        Form {
+            PermissionsSection()
         }
+        .padding()
     }
 }
 
