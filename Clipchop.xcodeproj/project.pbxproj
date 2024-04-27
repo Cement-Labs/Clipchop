@@ -7,16 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
+		281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */; };
+		281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */; };
+		282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */; };
+		282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692762BDCACC600D1656E /* AboutSettingsPage.swift */; };
+		2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692792BDCAE6000D1656E /* Bundle+Extensions.swift */; };
 		288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288295172BC41F7300392B29 /* ClipchopApp.swift */; };
-		2882951A2BC41F7300392B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288295192BC41F7300392B29 /* ContentView.swift */; };
 		2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951B2BC41F7400392B29 /* Assets.xcassets */; };
 		288295202BC41F7400392B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951F2BC41F7400392B29 /* Preview Assets.xcassets */; };
+		28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */; };
+		28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
+		282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsPage.swift; sourceTree = "<group>"; };
+		282692762BDCACC600D1656E /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
+		282692792BDCAE6000D1656E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		288295142BC41F7300392B29 /* Clipchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288295172BC41F7300392B29 /* ClipchopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopApp.swift; sourceTree = "<group>"; };
-		288295192BC41F7300392B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2882951B2BC41F7400392B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2882951D2BC41F7400392B29 /* Clipchop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Clipchop.entitlements; sourceTree = "<group>"; };
 		2882951F2BC41F7400392B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -27,12 +38,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */,
+				28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */,
+				281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		281C28C92BDC99FD00DBEE4B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				282692732BDCACB100D1656E /* Pages */,
+				281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		281C28CE2BDC9A8600DBEE4B /* Menu Bar */ = {
+			isa = PBXGroup;
+			children = (
+				281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */,
+			);
+			path = "Menu Bar";
+			sourceTree = "<group>";
+		};
+		282692732BDCACB100D1656E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */,
+				282692762BDCACC600D1656E /* AboutSettingsPage.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		282692782BDCAE5500D1656E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2882950B2BC41F7300392B29 = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +100,10 @@
 		288295162BC41F7300392B29 /* Clipchop */ = {
 			isa = PBXGroup;
 			children = (
+				282692782BDCAE5500D1656E /* Extensions */,
+				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
+				281C28C92BDC99FD00DBEE4B /* Settings */,
 				288295172BC41F7300392B29 /* ClipchopApp.swift */,
-				288295192BC41F7300392B29 /* ContentView.swift */,
 				2882951B2BC41F7400392B29 /* Assets.xcassets */,
 				2882951D2BC41F7400392B29 /* Clipchop.entitlements */,
 				2882951E2BC41F7400392B29 /* Preview Content */,
@@ -85,6 +135,11 @@
 			dependencies = (
 			);
 			name = Clipchop;
+			packageProductDependencies = (
+				281C28C72BDC99C600DBEE4B /* SettingsAccess */,
+				28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */,
+				28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */,
+			);
 			productName = Clipchop;
 			productReference = 288295142BC41F7300392B29 /* Clipchop.app */;
 			productType = "com.apple.product-type.application";
@@ -111,8 +166,16 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 2882950B2BC41F7300392B29;
+			packageReferences = (
+				288295442BC4210900392B29 /* XCRemoteSwiftPackageReference "Defaults" */,
+				288295452BC4212200392B29 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				288295462BC4213700392B29 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				281C28C62BDC99C600DBEE4B /* XCRemoteSwiftPackageReference "SettingsAccess" */,
+				28ABFFA72BDCA92500B02E76 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */,
+			);
 			productRefGroup = 288295152BC41F7300392B29 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,8 +202,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2882951A2BC41F7300392B29 /* ContentView.swift in Sources */,
+				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
+				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
+				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
+				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
+				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +219,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -199,6 +267,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -213,6 +282,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -254,6 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -292,10 +363,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = studio.nnn.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -330,10 +401,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = studio.nnn.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -359,6 +430,67 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		281C28C62BDC99C600DBEE4B /* XCRemoteSwiftPackageReference "SettingsAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orchetect/SettingsAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+		288295442BC4210900392B29 /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		288295452BC4212200392B29 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		288295462BC4213700392B29 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+		28ABFFA72BDCA92500B02E76 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orchetect/MenuBarExtraAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		281C28C72BDC99C600DBEE4B /* SettingsAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 281C28C62BDC99C600DBEE4B /* XCRemoteSwiftPackageReference "SettingsAccess" */;
+			productName = SettingsAccess;
+		};
+		28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 288295462BC4213700392B29 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
+		};
+		28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28ABFFA72BDCA92500B02E76 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */;
+			productName = MenuBarExtraAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2882950C2BC41F7300392B29 /* Project object */;
 }

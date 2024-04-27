@@ -1,21 +1,18 @@
 //
-//  MenuBarIcon.swift
+//  MenuBarIconView.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/4/27.
 //
 
 import SwiftUI
+import SFSafeSymbols
 
-struct MenuBarIcon: View {
+struct MenuBarIconView: View {
     var body: some View {
-        Image("AppSymbol")
+        Image(.appSymbol)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 22)
+            .frame(height: 22)
     }
-}
-
-#Preview {
-    MenuBarIcon()
 }

@@ -6,10 +6,41 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
 
 struct SettingsView: View {
+    @State var selectedNavigation: Int = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationSplitView {
+            List(selection: $selectedNavigation) {
+                NavigationLink {
+                    GeneralSettingsPage()
+                } label: {
+                    Image(systemSymbol: .gearshape)
+                    Text("General")
+                }
+                .tag(0)
+                
+                NavigationLink {
+                    AboutSettingsPage()
+                } label: {
+                    Image(systemSymbol: .infoCircle)
+                    Text("About")
+                }
+                .tag(1)
+            }
+            .toolbar(removing: .sidebarToggle)
+        } detail: {
+        }
+        .navigationTitle(Bundle.main.appName)
+        .toolbarTitleDisplayMode(.inlineLarge)
+        .toolbar {
+            Button("Quit") {
+                
+            }
+            .controlSize(.extraLarge)
+        }
     }
 }
 

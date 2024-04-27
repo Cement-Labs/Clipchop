@@ -6,12 +6,45 @@
 //
 
 import SwiftUI
+import MenuBarExtraAccess
 
 @main
 struct ClipchopApp: App {
+    @State var isMenuBarItemInserted: Bool = true
+    
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        Settings {
+            SettingsView()
+                .task {
+                    let window = NSApplication.shared.keyWindow
+                    window?.toolbarStyle = .unified
+                    window?.titlebarAppearsTransparent = true
+                }
+        }
+        
+        MenuBarExtra("Clipchop", image: "Empty", isInserted: .constant(true)) {
+            SettingsLink {
+                Text("Settings…")
+            }
+            .keyboardShortcut(",", modifiers: .command)
+        }
+        .menuBarExtraStyle(.menu)
+        .menuBarExtraAccess(isPresented: $isMenuBarItemInserted) { menuBarItem in
+            guard
+                // Init once
+                let button = menuBarItem.button,
+                button.subviews.count == 0
+            else {
+                return
+            }
+            
+            menuBarItem.length = 24
+            
+            let view = NSHostingView(rootView: MenuBarIconView())
+            view.frame.size = .init(width: 24, height: NSStatusBar.system.thickness)
+            button.addSubview(view)
+            
+            
         }
     }
 }
