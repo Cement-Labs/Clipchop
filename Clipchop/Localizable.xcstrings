@@ -32,6 +32,9 @@
         }
       }
     },
+    "Clipboard" : {
+
+    },
     "Clipchop" : {
 
     },
@@ -72,6 +75,9 @@
 
     },
     "Starts with macOS" : {
+
+    },
+    "Syncing" : {
 
     },
     "You can open %@ again to access this page." : {

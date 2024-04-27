@@ -17,6 +17,8 @@ struct GeneralSettingsPage: View {
             GlobalBehaviorsSection()
         }
         .padding()
+        
+        Spacer()
     }
 }
 

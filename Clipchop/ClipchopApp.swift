@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MenuBarExtraAccess
+import Defaults
 
 func quit() {
     NSApp.terminate(nil)
@@ -14,7 +15,17 @@ func quit() {
 
 @main
 struct ClipchopApp: App {
-    @State var isMenuBarItemInserted: Bool = true
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @State var isMenuBarPresented: Bool = true
+    
+    @Default(.menuBarItemEnabled) var menuBarItemEnabled
+    
+#if DEBUG
+    init() {
+        // Reset menu bar item visibility
+        Defaults[.menuBarItemEnabled] = true
+    }
+#endif
     
     var body: some Scene {
         Settings {
@@ -22,17 +33,17 @@ struct ClipchopApp: App {
                 .task {
                     if let window = NSApp.windows.last {
                         window.toolbarStyle = .unified
+                        window.titlebarSeparatorStyle = .none
                     }
                 }
                 .frame(minHeight: 400)
-                .fixedSize(horizontal: true, vertical: false)
         }
         
-        MenuBarExtra("Clipchop", image: "Empty", isInserted: .constant(true)) {
+        MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
             MenuBarView()
         }
         .menuBarExtraStyle(.menu)
-        .menuBarExtraAccess(isPresented: $isMenuBarItemInserted) { menuBarItem in
+        .menuBarExtraAccess(isPresented: $isMenuBarPresented) { menuBarItem in
             guard
                 // Init once
                 let button = menuBarItem.button,

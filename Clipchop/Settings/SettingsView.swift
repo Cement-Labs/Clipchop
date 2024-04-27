@@ -44,7 +44,14 @@ func withCaption(
 }
 
 struct SettingsView: View {
-    @State var selectedNavigation: Int = 0
+    @State var selectedNavigation: Navigation = .general
+    
+    enum Navigation {
+        case general
+        case clipboard
+        case syncing
+        case about
+    }
     
     @ViewBuilder
     func navigationLink(
@@ -56,12 +63,15 @@ struct SettingsView: View {
             content()
         } label: {
             image()
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.tertiary)
                 .imageScale(.large)
+                .frame(width: 24)
+            
             Text(titleKey)
                 .font(.title3)
         }
-        .padding(6)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 7.5)
     }
     
     var body: some View {
@@ -72,20 +82,33 @@ struct SettingsView: View {
                 } content: {
                     GeneralSettingsPage()
                 }
-                .tag(0)
+                .tag(Navigation.general)
+                
+                navigationLink("Clipboard") {
+                    Image(systemSymbol: .clipboard)
+                } content: {
+                    SyncingSettingsPage()
+                }
+                .tag(Navigation.clipboard)
+                
+                navigationLink("Syncing") {
+                    Image(systemSymbol: .checkmarkIcloud)
+                } content: {
+                    SyncingSettingsPage()
+                }
+                .tag(Navigation.syncing)
                 
                 navigationLink("About") {
                     Image(systemSymbol: .infoCircle)
                 } content: {
                     AboutSettingsPage()
                 }
-                .tag(1)
+                .tag(Navigation.about)
             }
-            .toolbar(removing: .sidebarToggle)
-            .navigationSplitViewColumnWidth(150)
+            .navigationSplitViewColumnWidth(180)
         } detail: {
             Spacer()
-                .navigationSplitViewColumnWidth(600)
+                .navigationSplitViewColumnWidth(550)
         }
         .navigationTitle(Bundle.main.appName)
         .toolbarTitleDisplayMode(.inlineLarge)

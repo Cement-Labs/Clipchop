@@ -30,6 +30,9 @@
 		28D8CE6B2BDD142F008B17B5 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */; };
 		28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE6C2BDD2458008B17B5 /* GlobalBehaviorsSection.swift */; };
 		28D8CE6F2BDD2492008B17B5 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE6E2BDD2492008B17B5 /* LaunchAtLogin */; };
+		28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE702BDD2746008B17B5 /* SyncingSettingsPage.swift */; };
+		28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */; };
+		28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,9 @@
 		28D8CE682BDD1260008B17B5 /* PermissionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsSection.swift; sourceTree = "<group>"; };
 		28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		28D8CE6C2BDD2458008B17B5 /* GlobalBehaviorsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalBehaviorsSection.swift; sourceTree = "<group>"; };
+		28D8CE702BDD2746008B17B5 /* SyncingSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncingSettingsPage.swift; sourceTree = "<group>"; };
+		28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardSettingsPage.swift; sourceTree = "<group>"; };
+		28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */,
+				28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */,
+				28D8CE702BDD2746008B17B5 /* SyncingSettingsPage.swift */,
 				282692762BDCACC600D1656E /* AboutSettingsPage.swift */,
 			);
 			path = Pages;
@@ -128,11 +136,12 @@
 		288295162BC41F7300392B29 /* Clipchop */ = {
 			isa = PBXGroup;
 			children = (
+				288295172BC41F7300392B29 /* ClipchopApp.swift */,
+				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
 				28D8CE5D2BDCF7E5008B17B5 /* Clip History */,
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
 				281C28C92BDC99FD00DBEE4B /* Settings */,
-				288295172BC41F7300392B29 /* ClipchopApp.swift */,
 				282692782BDCAE5500D1656E /* Extensions */,
 				2882951E2BC41F7400392B29 /* Preview Content */,
 				2882951B2BC41F7400392B29 /* Assets.xcassets */,
@@ -266,12 +275,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D8CE612BDCF9B8008B17B5 /* MenuBarView.swift in Sources */,
+				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
 				28D8CE642BDD0DEE008B17B5 /* PerimissionsManager.swift in Sources */,
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
+				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
+				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
 				28D8CE5F2BDCF81C008B17B5 /* ClipHistoryPanel.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				28D8CE692BDD1260008B17B5 /* PermissionsSection.swift in Sources */,
