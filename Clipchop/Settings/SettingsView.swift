@@ -27,6 +27,19 @@ func section(
     .padding(2)
 }
 
+func withCaption(
+    _ descriptionKey: LocalizedStringKey,
+    @ViewBuilder content: () -> some View
+) -> some View {
+    VStack(alignment: .leading) {
+        content()
+        
+        Text(descriptionKey)
+            .font(.caption)
+            .foregroundStyle(.placeholder)
+    }
+}
+
 struct SettingsView: View {
     @State var selectedNavigation: Int = 0
     

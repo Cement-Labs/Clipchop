@@ -18,7 +18,9 @@ struct PermissionsSection: View {
     
     var body: some View {
         section("Permissions") {
-            VStack(alignment: .leading) {
+            withCaption("""
+\(Bundle.main.appName) requires Accessibility Permissions to take over your clipboard. No data will be collected remotely.
+""") {
                 HStack {
                     Text("Accessibility Access")
                     
@@ -52,10 +54,6 @@ struct PermissionsSection: View {
                         isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
                     }
                 }
-                
-                Text("\(Bundle.main.appName) requires Accessibility Permissions to take over your clipboard. No data will be collected remotely.")
-                    .font(.caption)
-                    .foregroundStyle(.placeholder)
             }
         }
     }
