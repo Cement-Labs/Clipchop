@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@ requires Accessibility Permissions to take over your clipboard. No data will be collected remotely." : {
+    "%@ needs Accessibility Access to take over your clipboard. No data will be collected remotely." : {
 
     },
     "About" : {
@@ -16,7 +16,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%@ needs Accessibility Access to take over your clipboard. No data will be collected remotely."
+            "value" : "Accessibility Access is required for %@ to take over your clipboard. No data will be collected remotely."
           }
         }
       }
@@ -41,6 +41,9 @@
     "General" : {
 
     },
+    "Global Behaviors" : {
+
+    },
     "Grant" : {
 
     },
@@ -63,6 +66,15 @@
 
     },
     "Settings…" : {
+
+    },
+    "Show menu bar item" : {
+
+    },
+    "Starts with macOS" : {
+
+    },
+    "You can open %@ again to access this page." : {
 
     }
   },

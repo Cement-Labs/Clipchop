@@ -9,5 +9,5 @@ import Foundation
 import Defaults
 
 extension Defaults.Keys {
-    static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true, iCloud: true)
+    static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
 }

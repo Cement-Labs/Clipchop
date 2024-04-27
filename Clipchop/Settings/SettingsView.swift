@@ -29,14 +29,17 @@ func section(
 
 func withCaption(
     _ descriptionKey: LocalizedStringKey,
+    condition: Bool = true,
     @ViewBuilder content: () -> some View
 ) -> some View {
     VStack(alignment: .leading) {
         content()
         
-        Text(descriptionKey)
-            .font(.caption)
-            .foregroundStyle(.placeholder)
+        if condition {
+            Text(descriptionKey)
+                .font(.caption)
+                .foregroundStyle(.placeholder)
+        }
     }
 }
 

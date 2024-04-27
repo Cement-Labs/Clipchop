@@ -11,6 +11,10 @@ struct GeneralSettingsPage: View {
     var body: some View {
         Form {
             PermissionsSection()
+            
+            Divider()
+            
+            GlobalBehaviorsSection()
         }
         .padding()
     }

@@ -19,7 +19,7 @@ struct PermissionsSection: View {
     var body: some View {
         section("Permissions") {
             withCaption("""
-\(Bundle.main.appName) requires Accessibility Permissions to take over your clipboard. No data will be collected remotely.
+\(Bundle.main.appName) needs Accessibility Access to take over your clipboard. No data will be collected remotely.
 """) {
                 HStack {
                     Text("Accessibility Access")

@@ -40,7 +40,7 @@ class PermissionsManager {
                 format: String(localized: .init(
                     "Accessibility Access Alert: Content",
                     defaultValue: """
-%@ needs Accessibility Access to take over your clipboard. No data will be collected remotely.
+Accessibility Access is required for \(Bundle.main.appName) to take over your clipboard. No data will be collected remotely.
 """
                 )),
                 Bundle.main.appName, Bundle.main.appName
