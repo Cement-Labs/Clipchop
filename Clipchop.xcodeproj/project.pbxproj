@@ -13,6 +13,8 @@
 		282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */; };
 		282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692762BDCACC600D1656E /* AboutSettingsPage.swift */; };
 		2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692792BDCAE6000D1656E /* Bundle+Extensions.swift */; };
+		282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */; };
+		282692992BDCC9F200D1656E /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 282692982BDCC9F200D1656E /* Defaults */; };
 		288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288295172BC41F7300392B29 /* ClipchopApp.swift */; };
 		2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951B2BC41F7400392B29 /* Assets.xcassets */; };
 		288295202BC41F7400392B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951F2BC41F7400392B29 /* Preview Assets.xcassets */; };
@@ -26,6 +28,7 @@
 		282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsPage.swift; sourceTree = "<group>"; };
 		282692762BDCACC600D1656E /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
 		282692792BDCAE6000D1656E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Extensions.swift"; sourceTree = "<group>"; };
 		288295142BC41F7300392B29 /* Clipchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288295172BC41F7300392B29 /* ClipchopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopApp.swift; sourceTree = "<group>"; };
 		2882951B2BC41F7400392B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				282692992BDCC9F200D1656E /* Defaults in Frameworks */,
 				28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */,
 				28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */,
 				281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */,
@@ -77,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
+				282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				281C28C72BDC99C600DBEE4B /* SettingsAccess */,
 				28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */,
 				28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */,
+				282692982BDCC9F200D1656E /* Defaults */,
 			);
 			productName = Clipchop;
 			productReference = 288295142BC41F7300392B29 /* Clipchop.app */;
@@ -207,6 +213,7 @@
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
+				282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */,
 				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +486,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 281C28C62BDC99C600DBEE4B /* XCRemoteSwiftPackageReference "SettingsAccess" */;
 			productName = SettingsAccess;
+		};
+		282692982BDCC9F200D1656E /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 288295442BC4210900392B29 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
 		};
 		28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;

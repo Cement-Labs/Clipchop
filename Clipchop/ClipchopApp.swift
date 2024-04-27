@@ -16,10 +16,12 @@ struct ClipchopApp: App {
         Settings {
             SettingsView()
                 .task {
-                    let window = NSApplication.shared.keyWindow
-                    window?.toolbarStyle = .unified
-                    window?.titlebarAppearsTransparent = true
+                    if let window = NSApp.windows.last {
+                        window.toolbarStyle = .unified
+                    }
                 }
+                .frame(minHeight: 400)
+                .fixedSize(horizontal: true, vertical: false)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: .constant(true)) {
@@ -43,8 +45,6 @@ struct ClipchopApp: App {
             let view = NSHostingView(rootView: MenuBarIconView())
             view.frame.size = .init(width: 24, height: NSStatusBar.system.thickness)
             button.addSubview(view)
-            
-            
         }
     }
 }

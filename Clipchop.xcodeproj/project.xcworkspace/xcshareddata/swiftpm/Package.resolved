@@ -1,5 +1,5 @@
 {
-  "originHash" : "b2bf0dfc974581ccc243c0e446ae18b517246d601df3a6e0a7f491edf4a33daa",
+  "originHash" : "1f63e56e56f3ac24ee3fcebc245d2e0ab129406d8ccc6f80aeed771d3601be57",
   "pins" : [
     {
       "identity" : "defaults",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
         "branch" : "main",
-        "revision" : "38925e3cfacf3fb89a81a35b1cd44fd5a5b7e0fa"
+        "revision" : "1064186b3d1f225543aa8450927c20e3ee34ea16"
       }
     },
     {
