@@ -15,6 +15,16 @@
 		2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692792BDCAE6000D1656E /* Bundle+Extensions.swift */; };
 		282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */; };
 		282692992BDCC9F200D1656E /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 282692982BDCC9F200D1656E /* Defaults */; };
+		2871978F2BDE7281004BCDA3 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871978E2BDE7281004BCDA3 /* Clipboard.swift */; };
+		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
+		287197942BDE7360004BCDA3 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197932BDE7360004BCDA3 /* HistoryItem.swift */; };
+		287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197952BDE7399004BCDA3 /* KeyChord.swift */; };
+		287197982BDE73B9004BCDA3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197972BDE73B9004BCDA3 /* CoreDataManager.swift */; };
+		2871979A2BDE746B004BCDA3 /* HistoryItemContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197992BDE746B004BCDA3 /* HistoryItemContent.swift */; };
+		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
+		2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */; };
+		287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */; };
+		287197A32BDE7679004BCDA3 /* Storage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 287197A12BDE7679004BCDA3 /* Storage.xcdatamodeld */; };
 		288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288295172BC41F7300392B29 /* ClipchopApp.swift */; };
 		2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951B2BC41F7400392B29 /* Assets.xcassets */; };
 		288295202BC41F7400392B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951F2BC41F7400392B29 /* Preview Assets.xcassets */; };
@@ -42,6 +52,16 @@
 		282692762BDCACC600D1656E /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
 		282692792BDCAE6000D1656E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Extensions.swift"; sourceTree = "<group>"; };
+		2871978E2BDE7281004BCDA3 /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
+		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
+		287197932BDE7360004BCDA3 /* HistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
+		287197952BDE7399004BCDA3 /* KeyChord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChord.swift; sourceTree = "<group>"; };
+		287197972BDE73B9004BCDA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		287197992BDE746B004BCDA3 /* HistoryItemContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItemContent.swift; sourceTree = "<group>"; };
+		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
+		2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
+		287197A22BDE7679004BCDA3 /* Storage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Storage.xcdatamodel; sourceTree = "<group>"; };
 		288295142BC41F7300392B29 /* Clipchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288295172BC41F7300392B29 /* ClipchopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopApp.swift; sourceTree = "<group>"; };
 		2882951B2BC41F7400392B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,8 +133,37 @@
 				28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */,
 				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
 				282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */,
+				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
+				2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2871978C2BDE723C004BCDA3 /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				2871978D2BDE7269004BCDA3 /* Data */,
+				28D8CE5E2BDCF81C008B17B5 /* ClipHistoryPanel.swift */,
+			);
+			path = Clipboard;
+			sourceTree = "<group>";
+		};
+		2871978D2BDE7269004BCDA3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				287197922BDE732C004BCDA3 /* History */,
+				2871978E2BDE7281004BCDA3 /* Clipboard.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		287197922BDE732C004BCDA3 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				287197932BDE7360004BCDA3 /* HistoryItem.swift */,
+				287197992BDE746B004BCDA3 /* HistoryItemContent.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 		2882950B2BC41F7300392B29 = {
@@ -139,7 +188,7 @@
 				288295172BC41F7300392B29 /* ClipchopApp.swift */,
 				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
-				28D8CE5D2BDCF7E5008B17B5 /* Clip History */,
+				2871978C2BDE723C004BCDA3 /* Clipboard */,
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
 				281C28C92BDC99FD00DBEE4B /* Settings */,
 				282692782BDCAE5500D1656E /* Extensions */,
@@ -147,6 +196,7 @@
 				2882951B2BC41F7400392B29 /* Assets.xcassets */,
 				28D8CE652BDD0FCB008B17B5 /* Localizable.xcstrings */,
 				2882951D2BC41F7400392B29 /* Clipchop.entitlements */,
+				287197A12BDE7679004BCDA3 /* Storage.xcdatamodeld */,
 			);
 			path = Clipchop;
 			sourceTree = "<group>";
@@ -159,18 +209,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		28D8CE5D2BDCF7E5008B17B5 /* Clip History */ = {
-			isa = PBXGroup;
-			children = (
-				28D8CE5E2BDCF81C008B17B5 /* ClipHistoryPanel.swift */,
-			);
-			path = "Clip History";
-			sourceTree = "<group>";
-		};
 		28D8CE622BDD0DE1008B17B5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				287197952BDE7399004BCDA3 /* KeyChord.swift */,
+				2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */,
 				28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */,
+				287197972BDE73B9004BCDA3 /* CoreDataManager.swift */,
+				2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -277,19 +323,29 @@
 				28D8CE612BDCF9B8008B17B5 /* MenuBarView.swift in Sources */,
 				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
+				287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */,
 				28D8CE642BDD0DEE008B17B5 /* PerimissionsManager.swift in Sources */,
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
+				287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */,
+				2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */,
+				287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
+				2871979A2BDE746B004BCDA3 /* HistoryItemContent.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
+				287197A32BDE7679004BCDA3 /* Storage.xcdatamodeld in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
+				287197982BDE73B9004BCDA3 /* CoreDataManager.swift in Sources */,
 				28D8CE5F2BDCF81C008B17B5 /* ClipHistoryPanel.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
+				2871978F2BDE7281004BCDA3 /* Clipboard.swift in Sources */,
 				28D8CE692BDD1260008B17B5 /* PermissionsSection.swift in Sources */,
 				282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */,
+				287197942BDE7360004BCDA3 /* HistoryItem.swift in Sources */,
 				28D8CE6B2BDD142F008B17B5 /* View+Extension.swift in Sources */,
 				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
+				2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +665,20 @@
 			productName = LaunchAtLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		287197A12BDE7679004BCDA3 /* Storage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				287197A22BDE7679004BCDA3 /* Storage.xcdatamodel */,
+			);
+			currentVersion = 287197A22BDE7679004BCDA3 /* Storage.xcdatamodel */;
+			name = Storage.xcdatamodeld;
+			path = /Users/Kr/Documents/Swift/Clipchop/Clipchop/Storage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2882950C2BC41F7300392B29 /* Project object */;
 }
