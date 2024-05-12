@@ -45,10 +45,13 @@ func withCaption(
 
 struct SettingsView: View {
     @State var selectedNavigation: Navigation = .general
+    @State var apps = Apps()
     
     enum Navigation {
         case general
+        case customization
         case clipboard
+        case excludedApps
         case syncing
         case about
     }
@@ -84,12 +87,26 @@ struct SettingsView: View {
                 }
                 .tag(Navigation.general)
                 
+                navigationLink("Customization") {
+                    Image(systemSymbol: .pencilAndOutline)
+                } content: {
+                    CustomizationSettingsPage()
+                }
+                .tag(Navigation.customization)
+                
                 navigationLink("Clipboard") {
                     Image(systemSymbol: .clipboard)
                 } content: {
                     SyncingSettingsPage()
                 }
                 .tag(Navigation.clipboard)
+                
+                navigationLink("Excluded Apps") {
+                    Image(systemSymbol: .lockAppDashed)
+                } content: {
+                    ExcludedAppsSettingsPage()
+                }
+                .tag(Navigation.excludedApps)
                 
                 navigationLink("Syncing") {
                     Image(systemSymbol: .checkmarkIcloud)
