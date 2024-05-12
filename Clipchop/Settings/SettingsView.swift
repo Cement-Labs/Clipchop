@@ -107,6 +107,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .lockAppDashed)
                 } content: {
                     ExcludedAppsSettingsPage()
+                        .environmentObject(apps)
                 }
                 .tag(Navigation.excludedApps)
                 

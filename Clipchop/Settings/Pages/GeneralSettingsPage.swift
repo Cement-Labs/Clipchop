@@ -14,7 +14,6 @@ struct GeneralSettingsPage: View {
             
             GlobalBehaviorsSection()
         }
-        .padding()
     }
 }
 

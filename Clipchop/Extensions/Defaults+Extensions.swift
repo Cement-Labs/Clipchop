@@ -21,7 +21,7 @@ extension Defaults.Keys {
     
     static let timerInterval = Key<TimeInterval>("timerInterval", default: 1)
     
-    static let ignoreAppsEnabled = Key<Bool>("ignoreAppsEnabled", default: true)
+    static let excludeAppsEnabled = Key<Bool>("excludeAppsEnabled", default: true)
     static let applicationExcludeList = Key<[String]>("applicationExcludeList", default: [])
     
     static let historyPreservationTime = Key<HistoryPreservationTime>("historyPreservationTime", default: .forever)

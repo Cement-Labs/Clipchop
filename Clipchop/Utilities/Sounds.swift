@@ -32,7 +32,7 @@ class Sounds {
             
             func deserialize(_ object: String?) -> Sounds.Sound? {
                 if let object {
-                    return Sounds.sounds.first(where: { $0.assetName == object })
+                    return Sounds.sounds.first { $0.assetName == object }
                 } else {
                     return Sounds.defaultSound
                 }

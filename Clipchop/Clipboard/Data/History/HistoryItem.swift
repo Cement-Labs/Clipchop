@@ -180,7 +180,7 @@ class HistoryItem: NSManagedObject {
                 ].contains(content.type)
             }
             .allSatisfy { content in
-                getContents().contains(where: { $0 == content})
+                getContents().contains { $0 == content}
             }
     }
     
@@ -233,9 +233,9 @@ class HistoryItem: NSManagedObject {
     
     private func contentData(_ types: [NSPasteboard.PasteboardType]) -> Data? {
         let contents = getContents()
-        let content = contents.first(where: { content in
+        let content = contents.first { content in
             return types.contains(NSPasteboard.PasteboardType(content.type))
-        })
+        }
         
         return content?.value
     }

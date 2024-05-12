@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct ExcludedAppsSettingsPage: View {
+    @EnvironmentObject var apps: Apps
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            ExcludedAppListSection()
+                .environmentObject(apps)
+        }
     }
 }
 
 #Preview {
     ExcludedAppsSettingsPage()
+        .formStyle(.grouped)
+        .environmentObject(Apps())
 }

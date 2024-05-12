@@ -28,7 +28,7 @@ class Icons {
             
             func deserialize(_ object: String?) -> Icons.Icon? {
                 if let object {
-                    return Icons.icons.first(where: { $0.assetName == object })
+                    return Icons.icons.first { $0.assetName == object }
                 } else {
                     return Icons.defaultAppIcon
                 }

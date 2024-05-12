@@ -32,6 +32,9 @@
     "Accessibility Access is needed to take over your clipboard." : {
 
     },
+    "Allow app excluding" : {
+
+    },
     "App icon" : {
 
     },
@@ -111,6 +114,9 @@
     "Example" : {
 
     },
+    "Exclude apps to prevent %@ copying their contents." : {
+
+    },
     "Excluded Apps" : {
 
     },
@@ -163,6 +169,9 @@
     "Later" : {
 
     },
+    "No Application Excluded" : {
+
+    },
     "Open Settings" : {
 
     },
@@ -176,6 +185,9 @@
 
     },
     "Recent Copied" : {
+
+    },
+    "Remove" : {
 
     },
     "Settings…" : {
@@ -232,6 +244,9 @@
 
     },
     "Syncing" : {
+
+    },
+    "Use custom accent color" : {
 
     },
     "You can open %@ again to access this page." : {
