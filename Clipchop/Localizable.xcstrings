@@ -1,7 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@ needs Accessibility Access to take over your clipboard. No data will be collected remotely." : {
+    "%@ needs Accessibility Access to take over your clipboard." : {
+
+    },
+    "%@ needs Full Disk Access to generate file previews." : {
 
     },
     "About" : {
@@ -16,7 +19,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Accessibility Access is required for %@ to take over your clipboard. No data will be collected remotely."
+            "value" : "Accessibility Access is required for %@ to take over your clipboard."
           }
         }
       }
@@ -27,10 +30,52 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%@ needs Accessibility Access"
+            "value" : "%@ Needs Accessibility Access"
           }
         }
       }
+    },
+    "App icon" : {
+
+    },
+    "App Icon: Aerugo" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Aerugo"
+          }
+        }
+      }
+    },
+    "App Icon: Beta" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clipchop Beta"
+          }
+        }
+      }
+    },
+    "App Icon: Stable" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clipchop"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+
+    },
+    "Clip more to unlock more! You've already clipped %llu times." : {
+
     },
     "Clipboard" : {
 
@@ -38,8 +83,39 @@
     "Clipchop" : {
 
     },
+    "Customization" : {
+
+    },
     "Example" : {
 
+    },
+    "Excluded Apps" : {
+
+    },
+    "Full Disk Access" : {
+
+    },
+    "Full Disk Access Alert: Content" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Full Disk Access is required for %@ to generate file previews."
+          }
+        }
+      }
+    },
+    "Full Disk Access Alert: Title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ Needs Full Disk Access"
+          }
+        }
+      }
     },
     "General" : {
 
@@ -54,6 +130,15 @@
 
     },
     "Hello, World!" : {
+
+    },
+    "key_used_error" : {
+
+    },
+    "Later" : {
+
+    },
+    "Open Settings" : {
 
     },
     "Permissions" : {
@@ -73,6 +158,50 @@
     },
     "Show menu bar item" : {
 
+    },
+    "Sound: Bloop" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bloop"
+          }
+        }
+      }
+    },
+    "Sound: None" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "None"
+          }
+        }
+      }
+    },
+    "Sound: Pop" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pop"
+          }
+        }
+      }
+    },
+    "Sound: Tap" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tap"
+          }
+        }
+      }
     },
     "Starts with macOS" : {
 

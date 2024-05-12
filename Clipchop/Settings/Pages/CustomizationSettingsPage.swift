@@ -10,16 +10,13 @@ import Defaults
 import SFSafeSymbols
 
 struct CustomizationSettingsPage: View {
-    @Default(.appIcon) var appIcon
     @Default(.sound) var sound
-    
     @Default(.accentColor) var accentColor
-    
     @Default(.timesClipped) var timesClipped
 
     var body: some View {
         Form {
-            
+            AppearanceSection()
         }
     }
 }

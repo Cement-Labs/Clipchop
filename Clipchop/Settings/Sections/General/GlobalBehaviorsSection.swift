@@ -17,6 +17,8 @@ struct GlobalBehaviorsSection: View {
             HStack {
                 Text("Starts with macOS")
                 
+                Spacer()
+                
                 LaunchAtLogin.Toggle {
                     EmptyView()
                 }
@@ -27,6 +29,8 @@ You can open \(Bundle.main.appName) again to access this page.
 """) {
                 HStack {
                     Text("Show menu bar item")
+                    
+                    Spacer()
                     
                     Toggle(isOn: $menuBarItemEnabled) {
                         EmptyView()
@@ -41,4 +45,5 @@ You can open \(Bundle.main.appName) again to access this page.
     Form {
         GlobalBehaviorsSection()
     }
+    .formStyle(.grouped)
 }

@@ -16,15 +16,8 @@ func section(
     Section {
         content()
     } header: {
-        HStack {
-            Text(titleKey)
-                .bold()
-                .font(.title)
-            
-            Spacer()
-        }
+        Text(titleKey)
     }
-    .padding(2)
 }
 
 func withCaption(
@@ -135,6 +128,7 @@ struct SettingsView: View {
             }
             .controlSize(.extraLarge)
         }
+        .formStyle(.grouped)
     }
 }
 

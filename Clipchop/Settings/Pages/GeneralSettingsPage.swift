@@ -12,16 +12,13 @@ struct GeneralSettingsPage: View {
         Form {
             PermissionsSection()
             
-            Divider()
-            
             GlobalBehaviorsSection()
         }
         .padding()
-        
-        Spacer()
     }
 }
 
 #Preview {
     GeneralSettingsPage()
+        .formStyle(.grouped)
 }

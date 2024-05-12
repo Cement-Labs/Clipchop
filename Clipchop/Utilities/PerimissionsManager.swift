@@ -41,7 +41,7 @@ class PermissionsManager {
                 format: String(localized: .init(
                     "Accessibility Access Alert: Content",
                     defaultValue: """
-Accessibility Access is required for %@ to take over your clipboard. No data will be collected remotely.
+Accessibility Access is required for %@ to take over your clipboard.
 """
                 )),
                 Bundle.main.appName
@@ -78,7 +78,7 @@ Accessibility Access is required for %@ to take over your clipboard. No data wil
                     format: String(localized: .init(
                         "Full Disk Access Alert: Content",
                         defaultValue: """
-Full Disk Access is required for %@ to generate file previews. No data will be collected remotely.
+Full Disk Access is required for %@ to generate file previews.
 """
                     )),
                     Bundle.main.appName

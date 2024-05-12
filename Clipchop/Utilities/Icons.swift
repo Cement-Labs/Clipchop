@@ -8,7 +8,7 @@
 import SwiftUI
 import Defaults
 
-class Icons: ObservableObject {
+class Icons {
     struct Icon: Hashable, Defaults.Serializable {
         var name: String?
         var assetName: String
@@ -49,7 +49,7 @@ class Icons: ObservableObject {
     static let icons: [Icon] = [
         Icon(
             name: .init(localized: .init("App Icon: Stable", defaultValue: "Clipchop")),
-            assetName: "AppIcon-Public",
+            assetName: "AppIcon-Stable",
             unlockThreshold: 0
         ),
         Icon(
@@ -61,9 +61,10 @@ class Icons: ObservableObject {
             name: .init(localized: .init("App Icon: Aerugo", defaultValue: "Aerugo")),
             assetName: "AppIcon-Aerugo",
             unlockThreshold: 25
-        )]
+        )
+    ]
     
-    static func returnUnlockedIcons() -> [Icon] {
+    static var unlockedIcons: [Icon] {
         var returnValue: [Icon] = []
         for icon in icons where icon.unlockThreshold <= Defaults[.timesClipped] {
             returnValue.append(icon)

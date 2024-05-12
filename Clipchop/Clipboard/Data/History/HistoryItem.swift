@@ -10,6 +10,7 @@ import Cocoa
 import CoreData
 import Sauce
 
+/*
 // Code from https://github.com/p0deje/Maccy
 @objc(HistoryItem)
 class HistoryItem: NSManagedObject {
@@ -246,4 +247,4 @@ class HistoryItem: NSManagedObject {
             .compactMap { $0.value }
     }
 }
-
+ */

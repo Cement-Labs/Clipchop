@@ -9,6 +9,7 @@ import Foundation
 import AppKit
 import Sauce
 
+/*
 // Code from https://github.com/p0deje/Maccy
 class Clipboard {
     static let shared = Clipboard()
@@ -272,4 +273,4 @@ class Clipboard {
         return false
     }
 }
-
+ */

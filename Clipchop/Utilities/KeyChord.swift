@@ -10,6 +10,7 @@ import AppKit
 import KeyboardShortcuts
 import Sauce
 
+/*
 enum KeyChord: CaseIterable {
     // Fetch paste from Edit / Paste menu item.
     // Fallback to ⌘V if unavailable.
@@ -145,4 +146,4 @@ enum KeyChord: CaseIterable {
         .option
     ])
 }
-
+ */

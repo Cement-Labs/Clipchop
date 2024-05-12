@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+/*
 // Code from https://github.com/p0deje/Maccy
 @objc(HistoryItemContent)
 class HistoryItemContent: NSManagedObject {
@@ -31,4 +32,4 @@ class HistoryItemContent: NSManagedObject {
         self.value = value
     }
 }
-
+ */
