@@ -86,6 +86,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .gearshape)
                 } content: {
                     GeneralSettingsPage()
+                        .padding()
                 }
                 .tag(Navigation.general)
                 
@@ -93,6 +94,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .pencilAndOutline)
                 } content: {
                     CustomizationSettingsPage()
+                        .padding()
                 }
                 .tag(Navigation.customization)
                 
@@ -100,6 +102,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .clipboard)
                 } content: {
                     SyncingSettingsPage()
+                        .padding()
                 }
                 .tag(Navigation.clipboard)
                 
@@ -107,6 +110,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .lockAppDashed)
                 } content: {
                     ExcludedAppsSettingsPage()
+                        .padding()
                         .environmentObject(apps)
                 }
                 .tag(Navigation.excludedApps)
@@ -115,6 +119,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .checkmarkIcloud)
                 } content: {
                     SyncingSettingsPage()
+                        .padding()
                 }
                 .tag(Navigation.syncing)
                 
@@ -122,6 +127,7 @@ struct SettingsView: View {
                     Image(systemSymbol: .infoCircle)
                 } content: {
                     AboutSettingsPage()
+                        .padding()
                 }
                 .tag(Navigation.about)
             }

@@ -71,34 +71,38 @@ struct ExcludedAppListSection: View {
             .foregroundStyle(.quinary)
             .overlay {
                 HStack(spacing: 5) {
+                    Spacer()
+                    
+                    // Remove
+                    Button {
+                        removeSelected()
+                    } label: {
+                        buildFooterButton(systemSymbol: .minus)
+                    }
+                    .buttonStyle(.borderless)
+                    .disabled(selection.isEmpty)
+                    
+                    // Add
                     Menu {
                         InstalledAppsMenu()
                             .environmentObject(apps)
                     } label: {
                         buildFooterButton(systemSymbol: .plus)
                     }
-                    
-                    Divider()
-                    
-                    Button {
-                        removeSelected()
-                    } label: {
-                        buildFooterButton(systemSymbol: .minus)
-                    }
-                    .disabled(selection.isEmpty)
+                    .aspectRatio(contentMode: .fit)
                 }
             }
+            .disabled(!excludeAppsEnabled)
     }
     
     @ViewBuilder
     func buildFooterButton(systemSymbol: SFSymbol) -> some View {
         Rectangle()
-            .foregroundStyle(.placeholder)
+            .foregroundStyle(.placeholder.opacity(0))
             .overlay {
                 Image(systemSymbol: systemSymbol)
                     .font(.footnote)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.secondary)
             }
             .aspectRatio(1, contentMode: .fit)
             .padding(-5)
@@ -136,6 +140,7 @@ struct ExcludedAppListSection: View {
                     .padding()
                 } else {
                     excludedList()
+                        .disabled(!excludeAppsEnabled)
                 }
                 
                 Divider()
