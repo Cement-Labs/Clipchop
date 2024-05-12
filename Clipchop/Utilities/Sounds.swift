@@ -1,0 +1,80 @@
+//
+//  Sounds.swift
+//  Clipchop
+//
+//  Created by KrLite on 2024/5/12.
+//
+
+import SwiftUI
+import Defaults
+
+
+class Sounds {
+    struct Sound: Hashable, Defaults.Serializable {
+        var name: String?
+        var assetName: String
+        var unlockThreshold: Int
+        
+        func play() {
+            SoundPlayer.playSound(named: assetName)
+        }
+        
+        struct Bridge: Defaults.Bridge {
+            typealias Value = Sound
+            typealias Serializable = String
+            
+            func serialize(_ value: Sounds.Sound?) -> String? {
+                value?.assetName
+            }
+            
+            func deserialize(_ object: String?) -> Sounds.Sound? {
+                if let object {
+                    return Sounds.sounds.first(where: { $0.assetName == object })
+                } else {
+                    return Sounds.defaultSound
+                }
+            }
+        }
+        
+        static let bridge = Bridge()
+    }
+    
+    static var defaultSound: Sound {
+        sounds.first!
+    }
+    
+    static var currentSound: Sound {
+        Defaults[.sound]
+    }
+    
+    static let sounds: [Sound] = [
+        Sound(
+            name: .init(localized: .init("Sound: None", defaultValue: "None")),
+            assetName: ".none",
+            unlockThreshold: 0
+        ),
+        Sound(
+            name: .init(localized: .init("Sound: Pop", defaultValue: "Pop")),
+            assetName: "happy-pop",
+            unlockThreshold: 0
+        ),
+        Sound(
+            name: .init(localized: .init("Sound: Bloop", defaultValue: "Bloop")),
+            assetName: "marimba-bloop",
+            unlockThreshold: 0
+        ),
+        Sound(
+            name: .init(localized: .init("Sound: Tap", defaultValue: "Tap")),
+            assetName: "tap-notification",
+            unlockThreshold: 25
+        )
+    ]
+    
+    static func returnUnlockedSound() -> [Sound] {
+        var returnValue: [Sound] = []
+        for sound in sounds where sound.unlockThreshold <= Defaults[.timesClipped] {
+            returnValue.append(sound)
+        }
+        return returnValue.reversed()
+    }
+}

@@ -35,6 +35,13 @@
 		28C2C5862BF0C69F00E9D9AA /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5852BF0C69F00E9D9AA /* HotKey */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
+		28C2C5902BF0CA3E00E9D9AA /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C58F2BF0CA3E00E9D9AA /* Icons.swift */; };
+		28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */; };
+		28C2C5962BF0D0BF00E9D9AA /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5952BF0D0BF00E9D9AA /* Sounds.swift */; };
+		28C2C59C2BF0D1AE00E9D9AA /* marimba-bloop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28C2C5992BF0D1AE00E9D9AA /* marimba-bloop.mp3 */; };
+		28C2C59D2BF0D1AE00E9D9AA /* tap-notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28C2C59A2BF0D1AE00E9D9AA /* tap-notification.mp3 */; };
+		28C2C59E2BF0D1AE00E9D9AA /* happy-pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28C2C59B2BF0D1AE00E9D9AA /* happy-pop.mp3 */; };
+		28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C59F2BF0D31C00E9D9AA /* SoundPlayer.swift */; };
 		28D8CE592BDCF5B9008B17B5 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */; };
 		28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE5B2BDCF7A5008B17B5 /* Sauce */; };
 		28D8CE5F2BDCF81C008B17B5 /* ClipHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE5E2BDCF81C008B17B5 /* ClipHistoryPanel.swift */; };
@@ -72,6 +79,13 @@
 		2882951B2BC41F7400392B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2882951D2BC41F7400392B29 /* Clipchop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Clipchop.entitlements; sourceTree = "<group>"; };
 		2882951F2BC41F7400392B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		28C2C58F2BF0CA3E00E9D9AA /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
+		28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
+		28C2C5952BF0D0BF00E9D9AA /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
+		28C2C5992BF0D1AE00E9D9AA /* marimba-bloop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "marimba-bloop.mp3"; sourceTree = "<group>"; };
+		28C2C59A2BF0D1AE00E9D9AA /* tap-notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "tap-notification.mp3"; sourceTree = "<group>"; };
+		28C2C59B2BF0D1AE00E9D9AA /* happy-pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "happy-pop.mp3"; sourceTree = "<group>"; };
+		28C2C59F2BF0D31C00E9D9AA /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		28D8CE5E2BDCF81C008B17B5 /* ClipHistoryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryPanel.swift; sourceTree = "<group>"; };
 		28D8CE602BDCF9B8008B17B5 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerimissionsManager.swift; sourceTree = "<group>"; };
@@ -140,9 +154,10 @@
 		282692782BDCAE5500D1656E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */,
+				28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */,
 				28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */,
 				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
-				282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */,
 				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
 				2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */,
 			);
@@ -197,6 +212,7 @@
 			children = (
 				288295172BC41F7300392B29 /* ClipchopApp.swift */,
 				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
+				28C2C5972BF0D16100E9D9AA /* Sound */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
 				2871978C2BDE723C004BCDA3 /* Clipboard */,
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
@@ -219,6 +235,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		28C2C5972BF0D16100E9D9AA /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				28C2C59B2BF0D1AE00E9D9AA /* happy-pop.mp3 */,
+				28C2C5992BF0D1AE00E9D9AA /* marimba-bloop.mp3 */,
+				28C2C59A2BF0D1AE00E9D9AA /* tap-notification.mp3 */,
+				28C2C59F2BF0D31C00E9D9AA /* SoundPlayer.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		28D8CE622BDD0DE1008B17B5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +254,8 @@
 				28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */,
 				287197972BDE73B9004BCDA3 /* CoreDataManager.swift */,
 				2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */,
+				28C2C58F2BF0CA3E00E9D9AA /* Icons.swift */,
+				28C2C5952BF0D0BF00E9D9AA /* Sounds.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -328,8 +357,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				288295202BC41F7400392B29 /* Preview Assets.xcassets in Resources */,
+				28C2C59C2BF0D1AE00E9D9AA /* marimba-bloop.mp3 in Resources */,
+				28C2C59D2BF0D1AE00E9D9AA /* tap-notification.mp3 in Resources */,
 				2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */,
 				28D8CE662BDD0FCB008B17B5 /* Localizable.xcstrings in Resources */,
+				28C2C59E2BF0D1AE00E9D9AA /* happy-pop.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,8 +379,11 @@
 				28D8CE642BDD0DEE008B17B5 /* PerimissionsManager.swift in Sources */,
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
 				287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */,
+				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
 				2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */,
 				287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */,
+				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
+				28C2C5962BF0D0BF00E9D9AA /* Sounds.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2871979A2BDE746B004BCDA3 /* HistoryItemContent.swift in Sources */,
@@ -366,6 +401,7 @@
 				28D8CE6B2BDD142F008B17B5 /* View+Extension.swift in Sources */,
 				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
 				2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */,
+				28C2C5902BF0CA3E00E9D9AA /* Icons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

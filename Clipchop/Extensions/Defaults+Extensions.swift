@@ -9,7 +9,11 @@ import Foundation
 import Defaults
 
 extension Defaults.Keys {
-    static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
+    static let timesClipped = Key<UInt>("timesClipped", default: 0)
     
-    static let enabledPasteboardTypes = Key<Set<NSPasteboard.PasteboardType>>("enabledPasteboardTypes", default: Clipboard.shared.supp)
+    static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
+    static let accentColor = Key<AccentColor>("accentColor", default: .system)
+    
+    static let appIcon = Key<Icons.Icon>("appIcon", default: Icons.defaultAppIcon)
+    static let sound = Key<Sounds.Sound>("sound", default: Sounds.defaultSound)
 }
