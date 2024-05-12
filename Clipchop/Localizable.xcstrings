@@ -75,7 +75,26 @@
 
     },
     "Clip more to unlock more! You've already clipped %llu times." : {
-
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Clip more to unlock more! You've already clipped %llu time."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "Clip more to unlock more! You've already clipped %llu times."
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "Clipboard" : {
 

@@ -43,9 +43,7 @@ struct PermissionsSection: View {
     
     var body: some View {
         section("Permissions") {
-            withCaption("""
-\(Bundle.main.appName) needs Accessibility Access to take over your clipboard.
-""") {
+            withCaption {
                 HStack {
                     Text("Accessibility Access")
                     
@@ -63,11 +61,13 @@ struct PermissionsSection: View {
                         isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
                     }
                 }
+            } label: {
+                Text("""
+Accessibility Access is needed to take over your clipboard.
+""")
             }
             
-            withCaption("""
-\(Bundle.main.appName) needs Full Disk Access to generate file previews.
-""") {
+            withCaption {
                 HStack {
                     Text("Full Disk Access")
                     
@@ -85,6 +85,10 @@ struct PermissionsSection: View {
                         isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
                     }
                 }
+            } label: {
+                Text("""
+Full Disk Access is neede to generate file previews.
+""")
             }
         }
     }
