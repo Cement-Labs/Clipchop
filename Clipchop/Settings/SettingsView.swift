@@ -9,17 +9,13 @@ import SwiftUI
 import SFSafeSymbols
 
 @ViewBuilder
-func section(
-    _ titleKey: LocalizedStringKey,
-    @ViewBuilder content: () -> some View
-) -> some View {
-    Section {
-        content()
-    } header: {
-        Text(titleKey)
-    }
+func description(@ViewBuilder label: () -> some View) -> some View {
+    label()
+        .font(.caption)
+        .foregroundStyle(.placeholder)
 }
 
+@ViewBuilder
 func withCaption(
     condition: Bool = true,
     @ViewBuilder content: () -> some View,
@@ -29,13 +25,14 @@ func withCaption(
         content()
         
         if condition {
-            label()
-                .font(.caption)
-                .foregroundStyle(.placeholder)
+            description {
+                label()
+            }
         }
     }
 }
 
+@ViewBuilder
 func withCaption(
     _ descriptionKey: LocalizedStringKey,
     condition: Bool = true,

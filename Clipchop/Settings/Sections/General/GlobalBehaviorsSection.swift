@@ -13,7 +13,7 @@ struct GlobalBehaviorsSection: View {
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     
     var body: some View {
-        section("Global Behaviors") {
+        Section("Global Behaviors") {
             HStack {
                 Text("Starts with macOS")
                 

@@ -42,7 +42,7 @@ struct PermissionsSection: View {
     }
     
     var body: some View {
-        section("Permissions") {
+        Section("Permissions") {
             withCaption {
                 HStack {
                     Text("Accessibility Access")

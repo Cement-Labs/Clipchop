@@ -33,10 +33,9 @@ struct ClipchopApp: App {
                 .task {
                     if let window = NSApp.windows.last {
                         window.toolbarStyle = .unified
-                        window.titlebarSeparatorStyle = .none
                     }
                 }
-                .frame(minHeight: 400)
+                .frame(idealWidth: 680, minHeight: 350, idealHeight: 400, maxHeight: .infinity)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

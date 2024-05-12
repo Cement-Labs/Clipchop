@@ -78,12 +78,6 @@ class Icons {
         refreshCurrentAppIcon()
     }
     
-    static func setAppIcon(to iconName: String) {
-        if let targetIcon = icons.first(where: { $0.assetName == iconName }) {
-            setAppIcon(to: targetIcon)
-        }
-    }
-    
     static func refreshCurrentAppIcon() {
         let image = Defaults[.appIcon].image
         

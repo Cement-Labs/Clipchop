@@ -8,11 +8,13 @@
 import AVFAudio
 
 class SoundPlayer: Identifiable{
+    private static var audioPlayer: AVAudioPlayer?
+    
     static func playSound(named assetName: String) {
         if let soundURL = Bundle.main.url(forResource: assetName, withExtension: "mp3") {
             do {
-                let audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                audioPlayer.play()
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.play()
                 
                 print("Audio played: \(assetName)")
             } catch {

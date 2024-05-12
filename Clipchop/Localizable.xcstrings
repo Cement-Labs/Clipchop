@@ -1,12 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@ needs Accessibility Access to take over your clipboard." : {
-
-    },
-    "%@ needs Full Disk Access to generate file previews." : {
-
-    },
     "About" : {
 
     },
@@ -34,6 +28,9 @@
           }
         }
       }
+    },
+    "Accessibility Access is needed to take over your clipboard." : {
+
     },
     "App icon" : {
 
@@ -96,6 +93,9 @@
         }
       }
     },
+    "Clip sound" : {
+
+    },
     "Clipboard" : {
 
     },
@@ -135,6 +135,9 @@
           }
         }
       }
+    },
+    "Full Disk Access is neede to generate file previews." : {
+
     },
     "General" : {
 

@@ -11,12 +11,15 @@ import Defaults
 
 class Sounds {
     struct Sound: Hashable, Defaults.Serializable {
+        var hasSound: Bool = true
         var name: String?
         var assetName: String
         var unlockThreshold: Int
         
         func play() {
-            SoundPlayer.playSound(named: assetName)
+            if hasSound {
+                SoundPlayer.playSound(named: assetName)
+            }
         }
         
         struct Bridge: Defaults.Bridge {
@@ -49,8 +52,9 @@ class Sounds {
     
     static let sounds: [Sound] = [
         Sound(
+            hasSound: false,
             name: .init(localized: .init("Sound: None", defaultValue: "None")),
-            assetName: ".none",
+            assetName: "",
             unlockThreshold: 0
         ),
         Sound(
@@ -70,11 +74,17 @@ class Sounds {
         )
     ]
     
-    static func returnUnlockedSound() -> [Sound] {
+    static var unlockedSounds: [Sound] {
         var returnValue: [Sound] = []
         for sound in sounds where sound.unlockThreshold <= Defaults[.timesClipped] {
             returnValue.append(sound)
         }
         return returnValue.reversed()
+    }
+    
+    static func setSound(to sound: Sound) {
+        print("Sound set to: \(sound.assetName)")
+        Defaults[.sound] = sound
+        sound.play()
     }
 }
