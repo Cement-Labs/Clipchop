@@ -16,4 +16,11 @@ extension Defaults.Keys {
     
     static let appIcon = Key<Icons.Icon>("appIcon", default: Icons.defaultAppIcon)
     static let sound = Key<Sounds.Sound>("sound", default: Sounds.defaultSound)
+    
+    static let timerInterval = Key<TimeInterval>("timerInterval", default: 1)
+    
+    static let ignoreAppsEnabled = Key<Bool>("ignoreAppsEnabled", default: true)
+    static let applicationExcludeList = Key<[String]>("applicationExcludeList", default: [])
+    
+    static let historyPreservationTime = Key<HistoryPreservationTime>("historyPreservationTime", default: .forever)
 }
