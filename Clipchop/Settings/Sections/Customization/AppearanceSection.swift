@@ -14,6 +14,9 @@ struct AppearanceSection: View {
     @Default(.appIcon) var appIcon
     @Default(.sound) var sound
     
+    @Default(.useCustomAccentColor) var useCustomAccentColor
+    @Default(.customAccentColor) var customAccentColor
+    
     var body: some View {
         Section {
             Picker("App icon", selection: $appIcon) {
@@ -61,9 +64,20 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
             
             Spacer()
         }
+        
+        Section {
+            Toggle("Use custom accent color", isOn: $useCustomAccentColor)
+            
+            if useCustomAccentColor {
+                ColorPicker("Custom accent color", selection: $customAccentColor, supportsOpacity: false)
+            }
+        }
     }
 }
 
 #Preview {
-    AppearanceSection()
+    Form {
+        AppearanceSection()
+    }
+    .formStyle(.grouped)
 }

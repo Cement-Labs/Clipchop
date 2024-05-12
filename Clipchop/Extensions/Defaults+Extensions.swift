@@ -7,12 +7,14 @@
 
 import Foundation
 import Defaults
+import SwiftUI
 
 extension Defaults.Keys {
     static let timesClipped = Key<UInt>("timesClipped", default: 0)
     
     static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
-    static let accentColor = Key<AccentColor>("accentColor", default: .system)
+    static let useCustomAccentColor = Key<Bool>("useCustomAccentColor", default: false)
+    static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     
     static let appIcon = Key<Icons.Icon>("appIcon", default: Icons.defaultAppIcon)
     static let sound = Key<Sounds.Sound>("sound", default: Sounds.defaultSound)

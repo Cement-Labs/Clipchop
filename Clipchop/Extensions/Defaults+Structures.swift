@@ -8,45 +8,6 @@
 import SwiftUI
 import Defaults
 
-enum AccentColor: Defaults.Serializable {
-    case system
-    case custom(Color)
-    
-    struct Bridge: Defaults.Bridge {
-        typealias Value = AccentColor
-        typealias Serializable = Any
-        
-        func serialize(_ value: AccentColor?) -> Any? {
-            if let value {
-                return switch value {
-                case .system: []
-                case .custom(let color): Color.bridge.serialize(color)
-                }
-            } else {
-                return []
-            }
-        }
-        
-        func deserialize(_ object: Any?) -> AccentColor? {
-            if let object = object as? [Any] {
-                if object.isEmpty {
-                    return .system
-                } else {
-                    if let color = Color.bridge.deserialize(object) {
-                        return .custom(color)
-                    } else {
-                        return .system
-                    }
-                }
-            } else {
-                return .system
-            }
-        }
-    }
-    
-    static let bridge = Bridge()
-}
-
 enum HistoryPreservationTime: Defaults.Serializable {
     case forever
     
@@ -66,7 +27,7 @@ enum HistoryPreservationTime: Defaults.Serializable {
         case year = "year"
         
         func withTime(_ time: UInt) -> HistoryPreservationTime {
-            return switch self {
+            switch self {
             case .forever:  .forever
             case .minute:   .minute(time)
             case .hour:     .hour(time)
@@ -78,7 +39,7 @@ enum HistoryPreservationTime: Defaults.Serializable {
     }
     
     var period: Period {
-        return switch self {
+        switch self {
         case .forever:      .forever
         case .minute(_):    .minute
         case .hour(_):      .hour
@@ -93,7 +54,7 @@ enum HistoryPreservationTime: Defaults.Serializable {
         typealias Serializable = (Period, UInt)
         
         func serialize(_ value: HistoryPreservationTime?) -> (HistoryPreservationTime.Period, UInt)? {
-            return switch value ?? .forever {
+            switch value ?? .forever {
             case .forever:
                 (.forever, 0)
             case .minute(let time):
