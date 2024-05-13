@@ -24,5 +24,6 @@ extension Defaults.Keys {
     static let excludeAppsEnabled = Key<Bool>("excludeAppsEnabled", default: true)
     static let applicationExcludeList = Key<[String]>("applicationExcludeList", default: [])
     
-    static let historyPreservationTime = Key<HistoryPreservationTime>("historyPreservationTime", default: .forever)
+    static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
+    static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
 }

@@ -1,6 +1,116 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld Day" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Day"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Days"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Hour" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Hour"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Hours"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Minute" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Minute"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Minutes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Month" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Month"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Months"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Year" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld Year"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Years"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "About" : {
 
     },
@@ -135,6 +245,9 @@
     "Clipboard" : {
 
     },
+    "Clipboard History" : {
+
+    },
     "Clipchop" : {
 
     },
@@ -155,6 +268,9 @@
     "Customization" : {
 
     },
+    "Delete history" : {
+
+    },
     "Example" : {
 
     },
@@ -162,6 +278,9 @@
 
     },
     "Excluded Apps" : {
+
+    },
+    "Forever" : {
 
     },
     "Full Disk Access" : {
@@ -210,10 +329,13 @@
     "key_used_error" : {
 
     },
+    "Keyboard Shortcuts" : {
+
+    },
     "Later" : {
 
     },
-    "Limit %@'s functions in the specified apps." : {
+    "Limit %@'s functions in specified apps." : {
 
     },
     "No Application Excluded" : {
@@ -223,6 +345,12 @@
 
     },
     "Permissions" : {
+
+    },
+    "Pin history" : {
+
+    },
+    "Preservation time" : {
 
     },
     "Quit" : {
@@ -238,6 +366,9 @@
 
     },
     "Settings…" : {
+
+    },
+    "Show %@" : {
 
     },
     "Show menu bar item" : {
@@ -291,6 +422,9 @@
 
     },
     "Syncing" : {
+
+    },
+    "The global keyboard shortcut for calling up %@." : {
 
     },
     "Use custom accent color" : {

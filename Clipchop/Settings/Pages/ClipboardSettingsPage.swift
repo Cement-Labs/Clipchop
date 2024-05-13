@@ -9,10 +9,16 @@ import SwiftUI
 
 struct ClipboardSettingsPage: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            KeyboardShortcutsSection()
+                .controlSize(.large)
+            
+            ClipboardHistorySection()
+        }
     }
 }
 
 #Preview {
     ClipboardSettingsPage()
+        .formStyle(.grouped)
 }

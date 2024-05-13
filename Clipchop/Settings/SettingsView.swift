@@ -101,7 +101,7 @@ struct SettingsView: View {
                 navigationLink("Clipboard") {
                     Image(systemSymbol: .clipboard)
                 } content: {
-                    SyncingSettingsPage()
+                    ClipboardSettingsPage()
                 }
                 .tag(Navigation.clipboard)
                 

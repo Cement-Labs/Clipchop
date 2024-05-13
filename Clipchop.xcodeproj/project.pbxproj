@@ -12,6 +12,8 @@
 		281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */; };
 		28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */; };
 		28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */; };
+		28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28227F622BF248E3008FAC3A /* KeyboardShortcutsSection.swift */; };
+		28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28227F642BF24BC1008FAC3A /* ClipboardHistorySection.swift */; };
 		282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */; };
 		282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692762BDCACC600D1656E /* AboutSettingsPage.swift */; };
 		2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692792BDCAE6000D1656E /* Bundle+Extensions.swift */; };
@@ -71,6 +73,8 @@
 		281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
 		28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
 		28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightsView.swift; sourceTree = "<group>"; };
+		28227F622BF248E3008FAC3A /* KeyboardShortcutsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcutsSection.swift; sourceTree = "<group>"; };
+		28227F642BF24BC1008FAC3A /* ClipboardHistorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistorySection.swift; sourceTree = "<group>"; };
 		282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsPage.swift; sourceTree = "<group>"; };
 		282692762BDCACC600D1656E /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
 		282692792BDCAE6000D1656E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -158,6 +162,15 @@
 				28D8CE602BDCF9B8008B17B5 /* MenuBarView.swift */,
 			);
 			path = "Menu Bar";
+			sourceTree = "<group>";
+		};
+		28227F612BF248CF008FAC3A /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				28227F622BF248E3008FAC3A /* KeyboardShortcutsSection.swift */,
+				28227F642BF24BC1008FAC3A /* ClipboardHistorySection.swift */,
+			);
+			path = Clipboard;
 			sourceTree = "<group>";
 		};
 		282692732BDCACB100D1656E /* Pages */ = {
@@ -315,6 +328,7 @@
 			children = (
 				28C2C5A72BF0DB8300E9D9AA /* General */,
 				28C2C5A82BF0DB8C00E9D9AA /* Customization */,
+				28227F612BF248CF008FAC3A /* Clipboard */,
 				2843DB5E2BF0F058008AA2E1 /* Excluded Apps */,
 			);
 			path = Sections;
@@ -442,10 +456,12 @@
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2871979A2BDE746B004BCDA3 /* HistoryItemContent.swift in Sources */,
+				28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				287197A32BDE7679004BCDA3 /* Storage.xcdatamodeld in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
+				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
 				287197982BDE73B9004BCDA3 /* CoreDataManager.swift in Sources */,
 				28D8CE5F2BDCF81C008B17B5 /* ClipHistoryPanel.swift in Sources */,
