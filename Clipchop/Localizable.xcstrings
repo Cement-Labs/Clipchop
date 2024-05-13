@@ -35,6 +35,17 @@
     "Allow app excluding" : {
 
     },
+    "App Development Time" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@-%2$@"
+          }
+        }
+      }
+    },
     "App icon" : {
 
     },
@@ -67,6 +78,28 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Clipchop"
+          }
+        }
+      }
+    },
+    "App Version: Raw" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "App Version: Semantic" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %@"
           }
         }
       }
@@ -104,6 +137,17 @@
     },
     "Clipchop" : {
 
+    },
+    "Copyrights" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ NNN Studio"
+          }
+        }
+      }
     },
     "Custom accent color" : {
 
@@ -167,6 +211,9 @@
 
     },
     "Later" : {
+
+    },
+    "Limit %@'s functions in the specified apps." : {
 
     },
     "No Application Excluded" : {

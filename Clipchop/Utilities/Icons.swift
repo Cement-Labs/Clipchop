@@ -48,17 +48,17 @@ class Icons {
     
     static let icons: [Icon] = [
         Icon(
-            name: .init(localized: .init("App Icon: Stable", defaultValue: "Clipchop")),
+            name: .init(localized: "App Icon: Stable", defaultValue: "Clipchop"),
             assetName: "AppIcon-Stable",
             unlockThreshold: 0
         ),
         Icon(
-            name: .init(localized: .init("App Icon: Beta", defaultValue: "Clipchop Beta")),
+            name: .init(localized: "App Icon: Beta", defaultValue: "Clipchop Beta"),
             assetName: "AppIcon-Beta",
             unlockThreshold: 0
         ),
         Icon(
-            name: .init(localized: .init("App Icon: Aerugo", defaultValue: "Aerugo")),
+            name: .init(localized: "App Icon: Aerugo", defaultValue: "Aerugo"),
             assetName: "AppIcon-Aerugo",
             unlockThreshold: 25
         )

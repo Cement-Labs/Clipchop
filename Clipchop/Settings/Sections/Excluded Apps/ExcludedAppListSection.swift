@@ -70,7 +70,7 @@ struct ExcludedAppListSection: View {
             .frame(height: 20)
             .foregroundStyle(.quinary)
             .overlay {
-                HStack(spacing: 5) {
+                HStack(spacing: 2) {
                     Spacer()
                     
                     // Remove
@@ -110,45 +110,50 @@ struct ExcludedAppListSection: View {
     
     var body: some View {
         Section {
-            Toggle("Allow app excluding", isOn: $excludeAppsEnabled)
+            withCaption("Limit \(Bundle.main.appName)'s functions in specified apps.") {
+                Toggle("Allow app excluding", isOn: $excludeAppsEnabled)
                 .toggleStyle(.switch)
-            
-            VStack(spacing: 0) {
-                if excluded.isEmpty {
-                    // No app excluded.
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            Image(systemSymbol: .appDashed)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 32)
-                                .foregroundStyle(.placeholder)
-                            
-                            Text("No Application Excluded")
-                                .font(.title3)
-                            
-                            description {
-                                Text("Exclude apps to prevent \(Bundle.main.appName) copying their contents.")
-                            }
-                        }
-                        
-                        Spacer()
-                    }
-                    .foregroundStyle(.secondary)
-                    .padding()
-                } else {
-                    excludedList()
-                        .disabled(!excludeAppsEnabled)
-                }
-                
-                Divider()
-                
-                sectionFooter()
             }
-            .ignoresSafeArea()
-            .padding(-10)
+        }
+        
+        if excludeAppsEnabled {
+            Section {
+                VStack(spacing: 0) {
+                    if excluded.isEmpty {
+                        // No app excluded.
+                        HStack {
+                            Spacer()
+                            
+                            VStack {
+                                Image(systemSymbol: .appDashed)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 32)
+                                    .foregroundStyle(.placeholder)
+                                
+                                Text("No Application Excluded")
+                                    .font(.title3)
+                                
+                                description {
+                                    Text("Exclude apps to prevent \(Bundle.main.appName) copying their contents.")
+                                }
+                            }
+                            
+                            Spacer()
+                        }
+                        .foregroundStyle(.secondary)
+                        .padding()
+                    } else {
+                        excludedList()
+                    }
+                    
+                    Divider()
+                    
+                    sectionFooter()
+                }
+                .ignoresSafeArea()
+                .padding(-10)
+            }
         }
     }
 }

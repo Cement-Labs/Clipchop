@@ -10,6 +10,8 @@
 		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
 		281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */; };
 		281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */; };
+		28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */; };
+		28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */; };
 		282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */; };
 		282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692762BDCACC600D1656E /* AboutSettingsPage.swift */; };
 		2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692792BDCAE6000D1656E /* Bundle+Extensions.swift */; };
@@ -67,6 +69,8 @@
 /* Begin PBXFileReference section */
 		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
+		28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
+		28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightsView.swift; sourceTree = "<group>"; };
 		282692742BDCACBB00D1656E /* GeneralSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsPage.swift; sourceTree = "<group>"; };
 		282692762BDCACC600D1656E /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
 		282692792BDCAE6000D1656E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 				28D8CE672BDD124A008B17B5 /* Sections */,
 				282692732BDCACB100D1656E /* Pages */,
 				281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */,
+				28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */,
+				28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
 				28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */,
+				28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */,
 				287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */,
 				28D8CE642BDD0DEE008B17B5 /* PerimissionsManager.swift in Sources */,
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
@@ -446,6 +453,7 @@
 				28C2C5A22BF0D85D00E9D9AA /* Apps.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				2871978F2BDE7281004BCDA3 /* Clipboard.swift in Sources */,
+				28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */,
 				28D8CE692BDD1260008B17B5 /* PermissionsSection.swift in Sources */,
 				282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */,
 				28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */,

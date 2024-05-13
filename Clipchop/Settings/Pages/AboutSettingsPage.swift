@@ -9,7 +9,31 @@ import SwiftUI
 
 struct AboutSettingsPage: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Spacer()
+            
+            Image(nsImage: Icons.currentAppIcon.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 120)
+
+            VStack(alignment: .leading, spacing: 16) {
+                Text(Bundle.main.appName)
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    AppVersionView()
+                    CopyrightsView()
+                }
+                .font(.caption2)
+                .foregroundColor(.secondary)
+            }
+            .padding()
+            
+            Spacer()
+        }
+        .padding()
     }
 }
 

@@ -53,22 +53,22 @@ class Sounds {
     static let sounds: [Sound] = [
         Sound(
             hasSound: false,
-            name: .init(localized: .init("Sound: None", defaultValue: "None")),
+            name: .init(localized: "Sound: None", defaultValue: "None"),
             assetName: "",
             unlockThreshold: 0
         ),
         Sound(
-            name: .init(localized: .init("Sound: Pop", defaultValue: "Pop")),
+            name: .init(localized: "Sound: Pop", defaultValue: "Pop"),
             assetName: "happy-pop",
             unlockThreshold: 0
         ),
         Sound(
-            name: .init(localized: .init("Sound: Bloop", defaultValue: "Bloop")),
+            name: .init(localized: "Sound: Bloop", defaultValue: "Bloop"),
             assetName: "marimba-bloop",
             unlockThreshold: 0
         ),
         Sound(
-            name: .init(localized: .init("Sound: Tap", defaultValue: "Tap")),
+            name: .init(localized: "Sound: Tap", defaultValue: "Tap"),
             assetName: "tap-notification",
             unlockThreshold: 25
         )

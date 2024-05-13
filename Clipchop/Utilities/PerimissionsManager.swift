@@ -31,19 +31,19 @@ class PermissionsManager {
             let alert = NSAlert()
             alert.alertStyle = NSAlert.Style.informational
             alert.messageText = String(
-                format: String(localized: .init(
-                    "Accessibility Access Alert: Title",
+                format: String(
+                    localized: "Accessibility Access Alert: Title",
                     defaultValue: "%@ Needs Accessibility Access"
-                )),
+                ),
                 Bundle.main.appName
             )
             alert.informativeText = String(
-                format: String(localized: .init(
-                    "Accessibility Access Alert: Content",
+                format: String(
+                    localized: "Accessibility Access Alert: Content",
                     defaultValue: """
 Accessibility Access is required for %@ to take over your clipboard.
 """
-                )),
+                ),
                 Bundle.main.appName
             )
             
@@ -68,19 +68,19 @@ Accessibility Access is required for %@ to take over your clipboard.
             
             FullDiskAccess.promptIfNotGranted(
                 title: String(
-                    format: String(localized: .init(
-                        "Full Disk Access Alert: Title",
+                    format: String(
+                        localized: "Full Disk Access Alert: Title",
                         defaultValue: "%@ Needs Full Disk Access"
-                    )),
+                    ),
                     Bundle.main.appName
                 ),
                 message: String(
-                    format: String(localized: .init(
-                        "Full Disk Access Alert: Content",
+                    format: String(
+                        localized: "Full Disk Access Alert: Content",
                         defaultValue: """
 Full Disk Access is required for %@ to generate file previews.
 """
-                    )),
+                    ),
                     Bundle.main.appName
                 ),
                 settingsButtonTitle: String(localized: .init("Open Settings", defaultValue: "Open Settings")),

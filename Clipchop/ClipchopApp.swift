@@ -9,6 +9,8 @@ import SwiftUI
 import MenuBarExtraAccess
 import Defaults
 
+let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
+
 func quit() {
     NSApp.terminate(nil)
 }

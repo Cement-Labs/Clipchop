@@ -106,7 +106,7 @@ struct SettingsView: View {
                 .tag(Navigation.clipboard)
                 
                 navigationLink("Excluded Apps") {
-                    Image(systemSymbol: .lockAppDashed)
+                    Image(systemSymbol: .xmarkApp)
                 } content: {
                     ExcludedAppsSettingsPage()
                         .environmentObject(apps)
