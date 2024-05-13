@@ -33,11 +33,14 @@ struct ClipchopApp: App {
             SettingsView(isWindowInitialized: $isWindowInitialized)
                 .task {
                     if let window = NSApp.windows.last {
-                        window.toolbarStyle = .automatic
-                        
-                        withAnimation {
-                            // Tells the navigation split view to appear
-                            isWindowInitialized = true
+                        // Delays a little bit
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            window.toolbarStyle = .automatic
+                            
+                            withAnimation {
+                                // Tells the navigation split view to appear
+                                isWindowInitialized = true
+                            }
                         }
                     }
                 }

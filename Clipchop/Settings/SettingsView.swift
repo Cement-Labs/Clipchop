@@ -133,6 +133,7 @@ struct SettingsView: View {
                 .navigationSplitViewColumnWidth(min: 350, ideal: 750)
         }
         .navigationTitle(Bundle.main.appName)
+        
         .toolbarTitleDisplayMode(.inlineLarge)
         .toolbar {
             Button("Quit") {
@@ -140,6 +141,7 @@ struct SettingsView: View {
             }
             .controlSize(.extraLarge)
         }
+        
         .formStyle(.grouped)
         
         // An intermediate view to hide the ugly window toolbar transition
@@ -147,9 +149,12 @@ struct SettingsView: View {
             Image(.appSymbol)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 64)
                 .foregroundStyle(.placeholder)
+            
+                .frame(height: 64)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+                .navigationTitle(Text(verbatim: ""))
         }
     }
 }
