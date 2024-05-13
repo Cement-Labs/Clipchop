@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%.2fs" : {
+
+    },
     "%lld Day" : {
       "localizations" : {
         "en" : {
@@ -111,6 +114,18 @@
         }
       }
     },
+    "0.10" : {
+
+    },
+    "1" : {
+
+    },
+    "5.00" : {
+
+    },
+    "30" : {
+
+    },
     "About" : {
 
     },
@@ -217,6 +232,12 @@
     "Appearance" : {
 
     },
+    "Clear clipboard history" : {
+
+    },
+    "Clear Clipboard History" : {
+
+    },
     "Clip more to unlock more! You've already clipped %llu times." : {
       "localizations" : {
         "en" : {
@@ -266,6 +287,9 @@
 
     },
     "Customization" : {
+
+    },
+    "Delete" : {
 
     },
     "Delete history" : {
@@ -425,6 +449,12 @@
 
     },
     "The global keyboard shortcut for calling up %@." : {
+
+    },
+    "This action clears all your clipboard history unrestorably, including pins." : {
+
+    },
+    "Update interval" : {
 
     },
     "Use custom accent color" : {
