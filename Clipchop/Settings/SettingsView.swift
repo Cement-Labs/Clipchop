@@ -49,6 +49,8 @@ struct SettingsView: View {
     @State var selectedNavigation: Navigation = .general
     @State var apps = Apps()
     
+    @Binding var isWindowInitialized: Bool
+    
     enum Navigation {
         case general
         case customization
@@ -86,7 +88,6 @@ struct SettingsView: View {
                     Image(systemSymbol: .gearshape)
                 } content: {
                     GeneralSettingsPage()
-                        .padding()
                 }
                 .tag(Navigation.general)
                 
@@ -94,7 +95,6 @@ struct SettingsView: View {
                     Image(systemSymbol: .pencilAndOutline)
                 } content: {
                     CustomizationSettingsPage()
-                        .padding()
                 }
                 .tag(Navigation.customization)
                 
@@ -102,7 +102,6 @@ struct SettingsView: View {
                     Image(systemSymbol: .clipboard)
                 } content: {
                     SyncingSettingsPage()
-                        .padding()
                 }
                 .tag(Navigation.clipboard)
                 
@@ -110,7 +109,6 @@ struct SettingsView: View {
                     Image(systemSymbol: .lockAppDashed)
                 } content: {
                     ExcludedAppsSettingsPage()
-                        .padding()
                         .environmentObject(apps)
                 }
                 .tag(Navigation.excludedApps)
@@ -119,7 +117,6 @@ struct SettingsView: View {
                     Image(systemSymbol: .checkmarkIcloud)
                 } content: {
                     SyncingSettingsPage()
-                        .padding()
                 }
                 .tag(Navigation.syncing)
                 
@@ -127,14 +124,13 @@ struct SettingsView: View {
                     Image(systemSymbol: .infoCircle)
                 } content: {
                     AboutSettingsPage()
-                        .padding()
                 }
                 .tag(Navigation.about)
             }
-            .navigationSplitViewColumnWidth(180)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 250)
         } detail: {
             Spacer()
-                .navigationSplitViewColumnWidth(550)
+                .navigationSplitViewColumnWidth(min: 350, ideal: 750)
         }
         .navigationTitle(Bundle.main.appName)
         .toolbarTitleDisplayMode(.inlineLarge)
@@ -145,9 +141,19 @@ struct SettingsView: View {
             .controlSize(.extraLarge)
         }
         .formStyle(.grouped)
+        
+        // An intermediate view to hide the ugly window toolbar transition
+        .orSomeView(condition: !isWindowInitialized) {
+            Image(.appSymbol)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 64)
+                .foregroundStyle(.placeholder)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(isWindowInitialized: .constant(true))
 }

@@ -17,6 +17,7 @@ func quit() {
 struct ClipchopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var isMenuBarPresented: Bool = true
+    @State var isWindowInitialized: Bool = false
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     
@@ -29,13 +30,18 @@ struct ClipchopApp: App {
     
     var body: some Scene {
         Settings {
-            SettingsView()
+            SettingsView(isWindowInitialized: $isWindowInitialized)
                 .task {
                     if let window = NSApp.windows.last {
-                        window.toolbarStyle = .unified
+                        window.toolbarStyle = .automatic
+                        
+                        withAnimation {
+                            // Tells the navigation split view to appear
+                            isWindowInitialized = true
+                        }
                     }
                 }
-                .frame(idealWidth: 680, minHeight: 350, idealHeight: 400, maxHeight: .infinity)
+                .frame(minHeight: 350)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
