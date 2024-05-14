@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AboutSettingsPage: View {
+    @State var isSourcePresented = false
+    @State var isAcknowledgementsPresented = false
+    
     var body: some View {
         HStack {
             Spacer()
@@ -34,6 +37,65 @@ struct AboutSettingsPage: View {
             Spacer()
         }
         .padding()
+        .toolbar {
+            Button {
+                isSourcePresented = true
+            } label: {
+                Group {
+                    Image(systemSymbol: .curlybraces)
+                    Text("GPL-3.0")
+                }
+                .imageScale(.small)
+                .padding(2)
+            }
+            .popover(isPresented: $isSourcePresented, arrowEdge: .bottom) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Image(systemSymbol: .curlybraces)
+                            .frame(width: 16)
+                        
+                        Button {
+                            
+                        } label: {
+                            Text("Source Code")
+                            
+                            Image(systemSymbol: .arrowUpRight)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    
+                    HStack {
+                        Image(systemSymbol: .docText)
+                            .frame(width: 16)
+                        
+                        Button {
+                            
+                        } label: {
+                            Text("Licenced Under GPL-3.0")
+                            
+                            Image(systemSymbol: .arrowUpRight)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .buttonStyle(.accessoryBar)
+                .padding()
+            }
+            
+            Button {
+                isAcknowledgementsPresented = true
+            } label: {
+                Group {
+                    Image(systemSymbol: .aqiMedium)
+                    Text("Acknowledgements")
+                }
+                .imageScale(.small)
+                .padding(2)
+            }
+            .popover(isPresented: $isAcknowledgementsPresented, arrowEdge: .bottom) {
+                
+            }
+        }
     }
 }
 

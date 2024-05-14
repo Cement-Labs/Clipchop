@@ -157,6 +157,9 @@
     "Accessibility Access is needed to take over your clipboard." : {
 
     },
+    "Acknowledgements" : {
+
+    },
     "Allow app excluding" : {
 
     },
@@ -341,6 +344,9 @@
     "Global Behaviors" : {
 
     },
+    "GPL-3.0" : {
+
+    },
     "Grant" : {
 
     },
@@ -357,6 +363,9 @@
 
     },
     "Later" : {
+
+    },
+    "Licenced Under GPL-3.0" : {
 
     },
     "Limit %@'s functions in specified apps." : {
@@ -444,6 +453,9 @@
           }
         }
       }
+    },
+    "Source Code" : {
+
     },
     "Starts with macOS" : {
 
