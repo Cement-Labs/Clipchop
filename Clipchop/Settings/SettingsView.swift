@@ -136,8 +136,11 @@ struct SettingsView: View {
         
         .toolbarTitleDisplayMode(.inlineLarge)
         .toolbar {
-            Button("Quit") {
+            Button {
                 quit()
+            } label: {
+                Text("Quit")
+                    .padding(4)
             }
             .controlSize(.extraLarge)
         }

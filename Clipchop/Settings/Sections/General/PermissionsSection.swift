@@ -24,71 +24,71 @@ struct PermissionsSection: View {
         } label: {
             Group {
                 Text("Grant")
-                Image(systemSymbol: .arrowRight)
+                Image(systemSymbol: .arrowRightCircleFill)
             }
             .or(condition: isGranted) {
                 Group {
                     Text("Granted")
-                    Image(systemSymbol: .checkmarkSeal)
+                    Image(systemSymbol: .checkmarkSealFill)
                 }
             }
-            .frame(height: 12)
+            .frame(height: 16)
         }
-        .controlSize(.small)
-        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+        .buttonStyle(.borderless)
         .buttonBorderShape(.capsule)
         .disabled(isGranted)
-        .tint(isGranted ? .green : .red)
+        .tint(isGranted ? .secondary : .red)
     }
     
     var body: some View {
         Section("Permissions") {
-            withCaption {
-                HStack {
+            HStack {
+                withCaption {
                     Text("Accessibility Access")
-                    
-                    Spacer()
-                    
-                    grantAccessButton(isGranted: isAccessibilityAccessGranted) {
-                        withAnimation {
-                            isAccessibilityAccessGranted = PermissionsManager.Accessibility.requestAccess()
-                        }
-                    }
-                    .task {
-                        isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
-                    }
-                    .onReceive(permissionsAutoCheck) { _ in
-                        isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
-                    }
-                }
-            } label: {
-                Text("""
+                } label: {
+                    Text("""
 Accessibility Access is needed to take over your clipboard.
 """)
-            }
-            
-            withCaption {
-                HStack {
-                    Text("Full Disk Access")
-                    
-                    Spacer()
-                    
-                    grantAccessButton(isGranted: isFullDiskAccessGranted) {
-                        withAnimation {
-                            isFullDiskAccessGranted = PermissionsManager.FullDisk.requestAccess()
-                        }
-                    }
-                    .task {
-                        isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
-                    }
-                    .onReceive(permissionsAutoCheck) { _ in
-                        isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
+                }
+                
+                Spacer()
+                
+                grantAccessButton(isGranted: isAccessibilityAccessGranted) {
+                    withAnimation {
+                        isAccessibilityAccessGranted = PermissionsManager.Accessibility.requestAccess()
                     }
                 }
-            } label: {
-                Text("""
+                .task {
+                    isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
+                }
+                .onReceive(permissionsAutoCheck) { _ in
+                    isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
+                }
+            }
+            
+            HStack {
+                withCaption {
+                    Text("Full Disk Access")
+                } label: {
+                    Text("""
 Full Disk Access is neede to generate file previews.
 """)
+                }
+                
+                Spacer()
+                
+                grantAccessButton(isGranted: isFullDiskAccessGranted) {
+                    withAnimation {
+                        isFullDiskAccessGranted = PermissionsManager.FullDisk.requestAccess()
+                    }
+                }
+                .task {
+                    isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
+                }
+                .onReceive(permissionsAutoCheck) { _ in
+                    isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
+                }
             }
         }
     }

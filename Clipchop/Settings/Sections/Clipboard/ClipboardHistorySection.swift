@@ -63,9 +63,9 @@ struct ClipboardHistorySection: View {
                 Slider(value: $timerInterval, in: 0.1...5) {
                     
                 } minimumValueLabel: {
-                    Text("0.10")
+                    Text("0.1")
                 } maximumValueLabel: {
-                    Text("5.00")
+                    Text("5")
                 }
                 .monospaced()
             }

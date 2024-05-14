@@ -11,9 +11,11 @@ import KeyboardShortcuts
 struct KeyboardShortcutsSection: View {
     var body: some View {
         Section("Keyboard Shortcuts") {
-            withCaption("The global keyboard shortcut for calling up \(Bundle.main.appName).") {
-                KeyboardShortcuts.Recorder(for: .action) {
+            KeyboardShortcuts.Recorder(for: .action) {
+                withCaption {
                     Text("Show \(Bundle.main.appName)")
+                } label: {
+                    Text("The global keyboard shortcut for calling up the clip window.")
                 }
             }
         }

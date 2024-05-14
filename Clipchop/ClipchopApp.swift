@@ -46,7 +46,7 @@ struct ClipchopApp: App {
                         }
                     }
                 }
-                .frame(minHeight: 350)
+                .frame(minHeight: 300)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

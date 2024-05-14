@@ -10,8 +10,15 @@ import AppKit
 import FullDiskAccess
 
 class PermissionsManager {
+    static var remaining: Int {
+        [Accessibility.getStatus(), FullDisk.getStatus()]
+            .filter { !$0 }
+            .count
+    }
+    
     static func requestAccess() {
         PermissionsManager.Accessibility.requestAccess()
+        PermissionsManager.FullDisk.requestAccess()
     }
     
     class Accessibility {

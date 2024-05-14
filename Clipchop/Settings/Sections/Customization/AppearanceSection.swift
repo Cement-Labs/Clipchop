@@ -66,7 +66,9 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            Toggle("Use custom accent color", isOn: $useCustomAccentColor)
+            withCaption("Only applies to the clip window.") {
+                Toggle("Use custom accent color", isOn: $useCustomAccentColor)
+            }
             
             if useCustomAccentColor {
                 ColorPicker("Custom accent color", selection: $customAccentColor, supportsOpacity: false)

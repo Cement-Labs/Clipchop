@@ -114,13 +114,13 @@
         }
       }
     },
-    "0.10" : {
+    "0.1" : {
 
     },
     "1" : {
 
     },
-    "5.00" : {
+    "5" : {
 
     },
     "30" : {
@@ -365,6 +365,9 @@
     "No Application Excluded" : {
 
     },
+    "Only applies to the clip window." : {
+
+    },
     "Open Settings" : {
 
     },
@@ -448,7 +451,7 @@
     "Syncing" : {
 
     },
-    "The global keyboard shortcut for calling up %@." : {
+    "The global keyboard shortcut for calling up the clip window." : {
 
     },
     "This action clears all your clipboard history unrestorably, including pins." : {
