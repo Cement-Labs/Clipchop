@@ -10,6 +10,8 @@ import SwiftUI
 struct AcknowledgementsView: View {
     @Environment(\.openURL) private var openURL
     
+    @State var presentingReasonForPackage: String?
+    
     struct Package {
         var name: String
         var author: Author
@@ -28,7 +30,8 @@ struct AcknowledgementsView: View {
         .init(
             name: "Defaults",
             author: .init(name: "Sindre Sorhus", slug: "sindresorhus", link: URL(string: "https://sindresorhus.com/apps")),
-            link: URL(string: "https://github.com/sindresorhus/Defaults")!
+            link: URL(string: "https://github.com/sindresorhus/Defaults")!,
+            reason: "This is a reason."
         ),
         .init(
             name: "FilePreviews", 
@@ -42,48 +45,77 @@ struct AcknowledgementsView: View {
         )
     ]
     
+    @ViewBuilder
+    func name(author: Package.Author) -> some View {
+        Text(author.name)
+        
+        if let slug = author.slug {
+            Text(slug)
+                .foregroundStyle(.placeholder)
+                .monospaced()
+        }
+    }
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             ForEach(AcknowledgementsView.packages, id: \.name) { package in
-                HStack(alignment: .center) {
+                HStack {
                     @State var isReasonPresented = false
                     
                     VStack {
-                        withCaption {
+                        withCaption(spacing: 0) {
                             Text(package.name)
                                 .font(.title3)
                         } caption: {
-                            Text(package.author.name)
+                            if let link = package.author.link {
+                                Button {
+                                    openURL(link)
+                                } label: {
+                                    name(author: package.author)
+                                    Image(systemSymbol: .arrowUpRight)
+                                        .foregroundStyle(.placeholder)
+                                }
+                                .buttonStyle(.plain)
+                            } else {
+                                name(author: package.author)
+                            }
                         }
                     }
                     
-                    if let reason = package.reason {
+                    Spacer()
+                    
+                    Group {
+                        if let reason = package.reason {
+                            Button {
+                                presentingReasonForPackage = package.name
+                            } label: {
+                                Image(systemSymbol: .infoCircleFill)
+                            }
+                            .aspectRatio(1, contentMode: .fit)
+                            .popover(isPresented: .init {
+                                presentingReasonForPackage == package.name
+                            } set: { _ in
+                                presentingReasonForPackage = nil
+                            }) {
+                                Text(reason)
+                                    .padding()
+                            }
+                        }
+                        
                         Button {
-                            isReasonPresented = true
+                            openURL(package.link)
                         } label: {
-                            Image(systemSymbol: .infoCircleFill)
+                            Image(systemSymbol: .safariFill)
                         }
-                        .buttonBorderShape(.circle)
-                        .foregroundStyle(.secondary)
                         .aspectRatio(1, contentMode: .fit)
-                        .popover(isPresented: $isReasonPresented) {
-                            Text(reason)
-                                .padding()
-                        }
                     }
-                    
-                    Button {
-                        openURL(package.link)
-                    } label: {
-                        Image(systemSymbol: .safariFill)
-                    }
-                    .buttonBorderShape(.circle)
+                    .imageScale(.large)
+                    .buttonStyle(.plain)
                     .foregroundStyle(.secondary)
-                    .aspectRatio(1, contentMode: .fit)
                 }
-                .padding()
             }
         }
+        .padding()
     }
 }
 

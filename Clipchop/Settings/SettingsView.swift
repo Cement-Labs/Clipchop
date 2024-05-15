@@ -12,16 +12,17 @@ import SFSafeSymbols
 func description(@ViewBuilder label: () -> some View) -> some View {
     label()
         .font(.caption)
-        .foregroundStyle(.placeholder)
+        .foregroundStyle(.secondary)
 }
 
 @ViewBuilder
 func withCaption(
     condition: Bool = true,
+    spacing: CGFloat? = nil,
     @ViewBuilder content: () -> some View,
-    @ViewBuilder caption: () -> Text
+    @ViewBuilder caption: () -> some View
 ) -> some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: spacing) {
         content()
         
         if condition {
@@ -36,9 +37,10 @@ func withCaption(
 func withCaption(
     _ descriptionKey: LocalizedStringKey,
     condition: Bool = true,
+    spacing: CGFloat? = nil,
     @ViewBuilder content: () -> some View
 ) -> some View {
-    withCaption(condition: condition) {
+    withCaption(condition: condition, spacing: spacing) {
         content()
     } caption: {
         Text(descriptionKey)

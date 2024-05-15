@@ -49,36 +49,41 @@ struct AboutSettingsPage: View {
                 .padding(2)
             }
             .popover(isPresented: $isSourcePresented, arrowEdge: .bottom) {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Image(systemSymbol: .curlybraces)
-                            .frame(width: 16)
-                        
-                        Button {
-                            
-                        } label: {
-                            Text("Source Code")
-                            
-                            Image(systemSymbol: .arrowUpRight)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
+                VStack {
+                    Text("\(Bundle.main.appName) is open source.")
                     
-                    HStack {
-                        Image(systemSymbol: .docText)
-                            .frame(width: 16)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Image(systemSymbol: .curlybraces)
+                                .frame(width: 16)
+                            
+                            Button {
+                                
+                            } label: {
+                                Text("Source Code")
+                                
+                                Image(systemSymbol: .arrowUpRight)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
                         
-                        Button {
+                        HStack {
+                            Image(systemSymbol: .docText)
+                                .frame(width: 16)
                             
-                        } label: {
-                            Text("Licenced Under GPL-3.0")
-                            
-                            Image(systemSymbol: .arrowUpRight)
-                                .foregroundStyle(.secondary)
+                            Button {
+                                
+                            } label: {
+                                Text("Licenced Under GPL-3.0")
+                                
+                                Image(systemSymbol: .arrowUpRight)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
+                    .imageScale(.small)
+                    .buttonStyle(.accessoryBar)
                 }
-                .buttonStyle(.accessoryBar)
                 .padding()
             }
             
@@ -93,7 +98,7 @@ struct AboutSettingsPage: View {
                 .padding(2)
             }
             .popover(isPresented: $isAcknowledgementsPresented, arrowEdge: .bottom) {
-                
+                AcknowledgementsView()
             }
         }
     }
