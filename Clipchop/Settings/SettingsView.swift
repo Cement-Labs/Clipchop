@@ -131,7 +131,7 @@ struct SettingsView: View {
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 250)
         } detail: {
-            Spacer()
+            StaleView()
                 .navigationSplitViewColumnWidth(min: 350, ideal: 750)
         }
         .navigationTitle(Bundle.main.appName)
@@ -151,14 +151,7 @@ struct SettingsView: View {
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(condition: !isWindowInitialized) {
-            Image(.appSymbol)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .foregroundStyle(.placeholder)
-            
-                .frame(height: 64)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+            StaleView()
                 .navigationTitle(Text(verbatim: ""))
         }
     }
