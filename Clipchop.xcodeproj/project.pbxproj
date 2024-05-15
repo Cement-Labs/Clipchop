@@ -19,6 +19,7 @@
 		2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692792BDCAE6000D1656E /* Bundle+Extensions.swift */; };
 		282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */; };
 		282692992BDCC9F200D1656E /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 282692982BDCC9F200D1656E /* Defaults */; };
+		283E25342BF4EF670094C06F /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E25332BF4EF670094C06F /* AcknowledgementsView.swift */; };
 		2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */; };
 		2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */; };
 		2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */; };
@@ -80,6 +81,7 @@
 		282692762BDCACC600D1656E /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
 		282692792BDCAE6000D1656E /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Extensions.swift"; sourceTree = "<group>"; };
+		283E25332BF4EF670094C06F /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppListSection.swift; sourceTree = "<group>"; };
 		2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsMenu.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */,
 				28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */,
 				28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */,
+				283E25332BF4EF670094C06F /* AcknowledgementsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */,
 				287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */,
 				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
+				283E25342BF4EF670094C06F /* AcknowledgementsView.swift in Sources */,
 				28C2C5962BF0D0BF00E9D9AA /* Sounds.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,

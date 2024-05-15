@@ -14,7 +14,7 @@ struct KeyboardShortcutsSection: View {
             KeyboardShortcuts.Recorder(for: .action) {
                 withCaption {
                     Text("Show \(Bundle.main.appName)")
-                } label: {
+                } caption: {
                     Text("The global keyboard shortcut for calling up the clip window.")
                 }
             }

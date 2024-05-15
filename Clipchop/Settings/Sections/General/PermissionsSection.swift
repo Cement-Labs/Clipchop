@@ -46,7 +46,7 @@ struct PermissionsSection: View {
             HStack {
                 withCaption {
                     Text("Accessibility Access")
-                } label: {
+                } description: {
                     Text("""
 Accessibility Access is needed to take over your clipboard.
 """)
@@ -70,7 +70,7 @@ Accessibility Access is needed to take over your clipboard.
             HStack {
                 withCaption {
                     Text("Full Disk Access")
-                } label: {
+                } description: {
                     Text("""
 Full Disk Access is neede to generate file previews.
 """)

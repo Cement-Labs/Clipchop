@@ -19,14 +19,14 @@ func description(@ViewBuilder label: () -> some View) -> some View {
 func withCaption(
     condition: Bool = true,
     @ViewBuilder content: () -> some View,
-    @ViewBuilder label: () -> Text
+    @ViewBuilder caption: () -> Text
 ) -> some View {
     VStack(alignment: .leading) {
         content()
         
         if condition {
             description {
-                label()
+                caption()
             }
         }
     }
@@ -40,7 +40,7 @@ func withCaption(
 ) -> some View {
     withCaption(condition: condition) {
         content()
-    } label: {
+    } caption: {
         Text(descriptionKey)
     }
 }
