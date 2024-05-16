@@ -105,6 +105,7 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
             in: ClipboardDataProvider.shared.viewContext
         )!
         self.init(entity: entity, insertInto: ClipboardDataProvider.shared.viewContext)
+        
         self.id = UUID()
         self.app = ClipboardHistory.source?.localizedName
         self.time = Date.now
@@ -147,12 +148,8 @@ extension ClipboardHistory {
     @objc(removeContents:)
     @NSManaged public func removeFromContents(_ values: NSSet)
     
-    private static var itemFetchRequsest: NSFetchRequest<ClipboardHistory> {
-        .init(entityName: ClipboardHistory.entityName)
-    }
-    
     static func all() -> NSFetchRequest<ClipboardHistory> {
-        let request = itemFetchRequsest
+        let request = fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(keyPath: \ClipboardHistory.time, ascending: false)]
         return request
     }

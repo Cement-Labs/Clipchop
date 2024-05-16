@@ -22,4 +22,9 @@ final class ClipboardEditModel {
             self.item = .init(context: self.context)
         }
     }
+    
+    func deleteAll() throws {
+        let historyFetchRequest = ClipboardHistory.fetchRequest()
+        let contentFetchRequest = ClipboardContent.fetchRequest()
+    }
 }
