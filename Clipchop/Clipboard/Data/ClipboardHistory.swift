@@ -62,7 +62,6 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
     enum Managed: String {
         case app = "app"
         case id = "id"
-        case list = "list"
         case time = "time"
         case title = "title"
         case contents = "contents"
@@ -87,7 +86,6 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
     
     @NSManaged public var app: String?
     @NSManaged public var id: UUID?
-    @NSManaged public var list: String?
     @NSManaged public var time: Date?
     @NSManaged public var title: String?
     @NSManaged public var contents: NSSet?
@@ -103,7 +101,6 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
         setPrimitiveValue(Self.source?.localizedName, forKey: Managed.app.rawValue)
         setPrimitiveValue(UUID(), forKey: Managed.id.rawValue)
         setPrimitiveValue(Date.now, forKey: Managed.time.rawValue)
-        setPrimitiveValue(nil, forKey: Managed.list.rawValue)
         setPrimitiveValue(nil, forKey: Managed.title.rawValue)
         setPrimitiveValue(nil, forKey: Managed.contents.rawValue)
         setPrimitiveValue(false, forKey: Managed.pinned.rawValue)
@@ -119,7 +116,6 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
         self.id = UUID()
         self.app = ClipboardHistory.source?.localizedName
         self.time = Date.now
-        self.list = "1"
         self.title = formatter.title
         self.pinned = false
         
