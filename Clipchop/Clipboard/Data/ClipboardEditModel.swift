@@ -8,9 +8,8 @@
 import CoreData
 import AppKit
 
-/*
 final class ClipboardEditModel {
-    @Published var item: ClipboardHistorya
+    @Published var item: ClipboardHistory
     
     static let shared = ClipboardEditModel(provider: .shared)
     private let context: NSManagedObjectContext
@@ -24,4 +23,3 @@ final class ClipboardEditModel {
         }
     }
 }
- */
