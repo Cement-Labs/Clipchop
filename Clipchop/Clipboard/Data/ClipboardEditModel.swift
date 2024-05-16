@@ -46,7 +46,7 @@ final class ClipboardEditModel {
     
     func deleteEmpty() throws {
         let fetchRequest = ClipboardHistory.fetchRequest()
-        fetchRequest.predicate = .init(format: "\(ClipboardHistory.Managed.list.rawValue) == nil")
+        fetchRequest.predicate = .init(format: "\(ClipboardHistory.Managed.list) == nil")
         
         do {
             let histories = try context.fetch(fetchRequest)

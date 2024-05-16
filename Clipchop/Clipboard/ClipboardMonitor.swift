@@ -23,9 +23,42 @@ class ClipboardMonitor: NSObject {
     
     // MARK: - Clipboard Change
     
-    /*
     private func isNew(content: Data?) -> Bool {
         guard let content else { return false }
+        let fetchRequest = ClipboardContent.fetchRequest()
+        fetchRequest.predicate = .init(format: "\(ClipboardContent.Managed.value) == \(content)")
+        
+        do {
+            let existing = try context.fetch(fetchRequest)
+            if !existing.isEmpty {
+                // Duplicated
+                try handleDuplicated(existing)
+                reorder()
+                
+                return false
+            } else {
+                return true
+            }
+        } catch {
+            print("Error checking for duplicate content! \(error)")
+            return true
+        }
     }
-     */
+    
+    private func handleDuplicated(_ existing: [ClipboardContent]) throws {
+        for exist in existing {
+            if let history = exist.item {
+                history.time = Date.now
+                try context.save()
+                
+                break
+            }
+        }
+    }
+    
+    // MARK: - Content Reorder
+    
+    func reorder() {
+        
+    }
 }
