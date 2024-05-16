@@ -8,6 +8,11 @@
 import CoreData
 
 final class ClipboardContent: NSManagedObject {
+    enum Managed: String {
+        case type = "type"
+        case value = "value"
+    }
+    
     static let entityName = "ClipboardContent"
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<ClipboardContent> {

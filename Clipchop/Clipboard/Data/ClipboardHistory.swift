@@ -59,6 +59,16 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
         }
     }
     
+    enum Managed: String {
+        case app = "app"
+        case id = "id"
+        case list = "list"
+        case time = "time"
+        case title = "title"
+        case contents = "contents"
+        case pinned = "pinned"
+    }
+    
     static var source: NSRunningApplication? {
         NSWorkspace.shared.frontmostApplication
     }
@@ -90,13 +100,13 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
     override func awakeFromInsert() {
         super.awakeFromInsert()
         
-        setPrimitiveValue(UUID(), forKey: "id")
-        setPrimitiveValue(Date.now, forKey: "time")
-        setPrimitiveValue(Self.source?.localizedName, forKey: "app")
-        setPrimitiveValue(nil, forKey: "list")
-        setPrimitiveValue("Untitled", forKey: "title")
-        setPrimitiveValue(nil, forKey: "contents")
-        setPrimitiveValue(false, forKey: "pinned")
+        setPrimitiveValue(Self.source?.localizedName, forKey: Managed.app.rawValue)
+        setPrimitiveValue(UUID(), forKey: Managed.id.rawValue)
+        setPrimitiveValue(Date.now, forKey: Managed.time.rawValue)
+        setPrimitiveValue(nil, forKey: Managed.list.rawValue)
+        setPrimitiveValue(nil, forKey: Managed.title.rawValue)
+        setPrimitiveValue(nil, forKey: Managed.contents.rawValue)
+        setPrimitiveValue(false, forKey: Managed.pinned.rawValue)
     }
     
     convenience init(contents: [ClipboardContent]) {
