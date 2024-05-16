@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="ClipboardContentc" representedClassName=".ClipboardContentc" syncable="YES" codeGenerationType="class">
+    <entity name="ClipboardContentc" representedClassName=".ClipboardContent" syncable="YES" codeGenerationType="class">
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Binary"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClipboardHistorya" inverseName="contents" inverseEntity="ClipboardHistorya"/>
     </entity>
-    <entity name="ClipboardHistorya" representedClassName=".ClipboardHistorya" syncable="YES" codeGenerationType="class">
+    <entity name="ClipboardHistorya" representedClassName=".ClipboardHistory" syncable="YES" codeGenerationType="class">
         <attribute name="app" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="list" optional="YES" attributeType="String"/>
