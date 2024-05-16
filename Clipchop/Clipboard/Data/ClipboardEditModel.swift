@@ -23,7 +23,7 @@ final class ClipboardEditModel {
         }
     }
     
-    func deleteAll() throws {
+    func deleteAll(ignoresPinned: Bool = true) throws {
         let historyFetchRequest = ClipboardHistory.fetchRequest()
         let contentFetchRequest = ClipboardContent.fetchRequest()
         
@@ -38,7 +38,25 @@ final class ClipboardEditModel {
             print("Deleted all clipboard data.")
         } catch {
             let nsError = error as NSError
-            print("Error deleting clipboard dara! \(nsError), \(nsError.userInfo)")
+            print("Error deleting all clipboard data! \(nsError), \(nsError.userInfo)")
+            
+            throw nsError
+        }
+    }
+    
+    func deleteEmpty() throws {
+        let fetchRequest = ClipboardHistory.fetchRequest()
+        fetchRequest.predicate = .init(format: "\(ClipboardHistory.Managed.list.rawValue) == nil")
+        
+        do {
+            let histories = try context.fetch(fetchRequest)
+            histories.forEach(context.delete(_:))
+            
+            try context.save()
+            print("Deleted empty clipboard data.")
+        } catch {
+            let nsError = error as NSError
+            print("Error deleting empty clipboard data! \(nsError), \(nsError.userInfo)")
             
             throw nsError
         }
