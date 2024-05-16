@@ -1,5 +1,5 @@
 //
-//  ClipboardContent.swift
+//  ClipboardContentc.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/16.
@@ -7,14 +7,14 @@
 
 import CoreData
 
-final class ClipboardContent: NSManagedObject {
-    static let entityName = "ClipboardContent"
+final class ClipboardContentc: NSManagedObject {
+    static let entityName = "ClipboardContentc"
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Content> {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ClipboardContent> {
         .init(entityName: ClipboardContent.entityName)
     }
     
-    @NSManaged public var item: History?
+    @NSManaged public var item: ClipboardHistory?
     @NSManaged public var type: String?
     @NSManaged public var value: Data?
     

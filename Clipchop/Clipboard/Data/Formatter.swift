@@ -17,10 +17,10 @@ struct Formatter {
     }
     var universalHasText: Bool {
         isUniversal && contentData(
-            ClipboardHistory.Class.html.types
-            + ClipboardHistory.Class.image.types
-            + ClipboardHistory.Class.rtf.types
-            + ClipboardHistory.Class.text.types
+            ClipboardHistorya.Class.html.types
+            + ClipboardHistorya.Class.image.types
+            + ClipboardHistorya.Class.rtf.types
+            + ClipboardHistorya.Class.text.types
         ) != nil
     }
     var isUniversal: Bool { contentData([.universalClipboard]) != nil }
@@ -42,12 +42,12 @@ struct Formatter {
 extension Formatter {
     var fileURLs: [URL] {
         guard !universalHasText else { return [] }
-        return allContentData(ClipboardHistory.Class.file.types)
+        return allContentData(ClipboardHistorya.Class.file.types)
             .compactMap { URL(dataRepresentation: $0, relativeTo: nil, isAbsolute: true) }
     }
     
     var htmlData: Data? {
-        contentData(ClipboardHistory.Class.html.types)
+        contentData(ClipboardHistorya.Class.html.types)
     }
     
     var htmlString: NSAttributedString? {
@@ -56,7 +56,7 @@ extension Formatter {
     }
     
     var image: NSImage? {
-        var data = contentData(ClipboardHistory.Class.image.types)
+        var data = contentData(ClipboardHistorya.Class.image.types)
         if data == nil, universalHasImage, let url = fileURLs.first {
             data = try? Data(contentsOf: url)
         }
@@ -66,7 +66,7 @@ extension Formatter {
     }
     
     var rtfData: Data? {
-        contentData(ClipboardHistory.Class.rtf.types)
+        contentData(ClipboardHistorya.Class.rtf.types)
     }
     
     var rtfString: NSAttributedString? {
@@ -75,7 +75,7 @@ extension Formatter {
     }
     
     var text: String? {
-        guard let data = contentData(ClipboardHistory.Class.text.types)
+        guard let data = contentData(ClipboardHistorya.Class.text.types)
         else { return nil }
         return .init(data: data, encoding: .utf8)
     }

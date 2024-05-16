@@ -16,7 +16,7 @@ class ClipboardMonitor: NSObject {
     
     init(context: NSManagedObjectContext) {
         self.context = context
-        self.changeCount = ClipboardHistory.pasteboard.changeCount
+        self.changeCount = ClipboardHistorya.pasteboard.changeCount
         
         super.init()
     }

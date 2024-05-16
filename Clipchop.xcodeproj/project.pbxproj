@@ -27,7 +27,6 @@
 		2870BEEC2BF38E9400B79624 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */; };
 		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
 		287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197952BDE7399004BCDA3 /* KeyChord.swift */; };
-		287197982BDE73B9004BCDA3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197972BDE73B9004BCDA3 /* CoreDataManager.swift */; };
 		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
 		2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */; };
 		287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */; };
@@ -43,6 +42,7 @@
 		28A699B82BF620EF000B0272 /* ClipboardData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */; };
 		28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */; };
 		28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */; };
+		28ADB48D2BF62DAC000FB0B9 /* ClipboardEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */; };
 		28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5822BF0C67900E9D9AA /* FullDiskAccess */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
@@ -90,7 +90,6 @@
 		2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		287197952BDE7399004BCDA3 /* KeyChord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChord.swift; sourceTree = "<group>"; };
-		287197972BDE73B9004BCDA3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
@@ -106,6 +105,7 @@
 		28A699B22BF62009000B0272 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardContent.swift; sourceTree = "<group>"; };
 		28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDataProvider.swift; sourceTree = "<group>"; };
 		28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClipboardData.xcdatamodel; sourceTree = "<group>"; };
+		28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEditModel.swift; sourceTree = "<group>"; };
 		28C2C58F2BF0CA3E00E9D9AA /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
 		28C2C5952BF0D0BF00E9D9AA /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
@@ -230,6 +230,7 @@
 		2871978D2BDE7269004BCDA3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */,
 				28A699AE2BF61B26000B0272 /* ClipboardHistory.swift */,
 				28A699B22BF62009000B0272 /* ClipboardContent.swift */,
 				28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */,
@@ -325,7 +326,6 @@
 				287197952BDE7399004BCDA3 /* KeyChord.swift */,
 				2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */,
 				28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */,
-				287197972BDE73B9004BCDA3 /* CoreDataManager.swift */,
 				2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */,
 				28C2C58F2BF0CA3E00E9D9AA /* Icons.swift */,
 				28C2C5952BF0D0BF00E9D9AA /* Sounds.swift */,
@@ -473,10 +473,10 @@
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
 				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
-				287197982BDE73B9004BCDA3 /* CoreDataManager.swift in Sources */,
 				2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */,
 				28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */,
 				28C2C5A22BF0D85D00E9D9AA /* Apps.swift in Sources */,
+				28ADB48D2BF62DAC000FB0B9 /* ClipboardEditModel.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				283E25362BF4FE040094C06F /* StaleView.swift in Sources */,
 				28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */,

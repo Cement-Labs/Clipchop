@@ -71,7 +71,7 @@ final class ClipboardHistory: NSManagedObject, Identifiable {
     
     static let entityName = "ClipboardHistory"
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<History> {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<ClipboardHistory> {
         return .init(entityName: ClipboardHistory.entityName)
     }
     
@@ -155,13 +155,5 @@ extension ClipboardHistory {
         let request = itemFetchRequsest
         request.sortDescriptors = [NSSortDescriptor(keyPath: \ClipboardHistory.time, ascending: false)]
         return request
-    }
-}
-
-extension ClipboardHistory {
-    // MARK: - Equatable Extension
-    
-    static func ==(lhs: ClipboardHistory, rhs: ClipboardHistory) -> Bool {
-        lhs.getContents().count == rhs.getContents().count && lhs.supersedes(rhs)
     }
 }
