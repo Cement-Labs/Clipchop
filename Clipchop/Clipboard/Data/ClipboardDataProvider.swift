@@ -1,5 +1,5 @@
 //
-//  Provider.swift
+//  ClipboardDataProvider.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/16.
@@ -8,8 +8,8 @@
 import Foundation
 import CoreData
 
-final class Provider {
-    static let shared = Provider()
+final class ClipboardDataProvider {
+    static let shared = ClipboardDataProvider()
     
     private let persistentContainer : NSPersistentContainer
     

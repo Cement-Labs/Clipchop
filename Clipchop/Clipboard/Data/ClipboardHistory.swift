@@ -1,5 +1,5 @@
 //
-//  History.swift
+//  ClipboardHistory.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/16.
@@ -12,8 +12,8 @@ import Algorithms
 import SwiftHEXColors
 import UniformTypeIdentifiers
 
-final class History: NSManagedObject, Identifiable {
-    enum Classification {
+final class ClipboardHistory: NSManagedObject, Identifiable {
+    enum Class {
         case all
         
         case file
@@ -69,10 +69,10 @@ final class History: NSManagedObject, Identifiable {
     
     // MARK: - Fields
     
-    static let entityName = "History"
+    static let entityName = "ClipboardHistory"
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<History> {
-        return .init(entityName: History.entityName)
+        return .init(entityName: ClipboardHistory.entityName)
     }
     
     @NSManaged public var app: String?
@@ -82,6 +82,10 @@ final class History: NSManagedObject, Identifiable {
     @NSManaged public var title: String?
     @NSManaged public var contents: NSSet?
     @NSManaged public var pinned: Bool
+    
+    private var formatter: Formatter {
+        .init(contents: getContents())
+    }
     
     override func awakeFromInsert() {
         super.awakeFromInsert()
@@ -95,22 +99,29 @@ final class History: NSManagedObject, Identifiable {
         setPrimitiveValue(false, forKey: "pinned")
     }
     
+    convenience init(contents: [ClipboardContent]) {
+        let entity = NSEntityDescription.entity(
+            forEntityName: ClipboardHistory.entityName,
+            in: ClipboardDataProvider.shared.viewContext
+        )!
+        self.init(entity: entity, insertInto: ClipboardDataProvider.shared.viewContext)
+        self.id = UUID()
+        self.app = ClipboardHistory.source?.localizedName
+        self.time = Date.now
+        self.list = "1"
+        self.title = formatter.title
+        self.pinned = false
+        
+        contents.forEach(addToContents(_:))
+    }
+    
     // MARK: - Functions
     
-    private func contentData(_ types: [NSPasteboard.PasteboardType]) -> Data? {
-        let contents = getContents()
-        let content = contents.first { content in
-            types.contains(.init(content.type!))
-        }
-        
-        return content?.value
+    func getContents() -> [ClipboardContent] {
+        (contents?.allObjects as? [ClipboardContent]) ?? []
     }
     
-    func getContents() -> [Content] {
-        (contents?.allObjects as? [Content]) ?? []
-    }
-    
-    func supersedes(_ item: History) -> Bool {
+    func supersedes(_ item: ClipboardHistory) -> Bool {
         item.getContents()
             .filter { content in
                 content.type == NSPasteboard.PasteboardType.fromClipchop.rawValue
@@ -118,5 +129,39 @@ final class History: NSManagedObject, Identifiable {
             .allSatisfy { content in
                 getContents().contains([content])
             }
+    }
+}
+
+extension ClipboardHistory {
+    // MARK: - Objective-C Extension
+    
+    @objc(addContentsObject:)
+    @NSManaged public func addToContents(_ value: ClipboardContent)
+    
+    @objc(removeContentsObject:)
+    @NSManaged public func removeFromContents(_ value: ClipboardContent)
+    
+    @objc(addContents:)
+    @NSManaged public func addToContents(_ values: NSSet)
+    
+    @objc(removeContents:)
+    @NSManaged public func removeFromContents(_ values: NSSet)
+    
+    private static var itemFetchRequsest: NSFetchRequest<ClipboardHistory> {
+        .init(entityName: ClipboardHistory.entityName)
+    }
+    
+    static func all() -> NSFetchRequest<ClipboardHistory> {
+        let request = itemFetchRequsest
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \ClipboardHistory.time, ascending: false)]
+        return request
+    }
+}
+
+extension ClipboardHistory {
+    // MARK: - Equatable Extension
+    
+    static func ==(lhs: ClipboardHistory, rhs: ClipboardHistory) -> Bool {
+        lhs.getContents().count == rhs.getContents().count && lhs.supersedes(rhs)
     }
 }
