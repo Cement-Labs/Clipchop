@@ -69,8 +69,10 @@ final class History: NSManagedObject, Identifiable {
     
     // MARK: - Fields
     
+    static let entityName = "History"
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<History> {
-        return .init(entityName: "Clipchop/History")
+        return .init(entityName: History.entityName)
     }
     
     @NSManaged public var app: String?
@@ -92,16 +94,6 @@ final class History: NSManagedObject, Identifiable {
         setPrimitiveValue(nil, forKey: "contents")
         setPrimitiveValue(false, forKey: "pinned")
     }
-    
-    private var universalClipboardHasImage: Bool {
-        universalClipboard && fileURLs.first?.pathExtension == NSPasteboard.PasteboardType.jpeg.rawValue
-    }
-    private var universalClipboardHasText: Bool {
-        universalClipboard && contentData(Classification.html.types + Classification.image.types + Classification.rtf.types + Classification.text.types) != nil
-    }
-    
-    var universalClipboard: Bool { contentData([.universalClipboard]) != nil }
-    var fromClipchop: Bool { contentData([.fromClipchop]) != nil }
     
     // MARK: - Functions
     
