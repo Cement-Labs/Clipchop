@@ -26,5 +26,21 @@ final class ClipboardEditModel {
     func deleteAll() throws {
         let historyFetchRequest = ClipboardHistory.fetchRequest()
         let contentFetchRequest = ClipboardContent.fetchRequest()
+        
+        do {
+            let histories = try context.fetch(historyFetchRequest)
+            histories.forEach(context.delete(_:))
+            
+            let contents = try context.fetch(contentFetchRequest)
+            contents.forEach(context.delete(_:))
+            
+            try context.save()
+            print("Deleted all clipboard data.")
+        } catch {
+            let nsError = error as NSError
+            print("Error deleting clipboard dara! \(nsError), \(nsError.userInfo)")
+            
+            throw nsError
+        }
     }
 }
