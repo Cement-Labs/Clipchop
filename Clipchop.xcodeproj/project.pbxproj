@@ -43,9 +43,7 @@
 		28A699B82BF620EF000B0272 /* ClipboardData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */; };
 		28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */; };
 		28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */; };
-		28C2C5802BF0C60200E9D9AA /* FilePreviews in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C57F2BF0C60200E9D9AA /* FilePreviews */; };
 		28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5822BF0C67900E9D9AA /* FullDiskAccess */; };
-		28C2C5862BF0C69F00E9D9AA /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5852BF0C69F00E9D9AA /* HotKey */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
 		28C2C5902BF0CA3E00E9D9AA /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C58F2BF0CA3E00E9D9AA /* Icons.swift */; };
@@ -136,10 +134,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */,
-				28C2C5862BF0C69F00E9D9AA /* HotKey in Frameworks */,
 				28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */,
 				28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */,
-				28C2C5802BF0C60200E9D9AA /* FilePreviews in Frameworks */,
 				28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */,
 				282692992BDCC9F200D1656E /* Defaults in Frameworks */,
 				28D8CE6F2BDD2492008B17B5 /* LaunchAtLogin in Frameworks */,
@@ -373,9 +369,7 @@
 				28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */,
 				28D8CE5B2BDCF7A5008B17B5 /* Sauce */,
 				28D8CE6E2BDD2492008B17B5 /* LaunchAtLogin */,
-				28C2C57F2BF0C60200E9D9AA /* FilePreviews */,
 				28C2C5822BF0C67900E9D9AA /* FullDiskAccess */,
-				28C2C5852BF0C69F00E9D9AA /* HotKey */,
 				28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */,
 				28C2C58B2BF0C6ED00E9D9AA /* Algorithms */,
 			);
@@ -416,9 +410,7 @@
 				28ABFFA72BDCA92500B02E76 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */,
 				28D8CE572BDCF5B9008B17B5 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				28D8CE5A2BDCF7A5008B17B5 /* XCRemoteSwiftPackageReference "Sauce" */,
-				28C2C57E2BF0C60200E9D9AA /* XCRemoteSwiftPackageReference "FilePreviews" */,
 				28C2C5812BF0C67900E9D9AA /* XCRemoteSwiftPackageReference "FullDiskAccess" */,
-				28C2C5842BF0C69F00E9D9AA /* XCRemoteSwiftPackageReference "HotKey" */,
 				28C2C5872BF0C6C800E9D9AA /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 				28C2C58A2BF0C6ED00E9D9AA /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
@@ -778,28 +770,12 @@
 				minimumVersion = 1.0.5;
 			};
 		};
-		28C2C57E2BF0C60200E9D9AA /* XCRemoteSwiftPackageReference "FilePreviews" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ntsh/FilePreviews";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
-			};
-		};
 		28C2C5812BF0C67900E9D9AA /* XCRemoteSwiftPackageReference "FullDiskAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/inket/FullDiskAccess";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		28C2C5842BF0C69F00E9D9AA /* XCRemoteSwiftPackageReference "HotKey" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/soffes/HotKey";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		28C2C5872BF0C6C800E9D9AA /* XCRemoteSwiftPackageReference "SwiftHEXColors" */ = {
@@ -857,20 +833,10 @@
 			package = 28ABFFA72BDCA92500B02E76 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */;
 			productName = MenuBarExtraAccess;
 		};
-		28C2C57F2BF0C60200E9D9AA /* FilePreviews */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 28C2C57E2BF0C60200E9D9AA /* XCRemoteSwiftPackageReference "FilePreviews" */;
-			productName = FilePreviews;
-		};
 		28C2C5822BF0C67900E9D9AA /* FullDiskAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 28C2C5812BF0C67900E9D9AA /* XCRemoteSwiftPackageReference "FullDiskAccess" */;
 			productName = FullDiskAccess;
-		};
-		28C2C5852BF0C69F00E9D9AA /* HotKey */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 28C2C5842BF0C69F00E9D9AA /* XCRemoteSwiftPackageReference "HotKey" */;
-			productName = HotKey;
 		};
 		28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */ = {
 			isa = XCSwiftPackageProductDependency;

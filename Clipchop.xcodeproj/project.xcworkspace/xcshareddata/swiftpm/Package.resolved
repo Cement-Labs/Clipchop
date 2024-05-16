@@ -1,5 +1,5 @@
 {
-  "originHash" : "76cf65a7b40376b6d45a3ffca37b9bca5a118e1ef02b516eeee712a003691a7b",
+  "originHash" : "03f54fc4e3d0d1f942d293a2699d9d46f7917c90632b2569ee193820ebfa72e6",
   "pins" : [
     {
       "identity" : "defaults",
@@ -11,30 +11,12 @@
       }
     },
     {
-      "identity" : "filepreviews",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/ntsh/FilePreviews",
-      "state" : {
-        "revision" : "fd024b8084442d35ac8ae4451207f65e98199852",
-        "version" : "0.2.0"
-      }
-    },
-    {
       "identity" : "fulldiskaccess",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/inket/FullDiskAccess",
       "state" : {
         "revision" : "846e04ea2b84fce843f47d7e7f3421189221829c",
         "version" : "1.0.0"
-      }
-    },
-    {
-      "identity" : "hotkey",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/soffes/HotKey",
-      "state" : {
-        "branch" : "main",
-        "revision" : "4d02d80de143d69b7eeb5962729591a157a57ede"
       }
     },
     {

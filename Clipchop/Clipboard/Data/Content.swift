@@ -21,9 +21,9 @@ final class Content: NSManagedObject {
     convenience init(type: String, value: Data?) {
         let entity = NSEntityDescription.entity(
             forEntityName: Content.entityName,
-            in: ClipboardHistoryProvider.shared.viewContext
+            in: Provider.shared.viewContext
         )!
-        self.init(entity: entity, insertInto: ClipboardHistoryProvider.shared.viewContext)
+        self.init(entity: entity, insertInto: Provider.shared.viewContext)
         
         self.type = type
         self.value = value

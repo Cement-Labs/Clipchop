@@ -23,12 +23,14 @@ final class Provider {
     
     private init() {
         persistentContainer = NSPersistentContainer(name: "ClipboardData")
-        // AutoSave ClipboardData
+        
+        // Autosaves
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
-        // Load ClipboardData
+        
+        // Load persistent stores
         persistentContainer.loadPersistentStores { _, error in
             if let error {
-                fatalError("Unale to load store with error: \(error)")
+                fatalError("Unale to load data! \(error)")
             }
         }
     }

@@ -105,4 +105,18 @@ final class History: NSManagedObject, Identifiable {
         
         return content?.value
     }
+    
+    func getContents() -> [Content] {
+        (contents?.allObjects as? [Content]) ?? []
+    }
+    
+    func supersedes(_ item: History) -> Bool {
+        item.getContents()
+            .filter { content in
+                content.type == NSPasteboard.PasteboardType.fromClipchop.rawValue
+            }
+            .allSatisfy { content in
+                getContents().contains([content])
+            }
+    }
 }
