@@ -26,8 +26,10 @@ struct ClipchopApp: App {
     let monitor = ClipboardMonitor(context: ClipboardDataProvider.shared.viewContext)
     let editModel = ClipboardEditModel(provider: .shared)
     
-#if DEBUG
     init() {
+        monitor.start()
+        
+#if DEBUG
         // Resets menu bar item visibility
         Defaults[.menuBarItemEnabled] = true
         
@@ -37,8 +39,8 @@ struct ClipchopApp: App {
         
         // Resets clipboard history
         try! editModel.deleteAll()
-    }
 #endif
+    }
     
     var body: some Scene {
         Settings {
@@ -61,9 +63,6 @@ struct ClipchopApp: App {
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
             MenuBarView()
-                .onAppear {
-                    monitor.start()
-                }
         }
         .menuBarExtraStyle(.menu)
         .menuBarExtraAccess(isPresented: $isMenuBarPresented) { menuBarItem in
