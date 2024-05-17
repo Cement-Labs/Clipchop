@@ -1,5 +1,5 @@
 {
-  "originHash" : "03f54fc4e3d0d1f942d293a2699d9d46f7917c90632b2569ee193820ebfa72e6",
+  "originHash" : "10355ffae7e7c774958d8e6ecc6346de91e2475a7dae8caca3a23c48eddfdf6a",
   "pins" : [
     {
       "identity" : "defaults",
@@ -98,6 +98,15 @@
       "state" : {
         "revision" : "1f886cb20fedda14a5ac75efd09bc99c95b43a18",
         "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "swiftui-windowmanagement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Wouter01/SwiftUI-WindowManagement",
+      "state" : {
+        "branch" : "main",
+        "revision" : "adbebf5d7df325f3d7bf07dc832e5e162a9003f5"
       }
     }
   ],

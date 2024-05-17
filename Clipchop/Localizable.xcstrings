@@ -413,7 +413,7 @@
     "Show %@" : {
 
     },
-    "Show menu bar item" : {
+    "Shows menu bar item" : {
 
     },
     "Sound: Bloop" : {
@@ -547,7 +547,7 @@
     "Use custom accent color" : {
 
     },
-    "You can open %@ again to access this page." : {
+    "You can always open %@ again to access this page." : {
 
     }
   },
