@@ -25,16 +25,9 @@ struct ClipchopApp: App {
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     
-    let monitor = ClipboardMonitor(context: ClipboardDataProvider.shared.viewContext)
-    let editModel = ClipboardEditModel(provider: .shared)
+    let manager = AppManager()
     
     init() {
-        monitor.start()
-        
-        KeyboardShortcuts.onKeyUp(for: .window) {
-            //NSApp.openWindow(.clipHistoryWindow)
-        }
-        
 #if DEBUG
         // Resets menu bar item visibility
         Defaults[.menuBarItemEnabled] = true
@@ -44,7 +37,7 @@ struct ClipchopApp: App {
         Defaults[.sound] = Sound.defaultSound
         
         // Resets clipboard history
-        try! editModel.deleteAll()
+        try! manager.editModel.deleteAll()
 #endif
     }
     

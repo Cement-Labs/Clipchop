@@ -8,13 +8,30 @@
 import SwiftUI
 
 struct ClipHistoryView: View {
+    @ViewBuilder
+    func clip(content: () -> some View) -> some View {
+        content()
+            .clipShape(.rect(cornerRadius: 25, style: .continuous))
+    }
+    
     var body: some View {
-        Group {
-            Text("Test")
+        clip {
+            ZStack {
+                clip {
+                    VisualEffectView(material: .underWindowBackground, blendingMode: .behindWindow)
+                }
+                
+                VStack(alignment: .center) {
+                    Image(.appSymbol)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 24)
+                    Text("No Clipboard History Available")
+                }
+                .foregroundStyle(.blendMode(.overlay))
+            }
         }
-        .frame(width: 500, height: 100, alignment: .center)
-        .background(BlurView())
-        .clipShape(.rect(cornerRadius: 25, style: .continuous))
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -380,6 +380,9 @@
     "No Application Excluded" : {
 
     },
+    "No Clipboard History Available" : {
+
+    },
     "Only applies to the clip history window." : {
 
     },
@@ -467,9 +470,6 @@
 
     },
     "Syncing" : {
-
-    },
-    "Test" : {
 
     },
     "The global keyboard shortcut for calling up the clip history window." : {
