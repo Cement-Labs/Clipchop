@@ -49,7 +49,7 @@ func withCaption(
 
 struct SettingsView: View {
     @State var selectedNavigation: Navigation = .general
-    @State var apps = Apps()
+    @State var apps = InstalledApps()
     
     @Binding var isWindowInitialized: Bool
     

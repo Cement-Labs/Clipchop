@@ -10,7 +10,7 @@ import Defaults
 import SFSafeSymbols
 
 struct ExcludedAppListSection: View {
-    @EnvironmentObject var apps: Apps
+    @EnvironmentObject var apps: InstalledApps
     
     @Default(.excludeAppsEnabled) var excludeAppsEnabled
     @Default(.applicationExcludeList) var excluded
@@ -161,7 +161,7 @@ struct ExcludedAppListSection: View {
 #Preview {
     Form {
         ExcludedAppListSection()
-            .environmentObject(Apps())
+            .environmentObject(InstalledApps())
     }
     .formStyle(.grouped)
 }

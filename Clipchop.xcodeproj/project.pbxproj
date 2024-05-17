@@ -44,14 +44,14 @@
 		28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5822BF0C67900E9D9AA /* FullDiskAccess */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
-		28C2C5902BF0CA3E00E9D9AA /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C58F2BF0CA3E00E9D9AA /* Icon.swift */; };
+		28C2C5902BF0CA3E00E9D9AA /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C58F2BF0CA3E00E9D9AA /* AppIcon.swift */; };
 		28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */; };
 		28C2C5962BF0D0BF00E9D9AA /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5952BF0D0BF00E9D9AA /* Sound.swift */; };
 		28C2C59C2BF0D1AE00E9D9AA /* marimba-bloop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28C2C5992BF0D1AE00E9D9AA /* marimba-bloop.mp3 */; };
 		28C2C59D2BF0D1AE00E9D9AA /* tap-notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28C2C59A2BF0D1AE00E9D9AA /* tap-notification.mp3 */; };
 		28C2C59E2BF0D1AE00E9D9AA /* happy-pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 28C2C59B2BF0D1AE00E9D9AA /* happy-pop.mp3 */; };
 		28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C59F2BF0D31C00E9D9AA /* SoundPlayer.swift */; };
-		28C2C5A22BF0D85D00E9D9AA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5A12BF0D85D00E9D9AA /* App.swift */; };
+		28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5A12BF0D85D00E9D9AA /* InstalledApp.swift */; };
 		28C2C5A42BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5A32BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift */; };
 		28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5A52BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift */; };
 		28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */; };
@@ -102,14 +102,14 @@
 		28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDataProvider.swift; sourceTree = "<group>"; };
 		28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClipboardData.xcdatamodel; sourceTree = "<group>"; };
 		28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEditModel.swift; sourceTree = "<group>"; };
-		28C2C58F2BF0CA3E00E9D9AA /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		28C2C58F2BF0CA3E00E9D9AA /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
 		28C2C5952BF0D0BF00E9D9AA /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		28C2C5992BF0D1AE00E9D9AA /* marimba-bloop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "marimba-bloop.mp3"; sourceTree = "<group>"; };
 		28C2C59A2BF0D1AE00E9D9AA /* tap-notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "tap-notification.mp3"; sourceTree = "<group>"; };
 		28C2C59B2BF0D1AE00E9D9AA /* happy-pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "happy-pop.mp3"; sourceTree = "<group>"; };
 		28C2C59F2BF0D31C00E9D9AA /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
-		28C2C5A12BF0D85D00E9D9AA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		28C2C5A12BF0D85D00E9D9AA /* InstalledApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledApp.swift; sourceTree = "<group>"; };
 		28C2C5A32BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizationSettingsPage.swift; sourceTree = "<group>"; };
 		28C2C5A52BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppsSettingsPage.swift; sourceTree = "<group>"; };
 		28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSection.swift; sourceTree = "<group>"; };
@@ -208,9 +208,9 @@
 		283246C02BF76D91009C38D9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				28C2C58F2BF0CA3E00E9D9AA /* Icon.swift */,
+				28C2C58F2BF0CA3E00E9D9AA /* AppIcon.swift */,
 				28C2C5952BF0D0BF00E9D9AA /* Sound.swift */,
-				28C2C5A12BF0D85D00E9D9AA /* App.swift */,
+				28C2C5A12BF0D85D00E9D9AA /* InstalledApp.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -476,7 +476,7 @@
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
 				2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */,
 				28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */,
-				28C2C5A22BF0D85D00E9D9AA /* App.swift in Sources */,
+				28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */,
 				28ADB48D2BF62DAC000FB0B9 /* ClipboardEditModel.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				283E25362BF4FE040094C06F /* StaleView.swift in Sources */,
@@ -489,7 +489,7 @@
 				28D8CE6B2BDD142F008B17B5 /* View+Extension.swift in Sources */,
 				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
 				2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */,
-				28C2C5902BF0CA3E00E9D9AA /* Icon.swift in Sources */,
+				28C2C5902BF0CA3E00E9D9AA /* AppIcon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

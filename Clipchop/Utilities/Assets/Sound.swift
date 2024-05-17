@@ -14,6 +14,10 @@ struct Sound: Hashable, Defaults.Serializable {
     var assetName: String
     var unlockThreshold: Int
     
+    func setSound() {
+        Self.setSound(to: self)
+    }
+    
     func play() {
         if hasSound {
             SoundPlayer.playSound(named: assetName)

@@ -20,7 +20,7 @@ struct AppearanceSection: View {
     var body: some View {
         Section {
             Picker("App icon", selection: $appIcon) {
-                ForEach(Icon.unlockedIcons, id: \.self) { icon in
+                ForEach(AppIcon.unlockedIcons, id: \.self) { icon in
                     HStack {
                         Image(nsImage: icon.image)
                         Text(icon.name ?? "")
@@ -28,8 +28,8 @@ struct AppearanceSection: View {
                     .tag(icon.assetName)
                 }
             }
-            .onChange(of: appIcon) { oldIcon, newIcon in
-                Icon.setAppIcon(to: newIcon)
+            .onChange(of: appIcon) { _, newIcon in
+                newIcon.setAppIcon()
             }
             
             HStack {
@@ -39,8 +39,8 @@ struct AppearanceSection: View {
                             .tag(sound.assetName)
                     }
                 }
-                .onChange(of: sound) { oldSound, newSound in
-                    Sound.setSound(to: newSound)
+                .onChange(of: sound) { _, newSound in
+                    newSound.setSound()
                 }
                 
                 if sound.hasSound {

@@ -1,5 +1,5 @@
 //
-//  App.swift
+//  InstalledApp.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/12.
@@ -9,7 +9,7 @@ import SwiftUI
 import Algorithms
 import Defaults
 
-struct App: Identifiable {
+struct InstalledApp: Identifiable {
     var id: String { bundleID }
     var bundleID: String
     var icon: NSImage
@@ -17,10 +17,10 @@ struct App: Identifiable {
     var installationFolder: String
 }
 
-class Apps: ObservableObject {
+class InstalledApps: ObservableObject {
     private var query = NSMetadataQuery()
     
-    @Published var installedApps = [App]()
+    @Published var installedApps = [InstalledApp]()
     
     init() {
         self.startQuery()
@@ -56,8 +56,9 @@ class Apps: ObservableObject {
                 else {
                     return nil
                 }
+                
                 let icon = NSWorkspace.shared.icon(forFile: path)
-                return App(
+                return .init(
                     bundleID: bundleId,
                     icon: icon,
                     displayName: displayName,

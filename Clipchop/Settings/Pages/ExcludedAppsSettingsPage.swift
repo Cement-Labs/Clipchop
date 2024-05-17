@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExcludedAppsSettingsPage: View {
-    @EnvironmentObject var apps: Apps
+    @EnvironmentObject var apps: InstalledApps
     
     var body: some View {
         Form {
@@ -21,5 +21,5 @@ struct ExcludedAppsSettingsPage: View {
 #Preview {
     ExcludedAppsSettingsPage()
         .formStyle(.grouped)
-        .environmentObject(Apps())
+        .environmentObject(InstalledApps())
 }

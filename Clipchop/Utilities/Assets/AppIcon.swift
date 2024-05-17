@@ -1,5 +1,5 @@
 //
-//  Icon.swift
+//  AppIcon.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/12.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Defaults
 
-struct Icon: Hashable, Defaults.Serializable {
+struct AppIcon: Hashable, Defaults.Serializable {
     var name: String?
     var assetName: String
     var unlockThreshold: Int
@@ -17,15 +17,19 @@ struct Icon: Hashable, Defaults.Serializable {
         .init(named: assetName)!
     }
     
+    func setAppIcon() {
+        Self.setAppIcon(to: self)
+    }
+    
     struct Bridge: Defaults.Bridge {
-        typealias Value = Icon
+        typealias Value = AppIcon
         typealias Serializable = String
         
-        func serialize(_ value: Icon?) -> String? {
+        func serialize(_ value: AppIcon?) -> String? {
             value?.assetName
         }
         
-        func deserialize(_ object: String?) -> Icon? {
+        func deserialize(_ object: String?) -> AppIcon? {
             if let object {
                 return .icons.first { $0.assetName == object }
             } else {
@@ -37,52 +41,52 @@ struct Icon: Hashable, Defaults.Serializable {
     static let bridge = Bridge()
 }
 
-extension Icon {
-    static let stable = Icon(
+extension AppIcon {
+    static let stable = AppIcon(
         name: .init(localized: "App Icon: Stable", defaultValue: "Clipchop"),
         assetName: "AppIcon-Stable",
         unlockThreshold: 0
     )
     
-    static let beta = Icon(
+    static let beta = AppIcon(
         name: .init(localized: "App Icon: Beta", defaultValue: "Clipchop Beta"),
         assetName: "AppIcon-Beta",
         unlockThreshold: 0
     )
     
-    static let aerugo = Icon(
+    static let aerugo = AppIcon(
         name: .init(localized: "App Icon: Aerugo", defaultValue: "Aerugo"),
         assetName: "AppIcon-Aerugo",
         unlockThreshold: 25
     )
 }
 
-extension Icon {
-    static var defaultAppIcon: Icon {
+extension AppIcon {
+    static var defaultAppIcon: AppIcon {
         stable
     }
     
-    static var currentAppIcon: Icon {
+    static var currentAppIcon: AppIcon {
         Defaults[.appIcon]
     }
     
-    static let icons: [Icon] = [
+    static let icons: [AppIcon] = [
         stable,
         beta,
         aerugo
     ]
 }
 
-extension Icon {
-    static var unlockedIcons: [Icon] {
-        var returnValue: [Icon] = []
+extension AppIcon {
+    static var unlockedIcons: [AppIcon] {
+        var returnValue: [AppIcon] = []
         for icon in icons where icon.unlockThreshold <= Defaults[.timesClipped] {
             returnValue.append(icon)
         }
         return returnValue.reversed()
     }
     
-    static func setAppIcon(to icon: Icon) {
+    static func setAppIcon(to icon: AppIcon) {
         print("App icon set to: \(icon.assetName)")
         Defaults[.appIcon] = icon
         refreshCurrentAppIcon()

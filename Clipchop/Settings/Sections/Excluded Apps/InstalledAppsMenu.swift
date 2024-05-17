@@ -9,7 +9,7 @@ import SwiftUI
 import Defaults
 
 struct InstalledAppsMenu: View {
-    @EnvironmentObject var apps: Apps
+    @EnvironmentObject var apps: InstalledApps
     
     @Default(.applicationExcludeList) var excluded
     
