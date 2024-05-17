@@ -76,6 +76,8 @@ class ClipboardMonitor: NSObject {
             
         }
          */
+        
+        Sound.currentSound.play()
     }
 }
 

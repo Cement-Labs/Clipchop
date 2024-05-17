@@ -19,9 +19,7 @@ struct Sound: Hashable, Defaults.Serializable {
     }
     
     func play() {
-        if hasSound {
-            SoundPlayer.playSound(named: assetName)
-        }
+        Self.play(sound: self)
     }
     
     struct Bridge: Defaults.Bridge {
@@ -100,6 +98,12 @@ extension Sound {
     static func setSound(to sound: Sound) {
         print("Sound set to: \(sound.assetName)")
         Defaults[.sound] = sound
-        sound.play()
+        play(sound: sound)
+    }
+    
+    static func play(sound: Sound) {
+        if sound.hasSound {
+            SoundPlayer.playSound(named: sound.assetName)
+        }
     }
 }
