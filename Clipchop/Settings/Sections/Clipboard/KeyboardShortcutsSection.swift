@@ -11,7 +11,7 @@ import KeyboardShortcuts
 struct KeyboardShortcutsSection: View {
     var body: some View {
         Section("Keyboard Shortcuts") {
-            KeyboardShortcuts.Recorder(for: .action) {
+            KeyboardShortcuts.Recorder(for: .window) {
                 withCaption {
                     Text("Show \(Bundle.main.appName)")
                 } caption: {

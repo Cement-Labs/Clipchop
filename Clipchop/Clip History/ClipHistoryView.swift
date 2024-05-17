@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ClipHistoryView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            Text("Test")
+        }
+        .frame(width: 500, height: 100, alignment: .center)
+        .background(BlurView())
+        .clipShape(.rect(cornerRadius: 25, style: .continuous))
     }
 }
 

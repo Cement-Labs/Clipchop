@@ -85,7 +85,7 @@ struct ClipboardHistorySection: View {
                     
                 }
             } message: {
-                Text("This action clears all your clipboard history unrestorably, including pins.")
+                Text("This window clears all your clipboard history unrestorably, including pins.")
             }
             .padding(-5)
         }

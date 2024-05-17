@@ -380,7 +380,7 @@
     "No Application Excluded" : {
 
     },
-    "Only applies to the clip window." : {
+    "Only applies to the clip history window." : {
 
     },
     "Open Settings" : {
@@ -469,10 +469,13 @@
     "Syncing" : {
 
     },
-    "The global keyboard shortcut for calling up the clip window." : {
+    "Test" : {
 
     },
-    "This action clears all your clipboard history unrestorably, including pins." : {
+    "The global keyboard shortcut for calling up the clip history window." : {
+
+    },
+    "This window clears all your clipboard history unrestorably, including pins." : {
 
     },
     "Type: Color" : {

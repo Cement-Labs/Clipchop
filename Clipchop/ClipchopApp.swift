@@ -9,6 +9,7 @@ import SwiftUI
 import MenuBarExtraAccess
 import Defaults
 import WindowManagement
+import KeyboardShortcuts
 
 let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
 
@@ -29,6 +30,10 @@ struct ClipchopApp: App {
     
     init() {
         monitor.start()
+        
+        KeyboardShortcuts.onKeyUp(for: .window) {
+            //NSApp.openWindow(.clipHistoryWindow)
+        }
         
 #if DEBUG
         // Resets menu bar item visibility
@@ -62,10 +67,13 @@ struct ClipchopApp: App {
                 .frame(minHeight: 300)
         }
         
+        /*
         WindowGroup(id: SceneID.clipHistoryWindow.id) {
             ClipHistoryView()
         }
         .enableOpenWindow()
+        .styleMask([.borderless, .hudWindow, .fullSizeContentView])
+         */
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
             MenuBarView()

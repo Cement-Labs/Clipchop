@@ -10,7 +10,7 @@ import KeyboardShortcuts
 import AppKit
 
  extension KeyboardShortcuts.Name {
-     static let action = Self("action", default: Shortcut(.v, modifiers: [.option]))
+     static let window = Self("window", default: Shortcut(.v, modifiers: [.option]))
      static let pin = Self("pin", default: Shortcut(.p, modifiers: [.option]))
      static let delete = Self("delete", default: Shortcut(.delete, modifiers: [.option]))
  }
