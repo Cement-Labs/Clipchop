@@ -15,7 +15,7 @@ struct AboutSettingsPage: View {
         HStack {
             Spacer()
             
-            Image(nsImage: Icons.currentAppIcon.image)
+            Image(nsImage: Icon.currentAppIcon.image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 120)

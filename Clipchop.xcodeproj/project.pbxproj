@@ -267,7 +267,7 @@
 			children = (
 				288295172BC41F7300392B29 /* ClipchopApp.swift */,
 				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
-				28C2C5972BF0D16100E9D9AA /* Sound */,
+				28C2C5972BF0D16100E9D9AA /* Sounds */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
 				2871978C2BDE723C004BCDA3 /* Clipboard */,
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
@@ -298,7 +298,7 @@
 			path = "Clip Window";
 			sourceTree = "<group>";
 		};
-		28C2C5972BF0D16100E9D9AA /* Sound */ = {
+		28C2C5972BF0D16100E9D9AA /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				28C2C59B2BF0D1AE00E9D9AA /* happy-pop.mp3 */,
@@ -306,7 +306,7 @@
 				28C2C59A2BF0D1AE00E9D9AA /* tap-notification.mp3 */,
 				28C2C59F2BF0D31C00E9D9AA /* SoundPlayer.swift */,
 			);
-			path = Sound;
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		28C2C5A72BF0DB8300E9D9AA /* General */ = {
