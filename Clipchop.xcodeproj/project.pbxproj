@@ -28,9 +28,7 @@
 		286143FC2BF63521009E849F /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286143FB2BF63521009E849F /* ClipboardContent.swift */; };
 		2870BEEC2BF38E9400B79624 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */; };
 		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
-		287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197952BDE7399004BCDA3 /* KeyChord.swift */; };
 		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
-		2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */; };
 		287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */; };
 		288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288295172BC41F7300392B29 /* ClipchopApp.swift */; };
 		2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951B2BC41F7400392B29 /* Assets.xcassets */; };
@@ -91,9 +89,7 @@
 		286143FB2BF63521009E849F /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardContent.swift; sourceTree = "<group>"; };
 		2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
-		287197952BDE7399004BCDA3 /* KeyChord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChord.swift; sourceTree = "<group>"; };
 		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
 		288295142BC41F7300392B29 /* Clipchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288295172BC41F7300392B29 /* ClipchopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopApp.swift; sourceTree = "<group>"; };
@@ -207,6 +203,16 @@
 				2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		283246C02BF76D91009C38D9 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				28C2C58F2BF0CA3E00E9D9AA /* Icon.swift */,
+				28C2C5952BF0D0BF00E9D9AA /* Sound.swift */,
+				28C2C5A12BF0D85D00E9D9AA /* App.swift */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		2843DB5E2BF0F058008AA2E1 /* Excluded Apps */ = {
@@ -323,13 +329,9 @@
 		28D8CE622BDD0DE1008B17B5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				287197952BDE7399004BCDA3 /* KeyChord.swift */,
-				2871979D2BDE7578004BCDA3 /* KeyboardLayout.swift */,
+				283246C02BF76D91009C38D9 /* Assets */,
 				28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */,
 				2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */,
-				28C2C58F2BF0CA3E00E9D9AA /* Icon.swift */,
-				28C2C5952BF0D0BF00E9D9AA /* Sound.swift */,
-				28C2C5A12BF0D85D00E9D9AA /* App.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -458,8 +460,6 @@
 				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
 				2870BEEC2BF38E9400B79624 /* Color+Extensions.swift in Sources */,
 				2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */,
-				2871979E2BDE7578004BCDA3 /* KeyboardLayout.swift in Sources */,
-				287197962BDE7399004BCDA3 /* KeyChord.swift in Sources */,
 				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
 				283E25342BF4EF670094C06F /* AcknowledgementsView.swift in Sources */,
 				28C2C5962BF0D0BF00E9D9AA /* Sound.swift in Sources */,
