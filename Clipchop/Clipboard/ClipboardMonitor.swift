@@ -33,7 +33,6 @@ class ClipboardMonitor: NSObject {
             if !existing.isEmpty {
                 // Duplicated
                 try handleDuplicated(existing)
-                reorder()
                 
                 return false
             } else {
@@ -56,9 +55,46 @@ class ClipboardMonitor: NSObject {
         }
     }
     
-    // MARK: - Content Reorder
-    
-    func reorder() {
+    private func updateClipboard() {
+        try! context.save()
         
+        guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
+        changeCount = ClipboardHistory.pasteboard.changeCount
+        
+        if let sourceBundle = ClipboardHistory.source?.bundleIdentifier {
+            print("Clipboard update detected in application \(sourceBundle)")
+            if Defaults.shouldIgnoreApp(sourceBundle) {
+                // Ignored
+                return
+            }
+        } else {
+            print("Clipboard update detected")
+        }
+        
+        /*
+        let contents = ClipboardHistory.pasteboard.pasteboardItems?.compactMap { content in
+            
+        }
+         */
+    }
+}
+
+extension ClipboardMonitor {
+    // MARK: - Monitoring Functions
+    
+    func start() {
+        timer = .scheduledTimer(
+            withTimeInterval: Defaults[.timerInterval],
+            repeats: true
+        ) { [weak self] _ in
+            self?.updateClipboard()
+        }
+        print("Started monitoring")
+    }
+    
+    func stop() {
+        timer?.invalidate()
+        timer = nil
+        print("Stopped monitoring")
     }
 }

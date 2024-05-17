@@ -27,3 +27,9 @@ extension Defaults.Keys {
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
 }
+
+extension Defaults {
+    static func shouldIgnoreApp(_ bundleIdentifier: String) -> Bool {
+        Self[.excludeAppsEnabled] && Self[.applicationExcludeList].contains(bundleIdentifier)
+    }
+}

@@ -35,7 +35,7 @@ final class ClipboardEditModel {
             contents.forEach(context.delete(_:))
             
             try context.save()
-            print("Deleted all clipboard data.")
+            print("Deleted all clipboard data")
         } catch {
             let nsError = error as NSError
             print("Error deleting all clipboard data! \(nsError), \(nsError.userInfo)")
