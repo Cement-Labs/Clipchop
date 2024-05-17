@@ -25,10 +25,10 @@ struct GlobalBehaviorsSection: View {
             }
             
             withCaption("""
-You can open \(Bundle.main.appName) again to access this page.
+You can always open \(Bundle.main.appName) again to access this page.
 """) {
                 HStack {
-                    Text("Show menu bar item")
+                    Text("Shows menu bar item")
                     
                     Spacer()
                     
