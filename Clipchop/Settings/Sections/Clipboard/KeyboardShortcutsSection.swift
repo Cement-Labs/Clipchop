@@ -15,7 +15,7 @@ struct KeyboardShortcutsSection: View {
                 withCaption {
                     Text("Show \(Bundle.main.appName)")
                 } caption: {
-                    Text("The global keyboard shortcut for calling up the clip window.")
+                    Text("The global keyboard shortcut for calling up the clip history window.")
                 }
             }
         }

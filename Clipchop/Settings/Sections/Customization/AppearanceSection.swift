@@ -66,7 +66,7 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            withCaption("Only applies to the clip window.") {
+            withCaption("Only applies to the clip history window.") {
                 Toggle("Use custom accent color", isOn: $useCustomAccentColor)
             }
             
