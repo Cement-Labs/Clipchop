@@ -142,6 +142,7 @@ struct SettingsView: View {
                 quit()
             } label: {
                 Text("Quit")
+
                     .padding(4)
             }
             .controlSize(.extraLarge)
