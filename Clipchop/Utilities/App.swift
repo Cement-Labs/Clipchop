@@ -1,5 +1,5 @@
 //
-//  Apps.swift
+//  App.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/12.
@@ -9,15 +9,15 @@ import SwiftUI
 import Algorithms
 import Defaults
 
+struct App: Identifiable {
+    var id: String { bundleID }
+    var bundleID: String
+    var icon: NSImage
+    var displayName: String
+    var installationFolder: String
+}
+
 class Apps: ObservableObject {
-    struct App: Identifiable {
-        var id: String { bundleID }
-        var bundleID: String
-        var icon: NSImage
-        var displayName: String
-        var installationFolder: String
-    }
-    
     private var query = NSMetadataQuery()
     
     @Published var installedApps = [App]()
