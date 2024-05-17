@@ -20,7 +20,7 @@ struct AppearanceSection: View {
     var body: some View {
         Section {
             Picker("App icon", selection: $appIcon) {
-                ForEach(AppIcon.unlockedIcons, id: \.self) { icon in
+                ForEach(AppIcon.unlockedAppIcons, id: \.self) { icon in
                     HStack {
                         Image(nsImage: icon.image)
                         Text(icon.name ?? "")

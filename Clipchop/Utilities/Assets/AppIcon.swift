@@ -78,7 +78,7 @@ extension AppIcon {
 }
 
 extension AppIcon {
-    static var unlockedIcons: [AppIcon] {
+    static var unlockedAppIcons: [AppIcon] {
         var returnValue: [AppIcon] = []
         for icon in icons where icon.unlockThreshold <= Defaults[.timesClipped] {
             returnValue.append(icon)
