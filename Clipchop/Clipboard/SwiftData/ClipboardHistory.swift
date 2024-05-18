@@ -11,7 +11,8 @@ import SwiftData
 import AppKit
 
 
-@Model class ClipboardHistory {
+@Model
+class ClipboardHistory {
     enum Class {
         case all
         
@@ -73,23 +74,24 @@ import AppKit
     var id: UUID
     var pinned: Bool
     var time: Date?
-    var title: String?
-    var contents: ClipboardContent?
+    var contents: [ClipboardContent]?
+    
+    var formatter: Formatter {
+        .init(contents: getContents())
+    }
     
     public init() {
         self.id = .init()
-        self.app = ClipboardHistory.source?.localizedName
-        self.time = Date.now
-        self.title = formatter.title
         self.pinned = false
         
-        contents.forEach(addToContents(_:))
+        self.app = ClipboardHistory.source?.localizedName
+        self.time = Date.now
     }
     
     // MARK: - Functions
     
     func getContents() -> [ClipboardContent] {
-        (contents?.allObjects as? [ClipboardContent]) ?? []
+        contents ?? []
     }
     
     func supersedes(_ item: ClipboardHistory) -> Bool {

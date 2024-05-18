@@ -24,8 +24,6 @@
 		2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */; };
 		2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */; };
 		2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */; };
-		286143F82BF6350B009E849F /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286143F72BF6350B009E849F /* ClipboardHistory.swift */; };
-		286143FC2BF63521009E849F /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286143FB2BF63521009E849F /* ClipboardContent.swift */; };
 		2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */; };
 		2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */; };
 		2870BEEC2BF38E9400B79624 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */; };
@@ -43,11 +41,8 @@
 		28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */; };
 		28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */; };
 		28A699B12BF61F92000B0272 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B02BF61F92000B0272 /* Formatter.swift */; };
-		28A699B52BF62089000B0272 /* ClipboardDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */; };
-		28A699B82BF620EF000B0272 /* ClipboardData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */; };
 		28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */; };
 		28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */; };
-		28ADB48D2BF62DAC000FB0B9 /* ClipboardEditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */; };
 		28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5822BF0C67900E9D9AA /* FullDiskAccess */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
@@ -93,8 +88,6 @@
 		2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppListSection.swift; sourceTree = "<group>"; };
 		2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsMenu.swift; sourceTree = "<group>"; };
-		286143F72BF6350B009E849F /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistory.swift; sourceTree = "<group>"; };
-		286143FB2BF63521009E849F /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardContent.swift; sourceTree = "<group>"; };
 		2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardContent.swift; path = Clipchop/Clipboard/SwiftData/ClipboardContent.swift; sourceTree = "<group>"; };
 		2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardHistory.swift; path = Clipchop/Clipboard/SwiftData/ClipboardHistory.swift; sourceTree = "<group>"; };
 		2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -114,9 +107,6 @@
 		28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
 		28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		28A699B02BF61F92000B0272 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardDataProvider.swift; sourceTree = "<group>"; };
-		28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClipboardData.xcdatamodel; sourceTree = "<group>"; };
-		28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardEditModel.swift; sourceTree = "<group>"; };
 		28C2C58F2BF0CA3E00E9D9AA /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
 		28C2C5952BF0D0BF00E9D9AA /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -242,34 +232,13 @@
 			path = "Excluded Apps";
 			sourceTree = "<group>";
 		};
-		2866D7552BF88CEC00F57DF7 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */,
-				286143F72BF6350B009E849F /* ClipboardHistory.swift */,
-				286143FB2BF63521009E849F /* ClipboardContent.swift */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		2871978C2BDE723C004BCDA3 /* Clipboard */ = {
 			isa = PBXGroup;
 			children = (
-				2866D7552BF88CEC00F57DF7 /* CoreData */,
 				28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */,
-				2871978D2BDE7269004BCDA3 /* Data */,
-			);
-			path = Clipboard;
-			sourceTree = "<group>";
-		};
-		2871978D2BDE7269004BCDA3 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */,
-				28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */,
 				28A699B02BF61F92000B0272 /* Formatter.swift */,
 			);
-			path = Data;
+			path = Clipboard;
 			sourceTree = "<group>";
 		};
 		2882950B2BC41F7300392B29 = {
@@ -491,7 +460,6 @@
 				28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */,
 				287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */,
 				28D8CE642BDD0DEE008B17B5 /* PerimissionsManager.swift in Sources */,
-				286143FC2BF63521009E849F /* ClipboardContent.swift in Sources */,
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
 				287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */,
 				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
@@ -500,7 +468,6 @@
 				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
 				283E25342BF4EF670094C06F /* AcknowledgementsView.swift in Sources */,
 				28C2C5962BF0D0BF00E9D9AA /* Sound.swift in Sources */,
-				28A699B52BF62089000B0272 /* ClipboardDataProvider.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2884E5D72BF86F2500201A79 /* TestSettingsPage.swift in Sources */,
@@ -509,7 +476,6 @@
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,
-				286143F82BF6350B009E849F /* ClipboardHistory.swift in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
 				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
@@ -517,14 +483,12 @@
 				2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */,
 				28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */,
 				28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */,
-				28ADB48D2BF62DAC000FB0B9 /* ClipboardEditModel.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				283E25362BF4FE040094C06F /* StaleView.swift in Sources */,
 				28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */,
 				28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */,
 				28D8CE692BDD1260008B17B5 /* PermissionsSection.swift in Sources */,
 				282692972BDCC9CF00D1656E /* Defaults+Extensions.swift in Sources */,
-				28A699B82BF620EF000B0272 /* ClipboardData.xcdatamodeld in Sources */,
 				28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */,
 				28D8CE6B2BDD142F008B17B5 /* View+Extension.swift in Sources */,
 				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
@@ -917,19 +881,6 @@
 			productName = WindowManagement;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */,
-			);
-			currentVersion = 28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */;
-			path = ClipboardData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 2882950C2BC41F7300392B29 /* Project object */;
 }

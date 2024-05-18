@@ -8,31 +8,31 @@
 import SwiftUI
 import AppKit
 import Defaults
+import SwiftData
 
 class ClipboardMonitor: NSObject {
     private var timer: Timer?
     private var changeCount: Int = 0
-    private var context: NSManagedObjectContext
+    private var context: ModelContext
     
-    init(context: NSManagedObjectContext) {
+    init(context: ModelContext) {
         self.context = context
         self.changeCount = ClipboardHistory.pasteboard.changeCount
-        
-        super.init()
     }
     
     // MARK: - Clipboard Change
     
     private func isNew(content: Data?) -> Bool {
         guard let content else { return false }
-        let fetchRequest = ClipboardContent.fetchRequest()
-        fetchRequest.predicate = .init(format: "\(ClipboardContent.Managed.value) == \(content)")
+        let existing = FetchDescriptor<ClipboardContent>(
+            predicate: #Predicate { $0.value == content }
+        )
         
         do {
-            let existing = try context.fetch(fetchRequest)
-            if !existing.isEmpty {
+            let existingResult = try context.fetch(existing)
+            if !existingResult.isEmpty {
                 // Duplicated
-                try handleDuplicated(existing)
+                try handleDuplicated(existingResult)
                 
                 return false
             } else {

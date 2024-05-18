@@ -10,6 +10,7 @@ import MenuBarExtraAccess
 import Defaults
 import WindowManagement
 import KeyboardShortcuts
+import SwiftData
 
 let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
 
@@ -58,15 +59,11 @@ struct ClipchopApp: App {
                     }
                 }
                 .frame(minHeight: 300)
+                .modelContainer(for: [
+                    ClipboardContent.self,
+                    ClipboardHistory.self
+                ], isAutosaveEnabled: true)
         }
-        
-        /*
-        WindowGroup(id: SceneID.clipHistoryWindow.id) {
-            ClipHistoryView()
-        }
-        .enableOpenWindow()
-        .styleMask([.borderless, .hudWindow, .fullSizeContentView])
-         */
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
             MenuBarView()
