@@ -26,6 +26,7 @@
 		2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */; };
 		2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */; };
 		2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */; };
+		2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */; };
 		2870BEEC2BF38E9400B79624 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */; };
 		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
 		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
@@ -90,6 +91,7 @@
 		2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsMenu.swift; sourceTree = "<group>"; };
 		2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardContent.swift; path = Clipchop/Clipboard/SwiftData/ClipboardContent.swift; sourceTree = "<group>"; };
 		2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardHistory.swift; path = Clipchop/Clipboard/SwiftData/ClipboardHistory.swift; sourceTree = "<group>"; };
+		2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTrackingStream.swift; sourceTree = "<group>"; };
 		2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				283246C02BF76D91009C38D9 /* Assets */,
 				28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */,
 				2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */,
+				2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */,
 				2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */,
 				2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */,
+				2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
 				28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */,
 				28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */,
