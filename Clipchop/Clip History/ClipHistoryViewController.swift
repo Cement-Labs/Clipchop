@@ -17,10 +17,7 @@ import KeyboardShortcuts
     
     private var windowController: NSWindowController?
     private var isExpanded: Bool = false
-    
-    init() {
-        initObservations()
-    }
+    private var expansionEdge: NSRectEdge = .minY
     
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
         guard let screenRect = NSScreen.main?.frame else { return topLeft }
@@ -34,7 +31,7 @@ import KeyboardShortcuts
             } else if screenRect.maxX < bottomRight.x {
                 // Only horizontally out of screen
                 return .init(x: screenRect.maxX - size.width, y: topLeft.y)
-            } else if screenRect.minY < bottomRight.y {
+            } else if screenRect.minY > bottomRight.y {
                 // Only vertically out of screen
                 return .init(x: topLeft.x, y: screenRect.minY + size.height)
             }
@@ -47,28 +44,16 @@ import KeyboardShortcuts
         return topLeft
     }
     
-    func expansionEdge(position topLeft: CGPoint, maxSize size: CGSize) -> NSDirectionalRectEdge {
-        guard let screenRect = NSScreen.main?.frame else { return .bottom }
+    func expansionEdge(position topLeft: CGPoint, size: CGSize) -> NSRectEdge {
+        guard let screenRect = NSScreen.main?.frame else { return expansionEdge }
         let bottomRight = topLeft.applying(.init(translationX: size.width, y: -size.height))
         
         if !screenRect.contains(bottomRight) {
             // Expands to the top
-            return .top
+            return .maxY
         } else {
             // Expands to the bottom
-            return .bottom
-        }
-    }
-}
-
-extension ClipHistoryViewController {
-    // MARK: - Observations
-    
-    func initObservations() {
-        Task { @MainActor in
-            for await isExpanded in observationTrackingStream({ self.isExpanded }) {
-                self.animateWindowSize(isExpanded: isExpanded)
-            }
+            return .minY
         }
     }
 }
@@ -101,30 +86,44 @@ extension ClipHistoryViewController {
 extension ClipHistoryViewController {
     // MARK: - Animations
     
-    func animateWindowSize(isExpanded: Bool) {
+    func setWindowSize(isExpanded: Bool, animate: Bool = true) {
+        guard self.isExpanded != isExpanded else { return }
         guard let window = windowController?.window else { return }
         let frame = window.frame
         let targetSize = isExpanded ? Self.size.expanded : Self.size.collapsed
-        let edge = expansionEdge(position: frame.origin, maxSize: Self.size.expanded)
+        
+        let edge: NSRectEdge
+        if isExpanded {
+            edge = expansionEdge(
+                position: frame.origin.applying(.init(translationX: 0, y: Self.size.collapsed.height)),
+                size: Self.size.expanded
+            )
+            expansionEdge = edge
+        } else {
+            // Use stored expansion edge
+            edge = expansionEdge
+        }
         
         switch edge {
-        case .top:
+        case .maxY:
             // Expands/Shrinks the top edge
             window.setFrame(
                 .init(origin: frame.origin, size: targetSize),
-                display: true, animate: window.isVisible
+                display: true, animate: animate
             )
-        case .bottom:
+        case .minY:
             // Expands/Shrinks the bottom edge
             window.setFrame(
                 .init(
-                    origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height),
+                    origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height),
                     size: targetSize
                 ),
-                display: true, animate: window.isVisible
+                display: true, animate: animate
             )
         default: break
         }
+        
+        self.isExpanded = isExpanded
     }
 }
 
@@ -136,8 +135,6 @@ extension ClipHistoryViewController {
     }
     
     func open(position: CGPoint) {
-        isExpanded = false
-        
         if let windowController {
             windowController.window?.orderFrontRegardless()
             return
@@ -172,6 +169,7 @@ extension ClipHistoryViewController {
         panel.orderFrontRegardless()
         
         windowController = .init(window: panel)
+        setWindowSize(isExpanded: false, animate: false)
         
         initShortcuts()
         enableShortcuts()
@@ -198,10 +196,10 @@ extension ClipHistoryViewController {
     // MARK: - Expand / Collapse
     
     func expand() {
-        isExpanded = true
+        setWindowSize(isExpanded: true)
     }
     
     func collapse() {
-        isExpanded = false
+        setWindowSize(isExpanded: false)
     }
 }
