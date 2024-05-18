@@ -12,10 +12,37 @@ import SFSafeSymbols
 struct AppearanceSection: View {
     @Default(.timesClipped) var timesClipped
     @Default(.appIcon) var appIcon
-    @Default(.sound) var sound
-    
+    @Default(.clipSound) var clipSound
+    @Default(.pasteSound) var pasteSound
+ 
     @Default(.useCustomAccentColor) var useCustomAccentColor
     @Default(.customAccentColor) var customAccentColor
+    
+    @ViewBuilder
+    func soundPicker(
+        _ titleKey: LocalizedStringKey,
+        selection: Binding<Sound>,
+        onChangePerform action: @escaping (Sound, Sound) -> Void
+    ) -> some View {
+        HStack {
+            Picker(titleKey, selection: selection) {
+                ForEach(Sound.unlockedSounds, id: \.self) { sound in
+                    Text(sound.name ?? "")
+                        .tag(sound.assetName)
+                }
+            }
+            .onChange(of: selection.wrappedValue, action)
+            
+            if selection.wrappedValue.hasSound {
+                Button {
+                    selection.wrappedValue.play()
+                } label: {
+                    Image(systemSymbol: .speakerWave2Fill)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
     
     var body: some View {
         Section {
@@ -32,25 +59,14 @@ struct AppearanceSection: View {
                 newIcon.setAppIcon()
             }
             
-            HStack {
-                Picker("Clip sound", selection: $sound) {
-                    ForEach(Sound.unlockedSounds, id: \.self) { sound in
-                        Text(sound.name ?? "")
-                            .tag(sound.assetName)
-                    }
-                }
-                .onChange(of: sound) { _, newSound in
-                    newSound.setSound()
-                }
-                
-                if sound.hasSound {
-                    Button {
-                        sound.play()
-                    } label: {
-                        Image(systemSymbol: .speakerWave2Fill)
-                    }
-                    .buttonStyle(.plain)
-                }
+            soundPicker("Clip sound", selection: $clipSound) { _, newSound in
+                newSound.setClipSound()
+                newSound.play()
+            }
+            
+            soundPicker("Paste sound", selection: $pasteSound) { _, newSound in
+                newSound.setPasteSound()
+                newSound.play()
             }
         } header: {
             withCaption("""
@@ -61,7 +77,7 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            withCaption("Only applies to the clip history window.") {
+            withCaption("Custom accent color only applies to the clip history window.") {
                 Toggle("Use custom accent color", isOn: $useCustomAccentColor)
             }
             

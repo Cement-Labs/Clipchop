@@ -298,6 +298,9 @@
     "Custom accent color" : {
 
     },
+    "Custom accent color only applies to the clip history window." : {
+
+    },
     "Customization" : {
 
     },
@@ -383,10 +386,10 @@
     "No Clipboard History Available" : {
 
     },
-    "Only applies to the clip history window." : {
+    "Open Settings" : {
 
     },
-    "Open Settings" : {
+    "Paste sound" : {
 
     },
     "Permissions" : {

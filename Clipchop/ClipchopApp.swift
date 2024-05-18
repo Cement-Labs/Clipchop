@@ -34,7 +34,7 @@ struct ClipchopApp: App {
         
         // Resets user interactions
         Defaults[.timesClipped] = 0
-        Defaults[.sound] = Sound.defaultSound
+        Defaults[.clipSound] = Sound.defaultSound
         
         // Resets clipboard history
         try! manager.editModel.deleteAll()

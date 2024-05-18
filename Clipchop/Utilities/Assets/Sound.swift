@@ -14,12 +14,16 @@ struct Sound: Hashable, Defaults.Serializable {
     var assetName: String
     var unlockThreshold: Int
     
-    func setSound() {
-        Self.setSound(to: self)
-    }
-    
     func play() {
         Self.play(sound: self)
+    }
+    
+    func setClipSound() {
+        Self.setClipSound(to: self)
+    }
+    
+    func setPasteSound() {
+        Self.setPasteSound(to: self)
     }
     
     struct Bridge: Defaults.Bridge {
@@ -75,7 +79,7 @@ extension Sound {
     }
     
     static var currentSound: Sound {
-        Defaults[.sound]
+        Defaults[.clipSound]
     }
     
     static let sounds: [Sound] = [
@@ -95,15 +99,19 @@ extension Sound {
         return returnValue.reversed()
     }
     
-    static func setSound(to sound: Sound) {
-        print("Sound set to: \(sound.assetName)")
-        Defaults[.sound] = sound
-        play(sound: sound)
-    }
-    
     static func play(sound: Sound) {
         if sound.hasSound {
             SoundPlayer.playSound(named: sound.assetName)
         }
+    }
+    
+    static func setClipSound(to sound: Sound) {
+        print("Clip sound set to: \(sound.assetName)")
+        Defaults[.clipSound] = sound
+    }
+    
+    static func setPasteSound(to sound: Sound) {
+        print("Paste sound set to: \(sound.assetName)")
+        Defaults[.pasteSound] = sound
     }
 }

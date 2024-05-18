@@ -17,7 +17,8 @@ extension Defaults.Keys {
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     
     static let appIcon = Key<AppIcon>("appIcon", default: .defaultAppIcon)
-    static let sound = Key<Sound>("sound", default: .defaultSound)
+    static let clipSound = Key<Sound>("clipSound", default: .defaultSound)
+    static let pasteSound = Key<Sound>("pasteSound", default: .defaultSound)
     
     static let timerInterval = Key<TimeInterval>("timerInterval", default: 1)
     
