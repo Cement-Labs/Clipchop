@@ -89,8 +89,10 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                 }
             }
             
-            Button("Relaunch") {
-                relaunch()
+            if !DefaultsStack.shared.isUnchanged(.accentColor) {
+                Button("Relaunch") {
+                    relaunch()
+                }
             }
         }
     }

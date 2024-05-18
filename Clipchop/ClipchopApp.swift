@@ -18,7 +18,7 @@ func quit() {
     NSApp.terminate(nil)
 }
 
-// https://stackoverflow.com/a/65320196/23452915
+// https://stackoverflow.com/questions/29847611/restarting-osx-app-programmatically
 func relaunch() {
     let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
     let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
