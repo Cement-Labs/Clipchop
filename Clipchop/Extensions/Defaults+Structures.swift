@@ -23,3 +23,15 @@ extension HistoryPreservationPeriod: Identifiable {
         self
     }
 }
+
+enum ColorStyle: Int, CaseIterable, Defaults.Serializable {
+    case app = 0
+    case system = 1
+    case custom = 2
+}
+
+extension ColorStyle: Identifiable {
+    var id: Self {
+        self
+    }
+}

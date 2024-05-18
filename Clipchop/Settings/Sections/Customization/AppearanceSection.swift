@@ -15,9 +15,10 @@ struct AppearanceSection: View {
     @Default(.clipSound) var clipSound
     @Default(.pasteSound) var pasteSound
  
-    @Default(.useCustomAccentColor) var useCustomAccentColor
-    @Default(.useSystemAccentColor) var useSystemAccentColor
+    @Default(.colorStyle) var colorStyle
     @Default(.customAccentColor) var customAccentColor
+    
+    @State var isRestartAlertPresented: Bool = false
     
     @ViewBuilder
     func soundPicker(
@@ -80,30 +81,46 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            Toggle(isOn: $useCustomAccentColor) {
-                HStack(alignment: .center) {
-                    Text("Custom accent color")
+            Picker(selection: $colorStyle) {
+                Text(Bundle.main.appName)
+                    .tag(ColorStyle.app)
+                
+                Text("System")
+                    .tag(ColorStyle.system)
+                
+                Text("Custom")
+                    .tag(ColorStyle.custom)
+            } label: {
+                HStack {
+                    Text("Color style")
                     
-                    ColorPicker(selection: $customAccentColor, supportsOpacity: false) {
-                        
+                    if !DefaultsStack.shared.isUnchanged(.accentColor) {
+                        Button {
+                            isRestartAlertPresented = true
+                        } label: {
+                            Text("Requires Relaunch")
+                            Image(systemSymbol: .powerCircleFill)
+                        }
+                        .buttonStyle(.borderless)
+                        .buttonBorderShape(.capsule)
+                        .tint(.red)
                     }
-                    .controlSize(.mini)
-                    .disabled(!useCustomAccentColor || useSystemAccentColor)
-                    .opacity(!useCustomAccentColor || useSystemAccentColor ? 0.5 : 1)
                     
                     Spacer()
                     
-                    Picker(selection: $useSystemAccentColor) {
-                        Text("System")
-                            .tag(true)
-                        
-                        Text("Custom")
-                            .tag(false)
-                    } label: {
-                        
+                    if colorStyle == .custom {
+                        ColorPicker(selection: $customAccentColor) {
+                            
+                        }
                     }
-                    .disabled(!useCustomAccentColor)
                 }
+            }
+            .alert("Relaunch \(Bundle.main.appName)", isPresented: $isRestartAlertPresented) {
+                Button("Relaunch", role: .destructive) {
+                    relaunch()
+                }
+            } message: {
+                Text("Relaunch \(Bundle.main.appName) to apply the accent color?")
             }
         }
     }

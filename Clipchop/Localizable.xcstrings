@@ -281,6 +281,9 @@
     "Clipchop" : {
 
     },
+    "Color style" : {
+
+    },
     "Copyrights" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -293,9 +296,6 @@
       }
     },
     "Custom" : {
-
-    },
-    "Custom accent color" : {
 
     },
     "Customization" : {
@@ -407,7 +407,19 @@
     "Recent Copied" : {
 
     },
+    "Relaunch" : {
+
+    },
+    "Relaunch %@" : {
+
+    },
+    "Relaunch %@ to apply the accent color?" : {
+
+    },
     "Remove" : {
+
+    },
+    "Requires Relaunch" : {
 
     },
     "Settings…" : {
@@ -484,7 +496,7 @@
     "The global keyboard shortcut for calling up the clip history window." : {
 
     },
-    "This window clears all your clipboard history unrestorably, including pins." : {
+    "This action clears all your clipboard history unrestorably, including pins." : {
 
     },
     "Type: Color" : {

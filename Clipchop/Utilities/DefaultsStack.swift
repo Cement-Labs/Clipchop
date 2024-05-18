@@ -15,7 +15,7 @@ struct DefaultsStack {
         var relationships: [AnyHashable] {
             switch self {
             case .accentColor:
-                [Defaults[.useCustomAccentColor], Defaults[.useSystemAccentColor], Defaults[.customAccentColor]]
+                [Defaults[.colorStyle], Defaults[.customAccentColor]]
             }
         }
         
