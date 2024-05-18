@@ -151,7 +151,7 @@ extension ClipHistoryViewController {
         panel.animationBehavior = .utilityWindow
         panel.collectionBehavior = .canJoinAllSpaces
         panel.hasShadow = true
-        panel.backgroundColor = .clear
+        panel.backgroundColor = .white.withAlphaComponent(0.000001) // Making the window transparent causes buggy shadows
         panel.level = .screenSaver
         panel.isMovableByWindowBackground = true
         
