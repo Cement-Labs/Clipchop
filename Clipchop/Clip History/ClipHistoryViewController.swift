@@ -10,84 +10,13 @@ import Defaults
 import KeyboardShortcuts
 
 @Observable class ClipHistoryViewController {
-    enum ExpansionState: Int, CaseIterable {
-        case collapsing = 0x00
-        case collapsed = 0x01
-        
-        case expanding = 0x10
-        case expanded = 0x11
-        
-        var next: Self {
-            switch self {
-            case .collapsing: .collapsed
-            case .collapsed: .expanding
-            case .expanding: .expanded
-            case .expanded: .collapsing
-            }
-        }
-        
-        var previous: Self {
-            switch self {
-            case .collapsing: .expanded
-            case .collapsed: .collapsing
-            case .expanding: .collapsed
-            case .expanded: .expanding
-            }
-        }
-        
-        var intermediate: Self {
-            switch self {
-            case .collapsing, .collapsed: .collapsing
-            case .expanding, .expanded: .collapsed
-            }
-        }
-        
-        var stable: Self {
-            switch self {
-            case .collapsing, .collapsed: .collapsed
-            case .expanding, .expanded: .expanded
-            }
-        }
-        
-        var isStable: Bool {
-            switch self {
-            case .collapsing, .expanding: false
-            case .collapsed, .expanded: true
-            }
-        }
-        
-        var isExpanding: Bool {
-            self == .expanding || self == .expanded
-        }
-        
-        var isExpanded: Bool {
-            self == .expanded
-        }
-        
-        var isCollapsing: Bool {
-            self == .collapsing || self == .collapsed
-        }
-        
-        var isCollapsed: Bool {
-            self == .collapsed
-        }
-    }
-    
     static let size = (
         collapsed: NSSize(width: 500, height: 85),
         expanded: NSSize(width: 500, height: 360)
     )
     
     private var windowController: NSWindowController?
-    private var expansionStack: [Bool] = []
-    
-    private var state: ExpansionState = .collapsed
-    
-    var expansionState: ExpansionState {
-        get {
-            state
-        }
-    }
+    private var isExpanded: Bool = false
     
     init() {
         initObservations()
@@ -137,8 +66,8 @@ extension ClipHistoryViewController {
     
     func initObservations() {
         Task { @MainActor in
-            for await stack in observationTrackingStream({ self.expansionStack }) {
-                print(self.expansionStack, stack)
+            for await isExpanded in observationTrackingStream({ self.isExpanded }) {
+                self.animateWindowSize(isExpanded: isExpanded)
             }
         }
     }
@@ -183,7 +112,7 @@ extension ClipHistoryViewController {
             // Expands/Shrinks the top edge
             window.setFrame(
                 .init(origin: frame.origin, size: targetSize),
-                display: true, animate: true
+                display: true, animate: window.isVisible
             )
         case .bottom:
             // Expands/Shrinks the bottom edge
@@ -192,8 +121,7 @@ extension ClipHistoryViewController {
                     origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height),
                     size: targetSize
                 ),
-                display: true,
-                animate: true
+                display: true, animate: window.isVisible
             )
         default: break
         }
@@ -208,7 +136,7 @@ extension ClipHistoryViewController {
     }
     
     func open(position: CGPoint) {
-        state = .collapsed
+        isExpanded = false
         
         if let windowController {
             windowController.window?.orderFrontRegardless()
@@ -270,14 +198,10 @@ extension ClipHistoryViewController {
     // MARK: - Expand / Collapse
     
     func expand() {
-        if expansionStack.last != true {
-            expansionStack.append(true)
-        }
+        isExpanded = true
     }
     
     func collapse() {
-        if expansionStack.last != false {
-            expansionStack.append(false)
-        }
+        isExpanded = false
     }
 }
