@@ -53,16 +53,11 @@ struct AppearanceSection: View {
                 }
             }
         } header: {
-            Text("Appearance")
-        } footer: {
-            description {
-                Text("""
+            withCaption("""
 Clip more to unlock more! You've already clipped \(timesClipped) times.
-""")
+""") {
+                Text("Appearance")
             }
-            .padding(.horizontal, 8)
-            
-            Spacer()
         }
         
         Section {
