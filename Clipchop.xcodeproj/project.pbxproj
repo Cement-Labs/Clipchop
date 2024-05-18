@@ -26,6 +26,8 @@
 		2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */; };
 		286143F82BF6350B009E849F /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286143F72BF6350B009E849F /* ClipboardHistory.swift */; };
 		286143FC2BF63521009E849F /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286143FB2BF63521009E849F /* ClipboardContent.swift */; };
+		2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */; };
+		2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */; };
 		2870BEEC2BF38E9400B79624 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */; };
 		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
 		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
@@ -93,6 +95,8 @@
 		2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsMenu.swift; sourceTree = "<group>"; };
 		286143F72BF6350B009E849F /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistory.swift; sourceTree = "<group>"; };
 		286143FB2BF63521009E849F /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardContent.swift; sourceTree = "<group>"; };
+		2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardContent.swift; path = Clipchop/Clipboard/SwiftData/ClipboardContent.swift; sourceTree = "<group>"; };
+		2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardHistory.swift; path = Clipchop/Clipboard/SwiftData/ClipboardHistory.swift; sourceTree = "<group>"; };
 		2870BEEB2BF38E9400B79624 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -238,9 +242,20 @@
 			path = "Excluded Apps";
 			sourceTree = "<group>";
 		};
+		2866D7552BF88CEC00F57DF7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */,
+				286143F72BF6350B009E849F /* ClipboardHistory.swift */,
+				286143FB2BF63521009E849F /* ClipboardContent.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		2871978C2BDE723C004BCDA3 /* Clipboard */ = {
 			isa = PBXGroup;
 			children = (
+				2866D7552BF88CEC00F57DF7 /* CoreData */,
 				28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */,
 				2871978D2BDE7269004BCDA3 /* Data */,
 			);
@@ -253,9 +268,6 @@
 				28ADB48C2BF62DAC000FB0B9 /* ClipboardEditModel.swift */,
 				28A699B42BF62089000B0272 /* ClipboardDataProvider.swift */,
 				28A699B02BF61F92000B0272 /* Formatter.swift */,
-				28A699B62BF620EF000B0272 /* ClipboardData.xcdatamodeld */,
-				286143F72BF6350B009E849F /* ClipboardHistory.swift */,
-				286143FB2BF63521009E849F /* ClipboardContent.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -263,6 +275,8 @@
 		2882950B2BC41F7300392B29 = {
 			isa = PBXGroup;
 			children = (
+				2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */,
+				2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */,
 				288295162BC41F7300392B29 /* Clipchop */,
 				288295152BC41F7300392B29 /* Products */,
 			);
@@ -470,6 +484,8 @@
 				28C2C5A42BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift in Sources */,
 				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
 				2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */,
+				2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */,
+				2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
 				28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */,
 				28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */,
@@ -909,8 +925,7 @@
 				28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */,
 			);
 			currentVersion = 28A699B72BF620EF000B0272 /* ClipboardData.xcdatamodel */;
-			name = ClipboardData.xcdatamodeld;
-			path = /Users/Kr/Documents/Swift/Clipchop/Clipchop/Clipboard/Data/ClipboardData.xcdatamodeld;
+			path = ClipboardData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
