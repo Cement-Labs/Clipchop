@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftHEXColors
 import SwiftUI
 import AppKit
 

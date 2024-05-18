@@ -26,9 +26,13 @@ struct ClipchopApp: App {
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     
-    let manager = AppManager()
+    private let container: ModelContainer
+    private let manager: ModelManager
     
     init() {
+        self.container = try! .init(for: ClipboardContent.self, ClipboardHistory.self)
+        self.manager = .init(context: container.mainContext)
+        
 #if DEBUG
         // Resets menu bar item visibility
         Defaults[.menuBarItemEnabled] = true
@@ -38,7 +42,9 @@ struct ClipchopApp: App {
         Defaults[.clipSound] = Sound.defaultSound
         
         // Resets clipboard history
-        try! manager.editModel.deleteAll()
+        container.mainContext.autosaveEnabled = true
+        try! container.mainContext.delete(model: ClipboardContent.self)
+        try! container.mainContext.delete(model: ClipboardHistory.self)
 #endif
     }
     
@@ -59,10 +65,6 @@ struct ClipchopApp: App {
                     }
                 }
                 .frame(minHeight: 300)
-                .modelContainer(for: [
-                    ClipboardContent.self,
-                    ClipboardHistory.self
-                ], isAutosaveEnabled: true)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

@@ -20,7 +20,7 @@ extension Defaults.Keys {
     static let clipSound = Key<Sound>("clipSound", default: .defaultSound)
     static let pasteSound = Key<Sound>("pasteSound", default: .defaultSound)
     
-    static let timerInterval = Key<TimeInterval>("timerInterval", default: 1)
+    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
     
     static let excludeAppsEnabled = Key<Bool>("excludeAppsEnabled", default: true)
     static let applicationExcludeList = Key<[String]>("applicationExcludeList", default: [])

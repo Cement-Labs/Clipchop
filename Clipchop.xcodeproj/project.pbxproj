@@ -33,7 +33,7 @@
 		2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F02BF785D9000ED6A8 /* SceneID+Extensions.swift */; };
 		2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */; };
 		2872C0F52BF78BC5000ED6A8 /* ClipHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */; };
-		2872C0F72BF78D59000ED6A8 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F62BF78D59000ED6A8 /* AppManager.swift */; };
+		2872C0F72BF78D59000ED6A8 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F62BF78D59000ED6A8 /* ModelManager.swift */; };
 		288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288295172BC41F7300392B29 /* ClipchopApp.swift */; };
 		2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951B2BC41F7400392B29 /* Assets.xcassets */; };
 		288295202BC41F7400392B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951F2BC41F7400392B29 /* Preview Assets.xcassets */; };
@@ -97,7 +97,7 @@
 		2872C0F02BF785D9000ED6A8 /* SceneID+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneID+Extensions.swift"; sourceTree = "<group>"; };
 		2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryViewController.swift; sourceTree = "<group>"; };
-		2872C0F62BF78D59000ED6A8 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		2872C0F62BF78D59000ED6A8 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		288295142BC41F7300392B29 /* Clipchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288295172BC41F7300392B29 /* ClipchopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopApp.swift; sourceTree = "<group>"; };
 		2882951B2BC41F7400392B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				288295172BC41F7300392B29 /* ClipchopApp.swift */,
-				2872C0F62BF78D59000ED6A8 /* AppManager.swift */,
+				2872C0F62BF78D59000ED6A8 /* ModelManager.swift */,
 				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
 				28C2C5972BF0D16100E9D9AA /* Sounds */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
@@ -449,7 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D8CE612BDCF9B8008B17B5 /* MenuBarView.swift in Sources */,
-				2872C0F72BF78D59000ED6A8 /* AppManager.swift in Sources */,
+				2872C0F72BF78D59000ED6A8 /* ModelManager.swift in Sources */,
 				28C2C5A42BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift in Sources */,
 				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
 				2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */,
