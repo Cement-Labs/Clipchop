@@ -75,6 +75,10 @@ struct SettingsView: View {
         case excludedApps
         case syncing
         case about
+        
+#if DEBUG
+        case test
+#endif
     }
     
     @ViewBuilder
@@ -143,6 +147,15 @@ struct SettingsView: View {
                     AboutSettingsPage()
                 }
                 .tag(Navigation.about)
+                
+#if DEBUG
+                navigationLink("Test") {
+                    Image(systemSymbol: .airplaneDeparture)
+                } content: {
+                    TestSettingsPage()
+                }
+                .tag(Navigation.test)
+#endif
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 250)
         } detail: {
@@ -150,8 +163,6 @@ struct SettingsView: View {
                 .navigationSplitViewColumnWidth(min: 350, ideal: 750)
         }
         .navigationTitle(Bundle.main.appName)
-        
-        .toolbarTitleDisplayMode(.inlineLarge)
         .toolbar {
             Button {
                 quit()
@@ -162,7 +173,6 @@ struct SettingsView: View {
             }
             .controlSize(.extraLarge)
         }
-        
         .formStyle(.grouped)
         
         // An intermediate view to hide the ugly window toolbar transition
