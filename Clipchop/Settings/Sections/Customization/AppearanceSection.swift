@@ -16,6 +16,7 @@ struct AppearanceSection: View {
     @Default(.pasteSound) var pasteSound
  
     @Default(.useCustomAccentColor) var useCustomAccentColor
+    @Default(.useSystemAccentColor) var useSystemAccentColor
     @Default(.customAccentColor) var customAccentColor
     
     @ViewBuilder
@@ -58,7 +59,9 @@ struct AppearanceSection: View {
             .onChange(of: appIcon) { _, newIcon in
                 newIcon.setAppIcon()
             }
-            
+        }
+         
+        Section {
             soundPicker("Clip sound", selection: $clipSound) { _, newSound in
                 newSound.setClipSound()
                 newSound.play()
@@ -77,12 +80,17 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            withCaption("Custom accent color only applies to the clip history window.") {
-                Toggle("Use custom accent color", isOn: $useCustomAccentColor)
-            }
+            Toggle("Customize accent color", isOn: $useCustomAccentColor)
             
             if useCustomAccentColor {
-                ColorPicker("Custom accent color", selection: $customAccentColor, supportsOpacity: false)
+                ColorPicker(selection: $customAccentColor, supportsOpacity: false) {
+                    Toggle("Use system color", isOn: $useSystemAccentColor)
+                        .toggleStyle(.checkbox)
+                }
+            }
+            
+            Button("Relaunch") {
+                relaunch()
             }
         }
     }

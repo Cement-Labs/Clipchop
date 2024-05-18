@@ -292,13 +292,10 @@
         }
       }
     },
-    "Custom accent color" : {
-
-    },
-    "Custom accent color only applies to the clip history window." : {
-
-    },
     "Customization" : {
+
+    },
+    "Customize accent color" : {
 
     },
     "Delete" : {
@@ -407,6 +404,9 @@
     "Recent Copied" : {
 
     },
+    "Relaunch" : {
+
+    },
     "Remove" : {
 
     },
@@ -470,9 +470,6 @@
 
     },
     "Syncing" : {
-
-    },
-    "Test" : {
 
     },
     "Test line No.%lld" : {
@@ -553,7 +550,7 @@
     "Update interval" : {
 
     },
-    "Use custom accent color" : {
+    "Use system color" : {
 
     },
     "You can always open %@ again to access this page." : {

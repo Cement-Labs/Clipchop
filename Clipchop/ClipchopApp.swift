@@ -18,6 +18,19 @@ func quit() {
     NSApp.terminate(nil)
 }
 
+// https://stackoverflow.com/a/65320196/23452915
+func relaunch() {
+    let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
+    let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
+    let task = Process()
+    
+    task.launchPath = "/usr/bin/open"
+    task.arguments = [path]
+    task.launch()
+    
+    quit()
+}
+
 @main
 struct ClipchopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -25,6 +38,9 @@ struct ClipchopApp: App {
     @State var isWindowInitialized: Bool = false
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
+    @Default(.useCustomAccentColor) var useCustomAccentColor
+    @Default(.useSystemAccentColor) var useSystemAccentColor
+    @Default(.customAccentColor) var customAccentColor
     
     private let container: ModelContainer
     private let manager: ModelManager
@@ -64,6 +80,12 @@ struct ClipchopApp: App {
                         }
                     }
                 }
+            // Use function instead of var to trigger view reload
+                .tint(Defaults.inlineAccentColor(
+                    useCustom: useCustomAccentColor,
+                    useSystem: useSystemAccentColor,
+                    customColor: customAccentColor
+                ))
                 .frame(minHeight: 300)
         }
         

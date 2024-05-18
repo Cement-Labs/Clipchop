@@ -14,6 +14,7 @@ extension Defaults.Keys {
     
     static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
     static let useCustomAccentColor = Key<Bool>("useCustomAccentColor", default: false)
+    static let useSystemAccentColor = Key<Bool>("useSystemAccentColor", default: true)
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     
     static let appIcon = Key<AppIcon>("appIcon", default: .defaultAppIcon)
@@ -30,6 +31,25 @@ extension Defaults.Keys {
 }
 
 extension Defaults {
+    static var accentColor: Color {
+        inlineAccentColor(useCustom: Self[.useCustomAccentColor], useSystem: Self[.useSystemAccentColor], customColor: Self[.customAccentColor])
+    }
+    
+    static func inlineAccentColor(useCustom: Bool, useSystem: Bool, customColor: Color) -> Color {
+        if !useCustom {
+            // Use the color defined in Asset Catalog
+            return .accent
+        } else {
+            if useSystem {
+                // Use the color chosen for macOS
+                return .init(nsColor: .controlAccentColor)
+            } else {
+                // Use the customized color
+                return customColor
+            }
+        }
+    }
+    
     static func shouldIgnoreApp(_ bundleIdentifier: String) -> Bool {
         Self[.excludeAppsEnabled] && Self[.applicationExcludeList].contains(bundleIdentifier)
     }
