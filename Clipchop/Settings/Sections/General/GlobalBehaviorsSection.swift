@@ -42,8 +42,7 @@ You can always open \(Bundle.main.appName) again to access this page.
 }
 
 #Preview {
-    Form {
+    previewSection {
         GlobalBehaviorsSection()
     }
-    .formStyle(.grouped)
 }

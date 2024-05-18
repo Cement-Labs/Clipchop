@@ -105,5 +105,7 @@ struct AboutSettingsPage: View {
 }
 
 #Preview {
-    AboutSettingsPage()
+    previewPage {
+        AboutSettingsPage()
+    }
 }

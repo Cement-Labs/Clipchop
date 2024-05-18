@@ -159,9 +159,8 @@ struct ExcludedAppListSection: View {
 }
 
 #Preview {
-    Form {
+    previewSection {
         ExcludedAppListSection()
             .environmentObject(InstalledApps())
     }
-    .formStyle(.grouped)
 }

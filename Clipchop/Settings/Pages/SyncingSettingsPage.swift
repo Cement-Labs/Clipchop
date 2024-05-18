@@ -14,5 +14,7 @@ struct SyncingSettingsPage: View {
 }
 
 #Preview {
-    SyncingSettingsPage()
+    previewPage {
+        SyncingSettingsPage()
+    }
 }

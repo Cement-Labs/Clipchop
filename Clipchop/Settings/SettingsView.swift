@@ -47,6 +47,21 @@ func withCaption(
     }
 }
 
+@ViewBuilder
+func previewSection(content: () -> some View) -> some View {
+    previewPage {
+        Form {
+            content()
+        }
+    }
+}
+
+@ViewBuilder
+func previewPage(content: () -> some View) -> some View {
+    content()
+        .formStyle(.grouped)
+}
+
 struct SettingsView: View {
     @State var selectedNavigation: Navigation = .general
     @State var apps = InstalledApps()

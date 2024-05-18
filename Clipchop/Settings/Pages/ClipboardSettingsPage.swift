@@ -19,6 +19,7 @@ struct ClipboardSettingsPage: View {
 }
 
 #Preview {
-    ClipboardSettingsPage()
-        .formStyle(.grouped)
+    previewPage {
+        ClipboardSettingsPage()
+    }
 }

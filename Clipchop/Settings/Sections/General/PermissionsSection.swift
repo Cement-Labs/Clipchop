@@ -95,7 +95,7 @@ Full Disk Access is neede to generate file previews.
 }
 
 #Preview {
-    Form {
+    previewSection {
         PermissionsSection()
     }
 }

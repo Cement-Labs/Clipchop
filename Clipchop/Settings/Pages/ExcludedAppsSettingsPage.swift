@@ -19,7 +19,8 @@ struct ExcludedAppsSettingsPage: View {
 }
 
 #Preview {
-    ExcludedAppsSettingsPage()
-        .formStyle(.grouped)
-        .environmentObject(InstalledApps())
+    previewPage {
+        ExcludedAppsSettingsPage()
+            .environmentObject(InstalledApps())
+    }
 }

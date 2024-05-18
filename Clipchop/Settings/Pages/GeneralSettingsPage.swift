@@ -18,6 +18,7 @@ struct GeneralSettingsPage: View {
 }
 
 #Preview {
-    GeneralSettingsPage()
-        .formStyle(.grouped)
+    previewPage {
+        GeneralSettingsPage()
+    }
 }

@@ -33,8 +33,7 @@ struct KeyboardShortcutsSection: View {
 }
 
 #Preview {
-    Form {
+    previewSection {
         KeyboardShortcutsSection()
     }
-    .formStyle(.grouped)
 }

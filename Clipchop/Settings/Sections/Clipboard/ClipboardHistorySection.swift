@@ -94,8 +94,7 @@ struct ClipboardHistorySection: View {
 }
 
 #Preview {
-    Form {
+    previewSection {
         ClipboardHistorySection()
     }
-    .formStyle(.grouped)
 }

@@ -89,8 +89,7 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
 }
 
 #Preview {
-    Form {
+    previewSection {
         AppearanceSection()
     }
-    .formStyle(.grouped)
 }

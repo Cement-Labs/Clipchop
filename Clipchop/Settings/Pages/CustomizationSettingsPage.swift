@@ -18,5 +18,7 @@ struct CustomizationSettingsPage: View {
 }
 
 #Preview {
-    CustomizationSettingsPage()
+    previewPage {
+        CustomizationSettingsPage()
+    }
 }
