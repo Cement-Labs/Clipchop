@@ -292,10 +292,13 @@
         }
       }
     },
-    "Customization" : {
+    "Custom" : {
 
     },
-    "Customize accent color" : {
+    "Custom accent color" : {
+
+    },
+    "Customization" : {
 
     },
     "Delete" : {
@@ -472,6 +475,9 @@
     "Syncing" : {
 
     },
+    "System" : {
+
+    },
     "Test" : {
 
     },
@@ -551,9 +557,6 @@
       }
     },
     "Update interval" : {
-
-    },
-    "Use system color" : {
 
     },
     "You can always open %@ again to access this page." : {

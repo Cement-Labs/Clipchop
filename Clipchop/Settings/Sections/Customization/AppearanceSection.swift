@@ -80,12 +80,26 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            Toggle("Customize accent color", isOn: $useCustomAccentColor)
+            Toggle(isOn: $useCustomAccentColor) {
+                Text("Custom accent color")
+            }
             
             if useCustomAccentColor {
-                ColorPicker(selection: $customAccentColor, supportsOpacity: false) {
-                    Toggle("Use system color", isOn: $useSystemAccentColor)
-                        .toggleStyle(.checkbox)
+                HStack {
+                    Picker(selection: $useSystemAccentColor) {
+                        Text("System")
+                            .tag(true)
+                        
+                        Text("Custom")
+                            .tag(false)
+                    } label: {
+                        
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    ColorPicker(selection: $customAccentColor, supportsOpacity: false) {
+                        
+                    }
                 }
             }
             

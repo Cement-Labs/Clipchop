@@ -38,9 +38,6 @@ struct ClipchopApp: App {
     @State var isWindowInitialized: Bool = false
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
-    @Default(.useCustomAccentColor) var useCustomAccentColor
-    @Default(.useSystemAccentColor) var useSystemAccentColor
-    @Default(.customAccentColor) var customAccentColor
     
     private let container: ModelContainer
     private let manager: ModelManager
@@ -80,12 +77,7 @@ struct ClipchopApp: App {
                         }
                     }
                 }
-            // Use function instead of var to trigger view reload
-                .tint(Defaults.inlineAccentColor(
-                    useCustom: useCustomAccentColor,
-                    useSystem: useSystemAccentColor,
-                    customColor: customAccentColor
-                ))
+                .tint(Defaults.accentColor)
                 .frame(minHeight: 300)
         }
         
