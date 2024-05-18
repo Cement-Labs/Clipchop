@@ -81,11 +81,18 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         
         Section {
             Toggle(isOn: $useCustomAccentColor) {
-                Text("Custom accent color")
-            }
-            
-            if useCustomAccentColor {
-                HStack {
+                HStack(alignment: .center) {
+                    Text("Custom accent color")
+                    
+                    ColorPicker(selection: $customAccentColor, supportsOpacity: false) {
+                        
+                    }
+                    .controlSize(.mini)
+                    .disabled(!useCustomAccentColor || useSystemAccentColor)
+                    .opacity(!useCustomAccentColor || useSystemAccentColor ? 0.5 : 1)
+                    
+                    Spacer()
+                    
                     Picker(selection: $useSystemAccentColor) {
                         Text("System")
                             .tag(true)
@@ -95,17 +102,7 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                     } label: {
                         
                     }
-                    .pickerStyle(.segmented)
-                    
-                    ColorPicker(selection: $customAccentColor, supportsOpacity: false) {
-                        
-                    }
-                }
-            }
-            
-            if !DefaultsStack.shared.isUnchanged(.accentColor) {
-                Button("Relaunch") {
-                    relaunch()
+                    .disabled(!useCustomAccentColor)
                 }
             }
         }
