@@ -389,6 +389,9 @@
     "Limit %@'s functions in the specified apps." : {
 
     },
+    "Log to Console" : {
+
+    },
     "macOS" : {
 
     },

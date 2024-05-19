@@ -29,7 +29,7 @@ struct ExcludedAppListSection: View {
         List(selection: $selection) {
             ForEach($excluded, id: \.self) { entry in
                 Group {
-                    if let app = apps.installedApps.first(where: {
+                    if let app = (apps.installedApps + apps.systemApps).first(where: {
                         $0.bundleID == entry.wrappedValue
                     }) {
                         HStack {
@@ -50,6 +50,14 @@ struct ExcludedAppListSection: View {
                             removeSelected()
                         }
                     }
+                    
+                    #if DEBUG
+                    Button("Log to Console") {
+                        selection.forEach {
+                            print($0)
+                        }
+                    }
+                    #endif
                 }
                 .tag(entry.wrappedValue)
             }
@@ -77,7 +85,7 @@ struct ExcludedAppListSection: View {
                     Button {
                         removeSelected()
                     } label: {
-                        buildFooterButton(systemSymbol: .minus)
+                        sectionFooterButton(systemSymbol: .minus)
                     }
                     .buttonStyle(.borderless)
                     .disabled(selection.isEmpty)
@@ -87,7 +95,7 @@ struct ExcludedAppListSection: View {
                         InstalledAppsMenu()
                             .environmentObject(apps)
                     } label: {
-                        buildFooterButton(systemSymbol: .plus)
+                        sectionFooterButton(systemSymbol: .plus)
                     }
                     .aspectRatio(contentMode: .fit)
                 }
@@ -96,7 +104,7 @@ struct ExcludedAppListSection: View {
     }
     
     @ViewBuilder
-    func buildFooterButton(systemSymbol: SFSymbol) -> some View {
+    func sectionFooterButton(systemSymbol: SFSymbol) -> some View {
         Rectangle()
             .foregroundStyle(.placeholder.opacity(0))
             .overlay {
@@ -150,6 +158,7 @@ struct ExcludedAppListSection: View {
                     Divider()
                     
                     sectionFooter()
+                        .padding(.bottom, 1)
                 }
                 .ignoresSafeArea()
                 .padding(-10)

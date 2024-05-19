@@ -18,21 +18,37 @@ struct InstalledApp: Identifiable {
 }
 
 class InstalledApps: ObservableObject {
-    private var query = NSMetadataQuery()
+    private var systemQuery = NSMetadataQuery()
+    private var localQuery = NSMetadataQuery()
     
+    @Published var systemApps = [InstalledApp]()
     @Published var installedApps = [InstalledApp]()
     
     init() {
-        self.startQuery()
+        self.startQuery(&systemQuery, in: .systemDomainMask) {
+            self.queryDidFinishGathering(self.systemQuery, to: &self.systemApps, notification: $0)
+        }
+        
+        self.startQuery(&localQuery, in: .localDomainMask) {
+            self.queryDidFinishGathering(self.localQuery, to: &self.installedApps, notification: $0)
+        }
     }
     
     deinit {
-        query.stop()
+        systemQuery.stop()
+        localQuery.stop()
     }
     
-    private func startQuery() {
+    private func startQuery(
+        _ query: inout NSMetadataQuery,
+        `in`: FileManager.SearchPathDomainMask,
+        completion: @escaping @Sendable (Notification) -> ()
+    ) {
         query.predicate = NSPredicate(format: "kMDItemContentType == 'com.apple.application-bundle'")
-        if let appFolder = FileManager.default.urls(for: .applicationDirectory, in: .localDomainMask).first {
+        if let appFolder = FileManager.default.urls(
+            for: .allApplicationsDirectory,
+            in: `in`
+        ).first {
             query.searchScopes = [appFolder]
         }
         
@@ -40,14 +56,18 @@ class InstalledApps: ObservableObject {
             forName: .NSMetadataQueryDidFinishGathering,
             object: nil,
             queue: nil,
-            using: queryDidFinishGathering
+            using: completion
         )
+        
         query.start()
     }
     
-    private func queryDidFinishGathering(notification: Notification) {
+    private func queryDidFinishGathering(
+        _ query: NSMetadataQuery, to: inout [InstalledApp],
+        notification: Notification
+    ) {
         if let items  = query.results as? [NSMetadataItem] {
-            self.installedApps = items.compactMap({ item in
+            to = items.compactMap { item in
                 guard
                     let bundleId = item.value(forAttribute: NSMetadataItemCFBundleIdentifierKey) as? String,
                     let displayName = item.value(forAttribute: NSMetadataItemDisplayNameKey) as? String,
@@ -64,7 +84,7 @@ class InstalledApps: ObservableObject {
                     displayName: displayName,
                     installationFolder: installationFolder
                 )
-            })
+            }
         }
     }
 }

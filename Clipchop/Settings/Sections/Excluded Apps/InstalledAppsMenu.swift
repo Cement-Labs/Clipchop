@@ -14,7 +14,7 @@ struct InstalledAppsMenu: View {
     @Default(.applicationExcludeList) var excluded
     
     var body: some View {
-        let availableApps = apps.installedApps
+        let availableApps = (apps.installedApps + apps.systemApps)
             .filter { !excluded.contains($0.bundleID) }
             .grouped { $0.installationFolder }
         let installationFolders = availableApps.keys
@@ -29,7 +29,6 @@ struct InstalledAppsMenu: View {
                 ForEach(containedApps) { app in
                     Button {
                         excluded.append(app.bundleID)
-                        print("Excluded: \(app.bundleID)")
                     } label: {
                         Image(nsImage: app.icon.resized(to: .init(width: 16, height: 16)))
                         Text(app.displayName)

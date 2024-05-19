@@ -170,6 +170,7 @@ struct SettingsView: View {
                     SyncingSettingsPage()
                 case .about:
                     AboutSettingsPage()
+                    
                 case .test:
                     TestSettingsPage()
                 }

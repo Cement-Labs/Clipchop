@@ -81,7 +81,6 @@ struct ClipchopApp: App {
                         }
                     }
                 }
-                .tint(Defaults.accentColor)
                 .preferredColorScheme(preferredColorScheme.colorScheme ?? colorScheme)
                 .frame(minHeight: 300)
         }
