@@ -82,8 +82,8 @@ struct ClipchopApp: App {
                     }
                 }
                 .tint(Defaults.accentColor)
-                .frame(minHeight: 300)
                 .preferredColorScheme(preferredColorScheme.colorScheme ?? colorScheme)
+                .frame(minHeight: 300)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

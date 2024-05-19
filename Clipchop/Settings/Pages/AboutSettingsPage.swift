@@ -12,36 +12,39 @@ struct AboutSettingsPage: View {
     @State var isAcknowledgementsPresented = false
     
     var body: some View {
-        listEmbeddedForm(formStyle: .columns) {
-            HStack {
-                Spacer()
-                
-                Image(nsImage: AppIcon.currentAppIcon.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 120)
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(Bundle.main.appName)
-                        .font(.title)
-                        .fontWeight(.bold)
+        GeometryReader { geometryProxy in
+            listEmbeddedForm(formStyle: .columns) {
+                HStack {
+                    Spacer()
                     
-                    VStack(alignment: .leading, spacing: 4) {
-                        AppVersionView()
-                        CopyrightsView()
+                    Image(nsImage: AppIcon.currentAppIcon.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 120)
+                    
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(Bundle.main.appName)
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            AppVersionView()
+                            CopyrightsView()
+                        }
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
                     }
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
+                    .padding()
+                    
+                    Spacer()
                 }
-                .padding()
-                
-                Spacer()
+                .frame(height: geometryProxy.size.height - geometryProxy.safeAreaInsets.top)
             }
-            .padding()
         }
         .scrollDisabled(true)
         .toolbar {
-            ToolbarItemGroup {
+            // Place them to the left of the quit button
+            ToolbarItemGroup(placement: .destructiveAction) {
                 Button {
                     isSourcePresented = true
                 } label: {
@@ -104,6 +107,8 @@ struct AboutSettingsPage: View {
                 .popover(isPresented: $isAcknowledgementsPresented, arrowEdge: .bottom) {
                     AcknowledgementsView()
                 }
+                
+                Spacer()
             }
         }
     }
