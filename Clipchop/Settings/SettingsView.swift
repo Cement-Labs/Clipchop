@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SFSafeSymbols
+import Defaults
 
 @ViewBuilder
 func description(@ViewBuilder label: () -> some View) -> some View {

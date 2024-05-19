@@ -81,7 +81,6 @@ struct ClipchopApp: App {
                         }
                     }
                 }
-                .preferredColorScheme(preferredColorScheme.colorScheme ?? colorScheme)
                 .frame(minHeight: 300)
         }
         
