@@ -161,18 +161,18 @@ struct SettingsView: View {
                 }
             }
             .navigationSplitViewColumnWidth(min: 350, ideal: 750)
+            .formStyle(.grouped)
+            .toolbar {
+                Button {
+                    quit()
+                } label: {
+                    Text("Quit")
+                        .padding(4)
+                }
+                .controlSize(.extraLarge)
+            }
         }
         .navigationTitle(Bundle.main.appName)
-        .toolbar {
-            Button {
-                quit()
-            } label: {
-                Text("Quit")
-                    .padding(4)
-            }
-            .controlSize(.extraLarge)
-        }
-        .formStyle(.grouped)
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(condition: !isWindowInitialized) {
