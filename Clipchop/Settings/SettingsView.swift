@@ -82,14 +82,11 @@ struct SettingsView: View {
     }
     
     @ViewBuilder
-    func navigationLink(
+    func navigationEntry(
         _ titleKey: LocalizedStringKey,
-        image: () -> Image,
-        @ViewBuilder content: () -> some View
+        image: () -> Image
     ) -> some View {
-        NavigationLink {
-            content()
-        } label: {
+        HStack {
             image()
                 .foregroundStyle(.tertiary)
                 .imageScale(.large)
@@ -105,62 +102,65 @@ struct SettingsView: View {
     var body: some View {
         NavigationSplitView {
             List(selection: $selectedNavigation) {
-                navigationLink("General") {
+                navigationEntry("General") {
                     Image(systemSymbol: .gearshape)
-                } content: {
-                    GeneralSettingsPage()
                 }
                 .tag(Navigation.general)
                 
-                navigationLink("Customization") {
+                navigationEntry("Customization") {
                     Image(systemSymbol: .pencilAndOutline)
-                } content: {
-                    CustomizationSettingsPage()
                 }
                 .tag(Navigation.customization)
                 
-                navigationLink("Clipboard") {
+                navigationEntry("Clipboard") {
                     Image(systemSymbol: .clipboard)
-                } content: {
-                    ClipboardSettingsPage()
                 }
                 .tag(Navigation.clipboard)
                 
-                navigationLink("Excluded Apps") {
+                navigationEntry("Excluded Apps") {
                     Image(systemSymbol: .xmarkApp)
-                } content: {
-                    ExcludedAppsSettingsPage()
-                        .environmentObject(apps)
                 }
                 .tag(Navigation.excludedApps)
                 
-                navigationLink("Syncing") {
+                navigationEntry("Syncing") {
                     Image(systemSymbol: .checkmarkIcloud)
-                } content: {
-                    SyncingSettingsPage()
                 }
                 .tag(Navigation.syncing)
                 
-                navigationLink("About") {
+                navigationEntry("About") {
                     Image(systemSymbol: .infoCircle)
-                } content: {
-                    AboutSettingsPage()
                 }
                 .tag(Navigation.about)
                 
 #if DEBUG
-                navigationLink("Test") {
+                navigationEntry("Test") {
                     Image(systemSymbol: .airplaneDeparture)
-                } content: {
-                    TestSettingsPage()
                 }
                 .tag(Navigation.test)
 #endif
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 250)
         } detail: {
-            StaleView()
-                .navigationSplitViewColumnWidth(min: 350, ideal: 750)
+            Group {
+                switch selectedNavigation {
+                case .general:
+                    GeneralSettingsPage()
+                case .customization:
+                    CustomizationSettingsPage()
+                case .clipboard:
+                    ClipboardSettingsPage()
+                case .excludedApps:
+                    ExcludedAppsSettingsPage()
+                        .environmentObject(apps)
+                case .syncing:
+                    SyncingSettingsPage()
+                case .about:
+                    AboutSettingsPage()
+                case .test:
+                    TestSettingsPage()
+                }
+            }
+            .navigationSplitViewColumnWidth(min: 350, ideal: 750)
         }
         .navigationTitle(Bundle.main.appName)
         .toolbar {
@@ -168,7 +168,6 @@ struct SettingsView: View {
                 quit()
             } label: {
                 Text("Quit")
-
                     .padding(4)
             }
             .controlSize(.extraLarge)

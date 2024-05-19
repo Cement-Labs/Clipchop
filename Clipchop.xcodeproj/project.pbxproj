@@ -162,13 +162,13 @@
 		281C28C92BDC99FD00DBEE4B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				28D8CE672BDD124A008B17B5 /* Sections */,
-				282692732BDCACB100D1656E /* Pages */,
 				281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */,
 				28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */,
 				28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */,
 				283E25332BF4EF670094C06F /* AcknowledgementsView.swift */,
 				283E25352BF4FE040094C06F /* StaleView.swift */,
+				28D8CE672BDD124A008B17B5 /* Sections */,
+				282692732BDCACB100D1656E /* Pages */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
