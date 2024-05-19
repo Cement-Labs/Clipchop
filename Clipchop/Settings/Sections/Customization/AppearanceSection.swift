@@ -18,8 +18,6 @@ struct AppearanceSection: View {
     @Default(.colorStyle) var colorStyle
     @Default(.customAccentColor) var customAccentColor
     
-    @State var isRestartAlertPresented: Bool = false
-    
     @ViewBuilder
     func soundPicker(
         _ titleKey: LocalizedStringKey,
@@ -81,46 +79,35 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         }
         
         Section {
-            Picker(selection: $colorStyle) {
-                Text(Bundle.main.appName)
+            withCaption("Custom accent color only applies to the clip history window.") {
+                Picker(selection: $colorStyle) {
+                    ColoredPickerRow(Defaults.inlineAccentColor(style: .app, customColor: .clear)) {
+                        Text(Bundle.main.appName)
+                    }
                     .tag(ColorStyle.app)
-                
-                Text("System")
+                    
+                    ColoredPickerRow(Defaults.inlineAccentColor(style: .system, customColor: .clear)) {
+                        Text("System")
+                    }
                     .tag(ColorStyle.system)
-                
-                Text("Custom")
+                    
+                    ColoredPickerRow(Defaults.inlineAccentColor(style: .custom, customColor: customAccentColor)) {
+                        Text("Custom")
+                    }
                     .tag(ColorStyle.custom)
-            } label: {
-                HStack {
-                    Text("Color style")
-                    
-                    if !DefaultsStack.shared.isUnchanged(.accentColor) {
-                        Button {
-                            isRestartAlertPresented = true
-                        } label: {
-                            Text("Requires Relaunch")
-                            Image(systemSymbol: .powerCircleFill)
-                        }
-                        .buttonStyle(.borderless)
-                        .buttonBorderShape(.capsule)
-                        .tint(.red)
-                    }
-                    
-                    Spacer()
-                    
-                    if colorStyle == .custom {
-                        ColorPicker(selection: $customAccentColor) {
-                            
+                } label: {
+                    HStack {
+                        Text("Color style")
+                        
+                        Spacer()
+                        
+                        if colorStyle == .custom {
+                            ColorPicker(selection: $customAccentColor) {
+                                
+                            }
                         }
                     }
                 }
-            }
-            .alert("Relaunch \(Bundle.main.appName)", isPresented: $isRestartAlertPresented) {
-                Button("Relaunch", role: .destructive) {
-                    relaunch()
-                }
-            } message: {
-                Text("Relaunch \(Bundle.main.appName) to apply the accent color?")
             }
         }
     }

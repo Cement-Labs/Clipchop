@@ -24,6 +24,7 @@
 		2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */; };
 		2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */; };
 		2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */; };
+		285FADBD2BF97A69005AE202 /* ColoredPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FADBC2BF97A69005AE202 /* ColoredPickerRow.swift */; };
 		2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */; };
 		2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */; };
 		2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */; };
@@ -89,6 +90,7 @@
 		2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppListSection.swift; sourceTree = "<group>"; };
 		2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsMenu.swift; sourceTree = "<group>"; };
+		285FADBC2BF97A69005AE202 /* ColoredPickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPickerRow.swift; sourceTree = "<group>"; };
 		2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardContent.swift; path = Clipchop/Clipboard/SwiftData/ClipboardContent.swift; sourceTree = "<group>"; };
 		2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardHistory.swift; path = Clipchop/Clipboard/SwiftData/ClipboardHistory.swift; sourceTree = "<group>"; };
 		2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTrackingStream.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */,
+				285FADBC2BF97A69005AE202 /* ColoredPickerRow.swift */,
 			);
 			path = Customization;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
 				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
+				285FADBD2BF97A69005AE202 /* ColoredPickerRow.swift in Sources */,
 				2872C0F52BF78BC5000ED6A8 /* ClipHistoryViewController.swift in Sources */,
 				2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */,
 				28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */,

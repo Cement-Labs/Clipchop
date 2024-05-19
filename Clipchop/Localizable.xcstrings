@@ -298,6 +298,9 @@
     "Custom" : {
 
     },
+    "Custom accent color only applies to the clip history window." : {
+
+    },
     "Customization" : {
 
     },
@@ -374,7 +377,7 @@
     "Licenced Under GPL-3.0" : {
 
     },
-    "Limit %@'s functions in specified apps." : {
+    "Limit %@'s functions in the specified apps." : {
 
     },
     "No Application Excluded" : {
@@ -407,19 +410,10 @@
     "Recent Copied" : {
 
     },
-    "Relaunch" : {
-
-    },
-    "Relaunch %@" : {
-
-    },
-    "Relaunch %@ to apply the accent color?" : {
+    "Red" : {
 
     },
     "Remove" : {
-
-    },
-    "Requires Relaunch" : {
 
     },
     "Settings…" : {
