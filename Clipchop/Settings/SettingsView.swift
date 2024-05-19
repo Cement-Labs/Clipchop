@@ -48,6 +48,20 @@ func withCaption(
 }
 
 @ViewBuilder
+func listEmbeddedForm(formStyle: some FormStyle = .grouped,@ViewBuilder content: () -> some View) -> some View {
+    List {
+        Form {
+            content()
+        }
+        .formStyle(formStyle)
+        
+        .scrollDisabled(true)
+        .scrollContentBackground(.hidden)
+        .ignoresSafeArea()
+    }
+}
+
+@ViewBuilder
 func previewSection(content: () -> some View) -> some View {
     previewPage {
         Form {
@@ -161,15 +175,16 @@ struct SettingsView: View {
                 }
             }
             .navigationSplitViewColumnWidth(min: 350, ideal: 750)
-            .formStyle(.grouped)
             .toolbar {
-                Button {
-                    quit()
-                } label: {
-                    Text("Quit")
-                        .padding(4)
+                ToolbarItemGroup {
+                    Button {
+                        quit()
+                    } label: {
+                        Text("Quit")
+                            .padding(4)
+                    }
+                    .controlSize(.extraLarge)
                 }
-                .controlSize(.extraLarge)
             }
         }
         .navigationTitle(Bundle.main.appName)

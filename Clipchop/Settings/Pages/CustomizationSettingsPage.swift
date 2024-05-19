@@ -11,7 +11,7 @@ import SFSafeSymbols
 
 struct CustomizationSettingsPage: View {
     var body: some View {
-        Form {
+        listEmbeddedForm {
             AppearanceSection()
         }
     }

@@ -11,7 +11,7 @@ struct ExcludedAppsSettingsPage: View {
     @EnvironmentObject var apps: InstalledApps
     
     var body: some View {
-        Form {
+        listEmbeddedForm {
             ExcludedAppListSection()
                 .environmentObject(apps)
         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TestSettingsPage: View {
     var body: some View {
-        ScrollView {
+        List {
             ForEach(0..<100) { number in
                 HStack {
                     Text("Test line No.\(number)")

@@ -92,7 +92,7 @@ struct ClipchopApp: App {
         .menuBarExtraStyle(.menu)
         .menuBarExtraAccess(isPresented: $isMenuBarPresented) { menuBarItem in
             guard
-                // Init once 
+                // Init once
                 let button = menuBarItem.button,
                 button.subviews.count == 0
             else {
