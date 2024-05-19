@@ -13,6 +13,10 @@ extension Defaults.Keys {
     static let timesClipped = Key<UInt>("timesClipped", default: 0)
     
     static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
+    static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
+    
+    // MARK: Appearance
+    
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     
@@ -20,10 +24,14 @@ extension Defaults.Keys {
     static let clipSound = Key<Sound>("clipSound", default: .defaultSound)
     static let pasteSound = Key<Sound>("pasteSound", default: .defaultSound)
     
-    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
+    // MARK: Excluded Applications
     
     static let excludeAppsEnabled = Key<Bool>("excludeAppsEnabled", default: true)
     static let applicationExcludeList = Key<[String]>("applicationExcludeList", default: [])
+    
+    // MARK: Clip History
+    
+    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
     
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)

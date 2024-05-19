@@ -58,6 +58,12 @@ struct AppearanceSection: View {
             .onChange(of: appIcon) { _, newIcon in
                 newIcon.setAppIcon()
             }
+        } header: {
+            withCaption("""
+Clip more to unlock more! You've already clipped \(timesClipped) times.
+""") {
+                Text("Appearance")
+            }
         }
          
         Section {
@@ -70,15 +76,9 @@ struct AppearanceSection: View {
                 newSound.setPasteSound()
                 newSound.play()
             }
-        } header: {
-            withCaption("""
-Clip more to unlock more! You've already clipped \(timesClipped) times.
-""") {
-                Text("Appearance")
-            }
         }
         
-        Section {
+        Section("Color") {
             withCaption("Custom accent color only applies to the clip history window.") {
                 Picker(selection: $colorStyle) {
                     ColoredPickerRow(Defaults.inlineAccentColor(style: .app, customColor: .clear)) {
@@ -87,7 +87,7 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                     .tag(ColorStyle.app)
                     
                     ColoredPickerRow(Defaults.inlineAccentColor(style: .system, customColor: .clear)) {
-                        Text("System")
+                        Text("macOS")
                     }
                     .tag(ColorStyle.system)
                     
@@ -109,6 +109,8 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                     }
                 }
             }
+            
+            PreferredColorSchemePicker()
         }
     }
 }

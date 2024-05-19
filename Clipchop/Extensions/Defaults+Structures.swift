@@ -8,6 +8,20 @@
 import SwiftUI
 import Defaults
 
+enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable {
+    case system = "system"
+    case light = "light"
+    case dark = "dark"
+    
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .light: .light
+        case .dark: .dark
+        default: nil
+        }
+    }
+}
+
 enum HistoryPreservationPeriod: String, CaseIterable, Defaults.Serializable {
     case forever = "forever"
     

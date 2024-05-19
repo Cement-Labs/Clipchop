@@ -38,6 +38,9 @@ struct ClipchopApp: App {
     @State var isWindowInitialized: Bool = false
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
+    @Default(.preferredColorScheme) var preferredColorScheme
+    
+    @Environment(\.colorScheme) var colorScheme
     
     private let container: ModelContainer
     private let manager: ModelManager
@@ -79,6 +82,7 @@ struct ClipchopApp: App {
                 }
                 .tint(Defaults.accentColor)
                 .frame(minHeight: 300)
+                .preferredColorScheme(preferredColorScheme.colorScheme ?? colorScheme)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

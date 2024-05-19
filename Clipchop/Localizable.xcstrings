@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "?" : {
+
+    },
     "%.2fs" : {
 
     },
@@ -281,6 +284,9 @@
     "Clipchop" : {
 
     },
+    "Color" : {
+
+    },
     "Color style" : {
 
     },
@@ -302,6 +308,9 @@
 
     },
     "Customization" : {
+
+    },
+    "Dark" : {
 
     },
     "Delete" : {
@@ -377,7 +386,13 @@
     "Licenced Under GPL-3.0" : {
 
     },
+    "Light" : {
+
+    },
     "Limit %@'s functions in the specified apps." : {
+
+    },
+    "macOS" : {
 
     },
     "No Application Excluded" : {
@@ -398,6 +413,9 @@
     "Pin history" : {
 
     },
+    "Preferred color scheme" : {
+
+    },
     "Preservation time" : {
 
     },
@@ -408,9 +426,6 @@
 
     },
     "Recent Copied" : {
-
-    },
-    "Red" : {
 
     },
     "Remove" : {

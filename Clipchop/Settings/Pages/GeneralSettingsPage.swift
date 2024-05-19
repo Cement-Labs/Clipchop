@@ -13,6 +13,10 @@ struct GeneralSettingsPage: View {
             PermissionsSection()
             
             GlobalBehaviorsSection()
+            
+            Section {
+                PreferredColorSchemePicker()
+            }
         }
     }
 }
