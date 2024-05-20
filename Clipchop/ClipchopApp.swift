@@ -34,13 +34,11 @@ func relaunch() {
 @main
 struct ClipchopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @State var isMenuBarPresented: Bool = true
-    @State var isWindowInitialized: Bool = false
+    @State var isMenuBarPresented = true
+    @State var isWindowInitialized = false
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     @Default(.preferredColorScheme) var preferredColorScheme
-    
-    @Environment(\.colorScheme) var colorScheme
     
     private let container: ModelContainer
     private let manager: ModelManager
@@ -82,6 +80,7 @@ struct ClipchopApp: App {
                     }
                 }
                 .frame(minHeight: 300)
+                .preferredColorScheme(preferredColorScheme.colorScheme)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

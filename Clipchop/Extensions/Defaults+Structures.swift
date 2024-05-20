@@ -17,7 +17,14 @@ enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable 
         switch self {
         case .light: .light
         case .dark: .dark
-        default: nil
+        default: .none
+        }
+    }
+    
+    var needsReload: Bool {
+        switch self {
+        case .system: true
+        default: false
         }
     }
 }

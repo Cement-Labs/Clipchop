@@ -9,8 +9,8 @@ import SwiftUI
 import Defaults
 
 struct PermissionsSection: View {
-    @State var isAccessibilityAccessGranted: Bool = false
-    @State var isFullDiskAccessGranted: Bool = false
+    @State var isAccessibilityAccessGranted = false
+    @State var isFullDiskAccessGranted = false
     
     let permissionsAutoCheck = Timer.publish(
         every: 1, tolerance: 0.5,

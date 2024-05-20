@@ -154,7 +154,7 @@ struct SettingsView: View {
                 .tag(Navigation.test)
 #endif
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 250)
+            .navigationSplitViewColumnWidth(250)
         } detail: {
             Group {
                 switch selectedNavigation {

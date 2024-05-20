@@ -7,9 +7,15 @@
 
 import SwiftUI
 import Defaults
+import AppearanceProviding
 
 struct PreferredColorSchemePicker: View {
     @Default(.preferredColorScheme) var preferredColorScheme
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    @State var storedColorScheme: ColorScheme = .light
+    @State var isSheetPresented = false
     
     var body: some View {
         Picker("Preferred color scheme", selection: $preferredColorScheme) {
@@ -23,6 +29,20 @@ struct PreferredColorSchemePicker: View {
             
             Text("Dark")
                 .tag(PreferredColorScheme.dark)
+        }
+        .sheet(isPresented: $isSheetPresented) {
+            // To update specific color schemes, like `.system`.
+            // Also useful for hiding the inactivate delays between switches.
+            ProgressView("Changing Color Scheme")
+                .padding()
+                .preferredColorScheme(.none)
+        }
+        .onChange(of: preferredColorScheme) { _, _ in
+            isSheetPresented = true
+            
+            DispatchQueue.main.async {
+                isSheetPresented = false
+            }
         }
     }
 }

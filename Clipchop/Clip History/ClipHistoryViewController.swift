@@ -16,7 +16,7 @@ import KeyboardShortcuts
     )
     
     private var windowController: NSWindowController?
-    private var isExpanded: Bool = false
+    private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
     
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
