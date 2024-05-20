@@ -392,6 +392,9 @@
     "Limit %@'s functions in the specified apps." : {
 
     },
+    "Loding..." : {
+
+    },
     "Log to Console" : {
 
     },
@@ -405,6 +408,9 @@
 
     },
     "Open Settings" : {
+
+    },
+    "Other" : {
 
     },
     "Paste sound" : {

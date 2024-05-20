@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Defaults
-import AppearanceProviding
+//import AppearanceProviding
 
 struct PreferredColorSchemePicker: View {
     @Default(.preferredColorScheme) var preferredColorScheme

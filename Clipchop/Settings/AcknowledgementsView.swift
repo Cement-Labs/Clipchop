@@ -33,11 +33,11 @@ struct AcknowledgementsView: View {
             link: URL(string: "https://github.com/sindresorhus/Defaults")!,
             reason: "This is a reason."
         ),
-        .init(
-            name: "FilePreviews", 
-            author: .init(name: "Neetesh Gupta", slug: "ntsh", link: URL(string: "https://github.com/ntsh")),
-            link: URL(string: "https://github.com/ntsh/FilePreviews")!
-        ),
+//        .init(
+//            name: "FilePreviews", 
+//            author: .init(name: "Neetesh Gupta", slug: "ntsh", link: URL(string: "https://github.com/ntsh")),
+//            link: URL(string: "https://github.com/ntsh/FilePreviews")!
+//        ),
         .init(
             name: "FullDiskAccess", 
             author: .init(name: "Mahdi Bchatnia", slug: "inket", link: URL(string: "https://github.com/inket")),

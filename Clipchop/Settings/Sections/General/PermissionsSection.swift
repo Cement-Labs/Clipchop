@@ -12,10 +12,10 @@ struct PermissionsSection: View {
     @State var isAccessibilityAccessGranted = false
     @State var isFullDiskAccessGranted = false
     
-    let permissionsAutoCheck = Timer.publish(
-        every: 1, tolerance: 0.5,
-        on: .main, in: .common
-    ).autoconnect()
+//    let permissionsAutoCheck = Timer.publish(
+//        every: 1, tolerance: 0.5,
+//        on: .main, in: .common
+//    ).autoconnect()
     
     @ViewBuilder
     func grantAccessButton(isGranted: Bool, action: @escaping () -> Void) -> some View {
@@ -62,7 +62,10 @@ Accessibility Access is needed to take over your clipboard.
                 .task {
                     isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
                 }
-                .onReceive(permissionsAutoCheck) { _ in
+//                .onReceive(permissionsAutoCheck) { _ in
+//                    isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
+//                }
+                .onAppear(){
                     isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
                 }
             }
@@ -86,9 +89,13 @@ Full Disk Access is neede to generate file previews.
                 .task {
                     isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
                 }
-                .onReceive(permissionsAutoCheck) { _ in
+//                .onReceive(permissionsAutoCheck) { _ in
+//                    isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
+//                }
+                .onAppear(){
                     isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
                 }
+                
             }
         }
     }

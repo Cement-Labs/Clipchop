@@ -74,6 +74,10 @@
 		28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */; };
 		28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */; };
 		28F7D0E52BF777C300DDFC2C /* WindowManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 28F7D0E42BF777C300DDFC2C /* WindowManagement */; };
+		6513FF392BFBB800008149AB /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF332BFBB800008149AB /* ColorView.swift */; };
+		6513FF3C2BFBB800008149AB /* RTFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF362BFBB800008149AB /* RTFView.swift */; };
+		6513FF3D2BFBB800008149AB /* WebLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF372BFBB800008149AB /* WebLinkView.swift */; };
+		6513FF3F2BFBB939008149AB /* ContentPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +139,10 @@
 		28D8CE702BDD2746008B17B5 /* SyncingSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncingSettingsPage.swift; sourceTree = "<group>"; };
 		28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardSettingsPage.swift; sourceTree = "<group>"; };
 		28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6513FF332BFBB800008149AB /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		6513FF362BFBB800008149AB /* RTFView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFView.swift; sourceTree = "<group>"; };
+		6513FF372BFBB800008149AB /* WebLinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLinkView.swift; sourceTree = "<group>"; };
+		6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				289B498B2BF9B50C008643FA /* CardPreviewView.swift */,
+				6513FF382BFBB800008149AB /* CardPage */,
 			);
 			path = "Card Preview";
 			sourceTree = "<group>";
@@ -365,6 +374,17 @@
 				2843DB5E2BF0F058008AA2E1 /* Excluded Apps */,
 			);
 			path = Sections;
+			sourceTree = "<group>";
+		};
+		6513FF382BFBB800008149AB /* CardPage */ = {
+			isa = PBXGroup;
+			children = (
+				6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */,
+				6513FF332BFBB800008149AB /* ColorView.swift */,
+				6513FF362BFBB800008149AB /* RTFView.swift */,
+				6513FF372BFBB800008149AB /* WebLinkView.swift */,
+			);
+			path = CardPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,6 +490,7 @@
 			files = (
 				28D8CE612BDCF9B8008B17B5 /* MenuBarView.swift in Sources */,
 				2872C0F72BF78D59000ED6A8 /* ModelManager.swift in Sources */,
+				6513FF3D2BFBB800008149AB /* WebLinkView.swift in Sources */,
 				28C2C5A42BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift in Sources */,
 				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
 				2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */,
@@ -477,6 +498,7 @@
 				2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */,
 				2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
+				6513FF3C2BFBB800008149AB /* RTFView.swift in Sources */,
 				28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */,
 				28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */,
 				287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */,
@@ -492,9 +514,11 @@
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2884E5D72BF86F2500201A79 /* TestSettingsPage.swift in Sources */,
+				6513FF392BFBB800008149AB /* ColorView.swift in Sources */,
 				285FADBF2BF98335005AE202 /* PreferredColorSchemePicker.swift in Sources */,
 				28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
+				6513FF3F2BFBB939008149AB /* ContentPreviewView.swift in Sources */,
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,
@@ -656,11 +680,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = 7XRF3J9RS4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -699,11 +724,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = 7XRF3J9RS4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

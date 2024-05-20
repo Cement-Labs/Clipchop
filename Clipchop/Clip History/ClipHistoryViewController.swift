@@ -11,7 +11,7 @@ import KeyboardShortcuts
 
 @Observable class ClipHistoryViewController {
     static let size = (
-        collapsed: NSSize(width: 500, height: 85),
+        collapsed: NSSize(width: 500, height: 100),
         expanded: NSSize(width: 500, height: 360)
     )
     
