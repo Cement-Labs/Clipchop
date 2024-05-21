@@ -17,7 +17,8 @@ class ClipboardContent {
     
     @Relationship(inverse: \ClipboardHistory.contents) var item: ClipboardHistory?
     
-    public init() {
-        
+    public init(type: String, value: Data) {
+        self.type = type
+        self.value = value
     }
 }

@@ -30,6 +30,7 @@ struct CardPreviewView: View {
                 VStack{
 //                    PreviewContentView(clipboardHistory: )
                 }
+                .allowsHitTesting(false)
                 .frame(width: 80, height: 80, alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: 12.5))
             }
