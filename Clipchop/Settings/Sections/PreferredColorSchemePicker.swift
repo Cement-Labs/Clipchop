@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Defaults
-//import AppearanceProviding
 
 struct PreferredColorSchemePicker: View {
     @Default(.preferredColorScheme) var preferredColorScheme
@@ -40,7 +39,7 @@ struct PreferredColorSchemePicker: View {
         .onChange(of: preferredColorScheme) { _, _ in
             isSheetPresented = true
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async  {
                 isSheetPresented = false
             }
         }

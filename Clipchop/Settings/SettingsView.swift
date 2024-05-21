@@ -80,7 +80,6 @@ func previewPage(content: () -> some View) -> some View {
 struct SettingsView: View {
     @State var selectedNavigation: Navigation = .general
     @State var apps = InstalledApps()
-    @State private var columnVisibility = NavigationSplitViewVisibility.doubleColumn
     
     @Binding var isWindowInitialized: Bool
     
@@ -116,7 +115,7 @@ struct SettingsView: View {
     }
     
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
+        NavigationSplitView {
             List(selection: $selectedNavigation) {
                 navigationEntry("General") {
                     Image(systemSymbol: .gearshape)
@@ -155,7 +154,7 @@ struct SettingsView: View {
                 .tag(Navigation.test)
 #endif
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 200)
+            .navigationSplitViewColumnWidth(200)
         } detail: {
             Group {
                 switch selectedNavigation {
@@ -177,7 +176,6 @@ struct SettingsView: View {
                     TestSettingsPage()
                 }
             }
-            .navigationSplitViewColumnWidth(min: 500, ideal: 500, max: 500)
             .toolbar {
                 ToolbarItemGroup {
                     Button {

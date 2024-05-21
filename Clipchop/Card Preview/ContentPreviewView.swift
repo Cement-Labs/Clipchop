@@ -15,7 +15,6 @@ import SwiftHEXColors
 import LinkPresentation
 
 struct PreviewContentView : View {
-    
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false
     
@@ -81,7 +80,7 @@ struct PreviewContentView : View {
     private func fileThumbnailView(for fileURL: URL) -> some View {
         ZStack {
             if isThumbnailLoading {
-                Text("Loding...")
+                Text("Loading...")
                     .font(.system(size: 10).monospaced())
                     .foregroundColor(.white)
             } else if let thumbnail = thumbnail {

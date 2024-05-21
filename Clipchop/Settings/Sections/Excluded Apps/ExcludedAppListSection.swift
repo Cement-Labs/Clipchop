@@ -51,13 +51,13 @@ struct ExcludedAppListSection: View {
                         }
                     }
                     
-                    #if DEBUG
+#if DEBUG
                     Button("Log to Console") {
                         selection.forEach {
                             print($0)
                         }
                     }
-                    #endif
+#endif
                 }
                 .tag(entry.wrappedValue)
             }

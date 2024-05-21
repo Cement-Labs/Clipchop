@@ -12,10 +12,10 @@ struct PermissionsSection: View {
     @State var isAccessibilityAccessGranted = false
     @State var isFullDiskAccessGranted = false
     
-//    let permissionsAutoCheck = Timer.publish(
-//        every: 1, tolerance: 0.5,
-//        on: .main, in: .common
-//    ).autoconnect()
+    let permissionsAutoCheck = Timer.publish(
+        every: 1, tolerance: 0.5,
+        on: .main, in: .common
+    ).autoconnect()
     
     @ViewBuilder
     func grantAccessButton(isGranted: Bool, action: @escaping () -> Void) -> some View {
@@ -55,19 +55,16 @@ Accessibility Access is needed to take over your clipboard.
                 Spacer()
                 
                 grantAccessButton(isGranted: isAccessibilityAccessGranted) {
-                    withAnimation {
-                        isAccessibilityAccessGranted = PermissionsManager.Accessibility.requestAccess()
-                    }
+                    isAccessibilityAccessGranted = PermissionsManager.Accessibility.requestAccess()
                 }
-                .task {
+                .onAppear {
                     isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
                 }
-//                .onReceive(permissionsAutoCheck) { _ in
-//                    isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
-//                }
-                .onAppear(){
+#if !DEBUG
+                .onReceive(permissionsAutoCheck) { _ in
                     isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
                 }
+#endif
             }
             
             HStack {
@@ -82,20 +79,16 @@ Full Disk Access is neede to generate file previews.
                 Spacer()
                 
                 grantAccessButton(isGranted: isFullDiskAccessGranted) {
-                    withAnimation {
-                        isFullDiskAccessGranted = PermissionsManager.FullDisk.requestAccess()
-                    }
+                    isFullDiskAccessGranted = PermissionsManager.FullDisk.requestAccess()
                 }
-                .task {
+                .onAppear {
                     isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
                 }
-//                .onReceive(permissionsAutoCheck) { _ in
-//                    isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
-//                }
-                .onAppear(){
+#if !DEBUG
+                .onReceive(permissionsAutoCheck) { _ in
                     isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
                 }
-                
+#endif
             }
         }
     }

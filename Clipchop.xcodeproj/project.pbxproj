@@ -309,7 +309,7 @@
 			children = (
 				289B498B2BF9B50C008643FA /* CardPreviewView.swift */,
 				6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */,
-				6513FF382BFBB800008149AB /* CardPage */,
+				6513FF382BFBB800008149AB /* Pages */,
 			);
 			path = "Card Preview";
 			sourceTree = "<group>";
@@ -377,14 +377,14 @@
 			path = Sections;
 			sourceTree = "<group>";
 		};
-		6513FF382BFBB800008149AB /* CardPage */ = {
+		6513FF382BFBB800008149AB /* Pages */ = {
 			isa = PBXGroup;
 			children = (
 				6513FF372BFBB800008149AB /* WebLinkPreviewPage.swift */,
 				6513FF332BFBB800008149AB /* ColorCodePage.swift */,
 				6513FF362BFBB800008149AB /* rtfPreviewPage.swift */,
 			);
-			path = CardPage;
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
