@@ -108,7 +108,7 @@ struct PreviewContentView : View {
     
     private func generateAndSetThumbnail(for fileURL: URL) {
         DispatchQueue.global(qos: .utility).async {
-            let maxDimension = 128.0
+            let maxDimension = 80
             let size = CGSize(width: maxDimension, height: maxDimension)
 
             let scale = NSScreen.main!.backingScaleFactor
@@ -131,7 +131,7 @@ struct PreviewContentView : View {
             }
         }
     }
-    
+    // MARK: - ResizeImage
     func resizeImage(image: NSImage) -> NSImage? {
         let maxSize: CGFloat = 80
 
