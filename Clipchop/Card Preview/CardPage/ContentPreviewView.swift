@@ -32,30 +32,22 @@ struct PreviewContentView : View {
                 }
             } else if let rtfData = clipboardHistory.formatter.rtfData {
                 VStack{
-                    RTFView(rtfData: rtfData)
+                    rtfPreviewPage(rtfData: rtfData)
                 }
                 .frame(width: 70, height: 70)
             } else if let text = clipboardHistory.formatter.text {
-                VStack{
-                    Text(text)
-                        .font(.system(size: 12).monospaced())
-                        .minimumScaleFactor(0.8)
-                        .lineLimit(10)
-                        .fixedSize(horizontal: false, vertical: false)
-                        .foregroundColor(.primary)
-                }
-                .frame(width: 70, height: 70)
-            } else if let html = clipboardHistory.formatter.htmlString {
-                VStack {
-//                    CustomLinkViewRepresentable(urlString: html)
-//                        .scaleEffect(0.625)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            } else if let text = clipboardHistory.formatter.text {
-                   if let colorImage = ColorView.from(text) {
+                if text.hasPrefix("http://") || text.hasPrefix("https://") {
+                    VStack {
+                        WebLinkPreviewPage(urlString: text)
+                            .scaleEffect(0.625)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .offset(y: -14)
+                } else if let colorImage = ColorCodePage.from(text) {
                     ZStack{
                         Image(nsImage: colorImage)
                             .resizable()
+                            .frame(width: 80, height: 80)
                             .aspectRatio(contentMode: .fit)
                         Text(text)
                             .font(.system(size: 12).monospaced())
@@ -64,7 +56,6 @@ struct PreviewContentView : View {
                             .fixedSize(horizontal: false, vertical: false)
                             .foregroundColor(.primary)
                     }
-                    .frame(width: 80, height: 80)
                 } else {
                     VStack{
                         Text(text)

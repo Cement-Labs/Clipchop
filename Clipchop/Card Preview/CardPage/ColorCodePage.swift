@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftHEXColors
 
-class ColorView {
+class ColorCodePage {
     static func from(_ colorHex: String) -> NSImage? {
         guard let color = NSColor(hexString: colorHex) else {
             return nil

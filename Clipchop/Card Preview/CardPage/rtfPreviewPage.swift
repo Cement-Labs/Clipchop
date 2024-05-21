@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RTFView: View {
+struct rtfPreviewPage: View {
     
     let attributedText: AttributedString
     
