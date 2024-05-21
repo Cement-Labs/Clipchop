@@ -77,17 +77,20 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                 newSound.play()
             }
         }
+        ColoredPickerRow(Defaults.inlineAccentColor(style: .system, customColor: .clear)) {
+            
+        }
         
         Section("Color") {
             withCaption("Custom accent color only applies to the clip history window.") {
                 Picker(selection: $colorStyle) {
                     ColoredPickerRow(Defaults.inlineAccentColor(style: .app, customColor: .clear)) {
-                        Text(Bundle.main.appName)
+                        Text("Application")
                     }
                     .tag(ColorStyle.app)
                     
                     ColoredPickerRow(Defaults.inlineAccentColor(style: .system, customColor: .clear)) {
-                        Text("macOS")
+                        Text("macOS Blue")
                     }
                     .tag(ColorStyle.system)
                     

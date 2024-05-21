@@ -50,7 +50,7 @@ extension Defaults {
         case .app:
             .accent
         case .system:
-            .init(nsColor: .controlAccentColor)
+            .blue
         case .custom:
             customColor
         }
