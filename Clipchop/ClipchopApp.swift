@@ -80,7 +80,6 @@ struct ClipchopApp: App {
                     }
                 }
                 .frame(minHeight: 400)
-                .frame(minWidth: 750)
                 .preferredColorScheme(preferredColorScheme.colorScheme)
         }
         
