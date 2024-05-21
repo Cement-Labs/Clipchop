@@ -14,6 +14,8 @@ import QuickLookThumbnailing
 import SwiftHEXColors
 import LinkPresentation
 
+// TODO: Review this.
+@available(*, deprecated, message: "Needs review.")
 struct PreviewContentView : View {
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false
@@ -31,7 +33,7 @@ struct PreviewContentView : View {
                 }
             } else if let rtfData = clipboardHistory.formatter.rtfData {
                 VStack{
-                    rtfPreviewPage(rtfData: rtfData)
+                    RTFPreviewPage(rtfData: rtfData)
                 }
                 .frame(width: 70, height: 70)
             } else if let text = clipboardHistory.formatter.text {
@@ -42,7 +44,7 @@ struct PreviewContentView : View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                     .offset(y: -14)
-                } else if let colorImage = ColorCodePage.from(text) {
+                } else if let colorImage = ColorPreviewPage.from(text) {
                     ZStack{
                         Image(nsImage: colorImage)
                             .resizable()
@@ -75,7 +77,7 @@ struct PreviewContentView : View {
         .onAppear(perform: loadThumbnail)
     }
     
-    // MARK: - QuickLookViewLoader
+    // MARK: - QuickLook View Loader
     
     private func fileThumbnailView(for fileURL: URL) -> some View {
         ZStack {
@@ -130,7 +132,7 @@ struct PreviewContentView : View {
             }
         }
     }
-    // MARK: - ResizeImage
+    // MARK: - Resize Image
     func resizeImage(image: NSImage) -> NSImage? {
         let maxSize: CGFloat = 80
 

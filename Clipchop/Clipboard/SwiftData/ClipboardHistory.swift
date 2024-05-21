@@ -10,7 +10,6 @@ import Foundation
 import SwiftData
 import AppKit
 
-
 @Model
 class ClipboardHistory {
     enum Class {

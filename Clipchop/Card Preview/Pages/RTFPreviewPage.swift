@@ -1,5 +1,5 @@
 //
-//  RTFView.swift
+//  RTFPreviewPage.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/21.
@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-struct rtfPreviewPage: View {
-    
+struct RTFPreviewPage: View {
     let attributedText: AttributedString
     
     init(rtfData: Data?) {
-        var text = AttributedString("empty")
-        if let rtfData = rtfData,
-           let contents = NSAttributedString(rtf: rtfData, documentAttributes: nil) {
-            text = AttributedString(contents)
+        if 
+            let rtfData = rtfData,
+            let contents = NSAttributedString(rtf: rtfData, documentAttributes: nil)
+        {
+            attributedText = .init(contents)
+        } else {
+            attributedText = .init()
         }
-        attributedText = text
     }
     
     var body: some View {

@@ -9,7 +9,6 @@
 import Foundation
 import SwiftData
 
-
 @Model 
 class ClipboardContent {
     var type: String?

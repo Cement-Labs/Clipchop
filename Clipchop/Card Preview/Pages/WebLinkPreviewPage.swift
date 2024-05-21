@@ -1,5 +1,5 @@
 //
-//  WebLinkView.swift
+//  WebLinkPreviewPage.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/21.
@@ -10,7 +10,7 @@ import LinkPresentation
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize {
-//This size is selected and scaling is applied for display because it enables the content to be visible.
+        // The most proper size.
         CGSize(width: 128, height: 90)
     }
 }
