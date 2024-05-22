@@ -20,14 +20,24 @@ struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: 
     
     var body: some View {
         HStack(alignment: .center) {
-            render(content: Circle().foregroundStyle(style))
+            render {
+                ZStack {
+                    Image(systemSymbol: .circleFill)
+                        .foregroundStyle(.background)
+                    
+                    Circle()
+                        .foregroundStyle(style)
+                        .padding(3.5)
+                }
+            }
+            
             content()
         }
     }
     
     @MainActor
-    func render(content: some View) -> Image? {
-        let renderer = ImageRenderer(content: Circle().foregroundStyle(style))
+    func render(content: () -> some View) -> Image? {
+        let renderer = ImageRenderer(content: content())
         renderer.scale = displayScale
         
         if let image = renderer.nsImage {
