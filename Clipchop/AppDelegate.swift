@@ -13,10 +13,6 @@ import WindowManagement
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        
-#if !DEBUG
-        PermissionsManager.requestAccess()
-#endif
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

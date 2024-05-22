@@ -15,6 +15,8 @@ extension Defaults.Keys {
     static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
     static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
     
+    static let beginningViewShown = Key<Bool>("beginningViewShown", default: false)
+    
     // MARK: Appearance
     
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)

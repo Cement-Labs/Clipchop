@@ -32,7 +32,6 @@
 		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
 		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
 		287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */; };
-		2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F02BF785D9000ED6A8 /* SceneID+Extensions.swift */; };
 		2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */; };
 		2872C0F52BF78BC5000ED6A8 /* ClipHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */; };
 		2872C0F72BF78D59000ED6A8 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2872C0F62BF78D59000ED6A8 /* ModelManager.swift */; };
@@ -73,6 +72,8 @@
 		28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE702BDD2746008B17B5 /* SyncingSettingsPage.swift */; };
 		28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */; };
 		28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */; };
+		28E6E8FB2BFE0E850068B449 /* BeginningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6E8FA2BFE0E850068B449 /* BeginningView.swift */; };
+		28E6E8FD2BFE11260068B449 /* BeginningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6E8FC2BFE11260068B449 /* BeginningViewController.swift */; };
 		28F7D0E52BF777C300DDFC2C /* WindowManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 28F7D0E42BF777C300DDFC2C /* WindowManagement */; };
 		6513FF392BFBB800008149AB /* ColorPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF332BFBB800008149AB /* ColorPreviewPage.swift */; };
 		6513FF3C2BFBB800008149AB /* RTFPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF362BFBB800008149AB /* RTFPreviewPage.swift */; };
@@ -104,7 +105,6 @@
 		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
-		2872C0F02BF785D9000ED6A8 /* SceneID+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneID+Extensions.swift"; sourceTree = "<group>"; };
 		2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryViewController.swift; sourceTree = "<group>"; };
 		2872C0F62BF78D59000ED6A8 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
@@ -139,6 +139,8 @@
 		28D8CE702BDD2746008B17B5 /* SyncingSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncingSettingsPage.swift; sourceTree = "<group>"; };
 		28D8CE722BDD283B008B17B5 /* ClipboardSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardSettingsPage.swift; sourceTree = "<group>"; };
 		28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		28E6E8FA2BFE0E850068B449 /* BeginningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginningView.swift; sourceTree = "<group>"; };
+		28E6E8FC2BFE11260068B449 /* BeginningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginningViewController.swift; sourceTree = "<group>"; };
 		6513FF332BFBB800008149AB /* ColorPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPreviewPage.swift; sourceTree = "<group>"; };
 		6513FF362BFBB800008149AB /* RTFPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFPreviewPage.swift; sourceTree = "<group>"; };
 		6513FF372BFBB800008149AB /* WebLinkPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLinkPreviewPage.swift; sourceTree = "<group>"; };
@@ -222,7 +224,6 @@
 				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
 				2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */,
 				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
-				2872C0F02BF785D9000ED6A8 /* SceneID+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +287,7 @@
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
 				289B498A2BF9B4E3008643FA /* Card Preview */,
 				28A699A92BF61897000B0272 /* Clip History */,
+				28E6E8F92BFE0E770068B449 /* Beginning */,
 				281C28C92BDC99FD00DBEE4B /* Settings */,
 				282692782BDCAE5500D1656E /* Extensions */,
 				2882951E2BC41F7400392B29 /* Preview Content */,
@@ -317,8 +319,8 @@
 		28A699A92BF61897000B0272 /* Clip History */ = {
 			isa = PBXGroup;
 			children = (
-				28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */,
 				2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */,
+				28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */,
 			);
 			path = "Clip History";
 			sourceTree = "<group>";
@@ -383,6 +385,15 @@
 				283E25352BF4FE040094C06F /* StaleView.swift */,
 			);
 			path = Fundamentals;
+			sourceTree = "<group>";
+		};
+		28E6E8F92BFE0E770068B449 /* Beginning */ = {
+			isa = PBXGroup;
+			children = (
+				28E6E8FC2BFE11260068B449 /* BeginningViewController.swift */,
+				28E6E8FA2BFE0E850068B449 /* BeginningView.swift */,
+			);
+			path = Beginning;
 			sourceTree = "<group>";
 		};
 		6513FF382BFBB800008149AB /* Pages */ = {
@@ -500,8 +511,8 @@
 				2872C0F72BF78D59000ED6A8 /* ModelManager.swift in Sources */,
 				6513FF3D2BFBB800008149AB /* WebLinkPreviewPage.swift in Sources */,
 				28C2C5A42BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift in Sources */,
+				28E6E8FD2BFE11260068B449 /* BeginningViewController.swift in Sources */,
 				28D8CE712BDD2746008B17B5 /* SyncingSettingsPage.swift in Sources */,
-				2872C0F12BF785D9000ED6A8 /* SceneID+Extensions.swift in Sources */,
 				2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */,
 				2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */,
 				2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */,
@@ -523,6 +534,7 @@
 				288295182BC41F7300392B29 /* ClipchopApp.swift in Sources */,
 				2884E5D72BF86F2500201A79 /* TestSettingsPage.swift in Sources */,
 				6513FF392BFBB800008149AB /* ColorPreviewPage.swift in Sources */,
+				28E6E8FB2BFE0E850068B449 /* BeginningView.swift in Sources */,
 				285FADBF2BF98335005AE202 /* PreferredColorSchemePicker.swift in Sources */,
 				28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
