@@ -78,7 +78,7 @@ class ClipboardMonitor: NSObject {
     
     private func updateClipboard() {
         
-        try! context.save()
+//        try! context.save()
         
         guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
         changeCount = ClipboardHistory.pasteboard.changeCount
@@ -143,17 +143,13 @@ class ClipboardMonitor: NSObject {
             return
         }
         Sound.currentSound.play()
-        do {
-            try context.save()
+        
 #if DEBUG
-            print("The Contents of Clipboard are changed:")
-            contents.forEach { content in
-                print("Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")            }
-#endif
-        } catch {
-            let nserror = error as NSError
-            print("UnSaved error \(nserror), \(nserror.userInfo)")
+        print("The Contents of Clipboard are changed:")
+        contents.forEach { content in
+            print("Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
+#endif
     }
 }
 

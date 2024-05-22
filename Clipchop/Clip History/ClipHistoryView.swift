@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ClipHistoryView: View {
+    
+    @Query private var items: [ClipboardHistory]
+    
     @ViewBuilder
     func clip(content: () -> some View) -> some View {
         content()

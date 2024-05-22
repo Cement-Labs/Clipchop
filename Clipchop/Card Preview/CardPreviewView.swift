@@ -10,12 +10,12 @@ import SwiftData
 import Defaults
 
 struct CardPreviewView: View {
-    
-//    @Query private var items: []
-    
+        
     @Environment(\.managedObjectContext) var context
     @Environment(\.displayScale) var displayScale
     @Environment(\.colorScheme) var colorScheme
+    
+    var item: ClipboardHistory
     
     @State private var isSelected = false
     @State private var data: Data?
@@ -28,7 +28,7 @@ struct CardPreviewView: View {
         ZStack {
             ZStack {
                 VStack{
-//                    PreviewContentView(clipboardHistory: )
+                    PreviewContentView(clipboardHistory: item)
                 }
                 .allowsHitTesting(false)
                 .frame(width: 80, height: 80, alignment: .center)
@@ -46,6 +46,6 @@ struct CardPreviewView: View {
     }
 }
 
-#Preview {
-    CardPreviewView()
-}
+//#Preview {
+//    CardPreviewView()
+//}

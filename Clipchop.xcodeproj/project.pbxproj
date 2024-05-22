@@ -77,7 +77,7 @@
 		6513FF392BFBB800008149AB /* ColorPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF332BFBB800008149AB /* ColorPreviewPage.swift */; };
 		6513FF3C2BFBB800008149AB /* RTFPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF362BFBB800008149AB /* RTFPreviewPage.swift */; };
 		6513FF3D2BFBB800008149AB /* WebLinkPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF372BFBB800008149AB /* WebLinkPreviewPage.swift */; };
-		6513FF3F2BFBB939008149AB /* ContentPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */; };
+		6513FF3F2BFBB939008149AB /* PreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF3E2BFBB939008149AB /* PreviewContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,7 +142,7 @@
 		6513FF332BFBB800008149AB /* ColorPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPreviewPage.swift; sourceTree = "<group>"; };
 		6513FF362BFBB800008149AB /* RTFPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFPreviewPage.swift; sourceTree = "<group>"; };
 		6513FF372BFBB800008149AB /* WebLinkPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLinkPreviewPage.swift; sourceTree = "<group>"; };
-		6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPreviewView.swift; sourceTree = "<group>"; };
+		6513FF3E2BFBB939008149AB /* PreviewContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,7 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				289B498B2BF9B50C008643FA /* CardPreviewView.swift */,
-				6513FF3E2BFBB939008149AB /* ContentPreviewView.swift */,
+				6513FF3E2BFBB939008149AB /* PreviewContentView.swift */,
 				6513FF382BFBB800008149AB /* Pages */,
 			);
 			path = "Card Preview";
@@ -518,7 +518,7 @@
 				285FADBF2BF98335005AE202 /* PreferredColorSchemePicker.swift in Sources */,
 				28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
-				6513FF3F2BFBB939008149AB /* ContentPreviewView.swift in Sources */,
+				6513FF3F2BFBB939008149AB /* PreviewContentView.swift in Sources */,
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,

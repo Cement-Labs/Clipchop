@@ -1,5 +1,5 @@
 //
-//  ContentPreviewView.swift
+//  PreviewContentView.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/21.
@@ -15,7 +15,7 @@ import SwiftHEXColors
 import LinkPresentation
 
 // TODO: Review this.
-@available(*, deprecated, message: "Needs review.")
+//@available(*, deprecated, message: "Needs review.")
 struct PreviewContentView : View {
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Defaults
 import KeyboardShortcuts
 
@@ -157,6 +158,7 @@ extension ClipHistoryViewController {
         
         panel.contentView = NSHostingView(
             rootView: ClipHistoryView()
+                .modelContainer(for: ClipboardHistory.self)
         )
         panel.setFrame(
             CGRect(
