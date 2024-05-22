@@ -10,7 +10,7 @@ import SwiftData
 
 struct ClipHistoryView: View {
     
-    @Query private var items: [ClipboardHistory]
+    @Query(sort: \ClipboardHistory.time, order: .forward) private var items: [ClipboardHistory]
     
     @ViewBuilder
     func clip(content: () -> some View) -> some View {
@@ -37,7 +37,7 @@ struct ClipHistoryView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(items) { item in
-//                                CardPreviewView(item: item)
+                                CardPreviewView(item: item)
                             }
                         }
                     }
@@ -45,6 +45,9 @@ struct ClipHistoryView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            print("Items: \(items)")
+        }
     }
 }
 

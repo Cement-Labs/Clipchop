@@ -11,7 +11,7 @@ import SwiftData
 import AppKit
 
 @Model
-final class ClipboardHistory: Equatable {
+final class ClipboardHistory: Equatable, Identifiable {
     enum Class {
         case all
         
@@ -72,9 +72,9 @@ final class ClipboardHistory: Equatable {
     
     // MARK: - Fields
     
-    var app: String?
     @Attribute(.unique)
     var id: UUID
+    var app: String?
     var pinned: Bool
     var time: Date?
     var contents: [ClipboardContent]?

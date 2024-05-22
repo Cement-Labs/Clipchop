@@ -53,10 +53,8 @@ class ClipboardMonitor: NSObject {
                 // Duplicated
                 try handleDuplicated(existingResult)
                 
-                print("1")
                 return false
             } else {
-                print("2")
                 return true
             }
         } catch {
@@ -119,21 +117,22 @@ class ClipboardMonitor: NSObject {
                 return
             }
             
+            let clipboardHistory = ClipboardHistory()
+            context.insert(clipboardHistory)
+            
             if hasFileURL {
                 if let fileData = fileURLData {
-                    let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData)
+                    let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData, item: clipboardHistory)
                     contents.append(fileContent)
                     context.insert(fileContent)
-                    print("Inserted file content: \(fileContent)")
                 }
             } else {
                 types.forEach { type in
                     if allowedPasteboardTypes.contains(type.rawValue), let data = item.data(forType: type) {
                         if type != NSPasteboard.PasteboardType.fileURL, isNew(content: data) {
-                            let content = ClipboardContent(type: type.rawValue, value: data)
+                            let content = ClipboardContent(type: type.rawValue, value: data, item: clipboardHistory)
                             contents.append(content)
                             context.insert(content)
-                            print("Inserted content: \(content)")
                         }
                     }
                 }
@@ -150,7 +149,6 @@ class ClipboardMonitor: NSObject {
             print("Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
 #endif
-        print("Current context state: \(context)")
     }
 }
 
