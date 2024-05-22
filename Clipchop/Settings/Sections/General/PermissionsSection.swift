@@ -90,6 +90,13 @@ Full Disk Access is neede to generate file previews.
                 }
 #endif
             }
+            
+#if DEBUG
+            Button("Refresh States (Debug)") {
+                isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
+                isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
+            }
+#endif
         }
     }
 }

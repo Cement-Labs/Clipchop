@@ -148,7 +148,7 @@ struct SettingsView: View {
                 .tag(Navigation.about)
                 
 #if DEBUG
-                navigationEntry("Test") {
+                navigationEntry("Test (Debug)") {
                     Image(systemSymbol: .airplaneDeparture)
                 }
                 .tag(Navigation.test)

@@ -398,7 +398,7 @@
     "Loading..." : {
 
     },
-    "Log to Console" : {
+    "Log to Console (Debug)" : {
 
     },
     "macOS Blue" : {
@@ -438,6 +438,9 @@
 
     },
     "Recent Copied" : {
+
+    },
+    "Refresh States (Debug)" : {
 
     },
     "Remove" : {
@@ -508,7 +511,7 @@
     "System" : {
 
     },
-    "Test" : {
+    "Test (Debug)" : {
 
     },
     "Test line No.%lld" : {

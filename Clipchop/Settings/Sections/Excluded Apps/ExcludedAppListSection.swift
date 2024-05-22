@@ -52,7 +52,7 @@ struct ExcludedAppListSection: View {
                     }
                     
 #if DEBUG
-                    Button("Log to Console") {
+                    Button("Log to Console (Debug)") {
                         selection.forEach {
                             print($0)
                         }

@@ -174,7 +174,6 @@
 				28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */,
 				28227F5F2BF23EC2008FAC3A /* CopyrightsView.swift */,
 				283E25332BF4EF670094C06F /* AcknowledgementsView.swift */,
-				283E25352BF4FE040094C06F /* StaleView.swift */,
 				28D8CE672BDD124A008B17B5 /* Sections */,
 				282692732BDCACB100D1656E /* Pages */,
 			);
@@ -283,6 +282,7 @@
 				28C2C5972BF0D16100E9D9AA /* Sounds */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
 				2871978C2BDE723C004BCDA3 /* Clipboard */,
+				28E6E8F62BFE0C060068B449 /* Fundamentals */,
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
 				289B498A2BF9B4E3008643FA /* Card Preview */,
 				28A699A92BF61897000B0272 /* Clip History */,
@@ -317,7 +317,6 @@
 		28A699A92BF61897000B0272 /* Clip History */ = {
 			isa = PBXGroup;
 			children = (
-				2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */,
 				28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */,
 				2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */,
 			);
@@ -375,6 +374,15 @@
 				2843DB5E2BF0F058008AA2E1 /* Excluded Apps */,
 			);
 			path = Sections;
+			sourceTree = "<group>";
+		};
+		28E6E8F62BFE0C060068B449 /* Fundamentals */ = {
+			isa = PBXGroup;
+			children = (
+				2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */,
+				283E25352BF4FE040094C06F /* StaleView.swift */,
+			);
+			path = Fundamentals;
 			sourceTree = "<group>";
 		};
 		6513FF382BFBB800008149AB /* Pages */ = {
@@ -685,7 +693,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7XRF3J9RS4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -729,7 +737,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7XRF3J9RS4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

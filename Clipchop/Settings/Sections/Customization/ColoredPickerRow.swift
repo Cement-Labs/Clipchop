@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.displayScale) var displayScale
     
     let style: Style
@@ -23,7 +24,7 @@ struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: 
             render {
                 ZStack {
                     Image(systemSymbol: .circleFill)
-                        .foregroundStyle(.background)
+                        .foregroundStyle(colorScheme == .light ? .white.opacity(0.75) : .black.opacity(0.75))
                     
                     Circle()
                         .foregroundStyle(style)
