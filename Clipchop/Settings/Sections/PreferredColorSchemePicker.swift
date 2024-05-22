@@ -13,7 +13,6 @@ struct PreferredColorSchemePicker: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    @State var storedColorScheme: ColorScheme = .light
     @State var isSheetPresented = false
     
     var body: some View {
