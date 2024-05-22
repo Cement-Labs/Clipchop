@@ -24,21 +24,30 @@ struct ClipHistoryView: View {
                 clip {
                     VisualEffectView(material: .underWindowBackground, blendingMode: .behindWindow)
                 }
-                
-                VStack(alignment: .center) {
-                    Image(.appSymbol)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 24)
-                    Text("No Clipboard History Available")
+                if items.isEmpty {
+                    VStack(alignment: .center) {
+                        Image(.appSymbol)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 24)
+                        Text("No Clipboard History Available")
+                    }
+                    .foregroundStyle(.blendMode(.overlay))
+                } else {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(items) { item in
+//                                CardPreviewView(item: item)
+                            }
+                        }
+                    }
                 }
-                .foregroundStyle(.blendMode(.overlay))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
-#Preview {
-    ClipHistoryView()
-}
+//#Preview {
+//    ClipHistoryView()
+//}

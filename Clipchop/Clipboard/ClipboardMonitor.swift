@@ -69,7 +69,7 @@ class ClipboardMonitor: NSObject {
         for exist in existing {
             if let history = exist.item {
                 history.time = Date.now
-                try context.save()
+                context.insert(history)
                 
                 break
             }
@@ -77,8 +77,6 @@ class ClipboardMonitor: NSObject {
     }
     
     private func updateClipboard() {
-        
-//        try! context.save()
         
         guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
         changeCount = ClipboardHistory.pasteboard.changeCount
@@ -126,6 +124,7 @@ class ClipboardMonitor: NSObject {
                     let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData)
                     contents.append(fileContent)
                     context.insert(fileContent)
+                    print("Inserted file content: \(fileContent)")
                 }
             } else {
                 types.forEach { type in
@@ -134,22 +133,24 @@ class ClipboardMonitor: NSObject {
                             let content = ClipboardContent(type: type.rawValue, value: data)
                             contents.append(content)
                             context.insert(content)
+                            print("Inserted content: \(content)")
                         }
                     }
                 }
             }
         })
         guard !contents.isEmpty else {
+            print("No new contents to insert.")
             return
         }
         Sound.currentSound.play()
-        
 #if DEBUG
         print("The Contents of Clipboard are changed:")
         contents.forEach { content in
             print("Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
 #endif
+        print("Current context state: \(context)")
     }
 }
 
