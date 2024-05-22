@@ -19,10 +19,10 @@ class ClipboardMonitor: NSObject {
     private let allowedPasteboardTypes: Set<String> = [
         NSPasteboard.PasteboardType.rtf.rawValue,
         NSPasteboard.PasteboardType.rtfd.rawValue,
-//        NSPasteboard.PasteboardType.html.rawValue,
+        NSPasteboard.PasteboardType.html.rawValue,
         NSPasteboard.PasteboardType.string.rawValue,
         NSPasteboard.PasteboardType.fileURL.rawValue,
-//        NSPasteboard.PasteboardType.URL.rawValue,
+        NSPasteboard.PasteboardType.URL.rawValue,
         NSPasteboard.PasteboardType.jpeg.rawValue,
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,
@@ -41,7 +41,8 @@ class ClipboardMonitor: NSObject {
     // MARK: - Clipboard Change
     
     private func isNew(content: Data?) -> Bool {
-        guard let content else { return false }
+        guard let content = content else { return false }
+        
         let existing = FetchDescriptor<ClipboardContent>(
             predicate: #Predicate { $0.value == content }
         )
@@ -52,13 +53,15 @@ class ClipboardMonitor: NSObject {
                 // Duplicated
                 try handleDuplicated(existingResult)
                 
+                print("1")
                 return false
             } else {
+                print("2")
                 return true
             }
         } catch {
             print("Error checking for duplicate content! \(error)")
-            return true
+            return false
         }
     }
     
@@ -74,6 +77,7 @@ class ClipboardMonitor: NSObject {
     }
     
     private func updateClipboard() {
+        
         try! context.save()
         
         guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
@@ -89,14 +93,9 @@ class ClipboardMonitor: NSObject {
             print("Clipboard update detected")
         }
         
-//        let contents = ClipboardHistory.pasteboard.pasteboardItems?.compactMap { content in
-//
-//        }
-        
         var contents: [ClipboardContent] = []
-        
+
         pasteboard.pasteboardItems?.forEach({ item in
-            
             let types = Set(item.types)
             var hasFileURL = false
             var fileURLData: Data?
@@ -110,7 +109,7 @@ class ClipboardMonitor: NSObject {
             }
             
             if types.contains(NSPasteboard.PasteboardType.string),
-               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.rtf) {
+               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.string) {
                 rtfData = rtfDataTemp
             }
             
@@ -126,6 +125,7 @@ class ClipboardMonitor: NSObject {
                 if let fileData = fileURLData {
                     let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData)
                     contents.append(fileContent)
+                    context.insert(fileContent)
                 }
             } else {
                 types.forEach { type in
@@ -133,15 +133,23 @@ class ClipboardMonitor: NSObject {
                         if type != NSPasteboard.PasteboardType.fileURL, isNew(content: data) {
                             let content = ClipboardContent(type: type.rawValue, value: data)
                             contents.append(content)
+                            context.insert(content)
                         }
                     }
                 }
             }
         })
+        guard !contents.isEmpty else {
+            return
+        }
         Sound.currentSound.play()
         do {
             try context.save()
-            print("The Contents of Clipboard are changed\(ClipboardHistory())")
+#if DEBUG
+            print("The Contents of Clipboard are changed:")
+            contents.forEach { content in
+                print("Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")            }
+#endif
         } catch {
             let nserror = error as NSError
             print("UnSaved error \(nserror), \(nserror.userInfo)")

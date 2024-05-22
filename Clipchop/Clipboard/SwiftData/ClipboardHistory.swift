@@ -11,7 +11,7 @@ import SwiftData
 import AppKit
 
 @Model
-class ClipboardHistory {
+final class ClipboardHistory: Equatable {
     enum Class {
         case all
         
@@ -64,6 +64,10 @@ class ClipboardHistory {
     
     static var pasteboard: NSPasteboard {
         .general
+    }
+    
+    static func == (lhs: ClipboardHistory, rhs: ClipboardHistory) -> Bool {
+      return lhs.getContents().count == rhs.getContents().count && lhs.supersedes(rhs)
     }
     
     // MARK: - Fields

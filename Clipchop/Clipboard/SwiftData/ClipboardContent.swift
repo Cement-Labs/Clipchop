@@ -10,7 +10,8 @@ import Foundation
 import SwiftData
 
 @Model 
-class ClipboardContent {
+final class ClipboardContent {
+    
     var type: String?
     var value: Data?
     
