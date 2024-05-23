@@ -10,7 +10,7 @@ import SwiftData
 
 struct ClipHistoryView: View {
     
-    @Query(sort: \ClipboardHistory.time, order: .forward) private var items: [ClipboardHistory]
+    @Query(sort: \ClipboardHistory.time, order: .reverse, animation: .smooth) private var items: [ClipboardHistory]
     
     @ViewBuilder
     func clip(content: () -> some View) -> some View {

@@ -158,7 +158,8 @@ extension ClipHistoryViewController {
         
         panel.contentView = NSHostingView(
             rootView: ClipHistoryView()
-                .modelContainer(for: ClipboardHistory.self)
+                .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
+                .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
         )
         panel.setFrame(
             CGRect(
