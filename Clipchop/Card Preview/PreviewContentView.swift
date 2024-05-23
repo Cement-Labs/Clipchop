@@ -43,7 +43,6 @@ struct PreviewContentView : View {
                             .scaleEffect(0.625)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    .offset(y: -14)
                 } else if let colorImage = ColorPreviewPage.from(text) {
                     ZStack{
                         Image(nsImage: colorImage)

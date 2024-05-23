@@ -10,7 +10,7 @@ import SwiftData
 
 struct ClipHistoryView: View {
     
-    @Query(sort: \ClipboardHistory.time, order: .reverse, animation: .smooth) private var items: [ClipboardHistory]
+    @Query(sort: \ClipboardHistory.time, order: .reverse, animation: .spring(dampingFraction: 0.7)) private var items: [ClipboardHistory]
     
     @ViewBuilder
     func clip(content: () -> some View) -> some View {
@@ -24,24 +24,26 @@ struct ClipHistoryView: View {
                 clip {
                     VisualEffectView(material: .underWindowBackground, blendingMode: .behindWindow)
                 }
-                if items.isEmpty {
-                    VStack(alignment: .center) {
-                        Image(.appSymbol)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 24)
-                        Text("No Clipboard History Available")
-                    }
-                    .foregroundStyle(.blendMode(.overlay))
-                } else {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(items) { item in
-                                CardPreviewView(item: item)
+                VStack{
+                    if items.isEmpty {
+                        VStack(alignment: .center) {
+                            Image(.appSymbol)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 24)
+                            Text("No Clipboard History Available")
+                        }
+                        .foregroundStyle(.blendMode(.overlay))
+                    } else {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(items) { item in
+                                    CardPreviewView(item: item)
+                                }
                             }
+                            .offset(x: 12)
                         }
                     }
-                    .offset(x: 12)
                 }
             }
         }

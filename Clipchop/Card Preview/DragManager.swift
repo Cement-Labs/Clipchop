@@ -19,6 +19,7 @@ func DragManager(for content: ClipboardContent) -> NSItemProvider? {
     case 
         UTType.plainText.identifier, UTType.text.identifier, UTType.utf8PlainText.identifier, UTType.utf16PlainText.identifier,
         UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.html.identifier, UTType.url.identifier:
+        
         guard let string = String(data: data as! Data, encoding: .utf8),
               let nsData = string.data(using: .utf8) else {
             print("Failed to convert data to string with UTF-8 encoding.")
@@ -28,7 +29,7 @@ func DragManager(for content: ClipboardContent) -> NSItemProvider? {
     
     case
         
-        UTType.fileURL.identifier,UTType.folder.identifier, UTType.package.identifier,
+        UTType.fileURL.identifier,UTType.folder.identifier, UTType.package.identifier, UTType.zip.identifier,
         
         UTType.jpeg.identifier, UTType.png.identifier, UTType.gif.identifier, UTType.tiff.identifier, 
         UTType.heic.identifier, UTType.aiff.identifier, UTType.heif.identifier, UTType.rawImage.identifier,
@@ -43,9 +44,6 @@ func DragManager(for content: ClipboardContent) -> NSItemProvider? {
         
         UTType.usd.identifier, UTType.usdz.identifier:
         
-        return NSItemProvider(item: data, typeIdentifier: content.type)
-
-    case UTType.zip.identifier:
         return NSItemProvider(item: data, typeIdentifier: content.type)
 
     default:
