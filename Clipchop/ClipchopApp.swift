@@ -62,9 +62,12 @@ struct ClipchopApp: App {
 #endif
         
         if !Defaults[.beginningViewShown] {
-            // Show beginning view once
+            // Shows beginning view once
             manager.beginningViewController.open()
             Defaults[.beginningViewShown] = true
+        } else {
+            // Alerts for permissions
+            PermissionsManager.requestAccess()
         }
     }
     

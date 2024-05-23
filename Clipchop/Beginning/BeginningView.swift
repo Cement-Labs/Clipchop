@@ -41,7 +41,7 @@ struct BeginningView: View {
     var body: some View {
         ZStack {
             ScrollView(.horizontal) {
-                HStack(spacing: 0) {
+                HStack(alignment: .center, spacing: 0) {
                     BeginningHelloPage()
                     
                     BeginningPermissionsPage()
@@ -57,43 +57,59 @@ struct BeginningView: View {
             .scrollIndicators(.never)
             .scrollDisabled(true)
             
-            HStack {
-                if selectedRoaming.hasPrevious {
-                    Button {
-                        withAnimation {
-                            selectedRoaming = selectedRoaming.previous
-                        }
-                    } label: {
-                        Image(systemSymbol: .chevronBackward)
-                            .padding()
-                    }
-                    .background {
-                        VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-                            .clipShape(.circle)
-                    }
-                }
-                
+            VStack {
                 Spacer()
                 
-                if selectedRoaming.hasHext {
-                    Button {
-                        withAnimation {
-                            selectedRoaming = selectedRoaming.next
-                        }
-                    } label: {
-                        Image(systemSymbol: .chevronForward)
+                HStack {
+                    if selectedRoaming.hasPrevious {
+                        Button {
+                            withAnimation {
+                                selectedRoaming = selectedRoaming.previous
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemSymbol: .chevronBackward)
+                                
+                                Image(systemSymbol: .command)
+                                    .foregroundStyle(.placeholder)
+                            }
                             .padding()
+                        }
+                        .background {
+                            VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
+                                .clipShape(.capsule)
+                        }
+                        .keyboardShortcut(.leftArrow, modifiers: .command)
                     }
-                    .background {
-                        VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-                            .clipShape(.circle)
+                    
+                    Spacer()
+                    
+                    if selectedRoaming.hasHext {
+                        Button {
+                            withAnimation {
+                                selectedRoaming = selectedRoaming.next
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemSymbol: .command)
+                                    .foregroundStyle(.placeholder)
+                                
+                                Image(systemSymbol: .chevronForward)
+                            }
+                            .padding()
+                        }
+                        .background {
+                            VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
+                                .clipShape(.capsule)
+                        }
+                        .keyboardShortcut(.rightArrow, modifiers: .command)
                     }
                 }
+                .bold()
+                .controlSize(.extraLarge)
+                .buttonStyle(.borderless)
             }
             .padding()
-            .bold()
-            .controlSize(.extraLarge)
-            .buttonStyle(.borderless)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .ignoresSafeArea()
