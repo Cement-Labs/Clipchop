@@ -9,12 +9,15 @@ import SwiftUI
 
 struct BeginningHelloPage: View {
     var body: some View {
-        Group {
-            Text("Hello")
+        VStack {
+            Image(nsImage: AppIcon.currentAppIcon.image)
+            
+            Text(Bundle.main.appName)
+                .font(.title)
+                .bold()
         }
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)
-        .background(.red)
     }
 }
 

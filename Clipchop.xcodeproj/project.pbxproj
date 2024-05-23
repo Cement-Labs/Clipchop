@@ -24,6 +24,7 @@
 		2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */; };
 		2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */; };
 		2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */; };
+		284882362BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284882352BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift */; };
 		285FADBD2BF97A69005AE202 /* ColoredPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FADBC2BF97A69005AE202 /* ColoredPickerRow.swift */; };
 		285FADBF2BF98335005AE202 /* PreferredColorSchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285FADBE2BF98335005AE202 /* PreferredColorSchemePicker.swift */; };
 		2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */; };
@@ -102,6 +103,7 @@
 		2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppListSection.swift; sourceTree = "<group>"; };
 		2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledAppsMenu.swift; sourceTree = "<group>"; };
+		284882352BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Extensions.swift"; sourceTree = "<group>"; };
 		285FADBC2BF97A69005AE202 /* ColoredPickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredPickerRow.swift; sourceTree = "<group>"; };
 		285FADBE2BF98335005AE202 /* PreferredColorSchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferredColorSchemePicker.swift; sourceTree = "<group>"; };
 		2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardContent.swift; path = Clipchop/Clipboard/SwiftData/ClipboardContent.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
 				2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */,
 				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
+				284882352BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				28D8CE642BDD0DEE008B17B5 /* PerimissionsManager.swift in Sources */,
 				289B498C2BF9B50C008643FA /* CardPreviewView.swift in Sources */,
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
+				284882362BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift in Sources */,
 				287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */,
 				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
 				2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */,

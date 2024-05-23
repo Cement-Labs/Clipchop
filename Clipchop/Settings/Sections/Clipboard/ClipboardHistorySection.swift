@@ -15,6 +15,8 @@ struct ClipboardHistorySection: View {
     
     @State var isDeleteHistoryAlertPresented = false
     
+    @Environment(\.hasTitle) var hasTitle
+    
     @ViewBuilder
     func periodWithTime(_ time: Int, period: HistoryPreservationPeriod) -> some View {
         switch period {
@@ -33,7 +35,7 @@ struct ClipboardHistorySection: View {
     }
     
     var body: some View {
-        Section("Clipboard History") {
+        Section {
             VStack {
                 Picker("Preservation time", selection: $historyPreservationPeriod) {
                     ForEach(HistoryPreservationPeriod.allCases) { period in
@@ -68,6 +70,10 @@ struct ClipboardHistorySection: View {
                     Text("1")
                 }
                 .monospaced()
+            }
+        } header: {
+            if hasTitle {
+                Text("Clipboard History")
             }
         }
         

@@ -12,7 +12,7 @@ struct PermissionsSection: View {
     @State var isAccessibilityAccessGranted = false
     @State var isFullDiskAccessGranted = false
     
-    var hasTitle = true
+    @Environment(\.hasTitle) var hasTitle
     
     let permissionsAutoCheck = Timer.publish(
         every: 1, tolerance: 0.5,

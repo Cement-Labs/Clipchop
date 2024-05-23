@@ -12,8 +12,10 @@ import LaunchAtLogin
 struct GlobalBehaviorsSection: View {
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     
+    @Environment(\.hasTitle) var hasTitle
+    
     var body: some View {
-        Section("Global Behaviors") {
+        Section {
             HStack {
                 Text("Starts with macOS")
                 
@@ -36,6 +38,10 @@ You can always open \(Bundle.main.appName) again to access this page.
                         EmptyView()
                     }
                 }
+            }
+        } header: {
+            if hasTitle {
+                Text("Global Behaviors")
             }
         }
     }

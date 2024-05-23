@@ -9,14 +9,20 @@ import SwiftUI
 import KeyboardShortcuts
 
 struct KeyboardShortcutsSection: View {
+    @Environment(\.hasTitle) var hasTitle
+    
     var body: some View {
-        Section("Keyboard Shortcuts") {
+        Section {
             KeyboardShortcuts.Recorder(for: .window) {
                 withCaption {
                     Text("Show \(Bundle.main.appName)")
                 } caption: {
                     Text("The global keyboard shortcut for calling up the clip history window.")
                 }
+            }
+        } header: {
+            if hasTitle {
+                Text("Keyboard Shortcuts")
             }
         }
         

@@ -38,7 +38,7 @@ import KeyboardShortcuts
         window.titlebarAppearsTransparent = true
         window.titleVisibility = .hidden
         window.collectionBehavior = .canJoinAllSpaces
-        window.level = .floating
+        window.level = .normal
         window.isMovableByWindowBackground = true
         
         window.standardWindowButton(.miniaturizeButton)?.isHidden = true

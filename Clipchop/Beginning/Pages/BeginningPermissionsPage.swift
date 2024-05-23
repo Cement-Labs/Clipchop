@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct BeginningPermissionsPage: View {
+    @Environment(\.navigateToNext) var next
+    
     var body: some View {
         VStack {
             VStack {
+                Image(systemSymbol: .lock)
+                    .imageScale(.large)
+                    .padding()
+                
                 Text("Permissions")
-                    .font(.title)
-                    .bold()
             }
+            .font(.title)
+            .bold()
             .frame(maxHeight: .infinity)
             
             Form {
-                PermissionsSection(hasTitle: false)
+                PermissionsSection()
             }
             .formStyle(.grouped)
             .scrollDisabled(true)
@@ -26,6 +32,12 @@ struct BeginningPermissionsPage: View {
         .padding()
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)
+        
+        .onChange(of: PermissionsManager.remaining) { old, new in
+            if new == 0 {
+                next()
+            }
+        }
     }
 }
 

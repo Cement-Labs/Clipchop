@@ -38,6 +38,18 @@ struct BeginningView: View {
     
     @State var selectedRoaming: Roaming = .hello
     
+    func previous() {
+        withAnimation {
+            selectedRoaming = selectedRoaming.previous
+        }
+    }
+    
+    func next() {
+        withAnimation {
+            selectedRoaming = selectedRoaming.next
+        }
+    }
+    
     var body: some View {
         ZStack {
             ScrollView(.horizontal) {
@@ -53,6 +65,10 @@ struct BeginningView: View {
                     BeginningCustomizationPage()
                 }
                 .offset(x: selectedRoaming.offsetY)
+                
+                .environment(\.hasTitle, false)
+                .environment(\.navigateToNext, next)
+                .environment(\.navigateToPrevious, previous)
             }
             .scrollIndicators(.never)
             .scrollDisabled(true)
@@ -63,9 +79,7 @@ struct BeginningView: View {
                 HStack {
                     if selectedRoaming.hasPrevious {
                         Button {
-                            withAnimation {
-                                selectedRoaming = selectedRoaming.previous
-                            }
+                            previous()
                         } label: {
                             HStack {
                                 Image(systemSymbol: .chevronBackward)
@@ -86,9 +100,7 @@ struct BeginningView: View {
                     
                     if selectedRoaming.hasHext {
                         Button {
-                            withAnimation {
-                                selectedRoaming = selectedRoaming.next
-                            }
+                            next()
                         } label: {
                             HStack {
                                 Image(systemSymbol: .command)
