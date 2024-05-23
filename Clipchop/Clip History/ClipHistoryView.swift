@@ -41,13 +41,11 @@ struct ClipHistoryView: View {
                             }
                         }
                     }
+                    .offset(x: 12)
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear {
-            print("Items: \(items)")
-        }
     }
 }
 

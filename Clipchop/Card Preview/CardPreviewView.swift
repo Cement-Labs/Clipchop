@@ -37,12 +37,26 @@ struct CardPreviewView: View {
         }
         .overlay(
             RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.accentColor, lineWidth: 7.5)
+                .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 7.5)
         )
-        .background(Color.white)
+        .onHover { isOver in
+            withAnimation(Animation.easeInOut) {
+                self.isSelected = isOver
+            }
+        }
+        .background(backgroundColor)
         .frame(width: 80, height: 80)
         .clipShape(RoundedRectangle(cornerRadius: 15))
-        .shadow(color: Color.accentColor, radius: 10)
+        .onDrag {
+            let clipboardContents = item.getContents()
+            for content in clipboardContents {
+                if let itemProvider = DragManager(for: content) {
+                    return itemProvider
+                }
+            }
+            print("No suitable content found for dragging.")
+            return NSItemProvider()
+        }
     }
 }
 
