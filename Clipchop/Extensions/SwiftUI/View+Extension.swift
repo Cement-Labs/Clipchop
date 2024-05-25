@@ -5,7 +5,6 @@
 //  Created by KrLite on 2024/3/23.
 //
 
-import Foundation
 import SwiftUI
 
 extension View {
@@ -56,5 +55,18 @@ extension View {
         } else {
             self
         }
+    }
+    
+    // https://github.com/MrKai77/Loop
+    func onReceive(
+        _ name: Notification.Name,
+        center: NotificationCenter = .default,
+        object: AnyObject? = nil,
+        perform action: @escaping (Notification) -> Void
+    ) -> some View {
+        self.onReceive(
+            center.publisher(for: name, object: object),
+            perform: action
+        )
     }
 }

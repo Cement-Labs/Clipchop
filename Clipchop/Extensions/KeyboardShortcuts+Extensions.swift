@@ -5,7 +5,6 @@
 //  Created by KrLite on 2024/4/28.
 //
 
-import Foundation
 import KeyboardShortcuts
 import AppKit
 

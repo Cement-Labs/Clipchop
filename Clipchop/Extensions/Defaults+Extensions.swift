@@ -5,9 +5,8 @@
 //  Created by KrLite on 2024/4/27.
 //
 
-import Foundation
-import Defaults
 import SwiftUI
+import Defaults
 
 extension Defaults.Keys {
     static let timesClipped = Key<UInt>("timesClipped", default: 0)

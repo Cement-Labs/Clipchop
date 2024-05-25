@@ -52,6 +52,7 @@
 		28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */; };
 		28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */; };
 		28AD83602C01665C0093176B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AD835F2C01665C0093176B /* ViewController.swift */; };
+		28C102322C0206E3003F5722 /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C102312C0206E3003F5722 /* Notification+Extensions.swift */; };
 		28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5822BF0C67900E9D9AA /* FullDiskAccess */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
@@ -137,6 +138,7 @@
 		28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		28A699B02BF61F92000B0272 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		28AD835F2C01665C0093176B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		28C102312C0206E3003F5722 /* Notification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extensions.swift"; sourceTree = "<group>"; };
 		28C2C58F2BF0CA3E00E9D9AA /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
 		28C2C5952BF0D0BF00E9D9AA /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -243,16 +245,12 @@
 		282692782BDCAE5500D1656E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				28C102302C0206C9003F5722 /* SwiftUI */,
+				28C1022F2C0206BD003F5722 /* Foundation */,
+				28C1022E2C020660003F5722 /* AppKit */,
 				282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */,
 				28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */,
 				2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */,
-				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
-				28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */,
-				284882352BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift */,
-				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
-				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
-				28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */,
-				28A173CE2C01954900B6FB03 /* Transision+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -353,6 +351,35 @@
 				28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */,
 			);
 			path = "Clip History";
+			sourceTree = "<group>";
+		};
+		28C1022E2C020660003F5722 /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
+				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
+				28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */,
+			);
+			path = AppKit;
+			sourceTree = "<group>";
+		};
+		28C1022F2C0206BD003F5722 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
+				28C102312C0206E3003F5722 /* Notification+Extensions.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		28C102302C0206C9003F5722 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */,
+				284882352BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift */,
+				28A173CE2C01954900B6FB03 /* Transision+Extensions.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		28C2C5972BF0D16100E9D9AA /* Sounds */ = {
@@ -593,6 +620,7 @@
 				285FADBF2BF98335005AE202 /* PreferredColorSchemePicker.swift in Sources */,
 				28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
+				28C102322C0206E3003F5722 /* Notification+Extensions.swift in Sources */,
 				6513FF3F2BFBB939008149AB /* PreviewContentView.swift in Sources */,
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,

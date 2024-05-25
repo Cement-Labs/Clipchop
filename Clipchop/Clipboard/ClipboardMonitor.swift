@@ -143,7 +143,10 @@ class ClipboardMonitor: NSObject {
             return
         }
         
-        Sound.currentSound.play()
+        DispatchQueue.main.async {
+            Notification.Name.didClip.post()
+            print("Notified clipboard change")
+        }
         
 #if DEBUG
         print("Clipboard changed:")
