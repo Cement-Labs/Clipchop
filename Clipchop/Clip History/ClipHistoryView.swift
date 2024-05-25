@@ -6,8 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ClipHistoryView: View {
+    @Query(
+        sort: \ClipboardHistory.time,
+        order: .reverse,
+        animation: .spring(dampingFraction: 0.7)
+    ) private var items: [ClipboardHistory]
+    
     @ViewBuilder
     func clip(content: () -> some View) -> some View {
         content()
@@ -20,21 +27,29 @@ struct ClipHistoryView: View {
                 clip {
                     VisualEffectView(material: .underWindowBackground, blendingMode: .behindWindow)
                 }
-                
-                VStack(alignment: .center) {
-                    Image(.appSymbol)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: 24)
-                    Text("No Clipboard History Available")
+                VStack{
+                    if items.isEmpty {
+                        VStack(alignment: .center) {
+                            Image(.appSymbol)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 24)
+                            Text("No Clipboard History Available")
+                        }
+                        .foregroundStyle(.blendMode(.overlay))
+                    } else {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(items) { item in
+                                    CardPreviewView(item: item)
+                                }
+                            }
+                            .offset(x: 12)
+                        }
+                    }
                 }
-                .foregroundStyle(.blendMode(.overlay))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-}
-
-#Preview {
-    ClipHistoryView()
 }

@@ -19,10 +19,10 @@ class ClipboardMonitor: NSObject {
     private let allowedPasteboardTypes: Set<String> = [
         NSPasteboard.PasteboardType.rtf.rawValue,
         NSPasteboard.PasteboardType.rtfd.rawValue,
-//        NSPasteboard.PasteboardType.html.rawValue,
+        NSPasteboard.PasteboardType.html.rawValue,
         NSPasteboard.PasteboardType.string.rawValue,
         NSPasteboard.PasteboardType.fileURL.rawValue,
-//        NSPasteboard.PasteboardType.URL.rawValue,
+        NSPasteboard.PasteboardType.URL.rawValue,
         NSPasteboard.PasteboardType.jpeg.rawValue,
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,
@@ -41,7 +41,8 @@ class ClipboardMonitor: NSObject {
     // MARK: - Clipboard Change
     
     private func isNew(content: Data?) -> Bool {
-        guard let content else { return false }
+        guard let content = content else { return false }
+        
         let existing = FetchDescriptor<ClipboardContent>(
             predicate: #Predicate { $0.value == content }
         )
@@ -58,7 +59,7 @@ class ClipboardMonitor: NSObject {
             }
         } catch {
             print("Error checking for duplicate content! \(error)")
-            return true
+            return false
         }
     }
     
@@ -66,7 +67,7 @@ class ClipboardMonitor: NSObject {
         for exist in existing {
             if let history = exist.item {
                 history.time = Date.now
-                try context.save()
+                context.insert(history)
                 
                 break
             }
@@ -74,8 +75,6 @@ class ClipboardMonitor: NSObject {
     }
     
     private func updateClipboard() {
-        try! context.save()
-        
         guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
         changeCount = ClipboardHistory.pasteboard.changeCount
         
@@ -89,14 +88,9 @@ class ClipboardMonitor: NSObject {
             print("Clipboard update detected")
         }
         
-//        let contents = ClipboardHistory.pasteboard.pasteboardItems?.compactMap { content in
-//
-//        }
-        
         var contents: [ClipboardContent] = []
-        
+
         pasteboard.pasteboardItems?.forEach({ item in
-            
             let types = Set(item.types)
             var hasFileURL = false
             var fileURLData: Data?
@@ -110,7 +104,7 @@ class ClipboardMonitor: NSObject {
             }
             
             if types.contains(NSPasteboard.PasteboardType.string),
-               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.rtf) {
+               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.string) {
                 rtfData = rtfDataTemp
             }
             
@@ -122,30 +116,41 @@ class ClipboardMonitor: NSObject {
                 return
             }
             
+            let clipboardHistory = ClipboardHistory()
+            context.insert(clipboardHistory)
+            
             if hasFileURL {
                 if let fileData = fileURLData {
-                    let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData)
+                    let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData, item: clipboardHistory)
                     contents.append(fileContent)
+                    context.insert(fileContent)
                 }
             } else {
                 types.forEach { type in
                     if allowedPasteboardTypes.contains(type.rawValue), let data = item.data(forType: type) {
                         if type != NSPasteboard.PasteboardType.fileURL, isNew(content: data) {
-                            let content = ClipboardContent(type: type.rawValue, value: data)
+                            let content = ClipboardContent(type: type.rawValue, value: data, item: clipboardHistory)
                             contents.append(content)
+                            context.insert(content)
                         }
                     }
                 }
             }
         })
-        Sound.currentSound.play()
-        do {
-            try context.save()
-            print("The Contents of Clipboard are changed\(ClipboardHistory())")
-        } catch {
-            let nserror = error as NSError
-            print("UnSaved error \(nserror), \(nserror.userInfo)")
+        
+        guard !contents.isEmpty else {
+            print("No clipboard change happened")
+            return
         }
+        
+        Sound.currentSound.play()
+        
+#if DEBUG
+        print("Clipboard changed:")
+        contents.forEach { content in
+            print("[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
+        }
+#endif
     }
 }
 

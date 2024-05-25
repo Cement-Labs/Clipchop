@@ -22,7 +22,7 @@ struct ModelManager {
         
         monitor.start()
         
-        KeyboardShortcuts.onKeyUp(for: .window) { [self] in
+        KeyboardShortcuts.onKeyDown(for: .window) { [self] in
             clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
         }
     }

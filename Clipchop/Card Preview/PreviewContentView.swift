@@ -1,5 +1,5 @@
 //
-//  ContentPreviewView.swift
+//  PreviewContentView.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/21.
@@ -43,7 +43,6 @@ struct PreviewContentView : View {
                             .scaleEffect(0.625)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    .offset(y: -14)
                 } else if let colorImage = ColorPreviewPage.from(text) {
                     ZStack{
                         Image(nsImage: colorImage)
@@ -132,7 +131,9 @@ struct PreviewContentView : View {
             }
         }
     }
+    
     // MARK: - Resize Image
+    
     func resizeImage(image: NSImage) -> NSImage? {
         let maxSize: CGFloat = 80
 

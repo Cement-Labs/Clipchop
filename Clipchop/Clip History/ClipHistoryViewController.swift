@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Defaults
 import KeyboardShortcuts
 
@@ -62,10 +63,10 @@ extension ClipHistoryViewController {
     // MARK: - Shortcuts
     
     func initShortcuts() {
-        KeyboardShortcuts.onKeyUp(for: .escape, action: self.close)
-        KeyboardShortcuts.onKeyUp(for: .settings, action: NSApp.openSettings)
-        KeyboardShortcuts.onKeyUp(for: .expand, action: self.expand)
-        KeyboardShortcuts.onKeyUp(for: .collapse, action: self.collapse)
+        KeyboardShortcuts.onKeyDown(for: .escape, action: self.close)
+        KeyboardShortcuts.onKeyDown(for: .settings, action: NSApp.openSettings)
+        KeyboardShortcuts.onKeyDown(for: .expand, action: self.expand)
+        KeyboardShortcuts.onKeyDown(for: .collapse, action: self.collapse)
     }
     
     func enableShortcuts() {
@@ -152,11 +153,13 @@ extension ClipHistoryViewController {
         panel.collectionBehavior = .canJoinAllSpaces
         panel.hasShadow = true
         panel.backgroundColor = .white.withAlphaComponent(0.000001) // Making the window transparent causes buggy shadows
-        panel.level = .screenSaver
-        panel.isMovableByWindowBackground = true
+        panel.level = .floating // This prevents misalignments between the card and window hierarchy when the card is being dragged.
+        panel.isMovableByWindowBackground = false
         
         panel.contentView = NSHostingView(
             rootView: ClipHistoryView()
+                .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
+                .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
                 .environment(\.viewController, self)
         )
         panel.setFrame(

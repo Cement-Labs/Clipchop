@@ -11,7 +11,7 @@ import SwiftData
 import AppKit
 
 @Model
-class ClipboardHistory {
+final class ClipboardHistory: Equatable, Identifiable {
     enum Class {
         case all
         
@@ -66,11 +66,15 @@ class ClipboardHistory {
         .general
     }
     
+    static func == (lhs: ClipboardHistory, rhs: ClipboardHistory) -> Bool {
+      return lhs.getContents().count == rhs.getContents().count && lhs.supersedes(rhs)
+    }
+    
     // MARK: - Fields
     
-    var app: String?
     @Attribute(.unique)
     var id: UUID
+    var app: String?
     var pinned: Bool
     var time: Date?
     var contents: [ClipboardContent]?
