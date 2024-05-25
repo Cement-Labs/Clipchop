@@ -10,9 +10,10 @@ import SFSafeSymbols
 
 struct MenuBarIconView: View {
     var body: some View {
-        Image(.appSymbol)
+        Image(.clipchopFill)
+            .symbolRenderingMode(.hierarchical)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(height: 22)
+            .frame(height: 18)
     }
 }

@@ -58,6 +58,7 @@ struct AboutSettingsPage: View {
                 .popover(isPresented: $isSourcePresented, arrowEdge: .bottom) {
                     VStack {
                         Text("\(Bundle.main.appName) is open source.")
+                            .foregroundStyle(.placeholder)
                         
                         VStack(alignment: .leading) {
                             HStack {

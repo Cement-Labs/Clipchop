@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StaleView: View {
     var body: some View {
-        Image(.appSymbol)
+        Image(.clipchopFill)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundStyle(.placeholder)

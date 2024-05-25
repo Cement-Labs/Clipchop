@@ -30,7 +30,7 @@ struct ClipHistoryView: View {
                 VStack{
                     if items.isEmpty {
                         VStack(alignment: .center) {
-                            Image(.appSymbol)
+                            Image(.clipchopFill)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 24)
