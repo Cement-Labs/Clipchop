@@ -46,6 +46,7 @@
 		28A699B12BF61F92000B0272 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B02BF61F92000B0272 /* Formatter.swift */; };
 		28ABFFA62BDC9B6500B02E76 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */; };
 		28ABFFA92BDCA92500B02E76 /* MenuBarExtraAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28ABFFA82BDCA92500B02E76 /* MenuBarExtraAccess */; };
+		28AD83602C01665C0093176B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AD835F2C01665C0093176B /* ViewController.swift */; };
 		28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5822BF0C67900E9D9AA /* FullDiskAccess */; };
 		28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */; };
 		28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 28C2C58B2BF0C6ED00E9D9AA /* Algorithms */; };
@@ -125,6 +126,7 @@
 		28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
 		28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		28A699B02BF61F92000B0272 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		28AD835F2C01665C0093176B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		28C2C58F2BF0CA3E00E9D9AA /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
 		28C2C5952BF0D0BF00E9D9AA /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */,
 				2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */,
 				28C2C99E2BF8D078007BDC3C /* DefaultsStack.swift */,
+				28AD835F2C01665C0093176B /* ViewController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
+				28AD83602C01665C0093176B /* ViewController.swift in Sources */,
 				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
 				285FADBD2BF97A69005AE202 /* ColoredPickerRow.swift in Sources */,

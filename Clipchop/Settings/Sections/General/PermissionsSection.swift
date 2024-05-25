@@ -74,7 +74,7 @@ Accessibility Access is needed to take over your clipboard.
                     Text("Full Disk Access")
                 } caption: {
                     Text("""
-Full Disk Access is neede to generate file previews.
+Full Disk Access is needed to generate file previews.
 """)
                 }
                 

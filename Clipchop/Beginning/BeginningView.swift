@@ -39,6 +39,9 @@ struct BeginningView: View {
     @State var roaming: Roaming = .hello
     @State var canContinue: [Roaming: Bool] = [:]
     @State var isContinueButtonHovering = false
+    @State var isFinished = false
+    
+    @Environment(\.viewController) var viewController
     
     var canRoamingContinue: Bool {
         canContinue[roaming] ?? true
@@ -90,15 +93,22 @@ struct BeginningView: View {
                 Spacer()
                 
                 Button {
-                    next()
+                    if !isFinished {
+                        next()
+                    } else {
+                        viewController?.close()
+                    }
                 } label: {
                     HStack {
-                        if roaming.hasHext {
+                        if !isFinished {
                             Text("Continue")
                             Image(systemSymbol: .arrowForward)
                         } else {
                             Text("Start Using")
                             Image(.appSymbol)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 18.5)
                         }
                     }
                     .padding()
@@ -127,5 +137,9 @@ struct BeginningView: View {
         .ignoresSafeArea()
         .frame(width: BeginningViewController.size.width, height: BeginningViewController.size.height)
         .fixedSize()
+        
+        .onChange(of: roaming) { old, new in
+            isFinished = !new.hasHext
+        }
     }
 }

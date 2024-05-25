@@ -9,7 +9,7 @@ import SwiftUI
 import Defaults
 import KeyboardShortcuts
 
-@Observable class BeginningViewController {
+@Observable class BeginningViewController: ViewController {
     static let size = NSSize(width: 450, height: 500)
     
     private var windowController: NSWindowController?
@@ -46,6 +46,7 @@ import KeyboardShortcuts
         
         window.contentView = NSHostingView(
             rootView: BeginningView()
+                .environment(\.viewController, self)
         )
         window.setFrame(CGRect(
             x: screenRect.midX - Self.size.width / 2, y: screenRect.midY - Self.size.height / 2,

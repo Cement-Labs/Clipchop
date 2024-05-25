@@ -17,6 +17,11 @@ extension EnvironmentValues {
         get { self[CanContinueEnvironmentKey.self] }
         set { self[CanContinueEnvironmentKey.self] = newValue }
     }
+    
+    var viewController: ViewController? {
+        get { self[ViewControllerEnvironmentKey.self] }
+        set { self[ViewControllerEnvironmentKey.self] = newValue }
+    }
 }
 
 struct HasTitleEnvironmentKey: EnvironmentKey {
@@ -25,4 +30,8 @@ struct HasTitleEnvironmentKey: EnvironmentKey {
 
 struct CanContinueEnvironmentKey: EnvironmentKey {
     static var defaultValue: (Bool) -> Void = { _ in }
+}
+
+struct ViewControllerEnvironmentKey: EnvironmentKey {
+    static var defaultValue: ViewController?
 }
