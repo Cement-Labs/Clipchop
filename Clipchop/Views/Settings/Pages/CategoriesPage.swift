@@ -1,5 +1,5 @@
 //
-//  FileSortingPage.swift
+//  CategoriesPage.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/26.
@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-struct FileSortingPage: View {
+struct CategoriesPage: View {
     var body: some View {
         listEmbeddedForm {
-            TagView()
+            CategoryListSection()
         }
     }
 }
 
 #Preview {
-    FileSortingPage()
+    previewPage {
+        CategoriesPage()
+    }
 }

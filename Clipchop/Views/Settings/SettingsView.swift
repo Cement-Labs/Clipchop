@@ -15,7 +15,7 @@ struct SettingsView: View {
         case general
         case customization
         case clipboard
-        case fileSorting
+        case categories
         case excludedApps
         case syncing
         case about
@@ -66,10 +66,10 @@ struct SettingsView: View {
                 }
                 .tag(Navigation.clipboard)
                 
-                navigationEntry("FileSorting") {
-                    Image(systemSymbol: .plusRectangleOnFolder)
+                navigationEntry("Categories") {
+                    Image(systemSymbol: .tray2)
                 }
-                .tag(Navigation.fileSorting)
+                .tag(Navigation.categories)
                 
                 navigationEntry("Excluded Apps") {
                     Image(systemSymbol: .xmarkApp)
@@ -108,8 +108,8 @@ struct SettingsView: View {
                 case .clipboard:
                     ClipboardSettingsPage()
                     
-                case .fileSorting:
-                    FileSortingPage()
+                case .categories:
+                    CategoriesPage()
                 
                 case .excludedApps:
                     ExcludedAppsSettingsPage()

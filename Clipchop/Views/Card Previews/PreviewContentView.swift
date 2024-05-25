@@ -122,7 +122,7 @@ struct PreviewContentView : View {
             QLThumbnailGenerator.shared.generateRepresentations(for: request) { thumbnail, _, error in
                 DispatchQueue.main.async {
                     if let error = error {
-//                        log(self, "Error generating thumbnail: \(error)")
+                        log(self, "Error generating thumbnail: \(error)")
                     } else if let cgImage = thumbnail?.cgImage {
                         self.thumbnail = NSImage(cgImage: cgImage, size: NSSize())
                     }

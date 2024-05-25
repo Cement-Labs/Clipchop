@@ -1,5 +1,5 @@
 //
-//  TagView.swift
+//  CategoryListSection.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/26.
@@ -9,8 +9,7 @@ import SwiftUI
 import Defaults
 import UniformTypeIdentifiers
 
-struct TagView: View {
-    
+struct CategoryListSection: View {
     @Default(.fileCategories) private var fileCategories
     @Default(.uncategorizedFileTypes) private var uncategorizedFileTypes
     
@@ -206,5 +205,5 @@ struct DropViewDelegate: DropDelegate {
 }
 
 #Preview {
-    TagView()
+    CategoryListSection()
 }
