@@ -16,7 +16,7 @@ struct ClipHistoryView: View {
     ) private var items: [ClipboardHistory]
     
     @ViewBuilder
-    func clip(content: () -> some View) -> some View {
+    func clip(@ViewBuilder content: () -> some View) -> some View {
         content()
             .clipShape(.rect(cornerRadius: 25, style: .continuous))
     }
@@ -27,8 +27,10 @@ struct ClipHistoryView: View {
                 clip {
                     VisualEffectView(material: .underWindowBackground, blendingMode: .behindWindow)
                 }
+                
                 VStack{
                     if items.isEmpty {
+                        // Placeholder
                         VStack(alignment: .center) {
                             Image(.clipchopFill)
                                 .resizable()

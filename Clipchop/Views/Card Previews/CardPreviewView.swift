@@ -26,10 +26,11 @@ struct CardPreviewView: View {
     var body: some View {
         VStack{
             PreviewContentView(clipboardHistory: item)
+                .clipShape(.rect(cornerRadius: 12.5))
         }
         .allowsHitTesting(false)
         .frame(width: 80, height: 80, alignment: .center)
-        .clipShape(RoundedRectangle(cornerRadius: 12.5))
+        .clipShape(.rect(cornerRadius: 12.5))
         
         .overlay(
             RoundedRectangle(cornerRadius: 15)
