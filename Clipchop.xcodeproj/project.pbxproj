@@ -42,6 +42,7 @@
 		2884E5D72BF86F2500201A79 /* TestSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2884E5D62BF86F2500201A79 /* TestSettingsPage.swift */; };
 		289B498C2BF9B50C008643FA /* CardPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289B498B2BF9B50C008643FA /* CardPreviewView.swift */; };
 		28A173C92C0185D500B6FB03 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */; };
+		28A173CB2C01895300B6FB03 /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */; };
 		28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */; };
 		28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */; };
 		28A699B12BF61F92000B0272 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B02BF61F92000B0272 /* Formatter.swift */; };
@@ -125,6 +126,7 @@
 		2882951F2BC41F7400392B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2884E5D62BF86F2500201A79 /* TestSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettingsPage.swift; sourceTree = "<group>"; };
 		289B498B2BF9B50C008643FA /* CardPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewView.swift; sourceTree = "<group>"; };
+		28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
 		28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
 		28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		28A699B02BF61F92000B0272 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -237,12 +239,13 @@
 			children = (
 				282692962BDCC9CF00D1656E /* Defaults+Extensions.swift */,
 				28C2C5912BF0CCB400E9D9AA /* Defaults+Structures.swift */,
-				28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */,
-				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
-				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
 				2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */,
-				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
+				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
+				28D8CE6A2BDD142F008B17B5 /* View+Extension.swift */,
 				284882352BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift */,
+				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
+				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
+				28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,
+				28A173CB2C01895300B6FB03 /* NSWindow+Extensions.swift in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
 				28AD83602C01665C0093176B /* ViewController.swift in Sources */,
 				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,

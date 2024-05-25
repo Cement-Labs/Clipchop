@@ -41,8 +41,7 @@ import KeyboardShortcuts
         window.level = .normal
         window.isMovableByWindowBackground = true
         
-        window.standardWindowButton(.miniaturizeButton)?.isHidden = true
-        window.standardWindowButton(.zoomButton)?.isHidden = true
+        window.visibleWindowButtonTypes = [.closeButton]
         
         window.contentView = NSHostingView(
             rootView: BeginningView()

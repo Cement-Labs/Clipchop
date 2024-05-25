@@ -202,8 +202,14 @@ struct SettingsView: View {
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(condition: !isWindowInitialized) {
-            StaleView()
-                .navigationTitle(Text(verbatim: ""))
+            ZStack {
+                VisualEffectView(material: .sidebar, blendingMode: .behindWindow)
+                    .ignoresSafeArea()
+                
+                StaleView()
+                    .blendMode(.overlay)
+            }
+            .navigationTitle(Text(verbatim: ""))
         }
     }
 }

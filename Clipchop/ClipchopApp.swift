@@ -76,9 +76,14 @@ struct ClipchopApp: App {
             SettingsView(isWindowInitialized: $isWindowInitialized)
                 .task {
                     if let window = NSApp.windows.last {
+                        window.visibleWindowButtonTypes = []
+                        window.titlebarAppearsTransparent = true
+                        
                         // Delays a little bit
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            window.visibleWindowButtonTypes = [.closeButton, .miniaturizeButton, .zoomButton]
                             window.toolbarStyle = .automatic
+                            window.titlebarAppearsTransparent = false
                             window.titlebarSeparatorStyle = .automatic
                             
                             withAnimation {
