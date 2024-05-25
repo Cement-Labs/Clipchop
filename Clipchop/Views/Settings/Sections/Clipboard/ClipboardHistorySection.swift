@@ -14,44 +14,73 @@ struct ClipboardHistorySection: View {
     @Default(.timerInterval) var timerInterval
     
     @State var isDeleteHistoryAlertPresented = false
+    @State var preservationPeriod: HistoryPreservationPeriod = .forever
+    @State var preservationTime: Double = 1
     
     @Environment(\.hasTitle) var hasTitle
+    
+    var isDefaultsIdentical: Bool {
+        DefaultsStack.Group.historyPreservation.isIdentical(comparedTo: [
+            preservationPeriod, preservationTime
+        ])
+    }
     
     @ViewBuilder
     func periodWithTime(_ time: Int, period: HistoryPreservationPeriod) -> some View {
         switch period {
         case .forever: Text("Forever")
         case .minute:
-            Text("\(time) Minute")
+            Text("\(time) Minutes")
         case .hour:
-            Text("\(time) Hour")
+            Text("\(time) Hours")
         case .day:
-            Text("\(time) Day")
+            Text("\(time) Days")
         case .month:
-            Text("\(time) Month")
+            Text("\(time) Months")
         case .year:
-            Text("\(time) Year")
+            Text("\(time) Years")
         }
     }
     
     var body: some View {
         Section {
             VStack {
-                Picker("Preservation time", selection: $historyPreservationPeriod) {
+                Picker("Preservation time", selection: $preservationPeriod) {
                     ForEach(HistoryPreservationPeriod.allCases) { period in
-                        periodWithTime(Int(historyPreservationTime), period: period)
+                        periodWithTime(Int(preservationTime), period: period)
                     }
                 }
                 
-                Slider(value: $historyPreservationTime, in: 1...30, step: 1) {
-                    
+                Slider(value: $preservationTime, in: 1...30, step: 1) {
+                    if !isDefaultsIdentical {
+                        HStack {
+                            Button {
+                                
+                            } label: {
+                                Image(systemSymbol: .clockArrowCirclepath)
+                                Text("Restore")
+                            }
+                            
+                            Button {
+                                
+                            } label: {
+                                Image(systemSymbol: .checkmark)
+                                Text("Apply")
+                            }
+                        }
+                        .monospaced(false)
+                    }
                 } minimumValueLabel: {
                     Text("1")
                 } maximumValueLabel: {
                     Text("30")
                 }
                 .monospaced()
-                .disabled(historyPreservationPeriod == .forever)
+                .disabled(preservationPeriod == .forever)
+            }
+            .onAppear {
+                preservationPeriod = historyPreservationPeriod
+                preservationTime = historyPreservationTime
             }
             
             VStack {

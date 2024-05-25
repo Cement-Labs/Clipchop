@@ -8,23 +8,40 @@
 import Foundation
 import Defaults
 
+extension [AnyHashable] {
+    var combinedHashValue: Int {
+        var hasher = Hasher()
+        self.forEach {
+            hasher.combine($0)
+        }
+        return hasher.finalize()
+    }
+}
+
 struct DefaultsStack {
     enum Group: String, CaseIterable {
         case accentColor = "accentColor"
+        case historyPreservation = "historyPreservation"
         
         var relationships: [AnyHashable] {
             switch self {
             case .accentColor:
                 [Defaults[.colorStyle], Defaults[.customAccentColor]]
+            case .historyPreservation:
+                [Defaults[.historyPreservationPeriod], Defaults[.historyPreservationTime]]
             }
         }
         
         var hashValue: Int {
-            var hasher = Hasher()
-            self.relationships.forEach {
-                hasher.combine($0)
-            }
-            return hasher.finalize()
+            relationships.combinedHashValue
+        }
+        
+        var isUnchanged: Bool {
+            DefaultsStack.shared.isUnchanged(self)
+        }
+        
+        func isIdentical(comparedTo: [AnyHashable]) -> Bool {
+            DefaultsStack.shared.isIdentical(self, comparedTo: comparedTo)
         }
     }
     
@@ -47,5 +64,9 @@ struct DefaultsStack {
     func isUnchanged(_ group: Group) -> Bool {
         guard let hashed = hash[group] else { return false }
         return hashed == group.hashValue
+    }
+    
+    func isIdentical(_ group: Group, comparedTo: [AnyHashable]) -> Bool {
+        return group.hashValue == comparedTo.combinedHashValue
     }
 }

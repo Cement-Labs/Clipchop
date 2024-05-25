@@ -7,7 +7,7 @@
     "%@ is open source." : {
 
     },
-    "%lld Day" : {
+    "%lld Days" : {
       "localizations" : {
         "en" : {
           "variations" : {
@@ -20,7 +20,7 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "new",
                   "value" : "%lld Days"
                 }
               }
@@ -29,7 +29,7 @@
         }
       }
     },
-    "%lld Hour" : {
+    "%lld Hours" : {
       "localizations" : {
         "en" : {
           "variations" : {
@@ -42,7 +42,7 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "new",
                   "value" : "%lld Hours"
                 }
               }
@@ -51,7 +51,7 @@
         }
       }
     },
-    "%lld Minute" : {
+    "%lld Minutes" : {
       "localizations" : {
         "en" : {
           "variations" : {
@@ -64,7 +64,7 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "new",
                   "value" : "%lld Minutes"
                 }
               }
@@ -73,7 +73,7 @@
         }
       }
     },
-    "%lld Month" : {
+    "%lld Months" : {
       "localizations" : {
         "en" : {
           "variations" : {
@@ -86,7 +86,7 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "new",
                   "value" : "%lld Months"
                 }
               }
@@ -95,7 +95,7 @@
         }
       }
     },
-    "%lld Year" : {
+    "%lld Years" : {
       "localizations" : {
         "en" : {
           "variations" : {
@@ -108,7 +108,7 @@
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "new",
                   "value" : "%lld Years"
                 }
               }
@@ -300,6 +300,9 @@
 
     },
     "Application" : {
+
+    },
+    "Apply" : {
 
     },
     "Back" : {
@@ -514,6 +517,9 @@
 
     },
     "Remove" : {
+
+    },
+    "Restore" : {
 
     },
     "Settings…" : {

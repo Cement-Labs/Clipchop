@@ -76,6 +76,7 @@ final class ClipboardHistory: Equatable, Identifiable {
     var id: UUID
     var app: String?
     var pinned: Bool
+    var deleted: Bool
     var time: Date?
     var contents: [ClipboardContent]?
     
@@ -86,6 +87,7 @@ final class ClipboardHistory: Equatable, Identifiable {
     public init() {
         self.id = .init()
         self.pinned = false
+        self.deleted = false
         
         self.app = ClipboardHistory.source?.localizedName
         self.time = Date.now
