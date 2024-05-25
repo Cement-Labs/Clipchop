@@ -48,12 +48,12 @@ struct CardPreviewView: View {
         .onDrag {
             let clipboardContents = item.getContents()
             for content in clipboardContents {
-                if let itemProvider = DragManager(for: content) {
+                if let itemProvider = dragManager(for: content) {
                     return itemProvider
                 }
             }
             
-            print("No suitable content found for dragging")
+            log(self, "No suitable content found for dragging")
             return NSItemProvider()
         }
     }

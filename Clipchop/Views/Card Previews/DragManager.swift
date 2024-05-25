@@ -9,7 +9,7 @@ import Foundation
 import UniformTypeIdentifiers
 import Contacts
 
-func DragManager(for content: ClipboardContent) -> NSItemProvider? {
+func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     guard let data = content.value as? NSSecureCoding else {
         print("Value is not NSSecureCoding compliant")
         return nil
@@ -20,8 +20,10 @@ func DragManager(for content: ClipboardContent) -> NSItemProvider? {
         UTType.plainText.identifier, UTType.text.identifier, UTType.utf8PlainText.identifier, UTType.utf16PlainText.identifier,
         UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.html.identifier, UTType.url.identifier:
         
-        guard let string = String(data: data as! Data, encoding: .utf8),
-              let nsData = string.data(using: .utf8) else {
+        guard 
+            let string = String(data: data as! Data, encoding: .utf8),
+            let nsData = string.data(using: .utf8) 
+        else {
             print("Failed to convert data to string with UTF-8 encoding.")
             return nil
         }

@@ -7,7 +7,7 @@
 
 import AVFAudio
 
-class SoundPlayer: Identifiable{
+class SoundPlayer: Identifiable {
     private static var audioPlayer: AVAudioPlayer?
     
     static func playSound(named assetName: String) {
@@ -16,12 +16,12 @@ class SoundPlayer: Identifiable{
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 audioPlayer?.play()
                 
-                print("Audio played: \(assetName)")
+                log(self, "Audio played: \(assetName)")
             } catch {
-                print("Unable to play audio: \(error.localizedDescription)")
+                log(self, "Unable to play audio: \(error.localizedDescription)")
             }
         } else {
-            print("Audio file not found for \(assetName)!")
+            log(self, "Audio file not found for \(assetName)!")
         }
     }
 }

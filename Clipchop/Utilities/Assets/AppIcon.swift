@@ -87,7 +87,7 @@ extension AppIcon {
     }
     
     static func setAppIcon(to icon: AppIcon) {
-        print("App icon set to: \(icon.assetName)")
+        log(self, "App icon set to: \(icon.assetName)")
         Defaults[.appIcon] = icon
         refreshCurrentAppIcon()
     }

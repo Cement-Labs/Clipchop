@@ -1,5 +1,5 @@
 //
-//  View+Extension.swift
+//  View+Extensions.swift
 //  Dial
 //
 //  Created by KrLite on 2024/3/23.
@@ -68,5 +68,11 @@ extension View {
             center.publisher(for: name, object: object),
             perform: action
         )
+    }
+}
+
+extension View {
+    func log(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+        Clipchop.log(self, items, separator: separator, terminator: terminator)
     }
 }

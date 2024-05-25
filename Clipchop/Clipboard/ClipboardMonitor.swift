@@ -58,7 +58,7 @@ class ClipboardMonitor: NSObject {
                 return true
             }
         } catch {
-            print("Error checking for duplicate content! \(error)")
+            log(self, "Error checking for duplicate content! \(error)")
             return false
         }
     }
@@ -79,13 +79,13 @@ class ClipboardMonitor: NSObject {
         changeCount = ClipboardHistory.pasteboard.changeCount
         
         if let sourceBundle = ClipboardHistory.source?.bundleIdentifier {
-            print("Clipboard update detected in application \(sourceBundle)")
+            log(self, "Clipboard update detected in application \(sourceBundle)")
             if Defaults.shouldIgnoreApp(sourceBundle) {
                 // Ignored
                 return
             }
         } else {
-            print("Clipboard update detected")
+            log(self, "Clipboard update detected")
         }
         
         var contents: [ClipboardContent] = []
@@ -139,19 +139,19 @@ class ClipboardMonitor: NSObject {
         })
         
         guard !contents.isEmpty else {
-            print("No clipboard change happened")
+            log(self, "No clipboard change happened")
             return
         }
         
         DispatchQueue.main.async {
             Notification.Name.didClip.post()
-            print("Notified clipboard change")
+            log(self, "Notified clipboard change")
         }
         
 #if DEBUG
-        print("Clipboard changed:")
+        log(self, "Clipboard changed:")
         contents.forEach { content in
-            print("[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
+            log(self, "[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
 #endif
     }
@@ -167,12 +167,14 @@ extension ClipboardMonitor {
         ) { [weak self] _ in
             self?.updateClipboard()
         }
-        print("Started monitoring")
+        
+        log(self, "Started monitoring")
     }
     
     func stop() {
         timer?.invalidate()
         timer = nil
-        print("Stopped monitoring")
+        
+        log(self, "Stopped monitoring")
     }
 }

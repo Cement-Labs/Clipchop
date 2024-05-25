@@ -90,7 +90,7 @@ Full Disk Access is required for %@ to generate file previews.
                     ),
                     Bundle.main.appName
                 ),
-                settingsButtonTitle: String(localized: .init("Open Settings", defaultValue: "Open Settings")),
+                settingsButtonTitle: String(localized: .init("Open in System Settings", defaultValue: "Open in System Settings")),
                 skipButtonTitle: String(localized: .init("Later", defaultValue: "Later")),
                 canBeSuppressed: false,
                 icon: nil

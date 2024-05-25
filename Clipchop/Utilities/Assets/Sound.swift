@@ -106,12 +106,12 @@ extension Sound {
     }
     
     static func setClipSound(to sound: Sound) {
-        print("Clip sound set to: \(sound.assetName)")
+        log(self, "Clip sound set to: \(sound.assetName)")
         Defaults[.clipSound] = sound
     }
     
     static func setPasteSound(to sound: Sound) {
-        print("Paste sound set to: \(sound.assetName)")
+        log(self, "Paste sound set to: \(sound.assetName)")
         Defaults[.pasteSound] = sound
     }
 }

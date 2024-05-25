@@ -111,7 +111,7 @@ struct BeginningView: View {
                         NSApp.openSettings()
                         viewController?.close()
                     } label: {
-                        Text("Open Settings")
+                        Text("Open Settings…")
                             .font(.title3)
                             .foregroundStyle(.secondary)
                     }

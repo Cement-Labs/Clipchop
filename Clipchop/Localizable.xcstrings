@@ -117,6 +117,70 @@
         }
       }
     },
+    "%llu Clips, %lld Items" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%#@arg1@, %#@arg2@"
+          },
+          "substitutions" : {
+            "arg1" : {
+              "argNum" : 1,
+              "formatSpecifier" : "llu",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Clip"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Clips"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "No Clips"
+                    }
+                  }
+                }
+              }
+            },
+            "arg2" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Item"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Items"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "No Items"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "0.01" : {
 
     },
@@ -328,9 +392,6 @@
     "Delete history" : {
 
     },
-    "Example" : {
-
-    },
     "Exclude apps to prevent %@ copying their contents." : {
 
     },
@@ -416,7 +477,10 @@
     "No Clipboard History Available" : {
 
     },
-    "Open Settings" : {
+    "Open in System Settings" : {
+
+    },
+    "Open Settings…" : {
 
     },
     "Other" : {
@@ -443,7 +507,7 @@
     "Quit %@" : {
 
     },
-    "Recent Copied" : {
+    "Recent Clips" : {
 
     },
     "Refresh States (Debug)" : {

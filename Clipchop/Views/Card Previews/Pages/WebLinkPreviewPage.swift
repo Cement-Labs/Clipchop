@@ -41,7 +41,7 @@ struct WebLinkPreviewPage: NSViewRepresentable {
     
     private func fetchMetadata(for urlString: String, completionHandler: @escaping (LPLinkMetadata?) -> Void) {
         guard let url = URL(string: urlString) else {
-            print("Invalid URL string")
+            log(self, "Invalid URL string")
             completionHandler(nil)
             return
         }
@@ -49,7 +49,7 @@ struct WebLinkPreviewPage: NSViewRepresentable {
         let metadataProvider = LPMetadataProvider()
         metadataProvider.startFetchingMetadata(for: url) { metadata, error in
             if let error = error {
-                print("Error fetching metadata: \(error)")
+                log(self, "Error fetching metadata: \(error)")
                 completionHandler(nil)
             } else {
                 completionHandler(metadata)
