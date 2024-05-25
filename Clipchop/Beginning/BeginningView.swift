@@ -125,11 +125,20 @@ struct BeginningView: View {
                         .clipShape(.buttonBorder)
                 }
                 .disabled(!canRoamingContinue)
+                .scaleEffect(isContinueButtonHovering && canRoamingContinue ? 1.05 : 1)
+                
                 .controlSize(.extraLarge)
                 .buttonStyle(.borderless)
                 .buttonBorderShape(.capsule)
+                
                 .tint(.white)
                 .shadow(color: canRoamingContinue ? .accent.opacity(0.25) : .clear, radius: 15, y: 7)
+                
+                .onHover { isHovering in
+                    withAnimation {
+                        isContinueButtonHovering = isHovering
+                    }
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
