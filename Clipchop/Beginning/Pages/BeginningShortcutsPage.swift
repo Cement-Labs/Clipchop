@@ -35,6 +35,7 @@ struct BeginningShortcutsPage: View {
             .formStyle(.grouped)
             .scrollDisabled(true)
         }
+        .padding()
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)
     }

@@ -30,6 +30,7 @@
 		2866D7532BF88CD300F57DF7 /* ClipboardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */; };
 		2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */; };
 		2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */; };
+		28672F072C01BB430095107B /* RoamingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28672F062C01BB430095107B /* RoamingButton.swift */; };
 		287197912BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */; };
 		2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */; };
 		287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */; };
@@ -115,6 +116,7 @@
 		2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardContent.swift; path = Clipchop/Clipboard/SwiftData/ClipboardContent.swift; sourceTree = "<group>"; };
 		2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ClipboardHistory.swift; path = Clipchop/Clipboard/SwiftData/ClipboardHistory.swift; sourceTree = "<group>"; };
 		2866D7572BF8A25100F57DF7 /* ObservationTrackingStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTrackingStream.swift; sourceTree = "<group>"; };
+		28672F062C01BB430095107B /* RoamingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoamingButton.swift; sourceTree = "<group>"; };
 		287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard.PasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		2871979B2BDE74A4004BCDA3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2871979F2BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 			children = (
 				28E6E8FC2BFE11260068B449 /* BeginningViewController.swift */,
 				28E6E8FA2BFE0E850068B449 /* BeginningView.swift */,
+				28672F062C01BB430095107B /* RoamingButton.swift */,
 				28E6E8FE2BFE162E0068B449 /* Pages */,
 			);
 			path = Beginning;
@@ -564,6 +567,7 @@
 				2866D7542BF88CD300F57DF7 /* ClipboardHistory.swift in Sources */,
 				2866D7582BF8A25100F57DF7 /* ObservationTrackingStream.swift in Sources */,
 				282692752BDCACBB00D1656E /* GeneralSettingsPage.swift in Sources */,
+				28672F072C01BB430095107B /* RoamingButton.swift in Sources */,
 				6513FF3C2BFBB800008149AB /* RTFPreviewPage.swift in Sources */,
 				28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */,
 				28227F5E2BF23BB7008FAC3A /* AppVersionView.swift in Sources */,

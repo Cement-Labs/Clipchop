@@ -26,16 +26,21 @@ struct PermissionsSection: View {
         } label: {
             Group {
                 Text("Grant")
+                    .fixedSize()
+                
                 Image(systemSymbol: .arrowRightCircleFill)
             }
             .or(condition: isGranted) {
                 Group {
                     Text("Granted")
+                        .fixedSize()
+                    
                     Image(systemSymbol: .checkmarkSealFill)
                 }
             }
             .frame(height: 16)
         }
+        .animation(.default, value: isGranted)
         .controlSize(.large)
         .buttonStyle(.borderless)
         .buttonBorderShape(.capsule)

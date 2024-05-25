@@ -238,6 +238,9 @@
     "Application" : {
 
     },
+    "Back" : {
+
+    },
     "Changing Color Scheme" : {
 
     },
@@ -459,6 +462,9 @@
 
     },
     "Shows menu bar item" : {
+
+    },
+    "Skip" : {
 
     },
     "Sound: Bloop" : {

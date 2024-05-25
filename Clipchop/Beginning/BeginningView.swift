@@ -44,8 +44,6 @@ struct BeginningView: View {
     
     @State var roaming: Roaming = .hello
     @State var canContinue: [Roaming: Bool] = [:]
-    @State var isContinueButtonHovering = false
-    @State var isFinished = false
     
     @Environment(\.viewController) var viewController
     
@@ -108,45 +106,38 @@ struct BeginningView: View {
             VStack {
                 Spacer()
                 
-                // With animation
                 if !roaming.hasHext {
                     Button {
                         NSApp.openSettings()
                         viewController?.close()
                     } label: {
                         Text("Open Settings")
-                            .padding()
                             .font(.title3)
-                            .blendMode(.luminosity)
+                            .foregroundStyle(.secondary)
                     }
                     .controlSize(.extraLarge)
                     .buttonStyle(.borderless)
-                    .buttonBorderShape(.roundedRectangle(radius: 15))
                 }
                 
-                Button {
-                    // Without animation
-                    if !isFinished {
+                RoamingButton(canHover: canRoamingContinue) {
+                    if roaming.hasHext {
                         next()
                     } else {
                         viewController?.close()
                     }
                 } label: {
                     HStack {
-                        if !isFinished {
+                        if roaming.hasHext {
                             Text("Continue")
-                                .fixedSize()
                             Image(systemSymbol: .arrowForward)
                         } else {
                             Text("Start Using \(Bundle.main.appName)")
-                                .fixedSize()
                         }
                     }
-                    .padding()
                     .font(.title3)
                     .blendMode(.luminosity)
-                }
-                .background {
+                    .fixedSize()
+                } background: {
                     Rectangle()
                         .if(condition: canRoamingContinue) { view in
                             view.fill(.accent)
@@ -156,18 +147,51 @@ struct BeginningView: View {
                         .clipShape(.buttonBorder)
                 }
                 .disabled(!canRoamingContinue)
-                .scaleEffect(isContinueButtonHovering && canRoamingContinue ? 1.05 : 1)
-                
-                .controlSize(.extraLarge)
-                .buttonStyle(.borderless)
-                .buttonBorderShape(.roundedRectangle(radius: 15))
                 
                 .tint(.white)
                 .shadow(color: canRoamingContinue ? .accent.opacity(0.25) : .clear, radius: 15, y: 7)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            VStack {
+                Spacer()
                 
-                .onHover { isHovering in
-                    withAnimation {
-                        isContinueButtonHovering = isHovering
+                HStack {
+                    if roaming.hasPrevious && roaming.hasHext {
+                        RoamingButton {
+                            previous()
+                        } label: {
+                            HStack {
+                                Image(systemSymbol: .arrowBackward)
+                                Text("Back")
+                            }
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                            .fixedSize()
+                        } background: {
+                            VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
+                                .clipShape(.buttonBorder)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    if !canRoamingContinue && roaming.hasHext {
+                        RoamingButton {
+                            next()
+                        } label: {
+                            HStack {
+                                Text("Skip")
+                                Image(systemSymbol: .arrowUturnForward)
+                            }
+                            .font(.title3)
+                            .foregroundStyle(.secondary)
+                            .fixedSize()
+                        } background: {
+                            VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
+                                .clipShape(.buttonBorder)
+                        }
                     }
                 }
             }
@@ -178,11 +202,5 @@ struct BeginningView: View {
         .ignoresSafeArea()
         .frame(width: BeginningViewController.size.width, height: BeginningViewController.size.height)
         .fixedSize()
-        
-        .onChange(of: roaming) { old, new in
-            withAnimation {
-                isFinished = !new.hasHext
-            }
-        }
     }
 }
