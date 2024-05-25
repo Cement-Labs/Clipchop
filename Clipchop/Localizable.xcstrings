@@ -224,6 +224,12 @@
     "Acknowledgements" : {
 
     },
+    "Add Category" : {
+
+    },
+    "Add File Type" : {
+
+    },
     "Allow app excluding" : {
 
     },
@@ -401,6 +407,12 @@
     "Excluded Apps" : {
 
     },
+    "File Extension" : {
+
+    },
+    "FileSorting" : {
+
+    },
     "Forever" : {
 
     },
@@ -472,6 +484,9 @@
 
     },
     "macOS Blue" : {
+
+    },
+    "New Category Name" : {
 
     },
     "No Application Excluded" : {
@@ -676,6 +691,9 @@
           }
         }
       }
+    },
+    "Uncategorized File Types" : {
+
     },
     "Update interval" : {
 
