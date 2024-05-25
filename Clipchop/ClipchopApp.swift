@@ -30,6 +30,12 @@ struct ClipchopApp: App {
         self.manager = .init(context: container.mainContext)
         
 #if DEBUG
+        
+        Defaults[.fileCategories] = Defaults.Keys.fileCategories.defaultValue
+        Defaults[.uncategorizedFileTypes] = Defaults.Keys.uncategorizedFileTypes.defaultValue
+        Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
+        Defaults[.applicationExcludeList] = Defaults.Keys.applicationExcludeList.defaultValue
+        
         // Resets UI states
         Defaults[.menuBarItemEnabled] = true
         Defaults[.beginningViewShown] = false

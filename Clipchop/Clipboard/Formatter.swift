@@ -129,13 +129,17 @@ extension Formatter {
     }
     
     func categorizeFileTypes() {
-        guard let result = self.title?.lowercased() else { return }
+        guard let result = self.title?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() else {
+            log(self, "Title is nil or empty")
+            return
+        }
+        
         var uncategorizedTypes = Set(Defaults[.uncategorizedFileTypes])
         let fileCategories = Defaults[.fileCategories]
         
         var categorized = false
         for (category, extensions) in fileCategories {
-            if extensions.contains(result) {
+            if extensions.contains(where: { $0 == result }) {
                 log(self, "File extension \(result) categorized under \(category)")
                 categorized = true
                 break

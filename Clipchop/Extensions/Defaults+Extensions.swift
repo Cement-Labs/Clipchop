@@ -43,9 +43,9 @@ extension Defaults.Keys {
     
     static let fileCategories = Key<[String: [String]]>("fileCategories", default: [
             "Images": ["jpg", "png", "gif"],
-            "Documents": ["pdf", "docx", "xlsx"],
+            "Documents": ["pdf", "docx", "xlsx", "pdf"],
             "Videos": ["mp4", "mov", "avi"],
-            "Audio": ["mp3", "wav", "m4a"]
+            "Audio": ["mp3", "wav", "m4a", "Link"]
         ])
     static let uncategorizedFileTypes = Key<[String]>("uncategorizedFileTypes", default: [])
     
