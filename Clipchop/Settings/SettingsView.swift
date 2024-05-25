@@ -191,14 +191,14 @@ struct SettingsView: View {
                     .controlSize(.extraLarge)
                 }
             }
+            
+            // Completely prevents the sidebar from collapsing
+            .introspect(.navigationSplitView, on: .macOS(.v14), scope: .ancestor) { splitView in
+                (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
+            }
         }
         .navigationTitle(Bundle.main.appName)
         .navigationSplitViewStyle(.prominentDetail)
-        
-        // Completely prevents the sidebar from collapsing
-        .introspect(.navigationSplitView, on: .macOS(.v14)) { splitView in
-            (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
-        }
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(condition: !isWindowInitialized) {
