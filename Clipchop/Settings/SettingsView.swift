@@ -8,6 +8,7 @@
 import SwiftUI
 import SFSafeSymbols
 import Defaults
+import SwiftUIIntrospect
 
 @ViewBuilder
 func description(@ViewBuilder label: () -> some View) -> some View {
@@ -49,13 +50,12 @@ func withCaption(
 }
 
 @ViewBuilder
-func listEmbeddedForm(formStyle: some FormStyle = .grouped,@ViewBuilder content: () -> some View) -> some View {
+func listEmbeddedForm(formStyle: some FormStyle = .grouped, @ViewBuilder content: () -> some View) -> some View {
     List {
         Form {
             content()
         }
         .formStyle(formStyle)
-        .background(.red)
         
         .scrollDisabled(true)
         .scrollContentBackground(.hidden)
@@ -156,7 +156,7 @@ struct SettingsView: View {
                 .tag(Navigation.test)
 #endif
             }
-            .navigationSplitViewColumnWidth(200)
+            .frame(minWidth: 200)
             .toolbar(removing: .sidebarToggle)
         } detail: {
             Group {
@@ -194,6 +194,11 @@ struct SettingsView: View {
         }
         .navigationTitle(Bundle.main.appName)
         .navigationSplitViewStyle(.prominentDetail)
+        
+        // Completely prevents the sidebar from collapsing
+        .introspect(.navigationSplitView, on: .macOS(.v14)) { splitView in
+            (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
+        }
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(condition: !isWindowInitialized) {

@@ -41,6 +41,7 @@
 		288295202BC41F7400392B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2882951F2BC41F7400392B29 /* Preview Assets.xcassets */; };
 		2884E5D72BF86F2500201A79 /* TestSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2884E5D62BF86F2500201A79 /* TestSettingsPage.swift */; };
 		289B498C2BF9B50C008643FA /* CardPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289B498B2BF9B50C008643FA /* CardPreviewView.swift */; };
+		28A173C92C0185D500B6FB03 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */; };
 		28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */; };
 		28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */; };
 		28A699B12BF61F92000B0272 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B02BF61F92000B0272 /* Formatter.swift */; };
@@ -171,6 +172,7 @@
 				28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */,
 				28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */,
 				28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */,
+				28A173C92C0185D500B6FB03 /* SwiftUIIntrospect in Frameworks */,
 				28C2C5892BF0C6C800E9D9AA /* SwiftHEXColors in Frameworks */,
 				282692992BDCC9F200D1656E /* Defaults in Frameworks */,
 				28D8CE6F2BDD2492008B17B5 /* LaunchAtLogin in Frameworks */,
@@ -466,6 +468,7 @@
 				28C2C5882BF0C6C800E9D9AA /* SwiftHEXColors */,
 				28C2C58B2BF0C6ED00E9D9AA /* Algorithms */,
 				28F7D0E42BF777C300DDFC2C /* WindowManagement */,
+				28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */,
 			);
 			productName = Clipchop;
 			productReference = 288295142BC41F7300392B29 /* Clipchop.app */;
@@ -508,6 +511,7 @@
 				28C2C5872BF0C6C800E9D9AA /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 				28C2C58A2BF0C6ED00E9D9AA /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				28F7D0E32BF777C300DDFC2C /* XCRemoteSwiftPackageReference "SwiftUI-WindowManagement" */,
+				28A173C72C0185D500B6FB03 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 			);
 			productRefGroup = 288295152BC41F7300392B29 /* Products */;
 			projectDirPath = "";
@@ -876,6 +880,14 @@
 				minimumVersion = 5.2.0;
 			};
 		};
+		28A173C72C0185D500B6FB03 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/swiftui-introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
 		28ABFFA72BDCA92500B02E76 /* XCRemoteSwiftPackageReference "MenuBarExtraAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/orchetect/MenuBarExtraAccess";
@@ -944,6 +956,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 288295442BC4210900392B29 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
+		};
+		28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28A173C72C0185D500B6FB03 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = SwiftUIIntrospect;
 		};
 		28ABFFA52BDC9B6500B02E76 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;
