@@ -16,7 +16,6 @@ class CustomLinkView: LPLinkView {
 }
 
 struct WebLinkPreviewPage: NSViewRepresentable {
-    
     typealias NSViewType = CustomLinkView
     var urlString: String
     

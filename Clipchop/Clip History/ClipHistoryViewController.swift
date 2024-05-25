@@ -153,8 +153,7 @@ extension ClipHistoryViewController {
         panel.collectionBehavior = .canJoinAllSpaces
         panel.hasShadow = true
         panel.backgroundColor = .white.withAlphaComponent(0.000001) // Making the window transparent causes buggy shadows
-        // The reason for using .floating is to prevent misalignment between the card and window hierarchy when the card is being dragged.
-        panel.level = .floating
+        panel.level = .floating // This prevents misalignments between the card and window hierarchy when the card is being dragged.
         panel.isMovableByWindowBackground = false
         
         panel.contentView = NSHostingView(

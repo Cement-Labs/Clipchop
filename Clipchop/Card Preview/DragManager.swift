@@ -11,12 +11,12 @@ import Contacts
 
 func DragManager(for content: ClipboardContent) -> NSItemProvider? {
     guard let data = content.value as? NSSecureCoding else {
-        print("Value is not NSSecureCoding compliant.")
+        print("Value is not NSSecureCoding compliant")
         return nil
     }
 
     switch content.type {
-    case 
+    case
         UTType.plainText.identifier, UTType.text.identifier, UTType.utf8PlainText.identifier, UTType.utf16PlainText.identifier,
         UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.html.identifier, UTType.url.identifier:
         
@@ -25,10 +25,10 @@ func DragManager(for content: ClipboardContent) -> NSItemProvider? {
             print("Failed to convert data to string with UTF-8 encoding.")
             return nil
         }
+        
         return NSItemProvider(item: nsData as NSSecureCoding, typeIdentifier: content.type)
     
     case
-        
         UTType.fileURL.identifier,UTType.folder.identifier, UTType.package.identifier, UTType.zip.identifier,
         
         UTType.jpeg.identifier, UTType.png.identifier, UTType.gif.identifier, UTType.tiff.identifier, 

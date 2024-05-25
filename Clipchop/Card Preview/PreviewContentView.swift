@@ -15,7 +15,7 @@ import SwiftHEXColors
 import LinkPresentation
 
 // TODO: Review this.
-//@available(*, deprecated, message: "Needs review.")
+@available(*, deprecated, message: "Needs review.")
 struct PreviewContentView : View {
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false
@@ -131,7 +131,9 @@ struct PreviewContentView : View {
             }
         }
     }
+    
     // MARK: - Resize Image
+    
     func resizeImage(image: NSImage) -> NSImage? {
         let maxSize: CGFloat = 80
 

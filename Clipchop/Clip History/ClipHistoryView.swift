@@ -9,8 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct ClipHistoryView: View {
-    
-    @Query(sort: \ClipboardHistory.time, order: .reverse, animation: .spring(dampingFraction: 0.7)) private var items: [ClipboardHistory]
+    @Query(
+        sort: \ClipboardHistory.time,
+        order: .reverse,
+        animation: .spring(dampingFraction: 0.7)
+    ) private var items: [ClipboardHistory]
     
     @ViewBuilder
     func clip(content: () -> some View) -> some View {
@@ -50,7 +53,3 @@ struct ClipHistoryView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
-
-//#Preview {
-//    ClipHistoryView()
-//}

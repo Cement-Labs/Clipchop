@@ -75,7 +75,6 @@ class ClipboardMonitor: NSObject {
     }
     
     private func updateClipboard() {
-        
         guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
         changeCount = ClipboardHistory.pasteboard.changeCount
         
@@ -138,15 +137,18 @@ class ClipboardMonitor: NSObject {
                 }
             }
         })
+        
         guard !contents.isEmpty else {
-            print("No new contents to insert.")
+            print("No clipboard change happened")
             return
         }
+        
         Sound.currentSound.play()
+        
 #if DEBUG
-        print("The Contents of Clipboard are changed:")
+        print("Clipboard changed:")
         contents.forEach { content in
-            print("Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
+            print("[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
 #endif
     }

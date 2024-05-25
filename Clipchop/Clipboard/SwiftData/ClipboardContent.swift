@@ -11,7 +11,6 @@ import SwiftData
 
 @Model 
 final class ClipboardContent {
-    
     var type: String?
     var value: Data?
     
