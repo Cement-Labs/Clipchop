@@ -10,7 +10,7 @@ import SwiftData
 import Defaults
 import KeyboardShortcuts
 
-@Observable class ClipHistoryViewController {
+@Observable class ClipHistoryViewController: ViewController {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
         expanded: NSSize(width: 500, height: 360)
@@ -161,6 +161,7 @@ extension ClipHistoryViewController {
             rootView: ClipHistoryView()
                 .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
                 .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
+                .environment(\.viewController, self)
         )
         panel.setFrame(
             CGRect(

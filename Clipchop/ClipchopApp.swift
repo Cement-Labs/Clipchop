@@ -8,7 +8,6 @@
 import SwiftUI
 import MenuBarExtraAccess
 import Defaults
-import WindowManagement
 import KeyboardShortcuts
 import SwiftData
 
@@ -48,8 +47,9 @@ struct ClipchopApp: App {
         self.manager = .init(context: container.mainContext)
         
 #if DEBUG
-        // Resets menu bar item visibility
+        // Resets UI states
         Defaults[.menuBarItemEnabled] = true
+        Defaults[.beginningViewShown] = false
         
         // Resets user interactions
         Defaults[.timesClipped] = 0
@@ -60,6 +60,15 @@ struct ClipchopApp: App {
         try! container.mainContext.delete(model: ClipboardContent.self)
         try! container.mainContext.delete(model: ClipboardHistory.self)
 #endif
+        
+        if !Defaults[.beginningViewShown] {
+            // Shows beginning view once
+            manager.beginningViewController.open()
+            Defaults[.beginningViewShown] = true
+        } else {
+            // Alerts for permissions
+            PermissionsManager.requestAccess()
+        }
     }
     
     var body: some Scene {

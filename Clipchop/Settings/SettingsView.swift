@@ -78,11 +78,6 @@ func previewPage(content: () -> some View) -> some View {
 }
 
 struct SettingsView: View {
-    @State var selectedNavigation: Navigation = .general
-    @State var apps = InstalledApps()
-    
-    @Binding var isWindowInitialized: Bool
-    
     enum Navigation {
         case general
         case customization
@@ -95,6 +90,11 @@ struct SettingsView: View {
         case test
 #endif
     }
+    
+    @State var selectedNavigation: Navigation = .general
+    @State var apps = InstalledApps()
+    
+    @Binding var isWindowInitialized: Bool
     
     @ViewBuilder
     func navigationEntry(
@@ -148,7 +148,7 @@ struct SettingsView: View {
                 .tag(Navigation.about)
                 
 #if DEBUG
-                navigationEntry("Test") {
+                navigationEntry("Test (Debug)") {
                     Image(systemSymbol: .airplaneDeparture)
                 }
                 .tag(Navigation.test)

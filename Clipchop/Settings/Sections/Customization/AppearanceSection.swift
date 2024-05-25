@@ -77,9 +77,6 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                 newSound.play()
             }
         }
-//        ColoredPickerRow(Defaults.inlineAccentColor(style: .system, customColor: .clear)) {
-//            
-//        }
         
         Section("Color") {
             withCaption("Custom accent color only applies to the clip history window.") {

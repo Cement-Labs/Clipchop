@@ -293,6 +293,9 @@
     "Color style" : {
 
     },
+    "Continue" : {
+
+    },
     "Copyrights" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -359,7 +362,7 @@
         }
       }
     },
-    "Full Disk Access is neede to generate file previews." : {
+    "Full Disk Access is needed to generate file previews." : {
 
     },
     "General" : {
@@ -398,7 +401,7 @@
     "Loading..." : {
 
     },
-    "Log to Console" : {
+    "Log to Console (Debug)" : {
 
     },
     "macOS Blue" : {
@@ -440,10 +443,16 @@
     "Recent Copied" : {
 
     },
+    "Refresh States (Debug)" : {
+
+    },
     "Remove" : {
 
     },
     "Settings…" : {
+
+    },
+    "Shortcuts" : {
 
     },
     "Show %@" : {
@@ -499,6 +508,9 @@
     "Source Code" : {
 
     },
+    "Start Using" : {
+
+    },
     "Starts with macOS" : {
 
     },
@@ -508,7 +520,7 @@
     "System" : {
 
     },
-    "Test" : {
+    "Test (Debug)" : {
 
     },
     "Test line No.%lld" : {
@@ -518,6 +530,9 @@
 
     },
     "This action clears all your clipboard history unrestorably, including pins." : {
+
+    },
+    "Tutorial" : {
 
     },
     "Type: Color" : {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.displayScale) var displayScale
     
     let style: Style
@@ -20,14 +21,24 @@ struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: 
     
     var body: some View {
         HStack(alignment: .center) {
-            render(content: Circle().foregroundStyle(style))
+            render {
+                ZStack {
+                    Image(systemSymbol: .circleFill)
+                        .foregroundStyle(colorScheme == .light ? .white.opacity(0.75) : .black.opacity(0.75))
+                    
+                    Circle()
+                        .foregroundStyle(style)
+                        .padding(3.5)
+                }
+            }
+            
             content()
         }
     }
     
     @MainActor
-    func render(content: some View) -> Image? {
-        let renderer = ImageRenderer(content: Circle().foregroundStyle(style))
+    func render(content: () -> some View) -> Image? {
+        let renderer = ImageRenderer(content: content())
         renderer.scale = displayScale
         
         if let image = renderer.nsImage {

@@ -12,6 +12,8 @@ struct PermissionsSection: View {
     @State var isAccessibilityAccessGranted = false
     @State var isFullDiskAccessGranted = false
     
+    @Environment(\.hasTitle) var hasTitle
+    
     let permissionsAutoCheck = Timer.publish(
         every: 1, tolerance: 0.5,
         on: .main, in: .common
@@ -42,7 +44,7 @@ struct PermissionsSection: View {
     }
     
     var body: some View {
-        Section("Permissions") {
+        Section {
             HStack {
                 withCaption {
                     Text("Accessibility Access")
@@ -72,7 +74,7 @@ Accessibility Access is needed to take over your clipboard.
                     Text("Full Disk Access")
                 } caption: {
                     Text("""
-Full Disk Access is neede to generate file previews.
+Full Disk Access is needed to generate file previews.
 """)
                 }
                 
@@ -89,6 +91,17 @@ Full Disk Access is neede to generate file previews.
                     isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
                 }
 #endif
+            }
+            
+#if DEBUG
+            Button("Refresh States (Debug)") {
+                isAccessibilityAccessGranted = PermissionsManager.Accessibility.getStatus()
+                isFullDiskAccessGranted = PermissionsManager.FullDisk.getStatus()
+            }
+#endif
+        } header: {
+            if hasTitle {
+                Text("Permissions")
             }
         }
     }

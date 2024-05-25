@@ -14,6 +14,7 @@ struct ModelManager {
     
     let monitor: ClipboardMonitor
     let clipHistoryViewController = ClipHistoryViewController()
+    let beginningViewController = BeginningViewController()
     
     init(context: ModelContext) {
         self.context = context
