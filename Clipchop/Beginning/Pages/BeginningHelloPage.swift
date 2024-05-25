@@ -19,7 +19,7 @@ struct BeginningHelloPage: View {
                     .transition(.blurReplace.combined(with: .scale(0.75)))
             }
             
-            Text(Bundle.main.appName)
+            Text("Welcome to \(Text(Bundle.main.appName).foregroundStyle(.accent))")
         }
         .font(.title)
         .bold()

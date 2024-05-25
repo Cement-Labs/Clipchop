@@ -27,7 +27,7 @@ struct BeginningPermissionsPage: View {
             }
             .font(.title)
             .bold()
-            .frame(maxHeight: .infinity)
+            .frame(height: 200)
             
             Form {
                 PermissionsSection()

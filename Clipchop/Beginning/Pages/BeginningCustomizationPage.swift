@@ -12,7 +12,7 @@ struct BeginningCustomizationPage: View {
     @Environment(\.isVisible) var isVisible
     
     var body: some View {
-        Group {
+        VStack {
             VStack {
                 if isVisible {
                     Image(systemSymbol: .pencilAndOutline)
@@ -26,7 +26,13 @@ struct BeginningCustomizationPage: View {
             }
             .font(.title)
             .bold()
-            .frame(maxHeight: .infinity)
+            .frame(height: 200)
+            
+            Form {
+                AppearanceSection()
+            }
+            .formStyle(.grouped)
+            .scrollDisabled(true)
         }
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)

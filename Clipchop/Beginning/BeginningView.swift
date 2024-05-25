@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct BeginningView: View {
     enum Roaming: Int, CaseIterable {
@@ -36,6 +37,8 @@ struct BeginningView: View {
             -CGFloat(self.rawValue) * BeginningViewController.size.width
         }
     }
+    
+    @Default(.preferredColorScheme) var preferredColorScheme
     
     @Namespace var namespace
     
@@ -105,7 +108,24 @@ struct BeginningView: View {
             VStack {
                 Spacer()
                 
+                // With animation
+                if !roaming.hasHext {
+                    Button {
+                        NSApp.openSettings()
+                        viewController?.close()
+                    } label: {
+                        Text("Open Settings")
+                            .padding()
+                            .font(.title3)
+                            .blendMode(.luminosity)
+                    }
+                    .controlSize(.extraLarge)
+                    .buttonStyle(.borderless)
+                    .buttonBorderShape(.capsule)
+                }
+                
                 Button {
+                    // Without animation
                     if !isFinished {
                         next()
                     } else {
@@ -118,10 +138,6 @@ struct BeginningView: View {
                             Image(systemSymbol: .arrowForward)
                         } else {
                             Text("Start Using \(Bundle.main.appName)")
-                            Image(.appSymbol)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 18.5)
                         }
                     }
                     .padding()
@@ -156,6 +172,7 @@ struct BeginningView: View {
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .preferredColorScheme(preferredColorScheme.colorScheme)
         .ignoresSafeArea()
         .frame(width: BeginningViewController.size.width, height: BeginningViewController.size.height)
         .fixedSize()

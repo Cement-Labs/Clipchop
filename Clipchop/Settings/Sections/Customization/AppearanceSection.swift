@@ -18,6 +18,8 @@ struct AppearanceSection: View {
     @Default(.colorStyle) var colorStyle
     @Default(.customAccentColor) var customAccentColor
     
+    @Environment(\.hasTitle) var hasTitle
+    
     @ViewBuilder
     func soundPicker(
         _ titleKey: LocalizedStringKey,
@@ -45,24 +47,26 @@ struct AppearanceSection: View {
     }
     
     var body: some View {
-        Section {
-            Picker("App icon", selection: $appIcon) {
-                ForEach(AppIcon.unlockedAppIcons, id: \.self) { icon in
-                    HStack {
-                        Image(nsImage: icon.image)
-                        Text(icon.name ?? "")
+        if hasTitle {
+            Section {
+                Picker("App icon", selection: $appIcon) {
+                    ForEach(AppIcon.unlockedAppIcons, id: \.self) { icon in
+                        HStack {
+                            Image(nsImage: icon.image)
+                            Text(icon.name ?? "")
+                        }
+                        .tag(icon.assetName)
                     }
-                    .tag(icon.assetName)
                 }
-            }
-            .onChange(of: appIcon) { _, newIcon in
-                newIcon.setAppIcon()
-            }
-        } header: {
-            withCaption("""
+                .onChange(of: appIcon) { _, newIcon in
+                    newIcon.setAppIcon()
+                }
+            } header: {
+                withCaption("""
 Clip more to unlock more! You've already clipped \(timesClipped) times.
 """) {
-                Text("Appearance")
+                    Text("Appearance")
+                }
             }
         }
          
@@ -78,7 +82,7 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
             }
         }
         
-        Section("Color") {
+        Section {
             withCaption("Custom accent color only applies to the clip history window.") {
                 Picker(selection: $colorStyle) {
                     ColoredPickerRow(Defaults.inlineAccentColor(style: .app, customColor: .clear)) {
@@ -111,6 +115,10 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
             }
             
             PreferredColorSchemePicker()
+        } header: {
+            if hasTitle {
+                Text("Color")
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ struct BeginningAllSetPage: View {
                     .transition(.blurReplace.combined(with: .scale(0.75)))
             }
             
-            Text("You're All Set!")
+            Text("You're All Set!").foregroundStyle(.accent)
         }
         .font(.title)
         .bold()

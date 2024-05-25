@@ -12,7 +12,7 @@ struct BeginningShortcutsPage: View {
     @Environment(\.isVisible) var isVisible
     
     var body: some View {
-        Group {
+        VStack {
             VStack {
                 if isVisible {
                     Image(systemSymbol: .keyboard)
@@ -26,7 +26,14 @@ struct BeginningShortcutsPage: View {
             }
             .font(.title)
             .bold()
-            .frame(maxHeight: .infinity)
+            .frame(height: 200)
+            
+            Form {
+                KeyboardShortcutsSection()
+                    .controlSize(.large)
+            }
+            .formStyle(.grouped)
+            .scrollDisabled(true)
         }
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)
