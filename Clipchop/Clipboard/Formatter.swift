@@ -130,15 +130,15 @@ extension Formatter {
     
     func categorizeFileTypes() {
         guard let result = self.title?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() else {
-            log(self, "Title is nil or empty")
+            log(self, "Title is nil or empty for \(self)")
             return
         }
         
         var uncategorizedTypes = Set(Defaults[.uncategorizedFileTypes])
-        let fileCategories = Defaults[.fileCategories]
+        let categories = Defaults[.categories]
         
         var categorized = false
-        for (category, extensions) in fileCategories {
+        for (category, extensions) in categories {
             if extensions.contains(where: { $0 == result }) {
                 log(self, "File extension \(result) categorized under \(category)")
                 categorized = true

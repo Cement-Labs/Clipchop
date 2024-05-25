@@ -31,18 +31,19 @@ struct ClipchopApp: App {
         
 #if DEBUG
         
-        Defaults[.fileCategories] = Defaults.Keys.fileCategories.defaultValue
+        // Resets Defaults
+        Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
+        Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
+        
+        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
+        Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
+        Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
+        
+        Defaults[.categories] = Defaults.Keys.categories.defaultValue
         Defaults[.uncategorizedFileTypes] = Defaults.Keys.uncategorizedFileTypes.defaultValue
+        
         Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
         Defaults[.applicationExcludeList] = Defaults.Keys.applicationExcludeList.defaultValue
-        
-        // Resets UI states
-        Defaults[.menuBarItemEnabled] = true
-        Defaults[.beginningViewShown] = false
-        
-        // Resets user interactions
-        Defaults[.timesClipped] = 0
-        Defaults[.clipSound] = Sound.defaultSound
         
         // Resets clipboard history
         container.mainContext.autosaveEnabled = true

@@ -41,7 +41,7 @@ extension Defaults.Keys {
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
     
     
-    static let fileCategories = Key<[String: [String]]>("fileCategories", default: [
+    static let categories = Key<[String: [String]]>("categories", default: [
             "Images": ["jpg", "png", "gif"],
             "Documents": ["pdf", "docx", "xlsx", "pdf"],
             "Videos": ["mp4", "mov", "avi"],

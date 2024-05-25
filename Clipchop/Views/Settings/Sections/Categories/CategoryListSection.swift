@@ -10,7 +10,7 @@ import Defaults
 import UniformTypeIdentifiers
 
 struct CategoryListSection: View {
-    @Default(.fileCategories) private var fileCategories
+    @Default(.categories) private var fileCategories
     @Default(.uncategorizedFileTypes) private var uncategorizedFileTypes
     
     @State private var showingAddCategorySheet = false
