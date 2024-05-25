@@ -135,9 +135,11 @@ struct BeginningView: View {
                     HStack {
                         if !isFinished {
                             Text("Continue")
+                                .fixedSize()
                             Image(systemSymbol: .arrowForward)
                         } else {
                             Text("Start Using \(Bundle.main.appName)")
+                                .fixedSize()
                         }
                     }
                     .padding()
@@ -178,7 +180,9 @@ struct BeginningView: View {
         .fixedSize()
         
         .onChange(of: roaming) { old, new in
-            isFinished = !new.hasHext
+            withAnimation {
+                isFinished = !new.hasHext
+            }
         }
     }
 }
