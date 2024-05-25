@@ -43,6 +43,8 @@
 		289B498C2BF9B50C008643FA /* CardPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289B498B2BF9B50C008643FA /* CardPreviewView.swift */; };
 		28A173C92C0185D500B6FB03 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */; };
 		28A173CB2C01895300B6FB03 /* NSWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */; };
+		28A173CD2C0190E600B6FB03 /* BeginningAllSetPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A173CC2C0190E600B6FB03 /* BeginningAllSetPage.swift */; };
+		28A173CF2C01954900B6FB03 /* Transision+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A173CE2C01954900B6FB03 /* Transision+Extensions.swift */; };
 		28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */; };
 		28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */; };
 		28A699B12BF61F92000B0272 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A699B02BF61F92000B0272 /* Formatter.swift */; };
@@ -127,6 +129,8 @@
 		2884E5D62BF86F2500201A79 /* TestSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettingsPage.swift; sourceTree = "<group>"; };
 		289B498B2BF9B50C008643FA /* CardPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewView.swift; sourceTree = "<group>"; };
 		28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSWindow+Extensions.swift"; sourceTree = "<group>"; };
+		28A173CC2C0190E600B6FB03 /* BeginningAllSetPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginningAllSetPage.swift; sourceTree = "<group>"; };
+		28A173CE2C01954900B6FB03 /* Transision+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transision+Extensions.swift"; sourceTree = "<group>"; };
 		28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
 		28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardMonitor.swift; sourceTree = "<group>"; };
 		28A699B02BF61F92000B0272 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				287197902BDE72BC004BCDA3 /* NSPasteboard.PasteboardType+Extensions.swift */,
 				2843DB612BF0F4D3008AA2E1 /* NSImage+Extensions.swift */,
 				28A173CA2C01895300B6FB03 /* NSWindow+Extensions.swift */,
+				28A173CE2C01954900B6FB03 /* Transision+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				28E6E9012BFE16490068B449 /* BeginningPermissionsPage.swift */,
 				28E6E9082BFE16730068B449 /* BeginningShortcutsPage.swift */,
 				28E6E9052BFE16620068B449 /* BeginningCustomizationPage.swift */,
+				28A173CC2C0190E600B6FB03 /* BeginningAllSetPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 				28D8CE6D2BDD2458008B17B5 /* GlobalBehaviorsSection.swift in Sources */,
 				284882362BFF7DCD00689F28 /* EnvironmentValues+Extensions.swift in Sources */,
 				287197A02BDE75C0004BCDA3 /* KeyboardShortcuts+Extensions.swift in Sources */,
+				28A173CD2C0190E600B6FB03 /* BeginningAllSetPage.swift in Sources */,
 				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
 				2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */,
 				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
@@ -586,6 +593,7 @@
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,
+				28A173CF2C01954900B6FB03 /* Transision+Extensions.swift in Sources */,
 				28A173CB2C01895300B6FB03 /* NSWindow+Extensions.swift in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
 				28AD83602C01665C0093176B /* ViewController.swift in Sources */,

@@ -1,13 +1,13 @@
 //
-//  BeginningHelloPage.swift
+//  BeginningAllSetPage.swift
 //  Clipchop
 //
-//  Created by KrLite on 2024/5/22.
+//  Created by KrLite on 2024/5/25.
 //
 
 import SwiftUI
 
-struct BeginningHelloPage: View {
+struct BeginningAllSetPage: View {
     @Environment(\.namespace) var namespace
     @Environment(\.isVisible) var isVisible
     
@@ -19,7 +19,7 @@ struct BeginningHelloPage: View {
                     .transition(.blurReplace.combined(with: .scale(0.75)))
             }
             
-            Text(Bundle.main.appName)
+            Text("You're All Set!")
         }
         .font(.title)
         .bold()
@@ -29,5 +29,5 @@ struct BeginningHelloPage: View {
 }
 
 #Preview {
-    BeginningHelloPage()
+    BeginningAllSetPage()
 }

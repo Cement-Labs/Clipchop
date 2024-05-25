@@ -22,6 +22,16 @@ extension EnvironmentValues {
         get { self[ViewControllerEnvironmentKey.self] }
         set { self[ViewControllerEnvironmentKey.self] = newValue }
     }
+    
+    var namespace: Namespace.ID? {
+        get { self[NamespaceEnvironmentKey.self] }
+        set { self[NamespaceEnvironmentKey.self] = newValue }
+    }
+    
+    var isVisible: Bool {
+        get { self[IsVisibleEnvironmentKey.self] }
+        set { self[IsVisibleEnvironmentKey.self] = newValue }
+    }
 }
 
 struct HasTitleEnvironmentKey: EnvironmentKey {
@@ -34,4 +44,12 @@ struct CanContinueEnvironmentKey: EnvironmentKey {
 
 struct ViewControllerEnvironmentKey: EnvironmentKey {
     static var defaultValue: ViewController?
+}
+
+struct NamespaceEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Namespace.ID?
+}
+
+struct IsVisibleEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Bool = true
 }

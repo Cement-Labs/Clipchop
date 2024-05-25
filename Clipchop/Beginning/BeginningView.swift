@@ -14,6 +14,7 @@ struct BeginningView: View {
         case permissions = 2
         case shortcuts = 3
         case customization = 4
+        case allSet = 5
         
         var next: Self {
             Self(rawValue: self.rawValue + 1) ?? self
@@ -35,6 +36,8 @@ struct BeginningView: View {
             -CGFloat(self.rawValue) * BeginningViewController.size.width
         }
     }
+    
+    @Namespace var namespace
     
     @State var roaming: Roaming = .hello
     @State var canContinue: [Roaming: Bool] = [:]
@@ -69,22 +72,32 @@ struct BeginningView: View {
                 HStack(alignment: .center, spacing: 0) {
                     BeginningHelloPage()
                         .environment(\.canContinue, { canContinueCallback(roaming: .hello, $0) })
+                        .environment(\.isVisible, roaming == .hello)
                     
                     BeginningTutorialPage()
                         .environment(\.canContinue, { canContinueCallback(roaming: .tutorial, $0) })
+                        .environment(\.isVisible, roaming == .tutorial)
                     
                     BeginningPermissionsPage()
                         .environment(\.canContinue, { canContinueCallback(roaming: .permissions, $0) })
+                        .environment(\.isVisible, roaming == .permissions)
                     
                     BeginningShortcutsPage()
                         .environment(\.canContinue, { canContinueCallback(roaming: .shortcuts, $0) })
+                        .environment(\.isVisible, roaming == .shortcuts)
                     
                     BeginningCustomizationPage()
                         .environment(\.canContinue, { canContinueCallback(roaming: .customization, $0) })
+                        .environment(\.isVisible, roaming == .customization)
+                    
+                    BeginningAllSetPage()
+                        .environment(\.canContinue, { canContinueCallback(roaming: .allSet, $0) })
+                        .environment(\.isVisible, roaming == .allSet)
                 }
                 .offset(x: roaming.offsetY)
                 
                 .environment(\.hasTitle, false)
+                .environment(\.namespace, namespace)
             }
             .scrollIndicators(.never)
             .scrollDisabled(true)
@@ -104,7 +117,7 @@ struct BeginningView: View {
                             Text("Continue")
                             Image(systemSymbol: .arrowForward)
                         } else {
-                            Text("Start Using")
+                            Text("Start Using \(Bundle.main.appName)")
                             Image(.appSymbol)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)

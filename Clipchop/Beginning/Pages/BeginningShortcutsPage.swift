@@ -8,9 +8,25 @@
 import SwiftUI
 
 struct BeginningShortcutsPage: View {
+    @Environment(\.namespace) var namespace
+    @Environment(\.isVisible) var isVisible
+    
     var body: some View {
         Group {
-            Text("Shortcuts")
+            VStack {
+                if isVisible {
+                    Image(systemSymbol: .keyboard)
+                        .imageScale(.large)
+                        .padding()
+                        .matchedGeometryEffect(id: "flip", in: namespace!)
+                        .transition(.rotate3D(angle: .degrees(65)).combined(with: .scale).combined(with: .opacity))
+                }
+                
+                Text("Shortcuts")
+            }
+            .font(.title)
+            .bold()
+            .frame(maxHeight: .infinity)
         }
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)
