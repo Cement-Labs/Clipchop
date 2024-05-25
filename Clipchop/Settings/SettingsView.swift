@@ -55,11 +55,13 @@ func listEmbeddedForm(formStyle: some FormStyle = .grouped,@ViewBuilder content:
             content()
         }
         .formStyle(formStyle)
+        .background(.red)
         
         .scrollDisabled(true)
         .scrollContentBackground(.hidden)
         .ignoresSafeArea()
     }
+    .background(.green)
 }
 
 @ViewBuilder
@@ -155,6 +157,7 @@ struct SettingsView: View {
 #endif
             }
             .navigationSplitViewColumnWidth(200)
+            .toolbar(removing: .sidebarToggle)
         } detail: {
             Group {
                 switch selectedNavigation {
@@ -190,6 +193,7 @@ struct SettingsView: View {
             }
         }
         .navigationTitle(Bundle.main.appName)
+        .navigationSplitViewStyle(.prominentDetail)
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(condition: !isWindowInitialized) {
