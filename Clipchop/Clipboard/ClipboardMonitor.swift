@@ -153,8 +153,11 @@ class ClipboardMonitor: NSObject {
         
 #if DEBUG
         if let title = formatter.title {
-            log(self, "Formatted title: \(title)")
+            log(self, "Clipboard changed with title: \(title)")
+        } else {
+            log(self, "Clipboard changed")
         }
+        
         contents.forEach { content in
             log(self, "[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
