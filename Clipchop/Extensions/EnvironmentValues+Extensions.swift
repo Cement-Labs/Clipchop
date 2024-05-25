@@ -13,14 +13,9 @@ extension EnvironmentValues {
         set { self[HasTitleEnvironmentKey.self] = newValue }
     }
     
-    var navigateToNext: () -> Void {
-        get { self[NavigateToNextEnvironmentKey.self] }
-        set { self[NavigateToNextEnvironmentKey.self] = newValue }
-    }
-    
-    var navigateToPrevious: () -> Void {
-        get { self[NavigateToPreviousEnvironmentKey.self] }
-        set { self[NavigateToPreviousEnvironmentKey.self] = newValue }
+    var canContinue: (Bool) -> Void {
+        get { self[CanContinueEnvironmentKey.self] }
+        set { self[CanContinueEnvironmentKey.self] = newValue }
     }
 }
 
@@ -28,10 +23,6 @@ struct HasTitleEnvironmentKey: EnvironmentKey {
     static var defaultValue: Bool = true
 }
 
-struct NavigateToNextEnvironmentKey: EnvironmentKey {
-    static var defaultValue: () -> Void = {}
-}
-
-struct NavigateToPreviousEnvironmentKey: EnvironmentKey {
-    static var defaultValue: () -> Void = {}
+struct CanContinueEnvironmentKey: EnvironmentKey {
+    static var defaultValue: (Bool) -> Void = { _ in }
 }

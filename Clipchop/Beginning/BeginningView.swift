@@ -10,8 +10,8 @@ import SwiftUI
 struct BeginningView: View {
     enum Roaming: Int, CaseIterable {
         case hello = 0
-        case permissions = 1
-        case tutorial = 2
+        case tutorial = 1
+        case permissions = 2
         case shortcuts = 3
         case customization = 4
         
@@ -36,18 +36,28 @@ struct BeginningView: View {
         }
     }
     
-    @State var selectedRoaming: Roaming = .hello
+    @State var roaming: Roaming = .hello
+    @State var canContinue: [Roaming: Bool] = [:]
+    @State var isContinueButtonHovering = false
+    
+    var canRoamingContinue: Bool {
+        canContinue[roaming] ?? true
+    }
     
     func previous() {
         withAnimation {
-            selectedRoaming = selectedRoaming.previous
+            roaming = roaming.previous
         }
     }
     
     func next() {
         withAnimation {
-            selectedRoaming = selectedRoaming.next
+            roaming = roaming.next
         }
+    }
+    
+    func canContinueCallback(roaming: Roaming, _ canContinue: Bool) {
+        self.canContinue[roaming] = canContinue
     }
     
     var body: some View {
@@ -55,20 +65,23 @@ struct BeginningView: View {
             ScrollView(.horizontal) {
                 HStack(alignment: .center, spacing: 0) {
                     BeginningHelloPage()
-                    
-                    BeginningPermissionsPage()
+                        .environment(\.canContinue, { canContinueCallback(roaming: .hello, $0) })
                     
                     BeginningTutorialPage()
+                        .environment(\.canContinue, { canContinueCallback(roaming: .tutorial, $0) })
+                    
+                    BeginningPermissionsPage()
+                        .environment(\.canContinue, { canContinueCallback(roaming: .permissions, $0) })
                     
                     BeginningShortcutsPage()
+                        .environment(\.canContinue, { canContinueCallback(roaming: .shortcuts, $0) })
                     
                     BeginningCustomizationPage()
+                        .environment(\.canContinue, { canContinueCallback(roaming: .customization, $0) })
                 }
-                .offset(x: selectedRoaming.offsetY)
+                .offset(x: roaming.offsetY)
                 
                 .environment(\.hasTitle, false)
-                .environment(\.navigateToNext, next)
-                .environment(\.navigateToPrevious, previous)
             }
             .scrollIndicators(.never)
             .scrollDisabled(true)
@@ -76,50 +89,37 @@ struct BeginningView: View {
             VStack {
                 Spacer()
                 
-                HStack {
-                    if selectedRoaming.hasPrevious {
-                        Button {
-                            previous()
-                        } label: {
-                            HStack {
-                                Image(systemSymbol: .chevronBackward)
-                                
-                                Image(systemSymbol: .command)
-                                    .foregroundStyle(.placeholder)
-                            }
-                            .padding()
+                Button {
+                    next()
+                } label: {
+                    HStack {
+                        if roaming.hasHext {
+                            Text("Continue")
+                            Image(systemSymbol: .arrowForward)
+                        } else {
+                            Text("Start Using")
+                            Image(.appSymbol)
                         }
-                        .background {
-                            VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-                                .clipShape(.capsule)
-                        }
-                        .keyboardShortcut(.leftArrow, modifiers: .command)
                     }
-                    
-                    Spacer()
-                    
-                    if selectedRoaming.hasHext {
-                        Button {
-                            next()
-                        } label: {
-                            HStack {
-                                Image(systemSymbol: .command)
-                                    .foregroundStyle(.placeholder)
-                                
-                                Image(systemSymbol: .chevronForward)
-                            }
-                            .padding()
-                        }
-                        .background {
-                            VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-                                .clipShape(.capsule)
-                        }
-                        .keyboardShortcut(.rightArrow, modifiers: .command)
-                    }
+                    .padding()
+                    .font(.title3)
+                    .blendMode(.luminosity)
                 }
-                .bold()
+                .background {
+                    Rectangle()
+                        .if(condition: canRoamingContinue) { view in
+                            view.fill(.accent)
+                        } falseExpression: { view in
+                            view.fill(.placeholder)
+                        }
+                        .clipShape(.buttonBorder)
+                }
+                .disabled(!canRoamingContinue)
                 .controlSize(.extraLarge)
                 .buttonStyle(.borderless)
+                .buttonBorderShape(.capsule)
+                .tint(.white)
+                .shadow(color: canRoamingContinue ? .accent.opacity(0.25) : .clear, radius: 15, y: 7)
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)

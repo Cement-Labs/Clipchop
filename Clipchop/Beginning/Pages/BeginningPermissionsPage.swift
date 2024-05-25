@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BeginningPermissionsPage: View {
-    @Environment(\.navigateToNext) var next
+    @Environment(\.canContinue) var canContinue
     
     var body: some View {
         VStack {
@@ -33,10 +33,8 @@ struct BeginningPermissionsPage: View {
         .frame(width: BeginningViewController.size.width)
         .frame(maxHeight: .infinity)
         
-        .onChange(of: PermissionsManager.remaining) { old, new in
-            if new == 0 {
-                next()
-            }
+        .onChange(of: PermissionsManager.remaining, initial: true) { old, new in
+            canContinue(new == 0)
         }
     }
 }

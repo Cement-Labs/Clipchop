@@ -10,7 +10,7 @@ import Defaults
 import KeyboardShortcuts
 
 @Observable class BeginningViewController {
-    static let size = NSSize(width: 500, height: 500)
+    static let size = NSSize(width: 450, height: 500)
     
     private var windowController: NSWindowController?
 
