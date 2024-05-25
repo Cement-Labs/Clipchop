@@ -121,7 +121,7 @@ struct BeginningView: View {
                     }
                     .controlSize(.extraLarge)
                     .buttonStyle(.borderless)
-                    .buttonBorderShape(.capsule)
+                    .buttonBorderShape(.roundedRectangle(radius: 15))
                 }
                 
                 Button {

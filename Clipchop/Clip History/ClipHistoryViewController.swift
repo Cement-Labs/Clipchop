@@ -19,6 +19,7 @@ import KeyboardShortcuts
     private var windowController: NSWindowController?
     private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
+    
     private var cachedPanel: NSPanel?
     private var cachedClipHistoryView: ClipHistoryView?
     
@@ -165,6 +166,7 @@ extension ClipHistoryViewController {
                 .environment(\.viewController, self)
             
             panel.contentView = NSHostingView(rootView: clipHistoryView)
+            
             cachedPanel = panel
             cachedClipHistoryView = clipHistoryView as? ClipHistoryView
         }
