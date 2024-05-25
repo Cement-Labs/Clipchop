@@ -148,8 +148,13 @@ class ClipboardMonitor: NSObject {
             log(self, "Notified clipboard change")
         }
         
+        let formatter = Formatter(contents: contents)
+        formatter.categorizeFileTypes()
+        
 #if DEBUG
-        log(self, "Clipboard changed:")
+        if let title = formatter.title {
+            log(self, "Formatted title: \(title)")
+        }
         contents.forEach { content in
             log(self, "[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }

@@ -11,7 +11,7 @@ import SwiftData
 import AppKit
 
 @Model
-final class ClipboardHistory: Equatable, Identifiable {
+final class ClipboardHistory: Equatable, Identifiable, Hashable {
     enum Class {
         case all
         

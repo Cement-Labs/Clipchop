@@ -9,6 +9,7 @@ import Foundation
 import SwiftHEXColors
 import SwiftUI
 import AppKit
+import Defaults
 
 struct Formatter {
     var contents: [ClipboardContent]
@@ -125,5 +126,29 @@ extension Formatter {
         }
         
         return result
+    }
+    
+    func categorizeFileTypes() {
+        guard let result = self.title?.lowercased() else { return }
+        var uncategorizedTypes = Set(Defaults[.uncategorizedFileTypes])
+        let fileCategories = Defaults[.fileCategories]
+        
+        var categorized = false
+        for (category, extensions) in fileCategories {
+            if extensions.contains(result) {
+                log(self, "File extension \(result) categorized under \(category)")
+                categorized = true
+                break
+            }
+        }
+        
+        if !categorized {
+            log(self, "File extension \(result) not categorized, needs manual categorization")
+            if !uncategorizedTypes.contains(result) {
+                uncategorizedTypes.insert(result)
+            }
+        }
+        
+        Defaults[.uncategorizedFileTypes] = Array(uncategorizedTypes)
     }
 }
