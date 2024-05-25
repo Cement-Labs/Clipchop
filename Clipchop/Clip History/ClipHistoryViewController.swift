@@ -19,6 +19,8 @@ import KeyboardShortcuts
     private var windowController: NSWindowController?
     private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
+    private var cachedPanel: NSPanel?
+    private var cachedClipHistoryView: ClipHistoryView?
     
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
         guard let screenRect = NSScreen.main?.frame else { return topLeft }
@@ -141,42 +143,49 @@ extension ClipHistoryViewController {
             return
         }
         
-        let panel = NSPanel(
-            contentRect: .zero,
-            styleMask: [.borderless, .nonactivatingPanel],
-            backing: .buffered,
-            defer: true,
-            screen: NSApp.keyWindow?.screen
-        )
-        
-        panel.animationBehavior = .utilityWindow
-        panel.collectionBehavior = .canJoinAllSpaces
-        panel.hasShadow = true
-        panel.backgroundColor = .white.withAlphaComponent(0.000001) // Making the window transparent causes buggy shadows
-        panel.level = .floating // This prevents misalignments between the card and window hierarchy when the card is being dragged.
-        panel.isMovableByWindowBackground = false
-        
-        panel.contentView = NSHostingView(
-            rootView: ClipHistoryView()
+        if cachedPanel == nil {
+            let panel = NSPanel(
+                contentRect: .zero,
+                styleMask: [.borderless, .nonactivatingPanel],
+                backing: .buffered,
+                defer: true,
+                screen: NSApp.keyWindow?.screen
+            )
+            
+            panel.animationBehavior = .utilityWindow
+            panel.collectionBehavior = .canJoinAllSpaces
+            panel.hasShadow = true
+            panel.backgroundColor = .white.withAlphaComponent(0.000001)
+            panel.level = .floating
+            panel.isMovableByWindowBackground = false
+            
+            let clipHistoryView = ClipHistoryView()
                 .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
                 .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
                 .environment(\.viewController, self)
-        )
-        panel.setFrame(
-            CGRect(
-                origin: positionNear(position: position, size: Self.size.collapsed)
-                    .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
-                size: Self.size.collapsed
-            ),
-            display: false
-        )
-        panel.orderFrontRegardless()
+            
+            panel.contentView = NSHostingView(rootView: clipHistoryView)
+            cachedPanel = panel
+            cachedClipHistoryView = clipHistoryView as? ClipHistoryView
+        }
         
-        windowController = .init(window: panel)
-        setWindowSize(isExpanded: false, animate: false)
-        
-        initShortcuts()
-        enableShortcuts()
+        if let panel = cachedPanel {
+            panel.setFrame(
+                CGRect(
+                    origin: positionNear(position: position, size: Self.size.collapsed)
+                        .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
+                    size: Self.size.collapsed
+                ),
+                display: false
+            )
+            panel.orderFrontRegardless()
+            
+            windowController = .init(window: panel)
+            setWindowSize(isExpanded: false, animate: false)
+            
+            initShortcuts()
+            enableShortcuts()
+        }
     }
     
     func close() {

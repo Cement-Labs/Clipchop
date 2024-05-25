@@ -158,7 +158,7 @@ struct BeginningView: View {
                 
                 .controlSize(.extraLarge)
                 .buttonStyle(.borderless)
-                .buttonBorderShape(.capsule)
+                .buttonBorderShape(.roundedRectangle(radius: 15))
                 
                 .tint(.white)
                 .shadow(color: canRoamingContinue ? .accent.opacity(0.25) : .clear, radius: 15, y: 7)
