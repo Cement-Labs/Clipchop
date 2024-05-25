@@ -16,7 +16,7 @@ struct MenuBarView: View {
         sort: \ClipboardHistory.time,
         order: .reverse
     ) private var items: [ClipboardHistory]
-        
+    
     var body: some View {
         Text("\(timesClipped) Clips, \(items.count) Items")
         

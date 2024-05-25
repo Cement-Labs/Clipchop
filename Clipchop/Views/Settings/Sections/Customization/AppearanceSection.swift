@@ -62,13 +62,15 @@ struct AppearanceSection: View {
                     newIcon.setAppIcon()
                 }
             } header: {
-                withCaption("""
-Clip more to unlock more! You've already clipped \(timesClipped) times.
-""") {
+                withCaption {
                     Text("Appearance")
+                } caption: {
+                    Text("""
+Clip more to unlock more! You've already clipped \(timesClipped) times.
+""")
+                    .contentTransition(.numericText(value: Double(timesClipped)))
+                    .animation(.snappy(duration: 0.5), value: timesClipped)
                 }
-.contentTransition(.numericText(value: Double(timesClipped)))
-.animation(.snappy(duration: 0.5), value: timesClipped)
             }
         }
          
