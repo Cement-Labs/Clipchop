@@ -14,10 +14,9 @@ struct MenuBarView: View {
     
     @Query(
         sort: \ClipboardHistory.time,
-        order: .reverse,
-        animation: .spring(dampingFraction: 0.7)
+        order: .reverse
     ) private var items: [ClipboardHistory]
-    
+        
     var body: some View {
         Text("\(timesClipped) Clips, \(items.count) Items")
         

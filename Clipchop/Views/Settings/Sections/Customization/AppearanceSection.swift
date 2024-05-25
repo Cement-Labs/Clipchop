@@ -67,6 +67,8 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
 """) {
                     Text("Appearance")
                 }
+.contentTransition(.numericText(value: Double(timesClipped)))
+.animation(.snappy(duration: 0.5), value: timesClipped)
             }
         }
          

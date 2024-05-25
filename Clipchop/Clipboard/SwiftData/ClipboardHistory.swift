@@ -67,7 +67,11 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
     }
     
     static func == (lhs: ClipboardHistory, rhs: ClipboardHistory) -> Bool {
-      return lhs.getContents().count == rhs.getContents().count && lhs.supersedes(rhs)
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     // MARK: - Fields
