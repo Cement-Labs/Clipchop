@@ -95,6 +95,7 @@
 		28E6E9042BFE16570068B449 /* BeginningTutorialPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6E9032BFE16570068B449 /* BeginningTutorialPage.swift */; };
 		28E6E9062BFE16620068B449 /* BeginningCustomizationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6E9052BFE16620068B449 /* BeginningCustomizationPage.swift */; };
 		28E6E9092BFE16730068B449 /* BeginningShortcutsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E6E9082BFE16730068B449 /* BeginningShortcutsPage.swift */; };
+		28F416502C03719D00C53197 /* MutableCollection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F4164F2C03719D00C53197 /* MutableCollection+Extensions.swift */; };
 		28F7D0E52BF777C300DDFC2C /* WindowManagement in Frameworks */ = {isa = PBXBuildFile; productRef = 28F7D0E42BF777C300DDFC2C /* WindowManagement */; };
 		6513FF392BFBB800008149AB /* ColorPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF332BFBB800008149AB /* ColorPreviewPage.swift */; };
 		6513FF3C2BFBB800008149AB /* RTFPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6513FF362BFBB800008149AB /* RTFPreviewPage.swift */; };
@@ -186,6 +187,7 @@
 		28E6E9032BFE16570068B449 /* BeginningTutorialPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginningTutorialPage.swift; sourceTree = "<group>"; };
 		28E6E9052BFE16620068B449 /* BeginningCustomizationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginningCustomizationPage.swift; sourceTree = "<group>"; };
 		28E6E9082BFE16730068B449 /* BeginningShortcutsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginningShortcutsPage.swift; sourceTree = "<group>"; };
+		28F4164F2C03719D00C53197 /* MutableCollection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MutableCollection+Extensions.swift"; sourceTree = "<group>"; };
 		6513FF332BFBB800008149AB /* ColorPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPreviewPage.swift; sourceTree = "<group>"; };
 		6513FF362BFBB800008149AB /* RTFPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTFPreviewPage.swift; sourceTree = "<group>"; };
 		6513FF372BFBB800008149AB /* WebLinkPreviewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLinkPreviewPage.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 		28C1022F2C0206BD003F5722 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				28F4164F2C03719D00C53197 /* MutableCollection+Extensions.swift */,
 				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
 				28C102312C0206E3003F5722 /* Notification+Extensions.swift */,
 			);
@@ -679,6 +682,7 @@
 				28A699B12BF61F92000B0272 /* Formatter.swift in Sources */,
 				2843DB602BF0F06B008AA2E1 /* ExcludedAppListSection.swift in Sources */,
 				2872C0F32BF78963000ED6A8 /* VisualEffectView.swift in Sources */,
+				28F416502C03719D00C53197 /* MutableCollection+Extensions.swift in Sources */,
 				28A173CF2C01954900B6FB03 /* Transision+Extensions.swift in Sources */,
 				28A173CB2C01895300B6FB03 /* NSWindow+Extensions.swift in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,

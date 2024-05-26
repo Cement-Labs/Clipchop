@@ -19,6 +19,7 @@ struct FileTypeListView<Label>: View where Label: View {
     var onDropOf: [UTType] = []
     var onDropDelegate: DropDelegate?
     var onDelete: Optional<(IndexSet) -> Void> = { _ in }
+    var onSingleDelete: (String) -> Void = { _ in }
     
     init(
         types: Binding<[String]>,
@@ -26,6 +27,7 @@ struct FileTypeListView<Label>: View where Label: View {
         onDropOf: [UTType] = [],
         onDropDelegate: DropDelegate? = nil,
         onDelete: @escaping (IndexSet) -> Void = { _ in },
+        onSingleDelete: @escaping (String) -> Void = { _ in },
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.label = label
@@ -33,6 +35,7 @@ struct FileTypeListView<Label>: View where Label: View {
         self._isInEditMode = isInEditMode
         
         self.onDelete = onDelete
+        self.onSingleDelete = onSingleDelete
         self.onDropOf = onDropOf
         self.onDropDelegate = onDropDelegate
     }
@@ -43,9 +46,15 @@ struct FileTypeListView<Label>: View where Label: View {
         isInEditMode: Binding<Bool>,
         onDropOf: [UTType] = [],
         onDropDelegate: DropDelegate? = nil,
-        onDelete: @escaping (IndexSet) -> Void = { _ in }
+        onDelete: @escaping (IndexSet) -> Void = { _ in },
+        onSingleDelete: @escaping (String) -> Void = { _ in }
     ) where Label == Text {
-        self.init(types: types, isInEditMode: isInEditMode, onDropOf: onDropOf, onDropDelegate: onDropDelegate, onDelete: onDelete) {
+        self.init(
+            types: types,
+            isInEditMode: isInEditMode,
+            onDropOf: onDropOf, onDropDelegate: onDropDelegate,
+            onDelete: onDelete, onSingleDelete: onSingleDelete
+        ) {
             Text(titleKey)
         }
     }
@@ -53,9 +62,7 @@ struct FileTypeListView<Label>: View where Label: View {
     @ViewBuilder
     func buildTagEntry(_ type: String) -> some View {
         HStack {
-            FileTypeTagView(type: type, isDeleteButtonShown: $isInEditMode) { type in
-                types.removeAll { $0 == type }
-            }
+            FileTypeTagView(type: type, isDeleteButtonShown: $isInEditMode, onDelete: onSingleDelete)
             .onDrag {
                 isInEditMode = false
                 return NSItemProvider(object: type as NSString)

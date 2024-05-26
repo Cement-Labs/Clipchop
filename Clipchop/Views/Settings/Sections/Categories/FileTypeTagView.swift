@@ -38,5 +38,11 @@ struct FileTypeTagView: View {
                     .offset(x: 5, y: -5)
                 }
             }
+        
+            .contextMenu {
+                Button("Remove", role: .destructive) {
+                    onDelete(type)
+                }
+            }
     }
 }
