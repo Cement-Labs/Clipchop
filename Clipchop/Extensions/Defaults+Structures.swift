@@ -87,3 +87,9 @@ struct FileCategory: Identifiable, Codable, Defaults.Serializable {
     var name: String?
     var types: [String] = []
 }
+
+extension FileCategory: Equatable {
+    static func ==(lhs: FileCategory, rhs: FileCategory) -> Bool {
+        lhs.id == rhs.id
+    }
+}

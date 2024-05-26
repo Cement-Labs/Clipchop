@@ -233,9 +233,6 @@
     "Allow app excluding" : {
 
     },
-    "Annonymous Category" : {
-
-    },
     "App Development Time" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -326,7 +323,13 @@
     "Back" : {
 
     },
+    "Cancel" : {
+
+    },
     "Categories" : {
+
+    },
+    "Category %@" : {
 
     },
     "Category Name" : {
@@ -428,7 +431,7 @@
     "Excluded Apps" : {
 
     },
-    "File Type" : {
+    "Extension" : {
 
     },
     "Forever" : {

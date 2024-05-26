@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
+		2807BFD82C02C94300D65DE3 /* AddContentPopoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD72C02C94300D65DE3 /* AddContentPopoverButton.swift */; };
+		2807BFDA2C02CCA800D65DE3 /* FileTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD92C02CCA800D65DE3 /* FileTypeList.swift */; };
+		2807BFDC2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */; };
 		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
 		281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */; };
 		281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */; };
@@ -103,6 +106,9 @@
 
 /* Begin PBXFileReference section */
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
+		2807BFD72C02C94300D65DE3 /* AddContentPopoverButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentPopoverButton.swift; sourceTree = "<group>"; };
+		2807BFD92C02CCA800D65DE3 /* FileTypeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeList.swift; sourceTree = "<group>"; };
+		2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeDropDelegate.swift; sourceTree = "<group>"; };
 		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
 		28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
@@ -509,6 +515,9 @@
 			isa = PBXGroup;
 			children = (
 				654DCBEB2C024A890027FAD4 /* CategoryListSection.swift */,
+				2807BFD72C02C94300D65DE3 /* AddContentPopoverButton.swift */,
+				2807BFD92C02CCA800D65DE3 /* FileTypeList.swift */,
+				2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -646,6 +655,7 @@
 				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
 				2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */,
 				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
+				2807BFD82C02C94300D65DE3 /* AddContentPopoverButton.swift in Sources */,
 				283E25342BF4EF670094C06F /* AcknowledgementsView.swift in Sources */,
 				28C2C5962BF0D0BF00E9D9AA /* Sound.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
@@ -677,8 +687,10 @@
 				28E6E9042BFE16570068B449 /* BeginningTutorialPage.swift in Sources */,
 				28C102342C020C5D003F5722 /* Logger.swift in Sources */,
 				28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */,
+				2807BFDA2C02CCA800D65DE3 /* FileTypeList.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				283E25362BF4FE040094C06F /* StaleView.swift in Sources */,
+				2807BFDC2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift in Sources */,
 				28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */,
 				28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */,
 				28D8CE692BDD1260008B17B5 /* PermissionsSection.swift in Sources */,

@@ -56,7 +56,7 @@ extension Defaults.Keys {
             "mp3", "wav", "m4a", "flac"
         ])
     ])
-    static let uncategorizedTypes = Key<[String]>("uncategorizedTypes", default: [])
+    static let allTypes = Key<[String]>("allTypes", default: categories.defaultValue.flatMap { $0.types })
     
 }
 
