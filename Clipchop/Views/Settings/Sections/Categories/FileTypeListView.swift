@@ -60,6 +60,7 @@ struct FileTypeListView<Label>: View where Label: View {
                 isInEditMode = false
                 return NSItemProvider(object: type as NSString)
             }
+            .wiggle(isAnimating: $isInEditMode)
         }
     }
     
@@ -82,6 +83,9 @@ struct FileTypeListView<Label>: View where Label: View {
                 ) { type in
                     buildTagEntry(type)
                 }
+                .if(onDropDelegate != nil) { view in
+                    view.onDrop(of: onDropOf, delegate: onDropDelegate!)
+                }
             }
         } header: {
             HStack {
@@ -102,8 +106,6 @@ struct FileTypeListView<Label>: View where Label: View {
             }
         }
         .animation(.interactiveSpring, value: types)
-        .if(onDropDelegate != nil) { view in
-            view.onDrop(of: onDropOf, delegate: onDropDelegate!)
-        }
+        
     }
 }

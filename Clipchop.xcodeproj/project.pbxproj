@@ -103,6 +103,7 @@
 		654DCBEC2C024A890027FAD4 /* CategoryListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DCBEB2C024A890027FAD4 /* CategoryListSection.swift */; };
 		654DCBEE2C0253C10027FAD4 /* CategoriesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DCBED2C0253C10027FAD4 /* CategoriesPage.swift */; };
 		659355082BFEE94F00CA1D53 /* DragManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659355072BFEE94F00CA1D53 /* DragManager.swift */; };
+		65DDA4832C037E920086458E /* Wiggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DDA4822C037E920086458E /* Wiggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,7 @@
 		654DCBEB2C024A890027FAD4 /* CategoryListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListSection.swift; sourceTree = "<group>"; };
 		654DCBED2C0253C10027FAD4 /* CategoriesPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesPage.swift; sourceTree = "<group>"; };
 		659355072BFEE94F00CA1D53 /* DragManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragManager.swift; sourceTree = "<group>"; };
+		65DDA4822C037E920086458E /* Wiggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,6 +519,7 @@
 		654DCBEA2C024A060027FAD4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				65DDA4822C037E920086458E /* Wiggle.swift */,
 				654DCBEB2C024A890027FAD4 /* CategoryListSection.swift */,
 				2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */,
 				28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */,
@@ -702,6 +705,7 @@
 				28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */,
 				28D8CE6B2BDD142F008B17B5 /* View+Extensions.swift in Sources */,
 				28C2C99F2BF8D078007BDC3C /* DefaultsStack.swift in Sources */,
+				65DDA4832C037E920086458E /* Wiggle.swift in Sources */,
 				281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */,
 				2871979C2BDE74A4004BCDA3 /* NotificationManager.swift in Sources */,
 				28C2C5902BF0CA3E00E9D9AA /* AppIcon.swift in Sources */,
