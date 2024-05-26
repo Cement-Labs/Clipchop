@@ -69,9 +69,10 @@ struct ClipboardHistorySection: View {
                 } maximumValueLabel: {
                     Text("30")
                 }
+                .frame(height: 24)
                 .monospaced()
-                .disabled(historyPreservationPeriod == .forever)
-                .animation(.snappy(duration: 0.5), value: historyPreservationTime)
+                .disabled(historyPreservationPeriod == .forever && DefaultsStack.Group.historyPreservation.isUnchanged)
+                .animation(.default, value: DefaultsStack.Group.historyPreservation.isUnchanged)
                 
                 .onAppear {
                     cache()

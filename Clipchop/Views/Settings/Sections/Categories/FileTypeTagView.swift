@@ -9,9 +9,8 @@ import SwiftUI
 
 struct FileTypeTagView: View {
     var type: String
+    @State var isDeleteButtonShown: Bool = false
     var onDelete: (String) -> Void
-    
-    @State private var isDeleteButtonShown: Bool = false
     
     var body: some View {
         Text(type)
@@ -19,16 +18,21 @@ struct FileTypeTagView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
         
-            .background {
-                VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
-            }
+            .background(.accent.opacity(0.1))
             .clipShape(.rect(cornerRadius: 12))
         
-            .onAppear {
-                // Hold option to show delete button
-                NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
-                    isDeleteButtonShown = event.modifierFlags.contains(.option)
-                    return event
+            .overlay(alignment: .topTrailing) {
+                if isDeleteButtonShown {
+                    Button {
+                        onDelete(type)
+                    } label: {
+                        Image(systemSymbol: .xmark)
+                    }
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.red)
+                } else {
+                    Color.red
                 }
             }
     }

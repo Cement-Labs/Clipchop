@@ -15,12 +15,15 @@ struct FileTypeListView<Label>: View where Label: View {
     
     @State private var isCollapsed = false
     
+    var isInEditMode = false
+    
     var onDropOf: [UTType] = []
     var onDropDelegate: DropDelegate?
     var onDelete: Optional<(IndexSet) -> Void> = { _ in }
     
     init(
         types: Binding<[String]>,
+        isInEditMode: Bool = false,
         onDropOf: [UTType] = [],
         onDropDelegate: DropDelegate? = nil,
         onDelete: @escaping (IndexSet) -> Void = { _ in },
@@ -32,16 +35,19 @@ struct FileTypeListView<Label>: View where Label: View {
         self.onDelete = onDelete
         self.onDropOf = onDropOf
         self.onDropDelegate = onDropDelegate
+        
+        self.isInEditMode = isInEditMode
     }
     
     init(
         _ titleKey: LocalizedStringKey,
         types: Binding<[String]>,
+        isInEditMode: Bool = false,
         onDropOf: [UTType] = [],
         onDropDelegate: DropDelegate? = nil,
         onDelete: @escaping (IndexSet) -> Void = { _ in }
     ) where Label == Text {
-        self.init(types: types, onDropOf: onDropOf, onDropDelegate: onDropDelegate, onDelete: onDelete) {
+        self.init(types: types, isInEditMode: isInEditMode, onDropOf: onDropOf, onDropDelegate: onDropDelegate, onDelete: onDelete) {
             Text(titleKey)
         }
     }
@@ -49,7 +55,7 @@ struct FileTypeListView<Label>: View where Label: View {
     @ViewBuilder
     func buildTagEntry(_ type: String) -> some View {
         HStack {
-            FileTypeTagView(type: type) { type in
+            FileTypeTagView(type: type, isDeleteButtonShown: isInEditMode) { type in
                 types.removeAll { $0 == type }
             }
             .onDrag {

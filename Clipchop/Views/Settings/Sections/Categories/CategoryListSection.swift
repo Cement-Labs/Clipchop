@@ -15,9 +15,10 @@ struct CategoryListSection: View {
         case fileType
     }
     
-    @Default(.categories) private var categories
-    @Default(.allTypes) private var allTypes
-    
+    @Default(.categories) var categories
+    @Default(.allTypes) var allTypes
+
+    @State var isInEditMode = false
     @State var isPopoverPresented = false
     @State var contentType: ContentType = .category
     @State var input: String = ""
@@ -91,6 +92,16 @@ struct CategoryListSection: View {
                         }
                     }
                 }
+        }
+        
+        .onAppear {
+            // Hold option to enable edit mode
+            NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
+                withAnimation {
+                    isInEditMode = event.modifierFlags.contains(.option)
+                }
+                return event
+            }
         }
 
         ForEach($categories) { category in
