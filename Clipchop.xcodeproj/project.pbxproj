@@ -75,7 +75,7 @@
 		28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */; };
 		28C2C99F2BF8D078007BDC3C /* DefaultsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C99E2BF8D078007BDC3C /* DefaultsStack.swift */; };
 		28D4B3DE2C0314A5002ACBAA /* FileTypeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */; };
-		28D4B3E12C03272C002ACBAA /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 28D4B3E02C03272C002ACBAA /* WrappingHStack */; };
+		28D4B3E32C0337D4002ACBAA /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */; };
 		28D8CE592BDCF5B9008B17B5 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */; };
 		28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE5B2BDCF7A5008B17B5 /* Sauce */; };
 		28D8CE612BDCF9B8008B17B5 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE602BDCF9B8008B17B5 /* MenuBarView.swift */; };
@@ -168,6 +168,7 @@
 		28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSection.swift; sourceTree = "<group>"; };
 		28C2C99E2BF8D078007BDC3C /* DefaultsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStack.swift; sourceTree = "<group>"; };
 		28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeTagView.swift; sourceTree = "<group>"; };
+		28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
 		28D8CE602BDCF9B8008B17B5 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerimissionsManager.swift; sourceTree = "<group>"; };
 		28D8CE652BDD0FCB008B17B5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -199,7 +200,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */,
-				28D4B3E12C03272C002ACBAA /* WrappingHStack in Frameworks */,
 				28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */,
 				28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */,
 				28A173C92C0185D500B6FB03 /* SwiftUIIntrospect in Frameworks */,
@@ -475,6 +475,7 @@
 			children = (
 				2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */,
 				283E25352BF4FE040094C06F /* StaleView.swift */,
+				28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */,
 			);
 			path = Fundamentals;
 			sourceTree = "<group>";
@@ -553,7 +554,6 @@
 				28C2C58B2BF0C6ED00E9D9AA /* Algorithms */,
 				28F7D0E42BF777C300DDFC2C /* WindowManagement */,
 				28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */,
-				28D4B3E02C03272C002ACBAA /* WrappingHStack */,
 			);
 			productName = Clipchop;
 			productReference = 288295142BC41F7300392B29 /* Clipchop.app */;
@@ -597,7 +597,6 @@
 				28C2C58A2BF0C6ED00E9D9AA /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				28F7D0E32BF777C300DDFC2C /* XCRemoteSwiftPackageReference "SwiftUI-WindowManagement" */,
 				28A173C72C0185D500B6FB03 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
-				28D4B3DF2C03272C002ACBAA /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 288295152BC41F7300392B29 /* Products */;
 			projectDirPath = "";
@@ -680,6 +679,7 @@
 				28A173CF2C01954900B6FB03 /* Transision+Extensions.swift in Sources */,
 				28A173CB2C01895300B6FB03 /* NSWindow+Extensions.swift in Sources */,
 				28D8CE752BDD2B42008B17B5 /* AppDelegate.swift in Sources */,
+				28D4B3E32C0337D4002ACBAA /* WrappingHStack.swift in Sources */,
 				28AD83602C01665C0093176B /* ViewController.swift in Sources */,
 				28227F632BF248E3008FAC3A /* KeyboardShortcutsSection.swift in Sources */,
 				28D8CE732BDD283B008B17B5 /* ClipboardSettingsPage.swift in Sources */,
@@ -1020,14 +1020,6 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		28D4B3DF2C03272C002ACBAA /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dkk/WrappingHStack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.11;
-			};
-		};
 		28D8CE572BDCF5B9008B17B5 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
@@ -1094,11 +1086,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 28C2C58A2BF0C6ED00E9D9AA /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
-		};
-		28D4B3E02C03272C002ACBAA /* WrappingHStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 28D4B3DF2C03272C002ACBAA /* XCRemoteSwiftPackageReference "WrappingHStack" */;
-			productName = WrappingHStack;
 		};
 		28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;

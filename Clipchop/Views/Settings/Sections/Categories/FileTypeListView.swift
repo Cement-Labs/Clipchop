@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WrappingHStack
 import UniformTypeIdentifiers
 
 struct FileTypeListView<Label>: View where Label: View {
@@ -75,11 +74,8 @@ struct FileTypeListView<Label>: View where Label: View {
                     }
                 }
             } else {
-                WrappingHStack(lineSpacing: 8) {
-                    
-                    ForEach(types, id: \.self) { type in
-                        buildTagEntry(type)
-                    }
+                WrappingHStack(models: types, lineSpacing: 8) { type in
+                    buildTagEntry(type)
                 }
             }
         } header: {
