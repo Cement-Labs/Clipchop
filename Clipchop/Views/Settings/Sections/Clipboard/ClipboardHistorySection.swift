@@ -51,15 +51,18 @@ struct ClipboardHistorySection: View {
                                 Image(systemSymbol: .clockArrowCirclepath)
                                 Text("Restore")
                             }
+                            .tint(.secondary)
                             
                             Button {
                                 isApplyPreservationTimeAlertPresented = true
                             } label: {
-                                Image(systemSymbol: .checkmark)
+                                Image(systemSymbol: .checkmarkCircleFill)
                                 Text("Apply")
                             }
+                            .tint(.accent)
                         }
                         .monospaced(false)
+                        .buttonStyle(.borderless)
                     }
                 } minimumValueLabel: {
                     Text("1")

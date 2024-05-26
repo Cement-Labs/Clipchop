@@ -311,6 +311,12 @@
     "Apply" : {
 
     },
+    "Apply Preservation Time" : {
+
+    },
+    "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
+
+    },
     "Back" : {
 
     },
