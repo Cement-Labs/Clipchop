@@ -95,4 +95,11 @@ extension Defaults {
             .lowercased()
             .replacing(/(\.|\s+)/, with: "")
     }
+    
+    static func removeFileTypeFromAll(_ type: String) {
+        Self[.allTypes].removeAll { $0 == type }
+        Self[.categories].updateEach { category in
+            category.types.removeAll { $0 == type }
+        }
+    }
 }

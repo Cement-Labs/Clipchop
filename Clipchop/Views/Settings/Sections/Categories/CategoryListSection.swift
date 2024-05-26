@@ -35,6 +35,8 @@ struct CategoryListSection: View {
     var body: some View {
         FileTypeListView(types: $allTypes, isInEditMode: $isInEditMode) { indexSet in
             allTypes.remove(atOffsets: indexSet)
+        } onSingleDelete: { type in
+            Defaults.removeFileTypeFromAll(type)
         } label: {
             Text("All")
                 .toolbar {
