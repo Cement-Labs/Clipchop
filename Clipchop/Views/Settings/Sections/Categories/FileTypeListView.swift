@@ -12,10 +12,9 @@ struct FileTypeListView<Label>: View where Label: View {
     @ViewBuilder var label: () -> Label
     
     @Binding var types: [String]
+    @Binding var isInEditMode: Bool
     
     @State private var isCollapsed = false
-    
-    var isInEditMode = false
     
     var onDropOf: [UTType] = []
     var onDropDelegate: DropDelegate?
@@ -23,7 +22,7 @@ struct FileTypeListView<Label>: View where Label: View {
     
     init(
         types: Binding<[String]>,
-        isInEditMode: Bool = false,
+        isInEditMode: Binding<Bool>,
         onDropOf: [UTType] = [],
         onDropDelegate: DropDelegate? = nil,
         onDelete: @escaping (IndexSet) -> Void = { _ in },
@@ -31,18 +30,17 @@ struct FileTypeListView<Label>: View where Label: View {
     ) {
         self.label = label
         self._types = types
+        self._isInEditMode = isInEditMode
         
         self.onDelete = onDelete
         self.onDropOf = onDropOf
         self.onDropDelegate = onDropDelegate
-        
-        self.isInEditMode = isInEditMode
     }
     
     init(
         _ titleKey: LocalizedStringKey,
         types: Binding<[String]>,
-        isInEditMode: Bool = false,
+        isInEditMode: Binding<Bool>,
         onDropOf: [UTType] = [],
         onDropDelegate: DropDelegate? = nil,
         onDelete: @escaping (IndexSet) -> Void = { _ in }
@@ -55,11 +53,12 @@ struct FileTypeListView<Label>: View where Label: View {
     @ViewBuilder
     func buildTagEntry(_ type: String) -> some View {
         HStack {
-            FileTypeTagView(type: type, isDeleteButtonShown: isInEditMode) { type in
+            FileTypeTagView(type: type, isDeleteButtonShown: $isInEditMode) { type in
                 types.removeAll { $0 == type }
             }
             .onDrag {
-                NSItemProvider(object: type as NSString)
+                isInEditMode = false
+                return NSItemProvider(object: type as NSString)
             }
         }
     }
@@ -95,7 +94,7 @@ struct FileTypeListView<Label>: View where Label: View {
                         isCollapsed.toggle()
                     }
                 } label: {
-                    Image(systemSymbol: isCollapsed ? .chevronDown : .minus)
+                    Image(systemSymbol: isCollapsed ? .chevronDown : .chevronUp)
                         .contentTransition(.symbolEffect(.replace.offUp))
                         .frame(width: 22, height: 16)
                 }

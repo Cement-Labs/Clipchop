@@ -33,7 +33,7 @@ struct CategoryListSection: View {
     }
     
     var body: some View {
-        FileTypeListView(types: $allTypes) { indexSet in
+        FileTypeListView(types: $allTypes, isInEditMode: $isInEditMode) { indexSet in
             allTypes.remove(atOffsets: indexSet)
         } label: {
             Text("All")
@@ -97,7 +97,7 @@ struct CategoryListSection: View {
         .onAppear {
             // Hold option to enable edit mode
             NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
-                withAnimation {
+                withAnimation(.default.speed(2)) {
                     isInEditMode = event.modifierFlags.contains(.option)
                 }
                 return event
@@ -105,7 +105,7 @@ struct CategoryListSection: View {
         }
 
         ForEach($categories) { category in
-            FileTypeListView(types: category.types, onDropOf: [.text], onDropDelegate: FileTypeDropDelegate(
+            FileTypeListView(types: category.types, isInEditMode: $isInEditMode, onDropOf: [.text], onDropDelegate: FileTypeDropDelegate(
                 destinationCategory: category,
                 categories: $categories,
                 allTypes: $allTypes
@@ -118,6 +118,7 @@ struct CategoryListSection: View {
                         .ignoresSafeArea()
                         .font(.headline)
                         .padding(.leading, -8)
+                        .padding(.trailing, 8)
                     
                     Spacer()
                     

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FileTypeTagView: View {
     var type: String
-    @State var isDeleteButtonShown: Bool = false
+    @Binding var isDeleteButtonShown: Bool
     var onDelete: (String) -> Void
     
     var body: some View {
@@ -18,7 +18,7 @@ struct FileTypeTagView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
         
-            .background(.accent.opacity(0.1))
+            .background(.placeholder.opacity(0.1))
             .clipShape(.rect(cornerRadius: 12))
         
             .overlay(alignment: .topTrailing) {
@@ -26,13 +26,14 @@ struct FileTypeTagView: View {
                     Button {
                         onDelete(type)
                     } label: {
-                        Image(systemSymbol: .xmark)
+                        Image(systemSymbol: .xmarkCircleFill)
+                            .imageScale(.large)
+                            .foregroundStyle(.red)
                     }
                     .buttonBorderShape(.circle)
-                    .buttonStyle(.borderedProminent)
-                    .tint(.red)
-                } else {
-                    Color.red
+                    .buttonStyle(.borderless)
+                    
+                    .offset(x: 5, y: -5)
                 }
             }
     }
