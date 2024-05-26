@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
-		2807BFD82C02C94300D65DE3 /* AddContentPopoverButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD72C02C94300D65DE3 /* AddContentPopoverButton.swift */; };
 		2807BFDA2C02CCA800D65DE3 /* FileTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */; };
 		2807BFDC2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */; };
 		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
@@ -76,6 +75,7 @@
 		28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */; };
 		28C2C99F2BF8D078007BDC3C /* DefaultsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C99E2BF8D078007BDC3C /* DefaultsStack.swift */; };
 		28D4B3DE2C0314A5002ACBAA /* FileTypeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */; };
+		28D4B3E12C03272C002ACBAA /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 28D4B3E02C03272C002ACBAA /* WrappingHStack */; };
 		28D8CE592BDCF5B9008B17B5 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */; };
 		28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE5B2BDCF7A5008B17B5 /* Sauce */; };
 		28D8CE612BDCF9B8008B17B5 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D8CE602BDCF9B8008B17B5 /* MenuBarView.swift */; };
@@ -107,7 +107,6 @@
 
 /* Begin PBXFileReference section */
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
-		2807BFD72C02C94300D65DE3 /* AddContentPopoverButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContentPopoverButton.swift; sourceTree = "<group>"; };
 		2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeListView.swift; sourceTree = "<group>"; };
 		2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeDropDelegate.swift; sourceTree = "<group>"; };
 		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -200,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C2C58C2BF0C6ED00E9D9AA /* Algorithms in Frameworks */,
+				28D4B3E12C03272C002ACBAA /* WrappingHStack in Frameworks */,
 				28C2C5832BF0C67900E9D9AA /* FullDiskAccess in Frameworks */,
 				28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */,
 				28A173C92C0185D500B6FB03 /* SwiftUIIntrospect in Frameworks */,
@@ -517,7 +517,6 @@
 			isa = PBXGroup;
 			children = (
 				654DCBEB2C024A890027FAD4 /* CategoryListSection.swift */,
-				2807BFD72C02C94300D65DE3 /* AddContentPopoverButton.swift */,
 				2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */,
 				28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */,
 				2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */,
@@ -554,6 +553,7 @@
 				28C2C58B2BF0C6ED00E9D9AA /* Algorithms */,
 				28F7D0E42BF777C300DDFC2C /* WindowManagement */,
 				28A173C82C0185D500B6FB03 /* SwiftUIIntrospect */,
+				28D4B3E02C03272C002ACBAA /* WrappingHStack */,
 			);
 			productName = Clipchop;
 			productReference = 288295142BC41F7300392B29 /* Clipchop.app */;
@@ -597,6 +597,7 @@
 				28C2C58A2BF0C6ED00E9D9AA /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 				28F7D0E32BF777C300DDFC2C /* XCRemoteSwiftPackageReference "SwiftUI-WindowManagement" */,
 				28A173C72C0185D500B6FB03 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				28D4B3DF2C03272C002ACBAA /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 288295152BC41F7300392B29 /* Products */;
 			projectDirPath = "";
@@ -659,7 +660,6 @@
 				28C2C5922BF0CCB400E9D9AA /* Defaults+Structures.swift in Sources */,
 				2843DB622BF0F4D3008AA2E1 /* NSImage+Extensions.swift in Sources */,
 				28C2C5A02BF0D31C00E9D9AA /* SoundPlayer.swift in Sources */,
-				2807BFD82C02C94300D65DE3 /* AddContentPopoverButton.swift in Sources */,
 				283E25342BF4EF670094C06F /* AcknowledgementsView.swift in Sources */,
 				28C2C5962BF0D0BF00E9D9AA /* Sound.swift in Sources */,
 				282692772BDCACC600D1656E /* AboutSettingsPage.swift in Sources */,
@@ -1020,6 +1020,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		28D4B3DF2C03272C002ACBAA /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.11;
+			};
+		};
 		28D8CE572BDCF5B9008B17B5 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
@@ -1086,6 +1094,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 28C2C58A2BF0C6ED00E9D9AA /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
+		};
+		28D4B3E02C03272C002ACBAA /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28D4B3DF2C03272C002ACBAA /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
 		};
 		28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;

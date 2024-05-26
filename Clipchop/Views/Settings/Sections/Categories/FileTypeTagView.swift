@@ -12,8 +12,10 @@ struct FileTypeTagView: View {
     
     var body: some View {
         Text(type)
+            .monospaced()
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
+        
             .background {
                 VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
             }

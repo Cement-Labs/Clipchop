@@ -13,6 +13,7 @@ struct FileTypeListView<Label>: View where Label: View {
     @Binding var types: [String]
     
     @State private var totalHeight: CGFloat = .zero
+    @State private var isCollapsed = false
     
     init(
         types: Binding<[String]>,
@@ -40,7 +41,22 @@ struct FileTypeListView<Label>: View where Label: View {
             }
             .frame(height: totalHeight)
         } header: {
-            label()
+            HStack {
+                label()
+                
+                Spacer()
+                
+                Button {
+                    withAnimation(.default.speed(5)) {
+                        isCollapsed.toggle()
+                    }
+                } label: {
+                    Image(systemSymbol: isCollapsed ? .minus : .chevronDown)
+                        .contentTransition(.symbolEffect(.replace.offUp))
+                }
+                .buttonStyle(.borderless)
+                .buttonBorderShape(.circle)
+            }
         }
     }
     
@@ -82,6 +98,10 @@ struct FileTypeListView<Label>: View where Label: View {
                         
                         return result
                     }
+                
+                    .if(isCollapsed && height < 0) { view in
+                        view.hidden()
+                    }
             }
         }
         .background {
@@ -90,12 +110,14 @@ struct FileTypeListView<Label>: View where Label: View {
     }
     
     @ViewBuilder
-    private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {
+    private func viewHeightReader(_ totalHeight: Binding<CGFloat>) -> some View {
         GeometryReader { geometry -> Color in
             let rect = geometry.frame(in: .local)
+            
             DispatchQueue.main.async {
-                binding.wrappedValue = rect.size.height
+                totalHeight.wrappedValue = rect.size.height
             }
+            
             return .clear
         }
     }

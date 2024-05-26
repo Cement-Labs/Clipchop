@@ -224,12 +224,6 @@
     "Acknowledgements" : {
 
     },
-    "Add Category" : {
-
-    },
-    "Add File Type" : {
-
-    },
     "All" : {
 
     },
@@ -326,10 +320,10 @@
     "Back" : {
 
     },
-    "Cancel" : {
+    "Categories" : {
 
     },
-    "Categories" : {
+    "Category" : {
 
     },
     "Category %@" : {
@@ -434,7 +428,10 @@
     "Excluded Apps" : {
 
     },
-    "Extension" : {
+    "File Extension" : {
+
+    },
+    "File Type" : {
 
     },
     "Forever" : {
