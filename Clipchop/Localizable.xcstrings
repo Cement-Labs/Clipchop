@@ -233,6 +233,9 @@
     "Allow app excluding" : {
 
     },
+    "Annonymous Category" : {
+
+    },
     "App Development Time" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -317,10 +320,16 @@
     "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
 
     },
+    "Audio" : {
+
+    },
     "Back" : {
 
     },
     "Categories" : {
+
+    },
+    "Category Name" : {
 
     },
     "Changing Color Scheme" : {
@@ -410,13 +419,16 @@
     "Delete history" : {
 
     },
+    "Documents" : {
+
+    },
     "Exclude apps to prevent %@ copying their contents." : {
 
     },
     "Excluded Apps" : {
 
     },
-    "File Extension" : {
+    "File Type" : {
 
     },
     "Forever" : {
@@ -468,6 +480,9 @@
     "Hello, World!" : {
 
     },
+    "Images" : {
+
+    },
     "Keyboard Shortcuts" : {
 
     },
@@ -490,9 +505,6 @@
 
     },
     "macOS Blue" : {
-
-    },
-    "New Category Name" : {
 
     },
     "No Application Excluded" : {
@@ -698,10 +710,13 @@
         }
       }
     },
-    "Uncategorized File Types" : {
+    "Uncategorized Types" : {
 
     },
     "Update interval" : {
+
+    },
+    "Videos" : {
 
     },
     "Welcome to %@" : {

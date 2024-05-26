@@ -20,61 +20,32 @@ struct CategoryListSection: View {
     @State private var newFileType: String = ""
     
     var body: some View {
-        VStack {
-            if !uncategorizedTypes.isEmpty {
-                VStack(alignment: .leading) {
-                    Text("Uncategorized Types")
-                        .font(.headline)
-                    
-                    LazyVStack {
-                        List{
-                            ForEach(uncategorizedTypes, id: \.self) { tag in
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.gray.opacity(0.2))
-                                        .frame(height: 50)
-                                    Text(tag)
-                                        .font(.headline)
-                                        .padding()
-                                }
-                                .onDrag {
-                                    NSItemProvider(object: tag as NSString)
-                                }
+        if !uncategorizedTypes.isEmpty {
+            Section("Uncategorized Types") {
+                ScrollView(.horizontal) {
+                    LazyHStack {
+                        ForEach(uncategorizedTypes, id: \.self) { tag in
+                            Group {
+                                Text(tag)
+                                    .font(.headline)
+                                    .padding()
+                            }
+                            .onDrag {
+                                NSItemProvider(object: tag as NSString)
                             }
                         }
                     }
                 }
-                .padding()
             }
+        }
 
+        VStack(spacing: 0) {
             ForEach($categories) { category in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Group {
-                            if let name = category.name.wrappedValue {
-                                Text(name)
-                            } else {
-                                Text("Annonymous Category")
-                                    .foregroundStyle(.placeholder)
-                            }
-                        }
-                        .font(.headline)
-                        
-                        Spacer()
-                        Button(action: { deleteCategory(category.wrappedValue) }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                        }
-                    }
-                    
-                    LazyVStack {
-                        List {
+                Section {
+                    ScrollView(.horizontal) {
+                        LazyHStack {
                             ForEach(category.types, id: \.self) { type in
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.gray.opacity(0.2))
-                                        .frame(height: 50)
-                                    
+                                Group {
                                     Text(type.wrappedValue)
                                         .font(.headline)
                                         .padding()
@@ -88,34 +59,55 @@ struct CategoryListSection: View {
                                     deleteFileType(category.wrappedValue, category.types[index].wrappedValue)
                                 }
                             }
+                            .onDrop(of: [UTType.text], delegate: FileTypeDropViewDelegate(
+                                destinationCategory: category,
+                                categories: $categories,
+                                uncategorizedTypes: $uncategorizedTypes
+                            ))
                         }
-                        .onDrop(of: [UTType.text], delegate: FileTypeDropViewDelegate(
-                            destinationCategory: category,
-                            categories: $categories,
-                            uncategorizedTypes: $uncategorizedTypes
-                        ))
+                    }
+                } header: {
+                    HStack {
+                        Group {
+                            if let name = category.name.wrappedValue {
+                                Text(name)
+                            } else {
+                                Text("Annonymous Category")
+                                    .foregroundStyle(.placeholder)
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Button {
+                            deleteCategory(category.wrappedValue)
+                        } label: {
+                            Image(systemSymbol: .trash)
+                                .foregroundColor(.red)
+                        }
                     }
                 }
                 .padding()
             }
         }
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItem(placement: .cancellationAction) {
                 HStack {
                     Button {
                         isAddCategorySheetPresented = true
                     } label: {
-                        Image(systemName: "folder.badge.plus")
+                        Image(systemSymbol: .folderBadgePlus)
                     }
                     
                     Button {
                         isAddFileTypeSheetPresented = true
                     } label: {
-                        Image(systemName: "doc.badge.plus")
+                        Image(systemSymbol: .docBadgePlus)
                     }
                 }
             }
         }
+        
         .sheet(isPresented: $isAddCategorySheetPresented) {
             VStack {
                 TextField("Category Name", text: $newCategoryName)
@@ -223,11 +215,5 @@ struct FileTypeDropViewDelegate: DropDelegate {
         }
         
         return true
-    }
-}
-
-#Preview {
-    previewSection {
-        CategoryListSection()
     }
 }
