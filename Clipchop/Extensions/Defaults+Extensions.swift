@@ -47,7 +47,7 @@ extension Defaults.Keys {
         .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
             "pdf", "docx", "xlsx",
             "key", "pages", "numbers",
-            "txt", "rtf"
+            "txt", "rtf", "rtfd"
         ]),
         .init(name: .init(localized: "Videos", defaultValue: "Videos"), types: [
             "mp4", "mov", "avi"
@@ -78,5 +78,21 @@ extension Defaults {
     
     static func shouldIgnoreApp(_ bundleIdentifier: String) -> Bool {
         Self[.excludeAppsEnabled] && Self[.applicationExcludeList].contains(bundleIdentifier)
+    }
+    
+    static func isValidFileTypeInput(_ type: String) -> Bool {
+        !type
+            .trimmingCharacters(in: [".", " "])
+            .contains(/(\.|\s+)/)
+    }
+    
+    static func isNewFileTypeInput(_ type: String) -> Bool {
+        !Self[.allTypes].contains(trimFileTypeInput(type))
+    }
+    
+    static func trimFileTypeInput(_ type: String) -> String {
+        type
+            .lowercased()
+            .replacing(/(\.|\s+)/, with: "")
     }
 }

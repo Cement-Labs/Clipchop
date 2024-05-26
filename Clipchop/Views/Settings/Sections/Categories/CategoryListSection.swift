@@ -27,7 +27,7 @@ struct CategoryListSection: View {
         case .category:
             true
         case .fileType:
-            !input.isEmpty
+            !input.isEmpty && Defaults.isValidFileTypeInput(input) && Defaults.isNewFileTypeInput(input)
         }
     }
     
@@ -133,8 +133,6 @@ struct CategoryListSection: View {
     
     private func addCategory(_ name: String) {
         /*
-        guard !newCategoryName.isEmpty else { return }
-        
         var updatedCategories = fileCategories
         if updatedCategories[newCategoryName] == nil {
             updatedCategories[newCategoryName] = []
