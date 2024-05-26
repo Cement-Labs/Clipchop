@@ -43,16 +43,18 @@ struct DefaultsStack {
         func isIdentical(comparedTo: [AnyHashable]) -> Bool {
             DefaultsStack.shared.isIdentical(self, comparedTo: comparedTo)
         }
+        
+        func markDirty() {
+            DefaultsStack.shared.markDirty(self)
+        }
     }
     
-    static let shared = DefaultsStack()
+    static var shared = DefaultsStack()
     
-    let hash: [Group: Int]
-    let date: Date
+    var hash: [Group: Int]
     
     init() {
         hash = DefaultsStack.hashAll()
-        date = .now
     }
     
     static func hashAll(_ groups: [Group] = Group.allCases) -> [Group: Int] {
@@ -67,6 +69,10 @@ struct DefaultsStack {
     }
     
     func isIdentical(_ group: Group, comparedTo: [AnyHashable]) -> Bool {
-        return group.hashValue == comparedTo.combinedHashValue
+        group.hashValue == comparedTo.combinedHashValue
+    }
+    
+    mutating func markDirty(_ group: Group) {
+        hash[group] = group.hashValue
     }
 }

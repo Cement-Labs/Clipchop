@@ -14,55 +14,46 @@ struct ClipboardHistorySection: View {
     @Default(.timerInterval) var timerInterval
     
     @State var isDeleteHistoryAlertPresented = false
-    @State var preservationPeriod: HistoryPreservationPeriod = .forever
-    @State var preservationTime: Double = 1
+    @State var isApplyPreservationTimeAlertPresented = false
+    
+    @State var cachedPreservationPeriod: HistoryPreservationPeriod = .forever
+    @State var cachedPreservationTime: Double = 1
     
     @Environment(\.hasTitle) var hasTitle
     
-    var isDefaultsIdentical: Bool {
-        DefaultsStack.Group.historyPreservation.isIdentical(comparedTo: [
-            preservationPeriod, preservationTime
-        ])
+    func cache() {
+        cachedPreservationPeriod = historyPreservationPeriod
+        cachedPreservationTime = historyPreservationTime
+        
+        DefaultsStack.shared.markDirty(.historyPreservation)
     }
     
-    @ViewBuilder
-    func periodWithTime(_ time: Int, period: HistoryPreservationPeriod) -> some View {
-        switch period {
-        case .forever: Text("Forever")
-        case .minute:
-            Text("\(time) Minutes")
-        case .hour:
-            Text("\(time) Hours")
-        case .day:
-            Text("\(time) Days")
-        case .month:
-            Text("\(time) Months")
-        case .year:
-            Text("\(time) Years")
-        }
+    func applyCache() {
+        historyPreservationPeriod = cachedPreservationPeriod
+        historyPreservationTime = cachedPreservationTime
     }
     
     var body: some View {
         Section {
             VStack {
-                Picker("Preservation time", selection: $preservationPeriod) {
+                Picker("Preservation time", selection: $historyPreservationPeriod) {
                     ForEach(HistoryPreservationPeriod.allCases) { period in
-                        periodWithTime(Int(preservationTime), period: period)
+                        period.withTime(Int(historyPreservationTime))
                     }
                 }
                 
-                Slider(value: $preservationTime, in: 1...30, step: 1) {
-                    if !isDefaultsIdentical {
+                Slider(value: $historyPreservationTime, in: 1...30, step: 1) {
+                    if !DefaultsStack.Group.historyPreservation.isUnchanged {
                         HStack {
                             Button {
-                                
+                                applyCache()
                             } label: {
                                 Image(systemSymbol: .clockArrowCirclepath)
                                 Text("Restore")
                             }
                             
                             Button {
-                                
+                                isApplyPreservationTimeAlertPresented = true
                             } label: {
                                 Image(systemSymbol: .checkmark)
                                 Text("Apply")
@@ -76,11 +67,19 @@ struct ClipboardHistorySection: View {
                     Text("30")
                 }
                 .monospaced()
-                .disabled(preservationPeriod == .forever)
-            }
-            .onAppear {
-                preservationPeriod = historyPreservationPeriod
-                preservationTime = historyPreservationTime
+                .disabled(historyPreservationPeriod == .forever)
+                
+                .onAppear {
+                    cache()
+                }
+                .alert("Apply Preservation Time", isPresented: $isApplyPreservationTimeAlertPresented) {
+                    Button("Apply", role: .destructive) {
+                        // TODO: Apply
+                        cache()
+                    }
+                } message: {
+                    Text("Applying a new preservation time clears all the outdated clipboard history except your pins.")
+                }
             }
             
             VStack {
@@ -117,7 +116,7 @@ struct ClipboardHistorySection: View {
             .controlSize(.large)
             .alert("Clear Clipboard History", isPresented: $isDeleteHistoryAlertPresented) {
                 Button("Delete", role: .destructive) {
-                    
+                    // TODO: Delete
                 }
             } message: {
                 Text("This action clears all your clipboard history unrestorably, including pins.")

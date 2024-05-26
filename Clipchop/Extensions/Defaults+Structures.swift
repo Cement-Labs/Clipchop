@@ -37,6 +37,23 @@ enum HistoryPreservationPeriod: String, CaseIterable, Defaults.Serializable {
     case day = "day"
     case month = "month"
     case year = "year"
+    
+    @ViewBuilder
+    func withTime(_ time: Int) -> some View {
+        switch self {
+        case .forever: Text("Forever")
+        case .minute:
+            Text("\(time) Minutes")
+        case .hour:
+            Text("\(time) Hours")
+        case .day:
+            Text("\(time) Days")
+        case .month:
+            Text("\(time) Months")
+        case .year:
+            Text("\(time) Years")
+        }
+    }
 }
 
 extension HistoryPreservationPeriod: Identifiable {
