@@ -13,7 +13,6 @@ struct FileTypeListView<Label>: View where Label: View {
     
     @Binding var types: [String]
     
-    @State private var totalHeight: CGFloat = .zero
     @State private var isCollapsed = false
     
     init(
@@ -33,13 +32,28 @@ struct FileTypeListView<Label>: View where Label: View {
         }
     }
     
+    @ViewBuilder
+    func buildTagEntry(_ type: String) -> some View {
+        FileTypeTagView(type: type)
+            .onDrag {
+                NSItemProvider(object: type as NSString)
+            }
+    }
+    
     var body: some View {
         Section {
-            WrappingHStack(types, id: \.self) { type in
-                FileTypeTagView(type: type)
-                    .onDrag {
-                        NSItemProvider(object: type as NSString)
+            if isCollapsed {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(types, id: \.self) { type in
+                            buildTagEntry(type)
+                        }
                     }
+                }
+            } else {
+                WrappingHStack(types, id: \.self, lineSpacing: 8) { type in
+                    buildTagEntry(type)
+                }
             }
         } header: {
             HStack {
@@ -48,15 +62,15 @@ struct FileTypeListView<Label>: View where Label: View {
                 Spacer()
                 
                 Button {
-                    withAnimation(.default.speed(5)) {
+                    withAnimation {
                         isCollapsed.toggle()
                     }
                 } label: {
-                    Image(systemSymbol: isCollapsed ? .minus : .chevronDown)
+                    Image(systemSymbol: isCollapsed ? .chevronDown : .minus)
                         .contentTransition(.symbolEffect(.replace.offUp))
+                        .frame(width: 22, height: 16)
                 }
                 .buttonStyle(.borderless)
-                .buttonBorderShape(.circle)
             }
         }
     }

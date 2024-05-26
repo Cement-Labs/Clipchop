@@ -19,7 +19,6 @@ struct FileTypeTagView: View {
             .background {
                 VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
             }
-            .clipShape(.rect(cornerRadius: 16))
-            .padding(4)
+            .clipShape(.rect(cornerRadius: 12))
     }
 }
