@@ -139,7 +139,7 @@ struct BeginningView: View {
                     .fixedSize()
                 } background: {
                     Rectangle()
-                        .if(condition: canRoamingContinue) { view in
+                        .if(canRoamingContinue) { view in
                             view.fill(.accent)
                         } falseExpression: { view in
                             view.fill(.placeholder)

@@ -8,12 +8,12 @@
 import SwiftUI
 
 extension View {
-    func or(condition: Bool, _ another: () -> Self) -> Self {
+    func or(_ condition: Bool, _ another: () -> Self) -> Self {
         condition ? another() : self
     }
     
     @ViewBuilder
-    func orSomeView(condition: Bool, _ another: () -> some View) -> some View {
+    func orSomeView(_ condition: Bool, _ another: () -> some View) -> some View {
         if condition {
             another()
         } else {
@@ -23,8 +23,8 @@ extension View {
     
     @ViewBuilder
     func `if`(
-        condition: Bool,
-        _ trueExpression: (Self) -> some View,
+        _ condition: Bool,
+        trueExpression: (Self) -> some View,
         falseExpression: (Self) -> some View
     ) -> some View {
         if condition {
@@ -36,10 +36,10 @@ extension View {
     
     @ViewBuilder
     func `if`(
-        condition: Bool,
-        _ expression: (Self) -> some View
+        _ condition: Bool,
+        expression: (Self) -> some View
     ) -> some View {
-        `if`(condition: condition, expression) { view in
+        `if`(condition, trueExpression: expression) { view in
             view
         }
     }

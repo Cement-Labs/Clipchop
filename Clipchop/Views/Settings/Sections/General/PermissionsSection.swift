@@ -30,7 +30,7 @@ struct PermissionsSection: View {
                 
                 Image(systemSymbol: .arrowRightCircleFill)
             }
-            .or(condition: isGranted) {
+            .or(isGranted) {
                 Group {
                     Text("Granted")
                         .fixedSize()

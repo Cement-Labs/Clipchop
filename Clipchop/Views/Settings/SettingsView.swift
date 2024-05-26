@@ -25,69 +25,51 @@ struct SettingsView: View {
 #endif
     }
     
-    @State var selectedNavigation: Navigation = .general
+    @State var navigation: Navigation = .general
     @State var apps = InstalledApps()
     
     @Binding var isWindowInitialized: Bool
     
-    @ViewBuilder
-    func navigationEntry(
-        _ titleKey: LocalizedStringKey,
-        image: () -> Image
-    ) -> some View {
-        HStack {
-            image()
-                .foregroundStyle(.tertiary)
-                .imageScale(.large)
-                .frame(width: 24)
-            
-            Text(titleKey)
-                .font(.title3)
-        }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 7.5)
-    }
-    
     var body: some View {
         NavigationSplitView {
-            List(selection: $selectedNavigation) {
-                navigationEntry("General") {
+            List(selection: $navigation) {
+                NavigationEntry("General") {
                     Image(systemSymbol: .gearshape)
                 }
                 .tag(Navigation.general)
                 
-                navigationEntry("Customization") {
+                NavigationEntry("Customization") {
                     Image(systemSymbol: .pencilAndOutline)
                 }
                 .tag(Navigation.customization)
                 
-                navigationEntry("Clipboard") {
+                NavigationEntry("Clipboard") {
                     Image(systemSymbol: .clipboard)
                 }
                 .tag(Navigation.clipboard)
                 
-                navigationEntry("Categories") {
+                NavigationEntry("Categories") {
                     Image(systemSymbol: .tray2)
                 }
                 .tag(Navigation.categories)
                 
-                navigationEntry("Excluded Apps") {
-                    Image(systemSymbol: .xmarkApp)
+                NavigationEntry("Excluded Apps") {
+                    Image(systemSymbol: .xmarkSeal)
                 }
                 .tag(Navigation.excludedApps)
                 
-                navigationEntry("Syncing") {
+                NavigationEntry("Syncing") {
                     Image(systemSymbol: .checkmarkIcloud)
                 }
                 .tag(Navigation.syncing)
                 
-                navigationEntry("About") {
+                NavigationEntry("About") {
                     Image(systemSymbol: .infoCircle)
                 }
                 .tag(Navigation.about)
                 
 #if DEBUG
-                navigationEntry("Test (Debug)") {
+                NavigationEntry("Test (Debug)") {
                     Image(systemSymbol: .airplaneDeparture)
                 }
                 .tag(Navigation.test)
@@ -97,7 +79,7 @@ struct SettingsView: View {
             .toolbar(removing: .sidebarToggle)
         } detail: {
             Group {
-                switch selectedNavigation {
+                switch navigation {
                     
                 case .general:
                     GeneralSettingsPage()
@@ -147,7 +129,7 @@ struct SettingsView: View {
         .navigationSplitViewStyle(.prominentDetail)
         
         // An intermediate view to hide the ugly window toolbar transition
-        .orSomeView(condition: !isWindowInitialized) {
+        .orSomeView(!isWindowInitialized) {
             ZStack {
                 VisualEffectView(material: .sidebar, blendingMode: .behindWindow)
                     .ignoresSafeArea()
