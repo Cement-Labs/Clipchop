@@ -94,14 +94,11 @@ struct CategoryListSection: View {
         ForEach($categories) { category in
             FileTypeListView(types: category.types) {
                 HStack {
-                    Group {
-                        if let name = category.name.wrappedValue {
-                            Text(name)
-                        } else {
-                            Text("Category \(Text(category.id.uuidString).monospaced())")
-                                .foregroundStyle(.placeholder)
-                        }
-                    }
+                    TextField("", text: category.name, prompt: Text(category.id.uuidString).monospaced())
+                        .textFieldStyle(.plain)
+                        .ignoresSafeArea()
+                        .font(.headline)
+                        .padding(.leading, -8)
                     
                     Spacer()
                     
@@ -132,14 +129,7 @@ struct CategoryListSection: View {
     }
     
     private func addCategory(_ name: String) {
-        /*
-        var updatedCategories = fileCategories
-        if updatedCategories[newCategoryName] == nil {
-            updatedCategories[newCategoryName] = []
-        }
-        
-        fileCategories = updatedCategories
-         */
+        Defaults[.categories].insert(.init(name: name), at: 0)
     }
     
     private func removeCategory(_ category: FileCategory) {
@@ -147,25 +137,12 @@ struct CategoryListSection: View {
     }
     
     private func addFileType(_ fileType: String) {
-        /*
-        guard !newFileType.isEmpty else { return }
+        guard Defaults.isValidFileTypeInput(fileType) && Defaults.isNewFileTypeInput(fileType) else { return }
         
-        if !uncategorizedTypes.contains(newFileType) {
-            uncategorizedTypes.append(newFileType)
-        }
-         */
+        allTypes.insert(Defaults.trimFileTypeInput(fileType), at: 0)
     }
     
-    private func removeFileType(_ category: FileCategory, _ fileType: String) {
-        /*
-        var updatedCategories = fileCategories
-        updatedCategories[category]?.removeAll { $0 == fileExtension }
-        
-        if updatedCategories[category]?.isEmpty == true {
-            updatedCategories.removeValue(forKey: category)
-        }
-        
-        fileCategories = updatedCategories
-         */
+    private func removeFileType(_ category: inout FileCategory, _ fileType: String) {
+        category.types.removeAll { $0 == fileType }
     }
 }

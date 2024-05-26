@@ -84,7 +84,7 @@ extension ColorStyle: Identifiable {
 
 struct FileCategory: Identifiable, Codable, Defaults.Serializable {
     var id: UUID = .init()
-    var name: String?
+    var name: String = ""
     var types: [String] = []
 }
 

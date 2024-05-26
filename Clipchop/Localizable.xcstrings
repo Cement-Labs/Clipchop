@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%.2fs" : {
 
     },
@@ -324,9 +327,6 @@
 
     },
     "Category" : {
-
-    },
-    "Category %@" : {
 
     },
     "Category Name" : {

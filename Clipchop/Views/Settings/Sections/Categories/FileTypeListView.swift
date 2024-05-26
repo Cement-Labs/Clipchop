@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WrappingHStack
+import UniformTypeIdentifiers
 
 struct FileTypeListView<Label>: View where Label: View {
     @ViewBuilder var label: () -> Label
@@ -15,19 +16,33 @@ struct FileTypeListView<Label>: View where Label: View {
     
     @State private var isCollapsed = false
     
+    //var onDelete: (IndexSet) -> Void
+    //var dropTypes: [UTType]
+    //var dropDelegate: DropDelegate
+    
     init(
         types: Binding<[String]>,
+        //dropTypes: [UTType],
+        //dropDelegate: DropDelegate,
+        //onDelete: @escaping (IndexSet) -> Void,
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.label = label
         self._types = types
+        
+        //self.onDelete = onDelete
+        //self.dropTypes = dropTypes
+        //self.dropDelegate = dropDelegate
     }
     
     init(
         _ titleKey: LocalizedStringKey,
-        types: Binding<[String]>
+        types: Binding<[String]>//,
+        //dropTypes: [UTType],
+        //dropDelegate: DropDelegate,
+        //onDelete: @escaping (IndexSet) -> Void
     ) where Label == Text {
-        self.init(types: types) {
+        self.init(types: types/*, dropTypes: dropTypes, dropDelegate: dropDelegate, onDelete: onDelete*/) {
             Text(titleKey)
         }
     }
@@ -40,6 +55,15 @@ struct FileTypeListView<Label>: View where Label: View {
             }
     }
     
+    /*
+    @ViewBuilder
+    func handleEvents(content: () -> some View) -> some View {
+        content()
+            .onDelete(onDelete)
+            .onDrop(of: dropTypes, delegate: dropDelegate)
+    }
+     */
+    
     var body: some View {
         Section {
             if isCollapsed {
@@ -51,8 +75,11 @@ struct FileTypeListView<Label>: View where Label: View {
                     }
                 }
             } else {
-                WrappingHStack(types, id: \.self, lineSpacing: 8) { type in
-                    buildTagEntry(type)
+                WrappingHStack(lineSpacing: 8) {
+                    
+                    ForEach(types, id: \.self) { type in
+                        buildTagEntry(type)
+                    }
                 }
             }
         } header: {
@@ -73,5 +100,6 @@ struct FileTypeListView<Label>: View where Label: View {
                 .buttonStyle(.borderless)
             }
         }
+        .animation(.interactiveSpring, value: types)
     }
 }
