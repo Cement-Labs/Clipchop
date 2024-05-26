@@ -184,14 +184,12 @@ struct DropViewDelegate: DropDelegate {
             DispatchQueue.main.async {
                 guard let data = data as? Data, let fileExtension = String(data: data, encoding: .utf8) else { return }
                 
+                // 检查是否已经存在该文件类型
                 if self.fileCategories[self.destinationCategory]?.contains(fileExtension) == true {
                     return
                 }
                 
-                if let index = self.uncategorizedFileTypes.firstIndex(of: fileExtension) {
-                    self.uncategorizedFileTypes.remove(at: index)
-                }
-                
+                // 不删除未分类的文件类型，只是复制
                 if self.fileCategories[self.destinationCategory] != nil {
                     self.fileCategories[self.destinationCategory]?.append(fileExtension)
                 } else {
