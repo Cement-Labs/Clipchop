@@ -10,25 +10,25 @@ import Defaults
 import UniformTypeIdentifiers
 
 struct CategoryListSection: View {
-    @Default(.categories) private var fileCategories
-    @Default(.uncategorizedFileTypes) private var uncategorizedFileTypes
+    @Default(.categories) private var categories
+    @Default(.uncategorizedTypes) private var uncategorizedTypes
     
-    @State private var showingAddCategorySheet = false
-    @State private var showingAddFileTypeSheet = false
+    @State private var isAddCategorySheetPresented = false
+    @State private var isAddFileTypeSheetPresented = false
+    
     @State private var newCategoryName: String = ""
-    @State private var newFileExtension: String = ""
+    @State private var newFileType: String = ""
     
     var body: some View {
         VStack {
-            if !uncategorizedFileTypes.isEmpty {
+            if !uncategorizedTypes.isEmpty {
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text("Uncategorized File Types")
-                            .font(.headline)
-                    }
+                    Text("Uncategorized Types")
+                        .font(.headline)
+                    
                     LazyVStack {
                         List{
-                            ForEach(uncategorizedFileTypes, id: \.self) { tag in
+                            ForEach(uncategorizedTypes, id: \.self) { tag in
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
                                         .fill(Color.gray.opacity(0.2))
@@ -47,40 +47,53 @@ struct CategoryListSection: View {
                 .padding()
             }
 
-            ForEach(fileCategories.keys.sorted(), id: \.self) { category in
+            ForEach($categories) { category in
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(category)
-                            .font(.headline)
+                        Group {
+                            if let name = category.name.wrappedValue {
+                                Text(name)
+                            } else {
+                                Text("Annonymous Category")
+                                    .foregroundStyle(.placeholder)
+                            }
+                        }
+                        .font(.headline)
+                        
                         Spacer()
-                        Button(action: { deleteCategory(category) }) {
+                        Button(action: { deleteCategory(category.wrappedValue) }) {
                             Image(systemName: "trash")
                                 .foregroundColor(.red)
                         }
                     }
+                    
                     LazyVStack {
                         List {
-                            ForEach(fileCategories[category] ?? [], id: \.self) { ext in
+                            ForEach(category.types, id: \.self) { type in
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
                                         .fill(Color.gray.opacity(0.2))
                                         .frame(height: 50)
-                                    Text(ext)
+                                    
+                                    Text(type.wrappedValue)
                                         .font(.headline)
                                         .padding()
                                 }
                                 .onDrag {
-                                    NSItemProvider(object: ext as NSString)
+                                    NSItemProvider(object: type.wrappedValue as NSString)
                                 }
                             }
                             .onDelete { indexSet in
                                 indexSet.forEach { index in
-                                    let ext = fileCategories[category]?[index] ?? ""
-                                    deleteFileExtension(category, ext)
+                                    deleteFileType(category.wrappedValue, category.types[index].wrappedValue)
                                 }
                             }
                         }
-                        .onDrop(of: [UTType.text], delegate: DropViewDelegate(destinationCategory: category, fileCategories: $fileCategories, uncategorizedFileTypes: $uncategorizedFileTypes))
+                        .onDrop(of: [UTType.text], delegate: FileTypeDropViewDelegate(
+                            destinationCategory: category,
+                            categories: $categories,
+                            uncategorizedTypes: $uncategorizedTypes
+                        ))
                     }
                 }
                 .padding()
@@ -89,22 +102,29 @@ struct CategoryListSection: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 HStack {
-                    Button(action: { showingAddCategorySheet = true }) {
+                    Button {
+                        isAddCategorySheetPresented = true
+                    } label: {
                         Image(systemName: "folder.badge.plus")
                     }
-                    Button(action: { showingAddFileTypeSheet = true }) {
+                    
+                    Button {
+                        isAddFileTypeSheetPresented = true
+                    } label: {
                         Image(systemName: "doc.badge.plus")
                     }
                 }
             }
         }
-        .sheet(isPresented: $showingAddCategorySheet) {
+        .sheet(isPresented: $isAddCategorySheetPresented) {
             VStack {
-                TextField("New Category Name", text: $newCategoryName)
+                TextField("Category Name", text: $newCategoryName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
-                Button(action: addNewCategory) {
+                Button {
+                    addCategory()
+                } label: {
                     Text("Add Category")
                         .font(.callout)
                         .fontWeight(.semibold)
@@ -115,13 +135,15 @@ struct CategoryListSection: View {
             }
             .frame(width: 300, height: 200)
         }
-        .sheet(isPresented: $showingAddFileTypeSheet) {
+        .sheet(isPresented: $isAddFileTypeSheetPresented) {
             VStack {
-                TextField("File Extension", text: $newFileExtension)
+                TextField("File Type", text: $newFileType)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
-                Button(action: addNewFileType) {
+                Button {
+                    addFileType()
+                } label: {
                     Text("Add File Type")
                         .font(.callout)
                         .fontWeight(.semibold)
@@ -134,7 +156,8 @@ struct CategoryListSection: View {
         }
     }
     
-    private func addNewCategory() {
+    private func addCategory() {
+        /*
         guard !newCategoryName.isEmpty else { return }
         
         var updatedCategories = fileCategories
@@ -144,57 +167,58 @@ struct CategoryListSection: View {
         
         fileCategories = updatedCategories
         newCategoryName = ""
-        showingAddCategorySheet = false
+        isAddCategorySheetPresented = false
+         */
     }
     
-    private func addNewFileType() {
-        guard !newFileExtension.isEmpty else { return }
+    private func addFileType() {
+        /*
+        guard !newFileType.isEmpty else { return }
         
-        if !uncategorizedFileTypes.contains(newFileExtension) {
-            uncategorizedFileTypes.append(newFileExtension)
+        if !uncategorizedTypes.contains(newFileType) {
+            uncategorizedTypes.append(newFileType)
         }
         
-        newFileExtension = ""
-        showingAddFileTypeSheet = false
+        newFileType = ""
+        isAddFileTypeSheetPresented = false
+         */
     }
     
-    private func deleteCategory(_ category: String) {
-        fileCategories.removeValue(forKey: category)
+    private func deleteCategory(_ category: FileCategory) {
+        //categories.removeValue(forKey: category)
     }
     
-    private func deleteFileExtension(_ category: String, _ fileExtension: String) {
+    private func deleteFileType(_ category: FileCategory, _ fileType: String) {
+        /*
         var updatedCategories = fileCategories
         updatedCategories[category]?.removeAll { $0 == fileExtension }
+        
         if updatedCategories[category]?.isEmpty == true {
             updatedCategories.removeValue(forKey: category)
         }
+        
         fileCategories = updatedCategories
+         */
     }
 }
 
-struct DropViewDelegate: DropDelegate {
-    let destinationCategory: String
-    @Binding var fileCategories: [String: [String]]
-    @Binding var uncategorizedFileTypes: [String]
+struct FileTypeDropViewDelegate: DropDelegate {
+    @Binding var destinationCategory: FileCategory
+    @Binding var categories: [FileCategory]
+    @Binding var uncategorizedTypes: [String]
     
     func performDrop(info: DropInfo) -> Bool {
         guard let item = info.itemProviders(for: [UTType.text]).first else { return false }
         
         item.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { (data, error) in
             DispatchQueue.main.async {
-                guard let data = data as? Data, let fileExtension = String(data: data, encoding: .utf8) else { return }
+                guard let data = data as? Data, let fileType = String(data: data, encoding: .utf8) else { return }
                 
-                // 检查是否已经存在该文件类型
-                if self.fileCategories[self.destinationCategory]?.contains(fileExtension) == true {
+                if destinationCategory.types.contains(fileType) {
                     return
                 }
                 
-                // 不删除未分类的文件类型，只是复制
-                if self.fileCategories[self.destinationCategory] != nil {
-                    self.fileCategories[self.destinationCategory]?.append(fileExtension)
-                } else {
-                    self.fileCategories[self.destinationCategory] = [fileExtension]
-                }
+                destinationCategory.types.append(fileType)
             }
         }
         
@@ -203,5 +227,7 @@ struct DropViewDelegate: DropDelegate {
 }
 
 #Preview {
-    CategoryListSection()
+    previewSection {
+        CategoryListSection()
+    }
 }

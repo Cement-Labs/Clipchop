@@ -134,25 +134,25 @@ extension Formatter {
             return
         }
         
-        var uncategorizedTypes = Set(Defaults[.uncategorizedFileTypes])
+        var uncategorizedTypes = Set(Defaults[.uncategorizedTypes])
         let categories = Defaults[.categories]
         
         var categorized = false
-        for (category, extensions) in categories {
-            if extensions.contains(where: { $0 == result }) {
-                log(self, "File extension \(result) categorized under \(category)")
+        for category in categories {
+            if category.types.contains(where: { $0 == result }) {
+                log(self, "File type \(result) categorized under \(category)")
                 categorized = true
                 break
             }
         }
         
         if !categorized {
-            log(self, "File extension \(result) not categorized, needs manual categorization")
+            log(self, "File type \(result) not categorized, needs manual categorization")
             if !uncategorizedTypes.contains(result) {
                 uncategorizedTypes.insert(result)
             }
         }
         
-        Defaults[.uncategorizedFileTypes] = Array(uncategorizedTypes)
+        Defaults[.uncategorizedTypes] = Array(uncategorizedTypes)
     }
 }

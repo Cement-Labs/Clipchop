@@ -40,14 +40,23 @@ extension Defaults.Keys {
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
     
-    
-    static let categories = Key<[String: [String]]>("categories", default: [
-            "Images": ["jpg", "png", "gif"],
-            "Documents": ["pdf", "docx", "xlsx", "pdf"],
-            "Videos": ["mp4", "mov", "avi"],
-            "Audio": ["mp3", "wav", "m4a", "Link"]
+    static let categories = Key<[FileCategory]>("categories", default: [
+        .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
+            "jpg", "png", "gif"
+        ]),
+        .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
+            "pdf", "docx", "xlsx",
+            "key", "pages", "numbers",
+            "txt", "rtf"
+        ]),
+        .init(name: .init(localized: "Videos", defaultValue: "Videos"), types: [
+            "mp4", "mov", "avi"
+        ]),
+        .init(name: .init(localized: "Audio", defaultValue: "Audio"), types: [
+            "mp3", "wav", "m4a", "flac"
         ])
-    static let uncategorizedFileTypes = Key<[String]>("uncategorizedFileTypes", default: [])
+    ])
+    static let uncategorizedTypes = Key<[String]>("uncategorizedTypes", default: [])
     
 }
 

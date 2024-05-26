@@ -8,6 +8,8 @@
 import SwiftUI
 import Defaults
 
+// MARK: - Preferred Color Scheme
+
 enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable {
     case system = "system"
     case light = "light"
@@ -28,6 +30,8 @@ enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable 
         }
     }
 }
+
+// MARK: - History Preservation Period
 
 enum HistoryPreservationPeriod: String, CaseIterable, Defaults.Serializable {
     case forever = "forever"
@@ -62,6 +66,8 @@ extension HistoryPreservationPeriod: Identifiable {
     }
 }
 
+// MARK: - Color Style
+
 enum ColorStyle: Int, CaseIterable, Defaults.Serializable {
     case app = 0
     case system = 1
@@ -72,4 +78,12 @@ extension ColorStyle: Identifiable {
     var id: Self {
         self
     }
+}
+
+// MARK: Category
+
+struct FileCategory: Identifiable, Codable, Defaults.Serializable {
+    var id: UUID = .init()
+    var name: String?
+    var types: [String] = []
 }
