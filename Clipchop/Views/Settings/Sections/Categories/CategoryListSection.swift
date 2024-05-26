@@ -19,67 +19,39 @@ struct CategoryListSection: View {
     @State private var newFileType: String = ""
     
     var body: some View {
-        FileTypeList("All", types: $allTypes)
-
-        VStack(spacing: 0) {
-            ForEach($categories) { category in
-                Section {
-                    ScrollView(.horizontal) {
-                        LazyHStack {
-                            ForEach(category.types, id: \.self) { type in
-                                Group {
-                                    Text(type.wrappedValue)
-                                        .font(.headline)
-                                        .padding()
-                                }
-                                .onDrag {
-                                    NSItemProvider(object: type.wrappedValue as NSString)
-                                }
-                            }
-                            .onDelete { indexSet in
-                                indexSet.forEach { index in
-                                    removeFileType(category.wrappedValue, category.types[index].wrappedValue)
-                                }
-                            }
-                            .onDrop(of: [UTType.text], delegate: FileTypeDropViewDelegate(
-                                destinationCategory: category,
-                                categories: $categories,
-                                uncategorizedTypes: $uncategorizedTypes
-                            ))
-                        }
+        FileTypeListView("All", types: $allTypes)
+            .toolbar {
+                ToolbarItemGroup(placement: .cancellationAction) {
+                    AddContentPopoverButton("Category Name", "Add Category", action: addCategory(_:)) {
+                        Image(systemSymbol: .folderBadgePlus)
                     }
-                } header: {
-                    HStack {
-                        Group {
-                            if let name = category.name.wrappedValue {
-                                Text(name)
-                            } else {
-                                Text("Category \(Text(category.id.uuidString).monospaced())")
-                                    .foregroundStyle(.placeholder)
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        Button {
-                            removeCategory(category.wrappedValue)
-                        } label: {
-                            Image(systemSymbol: .trash)
-                                .foregroundColor(.red)
-                        }
+                    
+                    AddContentPopoverButton("Extension", "Add File Type", action: addFileType(_:)) {
+                        Image(systemSymbol: .docBadgePlus)
                     }
                 }
-                .padding()
             }
-        }
-        .toolbar {
-            ToolbarItemGroup(placement: .cancellationAction) {
-                AddContentPopoverButton("Category Name", "Add Category", action: addCategory(_:)) {
-                    Image(systemSymbol: .folderBadgePlus)
-                }
-                
-                AddContentPopoverButton("Extension", "Add File Type", action: addFileType(_:)) {
-                    Image(systemSymbol: .docBadgePlus)
+
+        ForEach($categories) { category in
+            FileTypeListView(types: category.types) {
+                HStack {
+                    Group {
+                        if let name = category.name.wrappedValue {
+                            Text(name)
+                        } else {
+                            Text("Category \(Text(category.id.uuidString).monospaced())")
+                                .foregroundStyle(.placeholder)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Button {
+                        removeCategory(category.wrappedValue)
+                    } label: {
+                        Image(systemSymbol: .trash)
+                            .foregroundColor(.red)
+                    }
                 }
             }
         }

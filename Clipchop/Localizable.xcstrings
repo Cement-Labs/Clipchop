@@ -230,6 +230,9 @@
     "Add File Type" : {
 
     },
+    "All" : {
+
+    },
     "Allow app excluding" : {
 
     },
@@ -712,9 +715,6 @@
           }
         }
       }
-    },
-    "Uncategorized Types" : {
-
     },
     "Update interval" : {
 

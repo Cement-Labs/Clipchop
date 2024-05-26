@@ -134,7 +134,7 @@ extension Formatter {
             return
         }
         
-        var uncategorizedTypes = Set(Defaults[.uncategorizedTypes])
+        var allTypes = Set(Defaults[.allTypes])
         let categories = Defaults[.categories]
         
         var categorized = false
@@ -148,11 +148,11 @@ extension Formatter {
         
         if !categorized {
             log(self, "File type \(result) not categorized, needs manual categorization")
-            if !uncategorizedTypes.contains(result) {
-                uncategorizedTypes.insert(result)
+            if !allTypes.contains(result) {
+                allTypes.insert(result)
             }
         }
         
-        Defaults[.uncategorizedTypes] = Array(uncategorizedTypes)
+        Defaults[.allTypes] = Array(allTypes)
     }
 }
