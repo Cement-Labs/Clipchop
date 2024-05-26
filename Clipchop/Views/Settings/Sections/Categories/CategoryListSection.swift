@@ -32,7 +32,9 @@ struct CategoryListSection: View {
     }
     
     var body: some View {
-        FileTypeListView(types: $allTypes) {
+        FileTypeListView(types: $allTypes) { indexSet in
+            allTypes.remove(atOffsets: indexSet)
+        } label: {
             Text("All")
                 .toolbar {
                     ToolbarItemGroup(placement: .cancellationAction) {
@@ -92,7 +94,13 @@ struct CategoryListSection: View {
         }
 
         ForEach($categories) { category in
-            FileTypeListView(types: category.types) {
+            FileTypeListView(types: category.types, onDropOf: [.text], onDropDelegate: FileTypeDropDelegate(
+                destinationCategory: category,
+                categories: $categories,
+                allTypes: $allTypes
+            )) { indexSet in
+                category.types.wrappedValue.remove(atOffsets: indexSet)
+            } label: {
                 HStack {
                     TextField("", text: category.name, prompt: Text(category.id.uuidString).monospaced())
                         .textFieldStyle(.plain)
@@ -132,14 +140,14 @@ struct CategoryListSection: View {
         Defaults[.categories].insert(.init(name: name), at: 0)
     }
     
-    private func removeCategory(_ category: FileCategory) {
-        categories.removeAll { $0 == category }
-    }
-    
     private func addFileType(_ fileType: String) {
         guard Defaults.isValidFileTypeInput(fileType) && Defaults.isNewFileTypeInput(fileType) else { return }
         
         allTypes.insert(Defaults.trimFileTypeInput(fileType), at: 0)
+    }
+    
+    private func removeCategory(_ category: FileCategory) {
+        categories.removeAll { $0 == category }
     }
     
     private func removeFileType(_ category: inout FileCategory, _ fileType: String) {

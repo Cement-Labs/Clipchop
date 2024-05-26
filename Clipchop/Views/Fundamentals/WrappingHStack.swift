@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 // Originally by https://stackoverflow.com/a/65453108/23452915
 struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
@@ -14,6 +15,9 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     var models: [Model]
     var spacing: CGFloat = 8
     var lineSpacing: CGFloat = 8
+    var onDropOf: [UTType] = []
+    var onDropDelegate: DropDelegate?
+    var onDelete: Optional<(IndexSet) -> Void> = { _ in }
     var viewGenerator: ViewGenerator
     
     @State private var totalHeight: CGFloat = .zero
@@ -60,6 +64,10 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
                         
                         return result
                     }
+            }
+            .onDelete(perform: onDelete)
+            .if(onDropDelegate != nil) { view in
+                view.onDrop(of: onDropOf, delegate: onDropDelegate!)
             }
         }
         .background {

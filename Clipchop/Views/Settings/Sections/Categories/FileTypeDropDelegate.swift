@@ -11,7 +11,7 @@ import SwiftUI
 struct FileTypeDropDelegate: DropDelegate {
     @Binding var destinationCategory: FileCategory
     @Binding var categories: [FileCategory]
-    @Binding var uncategorizedTypes: [String]
+    @Binding var allTypes: [String]
     
     func performDrop(info: DropInfo) -> Bool {
         guard let item = info.itemProviders(for: [UTType.text]).first else { return false }

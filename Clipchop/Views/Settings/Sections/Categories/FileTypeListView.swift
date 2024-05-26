@@ -15,33 +15,33 @@ struct FileTypeListView<Label>: View where Label: View {
     
     @State private var isCollapsed = false
     
-    //var onDelete: (IndexSet) -> Void
-    //var dropTypes: [UTType]
-    //var dropDelegate: DropDelegate
+    var onDropOf: [UTType] = []
+    var onDropDelegate: DropDelegate?
+    var onDelete: Optional<(IndexSet) -> Void> = { _ in }
     
     init(
         types: Binding<[String]>,
-        //dropTypes: [UTType],
-        //dropDelegate: DropDelegate,
-        //onDelete: @escaping (IndexSet) -> Void,
+        onDropOf: [UTType] = [],
+        onDropDelegate: DropDelegate? = nil,
+        onDelete: @escaping (IndexSet) -> Void = { _ in },
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.label = label
         self._types = types
         
-        //self.onDelete = onDelete
-        //self.dropTypes = dropTypes
-        //self.dropDelegate = dropDelegate
+        self.onDelete = onDelete
+        self.onDropOf = onDropOf
+        self.onDropDelegate = onDropDelegate
     }
     
     init(
         _ titleKey: LocalizedStringKey,
-        types: Binding<[String]>//,
-        //dropTypes: [UTType],
-        //dropDelegate: DropDelegate,
-        //onDelete: @escaping (IndexSet) -> Void
+        types: Binding<[String]>,
+        onDropOf: [UTType] = [],
+        onDropDelegate: DropDelegate? = nil,
+        onDelete: @escaping (IndexSet) -> Void = { _ in }
     ) where Label == Text {
-        self.init(types: types/*, dropTypes: dropTypes, dropDelegate: dropDelegate, onDelete: onDelete*/) {
+        self.init(types: types, onDropOf: onDropOf, onDropDelegate: onDropDelegate, onDelete: onDelete) {
             Text(titleKey)
         }
     }
@@ -54,15 +54,6 @@ struct FileTypeListView<Label>: View where Label: View {
             }
     }
     
-    /*
-    @ViewBuilder
-    func handleEvents(content: () -> some View) -> some View {
-        content()
-            .onDelete(onDelete)
-            .onDrop(of: dropTypes, delegate: dropDelegate)
-    }
-     */
-    
     var body: some View {
         Section {
             if isCollapsed {
@@ -71,10 +62,17 @@ struct FileTypeListView<Label>: View where Label: View {
                         ForEach(types, id: \.self) { type in
                             buildTagEntry(type)
                         }
+                        .onDelete(perform: onDelete)
+                        .if(onDropDelegate != nil) { view in
+                            view.onDrop(of: onDropOf, delegate: onDropDelegate!)
+                        }
                     }
                 }
             } else {
-                WrappingHStack(models: types, lineSpacing: 8) { type in
+                WrappingHStack(
+                    models: types, lineSpacing: 8,
+                    onDropOf: onDropOf, onDropDelegate: onDropDelegate
+                ) { type in
                     buildTagEntry(type)
                 }
             }
