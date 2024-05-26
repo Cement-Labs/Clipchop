@@ -14,6 +14,7 @@ struct FileTypeListView<Label>: View where Label: View {
     @Binding var types: [String]
     
     @State private var isCollapsed = false
+    @State private var showDeleteButtons = false
     
     var onDropOf: [UTType] = []
     var onDropDelegate: DropDelegate?
@@ -48,10 +49,22 @@ struct FileTypeListView<Label>: View where Label: View {
     
     @ViewBuilder
     func buildTagEntry(_ type: String) -> some View {
-        FileTypeTagView(type: type)
-            .onDrag {
-                NSItemProvider(object: type as NSString)
+        HStack {
+            FileTypeTagView(type: type)
+                .onDrag {
+                    NSItemProvider(object: type as NSString)
+                }
+            if showDeleteButtons {
+                Button(action: {
+                    if let index = types.firstIndex(of: type) {
+                        types.remove(at: index)
+                    }
+                }) {
+                    Image(systemName: "minus.circle")
+                        .foregroundColor(.red)
+                }
             }
+        }
     }
     
     var body: some View {
@@ -63,10 +76,8 @@ struct FileTypeListView<Label>: View where Label: View {
                             buildTagEntry(type)
                         }
                         .onDelete(perform: onDelete)
-                        .if(onDropDelegate != nil) { view in
-                            view.onDrop(of: onDropOf, delegate: onDropDelegate!)
-                        }
                     }
+                    
                 }
             } else {
                 WrappingHStack(
@@ -95,5 +106,18 @@ struct FileTypeListView<Label>: View where Label: View {
             }
         }
         .animation(.interactiveSpring, value: types)
+        .if(onDropDelegate != nil) { view in
+            view.onDrop(of: onDropOf, delegate: onDropDelegate!)
+        }
+        .onAppear {
+            NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
+                if event.modifierFlags.contains(.shift) {
+                    showDeleteButtons = true
+                } else {
+                    showDeleteButtons = false
+                }
+                return event
+            }
+        }
     }
 }

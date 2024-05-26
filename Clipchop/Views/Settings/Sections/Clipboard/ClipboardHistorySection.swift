@@ -71,6 +71,7 @@ struct ClipboardHistorySection: View {
                 }
                 .monospaced()
                 .disabled(historyPreservationPeriod == .forever)
+                .animation(.snappy(duration: 0.5), value: historyPreservationTime)
                 
                 .onAppear {
                     cache()
@@ -90,6 +91,8 @@ struct ClipboardHistorySection: View {
                     Text("Update interval")
                     Spacer()
                     Text("\(timerInterval, specifier: "%.2f")s")
+                        .contentTransition(.numericText(value: Double(timerInterval)))
+                        .animation(.snappy(duration: 0.5), value: timerInterval)
                         .monospaced()
                 }
                 
