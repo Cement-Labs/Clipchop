@@ -39,11 +39,9 @@ struct ClipboardHistorySection: View {
     var body: some View {
         Section {
             VStack {
-                HStack{
-                    Picker("Preservation time", selection: $historyPreservationPeriod) {
-                        ForEach(HistoryPreservationPeriod.allCases) { period in
-                            period.withTime(Int(historyPreservationTime))
-                        }
+                Picker("Preservation time", selection: $historyPreservationPeriod) {
+                    ForEach(HistoryPreservationPeriod.allCases) { period in
+                        period.withTime(Int(historyPreservationTime))
                     }
                 }
 
