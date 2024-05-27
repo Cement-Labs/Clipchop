@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
 import Defaults
 
 struct ClipboardHistorySection: View {
@@ -20,6 +21,8 @@ struct ClipboardHistorySection: View {
     @State var cachedPreservationTime: Double = 1
     
     @Environment(\.hasTitle) var hasTitle
+    
+    @State private var showPopover = false
     
     func cache() {
         cachedPreservationPeriod = historyPreservationPeriod
@@ -36,9 +39,47 @@ struct ClipboardHistorySection: View {
     var body: some View {
         Section {
             VStack {
-                Picker("Preservation time", selection: $historyPreservationPeriod) {
-                    ForEach(HistoryPreservationPeriod.allCases) { period in
-                        period.withTime(Int(historyPreservationTime))
+                HStack {
+                    Text("Preservation time")
+                    Spacer()
+                    HStack{
+                        ForEach(HistoryPreservationPeriod.allCases, id: \.self) { period in
+                            if period == historyPreservationPeriod {
+                                period.withTime(Int(historyPreservationTime))
+                                    .contentTransition(.numericText(value: Double(historyPreservationTime)))
+                                    .animation(.snappy(duration: 0.5), value: historyPreservationTime)
+                            }
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            showPopover.toggle()
+                        }
+                    }
+                    .popover(isPresented: $showPopover) {
+                        VStack {
+                            ForEach(HistoryPreservationPeriod.allCases, id: \.self) { period in
+                                Button(action: {
+                                    withAnimation {
+                                        historyPreservationPeriod = period
+                                        showPopover = false
+                                    }
+                                }) {
+                                    HStack {
+                                        period.withTime(Int(historyPreservationTime))
+                                        if period == historyPreservationPeriod {
+                                            Image(systemSymbol: .checkmark)
+                                                .foregroundColor(Color.accentColor)
+                                        }
+                                    }
+                                    .frame(width: 100, height: 25)
+                                    .background(period == historyPreservationPeriod ? Color.accentColor.opacity(0.5) : Color.clear)
+                                    .cornerRadius(8)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .padding()
                     }
                 }
                 
@@ -72,7 +113,7 @@ struct ClipboardHistorySection: View {
                 .frame(height: 24)
                 .monospaced()
                 .disabled(historyPreservationPeriod == .forever && DefaultsStack.Group.historyPreservation.isUnchanged)
-                .animation(.default, value: DefaultsStack.Group.historyPreservation.isUnchanged)
+                .animation(.easeInOut, value: DefaultsStack.Group.historyPreservation.isUnchanged)
                 
                 .onAppear {
                     cache()
@@ -100,7 +141,7 @@ struct ClipboardHistorySection: View {
                 Slider(value: $timerInterval, in: 0.01...1) {
                     
                 } minimumValueLabel: {
-                    Text("0.01")
+                    Text("0")
                 } maximumValueLabel: {
                     Text("1")
                 }

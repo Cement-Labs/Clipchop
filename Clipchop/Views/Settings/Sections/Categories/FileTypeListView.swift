@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
 import UniformTypeIdentifiers
 
 struct FileTypeListView<Label>: View where Label: View {
