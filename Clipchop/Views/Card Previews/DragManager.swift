@@ -11,7 +11,7 @@ import Contacts
 
 func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     guard let data = content.value as? NSSecureCoding else {
-        print("Value is not NSSecureCoding compliant")
+        log( "Value is not NSSecureCoding compliant")
         return nil
     }
 
@@ -24,7 +24,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
             let string = String(data: data as! Data, encoding: .utf8),
             let nsData = string.data(using: .utf8) 
         else {
-            print("Failed to convert data to string with UTF-8 encoding.")
+            log("Failed to convert data to string with UTF-8 encoding.")
             return nil
         }
         
@@ -49,7 +49,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         return NSItemProvider(item: data, typeIdentifier: content.type)
 
     default:
-        print("Unsupported content type for dragging: \(String(describing: content.type))")
+        log("Unsupported content type for dragging: \(String(describing: content.type))")
         return NSItemProvider(item: data, typeIdentifier: UTType.data.identifier)
     }
 }

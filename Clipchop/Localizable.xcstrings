@@ -227,6 +227,9 @@
     "Acknowledgements" : {
 
     },
+    "Add Tag" : {
+
+    },
     "All" : {
 
     },
@@ -317,6 +320,9 @@
     "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
 
     },
+    "Archives" : {
+
+    },
     "Audio" : {
 
     },
@@ -380,6 +386,17 @@
     },
     "Clipchop" : {
 
+    },
+    "Code" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Code Files"
+          }
+        }
+      }
     },
     "Color" : {
 

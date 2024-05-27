@@ -26,7 +26,7 @@ struct CategoryListSection: View {
     var canSubmitInput: Bool {
         switch contentType {
         case .category:
-            true
+            !input.isEmpty
         case .fileType:
             !input.isEmpty && Defaults.isValidFileTypeInput(input) && Defaults.isNewFileTypeInput(input)
         }
@@ -53,6 +53,7 @@ struct CategoryListSection: View {
                                         switch contentType {
                                         case .category:
                                             TextField("Category Name", text: $input)
+                                                .monospaced()
                                         case .fileType:
                                             TextField("File Extension", text: $input)
                                                 .monospaced()

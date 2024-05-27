@@ -67,7 +67,6 @@ struct FileTypeListView<Label>: View where Label: View {
                 isInEditMode = false
                 return NSItemProvider(object: type as NSString)
             }
-            .wiggle(isAnimating: $isInEditMode)
         }
     }
     
@@ -81,17 +80,28 @@ struct FileTypeListView<Label>: View where Label: View {
                         }
                         .onDelete(perform: onDelete)
                     }
-                    
                 }
             } else {
-                WrappingHStack(
-                    models: types, lineSpacing: 8,
-                    onDropOf: onDropOf, onDropDelegate: onDropDelegate
-                ) { type in
-                    buildTagEntry(type)
-                }
-                .if(onDropDelegate != nil) { view in
-                    view.onDrop(of: onDropOf, delegate: onDropDelegate!)
+                ZStack {
+                    if types.isEmpty {
+                        Text("Add Tag")
+                            .monospaced()
+                            .foregroundStyle(.gray)
+                        Color.clear
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .if(onDropDelegate != nil) { view in
+                                view.onDrop(of: onDropOf, delegate: onDropDelegate!)
+                            }
+                    }
+                    WrappingHStack(
+                        models: types, lineSpacing: 8,
+                        onDropOf: onDropOf, onDropDelegate: onDropDelegate
+                    ) { type in
+                        buildTagEntry(type)
+                    }
+                    .if(onDropDelegate != nil) { view in
+                        view.onDrop(of: onDropOf, delegate: onDropDelegate!)
+                    }
                 }
             }
         } header: {

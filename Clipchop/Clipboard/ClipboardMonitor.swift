@@ -11,6 +11,7 @@ import Defaults
 import SwiftData
 
 class ClipboardMonitor: NSObject {
+    
     private var timer: Timer?
     private var changeCount: Int = 0
     private var context: ModelContext
@@ -162,6 +163,41 @@ class ClipboardMonitor: NSObject {
             log(self, "[Content] Type: \(String(describing: content.type)), Value: \(content.value.debugDescription)")
         }
 #endif
+    }
+    // MARK: - Copy 2 Clipboard
+    
+    func copy(_ item: ClipboardHistory?, removeFormatting: Bool = false) {
+        
+        guard let item else {
+            return
+        }
+
+        pasteboard.clearContents()
+        var contents = item.getContents()
+        
+        if removeFormatting {
+            let stringContents = contents.filter({
+                NSPasteboard.PasteboardType($0.type!) == .string
+            })
+            if !stringContents.isEmpty {
+                contents = stringContents
+            }
+        }
+        
+        for content in contents {
+            content.item?.time = Date()
+            guard content.type != NSPasteboard.PasteboardType.fileURL.rawValue else { continue }
+            pasteboard.setData(content.value, forType: NSPasteboard.PasteboardType(content.type!))
+        }
+        
+        let fileURLItems: [NSPasteboardItem] = contents.compactMap { item in
+            guard item.type == NSPasteboard.PasteboardType.fileURL.rawValue else { return nil }
+            guard let value = item.value else { return nil }
+            let pasteItem = NSPasteboardItem()
+            pasteItem.setData(value, forType: NSPasteboard.PasteboardType(item.type!))
+            return pasteItem
+        }
+        pasteboard.writeObjects(fileURLItems)
     }
 }
 

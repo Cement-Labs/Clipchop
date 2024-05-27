@@ -21,8 +21,6 @@ struct FileTypeTagView: View {
             .background(.placeholder.opacity(0.1))
             .clipShape(.rect(cornerRadius: 12))
         
-            .wiggle(isAnimating: $isDeleteButtonShown)
-        
             .overlay(alignment: .topTrailing) {
                 if isDeleteButtonShown {
                     Button {

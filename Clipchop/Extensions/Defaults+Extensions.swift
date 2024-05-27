@@ -42,20 +42,32 @@ extension Defaults.Keys {
     
     static let categories = Key<[FileCategory]>("categories", default: [
         .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
-            "jpg", "png", "gif"
+            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic"
         ]),
         .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
             "pdf", "docx", "xlsx",
             "key", "pages", "numbers",
-            "txt", "rtf", "rtfd"
+            "txt", "rtf", "rtfd",
+            "doc", "ods", "odt", "pptx", "ppt", "xls", "csv", "html", "xml", "json"
         ]),
         .init(name: .init(localized: "Videos", defaultValue: "Videos"), types: [
-            "mp4", "mov", "avi"
+            "mp4", "mov", "avi",
+            "mkv", "wmv", "flv", "mpeg", "mpg", "m4v", "webm"
         ]),
         .init(name: .init(localized: "Audio", defaultValue: "Audio"), types: [
-            "mp3", "wav", "m4a", "flac"
+            "mp3", "wav", "m4a", "flac",
+            "aac", "ogg", "wma", "alac", "aiff", "dsd"
+        ]),
+        
+        .init(name: .init(localized: "Archives", defaultValue: "Archives"), types: [
+            "zip", "rar", "7z", "tar", "gz", "bz2"
+        ]),
+        
+        .init(name: .init(localized: "Code", defaultValue: "Code Files"), types: [
+            "swift", "objc", "java", "py", "cpp", "cs", "js", "ts", "html", "css", "scss", "less", "php", "rb", "pl", "go", "rs", "kt"
         ])
     ])
+
     static let allTypes = Key<[String]>("allTypes", default: categories.defaultValue.flatMap { $0.types })
     
 }

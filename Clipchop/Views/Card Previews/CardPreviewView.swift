@@ -15,7 +15,7 @@ struct CardPreviewView: View {
     @State private var isSelected = false
     @State private var data: Data?
     
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.modelContext) var context
     @Environment(\.displayScale) var displayScale
     @Environment(\.colorScheme) var colorScheme
     
@@ -57,5 +57,12 @@ struct CardPreviewView: View {
             log(self, "No suitable content found for dragging")
             return NSItemProvider()
         }
+        .gesture(
+            TapGesture(count: 2)
+                .onEnded {
+                    let clipboardMonitor = ClipboardMonitor(context: context)
+                    clipboardMonitor.copy(item)
+                }
+        )
     }
 }
