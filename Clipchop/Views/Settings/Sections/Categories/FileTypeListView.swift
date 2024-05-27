@@ -36,7 +36,11 @@ struct FileTypeListView<Label>: View where Label: View {
         self._isInEditMode = isInEditMode
         
         self.onDelete = onDelete
-        self.onSingleDelete = onSingleDelete
+        self.onSingleDelete = { type in
+            if let index = types.wrappedValue.firstIndex(of: type) {
+                types.wrappedValue.remove(at: index)
+            }
+        }
         self.onDropOf = onDropOf
         self.onDropDelegate = onDropDelegate
     }
