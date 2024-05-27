@@ -22,8 +22,6 @@ struct ClipboardHistorySection: View {
     
     @Environment(\.hasTitle) var hasTitle
     
-    @State private var showPopover = false
-    
     func cache() {
         cachedPreservationPeriod = historyPreservationPeriod
         cachedPreservationTime = historyPreservationTime
