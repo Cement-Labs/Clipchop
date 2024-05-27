@@ -39,50 +39,14 @@ struct ClipboardHistorySection: View {
     var body: some View {
         Section {
             VStack {
-                HStack {
-                    Text("Preservation time")
-                    Spacer()
-                    HStack{
-                        ForEach(HistoryPreservationPeriod.allCases, id: \.self) { period in
-                            if period == historyPreservationPeriod {
-                                period.withTime(Int(historyPreservationTime))
-                                    .contentTransition(.numericText(value: Double(historyPreservationTime)))
-                                    .animation(.snappy(duration: 0.5), value: historyPreservationTime)
-                            }
+                HStack{
+                    Picker("Preservation time", selection: $historyPreservationPeriod) {
+                        ForEach(HistoryPreservationPeriod.allCases) { period in
+                            period.withTime(Int(historyPreservationTime))
                         }
-                    }
-                    .onTapGesture {
-                        withAnimation {
-                            showPopover.toggle()
-                        }
-                    }
-                    .popover(isPresented: $showPopover) {
-                        VStack {
-                            ForEach(HistoryPreservationPeriod.allCases, id: \.self) { period in
-                                Button(action: {
-                                    withAnimation {
-                                        historyPreservationPeriod = period
-                                        showPopover = false
-                                    }
-                                }) {
-                                    HStack {
-                                        period.withTime(Int(historyPreservationTime))
-                                        if period == historyPreservationPeriod {
-                                            Image(systemSymbol: .checkmark)
-                                                .foregroundColor(Color.accentColor)
-                                        }
-                                    }
-                                    .frame(width: 100, height: 25)
-                                    .background(period == historyPreservationPeriod ? Color.accentColor.opacity(0.5) : Color.clear)
-                                    .cornerRadius(8)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                        }
-                        .padding()
                     }
                 }
-                
+
                 Slider(value: $historyPreservationTime, in: 1...30, step: 1) {
                     if !DefaultsStack.Group.historyPreservation.isUnchanged {
                         HStack {
@@ -133,8 +97,6 @@ struct ClipboardHistorySection: View {
                     Text("Update interval")
                     Spacer()
                     Text("\(timerInterval, specifier: "%.2f")s")
-                        .contentTransition(.numericText(value: Double(timerInterval)))
-                        .animation(.snappy(duration: 0.5), value: timerInterval)
                         .monospaced()
                 }
                 
