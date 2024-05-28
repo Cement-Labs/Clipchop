@@ -11,13 +11,8 @@ struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.displayScale) private var displayScale
     
-    let style: Style
-    let content: () -> Content
-    
-    init(_ style: Style, @ViewBuilder content: @escaping () -> Content) {
-        self.style = style
-        self.content = content
-    }
+    var style: Style
+    var content: () -> Content
     
     var body: some View {
         HStack(alignment: .center) {

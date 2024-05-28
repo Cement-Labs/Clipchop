@@ -12,6 +12,22 @@ struct FormSectionList<Content, Footer>: View where Content: View, Footer: View 
     @ViewBuilder var content: () -> Content
     @ViewBuilder var footer: () -> Footer
     
+    init(
+        @ViewBuilder content: @escaping () -> Content,
+        @ViewBuilder footer: @escaping () -> Footer
+    ) {
+        self.content = content
+        self.footer = footer
+    }
+    
+    init(
+        @ViewBuilder content: @escaping () -> Content
+    ) where Footer == EmptyView {
+        self.init(content: content) {
+            EmptyView()
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             content()

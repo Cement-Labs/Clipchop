@@ -20,3 +20,19 @@ extension Set {
         }
     }
 }
+
+extension Set where Element == FileType {
+    func sorted() -> [FileType] {
+        sorted {
+            $0.ext < $1.ext
+        }
+    }
+}
+
+extension Set where Element == FileType.Category {
+    func sorted() -> [FileType.Category] {
+        sorted {
+            $0.name < $1.name
+        }
+    }
+}
