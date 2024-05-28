@@ -198,6 +198,21 @@ class ClipboardMonitor: NSObject {
             return pasteItem
         }
         pasteboard.writeObjects(fileURLItems)
+        
+        if Defaults[.paste] {
+            pasteToActiveApplication()
+        }
+    }
+    
+    func pasteToActiveApplication() {
+        // Simulate Cmd+V keypress to paste
+        let keyDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x09, keyDown: true) // Cmd+V down
+        keyDownEvent?.flags = .maskCommand
+        keyDownEvent?.post(tap: .cghidEventTap)
+        
+        let keyUpEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x09, keyDown: false) // Cmd+V up
+        keyUpEvent?.flags = .maskCommand
+        keyUpEvent?.post(tap: .cghidEventTap)
     }
 }
 
