@@ -305,7 +305,7 @@
 			children = (
 				28A699AC2BF6192A000B0272 /* ClipboardMonitor.swift */,
 				28A699B02BF61F92000B0272 /* Formatter.swift */,
-				65DDA4872C046B340086458E /* ClipboardModel */,
+				65DDA4872C046B340086458E /* Model */,
 			);
 			path = Clipboard;
 			sourceTree = "<group>";
@@ -330,11 +330,11 @@
 			isa = PBXGroup;
 			children = (
 				65DDA4882C047A250086458E /* Info.plist */,
+				288295172BC41F7300392B29 /* ClipchopApp.swift */,
+				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
 				28D8CE622BDD0DE1008B17B5 /* Utilities */,
 				28C2C5972BF0D16100E9D9AA /* Sounds */,
 				2871978C2BDE723C004BCDA3 /* Clipboard */,
-				288295172BC41F7300392B29 /* ClipchopApp.swift */,
-				28D8CE742BDD2B42008B17B5 /* AppDelegate.swift */,
 				28C102392C020D79003F5722 /* Views */,
 				282692782BDCAE5500D1656E /* Extensions */,
 				2882951E2BC41F7400392B29 /* Preview Content */,
@@ -529,14 +529,14 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		65DDA4872C046B340086458E /* ClipboardModel */ = {
+		65DDA4872C046B340086458E /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				2872C0F62BF78D59000ED6A8 /* ModelManager.swift */,
 				2866D7512BF88CD300F57DF7 /* ClipboardContent.swift */,
 				2866D7522BF88CD300F57DF7 /* ClipboardHistory.swift */,
 			);
-			path = ClipboardModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

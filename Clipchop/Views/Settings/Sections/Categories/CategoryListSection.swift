@@ -37,7 +37,7 @@ struct CategoryListSection: View {
             allTypes.remove(atOffsets: indexSet)
         } onSingleDelete: { type in
             Defaults.removeFileTypeFromAll(type)
-        } label: {
+        } label: {  
             Text("All")
                 .toolbar {
                     ToolbarItemGroup(placement: .cancellationAction) {
