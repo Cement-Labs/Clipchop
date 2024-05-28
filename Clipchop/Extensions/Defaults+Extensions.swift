@@ -40,7 +40,7 @@ extension Defaults.Keys {
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
     
-    static let categories = Key<[FileType.Category]>("categories", default: [
+    static let categories = Key<Set<FileType.Category>>("categories", default: [
         .document,
         .image,
         .movie,
@@ -48,7 +48,7 @@ extension Defaults.Keys {
         .archive,
         .sourceCodeFile
     ])
-    static let fileTypes = Key<[FileType]>("fileTypes", default: [
+    static let fileTypes = Key<Set<FileType>>("fileTypes", default: [
         .init(ext: "pdf",       categories: [.document]),
         .init(ext: "doc",       categories: [.document]),
         .init(ext: "docx",      categories: [.document]),
@@ -142,6 +142,33 @@ extension Defaults.Keys {
 extension Defaults {
     static var accentColor: Color {
         inlineAccentColor(style: Self[.colorStyle], customColor: Self[.customAccentColor])
+    }
+    
+    static var fileExts: Set<String> {
+        get {
+            .init(Self[.fileTypes].map({ $0.ext }))
+        }
+        
+        set {
+            newValue.forEach { ext in
+                let isNew = newValue.contains(ext)
+                let isOld = fileExts.contains(ext)
+                guard isNew || isOld else {
+                    // No modifications
+                    return
+                }
+                
+                if isNew {
+                    // Added
+                    Self[.fileTypes].insert(.init(ext: ext))
+                }
+                
+                if isOld {
+                    // Removed
+                    Self[.fileTypes].remove(.init(ext: ext))
+                }
+            }
+        }
     }
     
     static func inlineAccentColor(style: ColorStyle, customColor: Color) -> Color {

@@ -1,0 +1,22 @@
+//
+//  Set+Extensions.swift
+//  Clipchop
+//
+//  Created by KrLite on 2024/5/28.
+//
+
+import Foundation
+
+extension Set {
+    mutating func updateEach(_ update: (inout Element) -> Void) {
+        for i in indices {
+            let original = self[i]
+            var element = original
+            update(&element)
+            
+            guard original != element else { continue }
+            self.remove(original)
+            self.insert(element)
+        }
+    }
+}
