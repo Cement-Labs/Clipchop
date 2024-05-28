@@ -9,6 +9,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 // Originally by https://stackoverflow.com/a/65453108/23452915
+@available(*, deprecated)
 struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     typealias ViewGenerator = (Model) -> V
     

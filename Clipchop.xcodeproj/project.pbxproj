@@ -10,6 +10,8 @@
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
 		2819A0E82C05EBFB00D351BC /* CategoriesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0E72C05EBFB00D351BC /* CategoriesSection.swift */; };
 		2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EB2C06000A00D351BC /* Set+Extensions.swift */; };
+		2819A0F02C0607E400D351BC /* FormSectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EF2C0607E400D351BC /* FormSectionList.swift */; };
+		2819A0F22C0608AA00D351BC /* ExcludedAppList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F12C0608AA00D351BC /* ExcludedAppList.swift */; };
 		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
 		281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */; };
 		281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */; };
@@ -109,6 +111,8 @@
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
 		2819A0E72C05EBFB00D351BC /* CategoriesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSection.swift; sourceTree = "<group>"; };
 		2819A0EB2C06000A00D351BC /* Set+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Extensions.swift"; sourceTree = "<group>"; };
+		2819A0EF2C0607E400D351BC /* FormSectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionList.swift; sourceTree = "<group>"; };
+		2819A0F12C0608AA00D351BC /* ExcludedAppList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppList.swift; sourceTree = "<group>"; };
 		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
 		28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				2843DB5F2BF0F06B008AA2E1 /* ExcludedAppListSection.swift */,
+				2819A0F12C0608AA00D351BC /* ExcludedAppList.swift */,
 				2843DB632BF0F8C4008AA2E1 /* InstalledAppsMenu.swift */,
 			);
 			path = "Excluded Apps";
@@ -476,6 +481,7 @@
 			children = (
 				2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */,
 				283E25352BF4FE040094C06F /* StaleView.swift */,
+				2819A0EF2C0607E400D351BC /* FormSectionList.swift */,
 				28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */,
 			);
 			path = Fundamentals;
@@ -678,6 +684,7 @@
 				28E6E8FB2BFE0E850068B449 /* BeginningView.swift in Sources */,
 				28C102362C020C86003F5722 /* LifecycleHandler.swift in Sources */,
 				285FADBF2BF98335005AE202 /* PreferredColorSchemePicker.swift in Sources */,
+				2819A0F22C0608AA00D351BC /* ExcludedAppList.swift in Sources */,
 				28227F652BF24BC1008FAC3A /* ClipboardHistorySection.swift in Sources */,
 				2826927A2BDCAE6000D1656E /* Bundle+Extensions.swift in Sources */,
 				28C102322C0206E3003F5722 /* Notification+Extensions.swift in Sources */,
@@ -700,6 +707,7 @@
 				28E6E9062BFE16620068B449 /* BeginningCustomizationPage.swift in Sources */,
 				2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */,
 				28E6E9042BFE16570068B449 /* BeginningTutorialPage.swift in Sources */,
+				2819A0F02C0607E400D351BC /* FormSectionList.swift in Sources */,
 				28C102342C020C5D003F5722 /* Logger.swift in Sources */,
 				28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,

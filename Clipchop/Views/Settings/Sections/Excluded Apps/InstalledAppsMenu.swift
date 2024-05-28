@@ -1,5 +1,5 @@
 //
-//  InstalledAppsMenu.swift
+//  InstalledAppMenu.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/12.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Defaults
 
-struct InstalledAppsMenu: View {
+struct InstalledAppMenu: View {
     @EnvironmentObject var apps: InstalledApps
     
     @Default(.applicationExcludeList) var excluded

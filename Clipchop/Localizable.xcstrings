@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "%.2fs" : {
 
     },
@@ -193,6 +190,9 @@
     "30" : {
 
     },
+    "ABC" : {
+
+    },
     "About" : {
 
     },
@@ -225,12 +225,6 @@
 
     },
     "Acknowledgements" : {
-
-    },
-    "Add Tag" : {
-
-    },
-    "All" : {
 
     },
     "Allow app excluding" : {
@@ -320,7 +314,7 @@
     "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
 
     },
-    "Archives" : {
+    "Archive" : {
 
     },
     "Audio" : {
@@ -330,12 +324,6 @@
 
     },
     "Categories" : {
-
-    },
-    "Category" : {
-
-    },
-    "Category Name" : {
 
     },
     "Changing Color Scheme" : {
@@ -387,17 +375,6 @@
     "Clipchop" : {
 
     },
-    "Code" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Code Files"
-          }
-        }
-      }
-    },
     "Color" : {
 
     },
@@ -436,19 +413,13 @@
     "Delete history" : {
 
     },
-    "Documents" : {
+    "Document" : {
 
     },
     "Exclude apps to prevent %@ copying their contents." : {
 
     },
     "Excluded Apps" : {
-
-    },
-    "File Extension" : {
-
-    },
-    "File Type" : {
 
     },
     "Forever" : {
@@ -500,7 +471,7 @@
     "Hello, World!" : {
 
     },
-    "Images" : {
+    "Image" : {
 
     },
     "Keyboard Shortcuts" : {
@@ -525,6 +496,9 @@
 
     },
     "macOS Blue" : {
+
+    },
+    "Movie" : {
 
     },
     "No Application Excluded" : {
@@ -637,6 +611,9 @@
     "Source Code" : {
 
     },
+    "Source Code File" : {
+
+    },
     "Start Using %@" : {
 
     },
@@ -731,9 +708,6 @@
       }
     },
     "Update interval" : {
-
-    },
-    "Videos" : {
 
     },
     "Welcome to %@" : {
