@@ -88,7 +88,7 @@ struct FileType: Codable, Defaults.Serializable {
     
     struct Category: Identifiable, Codable, Defaults.Serializable {
         var id: UUID = .init()
-        var name: String = ""
+        var name: String
         
         // Default provided categories
         static let document =       FileType.Category(name: .init(localized: "Document"))
