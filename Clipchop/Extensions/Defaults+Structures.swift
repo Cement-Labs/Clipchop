@@ -82,14 +82,38 @@ extension ColorStyle: Identifiable {
 
 // MARK: Category
 
-struct FileCategory: Identifiable, Codable, Defaults.Serializable {
-    var id: UUID = .init()
-    var name: String = ""
-    var types: [String] = []
+struct FileType: Codable, Defaults.Serializable {
+    var ext: String
+    var categories: [Category] = []
+    
+    struct Category: Identifiable, Codable, Defaults.Serializable {
+        var id: UUID = .init()
+        var name: String = ""
+        
+        // Default provided categories
+        static let document =       FileType.Category(name: .init(localized: "Document"))
+        static let image =          FileType.Category(name: .init(localized: "Image"))
+        static let movie =          FileType.Category(name: .init(localized: "Movie"))
+        static let audio =          FileType.Category(name: .init(localized: "Audio"))
+        static let archive =        FileType.Category(name: .init(localized: "Archive"))
+        static let sourceCodeFile = FileType.Category(name: .init(localized: "Source Code File"))
+    }
 }
 
-extension FileCategory: Equatable {
-    static func ==(lhs: FileCategory, rhs: FileCategory) -> Bool {
+extension FileType: Identifiable {
+    var id: String {
+        self.ext
+    }
+}
+
+extension FileType: Equatable {
+    static func ==(lhs: FileType, rhs: FileType) -> Bool {
+        lhs.ext == rhs.ext
+    }
+}
+
+extension FileType.Category: Equatable {
+    static func ==(lhs: FileType.Category, rhs: FileType.Category) -> Bool {
         lhs.id == rhs.id
     }
 }
