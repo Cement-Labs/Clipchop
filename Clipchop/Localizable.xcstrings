@@ -1,7 +1,196 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@ needs Accessibility Access to take over your clipboard. No data will be collected remotely." : {
+    "" : {
+
+    },
+    "%.2fs" : {
+
+    },
+    "%@ is open source." : {
+
+    },
+    "%lld Days" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Day"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Days"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Hours" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Hour"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Hours"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Minutes" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Minute"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Minutes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Months" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Month"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Months"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld Years" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Year"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Years"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%llu Clips, %lld Items" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%#@arg1@, %#@arg2@"
+          },
+          "substitutions" : {
+            "arg1" : {
+              "argNum" : 1,
+              "formatSpecifier" : "llu",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Clip"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Clips"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "No Clips"
+                    }
+                  }
+                }
+              }
+            },
+            "arg2" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Item"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg Items"
+                    }
+                  },
+                  "zero" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "No Items"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "0" : {
+
+    },
+    "1" : {
+
+    },
+    "30" : {
 
     },
     "About" : {
@@ -16,7 +205,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Accessibility Access is required for %@ to take over your clipboard. No data will be collected remotely."
+            "value" : "Accessibility Access is required for %@ to take over your clipboard."
           }
         }
       }
@@ -27,24 +216,279 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%@ needs Accessibility Access"
+            "value" : "%@ Needs Accessibility Access"
           }
         }
       }
     },
+    "Accessibility Access is needed to take over your clipboard." : {
+
+    },
+    "Acknowledgements" : {
+
+    },
+    "Add Tag" : {
+
+    },
+    "All" : {
+
+    },
+    "Allow app excluding" : {
+
+    },
+    "App Development Time" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@-%2$@"
+          }
+        }
+      }
+    },
+    "App icon" : {
+
+    },
+    "App Icon: Aerugo" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Aerugo"
+          }
+        }
+      }
+    },
+    "App Icon: Beta" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clipchop Beta"
+          }
+        }
+      }
+    },
+    "App Icon: Stable" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clipchop"
+          }
+        }
+      }
+    },
+    "App Version: Raw" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "App Version: Semantic" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %@"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+
+    },
+    "Application" : {
+
+    },
+    "Apply" : {
+
+    },
+    "Apply Preservation Time" : {
+
+    },
+    "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
+
+    },
+    "Archives" : {
+
+    },
+    "Audio" : {
+
+    },
+    "Back" : {
+
+    },
+    "Categories" : {
+
+    },
+    "Category" : {
+
+    },
+    "Category Name" : {
+
+    },
+    "Changing Color Scheme" : {
+
+    },
+    "Clear clipboard history" : {
+
+    },
+    "Clear Clipboard History" : {
+
+    },
+    "Clip more to unlock more! You've already clipped %llu times." : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Clip more to unlock more! You've already clipped %llu time."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "Clip more to unlock more! You've already clipped %llu times."
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Clip more to unlock more! You haven't clipped yet."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Clip sound" : {
+
+    },
     "Clipboard" : {
+
+    },
+    "Clipboard History" : {
 
     },
     "Clipchop" : {
 
     },
-    "Example" : {
+    "Code" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Code Files"
+          }
+        }
+      }
+    },
+    "Color" : {
+
+    },
+    "Color style" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Copyrights" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ NNN Studio"
+          }
+        }
+      }
+    },
+    "Custom" : {
+
+    },
+    "Custom accent color only applies to the clip history window." : {
+
+    },
+    "Customization" : {
+
+    },
+    "Dark" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete history" : {
+
+    },
+    "Documents" : {
+
+    },
+    "Exclude apps to prevent %@ copying their contents." : {
+
+    },
+    "Excluded Apps" : {
+
+    },
+    "File Extension" : {
+
+    },
+    "File Type" : {
+
+    },
+    "Forever" : {
+
+    },
+    "Full Disk Access" : {
+
+    },
+    "Full Disk Access Alert: Content" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Full Disk Access is required for %@ to generate file previews."
+          }
+        }
+      }
+    },
+    "Full Disk Access Alert: Title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ Needs Full Disk Access"
+          }
+        }
+      }
+    },
+    "Full Disk Access is needed to generate file previews." : {
 
     },
     "General" : {
 
     },
     "Global Behaviors" : {
+
+    },
+    "GPL-3.0" : {
 
     },
     "Grant" : {
@@ -56,7 +500,61 @@
     "Hello, World!" : {
 
     },
+    "Images" : {
+
+    },
+    "Keyboard Shortcuts" : {
+
+    },
+    "Later" : {
+
+    },
+    "Licenced Under GPL-3.0" : {
+
+    },
+    "Light" : {
+
+    },
+    "Limit %@'s functions in the specified apps." : {
+
+    },
+    "Loading..." : {
+
+    },
+    "Log to Console (Debug)" : {
+
+    },
+    "macOS Blue" : {
+
+    },
+    "No Application Excluded" : {
+
+    },
+    "No Clipboard History Available" : {
+
+    },
+    "Open in System Settings" : {
+
+    },
+    "Open Settings…" : {
+
+    },
+    "Other" : {
+
+    },
+    "Paste sound" : {
+
+    },
     "Permissions" : {
+
+    },
+    "Pin history" : {
+
+    },
+    "Preferred color scheme" : {
+
+    },
+    "Preservation time" : {
 
     },
     "Quit" : {
@@ -65,13 +563,81 @@
     "Quit %@" : {
 
     },
-    "Recent Copied" : {
+    "Recent Clips" : {
+
+    },
+    "Refresh States (Debug)" : {
+
+    },
+    "Remove" : {
+
+    },
+    "Restore" : {
 
     },
     "Settings…" : {
 
     },
-    "Show menu bar item" : {
+    "Shortcuts" : {
+
+    },
+    "Show %@" : {
+
+    },
+    "Shows menu bar item" : {
+
+    },
+    "Skip" : {
+
+    },
+    "Sound: Bloop" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bloop"
+          }
+        }
+      }
+    },
+    "Sound: None" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "None"
+          }
+        }
+      }
+    },
+    "Sound: Pop" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pop"
+          }
+        }
+      }
+    },
+    "Sound: Tap" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tap"
+          }
+        }
+      }
+    },
+    "Source Code" : {
+
+    },
+    "Start Using %@" : {
 
     },
     "Starts with macOS" : {
@@ -80,7 +646,103 @@
     "Syncing" : {
 
     },
-    "You can open %@ again to access this page." : {
+    "System" : {
+
+    },
+    "Test (Debug)" : {
+
+    },
+    "Test line No.%lld" : {
+
+    },
+    "The global keyboard shortcut for calling up the clip history window." : {
+
+    },
+    "This action clears all your clipboard history unrestorably, including pins." : {
+
+    },
+    "Tutorial" : {
+
+    },
+    "Type: Color" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Color"
+          }
+        }
+      }
+    },
+    "Type: Combined" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Type: Image" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Image"
+          }
+        }
+      }
+    },
+    "Type: Link" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Link"
+          }
+        }
+      }
+    },
+    "Type: Mixed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Multiple"
+          }
+        }
+      }
+    },
+    "Type: Text" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Plain Text"
+          }
+        }
+      }
+    },
+    "Update interval" : {
+
+    },
+    "Videos" : {
+
+    },
+    "Welcome to %@" : {
+
+    },
+    "You can always open %@ again to access this page." : {
+
+    },
+    "You're All Set!" : {
 
     }
   },
