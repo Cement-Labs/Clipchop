@@ -10,7 +10,7 @@ import SFSafeSymbols
 import Defaults
 
 struct MenuBarIconView: View {
-    @Default(.timesClipped) var timesClipped
+    @Default(.timesClipped) private var timesClipped
     
     var body: some View {
         Image(.clipchopFill)

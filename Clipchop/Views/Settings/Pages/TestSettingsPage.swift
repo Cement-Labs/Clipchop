@@ -20,9 +20,3 @@ struct TestSettingsPage: View {
         }
     }
 }
-
-#Preview {
-    previewPage {
-        TestSettingsPage()
-    }
-}

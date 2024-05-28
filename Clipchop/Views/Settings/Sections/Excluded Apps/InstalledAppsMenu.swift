@@ -1,5 +1,5 @@
 //
-//  InstalledAppMenu.swift
+//  InstalledAppsMenu.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/12.
@@ -8,10 +8,10 @@
 import SwiftUI
 import Defaults
 
-struct InstalledAppMenu: View {
-    @EnvironmentObject var apps: InstalledApps
+struct InstalledAppsMenu: View {
+    @EnvironmentObject private var apps: InstalledApps
     
-    @Default(.applicationExcludeList) var excluded
+    @Default(.applicationExcludeList) private var excluded
     
     var body: some View {
         let availableApps = (apps.installedApps + apps.systemApps)

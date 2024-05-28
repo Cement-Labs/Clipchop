@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExcludedAppsSettingsPage: View {
-    @EnvironmentObject var apps: InstalledApps
+    @EnvironmentObject private var apps: InstalledApps
     
     var body: some View {
         listEmbeddedForm {

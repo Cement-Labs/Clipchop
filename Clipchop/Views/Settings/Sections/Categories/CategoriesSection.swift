@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct CategoriesSection: View {
     var body: some View {

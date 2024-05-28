@@ -15,9 +15,9 @@ struct CardPreviewView: View {
     @State private var isSelected = false
     @State private var data: Data?
     
-    @Environment(\.modelContext) var context
-    @Environment(\.displayScale) var displayScale
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.modelContext) private var context
+    @Environment(\.displayScale) private var displayScale
+    @Environment(\.colorScheme) private var colorScheme
     
     var backgroundColor: Color {
         colorScheme == .dark ? .black : .white

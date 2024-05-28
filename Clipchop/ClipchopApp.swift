@@ -16,11 +16,12 @@ let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
 @main
 struct ClipchopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @State var isMenuBarPresented = true
-    @State var isWindowInitialized = false
     
-    @Default(.menuBarItemEnabled) var menuBarItemEnabled
-    @Default(.preferredColorScheme) var preferredColorScheme
+    @State private var isMenuBarPresented = true
+    @State private var isWindowInitialized = false
+    
+    @Default(.menuBarItemEnabled) private var menuBarItemEnabled
+    @Default(.preferredColorScheme) private var preferredColorScheme
     
     private let container: ModelContainer
     private let manager: ModelManager

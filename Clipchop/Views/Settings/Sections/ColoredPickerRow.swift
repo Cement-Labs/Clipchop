@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ColoredPickerRow<Style, Content>: View where Style: ShapeStyle, Content: View {
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.displayScale) var displayScale
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.displayScale) private var displayScale
     
     let style: Style
     let content: () -> Content

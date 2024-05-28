@@ -10,41 +10,15 @@ import Defaults
 import SFSafeSymbols
 
 struct AppearanceSection: View {
-    @Default(.timesClipped) var timesClipped
-    @Default(.appIcon) var appIcon
-    @Default(.clipSound) var clipSound
-    @Default(.pasteSound) var pasteSound
+    @Default(.timesClipped) private var timesClipped
+    @Default(.appIcon) private var appIcon
+    @Default(.clipSound) private var clipSound
+    @Default(.pasteSound) private var pasteSound
  
-    @Default(.colorStyle) var colorStyle
-    @Default(.customAccentColor) var customAccentColor
+    @Default(.colorStyle) private var colorStyle
+    @Default(.customAccentColor) private var customAccentColor
     
-    @Environment(\.hasTitle) var hasTitle
-    
-    @ViewBuilder
-    func soundPicker(
-        _ titleKey: LocalizedStringKey,
-        selection: Binding<Sound>,
-        onChangePerform action: @escaping (Sound, Sound) -> Void
-    ) -> some View {
-        HStack {
-            Picker(titleKey, selection: selection) {
-                ForEach(Sound.unlockedSounds, id: \.self) { sound in
-                    Text(sound.name ?? "")
-                        .tag(sound.assetName)
-                }
-            }
-            .onChange(of: selection.wrappedValue, action)
-            
-            if selection.wrappedValue.hasSound {
-                Button {
-                    selection.wrappedValue.play()
-                } label: {
-                    Image(systemSymbol: .speakerWave2Fill)
-                }
-                .buttonStyle(.plain)
-            }
-        }
-    }
+    @Environment(\.hasTitle) private var hasTitle
     
     var body: some View {
         if hasTitle {
@@ -122,6 +96,32 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         } header: {
             if hasTitle {
                 Text("Color")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func soundPicker(
+        _ titleKey: LocalizedStringKey,
+        selection: Binding<Sound>,
+        onChangePerform action: @escaping (Sound, Sound) -> Void
+    ) -> some View {
+        HStack {
+            Picker(titleKey, selection: selection) {
+                ForEach(Sound.unlockedSounds, id: \.self) { sound in
+                    Text(sound.name ?? "")
+                        .tag(sound.assetName)
+                }
+            }
+            .onChange(of: selection.wrappedValue, action)
+            
+            if selection.wrappedValue.hasSound {
+                Button {
+                    selection.wrappedValue.play()
+                } label: {
+                    Image(systemSymbol: .speakerWave2Fill)
+                }
+                .buttonStyle(.plain)
             }
         }
     }

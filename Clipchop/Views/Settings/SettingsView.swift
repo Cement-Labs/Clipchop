@@ -25,8 +25,8 @@ struct SettingsView: View {
 #endif
     }
     
-    @State var navigation: Navigation = .general
-    @State var apps = InstalledApps()
+    @State private var navigation: Navigation = .general
+    @State private var apps = InstalledApps()
     
     @Binding var isWindowInitialized: Bool
     

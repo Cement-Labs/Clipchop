@@ -9,44 +9,15 @@ import SwiftUI
 import Defaults
 
 struct PermissionsSection: View {
-    @State var isAccessibilityAccessGranted = false
-    @State var isFullDiskAccessGranted = false
+    @State private var isAccessibilityAccessGranted = false
+    @State private var isFullDiskAccessGranted = false
     
-    @Environment(\.hasTitle) var hasTitle
+    @Environment(\.hasTitle) private var hasTitle
     
-    let permissionsAutoCheck = Timer.publish(
+    private let permissionsAutoCheck = Timer.publish(
         every: 1, tolerance: 0.5,
         on: .main, in: .common
     ).autoconnect()
-    
-    @ViewBuilder
-    func grantAccessButton(isGranted: Bool, action: @escaping () -> Void) -> some View {
-        Button {
-            action()
-        } label: {
-            Group {
-                Text("Grant")
-                    .fixedSize()
-                
-                Image(systemSymbol: .arrowRightCircleFill)
-            }
-            .or(isGranted) {
-                Group {
-                    Text("Granted")
-                        .fixedSize()
-                    
-                    Image(systemSymbol: .checkmarkSealFill)
-                }
-            }
-            .frame(height: 16)
-        }
-        .animation(.default, value: isGranted)
-        .controlSize(.large)
-        .buttonStyle(.borderless)
-        .buttonBorderShape(.capsule)
-        .disabled(isGranted)
-        .tint(isGranted ? .secondary : .red)
-    }
     
     var body: some View {
         Section {
@@ -109,6 +80,35 @@ Full Disk Access is needed to generate file previews.
                 Text("Permissions")
             }
         }
+    }
+    
+    @ViewBuilder
+    private func grantAccessButton(isGranted: Bool, action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            Group {
+                Text("Grant")
+                    .fixedSize()
+                
+                Image(systemSymbol: .arrowRightCircleFill)
+            }
+            .or(isGranted) {
+                Group {
+                    Text("Granted")
+                        .fixedSize()
+                    
+                    Image(systemSymbol: .checkmarkSealFill)
+                }
+            }
+            .frame(height: 16)
+        }
+        .animation(.default, value: isGranted)
+        .controlSize(.large)
+        .buttonStyle(.borderless)
+        .buttonBorderShape(.capsule)
+        .disabled(isGranted)
+        .tint(isGranted ? .secondary : .red)
     }
 }
 

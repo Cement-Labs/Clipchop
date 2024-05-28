@@ -13,7 +13,7 @@ struct RoamingButton<Label, Background>: View where Label: View, Background: Vie
     @ViewBuilder var label: () -> Label
     @ViewBuilder var background: () -> Background
     
-    @State var isHovering = false
+    @State private var isHovering = false
     
     init(
         canHover: Bool = true,

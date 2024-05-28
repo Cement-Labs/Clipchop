@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AboutSettingsPage: View {
-    @State var isSourcePresented = false
-    @State var isAcknowledgementsPresented = false
+    @State private var isSourcePresented = false
+    @State private var isAcknowledgementsPresented = false
     
     var body: some View {
         GeometryReader { geometryProxy in

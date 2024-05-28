@@ -38,14 +38,14 @@ struct BeginningView: View {
         }
     }
     
-    @Default(.preferredColorScheme) var preferredColorScheme
+    @Default(.preferredColorScheme) private var preferredColorScheme
     
-    @Namespace var namespace
+    @Namespace private var namespace
     
-    @State var roaming: Roaming = .hello
-    @State var canContinue: [Roaming: Bool] = [:]
+    @State private var roaming: Roaming = .hello
+    @State private var canContinue: [Roaming: Bool] = [:]
     
-    @Environment(\.viewController) var viewController
+    @Environment(\.viewController) private var viewController
     
     var canRoamingContinue: Bool {
         canContinue[roaming] ?? true

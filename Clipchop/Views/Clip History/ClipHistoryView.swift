@@ -15,12 +15,6 @@ struct ClipHistoryView: View {
         animation: .spring(dampingFraction: 0.7)
     ) private var items: [ClipboardHistory]
     
-    @ViewBuilder
-    func clip(@ViewBuilder content: () -> some View) -> some View {
-        content()
-            .clipShape(.rect(cornerRadius: 25, style: .continuous))
-    }
-    
     var body: some View {
         clip {
             ZStack {
@@ -53,5 +47,11 @@ struct ClipHistoryView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    @ViewBuilder
+    private func clip(@ViewBuilder content: @escaping () -> some View) -> some View {
+        content()
+            .clipShape(.rect(cornerRadius: 25, style: .continuous))
     }
 }
