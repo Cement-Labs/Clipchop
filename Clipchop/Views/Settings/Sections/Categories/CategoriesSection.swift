@@ -23,27 +23,32 @@ struct CategoriesSection: View {
                                 }
                             }
                         } label: {
-                            Text(type.ext)
-                                .monospaced()
-                            
-                            Spacer()
-                            
-                            ScrollView(.horizontal) {
-                                HStack {
-                                    ForEach(type.categories.sorted()) { category in
-                                        TagView(style: .quinary) {
-                                            Text(category.name)
-                                                .foregroundStyle(.secondary)
+                            HStack {
+                                Text(type.ext)
+                                    .monospaced()
+                                
+                                Spacer()
+                                
+                                ScrollView(.horizontal) {
+                                    HStack {
+                                        ForEach(type.categories.sorted()) { category in
+                                            TagView(style: .quinary) {
+                                                Text(category.name)
+                                                    .foregroundStyle(.secondary)
+                                            }
                                         }
                                     }
                                 }
+                                .aspectRatio(contentMode: .fit)
+                                .defaultScrollAnchor(.trailing)
+                                .background(.red)
+                                
+                                Image(systemSymbol: .chevronForward)
+                                    .foregroundStyle(.secondary)
                             }
-                            .aspectRatio(contentMode: .fit)
-                            
-                            Image(systemSymbol: .chevronForward)
-                                .foregroundStyle(.secondary)
                         }
                         .padding(4)
+                        .buttonStyle(.borderless)
                     }
                 }
             }

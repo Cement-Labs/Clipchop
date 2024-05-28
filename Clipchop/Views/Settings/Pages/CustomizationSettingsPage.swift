@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomizationSettingsPage: View {
     var body: some View {
-        listEmbeddedForm {
+        ListEmbeddedForm {
             AppearanceSection()
         }
     }

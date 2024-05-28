@@ -65,7 +65,7 @@ extension Defaults.Keys {
         .init(ext: "pptx",      categories: [.document]),
         .init(ext: "xls",       categories: [.document]),
         .init(ext: "csv",       categories: [.document]),
-        .init(ext: "html",      categories: [.document, .sourceCodeFile]),
+        .init(ext: "html",      categories: [.document, .sourceCodeFile, .archive, .audio, .image]),
         .init(ext: "xml",       categories: [.document, .sourceCodeFile]),
         .init(ext: "json",      categories: [.document, .sourceCodeFile]),
         

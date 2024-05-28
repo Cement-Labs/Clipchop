@@ -35,12 +35,14 @@ struct FormSectionList<Content, Footer>: View where Content: View, Footer: View 
             Divider()
             
             Rectangle()
-                .frame(height: 20)
+                .frame(height: 24)
                 .foregroundStyle(.quinary)
                 .overlay {
                     HStack(spacing: 2) {
                         footer()
                     }
+                    .frame(height: 20)
+                    .padding(2)
                 }
         }
         .ignoresSafeArea()

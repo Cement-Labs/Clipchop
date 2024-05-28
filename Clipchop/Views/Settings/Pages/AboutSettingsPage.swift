@@ -13,7 +13,7 @@ struct AboutSettingsPage: View {
     
     var body: some View {
         GeometryReader { geometryProxy in
-            listEmbeddedForm(formStyle: .columns) {
+            ListEmbeddedForm(formStyle: .columns) {
                 HStack {
                     Spacer()
                     

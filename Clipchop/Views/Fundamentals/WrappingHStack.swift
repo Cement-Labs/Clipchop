@@ -9,19 +9,15 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 // Originally by https://stackoverflow.com/a/65453108/23452915
-@available(*, deprecated)
 struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     typealias ViewGenerator = (Model) -> V
     
     var models: [Model]
     var spacing: CGFloat = 8
     var lineSpacing: CGFloat = 8
-    var onDropOf: [UTType] = []
-    var onDropDelegate: DropDelegate?
-    var onDelete: Optional<(IndexSet) -> Void> = { _ in }
     var viewGenerator: ViewGenerator
     
-    @State private var totalHeight: CGFloat = .zero
+    @State private var size: CGSize = .zero
     
     var body: some View {
         VStack {
@@ -29,7 +25,7 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
                 generateContent(in: geometry)
             }
         }
-        .frame(height: totalHeight)
+        .frame(height: size.height)
     }
     
     @ViewBuilder
@@ -66,25 +62,19 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
                         return result
                     }
             }
-            .onDelete(perform: onDelete)
-            .if(onDropDelegate != nil) { view in
-                view.onDrop(of: onDropOf, delegate: onDropDelegate!)
-            }
         }
         .background {
-            viewHeightReader($totalHeight)
+            viewSizeReader($size)
         }
     }
     
     @ViewBuilder
-    private func viewHeightReader(_ totalHeight: Binding<CGFloat>) -> some View {
+    private func viewSizeReader(_ size: Binding<CGSize>) -> some View {
         GeometryReader { geometry -> Color in
             let rect = geometry.frame(in: .local)
             
             DispatchQueue.main.async {
-                withAnimation {
-                    totalHeight.wrappedValue = rect.size.height
-                }
+                size.wrappedValue = rect.size
             }
             
             return .clear

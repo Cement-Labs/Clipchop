@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesPage: View {
     var body: some View {
-        listEmbeddedForm {
+        ListEmbeddedForm {
             CategoriesSection()
         }
     }

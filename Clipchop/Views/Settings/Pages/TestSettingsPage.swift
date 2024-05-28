@@ -11,6 +11,8 @@ struct TestSettingsPage: View {
     var body: some View {
         ScrollView {
             LazyVStack(pinnedViews: [.sectionHeaders, .sectionFooters]) {
+                Spacer(minLength: 100)
+                
                 Color.red.frame(height: 100)
                 
                 Section {

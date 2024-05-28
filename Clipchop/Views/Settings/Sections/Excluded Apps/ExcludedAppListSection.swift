@@ -51,8 +51,62 @@ struct ExcludedAppListSection: View {
                     .foregroundStyle(.secondary)
                     .padding()
                 } else {
-                    ExcludedAppList(selection: $selection, removeSelected: removeSelected)
-                        .environmentObject(apps)
+                    List(selection: $selection) {
+                        ForEach($excluded, id: \.self) { entry in
+                            HStack {
+                                Group {
+                                    if let app = (apps.installedApps + apps.systemApps).first(where: {
+                                        $0.bundleID == entry.wrappedValue
+                                    }) {
+                                        HStack {
+                                            Image(nsImage: app.icon)
+                                                .resizable()
+                                                .aspectRatio(1, contentMode: .fit)
+                                                .frame(width: 20)
+                                            
+                                            Text(app.displayName)
+                                                .padding(.leading, 2)
+                                        }
+                                    } else {
+                                        Text(entry.wrappedValue)
+                                            .padding(.leading, 20 + 2)
+                                            .monospaced()
+                                    }
+                                }
+                                .padding(.vertical, 5)
+                                .contextMenu {
+                                    Button("Remove") {
+                                        if selection.isEmpty {
+                                            excluded.removeAll { $0 == entry.wrappedValue }
+                                        } else {
+                                            removeSelected()
+                                        }
+                                    }
+                                    
+#if DEBUG
+                                    Button("Log to Console (Debug)") {
+                                        selection.forEach {
+                                            print($0)
+                                        }
+                                    }
+#endif
+                                }
+                                .tag(entry.wrappedValue)
+                                
+                                Spacer()
+                            }
+                            // Requires a non-transparent background to expand the hit testing area
+                            .background(.placeholder.opacity(0.0001))
+                        }
+                        .onMove { indices, destination in
+                            excluded.move(fromOffsets: indices, toOffset: destination)
+                        }
+                        .onDelete { offsets in
+                            excluded.remove(atOffsets: offsets)
+                        }
+                    }
+                    .listStyle(.bordered)
+                    .alternatingRowBackgrounds()
                 }
             } footer: {
                 Spacer()
