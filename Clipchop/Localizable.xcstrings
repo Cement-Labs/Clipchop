@@ -419,6 +419,9 @@
     "Excluded Apps" : {
 
     },
+    "Footer" : {
+
+    },
     "Forever" : {
 
     },
@@ -463,6 +466,9 @@
 
     },
     "Granted" : {
+
+    },
+    "Header" : {
 
     },
     "Hello, World!" : {

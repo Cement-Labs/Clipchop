@@ -9,14 +9,26 @@ import SwiftUI
 
 struct TestSettingsPage: View {
     var body: some View {
-        List {
-            ForEach(0..<100) { number in
-                HStack {
-                    Text("Test line No.\(number)")
-                    Spacer()
+        ScrollView {
+            LazyVStack(pinnedViews: [.sectionHeaders, .sectionFooters]) {
+                Color.red.frame(height: 100)
+                
+                Section {
+                    ForEach(0..<100) { number in
+                        HStack {
+                            Text("Test line No.\(number)")
+                            Spacer()
+                        }
+                    }
+                    .padding()
+                } header: {
+                    Text("Header")
+                } footer: {
+                    Text("Footer")
                 }
+                
+                Color.blue.frame(height: 100)
             }
-            .padding()
         }
     }
 }
