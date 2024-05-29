@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
-		2807BFDA2C02CCA800D65DE3 /* FileTypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */; };
-		2807BFDC2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */; };
 		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
 		281C28CD2BDC9A1A00DBEE4B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */; };
 		281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */; };
@@ -74,7 +72,6 @@
 		28C2C5A62BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5A52BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift */; };
 		28C2C5AC2BF0DBBF00E9D9AA /* AppearanceSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */; };
 		28C2C99F2BF8D078007BDC3C /* DefaultsStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C2C99E2BF8D078007BDC3C /* DefaultsStack.swift */; };
-		28D4B3DE2C0314A5002ACBAA /* FileTypeTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */; };
 		28D4B3E32C0337D4002ACBAA /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */; };
 		28D8CE592BDCF5B9008B17B5 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE582BDCF5B9008B17B5 /* KeyboardShortcuts */; };
 		28D8CE5C2BDCF7A5008B17B5 /* Sauce in Frameworks */ = {isa = PBXBuildFile; productRef = 28D8CE5B2BDCF7A5008B17B5 /* Sauce */; };
@@ -109,8 +106,6 @@
 
 /* Begin PBXFileReference section */
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
-		2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeListView.swift; sourceTree = "<group>"; };
-		2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeDropDelegate.swift; sourceTree = "<group>"; };
 		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		281C28CF2BDC9A9000DBEE4B /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
 		28227F5D2BF23BB7008FAC3A /* AppVersionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionView.swift; sourceTree = "<group>"; };
@@ -169,7 +164,6 @@
 		28C2C5A52BF0DA2A00E9D9AA /* ExcludedAppsSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludedAppsSettingsPage.swift; sourceTree = "<group>"; };
 		28C2C5AB2BF0DBBF00E9D9AA /* AppearanceSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSection.swift; sourceTree = "<group>"; };
 		28C2C99E2BF8D078007BDC3C /* DefaultsStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStack.swift; sourceTree = "<group>"; };
-		28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeTagView.swift; sourceTree = "<group>"; };
 		28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
 		28D8CE602BDCF9B8008B17B5 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		28D8CE632BDD0DEE008B17B5 /* PerimissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerimissionsManager.swift; sourceTree = "<group>"; };
@@ -522,9 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				654DCBEB2C024A890027FAD4 /* CategoryListSection.swift */,
-				2807BFD92C02CCA800D65DE3 /* FileTypeListView.swift */,
-				28D4B3DD2C0314A5002ACBAA /* FileTypeTagView.swift */,
-				2807BFDB2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -648,7 +639,6 @@
 				2872C0F72BF78D59000ED6A8 /* ModelManager.swift in Sources */,
 				6513FF3D2BFBB800008149AB /* WebLinkPreviewPage.swift in Sources */,
 				2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */,
-				28D4B3DE2C0314A5002ACBAA /* FileTypeTagView.swift in Sources */,
 				28C2C5A42BF0DA1E00E9D9AA /* CustomizationSettingsPage.swift in Sources */,
 				28E6E9022BFE16490068B449 /* BeginningPermissionsPage.swift in Sources */,
 				28E6E8FD2BFE11260068B449 /* BeginningViewController.swift in Sources */,
@@ -707,10 +697,8 @@
 				28E6E9042BFE16570068B449 /* BeginningTutorialPage.swift in Sources */,
 				28C102342C020C5D003F5722 /* Logger.swift in Sources */,
 				28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */,
-				2807BFDA2C02CCA800D65DE3 /* FileTypeListView.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,
 				283E25362BF4FE040094C06F /* StaleView.swift in Sources */,
-				2807BFDC2C02D5EA00D65DE3 /* FileTypeDropDelegate.swift in Sources */,
 				28227F602BF23EC2008FAC3A /* CopyrightsView.swift in Sources */,
 				28A699AB2BF618AA000B0272 /* ClipHistoryView.swift in Sources */,
 				28D8CE692BDD1260008B17B5 /* PermissionsSection.swift in Sources */,

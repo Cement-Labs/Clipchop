@@ -107,7 +107,7 @@ struct SettingsView: View {
                     TestSettingsPage()
                 }
             }
-            .navigationSplitViewColumnWidth(min: 550, ideal: 550)
+            .navigationSplitViewColumnWidth(min: 550, ideal: 550, max: 550)
             .toolbar {
                 ToolbarItemGroup {
                     Button {

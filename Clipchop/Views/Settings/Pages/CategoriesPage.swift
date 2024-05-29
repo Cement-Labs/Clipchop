@@ -12,6 +12,7 @@ struct CategoriesPage: View {
         listEmbeddedForm {
             CategoryListSection()
         }
+        .scrollDisabled(true)
     }
 }
 

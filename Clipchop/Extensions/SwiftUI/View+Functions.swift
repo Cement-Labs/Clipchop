@@ -58,7 +58,7 @@ func listEmbeddedForm(formStyle: some FormStyle = .grouped, @ViewBuilder content
         .scrollContentBackground(.hidden)
         .ignoresSafeArea()
     }
-    .background(.green)
+    .background(.white)
 }
 
 @ViewBuilder

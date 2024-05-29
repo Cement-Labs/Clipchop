@@ -81,9 +81,7 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
             let rect = geometry.frame(in: .local)
             
             DispatchQueue.main.async {
-                withAnimation {
-                    totalHeight.wrappedValue = rect.size.height
-                }
+                totalHeight.wrappedValue = rect.size.height
             }
             
             return .clear

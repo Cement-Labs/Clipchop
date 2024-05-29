@@ -1,9 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "%.2fs" : {
 
     },
@@ -227,10 +224,7 @@
     "Acknowledgements" : {
 
     },
-    "Add Tag" : {
-
-    },
-    "All" : {
+    "All Types" : {
 
     },
     "Allow app excluding" : {
@@ -381,7 +375,7 @@
     "Clipboard" : {
 
     },
-    "Clipboard History" : {
+    "Clipboard Global" : {
 
     },
     "Clipchop" : {
@@ -545,6 +539,9 @@
     "Paste sound" : {
 
     },
+    "Paste to Active Application" : {
+
+    },
     "Permissions" : {
 
     },
@@ -573,6 +570,9 @@
 
     },
     "Restore" : {
+
+    },
+    "Search" : {
 
     },
     "Settings…" : {
@@ -737,6 +737,9 @@
 
     },
     "Welcome to %@" : {
+
+    },
+    "When enabled, will automatically paste into the focused application." : {
 
     },
     "You can always open %@ again to access this page." : {
