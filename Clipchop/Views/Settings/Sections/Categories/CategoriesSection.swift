@@ -29,18 +29,13 @@ struct CategoriesSection: View {
                                 
                                 Spacer()
                                 
-                                ScrollView(.horizontal) {
-                                    HStack {
-                                        ForEach(type.categories.sorted()) { category in
-                                            TagView(style: .quinary) {
-                                                Text(category.name)
-                                                    .foregroundStyle(.secondary)
-                                            }
-                                        }
+                                WrappingHStack(models: type.categories.sorted(), mirrored: true) { category in
+                                    TagView(style: .quinary) {
+                                        Text(category.name)
+                                            .foregroundStyle(.secondary)
                                     }
                                 }
-                                .aspectRatio(contentMode: .fit)
-                                .defaultScrollAnchor(.trailing)
+                                //.aspectRatio(contentMode: .fit)
                                 .background(.red)
                                 
                                 Image(systemSymbol: .chevronForward)
