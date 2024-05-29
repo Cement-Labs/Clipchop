@@ -15,7 +15,6 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     var models: [Model]
     var spacing: CGFloat = 8
     var lineSpacing: CGFloat = 8
-    var mirrored: Bool = false
     var viewGenerator: ViewGenerator
     
     @State private var size: CGSize = .zero
@@ -31,24 +30,24 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     
     @ViewBuilder
     private func generateContent(in geometry: GeometryProxy) -> some View {
-        var width: CGFloat = 0
-        var height: CGFloat = 0
+        var width: CGFloat = .zero
+        var height: CGFloat = .zero
         
         ZStack(alignment: .topLeading) {
             ForEach(models, id: \.self) { model in
                 viewGenerator(model)
                     .alignmentGuide(.leading) { dimensions in
-                        if width + dimensions.width > geometry.size.width {
+                        if abs(width - dimensions.width) > geometry.size.width {
                             width = 0
                             height -= (dimensions.height + lineSpacing)
                         }
                         
-                        let result = -width
+                        let result = width
                         if model == models.last {
                             // The last item
                             width = 0
                         } else {
-                            width += (dimensions.width + spacing)
+                            width -= (dimensions.width + spacing)
                         }
                         
                         return result
