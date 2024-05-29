@@ -366,7 +366,7 @@
     "Clipboard" : {
 
     },
-    "Clipboard History" : {
+    "Clipboard Global" : {
 
     },
     "Clipchop" : {
@@ -520,6 +520,9 @@
 
     },
     "Paste sound" : {
+
+    },
+    "Paste to Active Application" : {
 
     },
     "Permissions" : {
@@ -714,6 +717,9 @@
 
     },
     "Welcome to %@" : {
+
+    },
+    "When enabled, will automatically paste into the focused application." : {
 
     },
     "You can always open %@ again to access this page." : {

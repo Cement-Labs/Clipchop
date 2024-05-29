@@ -13,6 +13,7 @@ struct ClipboardHistorySection: View {
     @Default(.historyPreservationPeriod) private var historyPreservationPeriod
     @Default(.historyPreservationTime) private var historyPreservationTime
     @Default(.timerInterval) private var timerInterval
+    @Default(.paste) private var paste
     
     @State private var isDeleteHistoryAlertPresented = false
     @State private var isApplyPreservationTimeAlertPresented = false
@@ -23,6 +24,15 @@ struct ClipboardHistorySection: View {
     @Environment(\.hasTitle) private var hasTitle
     
     var body: some View {
+        Section {
+            withCaption("When enabled, will automatically paste into the focused application.") {
+                Toggle("Paste to Active Application", isOn: $paste)
+            }
+        } header: {
+            if hasTitle {
+                Text("Clipboard Global")
+            }
+        }
         Section {
             VStack {
                 Picker("Preservation time", selection: $historyPreservationPeriod) {
@@ -92,10 +102,6 @@ struct ClipboardHistorySection: View {
                     Text("1")
                 }
                 .monospaced()
-            }
-        } header: {
-            if hasTitle {
-                Text("Clipboard History")
             }
         }
         
