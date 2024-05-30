@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct CategoriesPage: View {
+    
     var body: some View {
-        listEmbeddedForm {
+        List {
             CategoryListSection()
+                .scrollContentBackground(.hidden)
+                .ignoresSafeArea()
         }
-        .scrollDisabled(true)
+//        .scrollDisabled(true)
     }
 }
 

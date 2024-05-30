@@ -10,6 +10,40 @@ import SwiftData
 import Defaults
 import KeyboardShortcuts
 
+class FloatingPaneHleper<Content: View>: NSPanel {
+    
+    init(position: CGPoint, show: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) {
+        
+        super.init(contentRect: .zero, styleMask: [.resizable, .closable, .fullSizeContentView, .nonactivatingPanel], backing: .buffered, defer: false)
+        
+        animationBehavior = .utilityWindow
+        collectionBehavior = .canJoinAllSpaces
+        hasShadow = true
+        backgroundColor = .white.withAlphaComponent(0.000001)
+        level = .floating
+        isMovableByWindowBackground = false
+        
+        let clipHistoryView = content()
+        
+        contentView = NSHostingView(rootView: clipHistoryView)
+        
+        setFrameOrigin(position)
+    }
+    override func resignMain() {
+        super.resignMain()
+        let clipHistoryViewController = ClipHistoryViewController()
+        clipHistoryViewController.close()
+    }
+    
+    override var canBecomeKey: Bool {
+        return true
+    }
+    
+    override var canBecomeMain: Bool {
+        return true
+    }
+}
+
 @Observable class ClipHistoryViewController: ViewController {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
@@ -20,31 +54,22 @@ import KeyboardShortcuts
     private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
     
-    private var cachedPanel: NSPanel?
-    private var cachedClipHistoryView: ClipHistoryView?
-    
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
         guard let screenRect = NSScreen.main?.frame else { return topLeft }
         let bottomRight = topLeft.applying(.init(translationX: size.width, y: -size.height))
         
         if !screenRect.contains(bottomRight) {
-            // Current position produces out of screen contents
             if screenRect.maxX < bottomRight.x && screenRect.minY > bottomRight.y {
-                // Completely out of screen
                 return .init(x: screenRect.maxX - size.width, y: screenRect.minY + size.height)
             } else if screenRect.maxX < bottomRight.x {
-                // Only horizontally out of screen
                 return .init(x: screenRect.maxX - size.width, y: topLeft.y)
             } else if screenRect.minY > bottomRight.y {
-                // Only vertically out of screen
                 return .init(x: topLeft.x, y: screenRect.minY + size.height)
             }
         } else {
-            // All set
             return topLeft
         }
         
-        // Well...
         return topLeft
     }
     
@@ -53,10 +78,8 @@ import KeyboardShortcuts
         let bottomRight = topLeft.applying(.init(translationX: size.width, y: -size.height))
         
         if !screenRect.contains(bottomRight) {
-            // Expands to the top
             return .maxY
         } else {
-            // Expands to the bottom
             return .minY
         }
     }
@@ -104,19 +127,16 @@ extension ClipHistoryViewController {
             )
             expansionEdge = edge
         } else {
-            // Use stored expansion edge
             edge = expansionEdge
         }
         
         switch edge {
         case .maxY:
-            // Expands/Shrinks the top edge
             window.setFrame(
                 .init(origin: frame.origin, size: targetSize),
                 display: true, animate: animate
             )
         case .minY:
-            // Expands/Shrinks the bottom edge
             window.setFrame(
                 .init(
                     origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height),
@@ -135,66 +155,49 @@ extension ClipHistoryViewController {
     // MARK: - Open / Close
     
     var isOpened: Bool {
-        windowController != nil
+        windowController != nil && windowController?.window?.isVisible == true
     }
     
     func open(position: CGPoint) {
         if let windowController {
+            windowController.window?.setFrameOrigin(positionNear(position: position, size: Self.size.collapsed)
+                .applying(.init(translationX: 0, y: -Self.size.collapsed.height)))
             windowController.window?.orderFrontRegardless()
-            return
+            initShortcuts()
+            enableShortcuts()
+        return
         }
         
-        if cachedPanel == nil {
-            let panel = NSPanel(
-                contentRect: .zero,
-                styleMask: [.borderless, .nonactivatingPanel],
-                backing: .buffered,
-                defer: true,
-                screen: NSApp.keyWindow?.screen
-            )
-            
-            panel.animationBehavior = .utilityWindow
-            panel.collectionBehavior = .canJoinAllSpaces
-            panel.hasShadow = true
-            panel.backgroundColor = .white.withAlphaComponent(0.000001)
-            panel.level = .floating
-            panel.isMovableByWindowBackground = false
-            
-            let clipHistoryView = ClipHistoryView()
+        let panel = FloatingPaneHleper(
+            position: position,
+            show: .constant(true)
+        ) {
+            ClipHistoryView()
                 .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
                 .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
                 .environment(\.viewController, self)
-            
-            panel.contentView = NSHostingView(rootView: clipHistoryView)
-            
-            cachedPanel = panel
-            cachedClipHistoryView = clipHistoryView as? ClipHistoryView
         }
         
-        if let panel = cachedPanel {
-            panel.setFrame(
-                CGRect(
-                    origin: positionNear(position: position, size: Self.size.collapsed)
-                        .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
-                    size: Self.size.collapsed
-                ),
-                display: false
-            )
-            panel.orderFrontRegardless()
-            
-            windowController = .init(window: panel)
-            setWindowSize(isExpanded: false, animate: false)
-            
-            initShortcuts()
-            enableShortcuts()
-        }
+        panel.setFrame(
+            CGRect(
+                origin: positionNear(position: position, size: Self.size.collapsed)
+                    .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
+                size: Self.size.collapsed
+            ),
+            display: false
+        )
+        panel.orderFrontRegardless()
+        
+        windowController = .init(window: panel)
+        setWindowSize(isExpanded: false, animate: false)
+        
+        initShortcuts()
+        enableShortcuts()
     }
     
     func close() {
         guard let windowController else { return }
-        self.windowController = nil
-        windowController.close()
-        
+        windowController.window?.orderOut(nil)
         disableShortcuts()
     }
     

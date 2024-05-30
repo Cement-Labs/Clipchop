@@ -14,9 +14,6 @@ struct GeneralSettingsPage: View {
             
             GlobalBehaviorsSection()
             
-            Section {
-                PreferredColorSchemePicker()
-            }
         }
     }
 }

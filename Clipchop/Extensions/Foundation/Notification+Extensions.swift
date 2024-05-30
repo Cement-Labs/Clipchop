@@ -9,6 +9,7 @@ import Foundation
 
 extension Notification.Name {
     static let didClip = Self("didClip")
+    static let didPaste = Self("didPaste")
 }
 
 extension Notification.Name {

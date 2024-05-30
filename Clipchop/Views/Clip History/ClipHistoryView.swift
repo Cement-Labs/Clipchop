@@ -7,8 +7,10 @@
 
 import SwiftUI
 import SwiftData
+import Defaults
 
 struct ClipHistoryView: View {
+    
     @Query(
         sort: \ClipboardHistory.time,
         order: .reverse,
@@ -21,11 +23,13 @@ struct ClipHistoryView: View {
             .clipShape(.rect(cornerRadius: 25, style: .continuous))
     }
     
+    @Environment(\.modelContext) var context
+        
     var body: some View {
         clip {
             ZStack {
                 clip {
-                    VisualEffectView(material: .underWindowBackground, blendingMode: .behindWindow)
+                    VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
                 }
                 
                 VStack{
@@ -42,8 +46,21 @@ struct ClipHistoryView: View {
                     } else {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 12) {
-                                ForEach(items) { item in
-                                    CardPreviewView(item: item)
+                                ForEach(items) { items in
+                                    VStack{
+                                        CardPreviewView(item: items)
+                                            .environment(\.modelContext, context)
+                                    }
+                                    .onDrag {
+                                        let clipboardContents = items.getContents()
+                                        for content in clipboardContents {
+                                            if let itemProvider = dragManager(for: content) {
+                                                return itemProvider
+                                            }
+                                        }
+                                        log(self, "No suitable content found for dragging")
+                                        return NSItemProvider()
+                                    }
                                 }
                             }
                             .offset(x: 12)

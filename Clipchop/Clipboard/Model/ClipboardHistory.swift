@@ -82,7 +82,8 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
     var pinned: Bool
     var deleted: Bool
     var time: Date?
-    var contents: [ClipboardContent]?
+    
+    @Relationship(deleteRule: .cascade) var contents: [ClipboardContent]?
     
     var formatter: Formatter {
         .init(contents: getContents())

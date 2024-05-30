@@ -27,6 +27,16 @@ struct KeyboardShortcutsSection: View {
         }
         
         Section {
+            KeyboardShortcuts.Recorder(for: .start) {
+                withCaption {
+                    Text("Clipboard History Recording")
+                } caption: {
+                    Text("Enable or disable clipboard history recording.")
+                }
+            }
+        }
+        
+        Section {
             KeyboardShortcuts.Recorder(for: .pin) {
                 Text("Pin history")
             }

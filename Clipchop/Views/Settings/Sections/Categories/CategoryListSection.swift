@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Defaults
+import SFSafeSymbols
 import UniformTypeIdentifiers
 
 struct CategoryListSection: View {
@@ -19,18 +20,27 @@ struct CategoryListSection: View {
     @Default(.categories) var categories
     @Default(.allTypes) var allTypes
     
-    @State private var searchText: String = ""
+    @State var isInEditMode = false
+    @State var searchText: String = ""
     @State var isPopoverPresented = false
+    @State var isPopoverSearch = false
     @State var contentType: ContentType = .category
     @State var input: String = ""
     
-    var filteredTypes: [String] {
-        let types = searchText.isEmpty ? allTypes : allTypes.filter { $0.localizedCaseInsensitiveContains(searchText) }
-        return types.sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+    var filteredCategories: [FileCategory] {
+        if searchText.isEmpty {
+            return categories
+        } else {
+            return categories.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
     }
     
-    var sortedCategories: [FileCategory] {
-        return categories.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+    var filteredTypes: [String] {
+        if searchText.isEmpty {
+            return allTypes
+        } else {
+            return allTypes.filter { $0.localizedCaseInsensitiveContains(searchText) }
+        }
     }
     
     var canSubmitInput: Bool {
@@ -48,49 +58,61 @@ struct CategoryListSection: View {
                 ScrollView(showsIndicators: false) {
                     Form {
                         Section(header: Text("All Types")) {
-                            VStack {
-                                TextField("Search", text: $searchText)
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .padding(.bottom, 10)
-                                
+                            withCaption {
+                                //
+                            } caption: {
                                 WrappingHStack(models: filteredTypes) { type in
-                                    RoundedTagView(text: type)
-                                        .onDrag {
-                                            NSItemProvider(object: type as NSString)
-                                        }
+                                    RoundedTagView(isDeleteButtonShown: $isInEditMode, text: type, onDelete: {
+                                        removeFileType(type)
+                                    })
+                                    .onDrag {
+                                        NSItemProvider(object: type as NSString)
+                                    }
                                 }
                             }
                         }
                     }
                     .formStyle(.grouped)
-                    .frame(width: geometry.size.width * 0.45)
+                    .frame(width: geometry.size.width * 0.4)
                 }
-                .ignoresSafeArea()
+                
                 
                 ScrollView(showsIndicators: false) {
-                    LazyVStack {
-                        ForEach(sortedCategories, id: \.self) { category in
-                            Form {
-                                Section(header: Text(category.name)) {
+                    ForEach(filteredCategories, id: \.self) { category in
+                        Form {
+                            Section(header: Text(category.name)) {
+                                withCaption {
+                                    //
+                                } caption: {
                                     WrappingHStack(models: category.types) { type in
-                                        RoundedTagView(text: type)
+                                        RoundedTagView(isDeleteButtonShown: $isInEditMode, text: type, onDelete: {
+                                            removeFileType(from: category, type)
+                                        })
+                                        .onDrag {
+                                            NSItemProvider(object: type as NSString)
+                                        }
                                     }
                                 }
                             }
-                            .onDrop(of: [UTType.text], delegate: DropViewDelegate(category: Binding(get: { category }, set: { _ in }), allTypes: $allTypes))
-                            .formStyle(.grouped)
                         }
+                        .onDrop(of: [UTType.text], delegate: DropViewDelegate(category: Binding(get: {
+                            category
+                        }, set: { newValue in
+                            if let index = categories.firstIndex(of: category) {
+                                categories[index] = newValue
+                            }
+                        }), allTypes: $allTypes))
+                        .formStyle(.grouped)
                     }
                 }
-                .frame(width: geometry.size.width * 0.55)
-                .ignoresSafeArea()
+                .frame(width: geometry.size.width * 0.575)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .cancellationAction) {
                     Button {
                         isPopoverPresented = true
                     } label: {
-                        Image(systemName: "plus")
+                        Image(systemSymbol: .plus)
                     }
                     .popover(isPresented: $isPopoverPresented, arrowEdge: .bottom) {
                         VStack {
@@ -114,7 +136,7 @@ struct CategoryListSection: View {
                                 Button {
                                     submitInput()
                                 } label: {
-                                    Image(systemName: canSubmitInput ? "arrow.forward.circle.fill" : "exclamationmark.circle.fill")
+                                    Image(systemSymbol: canSubmitInput ? .arrowForwardCircleFill : .exclamationmarkCircleFill)
                                         .imageScale(.large)
                                         .foregroundStyle(.secondary)
                                 }
@@ -139,10 +161,39 @@ struct CategoryListSection: View {
                         .frame(minWidth: 225)
                         .padding()
                     }
+                    Button {
+                        isPopoverSearch = true
+                    } label: {
+                        Image(systemSymbol: .magnifyingglass)
+                    }
+                    .popover(isPresented: $isPopoverSearch, arrowEdge: .bottom) {
+                        VStack {
+                            TextField("Search", text: $searchText)
+                                .textFieldStyle(.plain)
+                                .monospaced()
+                                .padding()
+                         }
+                        .frame(minWidth: 225)
+                        .padding()
+                    }
+                }
+            }
+            .onAppear {
+                NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+                    if event.modifierFlags.contains(.option) {
+                        withAnimation{
+                            isInEditMode = true
+                        }
+                    } else {
+                        withAnimation{
+                            isInEditMode = false
+                        }
+                    }
+                    return event
                 }
             }
         }
-        .frame(maxWidth: .infinity, minHeight: 350, maxHeight: .infinity)
+        .frame(height: 375)
     }
     
     private func submitInput() {
@@ -173,22 +224,43 @@ struct CategoryListSection: View {
         categories.removeAll { $0 == category }
     }
     
-    private func removeFileType(_ category: inout FileCategory, _ fileType: String) {
-        category.types.removeAll { $0 == fileType }
+    private func removeFileType(from category: FileCategory, _ fileType: String) {
+        if let index = categories.firstIndex(of: category) {
+            categories[index].types.removeAll { $0 == fileType }
+        }
+    }
+    
+    private func removeFileType(_ fileType: String) {
+        allTypes.removeAll { $0 == fileType }
     }
 }
 
 struct RoundedTagView: View {
+    
+    @Binding var isDeleteButtonShown: Bool
+        
     var text: String
+    var onDelete: () -> Void
     
     var body: some View {
-        Text(text)
-            .monospaced()
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-        
-            .background(.placeholder.opacity(0.1))
-            .clipShape(.rect(cornerRadius: 12))
+        HStack {
+            Text(text)
+                .monospaced()
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(.placeholder.opacity(0.1))
+                .clipShape(.rect(cornerRadius: 12))
+                .overlay(alignment: .topTrailing){
+                    if isDeleteButtonShown{
+                        Button(action: onDelete) {
+                            Image(systemSymbol: .xmarkCircleFill)
+                                .foregroundColor(.red)
+                        }
+                        .offset(x: 5, y: -5)
+                        .buttonStyle(.borderless)
+                    }
+                }
+        }
     }
 }
 

@@ -22,8 +22,8 @@ extension Defaults.Keys {
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     
     static let appIcon = Key<AppIcon>("appIcon", default: .defaultAppIcon)
-    static let clipSound = Key<Sound>("clipSound", default: .defaultSound)
-    static let pasteSound = Key<Sound>("pasteSound", default: .defaultSound)
+    static let clipSound = Key<Sound>("clipSound", default: .defaultClipSound)
+    static let pasteSound = Key<Sound>("pasteSound", default: .defaultPasteSound)
     
     // MARK: Excluded Applications
     

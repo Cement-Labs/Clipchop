@@ -21,8 +21,11 @@ struct MenuBarIconView: View {
         
             .symbolEffect(.bounce, value: timesClipped)
             .onReceive(.didClip) { _ in
-                Sound.currentSound.play()
+                Sound.defaultClipSound.play()
                 timesClipped += 1
+            }
+            .onReceive(.didPaste) { _ in
+                Sound.defaultPasteSound.play()
             }
     }
 }

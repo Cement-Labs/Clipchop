@@ -378,6 +378,9 @@
     "Clipboard Global" : {
 
     },
+    "Clipboard History Recording" : {
+
+    },
     "Clipchop" : {
 
     },
@@ -399,6 +402,9 @@
 
     },
     "Continue" : {
+
+    },
+    "copy" : {
 
     },
     "Copyrights" : {
@@ -431,6 +437,9 @@
 
     },
     "Documents" : {
+
+    },
+    "Enable or disable clipboard history recording." : {
 
     },
     "Exclude apps to prevent %@ copying their contents." : {
@@ -539,10 +548,16 @@
     "Paste sound" : {
 
     },
+    "Paste to %@" : {
+
+    },
     "Paste to Active Application" : {
 
     },
     "Permissions" : {
+
+    },
+    "Pin" : {
 
     },
     "Pin history" : {
@@ -729,6 +744,9 @@
           }
         }
       }
+    },
+    "Unpin" : {
+
     },
     "Update interval" : {
 

@@ -82,17 +82,6 @@ extension ColorStyle: Identifiable {
 
 // MARK: Category
 
-//struct FileCategory: Identifiable, Codable, Defaults.Serializable {
-//    var id: UUID = .init()
-//    var name: String = ""
-//    var types: [String] = []
-//}
-//
-//extension FileCategory: Equatable {
-//    static func ==(lhs: FileCategory, rhs: FileCategory) -> Bool {
-//        lhs.id == rhs.id
-//    }
-//}
 struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
         var id: UUID = .init()
         var name: String = ""

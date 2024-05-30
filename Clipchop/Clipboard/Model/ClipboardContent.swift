@@ -14,7 +14,7 @@ final class ClipboardContent {
     var type: String?
     var value: Data?
     
-    @Relationship(inverse: \ClipboardHistory.contents) var item: ClipboardHistory?
+    @Relationship(deleteRule: .cascade, inverse: \ClipboardHistory.contents) var item: ClipboardHistory?
     
     public init(type: String, value: Data, item: ClipboardHistory) {
         self.type = type

@@ -12,6 +12,7 @@ import SwiftData
 
 class ClipboardMonitor: NSObject {
     
+    private var started: Bool
     private var timer: Timer?
     private var changeCount: Int = 0
     private var context: ModelContext
@@ -35,6 +36,7 @@ class ClipboardMonitor: NSObject {
     ]
     
     init(context: ModelContext) {
+        self.started = true
         self.context = context
         self.changeCount = ClipboardHistory.pasteboard.changeCount
     }
@@ -42,20 +44,24 @@ class ClipboardMonitor: NSObject {
     // MARK: - Clipboard Change
     
     private func isNew(content: Data?) -> Bool {
-        guard let content = content else { return false }
+        guard let content = content else {
+            log(self, "Content is nil")
+            return false
+        }
         
-        let existing = FetchDescriptor<ClipboardContent>(
+        let fetchDescriptor = FetchDescriptor<ClipboardContent>(
             predicate: #Predicate { $0.value == content }
         )
         
         do {
-            let existingResult = try context.fetch(existing)
+            let existingResult = try context.fetch(fetchDescriptor)
             if !existingResult.isEmpty {
                 // Duplicated
-                try handleDuplicated(existingResult)
-                
+                log(self, "Found duplicated content")
+                handleDuplicated(existingResult)
                 return false
             } else {
+                log(self, "Content is new")
                 return true
             }
         } catch {
@@ -64,20 +70,22 @@ class ClipboardMonitor: NSObject {
         }
     }
     
-    private func handleDuplicated(_ existing: [ClipboardContent]) throws {
+    private func handleDuplicated(_ existing: [ClipboardContent]){
         for exist in existing {
             if let history = exist.item {
                 history.time = Date.now
                 context.insert(history)
-                
+                try? context.save()
+                log(self, "Updated duplicated content timestamp")
                 break
             }
         }
     }
     
     private func updateClipboard() {
-        guard ClipboardHistory.pasteboard.changeCount != changeCount else { return }
-        changeCount = ClipboardHistory.pasteboard.changeCount
+                
+        guard pasteboard.changeCount != changeCount else { return }
+        changeCount = pasteboard.changeCount
         
         if let sourceBundle = ClipboardHistory.source?.bundleIdentifier {
             log(self, "Clipboard update detected in application \(sourceBundle)")
@@ -118,7 +126,6 @@ class ClipboardMonitor: NSObject {
             }
             
             let clipboardHistory = ClipboardHistory()
-            context.insert(clipboardHistory)
             
             if hasFileURL {
                 if let fileData = fileURLData {
@@ -167,37 +174,26 @@ class ClipboardMonitor: NSObject {
     // MARK: - Copy 2 Clipboard
     
     func copy(_ item: ClipboardHistory?, removeFormatting: Bool = false) {
-        
-        guard let item else {
+        guard let item = item else {
             return
         }
 
-        pasteboard.clearContents()
         var contents = item.getContents()
         
+        pasteboard.clearContents()
+        
         if removeFormatting {
-            let stringContents = contents.filter({
-                NSPasteboard.PasteboardType($0.type!) == .string
-            })
-            if !stringContents.isEmpty {
-                contents = stringContents
+            contents = contents.filter { NSPasteboard.PasteboardType($0.type!) == .string }
+        }
+        
+        contents.forEach { content in
+            if let type = content.type {
+                pasteboard.setData(content.value, forType: NSPasteboard.PasteboardType(type))
             }
         }
-        
-        for content in contents {
-            content.item?.time = Date()
-            guard content.type != NSPasteboard.PasteboardType.fileURL.rawValue else { continue }
-            pasteboard.setData(content.value, forType: NSPasteboard.PasteboardType(content.type!))
+        DispatchQueue.main.async {
+            Notification.Name.didPaste.post()
         }
-        
-        let fileURLItems: [NSPasteboardItem] = contents.compactMap { item in
-            guard item.type == NSPasteboard.PasteboardType.fileURL.rawValue else { return nil }
-            guard let value = item.value else { return nil }
-            let pasteItem = NSPasteboardItem()
-            pasteItem.setData(value, forType: NSPasteboard.PasteboardType(item.type!))
-            return pasteItem
-        }
-        pasteboard.writeObjects(fileURLItems)
         
         if Defaults[.paste] {
             pasteToActiveApplication()
@@ -205,6 +201,9 @@ class ClipboardMonitor: NSObject {
     }
     
     func pasteToActiveApplication() {
+        
+        PermissionsManager.Accessibility.requestAccess()
+        
         // Simulate Cmd+V keypress to paste
         let keyDownEvent = CGEvent(keyboardEventSource: nil, virtualKey: 0x09, keyDown: true) // Cmd+V down
         keyDownEvent?.flags = .maskCommand
@@ -235,5 +234,16 @@ extension ClipboardMonitor {
         timer = nil
         
         log(self, "Stopped monitoring")
+    }
+    
+    func toggle() {
+        if started {
+            stop()
+            started = false
+        } else {
+            pasteboard.clearContents()
+            start()
+            started = true
+        }
     }
 }

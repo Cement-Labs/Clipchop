@@ -363,6 +363,7 @@
 			children = (
 				2872C0F42BF78BC5000ED6A8 /* ClipHistoryViewController.swift */,
 				28A699AA2BF618AA000B0272 /* ClipHistoryView.swift */,
+				289B498A2BF9B4E3008643FA /* Card Previews */,
 			);
 			path = "Clip History";
 			sourceTree = "<group>";
@@ -403,7 +404,6 @@
 			children = (
 				28E6E8F62BFE0C060068B449 /* Fundamentals */,
 				281C28CE2BDC9A8600DBEE4B /* Menu Bar */,
-				289B498A2BF9B4E3008643FA /* Card Previews */,
 				28A699A92BF61897000B0272 /* Clip History */,
 				28E6E8F92BFE0E770068B449 /* Beginning */,
 				281C28C92BDC99FD00DBEE4B /* Settings */,

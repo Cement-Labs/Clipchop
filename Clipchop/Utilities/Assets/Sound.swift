@@ -38,7 +38,7 @@ struct Sound: Hashable, Defaults.Serializable {
             if let object {
                 return .sounds.first { $0.assetName == object }
             } else {
-                return .defaultSound
+                return .pop
             }
         }
     }
@@ -74,12 +74,18 @@ extension Sound {
 }
 
 extension Sound {
-    static var defaultSound: Sound {
+    static var defaultClipSound: Sound {
         pop
     }
+    static var defaultPasteSound: Sound {
+        bloop
+    }
     
-    static var currentSound: Sound {
+    static var clipSound: Sound {
         Defaults[.clipSound]
+    }
+    static var pasteSound: Sound {
+        Defaults[.pasteSound]
     }
     
     static let sounds: [Sound] = [

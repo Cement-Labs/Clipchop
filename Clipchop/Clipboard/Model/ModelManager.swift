@@ -10,7 +10,8 @@ import AppKit
 import SwiftData
 
 struct ModelManager {
-    let context: ModelContext
+    
+    private let context: ModelContext
     
     let monitor: ClipboardMonitor
     let clipHistoryViewController = ClipHistoryViewController()
@@ -24,6 +25,9 @@ struct ModelManager {
         
         KeyboardShortcuts.onKeyDown(for: .window) { [self] in
             clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
+        }
+        KeyboardShortcuts.onKeyDown(for: .start) { [self] in
+            monitor.toggle()
         }
     }
 }
