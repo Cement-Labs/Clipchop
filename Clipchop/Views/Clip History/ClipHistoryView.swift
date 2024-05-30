@@ -47,20 +47,8 @@ struct ClipHistoryView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 12) {
                                 ForEach(items) { items in
-                                    VStack{
-                                        CardPreviewView(item: items)
-                                            .environment(\.modelContext, context)
-                                    }
-                                    .onDrag {
-                                        let clipboardContents = items.getContents()
-                                        for content in clipboardContents {
-                                            if let itemProvider = dragManager(for: content) {
-                                                return itemProvider
-                                            }
-                                        }
-                                        log(self, "No suitable content found for dragging")
-                                        return NSItemProvider()
-                                    }
+                                    CardPreviewView(item: items)
+                                        .environment(\.modelContext, context)
                                 }
                             }
                             .offset(x: 12)

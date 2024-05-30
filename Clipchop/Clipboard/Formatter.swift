@@ -103,9 +103,9 @@ extension Formatter {
         
         if let text, !text.isEmpty {
             // Plain text
-            var type = String(localized: "Type: Text", defaultValue: "Plain Text")
+            var type = String(localized: "Type: Text", defaultValue: "Text")
             
-            if let _ = URL(string: text) {
+            if text.hasPrefix("http://") || text.hasPrefix("https://") {
                 // Link
                 type = String(localized: "Type: Link", defaultValue: "Link")
             } else if let _ = NSColor(hexString: text) {

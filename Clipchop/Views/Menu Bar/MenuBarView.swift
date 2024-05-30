@@ -17,18 +17,24 @@ struct MenuBarView: View {
         order: .reverse
     ) private var items: [ClipboardHistory]
     
+    @Environment(\.modelContext) var context
+    
     var body: some View {
+        
+        let startIndex = 1
+        
         Text("\(timesClipped) Clips, \(items.count) Items")
         
         if !items.isEmpty {
             Menu("Recent Clips") {
-                ForEach(Array(items.prefix(10).enumerated()), id: \.element) { index, item in
+                ForEach(Array(items.prefix(9).enumerated()), id: \.element) { index, item in
                     Button {
-                        
+                        let clipboardMonitor = ClipboardMonitor(context: context)
+                        clipboardMonitor.copy(item)
                     } label: {
                         Text(item.formatter.title ?? "")
                     }
-                    .keyboardShortcut(.init(String(index).first!), modifiers: .option)
+                    .keyboardShortcut(.init(String(index + startIndex).first!), modifiers: .option)
                 }
             }
             .keyboardShortcut("r", modifiers: .option)

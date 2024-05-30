@@ -48,21 +48,42 @@ struct CardPreviewView: View {
                             isHoveredPin = isOverPin
                         }
                     }
+                    .onTapGesture {
+                        withAnimation(Animation.easeInOut) {
+                            do{
+                                item.pinned.toggle()
+                            }
+                        }
+                    }
                 Image(systemName: pinIcon)
                     .allowsHitTesting(false)
                     .rotationEffect(Angle.degrees(item.pinned ? 45 : 0))
                     .font(isHoveredPin ? .system(size: 10) : .system(size: 7.5))
             }
-            .onTapGesture {
-                withAnimation(Animation.easeInOut) {
-                    do{
-                        item.pinned.toggle()
-                    }
-                }
-            }
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .topTrailing)
             .padding(.top, 10)
             .padding(.trailing, 10)
+            ZStack(alignment:.bottomLeading){
+                
+                RoundedRectangle(cornerRadius: 0)
+                    .fill(.thickMaterial)
+                    .frame(width: 80, height: 30)
+                
+                HStack{
+                    VStack{
+                        let formatter = Formatter(contents: item.contents!)
+                        let title = formatter.title
+                        Text(title ?? "Other")
+                            .font(.system(size: 12.5).monospaced())
+                            .minimumScaleFactor(0.5)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(1)
+                        
+                    }
+                }
+                .padding(.all, 10)
+            }
+            .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
         .frame(width: 80, height: 80, alignment: .center)
         .background(backgroundColor)
@@ -120,6 +141,16 @@ struct CardPreviewView: View {
             withAnimation(Animation.easeInOut) {
                 self.isSelected = isOver
             }
+        }
+        .onDrag {
+            let clipboardContents = item.getContents()
+            for content in clipboardContents {
+                if let itemProvider = dragManager(for: content) {
+                    return itemProvider
+                }
+            }
+            log(self, "No suitable content found for dragging")
+            return NSItemProvider()
         }
     }
     private func deleteItem(_ item: ClipboardHistory) {

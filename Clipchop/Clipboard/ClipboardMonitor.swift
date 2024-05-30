@@ -24,7 +24,6 @@ class ClipboardMonitor: NSObject {
         NSPasteboard.PasteboardType.html.rawValue,
         NSPasteboard.PasteboardType.string.rawValue,
         NSPasteboard.PasteboardType.fileURL.rawValue,
-        NSPasteboard.PasteboardType.URL.rawValue,
         NSPasteboard.PasteboardType.jpeg.rawValue,
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,

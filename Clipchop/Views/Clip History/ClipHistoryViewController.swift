@@ -28,19 +28,7 @@ class FloatingPaneHleper<Content: View>: NSPanel {
         contentView = NSHostingView(rootView: clipHistoryView)
         
         setFrameOrigin(position)
-    }
-    override func resignMain() {
-        super.resignMain()
-        let clipHistoryViewController = ClipHistoryViewController()
-        clipHistoryViewController.close()
-    }
-    
-    override var canBecomeKey: Bool {
-        return true
-    }
-    
-    override var canBecomeMain: Bool {
-        return true
+        
     }
 }
 

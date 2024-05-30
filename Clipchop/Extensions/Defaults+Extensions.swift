@@ -44,7 +44,7 @@ extension Defaults.Keys {
     
     static let categories = Key<[FileCategory]>("categories", default: [
         .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
-            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic"
+            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic", "Image"
         ]),
         .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
             "pdf", "docx", "xlsx",
