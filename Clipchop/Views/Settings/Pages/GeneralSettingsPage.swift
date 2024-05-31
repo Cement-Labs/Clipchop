@@ -13,7 +13,6 @@ struct GeneralSettingsPage: View {
             PermissionsSection()
             
             GlobalBehaviorsSection()
-            
         }
     }
 }

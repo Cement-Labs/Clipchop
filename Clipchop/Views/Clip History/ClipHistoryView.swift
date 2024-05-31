@@ -16,12 +16,6 @@ struct ClipHistoryView: View {
         animation: .spring(dampingFraction: 0.7)
     ) private var items: [ClipboardHistory]
     
-    @ViewBuilder
-    func clip(@ViewBuilder content: () -> some View) -> some View {
-        content()
-            .clipShape(.rect(cornerRadius: 25, style: .continuous))
-    }
-    
     @Environment(\.modelContext) var context
         
     var body: some View {

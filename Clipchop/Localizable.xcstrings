@@ -570,9 +570,6 @@
     "Restore" : {
 
     },
-    "Search" : {
-
-    },
     "Settings…" : {
 
     },
@@ -738,9 +735,6 @@
 
     },
     "Welcome to %@" : {
-
-    },
-    "When enabled, will automatically paste into the focused application." : {
 
     },
     "When enabled, will automatically paste into the focused application." : {
