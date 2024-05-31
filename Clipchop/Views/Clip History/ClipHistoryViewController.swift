@@ -10,29 +10,9 @@ import SwiftData
 import Defaults
 import KeyboardShortcuts
 
-class FloatingPaneHleper<Content: View>: NSPanel {
-    
-    init(position: CGPoint, show: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) {
-        
-        super.init(contentRect: .zero, styleMask: [.resizable, .closable, .fullSizeContentView, .nonactivatingPanel], backing: .buffered, defer: false)
-        
-        animationBehavior = .utilityWindow
-        collectionBehavior = .canJoinAllSpaces
-        hasShadow = true
-        backgroundColor = .white.withAlphaComponent(0.000001)
-        level = .floating
-        isMovableByWindowBackground = false
-        
-        let clipHistoryView = content()
-        
-        contentView = NSHostingView(rootView: clipHistoryView)
-        
-        setFrameOrigin(position)
-        
-    }
-}
-
-@Observable class ClipHistoryViewController: ViewController {
+/*
+@Observable
+class ClipHistoryViewController: NSObject, ViewController, NSWindowDelegate {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
         expanded: NSSize(width: 500, height: 360)
@@ -70,6 +50,11 @@ class FloatingPaneHleper<Content: View>: NSPanel {
         } else {
             return .minY
         }
+    }
+    
+    // NSWindowDelegate method to close the window when it loses focus
+    func windowDidResignKey(_ notification: Notification) {
+        close()
     }
 }
 
@@ -149,23 +134,33 @@ extension ClipHistoryViewController {
     func open(position: CGPoint) {
         if let windowController {
             windowController.window?.setFrameOrigin(positionNear(position: position, size: Self.size.collapsed)
-                .applying(.init(translationX: 0, y: -Self.size.collapsed.height)))
+                            .applying(.init(translationX: 0, y: -Self.size.collapsed.height)))
             windowController.window?.orderFrontRegardless()
-            initShortcuts()
             enableShortcuts()
-        return
+            return
         }
+        let panel = NSPanel(
+            contentRect: .zero,
+            styleMask: [.borderless, .nonactivatingPanel],
+            backing: .buffered,
+            defer: true,
+            screen: NSApp.keyWindow?.screen
+        )
         
-        let panel = FloatingPaneHleper(
-            position: position,
-            show: .constant(true)
-        ) {
-            ClipHistoryView()
-                .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
-                .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
-                .environment(\.viewController, self)
-        }
+        panel.animationBehavior = .utilityWindow
+        panel.collectionBehavior = .canJoinAllSpaces
+        panel.hasShadow = true
+        panel.backgroundColor = .white.withAlphaComponent(0.000001)
+        panel.level = .floating
+        panel.isMovableByWindowBackground = false
         
+        let clipHistoryView = ClipHistoryView()
+            .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
+            .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
+            .environment(\.viewController, self)
+        
+        panel.contentView = NSHostingView(rootView: clipHistoryView)
+            
         panel.setFrame(
             CGRect(
                 origin: positionNear(position: position, size: Self.size.collapsed)
@@ -174,13 +169,15 @@ extension ClipHistoryViewController {
             ),
             display: false
         )
+        
         panel.orderFrontRegardless()
+        panel.makeKey()
         
         windowController = .init(window: panel)
+        windowController?.window?.delegate = self // Set the delegate
         setWindowSize(isExpanded: false, animate: false)
         
         initShortcuts()
-        enableShortcuts()
     }
     
     func close() {
@@ -209,3 +206,4 @@ extension ClipHistoryViewController {
         setWindowSize(isExpanded: false)
     }
 }
+*/

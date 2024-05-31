@@ -16,12 +16,13 @@ class ClipboardMonitor: NSObject {
     private var timer: Timer?
     private var changeCount: Int = 0
     private var context: ModelContext
+    private var floatingPaneHelper = FloatingPaneHleper()
     
     private let pasteboard = NSPasteboard.general
     private let allowedPasteboardTypes: Set<String> = [
         NSPasteboard.PasteboardType.rtf.rawValue,
         NSPasteboard.PasteboardType.rtfd.rawValue,
-        NSPasteboard.PasteboardType.html.rawValue,
+//        NSPasteboard.PasteboardType.html.rawValue,
         NSPasteboard.PasteboardType.string.rawValue,
         NSPasteboard.PasteboardType.fileURL.rawValue,
         NSPasteboard.PasteboardType.jpeg.rawValue,
@@ -195,6 +196,7 @@ class ClipboardMonitor: NSObject {
         }
         
         if Defaults[.paste] {
+            floatingPaneHelper.pasteClose()
             pasteToActiveApplication()
         }
     }

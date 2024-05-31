@@ -37,7 +37,8 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
         var height: CGFloat = .zero
         
         ZStack(alignment: .topLeading) {
-            ForEach(models, id: \.self) { model in
+            ForEach(models.indices, id: \.self) { index in
+                let model = models[index]
                 viewGenerator(model)
                     .alignmentGuide(.leading) { dimensions in
                         if abs(width - dimensions.width) > geometry.size.width {

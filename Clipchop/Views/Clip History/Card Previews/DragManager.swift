@@ -18,6 +18,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     switch content.type {
     case
         UTType.plainText.identifier, UTType.text.identifier, UTType.utf8PlainText.identifier, UTType.utf16PlainText.identifier,
+        UTType.emailMessage.identifier,
         UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.html.identifier, UTType.url.identifier:
         
         guard 
@@ -40,12 +41,13 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         UTType.pdf.identifier, UTType.mpeg4Movie.identifier,UTType.quickTimeMovie.identifier, UTType.mpeg.identifier, UTType.video.identifier,
         UTType.avi.identifier, UTType.mp3.identifier, UTType.audio.identifier, UTType.wav.identifier, UTType.mpeg4Audio.identifier,
         UTType.mpeg2Video.identifier, UTType.appleProtectedMPEG4Audio.identifier, UTType.appleProtectedMPEG4Video.identifier,
-        UTType.application.identifier, UTType.calendarEvent.identifier, UTType.bookmark.identifier, UTType.emailMessage.identifier,
+        UTType.application.identifier, UTType.calendarEvent.identifier, UTType.bookmark.identifier,
         
         UTType.rtf.identifier, UTType.json.identifier, UTType.content.identifier, UTType.contact.identifier,
         
         UTType.usd.identifier, UTType.usdz.identifier:
         
+        log("type is \(String(describing: content.type))")
         return NSItemProvider(item: data, typeIdentifier: content.type)
 
     default:

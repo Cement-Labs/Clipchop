@@ -24,6 +24,7 @@ struct ClipchopApp: App {
     
     private let container: ModelContainer
     private let manager: ModelManager
+    private let beginningViewController = BeginningViewController()
     
     init() {
         self.container = try! .init(for: ClipboardContent.self, ClipboardHistory.self)
@@ -53,7 +54,7 @@ struct ClipchopApp: App {
         
         if !Defaults[.beginningViewShown] {
             // Shows beginning view once
-            manager.beginningViewController.open()
+            beginningViewController.open()
             Defaults[.beginningViewShown] = true
         } else {
             // Alerts for permissions

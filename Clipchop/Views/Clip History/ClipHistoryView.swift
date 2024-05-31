@@ -57,6 +57,6 @@ struct ClipHistoryView: View {
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(width: 500, height: 100, alignment: .center)
     }
 }

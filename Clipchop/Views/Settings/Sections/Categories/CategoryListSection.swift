@@ -4,7 +4,7 @@
 //
 //  Created by Xinshao_Air on 2024/5/26.
 //
-
+/*
 import SwiftUI
 import Defaults
 import SFSafeSymbols
@@ -54,6 +54,10 @@ struct CategoryListSection: View {
     
     var body: some View {
         GeometryReader { geometry in
+            List{
+                
+            }
+            .allowsHitTesting(false)
             HStack {
                 ScrollView(showsIndicators: false) {
                     Form {
@@ -105,7 +109,7 @@ struct CategoryListSection: View {
                         .formStyle(.grouped)
                     }
                 }
-                .frame(width: geometry.size.width * 0.575)
+                .frame(width: geometry.size.width * 0.5)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .cancellationAction) {
@@ -193,7 +197,6 @@ struct CategoryListSection: View {
                 }
             }
         }
-        .frame(height: 375)
     }
     
     private func submitInput() {
@@ -284,3 +287,4 @@ struct DropViewDelegate: DropDelegate {
         return true
     }
 }
+*/

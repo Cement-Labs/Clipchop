@@ -108,6 +108,7 @@ struct SettingsView: View {
                 }
             }
             .navigationSplitViewColumnWidth(min: 550, ideal: 550, max: 550)
+
             .toolbar {
                 ToolbarItemGroup {
                     Button {
@@ -124,9 +125,9 @@ struct SettingsView: View {
             .introspect(.navigationSplitView, on: .macOS(.v14), scope: .ancestor) { splitView in
                 (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
             }
+            .navigationTitle(Bundle.main.appName)
+            .navigationSplitViewStyle(.prominentDetail)
         }
-        .navigationTitle(Bundle.main.appName)
-        .navigationSplitViewStyle(.prominentDetail)
         
         // An intermediate view to hide the ugly window toolbar transition
         .orSomeView(!isWindowInitialized) {
