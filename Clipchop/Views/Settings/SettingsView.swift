@@ -28,7 +28,8 @@ struct SettingsView: View {
     @State var navigation: Navigation = .general
     @State var apps = InstalledApps()
     
-    @Binding var isWindowInitialized: Bool
+    init() {
+    }
     
     var body: some View {
         NavigationSplitView {
@@ -119,30 +120,34 @@ struct SettingsView: View {
                     }
                     .controlSize(.extraLarge)
                 }
-            }
-            
+            }            
             // Completely prevents the sidebar from collapsing
             .introspect(.navigationSplitView, on: .macOS(.v14), scope: .ancestor) { splitView in
                 (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
             }
             .navigationTitle(Bundle.main.appName)
             .navigationSplitViewStyle(.prominentDetail)
-        }
-        
-        // An intermediate view to hide the ugly window toolbar transition
-        .orSomeView(!isWindowInitialized) {
-            ZStack {
-                VisualEffectView(material: .sidebar, blendingMode: .behindWindow)
-                    .ignoresSafeArea()
-                
-                StaleView()
-                    .blendMode(.overlay)
-            }
-            .navigationTitle(Text(verbatim: ""))
+            .background(WindowAccessor())
         }
     }
 }
 
+struct WindowAccessor: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            if let window = view.window {
+                window.toolbarStyle = .unified
+                window.titlebarAppearsTransparent = false
+                window.titlebarSeparatorStyle = .automatic
+                window.makeKeyAndOrderFront(nil)
+            }
+        }
+        return view
+    }
+    func updateNSView(_ nsView: NSView, context: Context) {}
+}
+
 #Preview {
-    SettingsView(isWindowInitialized: .constant(true))
+    SettingsView()
 }

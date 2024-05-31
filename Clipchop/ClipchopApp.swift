@@ -17,7 +17,6 @@ let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
 struct ClipchopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var isMenuBarPresented = true
-    @State var isWindowInitialized = false
     
     @Default(.menuBarItemEnabled) var menuBarItemEnabled
     @Default(.preferredColorScheme) var preferredColorScheme
@@ -64,26 +63,7 @@ struct ClipchopApp: App {
     
     var body: some Scene {
         Settings {
-            SettingsView(isWindowInitialized: $isWindowInitialized)
-                .task {
-                    if let window = NSApp.windows.last {
-                        window.visibleWindowButtonTypes = []
-                        window.titlebarAppearsTransparent = true
-                        
-                        // Delays a little bit
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            window.visibleWindowButtonTypes = [.closeButton, .miniaturizeButton, .zoomButton]
-                            window.toolbarStyle = .automatic
-                            window.titlebarAppearsTransparent = false
-                            window.titlebarSeparatorStyle = .automatic
-                            
-                            withAnimation {
-                                // Tells the navigation split view to appear
-                                isWindowInitialized = true
-                            }
-                        }
-                    }
-                }
+            SettingsView()
                 .frame(minHeight: 400, idealHeight: 425, maxHeight: 450)
                 .preferredColorScheme(preferredColorScheme.colorScheme)
         }

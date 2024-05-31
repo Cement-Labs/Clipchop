@@ -13,7 +13,6 @@ class FloatingPaneHleper: NSPanel {
     
     private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
-    private var storedPosition = CGPoint()
     private var isClosing = false
     
     init() {
@@ -171,7 +170,6 @@ class FloatingPaneHleper: NSPanel {
     
     func open(position: CGPoint) {
         isClosing = true
-        storedPosition = position
         setFrameOrigin(positionNear(position: position, size: CGSize(width: 500, height: 100))
             .applying(.init(translationX: 0, y: -100)))
         makeKeyAndOrderFront(nil)
