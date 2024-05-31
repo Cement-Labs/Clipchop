@@ -9,7 +9,7 @@ import SwiftUI
 import KeyboardShortcuts
 
 struct KeyboardShortcutsSection: View {
-    @Environment(\.hasTitle) var hasTitle
+    @Environment(\.hasTitle) private var hasTitle
     
     var body: some View {
         Section {

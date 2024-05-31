@@ -10,7 +10,7 @@ import SwiftUI
 struct AcknowledgementsView: View {
     @Environment(\.openURL) private var openURL
     
-    @State var presentingReasonForPackage: String?
+    @State private var presentedReasonPackage: String?
     
     struct Package {
         var name: String
@@ -82,15 +82,15 @@ struct AcknowledgementsView: View {
                     Group {
                         if let reason = package.reason {
                             Button {
-                                presentingReasonForPackage = package.name
+                                presentedReasonPackage = package.name
                             } label: {
                                 Image(systemSymbol: .infoCircleFill)
                             }
                             .aspectRatio(1, contentMode: .fit)
                             .popover(isPresented: .init {
-                                presentingReasonForPackage == package.name
+                                presentedReasonPackage == package.name
                             } set: { _ in
-                                presentingReasonForPackage = nil
+                                presentedReasonPackage = nil
                             }) {
                                 Text(reason)
                                     .padding()

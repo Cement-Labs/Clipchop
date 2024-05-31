@@ -16,10 +16,11 @@ let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
 @main
 struct ClipchopApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @State var isMenuBarPresented = true
     
-    @Default(.menuBarItemEnabled) var menuBarItemEnabled
-    @Default(.preferredColorScheme) var preferredColorScheme
+    @State private var isMenuBarPresented: Bool = true
+    
+    @Default(.menuBarItemEnabled) private var menuBarItemEnabled
+    @Default(.preferredColorScheme) private var preferredColorScheme
     
     private let container: ModelContainer
     private let manager: ModelManager
@@ -30,7 +31,6 @@ struct ClipchopApp: App {
         self.manager = .init(context: container.mainContext)
         
 #if DEBUG
-        
         // Resets Defaults
         Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
         Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
@@ -40,7 +40,7 @@ struct ClipchopApp: App {
         Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
         
         Defaults[.categories] = Defaults.Keys.categories.defaultValue
-        Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
+        Defaults[.fileTypes] = Defaults.Keys.fileTypes.defaultValue
         
         Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
         Defaults[.applicationExcludeList] = Defaults.Keys.applicationExcludeList.defaultValue

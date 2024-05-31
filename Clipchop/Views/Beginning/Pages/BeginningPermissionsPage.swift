@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BeginningPermissionsPage: View {
-    @Environment(\.canContinue) var canContinue
-    @Environment(\.namespace) var namespace
-    @Environment(\.isVisible) var isVisible
+    @Environment(\.canContinue) private var canContinue
+    @Environment(\.namespace) private var namespace
+    @Environment(\.isVisible) private var isVisible
     
     var body: some View {
         VStack {

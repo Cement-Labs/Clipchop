@@ -10,30 +10,18 @@ import SFSafeSymbols
 import Defaults
 
 struct ClipboardHistorySection: View {
-    @Default(.historyPreservationPeriod) var historyPreservationPeriod
-    @Default(.historyPreservationTime) var historyPreservationTime
-    @Default(.timerInterval) var timerInterval
+    @Default(.historyPreservationPeriod) private var historyPreservationPeriod
+    @Default(.historyPreservationTime) private var historyPreservationTime
+    @Default(.timerInterval) private var timerInterval
     @Default(.paste) private var paste
     
-    @State var isDeleteHistoryAlertPresented = false
-    @State var isApplyPreservationTimeAlertPresented = false
+    @State private var isDeleteHistoryAlertPresented = false
+    @State private var isApplyPreservationTimeAlertPresented = false
     
-    @State var cachedPreservationPeriod: HistoryPreservationPeriod = .forever
-    @State var cachedPreservationTime: Double = 1
+    @State private var cachedPreservationPeriod: HistoryPreservationPeriod = .forever
+    @State private var cachedPreservationTime: Double = 1
     
-    @Environment(\.hasTitle) var hasTitle
-    
-    func cache() {
-        cachedPreservationPeriod = historyPreservationPeriod
-        cachedPreservationTime = historyPreservationTime
-        
-        DefaultsStack.shared.markDirty(.historyPreservation)
-    }
-    
-    func applyCache() {
-        historyPreservationPeriod = cachedPreservationPeriod
-        historyPreservationTime = cachedPreservationTime
-    }
+    @Environment(\.hasTitle) private var hasTitle
     
     var body: some View {
         Section {
@@ -136,6 +124,18 @@ struct ClipboardHistorySection: View {
             .padding(-5)
         }
         .foregroundStyle(.red)
+    }
+    
+    private func cache() {
+        cachedPreservationPeriod = historyPreservationPeriod
+        cachedPreservationTime = historyPreservationTime
+        
+        DefaultsStack.shared.markDirty(.historyPreservation)
+    }
+    
+    private func applyCache() {
+        historyPreservationPeriod = cachedPreservationPeriod
+        historyPreservationTime = cachedPreservationTime
     }
 }
 

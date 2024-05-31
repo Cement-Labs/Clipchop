@@ -10,7 +10,7 @@ import SwiftData
 import Defaults
 
 struct MenuBarView: View {
-    @Default(.timesClipped) var timesClipped
+    @Default(.timesClipped) private var timesClipped
     
     @Query(
         sort: \ClipboardHistory.time,

@@ -9,11 +9,11 @@ import SwiftUI
 import Defaults
 
 struct PreferredColorSchemePicker: View {
-    @Default(.preferredColorScheme) var preferredColorScheme
+    @Default(.preferredColorScheme) private var preferredColorScheme
     
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     
-    @State var isSheetPresented = false
+    @State private var isSheetPresented = false
     
     var body: some View {
         Picker("Preferred color scheme", selection: $preferredColorScheme) {

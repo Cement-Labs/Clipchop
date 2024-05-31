@@ -42,41 +42,135 @@ extension Defaults.Keys {
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
     
-    static let categories = Key<[FileCategory]>("categories", default: [
-        .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
-            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic", "Image"
-        ]),
-        .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
-            "pdf", "docx", "xlsx",
-            "key", "pages", "numbers",
-            "txt", "rtf", "rtfd",
-            "doc", "ods", "odt", "pptx", "ppt", "xls", "csv", "html", "xml", "json"
-        ]),
-        .init(name: .init(localized: "Videos", defaultValue: "Videos"), types: [
-            "mp4", "mov", "avi",
-            "mkv", "wmv", "flv", "mpeg", "mpg", "m4v", "webm"
-        ]),
-        .init(name: .init(localized: "Audio", defaultValue: "Audio"), types: [
-            "mp3", "wav", "m4a", "flac",
-            "aac", "ogg", "wma", "alac", "aiff", "dsd"
-        ]),
-        
-        .init(name: .init(localized: "Archives", defaultValue: "Archives"), types: [
-            "zip", "rar", "7z", "tar", "gz", "bz2"
-        ]),
-        
-        .init(name: .init(localized: "Code", defaultValue: "Code Files"), types: [
-            "swift", "objc", "java", "py", "cpp", "cs", "js", "ts", "html", "css", "scss", "less", "php", "rb", "pl", "go", "rs", "kt"
-        ])
+    static let categories = Key<Set<FileType.Category>>("categories", default: [
+        .document,
+        .image,
+        .movie,
+        .audio,
+        .archive,
+        .sourceCodeFile
     ])
-
-    static let allTypes = Key<[String]>("allTypes", default: categories.defaultValue.flatMap { $0.types })
-    
+    static let fileTypes = Key<Set<FileType>>("fileTypes", default: [
+        .init(ext: "pdf",       categories: [.document]),
+        .init(ext: "doc",       categories: [.document]),
+        .init(ext: "docx",      categories: [.document]),
+        .init(ext: "xlsx",      categories: [.document]),
+        .init(ext: "key",       categories: [.document]),
+        .init(ext: "pages",     categories: [.document]),
+        .init(ext: "numbers",   categories: [.document]),
+        .init(ext: "txt",       categories: [.document]),
+        .init(ext: "rtf",       categories: [.document]),
+        .init(ext: "rtfd",      categories: [.document]),
+        .init(ext: "ods",       categories: [.document]),
+        .init(ext: "odt",       categories: [.document]),
+        .init(ext: "ppt",       categories: [.document]),
+        .init(ext: "pptx",      categories: [.document]),
+        .init(ext: "xls",       categories: [.document]),
+        .init(ext: "csv",       categories: [.document]),
+        .init(ext: "html",      categories: [.document, .sourceCodeFile, .archive, .audio, .image]),
+        .init(ext: "xml",       categories: [.document, .sourceCodeFile]),
+        .init(ext: "json",      categories: [.document, .sourceCodeFile]),
+        
+        .init(ext: "jpg",       categories: [.image]),
+        .init(ext: "jpeg",      categories: [.image]),
+        .init(ext: "png",       categories: [.image]),
+        .init(ext: "gif",       categories: [.image]),
+        .init(ext: "bmp",       categories: [.image]),
+        .init(ext: "tiff",      categories: [.image]),
+        .init(ext: "svg",       categories: [.image]),
+        .init(ext: "webp",      categories: [.image]),
+        .init(ext: "ico",       categories: [.image]),
+        .init(ext: "heic",      categories: [.image]),
+        .init(ext: "ai",        categories: [.image]),
+        .init(ext: "psd",       categories: [.image]),
+        .init(ext: "pxd",       categories: [.image]),
+        
+        .init(ext: "mp4",       categories: [.movie]),
+        .init(ext: "mov",       categories: [.movie]),
+        .init(ext: "avi",       categories: [.movie]),
+        .init(ext: "mkv",       categories: [.movie]),
+        .init(ext: "wmv",       categories: [.movie]),
+        .init(ext: "flv",       categories: [.movie]),
+        .init(ext: "mpeg",      categories: [.movie]),
+        .init(ext: "mpg",       categories: [.movie]),
+        .init(ext: "m4v",       categories: [.movie]),
+        .init(ext: "webm",      categories: [.movie]),
+        
+        .init(ext: "mp3",       categories: [.audio]),
+        .init(ext: "wav",       categories: [.audio]),
+        .init(ext: "m4a",       categories: [.audio]),
+        .init(ext: "flac",      categories: [.audio]),
+        .init(ext: "aac",       categories: [.audio]),
+        .init(ext: "ogg",       categories: [.audio]),
+        .init(ext: "wma",       categories: [.audio]),
+        .init(ext: "alac",      categories: [.audio]),
+        .init(ext: "aiff",      categories: [.audio]),
+        .init(ext: "dsd",       categories: [.audio]),
+        
+        .init(ext: "zip",       categories: [.archive]),
+        .init(ext: "rar",       categories: [.archive]),
+        .init(ext: "7z",        categories: [.archive]),
+        .init(ext: "tar",       categories: [.archive]),
+        .init(ext: "tar.gz",    categories: [.archive]),
+        .init(ext: "bz2",       categories: [.archive]),
+        
+        .init(ext: "swift",     categories: [.sourceCodeFile]),
+        .init(ext: "objc",      categories: [.sourceCodeFile]),
+        .init(ext: "h",         categories: [.sourceCodeFile]),
+        .init(ext: "m",         categories: [.sourceCodeFile]),
+        .init(ext: "java",      categories: [.sourceCodeFile]),
+        .init(ext: "class",     categories: [.sourceCodeFile]),
+        .init(ext: "py",        categories: [.sourceCodeFile]),
+        .init(ext: "cpp",       categories: [.sourceCodeFile]),
+        .init(ext: "c",         categories: [.sourceCodeFile]),
+        .init(ext: "cs",        categories: [.sourceCodeFile]),
+        .init(ext: "js",        categories: [.sourceCodeFile]),
+        .init(ext: "ts",        categories: [.sourceCodeFile]),
+        .init(ext: "vue",       categories: [.sourceCodeFile]),
+        .init(ext: "css",       categories: [.sourceCodeFile]),
+        .init(ext: "scss",      categories: [.sourceCodeFile]),
+        .init(ext: "less",      categories: [.sourceCodeFile]),
+        .init(ext: "php",       categories: [.sourceCodeFile]),
+        .init(ext: "rb",        categories: [.sourceCodeFile]),
+        .init(ext: "pl",        categories: [.sourceCodeFile]),
+        .init(ext: "go",        categories: [.sourceCodeFile]),
+        .init(ext: "rs",        categories: [.sourceCodeFile]),
+        .init(ext: "kt",        categories: [.sourceCodeFile]),
+        .init(ext: "hs",        categories: [.sourceCodeFile]),
+        .init(ext: "scala",     categories: [.sourceCodeFile]),
+    ])
 }
 
 extension Defaults {
     static var accentColor: Color {
         inlineAccentColor(style: Self[.colorStyle], customColor: Self[.customAccentColor])
+    }
+    
+    static var fileExts: Set<String> {
+        get {
+            .init(Self[.fileTypes].map({ $0.ext }))
+        }
+        
+        set {
+            newValue.forEach { ext in
+                let isNew = newValue.contains(ext)
+                let isOld = fileExts.contains(ext)
+                guard isNew || isOld else {
+                    // No modifications
+                    return
+                }
+                
+                if isNew {
+                    // Added
+                    Self[.fileTypes].insert(.init(ext: ext))
+                }
+                
+                if isOld {
+                    // Removed
+                    Self[.fileTypes].remove(.init(ext: ext))
+                }
+            }
+        }
     }
     
     static func inlineAccentColor(style: ColorStyle, customColor: Color) -> Color {
@@ -92,28 +186,5 @@ extension Defaults {
     
     static func shouldIgnoreApp(_ bundleIdentifier: String) -> Bool {
         Self[.excludeAppsEnabled] && Self[.applicationExcludeList].contains(bundleIdentifier)
-    }
-    
-    static func isValidFileTypeInput(_ type: String) -> Bool {
-        !type
-            .trimmingCharacters(in: [".", " "])
-            .contains(/(\.|\s+)/)
-    }
-    
-    static func isNewFileTypeInput(_ type: String) -> Bool {
-        !Self[.allTypes].contains(trimFileTypeInput(type))
-    }
-    
-    static func trimFileTypeInput(_ type: String) -> String {
-        type
-            .lowercased()
-            .replacing(/(\.|\s+)/, with: "")
-    }
-    
-    static func removeFileTypeFromAll(_ type: String) {
-        Self[.allTypes].removeAll { $0 == type }
-        Self[.categories].updateEach { category in
-            category.types.removeAll { $0 == type }
-        }
     }
 }

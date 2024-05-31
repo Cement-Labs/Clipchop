@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ClipboardSettingsPage: View {
     var body: some View {
-        listEmbeddedForm {
+        ListEmbeddedForm {
             KeyboardShortcutsSection()
                 .controlSize(.large)
             

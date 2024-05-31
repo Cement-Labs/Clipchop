@@ -10,7 +10,6 @@ import SwiftData
 import Defaults
 
 struct ClipHistoryView: View {
-    
     @Query(
         sort: \ClipboardHistory.time,
         order: .reverse,
@@ -58,5 +57,11 @@ struct ClipHistoryView: View {
             }
         }
         .frame(width: 500, height: 100, alignment: .center)
+    }
+    
+    @ViewBuilder
+    private func clip(@ViewBuilder content: @escaping () -> some View) -> some View {
+        content()
+            .clipShape(.rect(cornerRadius: 25, style: .continuous))
     }
 }

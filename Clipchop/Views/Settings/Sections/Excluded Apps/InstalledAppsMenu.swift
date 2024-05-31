@@ -9,9 +9,9 @@ import SwiftUI
 import Defaults
 
 struct InstalledAppsMenu: View {
-    @EnvironmentObject var apps: InstalledApps
+    @EnvironmentObject private var apps: InstalledApps
     
-    @Default(.applicationExcludeList) var excluded
+    @Default(.applicationExcludeList) private var excluded
     
     var body: some View {
         let availableApps = (apps.installedApps + apps.systemApps)

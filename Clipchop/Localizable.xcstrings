@@ -224,9 +224,6 @@
     "Acknowledgements" : {
 
     },
-    "All Types" : {
-
-    },
     "Allow app excluding" : {
 
     },
@@ -314,7 +311,7 @@
     "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
 
     },
-    "Archives" : {
+    "Archive" : {
 
     },
     "Audio" : {
@@ -324,12 +321,6 @@
 
     },
     "Categories" : {
-
-    },
-    "Category" : {
-
-    },
-    "Category Name" : {
 
     },
     "Changing Color Scheme" : {
@@ -384,17 +375,6 @@
     "Clipchop" : {
 
     },
-    "Code" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Code Files"
-          }
-        }
-      }
-    },
     "Color" : {
 
     },
@@ -436,7 +416,7 @@
     "Delete history" : {
 
     },
-    "Documents" : {
+    "Document" : {
 
     },
     "Enable or disable clipboard history recording." : {
@@ -448,10 +428,7 @@
     "Excluded Apps" : {
 
     },
-    "File Extension" : {
-
-    },
-    "File Type" : {
+    "Footer" : {
 
     },
     "Forever" : {
@@ -500,10 +477,13 @@
     "Granted" : {
 
     },
+    "Header" : {
+
+    },
     "Hello, World!" : {
 
     },
-    "Images" : {
+    "Image" : {
 
     },
     "Keyboard Shortcuts" : {
@@ -528,6 +508,9 @@
 
     },
     "macOS Blue" : {
+
+    },
+    "Movie" : {
 
     },
     "No Application Excluded" : {
@@ -652,6 +635,9 @@
     "Source Code" : {
 
     },
+    "Source Code File" : {
+
+    },
     "Start Using %@" : {
 
     },
@@ -751,10 +737,10 @@
     "Update interval" : {
 
     },
-    "Videos" : {
+    "Welcome to %@" : {
 
     },
-    "Welcome to %@" : {
+    "When enabled, will automatically paste into the focused application." : {
 
     },
     "When enabled, will automatically paste into the focused application." : {

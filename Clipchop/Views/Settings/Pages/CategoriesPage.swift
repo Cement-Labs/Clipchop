@@ -11,27 +11,8 @@ import SFSafeSymbols
 import UniformTypeIdentifiers
 
 struct CategoriesPage: View {
-    enum ContentType {
-        case category
-        case fileType
-    }
-    
-    @Default(.categories) var categories
-    @Default(.allTypes) var allTypes
-    
-    @State var isInEditMode = false
-    @State var searchText: String = ""
-    @State var isPopoverPresented = false
-    @State var isPopoverSearch = false
-    @State var contentType: ContentType = .category
-    @State var input: String = ""
-    
-    var filteredCategories: [FileCategory] {
-        if searchText.isEmpty {
-            return categories
-        } else {
-            return categories.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
-        }
+    var body: some View {
+            CategoriesSection()
     }
     
     var filteredTypes: [String] {

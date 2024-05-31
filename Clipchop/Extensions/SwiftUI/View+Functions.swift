@@ -47,21 +47,6 @@ func withCaption(
 }
 
 @ViewBuilder
-func listEmbeddedForm(formStyle: some FormStyle = .grouped, @ViewBuilder content: () -> some View) -> some View {
-    List {
-        Form {
-            content()
-        }
-        .formStyle(formStyle)
-        
-        .scrollDisabled(true)
-        .scrollContentBackground(.hidden)
-        .ignoresSafeArea()
-    }
-    .background(.white)
-}
-
-@ViewBuilder
 func previewSection(content: () -> some View) -> some View {
     previewPage {
         Form {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GeneralSettingsPage: View {
     var body: some View {
-        listEmbeddedForm {
+        ListEmbeddedForm {
             PermissionsSection()
             
             GlobalBehaviorsSection()

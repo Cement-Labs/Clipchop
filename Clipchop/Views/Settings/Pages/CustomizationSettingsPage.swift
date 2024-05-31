@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import Defaults
-import SFSafeSymbols
 
 struct CustomizationSettingsPage: View {
     var body: some View {
-        listEmbeddedForm {
+        ListEmbeddedForm {
             AppearanceSection()
         }
     }

@@ -10,9 +10,9 @@ import Defaults
 import LaunchAtLogin
 
 struct GlobalBehaviorsSection: View {
-    @Default(.menuBarItemEnabled) var menuBarItemEnabled
+    @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     
-    @Environment(\.hasTitle) var hasTitle
+    @Environment(\.hasTitle) private var hasTitle
     
     var body: some View {
         Section {

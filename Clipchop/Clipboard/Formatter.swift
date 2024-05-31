@@ -129,6 +129,7 @@ extension Formatter {
     }
     
     func categorizeFileTypes() {
+        /*
         guard let result = self.title?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() else {
             log(self, "Title is nil or empty for \(self)")
             return
@@ -154,5 +155,6 @@ extension Formatter {
         }
         
         Defaults[.allTypes] = Array(allTypes)
+         */
     }
 }
