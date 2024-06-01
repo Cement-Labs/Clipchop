@@ -410,6 +410,18 @@
         }
       }
     },
+    "Currently don't search for categories" : {
+
+    },
+    "Currently don't search for file types" : {
+
+    },
+    "Currently search for categories" : {
+
+    },
+    "Currently search for file types" : {
+
+    },
     "Custom" : {
 
     },
@@ -583,9 +595,6 @@
 
     },
     "Remove from File Types" : {
-
-    },
-    "Reset Categories" : {
 
     },
     "Restore" : {

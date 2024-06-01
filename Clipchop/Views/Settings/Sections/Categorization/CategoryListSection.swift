@@ -19,11 +19,12 @@ struct CategoryListSection: View {
     
     @Environment(\.hasTitle) var hasTitle
     @Environment(\.isSearchable) var isSearchable
+    @Environment(\.alternatingLayout) private var alternatingLayout
     
     private let fuse = Fuse()
     
     private var isSearching: Bool {
-        !searchQuery.isEmpty
+        isSearchable && !searchQuery.isEmpty
     }
     
     private var filteredCategories: [FileType.Category] {
@@ -111,12 +112,19 @@ struct CategoryListSection: View {
                     }
                     .listStyle(.bordered)
                     .alternatingRowBackgrounds()
-                    .if(isSearchable) { view in
+                    .if(!alternatingLayout) { view in
                         view.searchable(text: $searchQuery)
                     }
                 }
                 .toolbar {
-                    ToolbarItemGroup(placement: .primaryAction) {
+                    if alternatingLayout {
+                        ToolbarItemGroup {
+                            Text("Categories")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    
+                    ToolbarItemGroup {
                         Button {
                             chosenInsertionPopoverElement = .yes(nil)
                         } label: {

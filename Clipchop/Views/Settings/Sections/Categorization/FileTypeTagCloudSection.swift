@@ -1,5 +1,5 @@
 //
-//  FileTypeListSection.swift
+//  FileTypeTagCloudSection.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/28.
@@ -9,19 +9,21 @@ import SwiftUI
 import Defaults
 import Fuse
 
-struct FileTypeListSection: View {
+struct FileTypeTagCloudSection: View {
     @Default(.fileTypes) private var fileTypes
     
     @Binding var searchQuery: String
     
     @State private var chosenInsertionPopoverElement: Chosen<FileType?> = .no
     
+    @Environment(\.hasTitle) private var hasTitle
     @Environment(\.isSearchable) private var isSearchable
+    @Environment(\.alternatingLayout) private var alternatingLayout
     
     private let fuse = Fuse()
     
     private var isSearching: Bool {
-        !searchQuery.isEmpty
+        isSearchable && !searchQuery.isEmpty
     }
     
     private var filteredFileTypes: [FileType] {
@@ -33,7 +35,67 @@ struct FileTypeListSection: View {
         }
     }
     
+    private var filteredGroupedFileTypes: [Character: [FileType]] {
+        filteredFileTypes.grouped(by: { $0.ext.first ?? "?" })
+    }
+    
     var body: some View {
+        Section {
+            FormSectionListContainer {
+                List {
+                    ForEach(filteredGroupedFileTypes.sorted(by: { $0.key < $1.key }), id: \.key) { key, types in
+                        VStack {
+                            Text(String(key))
+                                .monospaced()
+                                .foregroundStyle(.accent)
+                                .badge(types.count)
+                                .padding(2)
+                            
+                            WrappingHStack(models: types) { type in
+                                TagView(style: .quinary) {
+                                    Text(type.ext)
+                                        .monospaced()
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+                .listStyle(.bordered)
+                .alternatingRowBackgrounds()
+                .searchable(text: $searchQuery)
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .cancellationAction) {
+                    Button {
+                        chosenInsertionPopoverElement = .yes(nil)
+                    } label: {
+                        Image(systemSymbol: .plus)
+                    }
+                    .popover(isPresented: .init {
+                        chosenInsertionPopoverElement == .yes(nil)
+                    } set: { _ in
+                        chosenInsertionPopoverElement = .no
+                    }) {
+                        newElementPopover()
+                    }
+                }
+                
+                if alternatingLayout {
+                    ToolbarItemGroup(placement: .cancellationAction) {
+                        Text("File Types")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        } header: {
+            if hasTitle {
+                Text("File Types")
+            }
+        }
+        
+        /*
         Section {
             FormSectionListContainer {
                 NavigationStack {
@@ -122,6 +184,7 @@ struct FileTypeListSection: View {
                 }
             }
         }
+         */
     }
     
     @ViewBuilder

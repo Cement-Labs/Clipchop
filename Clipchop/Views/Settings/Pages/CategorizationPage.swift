@@ -12,6 +12,8 @@ struct CategorizationPage: View {
     @Default(.fileTypes) private var fileTypes
     
     @State private var searchQuery: String = ""
+    @State private var isCategoriesSearchable: Bool = true
+    @State private var isFileTypesSearchable: Bool = true
     
     var body: some View {
         GeometryReader { geometry in
@@ -22,7 +24,7 @@ struct CategorizationPage: View {
                         NavigationStack {
                             NavigationLink {
                                 ListEmbeddedForm {
-                                    FileTypeListSection(searchQuery: $searchQuery)
+                                    FileTypeTagCloudSection(searchQuery: $searchQuery)
                                         .navigationTitle("File Types")
                                 }
                                 .navigationSplitViewCollapsingDisabled()
@@ -41,14 +43,43 @@ struct CategorizationPage: View {
                     ListEmbeddedForm {
                         CategoryListSection(searchQuery: $searchQuery)
                             .environment(\.hasTitle, false)
-                            .environment(\.isSearchable, false)
+                            .environment(\.alternatingLayout, true)
+                            .environment(\.isSearchable, isCategoriesSearchable)
                     }
                     .frame(minWidth: 370, idealWidth: 370)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .status) {
+                            // Trigger the layout where the search bar is at the rightmost
+                            Spacer()
+                        }
+                    }
                     
                     ListEmbeddedForm {
-                        FileTypeListSection(searchQuery: $searchQuery)
+                        FileTypeTagCloudSection(searchQuery: $searchQuery)
+                            .environment(\.hasTitle, false)
+                            .environment(\.alternatingLayout, true)
+                            .environment(\.isSearchable, isFileTypesSearchable)
                     }
                     .frame(minWidth: 420)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .primaryAction) {
+                            Spacer()
+                            
+                            Button {
+                                isCategoriesSearchable.toggle()
+                            } label: {
+                                Image(systemSymbol: isCategoriesSearchable ? .listBulletRectangleFill : .listBulletRectangle)
+                            }
+                            .help(isCategoriesSearchable ? "Currently search for categories" : "Currently don't search for categories")
+                            
+                            Button {
+                                isFileTypesSearchable.toggle()
+                            } label: {
+                                Image(systemSymbol: isFileTypesSearchable ? .tagFill : .tag)
+                            }
+                            .help(isCategoriesSearchable ? "Currently search for file types" : "Currently don't search for file types")
+                        }
+                    }
                 }
             }
         }

@@ -32,7 +32,7 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
         ) -> CGFloat {
             switch self {
             case .leading:
-                if width - dimensions.width < -geometry.size.width {
+                if abs(width - dimensions.width) > geometry.size.width {
                     width = originalWidth(in: geometry)
                     height -= (dimensions.height + lineSpacing)
                 }
@@ -90,7 +90,9 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
         var height: CGFloat = .zero
         
         HStack(spacing: 0) {
-            Spacer()
+            if direction == .trailing {
+                Spacer()
+            }
             
             ZStack(alignment: .topLeading) {
                 ForEach(models.indices, id: \.self) { index in
@@ -115,6 +117,10 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
                             return result
                         }
                 }
+            }
+            
+            if direction == .leading {
+                Spacer()
             }
         }
         .background {

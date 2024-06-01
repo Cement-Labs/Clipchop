@@ -18,6 +18,11 @@ extension EnvironmentValues {
         set { self[IsSearchableEnvironmentKey.self] = newValue }
     }
     
+    var alternatingLayout: Bool {
+        get { self[AlternatingLayourEnvironmentKey.self] }
+        set { self[AlternatingLayourEnvironmentKey.self] = newValue }
+    }
+    
     var canContinue: (Bool) -> Void {
         get { self[CanContinueEnvironmentKey.self] }
         set { self[CanContinueEnvironmentKey.self] = newValue }
@@ -45,6 +50,10 @@ struct HasTitleEnvironmentKey: EnvironmentKey {
 
 struct IsSearchableEnvironmentKey: EnvironmentKey {
     static var defaultValue: Bool = true
+}
+
+struct AlternatingLayourEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Bool = false
 }
 
 struct CanContinueEnvironmentKey: EnvironmentKey {
