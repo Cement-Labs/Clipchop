@@ -4,7 +4,7 @@
 //
 //  Created by KrLite on 2024/5/28.
 //
-
+/*
 import SwiftUI
 import Defaults
 import Fuse
@@ -212,3 +212,4 @@ struct FileTypeTagCloudSection: View {
         }
     }
 }
+*/

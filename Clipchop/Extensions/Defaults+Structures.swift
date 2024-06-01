@@ -8,11 +8,6 @@
 import SwiftUI
 import Defaults
 
-enum Chosen<Element>: Equatable where Element: Equatable {
-    case yes(Element)
-    case no
-}
-
 // MARK: - Preferred Color Scheme
 
 enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable {
@@ -87,110 +82,16 @@ extension ColorStyle: Identifiable {
 
 // MARK: Category
 
-struct FileType: Codable, Defaults.Serializable {
-    struct Category: Identifiable, Codable, Defaults.Serializable {
+struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
         var id: UUID = .init()
-        var name: String
-        
-        // Default provided categories
-        static let document =       FileType.Category(name: .init(localized: "Document"))
-        static let image =          FileType.Category(name: .init(localized: "Image"))
-        static let movie =          FileType.Category(name: .init(localized: "Movie"))
-        static let audio =          FileType.Category(name: .init(localized: "Audio"))
-        static let archive =        FileType.Category(name: .init(localized: "Archive"))
-        static let sourceCodeFile = FileType.Category(name: .init(localized: "Source Code File"))
-        
-        var fileTypes: [FileType] {
-            Defaults[.fileTypes]
-                .filter { $0.categories.contains(self) }
-        }
-        
-        var fileExts: [String] {
-            get {
-                .init(fileTypes.map({ $0.ext }))
-            }
-            
-            set {
-                let deletion = fileExts.filter { !newValue.contains($0) }
-                let addition = newValue.filter { !fileExts.contains($0) }
-                
-                guard deletion != addition else {
-                    // No modifications
-                    return
-                }
-                
-                deletion.forEach { ext in
-                    Defaults[.fileTypes]
-                        .updateEach { type in
-                            guard type.ext == ext else { return }
-                            type.categories.removeAll { $0 == self }
-                        }
-                }
-                
-                addition.forEach { ext in
-                    Defaults[.fileTypes]
-                        .updateEach { type in
-                            guard type.ext == ext else { return }
-                            type.categories.append(self)
-                        }
-                }
-            }
-        }
-    }
-    
-    var ext: String
-    var categories: [Category] = []
-    
-    init(ext input: String, categories: [Category] = []) {
-        self.ext = Self.trim(input: input)
-        self.categories = categories
-    }
-    
-    static func trim(input: String) -> String {
-        input
-            .lowercased()
-            .replacing(/\s+/, with: "") // Removes all spaces
-            .trimmingCharacters(in: ["."]) // Trims all prefixing & suffixing dots
-    }
-    
-    static func isValid(input: String) -> Bool {
-        let whitespaceTrimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmed = trim(input: input)
-        return !trimmed.isEmpty // Has valid characters
-        && !whitespaceTrimmed.contains(/\s+/) // Contains no whitespaces
-    }
-    
-    static func isNew(_ ext: String) -> Bool {
-        !Defaults[.fileTypes].contains(.init(ext: ext))
-    }
-}
+        var name: String = ""
+        var types: [String] = []
 
-extension FileType: Identifiable {
-    var id: String {
-        self.ext
-    }
-}
-
-extension FileType: Hashable {
     func hash(into hasher: inout Hasher) {
-        hasher.combine(self.ext.hashValue)
+        hasher.combine(name)
     }
-}
 
-extension FileType: Equatable {
-    static func ==(lhs: FileType, rhs: FileType) -> Bool {
-        lhs.ext == rhs.ext
-    }
-}
-
-extension FileType.Category: Equatable {
-    static func ==(lhs: FileType.Category, rhs: FileType.Category) -> Bool {
+    static func ==(lhs: FileCategory, rhs: FileCategory) -> Bool {
         lhs.id == rhs.id
-    }
-}
-
-extension FileType.Category: Hashable {
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id.hashValue)
     }
 }

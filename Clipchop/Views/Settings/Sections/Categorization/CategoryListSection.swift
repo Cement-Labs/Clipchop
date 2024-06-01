@@ -8,7 +8,7 @@
 import SwiftUI
 import Defaults
 import Fuse
-
+/*
 struct CategoryListSection: View {
     @Default(.fileTypes) private var fileTypes
     @Default(.categories) private var categories
@@ -169,3 +169,4 @@ struct CategoryListSection: View {
         }
     }
 }
+*/

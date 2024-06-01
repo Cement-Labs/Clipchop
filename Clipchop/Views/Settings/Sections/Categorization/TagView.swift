@@ -4,7 +4,7 @@
 //
 //  Created by KrLite on 2024/5/28.
 //
-
+/*
 import SwiftUI
 
 struct TagView<Style, Content>: View where Style: ShapeStyle, Content: View {
@@ -22,3 +22,4 @@ struct TagView<Style, Content>: View where Style: ShapeStyle, Content: View {
             .clipShape(.rect(cornerRadius: 6.5))
     }
 }
+*/

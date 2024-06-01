@@ -1,5 +1,5 @@
 //
-//  CategorizationPage.swift
+//  CategoriesPage.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/26.
@@ -7,81 +7,285 @@
 
 import SwiftUI
 import Defaults
+import SFSafeSymbols
+import UniformTypeIdentifiers
 
 struct CategorizationPage: View {
-    @Default(.fileTypes) private var fileTypes
+    enum ContentType {
+        case category
+        case fileType
+    }
     
-    @State private var searchQuery: String = ""
-    @State private var isCategoriesSearchable: Bool = true
-    @State private var isFileTypesSearchable: Bool = true
+    @Default(.categories) var categories
+    @Default(.allTypes) var allTypes
+    
+    @State var isInEditMode = false
+    @State var searchText: String = ""
+    @State var isPopoverPresented = false
+    @State var isPopoverSearch = false
+    @State var contentType: ContentType = .category
+    @State var input: String = ""
+    
+    var filteredCategories: [FileCategory] {
+        if searchText.isEmpty {
+            return categories
+        } else {
+            return categories.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+    
+    var filteredTypes: [String] {
+        if searchText.isEmpty {
+            return allTypes
+        } else {
+            return allTypes.filter { $0.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+    
+    var canSubmitInput: Bool {
+        switch contentType {
+        case .category:
+            return !input.isEmpty
+        case .fileType:
+            return !input.isEmpty && Defaults.isValidFileTypeInput(input) && Defaults.isNewFileTypeInput(input)
+        }
+    }
     
     var body: some View {
         GeometryReader { geometry in
-            if geometry.size.width <= 820 {
-                // Compact layout
-                ListEmbeddedForm {
-                    Section {
-                        NavigationStack {
-                            NavigationLink {
-                                ListEmbeddedForm {
-                                    FileTypeTagCloudSection(searchQuery: $searchQuery)
-                                        .navigationTitle("File Types")
+            List{
+                
+            }
+            .allowsHitTesting(false)
+            HStack(spacing: 0){
+                ScrollView(showsIndicators: false) {
+                    Form {
+                        Section(header: Text("All Types")) {
+                            withCaption {
+                                //
+                            } caption: {
+                                WrappingHStack(models: filteredTypes) { type in
+                                    RoundedTagView(isDeleteButtonShown: $isInEditMode, text: type, onDelete: {
+                                        removeFileType(type)
+                                    })
+                                    .onDrag {
+                                        NSItemProvider(object: type as NSString)
+                                    }
                                 }
-                                .navigationSplitViewCollapsingDisabled()
-                            } label: {
-                                Text("File Types")
-                                    .badge(fileTypes.count)
                             }
                         }
                     }
-                    
-                    CategoryListSection(searchQuery: $searchQuery)
+                    .formStyle(.grouped)
+                    .frame(width: geometry.size.width * 0.4)
                 }
-            } else {
-                // Wide layout
-                HSplitView {
-                    ListEmbeddedForm {
-                        CategoryListSection(searchQuery: $searchQuery)
-                            .environment(\.hasTitle, false)
-                            .environment(\.alternatingLayout, true)
-                            .environment(\.isSearchable, isCategoriesSearchable)
-                    }
-                    .frame(minWidth: 370, idealWidth: 370)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .status) {
-                            // Trigger the layout where the search bar is at the rightmost
-                            Spacer()
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: -10){
+                        ForEach(filteredCategories, id: \.self) { category in
+                            Form{
+                                Section(header: Text(category.name)) {
+                                    withCaption {
+                                        //
+                                    } caption: {
+                                        WrappingHStack(models: category.types) { type in
+                                            RoundedTagView(isDeleteButtonShown: $isInEditMode, text: type, onDelete: {
+                                                removeFileType(from: category, type)
+                                            })
+                                            .onDrag {
+                                                NSItemProvider(object: type as NSString)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .onDrop(of: [UTType.text], delegate: DropViewDelegate(category: Binding(get: {
+                                category
+                            }, set: { newValue in
+                                if let index = categories.firstIndex(of: category) {
+                                    categories[index] = newValue
+                                }
+                            }), allTypes: $allTypes))
+                            .formStyle(.grouped)
                         }
                     }
-                    
-                    ListEmbeddedForm {
-                        FileTypeTagCloudSection(searchQuery: $searchQuery)
-                            .environment(\.hasTitle, false)
-                            .environment(\.alternatingLayout, true)
-                            .environment(\.isSearchable, isFileTypesSearchable)
-                    }
-                    .frame(minWidth: 420)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .primaryAction) {
-                            Spacer()
+                    .frame(width: geometry.size.width * 0.525)
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .padding(.horizontal)
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .cancellationAction) {
+                Button {
+                    isPopoverPresented = true
+                } label: {
+                    Image(systemSymbol: .plus)
+                }
+                .popover(isPresented: $isPopoverPresented, arrowEdge: .bottom) {
+                    VStack {
+                        HStack {
+                            Group {
+                                switch contentType {
+                                case .category:
+                                    TextField("Category Name", text: $input)
+                                        .monospaced()
+                                case .fileType:
+                                    TextField("File Extension", text: $input)
+                                        .monospaced()
+                                }
+                            }
+                            .textFieldStyle(.plain)
+                            .padding(2)
+                            .onSubmit {
+                                submitInput()
+                            }
                             
                             Button {
-                                isCategoriesSearchable.toggle()
+                                submitInput()
                             } label: {
-                                Image(systemSymbol: isCategoriesSearchable ? .listBulletRectangleFill : .listBulletRectangle)
+                                Image(systemSymbol: canSubmitInput ? .arrowForwardCircleFill : .exclamationmarkCircleFill)
+                                    .imageScale(.large)
+                                    .foregroundStyle(.secondary)
                             }
-                            .help(isCategoriesSearchable ? "Currently search for categories" : "Currently don't search for categories")
-                            
-                            Button {
-                                isFileTypesSearchable.toggle()
-                            } label: {
-                                Image(systemSymbol: isFileTypesSearchable ? .tagFill : .tag)
-                            }
-                            .help(isCategoriesSearchable ? "Currently search for file types" : "Currently don't search for file types")
+                            .buttonStyle(.borderless)
+                            .buttonBorderShape(.circle)
+                            .disabled(!canSubmitInput)
                         }
+                        .padding(4)
+                        
+                        Picker(selection: $contentType) {
+                            Text("Category")
+                                .tag(ContentType.category)
+                            
+                            Text("File Type")
+                                .tag(ContentType.fileType)
+                        } label: {
+                            EmptyView()
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(4)
                     }
+                    .frame(minWidth: 225)
+                    .padding()
+                }
+                Button {
+                    isPopoverSearch = true
+                } label: {
+                    Image(systemSymbol: .magnifyingglass)
+                }
+                .popover(isPresented: $isPopoverSearch, arrowEdge: .bottom) {
+                    VStack {
+                        TextField("Search", text: $searchText)
+                            .textFieldStyle(.plain)
+                            .monospaced()
+                            .padding()
+                     }
+                    .frame(minWidth: 225)
+                    .padding()
                 }
             }
         }
+        .onAppear {
+            NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+                if event.modifierFlags.contains(.option) {
+                    withAnimation{
+                        isInEditMode = true
+                    }
+                } else {
+                    withAnimation{
+                        isInEditMode = false
+                    }
+                }
+                return event
+            }
+        }
+    }
+    
+    private func submitInput() {
+        guard canSubmitInput else { return }
+        
+        switch contentType {
+        case .category:
+            addCategory(input)
+        case .fileType:
+            addFileType(input)
+        }
+        
+        isPopoverPresented = false
+        input = ""
+    }
+    
+    private func addCategory(_ name: String) {
+        Defaults[.categories].insert(.init(name: name), at: 0)
+    }
+    
+    private func addFileType(_ fileType: String) {
+        guard Defaults.isValidFileTypeInput(fileType) && Defaults.isNewFileTypeInput(fileType) else { return }
+        
+        allTypes.insert(Defaults.trimFileTypeInput(fileType), at: 0)
+    }
+    
+    private func removeCategory(_ category: FileCategory) {
+        categories.removeAll { $0 == category }
+    }
+    
+    private func removeFileType(from category: FileCategory, _ fileType: String) {
+        if let index = categories.firstIndex(of: category) {
+            categories[index].types.removeAll { $0 == fileType }
+        }
+    }
+    
+    private func removeFileType(_ fileType: String) {
+        allTypes.removeAll { $0 == fileType }
     }
 }
+
+struct RoundedTagView: View {
+    
+    @Binding var isDeleteButtonShown: Bool
+        
+    var text: String
+    var onDelete: () -> Void
+    
+    var body: some View {
+        HStack {
+            Text(text)
+                .monospaced()
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(.placeholder.opacity(0.1))
+                .clipShape(.rect(cornerRadius: 12))
+                .overlay(alignment: .topTrailing){
+                    if isDeleteButtonShown{
+                        Button(action: onDelete) {
+                            Image(systemSymbol: .xmarkCircleFill)
+                                .foregroundColor(.red)
+                        }
+                        .offset(x: 5, y: -5)
+                        .buttonStyle(.borderless)
+                    }
+                }
+        }
+    }
+}
+
+struct DropViewDelegate: DropDelegate {
+    @Binding var category: FileCategory
+    @Binding var allTypes: [String]
+    
+    func performDrop(info: DropInfo) -> Bool {
+        guard let item = info.itemProviders(for: [UTType.text]).first else { return false }
+        
+        item.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { (data, error) in
+            DispatchQueue.main.async {
+                guard let data = data as? Data, let type = String(data: data, encoding: .utf8) else { return }
+                
+                if !category.types.contains(type) {
+                    category.types.append(type)
+                }
+            }
+        }
+        
+        return true
+    }
+}
+

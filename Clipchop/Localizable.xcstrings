@@ -224,6 +224,9 @@
     "Acknowledgements" : {
 
     },
+    "All Types" : {
+
+    },
     "App Development Time" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -314,7 +317,7 @@
     "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
 
     },
-    "Archive" : {
+    "Archives" : {
 
     },
     "Audio" : {
@@ -330,6 +333,9 @@
 
     },
     "Categorization" : {
+
+    },
+    "Category" : {
 
     },
     "Category Name" : {
@@ -387,6 +393,17 @@
     "Clipchop" : {
 
     },
+    "Code" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Code Files"
+          }
+        }
+      }
+    },
     "Color" : {
 
     },
@@ -410,18 +427,6 @@
         }
       }
     },
-    "Currently don't search for categories" : {
-
-    },
-    "Currently don't search for file types" : {
-
-    },
-    "Currently search for categories" : {
-
-    },
-    "Currently search for file types" : {
-
-    },
     "Custom" : {
 
     },
@@ -440,13 +445,19 @@
     "Delete history" : {
 
     },
-    "Document" : {
+    "Documents" : {
 
     },
     "Exclude apps to prevent %@ copying their contents." : {
 
     },
     "file extension" : {
+
+    },
+    "File Extension" : {
+
+    },
+    "File Type" : {
 
     },
     "File Types" : {
@@ -507,7 +518,7 @@
     "Hello, World!" : {
 
     },
-    "Image" : {
+    "Images" : {
 
     },
     "Insert" : {
@@ -535,9 +546,6 @@
 
     },
     "macOS Blue" : {
-
-    },
-    "Movie" : {
 
     },
     "No Application Excluded" : {
@@ -600,6 +608,9 @@
     "Restore" : {
 
     },
+    "Search" : {
+
+    },
     "Settings…" : {
 
     },
@@ -660,9 +671,6 @@
       }
     },
     "Source Code" : {
-
-    },
-    "Source Code File" : {
 
     },
     "Start Using %@" : {
@@ -762,6 +770,9 @@
 
     },
     "Update interval" : {
+
+    },
+    "Videos" : {
 
     },
     "Welcome to %@" : {

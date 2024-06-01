@@ -38,7 +38,7 @@ struct ClipchopApp: App {
         Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
         
         Defaults[.categories] = Defaults.Keys.categories.defaultValue
-        Defaults[.fileTypes] = Defaults.Keys.fileTypes.defaultValue
+        Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
         
         Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
         Defaults[.excludedApplications] = Defaults.Keys.excludedApplications.defaultValue
