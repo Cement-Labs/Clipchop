@@ -198,7 +198,7 @@ class ClipboardMonitor: NSObject {
             Notification.Name.didPaste.post()
         }
 
-        if Defaults[.paste] {
+        if Defaults[.pasteToFrontmostEnabled] {
             controller.close()
             pasteToActiveApplication()
         }

@@ -35,7 +35,7 @@ extension Defaults.Keys {
     
     // MARK: Clip History
     
-    static let paste = Key<Bool>("paste", default: false)
+    static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: false)
     
     static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
     

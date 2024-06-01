@@ -122,7 +122,16 @@ struct CardPreviewView: View {
             Button {
                 ModelManager.monitor?.copy(item)
             } label: {
-                Text(Defaults[.paste] ? "Paste to \(sourceApp?.localizedName ?? "Unknown App")" : "copy")
+                if Defaults[.pasteToFrontmostEnabled] {
+                    if let name = sourceApp?.localizedName {
+                        Text("Paste to \(name)")
+                    } else {
+                        Text("Paste to Frontmost")
+                    }
+                } else {
+                    Text("Copy to Clipboard")
+                }
+                
                 Image(systemSymbol: .docOnDoc)
             }
 

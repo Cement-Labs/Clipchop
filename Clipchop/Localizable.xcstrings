@@ -384,7 +384,7 @@
     "Continue" : {
 
     },
-    "copy" : {
+    "Copy to Clipboard" : {
 
     },
     "Copyrights" : {
@@ -535,6 +535,9 @@
 
     },
     "Paste to Active Application" : {
+
+    },
+    "Paste to Frontmost" : {
 
     },
     "Permissions" : {
