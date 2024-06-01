@@ -1,5 +1,5 @@
 //
-//  FloatingWindow.swift
+//  ClipHistoryPanel.swift
 //  ClipChop
 //
 //  Created by Xinshao_Air on 2024/5/31.
@@ -9,7 +9,8 @@ import SwiftUI
 import AppKit
 import KeyboardShortcuts
 
-class FloatingPaneHleper: NSPanel {
+class ClipHistoryPanel: NSPanel {
+    static let shared = ClipHistoryPanel()
     
     private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
@@ -26,6 +27,8 @@ class FloatingPaneHleper: NSPanel {
         collectionBehavior = .canJoinAllSpaces
         isFloatingPanel = true
         level = .floating
+        isMovableByWindowBackground = false
+        animationBehavior = .utilityWindow
         
         backgroundColor = NSColor.clear
         hasShadow = true
@@ -35,10 +38,6 @@ class FloatingPaneHleper: NSPanel {
             .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
         
         contentView = NSHostingView(rootView: clipHistoryView)
-        
-        isMovableByWindowBackground = false
-        
-        animationBehavior = .utilityWindow
         
         initShortcuts()
     }
@@ -71,7 +70,7 @@ class FloatingPaneHleper: NSPanel {
     // MARK: - Shortcuts
     
     override func keyDown(with event: NSEvent) {
-        if event.keyCode == 53 {
+        if event.keyCode == KeyboardShortcuts. {
             close()
         } else {
             super.keyDown(with: event)
@@ -79,12 +78,8 @@ class FloatingPaneHleper: NSPanel {
     }
     
     func initShortcuts() {
-        KeyboardShortcuts.onKeyDown(for: .expand) {
-            self.expand()
-        }
-        KeyboardShortcuts.onKeyDown(for: .collapse) {
-            self.collapse()
-        }
+        KeyboardShortcuts.onKeyDown(for: .expand, action: expand)
+        KeyboardShortcuts.onKeyDown(for: .collapse, action: collapse)
     }
     
     func enableShortcuts() {

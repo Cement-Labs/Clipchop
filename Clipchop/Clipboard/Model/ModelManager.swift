@@ -10,11 +10,8 @@ import AppKit
 import SwiftData
 
 class ModelManager {
-    
     private let context: ModelContext
-    
-    let monitor: ClipboardMonitor
-    private var floatingPaneHelper: FloatingPaneHleper?
+    private let monitor: ClipboardMonitor
     
     init(context: ModelContext) {
         self.context = context
@@ -23,17 +20,15 @@ class ModelManager {
         monitor.start()
         
         KeyboardShortcuts.onKeyDown(for: .window) { [self] in
-            self.toggleFloatingPane()
+            self.toggle()
         }
+        
         KeyboardShortcuts.onKeyDown(for: .start) { [self] in
             self.monitor.toggle()
         }
     }
     
-    private func toggleFloatingPane() {
-        if floatingPaneHelper == nil {
-            floatingPaneHelper = FloatingPaneHleper()
-        }
-        floatingPaneHelper?.toggle(position: NSEvent.mouseLocation)
+    func toggle() {
+        ClipHistoryPanel.shared.toggle(position: NSEvent.mouseLocation)
     }
 }

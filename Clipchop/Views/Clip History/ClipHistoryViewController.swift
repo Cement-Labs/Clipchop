@@ -10,7 +10,6 @@ import SwiftData
 import Defaults
 import KeyboardShortcuts
 
-/*
 @Observable
 class ClipHistoryViewController: NSObject, ViewController, NSWindowDelegate {
     static let size = (
@@ -206,4 +205,3 @@ extension ClipHistoryViewController {
         setWindowSize(isExpanded: false)
     }
 }
-*/

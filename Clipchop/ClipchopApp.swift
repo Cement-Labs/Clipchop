@@ -20,7 +20,6 @@ struct ClipchopApp: App {
     @State private var isMenuBarPresented: Bool = true
     
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
-    @Default(.preferredColorScheme) private var preferredColorScheme
     
     private let container: ModelContainer
     private let manager: ModelManager
@@ -64,8 +63,7 @@ struct ClipchopApp: App {
     var body: some Scene {
         Settings {
             SettingsView()
-                .frame(minHeight: 400, idealHeight: 425, maxHeight: 450)
-                .preferredColorScheme(preferredColorScheme.colorScheme)
+                .frame(minHeight: 400, idealHeight: 425)
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {

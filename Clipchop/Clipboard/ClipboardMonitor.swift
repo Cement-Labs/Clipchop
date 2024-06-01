@@ -15,7 +15,6 @@ class ClipboardMonitor: NSObject {
     private var timer: Timer?
     private var changeCount: Int = 0
     private var context: ModelContext
-    private var floatingPaneHelper = FloatingPaneHleper()
 
     private let pasteboard = NSPasteboard.general
     private let allowedPasteboardTypes: Set<String> = [
@@ -195,13 +194,12 @@ class ClipboardMonitor: NSObject {
         }
 
         if Defaults[.paste] {
-            floatingPaneHelper.pasteClose()
+            ClipHistoryPanel.shared.pasteClose()
             pasteToActiveApplication()
         }
     }
     
     func pasteToActiveApplication() {
-        
         PermissionsManager.Accessibility.requestAccess()
         
         // Simulate Cmd+V keypress to paste

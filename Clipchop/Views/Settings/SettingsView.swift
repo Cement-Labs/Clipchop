@@ -28,9 +28,6 @@ struct SettingsView: View {
     @State private var navigation: Navigation = .general
     @State private var apps = InstalledApps()
     
-    init() {
-    }
-    
     var body: some View {
         NavigationSplitView {
             List(selection: $navigation) {
