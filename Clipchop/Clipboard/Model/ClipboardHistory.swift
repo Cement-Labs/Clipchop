@@ -20,6 +20,7 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
         case image
         case rtf
         case text
+        case url
         
         var types: [NSPasteboard.PasteboardType] {
             switch self {
@@ -49,6 +50,9 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
             ]
             case .text: [
                 .string
+            ]
+            case .url: [
+                .URL
             ]
             }
         }

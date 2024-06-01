@@ -28,7 +28,7 @@ struct RTFPreviewPage: View {
                 .minimumScaleFactor(0.8)
                 .lineLimit(10)
                 .fixedSize(horizontal: false, vertical: false)
-                .background(.clear)
+                .background(.windowBackground)
         }
         .frame(width: 70, height: 70)
     }

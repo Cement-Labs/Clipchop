@@ -20,15 +20,20 @@ class ClipboardMonitor: NSObject {
 
     private let pasteboard = NSPasteboard.general
     private let allowedPasteboardTypes: Set<String> = [
+        
         NSPasteboard.PasteboardType.rtf.rawValue,
         NSPasteboard.PasteboardType.rtfd.rawValue,
-        NSPasteboard.PasteboardType.html.rawValue,
         NSPasteboard.PasteboardType.string.rawValue,
+        
         NSPasteboard.PasteboardType.fileURL.rawValue,
+        NSPasteboard.PasteboardType.URL.rawValue,
+        NSPasteboard.PasteboardType.html.rawValue,
+        
         NSPasteboard.PasteboardType.jpeg.rawValue,
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,
         NSPasteboard.PasteboardType.pdf.rawValue,
+        
         NSPasteboard.PasteboardType.universalClipboard.rawValue,
         NSPasteboard.PasteboardType.tabularText.rawValue,
         NSPasteboard.PasteboardType.multipleTextSelection.rawValue,

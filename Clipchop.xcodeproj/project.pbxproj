@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
 		2819A0E82C05EBFB00D351BC /* FileTypeListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0E72C05EBFB00D351BC /* FileTypeListSection.swift */; };
-		2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EB2C06000A00D351BC /* Set+Extensions.swift */; };
 		2819A0F02C0607E400D351BC /* FormSectionListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */; };
 		2819A0F42C06136500D351BC /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F32C06136500D351BC /* TagView.swift */; };
 		2819A0F62C061C9F00D351BC /* ListEmbeddedForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */; };
@@ -116,7 +115,6 @@
 /* Begin PBXFileReference section */
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
 		2819A0E72C05EBFB00D351BC /* FileTypeListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeListSection.swift; sourceTree = "<group>"; };
-		2819A0EB2C06000A00D351BC /* Set+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Extensions.swift"; sourceTree = "<group>"; };
 		2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionListContainer.swift; sourceTree = "<group>"; };
 		2819A0F32C06136500D351BC /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEmbeddedForm.swift; sourceTree = "<group>"; };
@@ -411,7 +409,6 @@
 				28F4164F2C03719D00C53197 /* MutableCollection+Extensions.swift */,
 				282692792BDCAE6000D1656E /* Bundle+Extensions.swift */,
 				28C102312C0206E3003F5722 /* Notification+Extensions.swift */,
-				2819A0EB2C06000A00D351BC /* Set+Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -737,7 +734,6 @@
 				2843DB642BF0F8C4008AA2E1 /* InstalledAppsMenu.swift in Sources */,
 				28A699AD2BF6192A000B0272 /* ClipboardMonitor.swift in Sources */,
 				28E6E9062BFE16620068B449 /* BeginningCustomizationPage.swift in Sources */,
-				2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */,
 				28E6E9042BFE16570068B449 /* BeginningTutorialPage.swift in Sources */,
 				2819A0F02C0607E400D351BC /* FormSectionListContainer.swift in Sources */,
 				28C102342C020C5D003F5722 /* Logger.swift in Sources */,
