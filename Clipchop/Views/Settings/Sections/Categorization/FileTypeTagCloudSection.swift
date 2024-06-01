@@ -47,9 +47,9 @@ struct FileTypeTagCloudSection: View {
                         VStack {
                             Text(String(key))
                                 .monospaced()
-                                .foregroundStyle(.accent)
                                 .badge(types.count)
-                                .padding(2)
+                                .foregroundStyle(.accent)
+                                .font(.caption)
                             
                             WrappingHStack(models: types) { type in
                                 TagView(style: .quinary) {

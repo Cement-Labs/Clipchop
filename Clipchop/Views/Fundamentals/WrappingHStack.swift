@@ -47,7 +47,7 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
                 
                 return result
             case .trailing:
-                if width + dimensions.width > 0 {
+                if width + dimensions.width + spacing > 0 {
                     width = originalWidth(in: geometry)
                     height -= (dimensions.height + lineSpacing)
                 }

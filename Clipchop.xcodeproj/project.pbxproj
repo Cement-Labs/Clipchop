@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
 		2819A0E82C05EBFB00D351BC /* FileTypeTagCloudSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0E72C05EBFB00D351BC /* FileTypeTagCloudSection.swift */; };
-		2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EB2C06000A00D351BC /* Set+Extensions.swift */; };
 		2819A0F02C0607E400D351BC /* FormSectionListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */; };
 		2819A0F42C06136500D351BC /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F32C06136500D351BC /* TagView.swift */; };
 		2819A0F62C061C9F00D351BC /* ListEmbeddedForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */; };
@@ -116,7 +115,6 @@
 /* Begin PBXFileReference section */
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
 		2819A0E72C05EBFB00D351BC /* FileTypeTagCloudSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeTagCloudSection.swift; sourceTree = "<group>"; };
-		2819A0EB2C06000A00D351BC /* Set+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Extensions.swift"; sourceTree = "<group>"; };
 		2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionListContainer.swift; sourceTree = "<group>"; };
 		2819A0F32C06136500D351BC /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEmbeddedForm.swift; sourceTree = "<group>"; };
@@ -499,10 +497,10 @@
 		28E6E8F62BFE0C060068B449 /* Fundamentals */ = {
 			isa = PBXGroup;
 			children = (
-				2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */,
 				283E25352BF4FE040094C06F /* StaleView.swift */,
-				28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */,
+				2872C0F22BF78963000ED6A8 /* VisualEffectView.swift */,
 				2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */,
+				28D4B3E22C0337D4002ACBAA /* WrappingHStack.swift */,
 				2837BC1F2C0AFFFC0080FE6C /* FormNavigationLinkLabel.swift */,
 			);
 			path = Fundamentals;

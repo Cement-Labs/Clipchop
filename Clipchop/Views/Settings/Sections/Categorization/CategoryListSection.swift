@@ -53,6 +53,7 @@ struct CategoryListSection: View {
                                 VStack {
                                     FormNavigationLinkLabel {
                                         Text(category.name)
+                                            .badge(category.fileExts.count)
                                     }
                                     
                                     if !category.fileExts.isEmpty {
