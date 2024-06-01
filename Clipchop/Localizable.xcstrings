@@ -428,6 +428,9 @@
     "Excluded Apps" : {
 
     },
+    "File Types" : {
+
+    },
     "Footer" : {
 
     },
@@ -568,6 +571,9 @@
 
     },
     "Refresh States (Debug)" : {
+
+    },
+    "Remove from File Types" : {
 
     },
     "Reset Categories" : {

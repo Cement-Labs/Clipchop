@@ -13,7 +13,20 @@ import UniformTypeIdentifiers
 struct CategoriesPage: View {
     var body: some View {
         ListEmbeddedForm {
-            CategoriesSection()
+            Section {
+                NavigationStack {
+                    NavigationLink {
+                        ListEmbeddedForm {
+                            CategoryListSection()
+                                .navigationTitle("Categories")
+                        }
+                    } label: {
+                        Text("Categories")
+                    }
+                }
+            }
+            
+            FileTypeListSection()
         }
     }
 }

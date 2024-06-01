@@ -86,7 +86,7 @@ struct ExcludedAppListSection: View {
                                 
                                 Button("Delete", role: .destructive) {
                                     if selection.isEmpty {
-                                        excluded.removeAll { $0 == entry.wrappedValue }
+                                        excluded.removeAll { $0 == entry }
                                     } else {
                                         removeSelected()
                                     }
