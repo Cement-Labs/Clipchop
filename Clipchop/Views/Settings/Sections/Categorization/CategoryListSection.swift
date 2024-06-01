@@ -15,6 +15,8 @@ struct CategoryListSection: View {
     @State private var chosenInsertionPopoverElement: Chosen<FileType.Category?> = .no
     @State private var searchQuery: String = ""
     
+    @Environment(\.hasTitle) var hasTitle
+    
     private let fuse = Fuse()
     
     private var isSearching: Bool {
@@ -39,9 +41,20 @@ struct CategoryListSection: View {
                             NavigationLink {
                                 
                             } label: {
-                                FormNavigationLinkLabel {
-                                    Text(category.name)
-                                        .badge(category.fileExts.count)
+                                VStack {
+                                    FormNavigationLinkLabel {
+                                        Text(category.name)
+                                    }
+                                    
+                                    if !category.fileExts.isEmpty {
+                                        WrappingHStack(models: category.fileExts, direction: .trailing) { ext in
+                                            TagView(style: .quinary) {
+                                                Text(ext)
+                                                    .monospaced()
+                                                    .foregroundStyle(.secondary)
+                                            }
+                                        }
+                                    }
                                 }
                                 .contextMenu {
                                     Button("Insert") {
@@ -108,6 +121,10 @@ struct CategoryListSection: View {
                         }
                     }
                 }
+            }
+        } header: {
+            if hasTitle {
+                Text("Categories")
             }
         }
     }

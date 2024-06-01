@@ -9,7 +9,7 @@ import SwiftUI
 import Defaults
 
 struct CategorizationPage: View {
-    @Default(.categories) var categories
+    @Default(.fileTypes) var fileTypes
     
     var body: some View {
         ListEmbeddedForm {
@@ -17,18 +17,18 @@ struct CategorizationPage: View {
                 NavigationStack {
                     NavigationLink {
                         ListEmbeddedForm {
-                            CategoryListSection()
-                                .navigationTitle("Categories")
+                            FileTypeListSection()
+                                .navigationTitle("File Types")
                         }
                         .navigationSplitViewCollapsingDisabled()
                     } label: {
-                        Text("Categories")
-                            .badge(categories.count)
+                        Text("File Types")
+                            .badge(fileTypes.count)
                     }
                 }
             }
             
-            FileTypeListSection()
+            CategoryListSection()
         }
     }
 }

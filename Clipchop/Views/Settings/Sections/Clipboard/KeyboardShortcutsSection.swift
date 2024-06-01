@@ -17,7 +17,7 @@ struct KeyboardShortcutsSection: View {
                 withCaption {
                     Text("Show \(Bundle.main.appName)")
                 } caption: {
-                    Text("The global keyboard shortcut for calling up the clip history window.")
+                    Text("Call up the clip history window.")
                 }
             }
         } header: {
@@ -29,9 +29,9 @@ struct KeyboardShortcutsSection: View {
         Section {
             KeyboardShortcuts.Recorder(for: .start) {
                 withCaption {
-                    Text("Clipboard History Recording")
+                    Text("Clipboard monitoring")
                 } caption: {
-                    Text("Enable or disable clipboard history recording.")
+                    Text("Toggle clipboard history monitoring.")
                 }
             }
         }

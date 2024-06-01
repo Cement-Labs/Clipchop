@@ -323,6 +323,9 @@
     "Back" : {
 
     },
+    "Call up the clip history window." : {
+
+    },
     "Categories" : {
 
     },
@@ -378,7 +381,7 @@
     "Clipboard Behaviors" : {
 
     },
-    "Clipboard History Recording" : {
+    "Clipboard monitoring" : {
 
     },
     "Clipchop" : {
@@ -426,9 +429,6 @@
 
     },
     "Document" : {
-
-    },
-    "Enable or disable clipboard history recording." : {
 
     },
     "Exclude apps to prevent %@ copying their contents." : {
@@ -674,10 +674,10 @@
     "Test line No.%lld" : {
 
     },
-    "The global keyboard shortcut for calling up the clip history window." : {
+    "This action clears all your clipboard history unrestorably, including pins." : {
 
     },
-    "This action clears all your clipboard history unrestorably, including pins." : {
+    "Toggle clipboard history monitoring." : {
 
     },
     "Tutorial" : {

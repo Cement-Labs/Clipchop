@@ -31,7 +31,7 @@ struct FileTypeListSection: View {
     }
     
     var body: some View {
-        Section("File Types") {
+        Section {
             FormSectionListContainer {
                 NavigationStack {
                     List {
@@ -45,19 +45,11 @@ struct FileTypeListSection: View {
                                 .navigationTitle(type.ext.uppercased())
                                 .navigationSplitViewCollapsingDisabled()
                             } label: {
-                                FormNavigationLinkLabel(hasSpacer: false, alignment: .top) {
+                                FormNavigationLinkLabel {
                                     Text(type.ext)
                                         .monospaced()
+                                        .badge(type.categories.count)
                                         .padding(.vertical, 4)
-                                    
-                                    Spacer()
-                                    
-                                    WrappingHStack(models: type.categories, direction: .trailing) { category in
-                                        TagView(style: .quinary) {
-                                            Text(category.name)
-                                                .foregroundStyle(.secondary)
-                                        }
-                                    }
                                 }
                                 .contextMenu {
                                     Button("Insert") {
