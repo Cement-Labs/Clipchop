@@ -11,14 +11,16 @@ import Defaults
 struct CategoriesSection: View {
     @Default(.fileTypes) private var fileTypes
     
+    @State private var selection: FileType?
+    
     var body: some View {
-        FormSectionList {
+        FormSectionListContainer {
             NavigationStack {
-                List {
-                    ForEach(fileTypes.sorted()) { type in
+                List(selection: $selection) {
+                    ForEach(fileTypes) { type in
                         NavigationLink {
                             List {
-                                ForEach(type.categories.sorted()) { category in
+                                ForEach(type.categories) { category in
                                     Text(category.name)
                                 }
                             }
@@ -29,36 +31,45 @@ struct CategoriesSection: View {
                                 
                                 Spacer()
                                 
-                                /*
-                                 ScrollView(.horizontal) {
-                                 HStack {
-                                 ForEach(type.categories.sorted()) { category in
-                                 TagView(style: .quinary) {
-                                 Text(category.name)
-                                 .foregroundStyle(.secondary)
-                                 }
-                                 }
-                                 }
-                                 }
-                                 .aspectRatio(contentMode: .fit)
-                                 .defaultScrollAnchor(.trailing)
-                                 .background(.red)
-                                 */
-                                
                                 Image(systemSymbol: .chevronForward)
                                     .foregroundStyle(.placeholder)
+                            }
+                            .contextMenu {
+                                Button("Insert") {
+                                    
+                                }
+                                
+                                Button("Reset Categories", role: .destructive) {
+                                    fileTypes.updateEach { mutableType in
+                                        if mutableType == type {
+                                            mutableType.categories = []
+                                        }
+                                    }
+                                }
+                                
+                                Button("Delete", role: .destructive) {
+                                    fileTypes.removeAll { $0 == type }
+                                }
                             }
                         }
                         .padding(4)
                         .buttonStyle(.borderless)
                     }
+                    .onMove { indexSet, destination in
+                        fileTypes.move(fromOffsets: indexSet, toOffset: destination)
+                    }
                     .onDelete { indexSet in
-                        
+                        fileTypes.remove(atOffsets: indexSet)
                     }
                 }
                 .listStyle(.bordered)
                 .alternatingRowBackgrounds()
             }
         }
+    }
+    
+    private func removeSelected() {
+        fileTypes.removeAll { $0 == selection }
+        selection = nil
     }
 }

@@ -13,19 +13,19 @@ struct ExcludedAppListSection: View {
     @EnvironmentObject private var apps: InstalledApps
     
     @Default(.excludeAppsEnabled) private var excludeAppsEnabled
-    @Default(.applicationExcludeList) private var excluded
+    @Default(.excludedApplications) private var excluded
     
     @State private var selection: Set<String> = .init()
     
     var body: some View {
         Section {
             withCaption("Limit \(Bundle.main.appName)'s functions in the specified apps.") {
-                Toggle("Allow app excluding", isOn: $excludeAppsEnabled)
+                Toggle("App excluding", isOn: $excludeAppsEnabled)
             }
         }
         
         Section {
-            FormSectionList {
+            FormSectionListContainer {
                 if excluded.isEmpty {
                     // No app excluded
                     HStack {
@@ -74,27 +74,33 @@ struct ExcludedAppListSection: View {
                                     }
                                 }
                                 .padding(.vertical, 5)
-                                .contextMenu {
-                                    Button("Remove") {
-                                        if selection.isEmpty {
-                                            excluded.removeAll { $0 == entry.wrappedValue }
-                                        } else {
-                                            removeSelected()
-                                        }
-                                    }
-                                    
-#if DEBUG
-                                    Button("Log to Console (Debug)") {
-                                        selection.forEach {
-                                            print($0)
-                                        }
-                                    }
-#endif
-                                }
                                 .tag(entry.wrappedValue)
                                 
                                 Spacer()
                             }
+                            .contextMenu {
+                                Menu("Insert") {
+                                    InstalledAppsMenu(entry: entry.wrappedValue)
+                                        .environmentObject(apps)
+                                }
+                                
+                                Button("Delete", role: .destructive) {
+                                    if selection.isEmpty {
+                                        excluded.removeAll { $0 == entry.wrappedValue }
+                                    } else {
+                                        removeSelected()
+                                    }
+                                }
+                                
+#if DEBUG
+                                Button("Log to Console (Debug)") {
+                                    selection.forEach {
+                                        print($0)
+                                    }
+                                }
+#endif
+                            }
+                            
                             // Requires a non-transparent background to expand the hit testing area
                             .background(.placeholder.opacity(0.0001))
                         }
@@ -133,9 +139,7 @@ struct ExcludedAppListSection: View {
     }
     
     private func removeSelected() {
-        for item in selection {
-            excluded.removeAll { $0 == item }
-        }
+        excluded.removeAll { selection.contains($0) }
         selection.removeAll()
     }
 }

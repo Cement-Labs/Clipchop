@@ -28,7 +28,7 @@ extension Defaults.Keys {
     // MARK: Excluded Applications
     
     static let excludeAppsEnabled = Key<Bool>("excludeAppsEnabled", default: true)
-    static let applicationExcludeList = Key<[String]>("applicationExcludeList", default: [
+    static let excludedApplications = Key<[String]>("excludedApplications", default: [
         // Keychain Access
         "com.apple.keychainaccess"
     ])
@@ -185,6 +185,6 @@ extension Defaults {
     }
     
     static func shouldIgnoreApp(_ bundleIdentifier: String) -> Bool {
-        Self[.excludeAppsEnabled] && Self[.applicationExcludeList].contains(bundleIdentifier)
+        Self[.excludeAppsEnabled] && Self[.excludedApplications].contains(bundleIdentifier)
     }
 }

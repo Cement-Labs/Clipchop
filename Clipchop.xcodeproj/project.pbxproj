@@ -10,7 +10,7 @@
 		2807BFD62C02ACFE00D65DE3 /* NavigationEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */; };
 		2819A0E82C05EBFB00D351BC /* CategoriesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0E72C05EBFB00D351BC /* CategoriesSection.swift */; };
 		2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EB2C06000A00D351BC /* Set+Extensions.swift */; };
-		2819A0F02C0607E400D351BC /* FormSectionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EF2C0607E400D351BC /* FormSectionList.swift */; };
+		2819A0F02C0607E400D351BC /* FormSectionListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */; };
 		2819A0F42C06136500D351BC /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F32C06136500D351BC /* TagView.swift */; };
 		2819A0F62C061C9F00D351BC /* ListEmbeddedForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */; };
 		281C28C82BDC99C600DBEE4B /* SettingsAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 281C28C72BDC99C600DBEE4B /* SettingsAccess */; };
@@ -113,7 +113,7 @@
 		2807BFD52C02ACFE00D65DE3 /* NavigationEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEntry.swift; sourceTree = "<group>"; };
 		2819A0E72C05EBFB00D351BC /* CategoriesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSection.swift; sourceTree = "<group>"; };
 		2819A0EB2C06000A00D351BC /* Set+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Extensions.swift"; sourceTree = "<group>"; };
-		2819A0EF2C0607E400D351BC /* FormSectionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionList.swift; sourceTree = "<group>"; };
+		2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionListContainer.swift; sourceTree = "<group>"; };
 		2819A0F32C06136500D351BC /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		2819A0F52C061C9F00D351BC /* ListEmbeddedForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEmbeddedForm.swift; sourceTree = "<group>"; };
 		281C28CC2BDC9A1A00DBEE4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -471,7 +471,7 @@
 			children = (
 				285FADBE2BF98335005AE202 /* PreferredColorSchemePicker.swift */,
 				285FADBC2BF97A69005AE202 /* ColoredPickerRow.swift */,
-				2819A0EF2C0607E400D351BC /* FormSectionList.swift */,
+				2819A0EF2C0607E400D351BC /* FormSectionListContainer.swift */,
 				28C2C5A72BF0DB8300E9D9AA /* General */,
 				28C2C5A82BF0DB8C00E9D9AA /* Customization */,
 				28227F612BF248CF008FAC3A /* Clipboard */,
@@ -715,7 +715,7 @@
 				28E6E9062BFE16620068B449 /* BeginningCustomizationPage.swift in Sources */,
 				2819A0EC2C06000A00D351BC /* Set+Extensions.swift in Sources */,
 				28E6E9042BFE16570068B449 /* BeginningTutorialPage.swift in Sources */,
-				2819A0F02C0607E400D351BC /* FormSectionList.swift in Sources */,
+				2819A0F02C0607E400D351BC /* FormSectionListContainer.swift in Sources */,
 				28C102342C020C5D003F5722 /* Logger.swift in Sources */,
 				28C2C5A22BF0D85D00E9D9AA /* InstalledApp.swift in Sources */,
 				281C28D02BDC9A9000DBEE4B /* MenuBarIconView.swift in Sources */,

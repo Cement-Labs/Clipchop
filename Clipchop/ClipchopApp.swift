@@ -41,7 +41,7 @@ struct ClipchopApp: App {
         Defaults[.fileTypes] = Defaults.Keys.fileTypes.defaultValue
         
         Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
-        Defaults[.applicationExcludeList] = Defaults.Keys.applicationExcludeList.defaultValue
+        Defaults[.excludedApplications] = Defaults.Keys.excludedApplications.defaultValue
         
         // Resets clipboard history
         container.mainContext.autosaveEnabled = true

@@ -11,7 +11,13 @@ import Defaults
 struct InstalledAppsMenu: View {
     @EnvironmentObject private var apps: InstalledApps
     
-    @Default(.applicationExcludeList) private var excluded
+    @Default(.excludedApplications) private var excluded
+    
+    var entry: String?
+    
+    init(entry: String? = nil) {
+        self.entry = entry
+    }
     
     var body: some View {
         let availableApps = (apps.installedApps + apps.systemApps)
@@ -28,7 +34,14 @@ struct InstalledAppsMenu: View {
                 
                 ForEach(containedApps) { app in
                     Button {
-                        excluded.append(app.bundleID)
+                        if 
+                            let entry,
+                            let destination = excluded.firstIndex(of: entry)
+                        {
+                            excluded.insert(app.bundleID, at: excluded.index(after: destination))
+                        } else {
+                            excluded.append(app.bundleID)
+                        }
                     } label: {
                         Image(nsImage: app.icon.resized(to: .init(width: 16, height: 16)))
                         Text(app.displayName)

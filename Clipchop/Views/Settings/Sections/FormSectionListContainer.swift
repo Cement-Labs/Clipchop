@@ -1,5 +1,5 @@
 //
-//  FormSectionList.swift
+//  FormSectionListContainer.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/28.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SFSafeSymbols
 
-struct FormSectionList<Content, Footer>: View where Content: View, Footer: View {
+struct FormSectionListContainer<Content, Footer>: View where Content: View, Footer: View {
     @ViewBuilder var content: () -> Content
     @ViewBuilder var footer: () -> Footer
     
@@ -32,18 +32,20 @@ struct FormSectionList<Content, Footer>: View where Content: View, Footer: View 
         VStack(spacing: 0) {
             content()
             
-            Divider()
-            
-            Rectangle()
-                .frame(height: 24)
-                .foregroundStyle(.quinary)
-                .overlay {
-                    HStack(spacing: 2) {
-                        footer()
+            if Footer.self != EmptyView.self {
+                Divider()
+                
+                Rectangle()
+                    .frame(height: 24)
+                    .foregroundStyle(.quinary)
+                    .overlay {
+                        HStack(spacing: 2) {
+                            footer()
+                        }
+                        .frame(height: 20)
+                        .padding(2)
                     }
-                    .frame(height: 20)
-                    .padding(2)
-                }
+            }
         }
         .ignoresSafeArea()
         .padding(-10)

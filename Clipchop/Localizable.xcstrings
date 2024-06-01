@@ -224,9 +224,6 @@
     "Acknowledgements" : {
 
     },
-    "Allow app excluding" : {
-
-    },
     "App Development Time" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -237,6 +234,9 @@
           }
         }
       }
+    },
+    "App excluding" : {
+
     },
     "App icon" : {
 
@@ -486,6 +486,9 @@
     "Image" : {
 
     },
+    "Insert" : {
+
+    },
     "Keyboard Shortcuts" : {
 
     },
@@ -567,7 +570,7 @@
     "Refresh States (Debug)" : {
 
     },
-    "Remove" : {
+    "Reset Categories" : {
 
     },
     "Restore" : {
