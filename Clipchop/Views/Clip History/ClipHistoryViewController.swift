@@ -61,24 +61,12 @@ extension ClipHistoryViewController {
     // MARK: - Shortcuts
     
     func initShortcuts() {
-        KeyboardShortcuts.onKeyDown(for: .escape, action: self.close)
-        KeyboardShortcuts.onKeyDown(for: .settings, action: NSApp.openSettings)
-        KeyboardShortcuts.onKeyDown(for: .expand, action: self.expand)
-        KeyboardShortcuts.onKeyDown(for: .collapse, action: self.collapse)
     }
     
     func enableShortcuts() {
-        KeyboardShortcuts.enable(.escape)
-        KeyboardShortcuts.enable(.settings)
-        KeyboardShortcuts.enable(.expand)
-        KeyboardShortcuts.enable(.collapse)
     }
     
     func disableShortcuts() {
-        KeyboardShortcuts.disable(.escape)
-        KeyboardShortcuts.disable(.settings)
-        KeyboardShortcuts.disable(.expand)
-        KeyboardShortcuts.disable(.collapse)
     }
 }
 

@@ -194,7 +194,7 @@ class ClipboardMonitor: NSObject {
         }
 
         if Defaults[.paste] {
-            ClipHistoryPanel.shared.pasteClose()
+            ClipHistoryPanel.shared.closeManually()
             pasteToActiveApplication()
         }
     }

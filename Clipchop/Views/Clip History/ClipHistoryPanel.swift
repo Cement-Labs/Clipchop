@@ -13,8 +13,8 @@ class ClipHistoryPanel: NSPanel {
     static let shared = ClipHistoryPanel()
     
     private var isExpanded = false
-    private var expansionEdge: NSRectEdge = .minY
     private var isClosing = false
+    private var expansionEdge: NSRectEdge = .minY
     
     init() {
         super.init(
@@ -38,8 +38,6 @@ class ClipHistoryPanel: NSPanel {
             .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
         
         contentView = NSHostingView(rootView: clipHistoryView)
-        
-        initShortcuts()
     }
         
     override func resignMain() {
@@ -55,8 +53,8 @@ class ClipHistoryPanel: NSPanel {
     override func close() {
         super.close()
         isClosing = false
-        disableShortcuts()
-        log(self, "Clipboard close")
+        
+        log(self, "Closed")
     }
     
     override var canBecomeKey: Bool {
@@ -70,41 +68,32 @@ class ClipHistoryPanel: NSPanel {
     // MARK: - Shortcuts
     
     override func keyDown(with event: NSEvent) {
-        if event.keyCode == KeyboardShortcuts. {
+        switch KeyboardShortcuts.Shortcut(event: event) {
+        case KeyboardShortcuts.Key.escape.shortcut:
             close()
-        } else {
+        case KeyboardShortcuts.Name.expand.shortcut:
+            expand()
+        case KeyboardShortcuts.Name.collapse.shortcut:
+            collapse()
+        default:
             super.keyDown(with: event)
         }
-    }
-    
-    func initShortcuts() {
-        KeyboardShortcuts.onKeyDown(for: .expand, action: expand)
-        KeyboardShortcuts.onKeyDown(for: .collapse, action: collapse)
-    }
-    
-    func enableShortcuts() {
-        KeyboardShortcuts.enable(.expand)
-        KeyboardShortcuts.enable(.collapse)
-    }
-    
-    func disableShortcuts() {
-        KeyboardShortcuts.disable(.expand)
-        KeyboardShortcuts.disable(.collapse)
     }
     
     // MARK: - Expand / Collapse
     
     func expand() {
-        setWindowSize(isExpanded: true)
+        setExpansion(true)
+        log(self, "Expanded")
     }
     
     func collapse() {
-        setWindowSize(isExpanded: false)
+        setExpansion(false)
+        log(self, "Collapsed")
     }
     
-    func setWindowSize(isExpanded: Bool, animate: Bool = true) {
+    func setExpansion(_ isExpanded: Bool, animate: Bool = true) {
         guard self.isExpanded != isExpanded else { return }
-        let frame = self.frame
         let targetSize = isExpanded ? CGSize(width: 500, height: 360) : CGSize(width: 500, height: 100)
         
         let edge: NSRectEdge
@@ -113,20 +102,32 @@ class ClipHistoryPanel: NSPanel {
                 position: frame.origin.applying(.init(translationX: 0, y: 100)),
                 size: targetSize
             )
+            
             expansionEdge = edge
         } else {
             edge = expansionEdge
         }
         
-        switch edge {
-        case .maxY:
-            self.setFrame(.init(origin: frame.origin, size: targetSize), display: true, animate: animate)
-        case .minY:
-            self.setFrame(.init(origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height), size: targetSize), display: true, animate: animate)
-        default: break
+        DispatchQueue.main.async {
+            switch edge {
+            case .maxY:
+                self.setFrame(
+                    .init(origin: self.frame.origin, size: targetSize),
+                    display: true, animate: animate
+                )
+            case .minY:
+                self.setFrame(
+                    .init(origin: .init(
+                        x: self.frame.origin.x,
+                        y: self.frame.origin.y + self.frame.size.height - targetSize.height
+                    ), size: targetSize),
+                    display: true, animate: animate
+                )
+            default: break
+            }
+            
+            self.isExpanded = isExpanded
         }
-        
-        self.isExpanded = isExpanded
     }
     
     // MARK: - Positioning
@@ -164,11 +165,9 @@ class ClipHistoryPanel: NSPanel {
     // MARK: - Open / Close
     
     func open(position: CGPoint) {
-        isClosing = true
         setFrameOrigin(positionNear(position: position, size: CGSize(width: 500, height: 100))
             .applying(.init(translationX: 0, y: -100)))
         makeKeyAndOrderFront(nil)
-        enableShortcuts()
     }
     
     func toggle(position: CGPoint) {
@@ -179,9 +178,10 @@ class ClipHistoryPanel: NSPanel {
         }
     }
     
-    func pasteClose() {
+    func closeManually() {
         guard !isClosing else { return }
         isClosing = true
+        
         makeMain()
         close()
     }
