@@ -29,28 +29,35 @@ struct CategoriesSection: View {
                                 
                                 Spacer()
                                 
-                                ScrollView(.horizontal) {
-                                    HStack {
-                                        ForEach(type.categories.sorted()) { category in
-                                            TagView(style: .quinary) {
-                                                Text(category.name)
-                                                    .foregroundStyle(.secondary)
-                                            }
-                                        }
-                                    }
-                                }
-                                .aspectRatio(contentMode: .fit)
-                                .defaultScrollAnchor(.trailing)
-                                .background(.red)
+                                /*
+                                 ScrollView(.horizontal) {
+                                 HStack {
+                                 ForEach(type.categories.sorted()) { category in
+                                 TagView(style: .quinary) {
+                                 Text(category.name)
+                                 .foregroundStyle(.secondary)
+                                 }
+                                 }
+                                 }
+                                 }
+                                 .aspectRatio(contentMode: .fit)
+                                 .defaultScrollAnchor(.trailing)
+                                 .background(.red)
+                                 */
                                 
                                 Image(systemSymbol: .chevronForward)
-                                    .foregroundStyle(.secondary)
+                                    .foregroundStyle(.placeholder)
                             }
                         }
                         .padding(4)
                         .buttonStyle(.borderless)
                     }
+                    .onDelete { indexSet in
+                        
+                    }
                 }
+                .listStyle(.bordered)
+                .alternatingRowBackgrounds()
             }
         }
     }

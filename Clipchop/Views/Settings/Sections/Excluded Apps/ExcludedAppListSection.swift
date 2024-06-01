@@ -98,11 +98,11 @@ struct ExcludedAppListSection: View {
                             // Requires a non-transparent background to expand the hit testing area
                             .background(.placeholder.opacity(0.0001))
                         }
-                        .onMove { indices, destination in
-                            excluded.move(fromOffsets: indices, toOffset: destination)
+                        .onMove { indexSet, destination in
+                            excluded.move(fromOffsets: indexSet, toOffset: destination)
                         }
-                        .onDelete { offsets in
-                            excluded.remove(atOffsets: offsets)
+                        .onDelete { indexSet in
+                            excluded.remove(atOffsets: indexSet)
                         }
                     }
                     .listStyle(.bordered)

@@ -95,19 +95,19 @@ struct FileType: Codable, Defaults.Serializable {
         static let archive =        FileType.Category(name: .init(localized: "Archive"))
         static let sourceCodeFile = FileType.Category(name: .init(localized: "Source Code File"))
         
-        var fileTypes: Set<FileType> {
+        var fileTypes: [FileType] {
             Defaults[.fileTypes]
                 .filter { $0.categories.contains(self) }
         }
         
-        var fileExts: Set<String> {
+        var fileExts: [String] {
             get {
                 .init(fileTypes.map({ $0.ext }))
             }
             
             set {
-                let deletion = fileExts.subtracting(newValue)
-                let addition = newValue.subtracting(fileExts)
+                let deletion = fileExts.filter { !newValue.contains($0) }
+                let addition = newValue.filter { !fileExts.contains($0) }
                 
                 guard deletion != addition else {
                     // No modifications
@@ -118,7 +118,7 @@ struct FileType: Codable, Defaults.Serializable {
                     Defaults[.fileTypes]
                         .updateEach { type in
                             guard type.ext == ext else { return }
-                            type.categories.remove(self)
+                            type.categories.removeAll { $0 == self }
                         }
                 }
                 
@@ -126,7 +126,7 @@ struct FileType: Codable, Defaults.Serializable {
                     Defaults[.fileTypes]
                         .updateEach { type in
                             guard type.ext == ext else { return }
-                            type.categories.insert(self)
+                            type.categories.append(self)
                         }
                 }
             }
@@ -134,11 +134,11 @@ struct FileType: Codable, Defaults.Serializable {
     }
     
     var ext: String
-    var categories: Set<Category> = .init()
+    var categories: [Category] = []
     
     init(ext input: String, categories: [Category] = []) {
         self.ext = Self.trim(input: input)
-        self.categories = .init(categories)
+        self.categories = categories
     }
     
     static func trim(input: String) -> String {

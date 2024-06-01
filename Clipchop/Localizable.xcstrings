@@ -366,7 +366,7 @@
     "Clipboard" : {
 
     },
-    "Clipboard Global" : {
+    "Clipboard Behaviors" : {
 
     },
     "Clipboard History Recording" : {
@@ -740,7 +740,7 @@
     "Welcome to %@" : {
 
     },
-    "When enabled, will automatically paste into the focused application." : {
+    "When enabled, will automatically paste into the frontmost application." : {
 
     },
     "You can always open %@ again to access this page." : {
