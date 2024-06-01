@@ -13,7 +13,7 @@ struct ClipboardSettingsPage: View {
             KeyboardShortcutsSection()
                 .controlSize(.large)
             
-            ClipboardHistorySection()
+            ClipboardBehaviorsSection()
         }
     }
 }

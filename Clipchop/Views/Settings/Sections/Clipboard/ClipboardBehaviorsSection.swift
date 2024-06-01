@@ -1,5 +1,5 @@
 //
-//  ClipboardHistorySection.swift
+//  ClipboardBehaviorsSection.swift
 //  Clipchop
 //
 //  Created by KrLite on 2024/5/13.
@@ -9,7 +9,7 @@ import SwiftUI
 import SFSafeSymbols
 import Defaults
 
-struct ClipboardHistorySection: View {
+struct ClipboardBehaviorsSection: View {
     @Default(.historyPreservationPeriod) private var historyPreservationPeriod
     @Default(.historyPreservationTime) private var historyPreservationTime
     @Default(.timerInterval) private var timerInterval
@@ -26,7 +26,7 @@ struct ClipboardHistorySection: View {
     var body: some View {
         Section {
             withCaption("When enabled, will automatically paste into the frontmost application.") {
-                Toggle("Paste to Active Application", isOn: $paste)
+                Toggle("Paste to active application", isOn: $paste)
             }
         } header: {
             if hasTitle {
@@ -142,6 +142,6 @@ struct ClipboardHistorySection: View {
 
 #Preview {
     previewSection {
-        ClipboardHistorySection()
+        ClipboardBehaviorsSection()
     }
 }

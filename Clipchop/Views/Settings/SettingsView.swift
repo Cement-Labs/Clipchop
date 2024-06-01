@@ -15,8 +15,8 @@ struct SettingsView: View {
         case general
         case customization
         case clipboard
-        case categories
-        case excludedApps
+        case categorization
+        case appExcluding
         case syncing
         case about
         
@@ -46,15 +46,15 @@ struct SettingsView: View {
                 }
                 .tag(Navigation.clipboard)
                 
-                NavigationEntry("Categories") {
+                NavigationEntry("Categorization") {
                     Image(systemSymbol: .tray2)
                 }
-                .tag(Navigation.categories)
+                .tag(Navigation.categorization)
                 
-                NavigationEntry("Excluded Apps") {
+                NavigationEntry("App Excluding") {
                     Image(systemSymbol: .xmarkSeal)
                 }
-                .tag(Navigation.excludedApps)
+                .tag(Navigation.appExcluding)
                 
                 NavigationEntry("Syncing") {
                     Image(systemSymbol: .checkmarkIcloud)
@@ -88,10 +88,10 @@ struct SettingsView: View {
                 case .clipboard:
                     ClipboardSettingsPage()
                     
-                case .categories:
-                    CategoriesPage()
+                case .categorization:
+                    CategorizationPage()
                 
-                case .excludedApps:
+                case .appExcluding:
                     ExcludedAppsSettingsPage()
                         .environmentObject(apps)
                 

@@ -1,5 +1,5 @@
 //
-//  CategoriesPage.swift
+//  CategorizationPage.swift
 //  Clipchop
 //
 //  Created by Xinshao_Air on 2024/5/26.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 import Defaults
-import SFSafeSymbols
-import UniformTypeIdentifiers
 
-struct CategoriesPage: View {
+struct CategorizationPage: View {
+    @Default(.categories) var categories
+    
     var body: some View {
         ListEmbeddedForm {
             Section {
@@ -22,6 +22,7 @@ struct CategoriesPage: View {
                         }
                     } label: {
                         Text("Categories")
+                            .badge(categories.count)
                     }
                 }
             }
