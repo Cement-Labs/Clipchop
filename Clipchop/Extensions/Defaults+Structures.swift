@@ -8,6 +8,11 @@
 import SwiftUI
 import Defaults
 
+enum Chosen<Element>: Equatable where Element: Equatable {
+    case yes(Element)
+    case no
+}
+
 // MARK: - Preferred Color Scheme
 
 enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable {

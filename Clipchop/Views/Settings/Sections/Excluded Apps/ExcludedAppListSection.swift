@@ -52,11 +52,11 @@ struct ExcludedAppListSection: View {
                     .padding()
                 } else {
                     List(selection: $selection) {
-                        ForEach($excluded, id: \.self) { entry in
+                        ForEach(excluded, id: \.self) { entry in
                             HStack {
                                 Group {
                                     if let app = (apps.installedApps + apps.systemApps).first(where: {
-                                        $0.bundleID == entry.wrappedValue
+                                        $0.bundleID == entry
                                     }) {
                                         HStack {
                                             Image(nsImage: app.icon)
@@ -68,19 +68,19 @@ struct ExcludedAppListSection: View {
                                                 .padding(.leading, 2)
                                         }
                                     } else {
-                                        Text(entry.wrappedValue)
+                                        Text(entry)
                                             .padding(.leading, 20 + 2)
                                             .monospaced()
                                     }
                                 }
                                 .padding(.vertical, 5)
-                                .tag(entry.wrappedValue)
+                                .tag(entry)
                                 
                                 Spacer()
                             }
                             .contextMenu {
                                 Menu("Insert") {
-                                    InstalledAppsMenu(entry: entry.wrappedValue)
+                                    InstalledAppsMenu(entry: entry)
                                         .environmentObject(apps)
                                 }
                                 

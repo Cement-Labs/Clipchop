@@ -56,7 +56,7 @@ struct FileTypeListSection: View {
                                 Button("Insert") {
                                     
                                 }
-                                .tint(.accent)
+                                .tint(.accentColor)
                             }
                         }
                         .onMove { indexSet, destination in
