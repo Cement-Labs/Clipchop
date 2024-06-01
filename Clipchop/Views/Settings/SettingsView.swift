@@ -73,7 +73,7 @@ struct SettingsView: View {
                 .tag(Navigation.test)
 #endif
             }
-            .frame(minWidth: 200)
+            .frame(width: 200) // `navigationSplitColumnWidth` doesn't work
             .toolbar(removing: .sidebarToggle)
         } detail: {
             Group {
@@ -105,7 +105,7 @@ struct SettingsView: View {
                     TestSettingsPage()
                 }
             }
-            .navigationSplitViewColumnWidth(min: 550, ideal: 550, max: 550)
+            .navigationSplitViewColumnWidth(min: 550, ideal: 550)
 
             .toolbar {
                 ToolbarItemGroup {
