@@ -10,9 +10,65 @@ import UniformTypeIdentifiers
 
 // Originally by https://stackoverflow.com/a/65453108/23452915
 struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
+    enum Direction {
+        case leading
+        case trailing
+        
+        func originalWidth(in geometry: GeometryProxy) -> CGFloat {
+            switch self {
+            case .leading: .zero
+            case .trailing: -geometry.size.width
+            }
+        }
+        
+        func horizontalAlignmentGuide(
+            width: inout CGFloat,
+            height: inout CGFloat,
+            spacing: CGFloat,
+            lineSpacing: CGFloat,
+            in geometry: GeometryProxy,
+            isLast: Bool,
+            dimensions: ViewDimensions
+        ) -> CGFloat {
+            switch self {
+            case .leading:
+                if width - dimensions.width < -geometry.size.width {
+                    width = originalWidth(in: geometry)
+                    height -= (dimensions.height + lineSpacing)
+                }
+                
+                let result = width
+                if isLast {
+                    // The last item
+                    width = originalWidth(in: geometry)
+                } else {
+                    width -= (dimensions.width + spacing)
+                }
+                
+                return result
+            case .trailing:
+                if width + dimensions.width > 0 {
+                    width = originalWidth(in: geometry)
+                    height -= (dimensions.height + lineSpacing)
+                }
+                
+                let result = width + dimensions.width
+                if isLast {
+                    // The last item
+                    width = originalWidth(in: geometry)
+                } else {
+                    width += (dimensions.width + spacing)
+                }
+                
+                return result
+            }
+        }
+    }
+    
     typealias ViewGenerator = (Model) -> V
     
     var models: [Model]
+    var direction: Direction = .leading
     var spacing: CGFloat = 8
     var lineSpacing: CGFloat = 8
     var viewGenerator: ViewGenerator
@@ -30,38 +86,35 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     
     @ViewBuilder
     private func generateContent(in geometry: GeometryProxy) -> some View {
-        var width: CGFloat = .zero
+        var width: CGFloat = direction.originalWidth(in: geometry)
         var height: CGFloat = .zero
         
-        ZStack(alignment: .topLeading) {
-            ForEach(models.indices, id: \.self) { index in
-                let model = models[index]
-                viewGenerator(model)
-                    .alignmentGuide(.leading) { dimensions in
-                        if abs(width - dimensions.width) > geometry.size.width {
-                            width = 0
-                            height -= (dimensions.height + lineSpacing)
+        HStack(spacing: 0) {
+            Spacer()
+            
+            ZStack(alignment: .topLeading) {
+                ForEach(models.indices, id: \.self) { index in
+                    let model = models[index]
+                    viewGenerator(model)
+                        .alignmentGuide(.leading) { dimensions in
+                            direction.horizontalAlignmentGuide(
+                                width: &width, height: &height,
+                                spacing: spacing, lineSpacing: lineSpacing,
+                                in: geometry, 
+                                isLast: model == models.last,
+                                dimensions: dimensions
+                            )
                         }
-                        
-                        let result = width
-                        if model == models.last {
-                            // The last item
-                            width = 0
-                        } else {
-                            width -= (dimensions.width + spacing)
+                        .alignmentGuide(.top) { dimensions in
+                            let result = height
+                            if model == models.last {
+                                // The last item
+                                height = 0
+                            }
+                            
+                            return result
                         }
-                        
-                        return result
-                    }
-                    .alignmentGuide(.top) { dimensions in
-                        let result = height
-                        if model == models.last {
-                            // The last item
-                            height = 0
-                        }
-                        
-                        return result
-                    }
+                }
             }
         }
         .background {

@@ -28,13 +28,14 @@ struct FileTypeListSection: View {
                                 .navigationTitle(type.ext.uppercased())
                                 .navigationSplitViewCollapsingDisabled()
                             } label: {
-                                FormNavigationLinkLabel(hasSpacer: false) {
+                                FormNavigationLinkLabel(hasSpacer: false, alignment: .top) {
                                     Text(type.ext)
                                         .monospaced()
+                                        .padding(.vertical, 4)
                                     
                                     Spacer()
                                     
-                                    WrappingHStack(models: type.categories) { category in
+                                    WrappingHStack(models: type.categories, direction: .trailing) { category in
                                         TagView(style: .quinary) {
                                             Text(category.name)
                                                 .foregroundStyle(.secondary)
