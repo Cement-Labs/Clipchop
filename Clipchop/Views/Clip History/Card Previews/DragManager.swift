@@ -19,7 +19,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     case
         UTType.plainText.identifier, UTType.text.identifier, UTType.utf8PlainText.identifier, UTType.utf16PlainText.identifier,
         UTType.emailMessage.identifier,
-        UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.html.identifier, UTType.url.identifier:
+        UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.url.identifier:
         
         guard 
             let string = String(data: data as! Data, encoding: .utf8),
@@ -30,6 +30,26 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         }
         
         return NSItemProvider(item: nsData as NSSecureCoding, typeIdentifier: content.type)
+        
+    case 
+        UTType.html.identifier:
+        
+            guard let data = data as? Data else {
+                log("Data is not of type Data.")
+                return nil
+            }
+            
+            guard let htmlString = String(data: data, encoding: .utf8) else {
+                log("Failed to convert HTML data to string with UTF-8 encoding.")
+                return nil
+            }
+            
+            guard let htmlData = htmlString.data(using: .utf8) else {
+                log("Failed to convert HTML string back to data with UTF-8 encoding.")
+                return nil
+            }
+            
+            return NSItemProvider(item: htmlData as NSSecureCoding, typeIdentifier: UTType.html.identifier)
     
     case
         UTType.fileURL.identifier,UTType.folder.identifier, UTType.package.identifier, UTType.zip.identifier,

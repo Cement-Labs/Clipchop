@@ -109,7 +109,7 @@ extension ClipHistoryViewController {
         guard let panel else {
             // Initialize
             panel = .init(self)
-            
+            setExpansion(false)
             open(position: position)
             return
         }

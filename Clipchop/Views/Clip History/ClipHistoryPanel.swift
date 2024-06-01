@@ -43,11 +43,6 @@ class ClipHistoryPanel: NSPanel {
         close()
     }
     
-    override func resignKey() {
-        super.resignKey()
-        close()
-    }
-    
     override func close() {
         controller.close()
         log(self, "Closed")

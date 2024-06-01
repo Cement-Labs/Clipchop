@@ -30,6 +30,8 @@ struct PreviewContentView: View {
                 rtfView(for: rtfData)
             } else if let text = clipboardHistory.formatter.text {
                 textView(for: text)
+            } else if let url = clipboardHistory.formatter.url {
+                urlPreviewView(for: url)
             } else {
                 defaultView()
             }
@@ -111,6 +113,15 @@ struct PreviewContentView: View {
                 .frame(width: 70, height: 70)
             )
         }
+    }
+    
+    private func urlPreviewView(for url: URL) -> some View {
+        VStack {
+            WebLinkPreviewPage(urlString: url.absoluteString)
+                .scaleEffect(0.625)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .offset(y: -14)
     }
     
     private func defaultView() -> some View {

@@ -81,6 +81,12 @@ extension Formatter {
         else { return nil }
         return .init(data: data, encoding: .utf8)
     }
+    
+    var url: URL? {
+        guard let data = contentData(ClipboardHistory.Class.url.types)
+        else { return nil }
+        return URL(dataRepresentation: data, relativeTo: nil, isAbsolute: true)
+    }
 }
 
 extension Formatter {
@@ -105,7 +111,7 @@ extension Formatter {
             // Plain text
             var type = String(localized: "Type: Text", defaultValue: "Text")
             
-            if text.hasPrefix("http://") || text.hasPrefix("https://") {
+            if let url = NSURL(string: text), url.scheme != nil {
                 // Link
                 type = String(localized: "Type: Link", defaultValue: "Link")
             } else if let _ = NSColor(hexString: text) {
@@ -118,6 +124,18 @@ extension Formatter {
                 result = type
             } else {
                 // Append special type
+                result = String(
+                    format: .init(localized: "Type: Combined", defaultValue: "%1$@ (%2$@)"),
+                    result!, type
+                )
+            }
+        }
+        
+        if url != nil {
+            let type = String(localized: "Type: Link", defaultValue: "Link")
+            if result == nil {
+                result = type
+            } else {
                 result = String(
                     format: .init(localized: "Type: Combined", defaultValue: "%1$@ (%2$@)"),
                     result!, type
@@ -155,6 +173,6 @@ extension Formatter {
         }
         
         Defaults[.allTypes] = Array(allTypes)
-         */
+        */
     }
 }

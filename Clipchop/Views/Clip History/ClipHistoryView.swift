@@ -37,15 +37,18 @@ struct ClipHistoryView: View {
                         }
                         .foregroundStyle(.blendMode(.overlay))
                     } else {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 12) {
-                                ForEach(items) { items in
-                                    CardPreviewView(item: items)
-                                        .environment(\.modelContext, context)
+                        ZStack(alignment: .topLeading){
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 12) {
+                                    ForEach(items) { items in
+                                        CardPreviewView(item: items)
+                                            .environment(\.modelContext, context)
+                                    }
                                 }
+                                .offset(x: 12)
                             }
-                            .offset(x: 12)
                         }
+                        
                     }
                 }
             }
