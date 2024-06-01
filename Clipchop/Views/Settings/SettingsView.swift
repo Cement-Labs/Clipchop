@@ -118,11 +118,7 @@ struct SettingsView: View {
                     .controlSize(.extraLarge)
                 }
             }
-            
-            // Completely prevents the sidebar from collapsing
-            .introspect(.navigationSplitView, on: .macOS(.v14), scope: .ancestor) { splitView in
-                (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
-            }
+            .navigationSplitViewCollapsingDisabled()
             .navigationTitle(Bundle.main.appName)
             .navigationSplitViewStyle(.prominentDetail)
             .background(WindowAccessor())

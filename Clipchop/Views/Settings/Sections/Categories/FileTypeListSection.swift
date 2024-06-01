@@ -27,6 +27,7 @@ struct FileTypeListSection: View {
                                     }
                                 }
                                 .navigationTitle(type.ext.uppercased())
+                                .navigationSplitViewCollapsingDisabled()
                             } label: {
                                 FormNavigationLinkLabel {
                                     Text(type.ext)

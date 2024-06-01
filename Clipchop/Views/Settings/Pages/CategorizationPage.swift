@@ -20,6 +20,7 @@ struct CategorizationPage: View {
                             CategoryListSection()
                                 .navigationTitle("Categories")
                         }
+                        .navigationSplitViewCollapsingDisabled()
                     } label: {
                         Text("Categories")
                             .badge(categories.count)

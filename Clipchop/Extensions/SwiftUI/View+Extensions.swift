@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIIntrospect
 
 extension View {
     func or(_ condition: Bool, _ another: () -> Self) -> Self {
@@ -68,6 +69,14 @@ extension View {
             center.publisher(for: name, object: object),
             perform: action
         )
+    }
+    
+    @ViewBuilder
+    func navigationSplitViewCollapsingDisabled() -> some View {
+        // Completely prevents the sidebar from collapsing
+        self.introspect(.navigationSplitView, on: .macOS(.v14), scope: .ancestor) { splitView in
+            (splitView.delegate as? NSSplitViewController)?.splitViewItems.forEach { $0.canCollapse = false }
+        }
     }
 }
 
