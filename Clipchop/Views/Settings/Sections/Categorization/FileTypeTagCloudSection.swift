@@ -57,6 +57,9 @@ struct FileTypeTagCloudSection: View {
                                         .monospaced()
                                         .foregroundStyle(.secondary)
                                 }
+                                .onDrag {
+                                    .init(object: type.ext as NSString)
+                                }
                             }
                         }
                         .padding(.vertical, 4)
