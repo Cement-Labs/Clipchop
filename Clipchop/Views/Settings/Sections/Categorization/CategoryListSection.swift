@@ -10,12 +10,15 @@ import Defaults
 import Fuse
 
 struct CategoryListSection: View {
+    @Default(.fileTypes) private var fileTypes
     @Default(.categories) private var categories
     
+    @Binding var searchQuery: String
+    
     @State private var chosenInsertionPopoverElement: Chosen<FileType.Category?> = .no
-    @State private var searchQuery: String = ""
     
     @Environment(\.hasTitle) var hasTitle
+    @Environment(\.isSearchable) var isSearchable
     
     private let fuse = Fuse()
     
@@ -25,10 +28,15 @@ struct CategoryListSection: View {
     
     private var filteredCategories: [FileType.Category] {
         if isSearching {
-            fuse.search(searchQuery, in: categories.map({ $0.name }))
+            let nameIndexed = fuse.search(searchQuery, in: categories.map({ $0.name }))
                 .map { categories[$0.index] }
+            let contentIndexed = fuse.search(searchQuery, in: fileTypes.map({ $0.ext }))
+                .flatMap { fileTypes[$0.index].categories }
+                .uniqued()
+            
+            return nameIndexed + contentIndexed
         } else {
-            categories
+            return categories
         }
     }
     
@@ -103,7 +111,9 @@ struct CategoryListSection: View {
                     }
                     .listStyle(.bordered)
                     .alternatingRowBackgrounds()
-                    .searchable(text: $searchQuery)
+                    .if(isSearchable) { view in
+                        view.searchable(text: $searchQuery)
+                    }
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .primaryAction) {

@@ -12,8 +12,11 @@ import Fuse
 struct FileTypeListSection: View {
     @Default(.fileTypes) private var fileTypes
     
+    @Binding var searchQuery: String
+    
     @State private var chosenInsertionPopoverElement: Chosen<FileType?> = .no
-    @State private var searchQuery: String = ""
+    
+    @Environment(\.isSearchable) private var isSearchable
     
     private let fuse = Fuse()
     
@@ -97,10 +100,12 @@ struct FileTypeListSection: View {
                     }
                     .listStyle(.bordered)
                     .alternatingRowBackgrounds()
-                    .searchable(text: $searchQuery)
+                    .if(isSearchable) { view in
+                        view.searchable(text: $searchQuery)
+                    }
                 }
                 .toolbar {
-                    ToolbarItemGroup(placement: .primaryAction) {
+                    ToolbarItemGroup(placement: .cancellationAction) {
                         Button {
                             chosenInsertionPopoverElement = .yes(nil)
                         } label: {

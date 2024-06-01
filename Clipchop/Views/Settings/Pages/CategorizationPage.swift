@@ -9,26 +9,48 @@ import SwiftUI
 import Defaults
 
 struct CategorizationPage: View {
-    @Default(.fileTypes) var fileTypes
+    @Default(.fileTypes) private var fileTypes
+    
+    @State private var searchQuery: String = ""
     
     var body: some View {
-        ListEmbeddedForm {
-            Section {
-                NavigationStack {
-                    NavigationLink {
-                        ListEmbeddedForm {
-                            FileTypeListSection()
-                                .navigationTitle("File Types")
+        GeometryReader { geometry in
+            if geometry.size.width <= 820 {
+                // Compact layout
+                ListEmbeddedForm {
+                    Section {
+                        NavigationStack {
+                            NavigationLink {
+                                ListEmbeddedForm {
+                                    FileTypeListSection(searchQuery: $searchQuery)
+                                        .navigationTitle("File Types")
+                                }
+                                .navigationSplitViewCollapsingDisabled()
+                            } label: {
+                                Text("File Types")
+                                    .badge(fileTypes.count)
+                            }
                         }
-                        .navigationSplitViewCollapsingDisabled()
-                    } label: {
-                        Text("File Types")
-                            .badge(fileTypes.count)
                     }
+                    
+                    CategoryListSection(searchQuery: $searchQuery)
+                }
+            } else {
+                // Wide layout
+                HSplitView {
+                    ListEmbeddedForm {
+                        CategoryListSection(searchQuery: $searchQuery)
+                            .environment(\.hasTitle, false)
+                            .environment(\.isSearchable, false)
+                    }
+                    .frame(minWidth: 370, idealWidth: 370)
+                    
+                    ListEmbeddedForm {
+                        FileTypeListSection(searchQuery: $searchQuery)
+                    }
+                    .frame(minWidth: 420)
                 }
             }
-            
-            CategoryListSection()
         }
     }
 }

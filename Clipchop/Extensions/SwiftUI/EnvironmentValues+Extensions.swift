@@ -13,6 +13,11 @@ extension EnvironmentValues {
         set { self[HasTitleEnvironmentKey.self] = newValue }
     }
     
+    var isSearchable: Bool {
+        get { self[IsSearchableEnvironmentKey.self] }
+        set { self[IsSearchableEnvironmentKey.self] = newValue }
+    }
+    
     var canContinue: (Bool) -> Void {
         get { self[CanContinueEnvironmentKey.self] }
         set { self[CanContinueEnvironmentKey.self] = newValue }
@@ -35,6 +40,10 @@ extension EnvironmentValues {
 }
 
 struct HasTitleEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Bool = true
+}
+
+struct IsSearchableEnvironmentKey: EnvironmentKey {
     static var defaultValue: Bool = true
 }
 
