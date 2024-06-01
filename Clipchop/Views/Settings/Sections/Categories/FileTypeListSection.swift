@@ -67,10 +67,7 @@ struct FileTypeListSection: View {
                             } set: { _ in
                                 chosenInsertionPopoverElement = .no
                             }) {
-                                NewElementPopover("file extension") { ext in
-                                    chosenInsertionPopoverElement = .no
-                                }
-                                .monospaced()
+                                newElementPopover(type: type)
                             }
                         }
                         .onMove { indexSet, destination in
@@ -95,10 +92,7 @@ struct FileTypeListSection: View {
                         } set: { _ in
                             chosenInsertionPopoverElement = .no
                         }) {
-                            NewElementPopover("file extension") { ext in
-                                chosenInsertionPopoverElement = .no
-                            }
-                            .monospaced()
+                            newElementPopover()
                         }
                     }
                 }
@@ -106,8 +100,30 @@ struct FileTypeListSection: View {
         }
     }
     
+    @ViewBuilder
+    private func newElementPopover(type: FileType? = nil) -> some View {
+        NewElementPopover("file extension") { input in
+            FileType.isValid(input: input) && FileType.isNew(FileType.trim(input: input))
+        } onCompletion: { input in
+            insertFileType(.init(ext: FileType.trim(input: input)), after: type)
+            chosenInsertionPopoverElement = .no
+        }
+        .monospaced()
+    }
+    
     private func removeSelected() {
         fileTypes.removeAll { $0 == selection }
         selection = nil
+    }
+    
+    private func insertFileType(_ newElement: FileType, after: FileType?) {
+        if
+            let after,
+            let destination = fileTypes.firstIndex(of: after)
+        {
+            fileTypes.insert(newElement, at: fileTypes.index(after: destination))
+        } else {
+            fileTypes.append(newElement)
+        }
     }
 }

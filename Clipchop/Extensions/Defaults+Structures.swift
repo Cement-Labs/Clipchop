@@ -154,8 +154,10 @@ struct FileType: Codable, Defaults.Serializable {
     }
     
     static func isValid(input: String) -> Bool {
-        let trimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
-        return !trimmed.contains(/\s+/) // Contains whitespaces
+        let whitespaceTrimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmed = trim(input: input)
+        return !trimmed.isEmpty // Has valid characters
+        && !whitespaceTrimmed.contains(/\s+/) // Contains no whitespaces
     }
     
     static func isNew(_ ext: String) -> Bool {
