@@ -11,13 +11,14 @@ import Defaults
 import KeyboardShortcuts
 
 @Observable
-class ClipHistoryViewController: NSObject, ViewController, NSWindowDelegate {
+class ClipHistoryViewController: NSViewController {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
         expanded: NSSize(width: 500, height: 360)
     )
     
-    private var windowController: NSWindowController?
+    private var panel: ClipHistoryPanel?
+    
     private var isExpanded = false
     private var expansionEdge: NSRectEdge = .minY
     
@@ -50,33 +51,17 @@ class ClipHistoryViewController: NSObject, ViewController, NSWindowDelegate {
             return .minY
         }
     }
-    
-    // NSWindowDelegate method to close the window when it loses focus
-    func windowDidResignKey(_ notification: Notification) {
-        close()
-    }
-}
-
-extension ClipHistoryViewController {
-    // MARK: - Shortcuts
-    
-    func initShortcuts() {
-    }
-    
-    func enableShortcuts() {
-    }
-    
-    func disableShortcuts() {
-    }
 }
 
 extension ClipHistoryViewController {
     // MARK: - Animations
     
-    func setWindowSize(isExpanded: Bool, animate: Bool = true) {
+    func setExpansion(_ isExpanded: Bool, animate: Bool = true) {
         guard self.isExpanded != isExpanded else { return }
-        guard let window = windowController?.window else { return }
-        let frame = window.frame
+        guard let panel = panel else { return }
+        log(self, "Set expansion to \(isExpanded)")
+        
+        let frame = panel.frame
         let targetSize = isExpanded ? Self.size.expanded : Self.size.collapsed
         
         let edge: NSRectEdge
@@ -90,24 +75,26 @@ extension ClipHistoryViewController {
             edge = expansionEdge
         }
         
-        switch edge {
-        case .maxY:
-            window.setFrame(
-                .init(origin: frame.origin, size: targetSize),
-                display: true, animate: animate
-            )
-        case .minY:
-            window.setFrame(
-                .init(
-                    origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height),
-                    size: targetSize
-                ),
-                display: true, animate: animate
-            )
-        default: break
+        DispatchQueue.main.async {
+            switch edge {
+            case .maxY:
+                panel.setFrame(
+                    .init(origin: frame.origin, size: targetSize),
+                    display: true, animate: animate
+                )
+            case .minY:
+                panel.setFrame(
+                    .init(
+                        origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height),
+                        size: targetSize
+                    ),
+                    display: true, animate: animate
+                )
+            default: break
+            }
+            
+            self.isExpanded = isExpanded
         }
-        
-        self.isExpanded = isExpanded
     }
 }
 
@@ -115,39 +102,19 @@ extension ClipHistoryViewController {
     // MARK: - Open / Close
     
     var isOpened: Bool {
-        windowController != nil && windowController?.window?.isVisible == true
+        panel != nil && panel?.isVisible == true
     }
     
     func open(position: CGPoint) {
-        if let windowController {
-            windowController.window?.setFrameOrigin(positionNear(position: position, size: Self.size.collapsed)
-                            .applying(.init(translationX: 0, y: -Self.size.collapsed.height)))
-            windowController.window?.orderFrontRegardless()
-            enableShortcuts()
+        guard let panel else {
+            // Initialize
+            panel = .init(self)
+            
+            open(position: position)
             return
         }
-        let panel = NSPanel(
-            contentRect: .zero,
-            styleMask: [.borderless, .nonactivatingPanel],
-            backing: .buffered,
-            defer: true,
-            screen: NSApp.keyWindow?.screen
-        )
         
-        panel.animationBehavior = .utilityWindow
-        panel.collectionBehavior = .canJoinAllSpaces
-        panel.hasShadow = true
-        panel.backgroundColor = .white.withAlphaComponent(0.000001)
-        panel.level = .floating
-        panel.isMovableByWindowBackground = false
-        
-        let clipHistoryView = ClipHistoryView()
-            .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
-            .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
-            .environment(\.viewController, self)
-        
-        panel.contentView = NSHostingView(rootView: clipHistoryView)
-            
+        setExpansion(false, animate: false)
         panel.setFrame(
             CGRect(
                 origin: positionNear(position: position, size: Self.size.collapsed)
@@ -156,21 +123,16 @@ extension ClipHistoryViewController {
             ),
             display: false
         )
+        panel.setFrameOrigin(
+            positionNear(position: position, size: Self.size.collapsed)
+                .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
+        )
         
-        panel.orderFrontRegardless()
-        panel.makeKey()
-        
-        windowController = .init(window: panel)
-        windowController?.window?.delegate = self // Set the delegate
-        setWindowSize(isExpanded: false, animate: false)
-        
-        initShortcuts()
+        panel.makeKeyAndOrderFront(nil)
     }
     
     func close() {
-        guard let windowController else { return }
-        windowController.window?.orderOut(nil)
-        disableShortcuts()
+        panel?.orderOut(nil)
     }
     
     func toggle(position: CGPoint) {
@@ -186,10 +148,12 @@ extension ClipHistoryViewController {
     // MARK: - Expand / Collapse
     
     func expand() {
-        setWindowSize(isExpanded: true)
+        setExpansion(true)
+        log(self, "Expanded")
     }
     
     func collapse() {
-        setWindowSize(isExpanded: false)
+        setExpansion(false)
+        log(self, "Collapsed")
     }
 }

@@ -14,7 +14,9 @@ class ClipboardMonitor: NSObject {
     private var started: Bool
     private var timer: Timer?
     private var changeCount: Int = 0
-    private var context: ModelContext
+    
+    private let context: ModelContext
+    private let controller: ClipHistoryViewController
 
     private let pasteboard = NSPasteboard.general
     private let allowedPasteboardTypes: Set<String> = [
@@ -33,10 +35,12 @@ class ClipboardMonitor: NSObject {
         NSPasteboard.PasteboardType.fileContents.rawValue
     ]
 
-    init(context: ModelContext) {
+    init(context: ModelContext, controller: ClipHistoryViewController) {
         self.started = true
-        self.context = context
         self.changeCount = ClipboardHistory.pasteboard.changeCount
+        
+        self.context = context
+        self.controller = controller
     }
 
     // MARK: - Clipboard Change
@@ -189,12 +193,13 @@ class ClipboardMonitor: NSObject {
                 pasteboard.setData(content.value, forType: NSPasteboard.PasteboardType(type))
             }
         }
+        
         DispatchQueue.main.async {
             Notification.Name.didPaste.post()
         }
 
         if Defaults[.paste] {
-            ClipHistoryPanel.shared.closeManually()
+            controller.close()
             pasteToActiveApplication()
         }
     }

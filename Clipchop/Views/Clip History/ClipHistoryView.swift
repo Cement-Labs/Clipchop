@@ -50,7 +50,7 @@ struct ClipHistoryView: View {
                 }
             }
         }
-        .frame(width: 500, height: 100, alignment: .center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
     
     @ViewBuilder

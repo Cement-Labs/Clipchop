@@ -10,25 +10,25 @@ import AppKit
 import SwiftData
 
 class ModelManager {
+    static var monitor: ClipboardMonitor?
+    
     private let context: ModelContext
-    private let monitor: ClipboardMonitor
+    
+    let beginningViewController = BeginningViewController()
+    let clipHistoryViewController = ClipHistoryViewController()
     
     init(context: ModelContext) {
         self.context = context
-        self.monitor = .init(context: context)
         
-        monitor.start()
+        Self.monitor = .init(context: context, controller: clipHistoryViewController)
+        Self.monitor?.start()
         
-        KeyboardShortcuts.onKeyDown(for: .window) { [self] in
-            self.toggle()
+        KeyboardShortcuts.onKeyDown(for: .window) {
+            self.clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
         }
         
-        KeyboardShortcuts.onKeyDown(for: .start) { [self] in
-            self.monitor.toggle()
+        KeyboardShortcuts.onKeyDown(for: .start) {
+            Self.monitor?.toggle()
         }
-    }
-    
-    func toggle() {
-        ClipHistoryPanel.shared.toggle(position: NSEvent.mouseLocation)
     }
 }

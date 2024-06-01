@@ -11,7 +11,6 @@ import Defaults
 import SFSafeSymbols
 
 struct CardPreviewView: View {
-    
     private var sourceApp: NSRunningApplication? {NSWorkspace.shared.frontmostApplication}
     
     @Bindable var item: ClipboardHistory
@@ -32,12 +31,13 @@ struct CardPreviewView: View {
     }
     
     var body: some View {
-        ZStack{
+        ZStack {
             PreviewContentView(clipboardHistory: item)
                 .frame(width: 80, height: 80, alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: 12.5))
                 .allowsHitTesting(false)
-            ZStack{
+            
+            ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(item.pinned ? Material.ultraThin : Material.regular)
                     .fill(item.pinned ? Color.accentColor : Color.clear)
@@ -55,6 +55,7 @@ struct CardPreviewView: View {
                             }
                         }
                     }
+                
                 Image(systemName: pinIcon)
                     .allowsHitTesting(false)
                     .rotationEffect(Angle.degrees(item.pinned ? 45 : 0))
@@ -63,22 +64,25 @@ struct CardPreviewView: View {
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .topTrailing)
             .padding(.top, 10)
             .padding(.trailing, 10)
-            ZStack(alignment:.bottomLeading){
-                
+            
+            ZStack(alignment:.bottomLeading) {
                 RoundedRectangle(cornerRadius: 0)
                     .fill(.thickMaterial)
                     .frame(width: 80, height: 30)
                 
                 HStack{
                     VStack{
-                        let formatter = Formatter(contents: item.contents!)
-                        let title = formatter.title
-                        Text(title ?? "Other")
-                            .font(.system(size: 12.5).monospaced())
-                            .minimumScaleFactor(0.5)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .lineLimit(1)
-                        
+                        Group {
+                            if let title = item.formatter.title {
+                                Text(title)
+                            } else {
+                                Text("Other")
+                            }
+                        }
+                        .font(.system(size: 12.5).monospaced())
+                        .minimumScaleFactor(0.5)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(1)
                     }
                 }
                 .padding(.all, 10)
@@ -97,35 +101,36 @@ struct CardPreviewView: View {
         )
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .contextMenu {
-            Button(action: {
+            Button {
                 withAnimation(Animation.easeInOut) {
                     do{
                         self.isHoveredPin = true
                         item.pinned.toggle()
                     }
                 }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation(Animation.easeInOut) {
                         self.isHoveredPin = false
                     }
                 }
-            }) {
+            } label: {
                 Text(item.pinned ? "Unpin" : "Pin")
                 Image(systemSymbol: .pin)
             }
-            Button(action: {
-                let clipboardMonitor = ClipboardMonitor(context: context)
-                clipboardMonitor.copy(item)
-            }) {
+            
+            Button {
+                ModelManager.monitor?.copy(item)
+            } label: {
                 Text(Defaults[.paste] ? "Paste to \(sourceApp?.localizedName ?? "Unknown App")" : "copy")
                 Image(systemSymbol: .docOnDoc)
             }
 
             Divider()
             
-            Button(action: {
+            Button {
                 deleteItem(item)
-            }) {
+            } label: {
                 Text("Delete")
                 Image(systemSymbol: .trash)
             }
@@ -133,8 +138,7 @@ struct CardPreviewView: View {
         .gesture(
             TapGesture(count: 2)
                 .onEnded{
-                    let clipboardMonitor = ClipboardMonitor(context: context)
-                    clipboardMonitor.copy(item)
+                    ModelManager.monitor?.copy(item)
                 }
         )
         .onHover { isOver in
