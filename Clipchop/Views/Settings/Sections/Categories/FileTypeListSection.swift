@@ -12,6 +12,7 @@ struct FileTypeListSection: View {
     @Default(.fileTypes) private var fileTypes
     
     @State private var selection: FileType?
+    @State private var chosenInsertionPopoverElement: Chosen<FileType?> = .no
     
     var body: some View {
         Section("File Types") {
@@ -33,7 +34,7 @@ struct FileTypeListSection: View {
                                 }
                                 .contextMenu {
                                     Button("Insert") {
-                                        
+                                        chosenInsertionPopoverElement = .yes(type)
                                     }
                                     
                                     Button("Reset Categories", role: .destructive) {
@@ -48,15 +49,28 @@ struct FileTypeListSection: View {
                                         fileTypes.removeAll { $0 == type }
                                     }
                                 }
+                                
+                                // Requires a non-transparent background to expand the hit testing area
+                                .background(.placeholder.opacity(0.0001))
                             }
                             .padding(.vertical, 4)
                             .buttonStyle(.borderless)
                             
                             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                 Button("Insert") {
-                                    
+                                    chosenInsertionPopoverElement = .yes(type)
                                 }
                                 .tint(.accentColor)
+                            }
+                            .popover(isPresented: .init {
+                                chosenInsertionPopoverElement == .yes(type)
+                            } set: { _ in
+                                chosenInsertionPopoverElement = .no
+                            }) {
+                                NewElementPopover("file extension") { ext in
+                                    chosenInsertionPopoverElement = .no
+                                }
+                                .monospaced()
                             }
                         }
                         .onMove { indexSet, destination in
@@ -72,9 +86,19 @@ struct FileTypeListSection: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .cancellationAction) {
                         Button {
-                            
+                            chosenInsertionPopoverElement = .yes(nil)
                         } label: {
                             Image(systemSymbol: .plus)
+                        }
+                        .popover(isPresented: .init {
+                            chosenInsertionPopoverElement == .yes(nil)
+                        } set: { _ in
+                            chosenInsertionPopoverElement = .no
+                        }) {
+                            NewElementPopover("file extension") { ext in
+                                chosenInsertionPopoverElement = .no
+                            }
+                            .monospaced()
                         }
                     }
                 }
