@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Defaults
+import Fuse
 
 struct CategoryListSection: View {
     @Default(.categories) private var categories
@@ -14,13 +15,16 @@ struct CategoryListSection: View {
     @State private var chosenInsertionPopoverElement: Chosen<FileType.Category?> = .no
     @State private var searchQuery: String = ""
     
+    private let fuse = Fuse()
+    
     private var isSearching: Bool {
-        searchQuery.isEmpty
+        !searchQuery.isEmpty
     }
     
     private var filteredCategories: [FileType.Category] {
         if isSearching {
-            categories.filter { $0.name.lowercased() }
+            fuse.search(searchQuery, in: categories.map({ $0.name }))
+                .map { categories[$0.index] }
         } else {
             categories
         }
@@ -31,7 +35,7 @@ struct CategoryListSection: View {
             FormSectionListContainer {
                 NavigationStack {
                     List {
-                        ForEach(categories) { category in
+                        ForEach(filteredCategories) { category in
                             NavigationLink {
                                 
                             } label: {
@@ -86,10 +90,10 @@ struct CategoryListSection: View {
                     }
                     .listStyle(.bordered)
                     .alternatingRowBackgrounds()
-                    .searchable(text: $searchQuery, placement: .toolbar)
+                    .searchable(text: $searchQuery)
                 }
                 .toolbar {
-                    ToolbarItemGroup(placement: .cancellationAction) {
+                    ToolbarItemGroup(placement: .primaryAction) {
                         Button {
                             chosenInsertionPopoverElement = .yes(nil)
                         } label: {

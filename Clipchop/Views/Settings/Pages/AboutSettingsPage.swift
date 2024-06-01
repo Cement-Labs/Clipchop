@@ -44,7 +44,7 @@ struct AboutSettingsPage: View {
         .scrollDisabled(true)
         .toolbar {
             // Place them to the left of the quit button
-            ToolbarItemGroup(placement: .destructiveAction) {
+            ToolbarItemGroup(placement: .cancellationAction) {
                 Button {
                     isSourcePresented = true
                 } label: {
@@ -108,8 +108,6 @@ struct AboutSettingsPage: View {
                 .popover(isPresented: $isAcknowledgementsPresented, arrowEdge: .bottom) {
                     AcknowledgementsView()
                 }
-                
-                Spacer()
             }
         }
     }

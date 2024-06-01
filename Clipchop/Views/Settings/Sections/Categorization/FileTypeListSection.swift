@@ -7,18 +7,35 @@
 
 import SwiftUI
 import Defaults
+import Fuse
 
 struct FileTypeListSection: View {
     @Default(.fileTypes) private var fileTypes
     
     @State private var chosenInsertionPopoverElement: Chosen<FileType?> = .no
+    @State private var searchQuery: String = ""
+    
+    private let fuse = Fuse()
+    
+    private var isSearching: Bool {
+        !searchQuery.isEmpty
+    }
+    
+    private var filteredFileTypes: [FileType] {
+        if isSearching {
+            fuse.search(searchQuery, in: fileTypes.map({ $0.ext }))
+                .map { fileTypes[$0.index] }
+        } else {
+            fileTypes
+        }
+    }
     
     var body: some View {
         Section("File Types") {
             FormSectionListContainer {
                 NavigationStack {
                     List {
-                        ForEach(fileTypes) { type in
+                        ForEach(filteredFileTypes) { type in
                             NavigationLink {
                                 List {
                                     ForEach(type.categories) { category in
@@ -88,9 +105,10 @@ struct FileTypeListSection: View {
                     }
                     .listStyle(.bordered)
                     .alternatingRowBackgrounds()
+                    .searchable(text: $searchQuery)
                 }
                 .toolbar {
-                    ToolbarItemGroup(placement: .cancellationAction) {
+                    ToolbarItemGroup(placement: .primaryAction) {
                         Button {
                             chosenInsertionPopoverElement = .yes(nil)
                         } label: {

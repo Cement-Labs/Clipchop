@@ -23,6 +23,13 @@ struct SettingsView: View {
 #if DEBUG
         case test
 #endif
+        
+        var hasUniversalToolbar: Bool {
+            switch self {
+            case .categorization: false
+            default: true
+            }
+        }
     }
     
     @State private var navigation: Navigation = .general
@@ -108,14 +115,16 @@ struct SettingsView: View {
             .navigationSplitViewColumnWidth(min: 550, ideal: 550)
 
             .toolbar {
-                ToolbarItemGroup {
-                    Button {
-                        quit()
-                    } label: {
-                        Text("Quit")
-                            .padding(4)
+                if navigation.hasUniversalToolbar {
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        Button {
+                            quit()
+                        } label: {
+                            Text("Quit")
+                                .padding(4)
+                        }
+                        .controlSize(.extraLarge)
                     }
-                    .controlSize(.extraLarge)
                 }
             }
             .navigationSplitViewCollapsingDisabled()
