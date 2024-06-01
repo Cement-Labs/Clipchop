@@ -11,14 +11,13 @@ import Defaults
 struct FileTypeListSection: View {
     @Default(.fileTypes) private var fileTypes
     
-    @State private var selection: FileType?
     @State private var chosenInsertionPopoverElement: Chosen<FileType?> = .no
     
     var body: some View {
         Section("File Types") {
             FormSectionListContainer {
                 NavigationStack {
-                    List(selection: $selection) {
+                    List {
                         ForEach(fileTypes) { type in
                             NavigationLink {
                                 List {
@@ -29,9 +28,18 @@ struct FileTypeListSection: View {
                                 .navigationTitle(type.ext.uppercased())
                                 .navigationSplitViewCollapsingDisabled()
                             } label: {
-                                FormNavigationLinkLabel {
+                                FormNavigationLinkLabel(hasSpacer: false) {
                                     Text(type.ext)
                                         .monospaced()
+                                    
+                                    Spacer()
+                                    
+                                    WrappingHStack(models: type.categories) { category in
+                                        TagView(style: .quinary) {
+                                            Text(category.name)
+                                                .foregroundStyle(.secondary)
+                                        }
+                                    }
                                 }
                                 .contextMenu {
                                     Button("Insert") {
@@ -55,7 +63,6 @@ struct FileTypeListSection: View {
                                 .background(.placeholder.opacity(0.0001))
                             }
                             .padding(.vertical, 4)
-                            .buttonStyle(.borderless)
                             
                             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                 Button("Insert") {
@@ -110,11 +117,6 @@ struct FileTypeListSection: View {
             chosenInsertionPopoverElement = .no
         }
         .monospaced()
-    }
-    
-    private func removeSelected() {
-        fileTypes.removeAll { $0 == selection }
-        selection = nil
     }
     
     private func insertFileType(_ newElement: FileType, after: FileType?) {

@@ -51,6 +51,8 @@ extension Defaults.Keys {
         .sourceCodeFile
     ])
     static let fileTypes = Key<[FileType]>("fileTypes", default: [
+        .init(ext: "test", categories: [.document, .sourceCodeFile, .archive, .audio, .image, .movie]),
+        
         .init(ext: "pdf",       categories: [.document]),
         .init(ext: "doc",       categories: [.document]),
         .init(ext: "docx",      categories: [.document]),
@@ -67,7 +69,7 @@ extension Defaults.Keys {
         .init(ext: "pptx",      categories: [.document]),
         .init(ext: "xls",       categories: [.document]),
         .init(ext: "csv",       categories: [.document]),
-        .init(ext: "html",      categories: [.document, .sourceCodeFile, .archive, .audio, .image]),
+        .init(ext: "html",      categories: [.document, .sourceCodeFile]),
         .init(ext: "xml",       categories: [.document, .sourceCodeFile]),
         .init(ext: "json",      categories: [.document, .sourceCodeFile]),
         
