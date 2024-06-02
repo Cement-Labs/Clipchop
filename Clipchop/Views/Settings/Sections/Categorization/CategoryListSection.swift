@@ -34,9 +34,8 @@ struct CategoryListSection: View {
                     .map { categories[$0.index] }
                 let contentIndexed = fuse.search(searchQuery, in: fileTypes.map({ $0.ext }))
                     .flatMap { fileTypes[$0.index].categories }
-                    .uniqued()
                 
-                return nameIndexed + contentIndexed
+                return Array((nameIndexed + contentIndexed).uniqued())
             } else {
                 return categories
             }
