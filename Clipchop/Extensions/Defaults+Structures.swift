@@ -85,57 +85,14 @@ extension ColorStyle: Identifiable {
     }
 }
 
-// MARK: Category
+// MARK: File Type & Category
+
+// Definition
 
 struct FileType: Codable, Defaults.Serializable {
     struct Category: Identifiable, Codable, Defaults.Serializable {
         var id: UUID = .init()
         var name: String
-        
-        // Default provided categories
-        static let document =       FileType.Category(name: .init(localized: "Document"))
-        static let image =          FileType.Category(name: .init(localized: "Image"))
-        static let movie =          FileType.Category(name: .init(localized: "Movie"))
-        static let audio =          FileType.Category(name: .init(localized: "Audio"))
-        static let archive =        FileType.Category(name: .init(localized: "Archive"))
-        static let sourceCodeFile = FileType.Category(name: .init(localized: "Source Code File"))
-        
-        var fileTypes: [FileType] {
-            Defaults[.fileTypes]
-                .filter { $0.categories.contains(self) }
-        }
-        
-        var fileExts: [String] {
-            get {
-                .init(fileTypes.map({ $0.ext }))
-            }
-            
-            set {
-                let deletion = fileExts.filter { !newValue.contains($0) }
-                let addition = newValue.filter { !fileExts.contains($0) }
-                
-                guard deletion != addition else {
-                    // No modifications
-                    return
-                }
-                
-                deletion.forEach { ext in
-                    Defaults[.fileTypes]
-                        .updateEach { type in
-                            guard type.ext == ext else { return }
-                            type.categories.removeAll { $0 == self }
-                        }
-                }
-                
-                addition.forEach { ext in
-                    Defaults[.fileTypes]
-                        .updateEach { type in
-                            guard type.ext == ext else { return }
-                            type.categories.append(self)
-                        }
-                }
-            }
-        }
     }
     
     var ext: String
@@ -145,7 +102,11 @@ struct FileType: Codable, Defaults.Serializable {
         self.ext = Self.trim(input: input)
         self.categories = categories
     }
-    
+}
+
+// File Type
+
+extension FileType {
     static func trim(input: String) -> String {
         input
             .lowercased()
@@ -180,6 +141,59 @@ extension FileType: Hashable {
 extension FileType: Equatable {
     static func ==(lhs: FileType, rhs: FileType) -> Bool {
         lhs.ext == rhs.ext
+    }
+}
+
+extension FileType: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(for: FileType.self, contentType: .data)
+    }
+}
+
+// Category
+
+extension FileType.Category {
+    // Default provided categories
+    static let document =       FileType.Category(name: .init(localized: "Document"))
+    static let image =          FileType.Category(name: .init(localized: "Image"))
+    static let movie =          FileType.Category(name: .init(localized: "Movie"))
+    static let audio =          FileType.Category(name: .init(localized: "Audio"))
+    static let archive =        FileType.Category(name: .init(localized: "Archive"))
+    static let sourceCodeFile = FileType.Category(name: .init(localized: "Source Code File"))
+}
+
+extension FileType.Category {
+    var fileTypes: [FileType] {
+        Defaults[.fileTypes]
+            .filter { $0.categories.contains(self) }
+    }
+    
+    var fileExts: [String] {
+        get {
+            .init(fileTypes.map({ $0.ext }))
+        }
+        
+        set {
+            let deletion = fileExts.filter { !newValue.contains($0) }
+            let addition = newValue.filter { !fileExts.contains($0) }
+            
+            guard deletion != addition else {
+                // No modifications
+                return
+            }
+            
+            Defaults[.fileTypes]
+                .updateEach { type in
+                    guard deletion.contains(type.ext) else { return }
+                    type.categories.removeAll { $0 == self }
+                }
+            
+            Defaults[.fileTypes]
+                .updateEach { type in
+                    guard addition.contains(type.ext) else { return }
+                    type.categories.append(self)
+                }
+        }
     }
 }
 

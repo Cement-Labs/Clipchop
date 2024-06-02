@@ -17,8 +17,8 @@ struct CategoryListSection: View {
     
     @State private var chosenInsertionPopoverElement: Chosen<FileType.Category?> = .no
     
-    @Environment(\.hasTitle) var hasTitle
-    @Environment(\.isSearchable) var isSearchable
+    @Environment(\.hasTitle) private var hasTitle
+    @Environment(\.isSearchable) private var isSearchable
     @Environment(\.alternatingLayout) private var alternatingLayout
     
     private let fuse = Fuse()
@@ -27,21 +27,39 @@ struct CategoryListSection: View {
         isSearchable && !searchQuery.isEmpty
     }
     
-    private var filteredCategories: [FileType.Category] {
-        if isSearching {
-            let nameIndexed = fuse.search(searchQuery, in: categories.map({ $0.name }))
-                .map { categories[$0.index] }
-            let contentIndexed = fuse.search(searchQuery, in: fileTypes.map({ $0.ext }))
-                .flatMap { fileTypes[$0.index].categories }
-                .uniqued()
-            
-            return nameIndexed + contentIndexed
-        } else {
-            return categories
+    private var filteredCategories: Binding<[FileType.Category]> {
+        .init {
+            if isSearching {
+                let nameIndexed = fuse.search(searchQuery, in: categories.map({ $0.name }))
+                    .map { categories[$0.index] }
+                let contentIndexed = fuse.search(searchQuery, in: fileTypes.map({ $0.ext }))
+                    .flatMap { fileTypes[$0.index].categories }
+                    .uniqued()
+                
+                return nameIndexed + contentIndexed
+            } else {
+                return categories
+            }
+        } set: { newValue in
+            categories.updateEach { category in
+                guard let newCategory = newValue.first(where: { $0 == category }) else { return }
+                category.fileExts = newCategory.fileExts
+            }
         }
     }
     
     var body: some View {
+#if DEBUG
+        Section {
+            Button {
+                categories = Defaults.Keys.categories.defaultValue
+            } label: {
+                Text("Reset Categories (Debug)")
+                    .frame(maxWidth: .infinity)
+            }
+        }
+#endif
+        
         Section {
             FormSectionListContainer {
                 NavigationStack {
@@ -52,12 +70,12 @@ struct CategoryListSection: View {
                             } label: {
                                 VStack {
                                     FormNavigationLinkLabel {
-                                        Text(category.name)
+                                        Text(category.name.wrappedValue)
                                             .badge(category.fileExts.count)
                                     }
                                     
                                     if !category.fileExts.isEmpty {
-                                        WrappingHStack(models: category.fileExts, direction: .trailing) { ext in
+                                        WrappingHStack(models: category.fileExts.wrappedValue, direction: .trailing) { ext in
                                             TagView(style: .quinary) {
                                                 Text(ext)
                                                     .monospaced()
@@ -68,20 +86,23 @@ struct CategoryListSection: View {
                                 }
                                 .contextMenu {
                                     Button("Insert") {
-                                        chosenInsertionPopoverElement = .yes(category)
+                                        chosenInsertionPopoverElement = .yes(category.wrappedValue)
                                     }
                                     
                                     Button("Remove from File Types", role: .destructive) {
-                                        categories.updateEach { mutableCategory in
-                                            if mutableCategory == category {
-                                                mutableCategory.fileExts = []
-                                            }
-                                        }
+                                        category.fileExts.wrappedValue = []
                                     }
                                     
                                     Button("Delete", role: .destructive) {
-                                        categories.removeAll { $0 == category }
+                                        categories.removeAll { $0 == category.wrappedValue }
                                     }
+                                }
+                                .dropDestination(for: FileType.self) { items, location in
+                                    guard let type = items.first else { return false }
+                                    category.fileExts.wrappedValue.append(type.ext)
+                                    return true
+                                } isTargeted: { inDropArea in
+                                    
                                 }
                                 
                                 // Requires a non-transparent background to expand the hit testing area
@@ -91,16 +112,16 @@ struct CategoryListSection: View {
                             
                             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                 Button("Insert") {
-                                    chosenInsertionPopoverElement = .yes(category)
+                                    chosenInsertionPopoverElement = .yes(category.wrappedValue)
                                 }
                                 .tint(.accentColor)
                             }
                             .popover(isPresented: .init {
-                                chosenInsertionPopoverElement == .yes(category)
+                                chosenInsertionPopoverElement == .yes(category.wrappedValue)
                             } set: { _ in
                                 chosenInsertionPopoverElement = .no
                             }) {
-                                newElementPopover(category: category)
+                                newElementPopover(category: category.wrappedValue)
                             }
                             .selectionDisabled()
                         }

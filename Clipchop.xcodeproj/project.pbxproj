@@ -109,7 +109,6 @@
 		654DCBEE2C0253C10027FAD4 /* CategorizationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654DCBED2C0253C10027FAD4 /* CategorizationPage.swift */; };
 		65725DF12C09B6E1009BE9BF /* ClipHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65725DEF2C09B6E1009BE9BF /* ClipHistoryPanel.swift */; };
 		659355082BFEE94F00CA1D53 /* DragManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659355072BFEE94F00CA1D53 /* DragManager.swift */; };
-		65DDA4892C047A250086458E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65DDA4882C047A250086458E /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -656,7 +655,6 @@
 				2882951C2BC41F7400392B29 /* Assets.xcassets in Resources */,
 				28D8CE662BDD0FCB008B17B5 /* Localizable.xcstrings in Resources */,
 				28C2C59E2BF0D1AE00E9D9AA /* happy-pop.mp3 in Resources */,
-				65DDA4892C047A250086458E /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

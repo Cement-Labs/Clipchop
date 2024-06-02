@@ -40,6 +40,17 @@ struct FileTypeTagCloudSection: View {
     }
     
     var body: some View {
+#if DEBUG
+        Section {
+            Button {
+                fileTypes = Defaults.Keys.fileTypes.defaultValue
+            } label: {
+                Text("Reset File Types (Debug)")
+                    .frame(maxWidth: .infinity)
+            }
+        }
+#endif
+        
         Section {
             FormSectionListContainer {
                 List {
@@ -57,9 +68,7 @@ struct FileTypeTagCloudSection: View {
                                         .monospaced()
                                         .foregroundStyle(.secondary)
                                 }
-                                .onDrag {
-                                    .init(object: type.ext as NSString)
-                                }
+                                .draggable(type)
                             }
                         }
                         .padding(.vertical, 4)
