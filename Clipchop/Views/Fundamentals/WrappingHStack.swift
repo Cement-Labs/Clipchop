@@ -8,67 +8,67 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-// Originally by https://stackoverflow.com/a/65453108/23452915
-struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
-    enum Direction {
-        case leading
-        case trailing
-        
-        func originalWidth(in geometry: GeometryProxy) -> CGFloat {
-            switch self {
-            case .leading: .zero
-            case .trailing: -geometry.size.width
-            }
-        }
-        
-        func horizontalAlignmentGuide(
-            width: inout CGFloat,
-            height: inout CGFloat,
-            spacing: CGFloat,
-            lineSpacing: CGFloat,
-            in geometry: GeometryProxy,
-            isLast: Bool,
-            dimensions: ViewDimensions
-        ) -> CGFloat {
-            switch self {
-            case .leading:
-                if abs(width - dimensions.width) > geometry.size.width {
-                    width = originalWidth(in: geometry)
-                    height -= (dimensions.height + lineSpacing)
-                }
-                
-                let result = width
-                if isLast {
-                    // The last item
-                    width = originalWidth(in: geometry)
-                } else {
-                    width -= (dimensions.width + spacing)
-                }
-                
-                return result
-            case .trailing:
-                if width + dimensions.width + spacing > 0 {
-                    width = originalWidth(in: geometry)
-                    height -= (dimensions.height + lineSpacing)
-                }
-                
-                let result = width + dimensions.width
-                if isLast {
-                    // The last item
-                    width = originalWidth(in: geometry)
-                } else {
-                    width += (dimensions.width + spacing)
-                }
-                
-                return result
-            }
+enum WrappingDirection {
+    case leading
+    case trailing
+    
+    func originalWidth(in geometry: GeometryProxy) -> CGFloat {
+        switch self {
+        case .leading: .zero
+        case .trailing: -geometry.size.width
         }
     }
     
+    func horizontalAlignmentGuide(
+        width: inout CGFloat,
+        height: inout CGFloat,
+        spacing: CGFloat,
+        lineSpacing: CGFloat,
+        in geometry: GeometryProxy,
+        isLast: Bool,
+        dimensions: ViewDimensions
+    ) -> CGFloat {
+        switch self {
+        case .leading:
+            if abs(width - dimensions.width) > geometry.size.width {
+                width = originalWidth(in: geometry)
+                height -= (dimensions.height + lineSpacing)
+            }
+            
+            let result = width
+            if isLast {
+                // The last item
+                width = originalWidth(in: geometry)
+            } else {
+                width -= (dimensions.width + spacing)
+            }
+            
+            return result
+        case .trailing:
+            if width + dimensions.width + spacing > 0 {
+                width = originalWidth(in: geometry)
+                height -= (dimensions.height + lineSpacing)
+            }
+            
+            let result = width + dimensions.width
+            if isLast {
+                // The last item
+                width = originalWidth(in: geometry)
+            } else {
+                width += (dimensions.width + spacing)
+            }
+            
+            return result
+        }
+    }
+}
+
+// Originally by https://stackoverflow.com/a/65453108/23452915
+struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     typealias ViewGenerator = (Model) -> V
     
     var models: [Model]
-    var direction: Direction = .leading
+    var direction: WrappingDirection = .leading
     var spacing: CGFloat = 8
     var lineSpacing: CGFloat = 8
     var viewGenerator: ViewGenerator
