@@ -17,48 +17,65 @@ struct ClipHistoryView: View {
     ) private var items: [ClipboardHistory]
     
     @Environment(\.modelContext) var context
-        
+    
+    @State private var previousHeight: CGFloat = 100
+    
     var body: some View {
-        clip {
-            ZStack {
-                clip {
-                    VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
-                }
-                
-                VStack{
-                    if items.isEmpty {
-                        // Placeholder
-                        VStack(alignment: .center) {
-                            Image(.clipchopFill)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 24)
-                            Text("No Clipboard History Available")
-                        }
-                        .foregroundStyle(.blendMode(.overlay))
-                    } else {
-                        ZStack(alignment: .topLeading){
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
-                                    ForEach(items) { items in
-                                        CardPreviewView(item: items)
-                                            .environment(\.modelContext, context)
+        GeometryReader { geo in
+            clip {
+                ZStack {
+                    clip {
+                        VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
+                    }
+                    
+                    VStack {
+                        if items.isEmpty {
+                            VStack(alignment: .center) {
+                                Image(.clipchopFill)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 24)
+                                Text("No Clipboard History Available")
+                            }
+                            .foregroundStyle(.blendMode(.overlay))
+                        } else {
+                            if previousHeight > 250 {
+                                ClipHistoryCategorization()
+                            }
+                            if previousHeight < 250 {
+                                ZStack(alignment: .topLeading) {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 12) {
+                                            ForEach(items) { item in
+                                                CardPreviewView(item: item)
+                                                    .environment(\.modelContext, context)
+                                            }
+                                        }
+                                        .offset(x: 12)
                                     }
                                 }
-                                .offset(x: 12)
                             }
                         }
-                        
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .onAppear{
+                DispatchQueue.main.async {
+                    previousHeight = geo.size.height
+                }
+            }
+            .onChange(of: geo.size.height) { newHeight, _ in
+                withAnimation {
+                    previousHeight = newHeight
+                }
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
     
     @ViewBuilder
     private func clip(@ViewBuilder content: @escaping () -> some View) -> some View {
         content()
-            .clipShape(.rect(cornerRadius: 25, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
     }
 }

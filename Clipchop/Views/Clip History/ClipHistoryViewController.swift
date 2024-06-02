@@ -14,7 +14,7 @@ import KeyboardShortcuts
 class ClipHistoryViewController: NSViewController {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
-        expanded: NSSize(width: 500, height: 360)
+        expanded: NSSize(width: 500, height: 260)
     )
     
     private var panel: ClipHistoryPanel?
@@ -109,12 +109,12 @@ extension ClipHistoryViewController {
         guard let panel else {
             // Initialize
             panel = .init(self)
-            setExpansion(false)
             open(position: position)
             return
         }
         
-        setExpansion(false, animate: false)
+        panel.alphaValue = 1.0
+        
         panel.setFrame(
             CGRect(
                 origin: positionNear(position: position, size: Self.size.collapsed)
@@ -132,7 +132,17 @@ extension ClipHistoryViewController {
     }
     
     func close() {
-        panel?.orderOut(nil)
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = 0.2
+            panel?.animator().alphaValue = 0.0
+        }, completionHandler: {
+            DispatchQueue.main.async {
+                self.setExpansion(false)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                self.panel?.orderOut(nil)
+            }
+        })
     }
     
     func toggle(position: CGPoint) {

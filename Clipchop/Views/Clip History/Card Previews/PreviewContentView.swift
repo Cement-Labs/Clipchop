@@ -76,7 +76,7 @@ struct PreviewContentView: View {
     }
     
     private func textView(for text: String) -> some View {
-        if text.hasPrefix("http://") || text.hasPrefix("https://") {
+        if let url = NSURL(string: text), url.scheme != nil {
             return AnyView(
                 VStack {
                     WebLinkPreviewPage(urlString: text)
@@ -161,7 +161,7 @@ struct PreviewContentView: View {
             QLThumbnailGenerator.shared.generateRepresentations(for: request) { thumbnail, _, error in
                 DispatchQueue.main.async {
                     if let error = error {
-                        log(self, "Error generating thumbnail: \(error)")
+                        log(/*self,*/ "Error generating thumbnail: \(error)")
                     } else if let cgImage = thumbnail?.cgImage {
                         self.thumbnail = NSImage(cgImage: cgImage, size: NSSize())
                     }

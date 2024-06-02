@@ -329,9 +329,6 @@
     "Call up the clip history window." : {
 
     },
-    "Categories" : {
-
-    },
     "Categorization" : {
 
     },
@@ -451,16 +448,10 @@
     "Exclude apps to prevent %@ copying their contents." : {
 
     },
-    "file extension" : {
-
-    },
     "File Extension" : {
 
     },
     "File Type" : {
-
-    },
-    "File Types" : {
 
     },
     "Footer" : {
@@ -584,6 +575,9 @@
     "Pin history" : {
 
     },
+    "Pinned" : {
+
+    },
     "Preferred color scheme" : {
 
     },
@@ -600,9 +594,6 @@
 
     },
     "Refresh States (Debug)" : {
-
-    },
-    "Remove from File Types" : {
 
     },
     "Restore" : {

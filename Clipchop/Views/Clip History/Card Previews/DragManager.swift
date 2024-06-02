@@ -7,7 +7,6 @@
 
 import Foundation
 import UniformTypeIdentifiers
-import Contacts
 
 func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     guard let data = content.value as? NSSecureCoding else {
