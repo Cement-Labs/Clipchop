@@ -10,6 +10,7 @@ import AppKit
 import KeyboardShortcuts
 
 class ClipHistoryPanel: NSPanel {
+    
     private let controller: ClipHistoryViewController
     
     init(_ controller: ClipHistoryViewController) {

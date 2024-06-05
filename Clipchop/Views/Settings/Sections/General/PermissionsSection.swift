@@ -8,7 +8,11 @@
 import SwiftUI
 import Defaults
 
+import LaunchAtLogin
+import FullDiskAccess
+
 struct PermissionsSection: View {
+    
     @State private var isAccessibilityAccessGranted = false
     @State private var isFullDiskAccessGranted = false
     

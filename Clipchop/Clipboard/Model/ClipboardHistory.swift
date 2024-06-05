@@ -98,7 +98,7 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
         self.pinned = false
         self.deleted = false
         
-        self.app = ClipboardHistory.source?.localizedName
+        self.app = ClipboardHistory.source?.bundleIdentifier
         self.time = Date.now
     }
     

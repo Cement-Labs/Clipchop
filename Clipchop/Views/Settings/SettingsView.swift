@@ -83,37 +83,8 @@ struct SettingsView: View {
             .frame(width: 200) // `navigationSplitColumnWidth` doesn't work
             .toolbar(removing: .sidebarToggle)
         } detail: {
-            Group {
-                switch navigation {
-                    
-                case .general:
-                    GeneralSettingsPage()
-                    
-                case .customization:
-                    CustomizationSettingsPage()
-                    
-                case .clipboard:
-                    ClipboardSettingsPage()
-                    
-                case .categorization:
-                    CategorizationPage()
-                
-                case .appExcluding:
-                    ExcludedAppsSettingsPage()
-                        .environmentObject(apps)
-                
-                case .syncing:
-                    SyncingSettingsPage()
-                
-                case .about:
-                    AboutSettingsPage()
-                    
-                case .test:
-                    TestSettingsPage()
-                }
-            }
+            contentForNavigation(navigation)
             .navigationSplitViewColumnWidth(min: 550, ideal: 550)
-
             .toolbar {
                 if navigation.hasUniversalToolbar {
                     ToolbarItemGroup(placement: .primaryAction) {
@@ -131,6 +102,39 @@ struct SettingsView: View {
             .navigationTitle(Bundle.main.appName)
             .navigationSplitViewStyle(.prominentDetail)
             .background(WindowAccessor())
+        }
+    }
+    @ViewBuilder
+    private func contentForNavigation(_ navigation: Navigation) -> some View {
+        switch navigation {
+            
+        case .general:
+            GeneralSettingsPage()
+            
+        case .customization:
+            CustomizationSettingsPage()
+            
+        case .clipboard:
+            ClipboardSettingsPage()
+            
+        case .categorization:
+            CategorizationPage()
+            
+        case .appExcluding:
+            ExcludedAppsSettingsPage()
+                .environmentObject(apps)
+            
+        case .syncing:
+            SyncingSettingsPage()
+            
+        case .about:
+            AboutSettingsPage()
+            
+        #if DEBUG
+        case .test:
+            TestSettingsPage()
+        #endif
+            
         }
     }
 }

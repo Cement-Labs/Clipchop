@@ -10,34 +10,20 @@ import Defaults
 import LaunchAtLogin
 
 struct GlobalBehaviorsSection: View {
+    
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     
     @Environment(\.hasTitle) private var hasTitle
     
     var body: some View {
         Section {
-            HStack {
-                Text("Starts with macOS")
-                
-                Spacer()
-                
-                LaunchAtLogin.Toggle {
-                    EmptyView()
-                }
-            }
+                LaunchAtLogin.Toggle("Starts with macOS")
             
             withCaption("""
 You can always open \(Bundle.main.appName) again to access this page.
 """) {
-                HStack {
-                    Text("Shows menu bar item")
                     
-                    Spacer()
-                    
-                    Toggle(isOn: $menuBarItemEnabled) {
-                        EmptyView()
-                    }
-                }
+                    Toggle("Shows menu bar item", isOn: $menuBarItemEnabled)
             }
         } header: {
             if hasTitle {

@@ -4,7 +4,7 @@
 //
 //  Created by Xinshao_Air on 2024/6/2.
 //
-/*
+
 import SwiftUI
 import Defaults
 import SFSafeSymbols
@@ -21,26 +21,24 @@ struct CategorizationSection: View {
     @Default(.allTypes) var allTypes
     
     @State var isInEditMode = false
-    @State var searchText: String = ""
+    @State var categorySearchText: String = ""
+    @State var fileTypeSearchText: String = ""
     @State var isPopoverPresented = false
-    @State var isPopoverSearch = false
     @State var contentType: ContentType = .category
     @State var input: String = ""
     
     var filteredCategories: [FileCategory] {
-        if searchText.isEmpty {
+        if categorySearchText.isEmpty {
             return categories
         } else {
-            return categories.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+            return categories.filter { $0.name.localizedCaseInsensitiveContains(categorySearchText) }
         }
     }
     
-    var filteredTypes: [String] {
-        if searchText.isEmpty {
-            return allTypes
-        } else {
-            return allTypes.filter { $0.localizedCaseInsensitiveContains(searchText) }
-        }
+    var groupedAndSortedTypes: [String: [String]] {
+        let filteredTypes = fileTypeSearchText.isEmpty ? allTypes : allTypes.filter { $0.localizedCaseInsensitiveContains(fileTypeSearchText) }
+        let grouped = Dictionary(grouping: filteredTypes) { $0.first?.uppercased() ?? "#" }
+        return grouped.mapValues { $0.sorted() }
     }
     
     var canSubmitInput: Bool {
@@ -53,33 +51,41 @@ struct CategorizationSection: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            List{
-                
-            }
-            .allowsHitTesting(false)
-            HStack(spacing: 0){
-                ScrollView(showsIndicators: false) {
+        HStack(spacing: 0){
+            ScrollView(showsIndicators: false) {
+                LazyVStack {
+                    TextField("Search File Types", text: $fileTypeSearchText)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
                     Form {
-                        Section(header: Text("All Types")) {
-                            withCaption {
-                                //
-                            } caption: {
-                                WrappingHStack(models: filteredTypes) { type in
-                                    RoundedTagView(isDeleteButtonShown: $isInEditMode, text: type, onDelete: {
-                                        removeFileType(type)
-                                    })
-                                    .onDrag {
-                                        NSItemProvider(object: type as NSString)
+                        ForEach(groupedAndSortedTypes.keys.sorted(), id: \.self) { key in
+                            Section(header: Text(key)) {
+                                withCaption {
+                                    //
+                                } caption: {
+                                    WrappingHStack(models: groupedAndSortedTypes[key] ?? []) { type in
+                                        RoundedTagView(isDeleteButtonShown: $isInEditMode, text: type, onDelete: {
+                                            removeFileType(type)
+                                        })
+                                        .onDrag {
+                                            NSItemProvider(object: type as NSString)
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                     .formStyle(.grouped)
-                    .frame(width: geometry.size.width * 0.4)
+                    .frame(maxWidth: .infinity * 0.4)
                 }
-                ScrollView(showsIndicators: false) {
+            }
+            
+            ScrollView(showsIndicators: false) {
+                LazyVStack {
+                    TextField("Search Categories", text: $categorySearchText)
+                        .textFieldStyle(.roundedBorder)
+                        .padding()
+                    
                     VStack(spacing: -10){
                         ForEach(filteredCategories, id: \.self) { category in
                             Form{
@@ -108,116 +114,82 @@ struct CategorizationSection: View {
                             .formStyle(.grouped)
                         }
                     }
-                    .frame(width: geometry.size.width * 0.525)
+                    .frame(maxWidth: .infinity * 0.525)
                 }
             }
-            .scrollContentBackground(.hidden)
-            .padding(.horizontal)
         }
-        .toolbar{
-            toolbarView
+        .scrollContentBackground(.hidden)
+        .padding(.horizontal)
+        .toolbar {
+            ToolbarItemGroup(placement: .cancellationAction) {
+                Button {
+                    isPopoverPresented = true
+                } label: {
+                    Image(systemSymbol: .plus)
+                }
+                .popover(isPresented: $isPopoverPresented, arrowEdge: .bottom) {
+                    VStack {
+                        HStack {
+                            Group {
+                                switch contentType {
+                                case .category:
+                                    TextField("Category Name", text: $input)
+                                        .monospaced()
+                                case .fileType:
+                                    TextField("File Extension", text: $input)
+                                        .monospaced()
+                                }
+                            }
+                            .textFieldStyle(.plain)
+                            .padding(2)
+                            .onSubmit {
+                                submitInput()
+                            }
+                            
+                            Button {
+                                submitInput()
+                            } label: {
+                                Image(systemSymbol: canSubmitInput ? .arrowForwardCircleFill : .exclamationmarkCircleFill)
+                                    .imageScale(.large)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.borderless)
+                            .buttonBorderShape(.circle)
+                            .disabled(!canSubmitInput)
+                        }
+                        .padding(4)
+                        
+                        Picker(selection: $contentType) {
+                            Text("Category")
+                                .tag(ContentType.category)
+                            
+                            Text("File Type")
+                                .tag(ContentType.fileType)
+                        } label: {
+                            EmptyView()
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(4)
+                    }
+                    .frame(minWidth: 225)
+                    .padding()
+                }
+            }
         }
         .onAppear {
             NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
                 if event.modifierFlags.contains(.option) {
-                    withAnimation {
+                    withAnimation{
                         isInEditMode = true
                     }
                 } else {
-                    withAnimation {
+                    withAnimation{
                         isInEditMode = false
                     }
                 }
                 return event
             }
         }
-    }
-    
-    // MARK: - ToolbarView
-    
-    private var toolbarView: some View {
-        HStack {
-            Button {
-                isPopoverPresented = true
-            } label: {
-                Image(systemSymbol: .plus)
-            }
-            .popover(isPresented: $isPopoverPresented, arrowEdge: .bottom) {
-                popoverContent
-            }
-            
-            Button {
-                isPopoverSearch = true
-            } label: {
-                Image(systemSymbol: .magnifyingglass)
-            }
-            .popover(isPresented: $isPopoverSearch, arrowEdge: .bottom) {
-                searchPopoverContent
-            }
-        }
-    }
-    
-    // MARK: - PopoverContent
-    
-    private var popoverContent: some View {
-        VStack {
-            HStack {
-                Group {
-                    switch contentType {
-                    case .category:
-                        TextField("Category Name", text: $input)
-                            .monospaced()
-                    case .fileType:
-                        TextField("File Extension", text: $input)
-                            .monospaced()
-                    }
-                }
-                .textFieldStyle(.plain)
-                .padding(2)
-                .onSubmit {
-                    submitInput()
-                }
-                
-                Button {
-                    submitInput()
-                } label: {
-                    Image(systemSymbol: canSubmitInput ? .arrowForwardCircleFill : .exclamationmarkCircleFill)
-                        .imageScale(.large)
-                        .foregroundStyle(.secondary)
-                }
-                .buttonStyle(.borderless)
-                .buttonBorderShape(.circle)
-                .disabled(!canSubmitInput)
-            }
-            .padding(4)
-            
-            Picker(selection: $contentType) {
-                Text("Category")
-                    .tag(ContentType.category)
-                
-                Text("File Type")
-                    .tag(ContentType.fileType)
-            } label: {
-                EmptyView()
-            }
-            .pickerStyle(.segmented)
-            .padding(4)
-        }
-        .frame(minWidth: 225)
-        .padding()
-    }
-    
-    // MARK: - SearchPopoverContent
-    
-    private var searchPopoverContent: some View {
-        VStack {
-            TextField("Search", text: $searchText)
-                .textFieldStyle(.plain)
-                .monospaced()
-                .padding()
-        }
-        .frame(minWidth: 225)
-        .padding()
     }
     
     private func submitInput() {
@@ -259,6 +231,8 @@ struct CategorizationSection: View {
     }
 }
 
+
+
 struct DropViewDelegate: DropDelegate {
     @Binding var category: FileCategory
     @Binding var allTypes: [String]
@@ -279,4 +253,3 @@ struct DropViewDelegate: DropDelegate {
         return true
     }
 }
-*/

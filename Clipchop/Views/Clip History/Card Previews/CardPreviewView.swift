@@ -18,7 +18,9 @@ struct CardPreviewView: View {
     @State private var isSelected = false
     @State private var isHoveredPin = false
     @State private var data: Data?
+    @State private var showMore = false
     
+    @EnvironmentObject private var apps: InstalledApps
     @Environment(\.modelContext) var context
     @Environment(\.displayScale) var displayScale
     @Environment(\.colorScheme) var colorScheme
@@ -30,13 +32,66 @@ struct CardPreviewView: View {
         item.pinned ? "pin.fill" : "pin"
     }
     
+    var keyboardShortcut: String
+    
     var body: some View {
         ZStack {
+            // MARK: - Button Action
+            Button("delete", action:{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    withAnimation(.spring(dampingFraction: 0.7)){
+                        deleteItem(item)
+                    }
+                }
+            })
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.control])
+            
+            Button("Coyp", action: {
+                self.isSelected = true
+                print("Selected: \(String(describing: keyboardShortcut))")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    withAnimation(Animation.spring(dampingFraction: 0.7)) {
+                        self.isSelected = false
+                    }
+                    ModelManager.monitor?.copy(item)
+                }
+            })
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.command])
+            
+            Button("Pin", action: {
+                print("Pin: \(String(describing: keyboardShortcut))")
+                withAnimation(Animation.easeInOut) {
+                    do{
+                        self.isHoveredPin = true
+                        item.pinned.toggle()
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation(Animation.easeInOut) {
+                        self.isHoveredPin = false
+                    }
+                }
+            })
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.option])
+            
+            // MARK: - CardView
             PreviewContentView(clipboardHistory: item)
                 .frame(width: 80, height: 80, alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: 12.5))
                 .allowsHitTesting(false)
-            
+
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(item.pinned ? Material.ultraThin : Material.regular)
@@ -71,6 +126,15 @@ struct CardPreviewView: View {
                     .frame(width: 80, height: 30)
                 
                 HStack{
+                    if keyboardShortcut != "none" {
+                        ZStack(alignment: .center){
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(backgroundColor)
+                                .frame(width: 13, height: 13)
+                            Text(keyboardShortcut)
+                                .font(.system(size: 10).monospaced())
+                        }
+                    }
                     VStack{
                         Group {
                             if let title = item.formatter.title {
@@ -94,10 +158,39 @@ struct CardPreviewView: View {
         .clipShape(.rect(cornerRadius: 12.5))
         
         .overlay(
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 7.5)
-                .frame(width: 80, height: 80)
-                .foregroundColor(.clear)
+            ZStack{
+                if showMore && isSelected {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill( Material.ultraThin)
+                        .frame(width: 80, height: 80)
+                    VStack(spacing: 2) {
+                        if let bundleID = item.app, let appIcon = getAppIcon(byBundleID: bundleID) {
+                            Image(nsImage: appIcon.resized(to: .init(width: 20, height: 20)))
+                        }
+                        if let bundleID = item.app, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
+                            Text(appDisplayName)
+                                .font(.system(size: 10).monospaced())
+                                .minimumScaleFactor(0.8)
+                                .lineLimit(10)
+                                .fixedSize(horizontal: false, vertical: false)
+                        }
+                        Text(formattedDate(from: item.time!))
+                            .font(.system(size: 7.5).monospaced())
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(10)
+                            .fixedSize(horizontal: false, vertical: false)
+                        Text(relativeTime(from: item.time!))
+                            .font(.system(size: 7.5).monospaced())
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(10)
+                            .fixedSize(horizontal: false, vertical: false)
+                    }
+                }
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 7.5)
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(.clear)
+            }
         )
         .clipShape(RoundedRectangle(cornerRadius: 15))
         .contextMenu {
@@ -165,6 +258,20 @@ struct CardPreviewView: View {
             log(self, "No suitable content found for dragging")
             return NSItemProvider()
         }
+        .onAppear {
+            NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+                if event.modifierFlags.contains(.shift) {
+                    withAnimation{
+                        showMore = true
+                    }
+                } else {
+                    withAnimation{
+                        showMore = false
+                    }
+                }
+                return event
+            }
+        }
     }
     private func deleteItem(_ item: ClipboardHistory) {
         if let contents = item.contents {
@@ -178,5 +285,29 @@ struct CardPreviewView: View {
         } catch {
             print("Failed to delete item: \(error)")
         }
+    }
+    func formattedDate(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd HH:mm"
+        return dateFormatter.string(from: date)
+    }
+
+    func relativeTime(from date: Date) -> String {
+        let relativeFormatter = RelativeDateTimeFormatter()
+        relativeFormatter.unitsStyle = .full
+        return relativeFormatter.localizedString(for: date, relativeTo: Date())
+    }
+    func getAppIcon(byBundleID bundleID: String) -> NSImage? {
+        if let app = (apps.installedApps + apps.systemApps).first(where: { $0.bundleID == bundleID }) {
+            return app.icon
+        }
+        return nil
+    }
+    
+    func getAppDisplayName(byBundleID bundleID: String) -> String? {
+        if let app = (apps.installedApps + apps.systemApps).first(where: { $0.bundleID == bundleID }) {
+            return app.displayName.replacingOccurrences(of: ".app", with: "")
+        }
+        return nil
     }
 }

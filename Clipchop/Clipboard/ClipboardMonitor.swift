@@ -17,6 +17,7 @@ class ClipboardMonitor: NSObject {
     
     private let context: ModelContext
     private let controller: ClipHistoryViewController
+    private let clipboardManager: ClipboardManager
 
     private let pasteboard = NSPasteboard.general
     private let allowedPasteboardTypes: Set<String> = [
@@ -40,12 +41,13 @@ class ClipboardMonitor: NSObject {
         NSPasteboard.PasteboardType.fileContents.rawValue
     ]
 
-    init(context: ModelContext, controller: ClipHistoryViewController) {
+    init(context: ModelContext, controller: ClipHistoryViewController, clipboardManager: ClipboardManager) {
         self.started = true
         self.changeCount = ClipboardHistory.pasteboard.changeCount
         
         self.context = context
         self.controller = controller
+        self.clipboardManager = clipboardManager
     }
 
     // MARK: - Clipboard Change
@@ -227,15 +229,17 @@ extension ClipboardMonitor {
     // MARK: - Monitoring Functions
     
     func start() {
-        timer = .scheduledTimer(
-            withTimeInterval: Defaults[.timerInterval],
-            repeats: true
-        ) { [weak self] _ in
+        
+        clipboardManager.startPeriodicCleanup()
+        
+        timer = .scheduledTimer(withTimeInterval: Defaults[.timerInterval], repeats: true ) { [weak self] _ in
             self?.updateClipboard()
         }
         
         log(self, "Started monitoring")
     }
+    
+    
     
     func stop() {
         timer?.invalidate()

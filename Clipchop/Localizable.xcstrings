@@ -390,16 +390,8 @@
     "Clipchop" : {
 
     },
-    "Code" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Code Files"
-          }
-        }
-      }
+    "Code Files" : {
+
     },
     "Color" : {
 
@@ -424,6 +416,9 @@
         }
       }
     },
+    "Coyp" : {
+
+    },
     "Custom" : {
 
     },
@@ -436,10 +431,10 @@
     "Dark" : {
 
     },
-    "Delete" : {
+    "delete" : {
 
     },
-    "Delete history" : {
+    "Delete" : {
 
     },
     "Documents" : {
@@ -530,6 +525,9 @@
     "Limit %@'s functions in the specified apps." : {
 
     },
+    "Link" : {
+
+    },
     "Loading..." : {
 
     },
@@ -572,9 +570,6 @@
     "Pin" : {
 
     },
-    "Pin history" : {
-
-    },
     "Pinned" : {
 
     },
@@ -600,6 +595,12 @@
 
     },
     "Search" : {
+
+    },
+    "Search Categories" : {
+
+    },
+    "Search File Types" : {
 
     },
     "Settings…" : {
@@ -665,9 +666,6 @@
 
     },
     "Start Using %@" : {
-
-    },
-    "Starts with macOS" : {
 
     },
     "Syncing" : {

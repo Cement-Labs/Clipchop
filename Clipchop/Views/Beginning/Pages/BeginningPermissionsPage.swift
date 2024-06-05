@@ -40,9 +40,9 @@ struct BeginningPermissionsPage: View {
         .frame(maxHeight: .infinity)
         
 #if !DEBUG
-        .onChange(of: PermissionsManager.remaining, initial: true) { old, new in
-            canContinue(new == 0)
-        }
+//        .onChange(of: PermissionsManager.remaining, initial: true) { old, new in
+//            canContinue(new == 0)
+//        }
 #endif
     }
 }

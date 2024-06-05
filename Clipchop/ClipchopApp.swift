@@ -19,6 +19,8 @@ struct ClipchopApp: App {
     
     @State private var isMenuBarPresented: Bool = true
     
+    @Environment(\.modelContext) private var modelContext
+    
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     
     private let container: ModelContainer
@@ -42,6 +44,9 @@ struct ClipchopApp: App {
         
         Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
         Defaults[.excludedApplications] = Defaults.Keys.excludedApplications.defaultValue
+        
+        Defaults[.historyPreservationPeriod] = Defaults.Keys.historyPreservationPeriod.defaultValue
+        Defaults[.historyPreservationTime] = Defaults.Keys.historyPreservationTime.defaultValue
         
         // Resets clipboard history
         container.mainContext.autosaveEnabled = true

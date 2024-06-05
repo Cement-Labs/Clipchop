@@ -35,16 +35,6 @@ struct KeyboardShortcutsSection: View {
                 }
             }
         }
-        
-        Section {
-            KeyboardShortcuts.Recorder(for: .pin) {
-                Text("Pin history")
-            }
-            
-            KeyboardShortcuts.Recorder(for: .delete) {
-                Text("Delete history")
-            }
-        }
     }
 }
 

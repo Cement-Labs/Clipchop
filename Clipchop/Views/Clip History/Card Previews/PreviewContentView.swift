@@ -72,7 +72,8 @@ struct PreviewContentView: View {
         VStack {
             RTFPreviewPage(rtfData: rtfData)
         }
-        .frame(width: 70, height: 70)
+        .frame(width: 80, height: 80)
+        .background(.clear)
     }
     
     private func textView(for text: String) -> some View {

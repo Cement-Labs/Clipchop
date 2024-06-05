@@ -17,6 +17,7 @@ struct GeneralSettingsPage: View {
     }
 }
 
+
 #Preview {
     previewPage {
         GeneralSettingsPage()

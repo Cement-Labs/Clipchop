@@ -11,7 +11,7 @@ import Defaults
 import KeyboardShortcuts
 
 @Observable
-class ClipHistoryViewController: NSViewController {
+class ClipHistoryViewController: NSViewController, ObservableObject {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
         expanded: NSSize(width: 500, height: 260)
@@ -19,7 +19,11 @@ class ClipHistoryViewController: NSViewController {
     
     private var panel: ClipHistoryPanel?
     
-    private var isExpanded = false
+    var isExpanded = false {
+        didSet {
+            NotificationCenter.default.post(name: .didChangeExpansionState, object: nil, userInfo: ["isExpanded": isExpanded])
+        }
+    }
     private var expansionEdge: NSRectEdge = .minY
     
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
@@ -113,8 +117,6 @@ extension ClipHistoryViewController {
             return
         }
         
-        panel.alphaValue = 1.0
-        
         panel.setFrame(
             CGRect(
                 origin: positionNear(position: position, size: Self.size.collapsed)
@@ -132,17 +134,8 @@ extension ClipHistoryViewController {
     }
     
     func close() {
-        NSAnimationContext.runAnimationGroup({ context in
-            context.duration = 0.2
-            panel?.animator().alphaValue = 0.0
-        }, completionHandler: {
-            DispatchQueue.main.async {
-                self.setExpansion(false)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                self.panel?.orderOut(nil)
-            }
-        })
+        self.setExpansion(false)
+        self.panel?.orderOut(nil)
     }
     
     func toggle(position: CGPoint) {
@@ -166,4 +159,8 @@ extension ClipHistoryViewController {
         setExpansion(false)
         log(self, "Collapsed")
     }
+}
+
+extension Notification.Name {
+    static let didChangeExpansionState = Notification.Name("didChangeExpansionState")
 }

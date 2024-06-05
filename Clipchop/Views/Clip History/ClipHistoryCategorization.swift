@@ -12,17 +12,16 @@ import Defaults
 
 struct ClipHistoryCategorization: View {
     
-    @Query(
-        sort: \ClipboardHistory.time,
-        order: .reverse,
-        animation: .spring(dampingFraction: 0.7)
-    ) private var items: [ClipboardHistory]
+    @Query(sort: \ClipboardHistory.time, order: .reverse, animation: .spring(dampingFraction: 0.7)) private var items: [ClipboardHistory]
     
     @Environment(\.modelContext) var context
+    @Environment(\.undoManager) private var undoManager
     
+    @State private var apps = InstalledApps()
     @State private var searchText: String = ""
     @State private var isSearchVisible: Bool = false
     
+    var animationNamespace: Namespace.ID
     var rotation: Double = 80
     
     var filteredCategories: [FileCategory] {
@@ -36,10 +35,16 @@ struct ClipHistoryCategorization: View {
     var filteredItems: [ClipboardHistory] {
         items.filter { item in
             let formatter = Formatter(contents: item.contents!)
+            let appDisplayName = getAppDisplayName(for: item.app)
             return searchText.isEmpty ||
-                (item.app?.localizedCaseInsensitiveContains(searchText) ?? false) ||
+                (appDisplayName?.localizedCaseInsensitiveContains(searchText) ?? false) ||
                 (formatter.title?.localizedCaseInsensitiveContains(searchText) ?? false)
         }
+    }
+    
+    private func getAppDisplayName(for bundleID: String?) -> String? {
+        guard let bundleID = bundleID else { return nil }
+        return apps.displayName(for: bundleID)
     }
     
     var body: some View {
@@ -50,21 +55,28 @@ struct ClipHistoryCategorization: View {
                     if !filteredItems.isEmpty {
                         GeometryReader { itemGeometry in
                             VStack(alignment: .leading) {
-                                Text("All Types")
+                                Text("All Type")
                                     .font(.title.monospaced())
-                                    .padding(.leading, 12)
+                                    .padding(.leading, 16)
                                 
                                 ZStack(alignment: .topLeading) {
                                     ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack(spacing: 12) {
+                                        LazyHStack(spacing: 12) {
                                             ForEach(filteredItems) { item in
-                                                CardPreviewView(item: item)
-                                                    .environment(\.modelContext, context)
+                                                CardPreviewView(item: item, keyboardShortcut: "none")
+                                                    .environmentObject(apps)
                                             }
                                             .offset(x: 12)
                                         }
                                     }
                                 }
+                                .matchedGeometryEffect(
+                                    id: "clipHistory",
+                                    in: animationNamespace,
+                                    properties: .frame,
+                                    anchor: .center,
+                                    isSource: true
+                                )
                             }
                             .rotation3DEffect(.init(degrees: rotation(for: itemGeometry, in: geometry)),
                                               axis: (x: 1, y: 0, z: 0),
@@ -72,69 +84,23 @@ struct ClipHistoryCategorization: View {
                             )
                         }
                         .frame(height: 130)
+                    } else {
+                        EmptyStateView()
                     }
                     
                     let pinnedItems = items.filter { $0.pinned }
                     if !pinnedItems.isEmpty {
-                        GeometryReader { itemGeometry in
-                            VStack(alignment: .leading) {
-                                Text("Pinned")
-                                    .font(.title.monospaced())
-                                    .padding(.leading, 12)
-                                
-                                ZStack(alignment: .topLeading) {
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack(spacing: 12) {
-                                            ForEach(pinnedItems) { item in
-                                                CardPreviewView(item: item)
-                                                    .environment(\.modelContext, context)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            .rotation3DEffect(.init(degrees: rotation(for: itemGeometry, in: geometry)),
-                                              axis: (x: 1, y: 0, z: 0),
-                                              anchor: .center
-                            )
-                        }
-                        .offset(x: 12)
-                        .frame(height: 130)
+                        renderSection(title: "Pinned", items: pinnedItems, geometry: geometry)
                     }
                     
                     ForEach(filteredCategories) { category in
-                        Group {
-                            let filteredItems = items.filter { item in
-                                let formatter = Formatter(contents: item.contents!)
-                                return category.types.contains(formatter.title ?? "")
-                            }
-                            
-                            if !filteredItems.isEmpty {
-                                GeometryReader { itemGeometry in
-                                    VStack(alignment: .leading) {
-                                        Text(category.name)
-                                            .font(.title.monospaced())
-                                            .padding(.leading, 12)
-                                        
-                                        ZStack(alignment: .topLeading) {
-                                            ScrollView(.horizontal, showsIndicators: false) {
-                                                HStack(spacing: 12) {
-                                                    ForEach(filteredItems) { item in
-                                                        CardPreviewView(item: item)
-                                                            .environment(\.modelContext, context)
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .rotation3DEffect(.init(degrees: rotation(for: itemGeometry, in: geometry)),
-                                                      axis: (x: 1, y: 0, z: 0),
-                                                      anchor: .center
-                                    )
-                                }
-                                .offset(x: 12)
-                                .frame(height: 130)
-                            }
+                        let categoryItems = items.filter { item in
+                            let formatter = Formatter(contents: item.contents!)
+                            return category.types.contains(formatter.title ?? "")
+                        }
+                        
+                        if !categoryItems.isEmpty {
+                            renderSection(title: category.name, items: categoryItems, geometry: geometry)
                         }
                     }
                 }
@@ -146,6 +112,19 @@ struct ClipHistoryCategorization: View {
             .overlay(
                 VStack {
                     ZStack {
+                        Button(action: undo) { }
+                        .disabled(!(undoManager?.canUndo ?? false))
+                        .opacity(0)
+                        .allowsHitTesting(false)
+                        .buttonStyle(.borderless)
+                        .keyboardShortcut("z", modifiers: .command)
+                        .frame(width: 0, height: 0)
+                        Button(action: redo) { }
+                        .disabled(!(undoManager?.canRedo ?? false))
+                        .opacity(0)
+                        .allowsHitTesting(false)
+                        .buttonStyle(.borderless)
+                        .keyboardShortcut("z", modifiers: [.command, .shift])
                         RoundedRectangle(cornerRadius: 30)
                             .fill(.thinMaterial)
                             .overlay(
@@ -155,10 +134,11 @@ struct ClipHistoryCategorization: View {
                         HStack {
                             if isSearchVisible {
                                 TextField("Search", text: $searchText)
-                                    .padding(.leading, 15)
+                                    .padding([.leading, .horizontal], 15)
                                     .cornerRadius(25)
                                     .monospaced()
                                     .textFieldStyle(.plain)
+                                    .frame(width: isSearchVisible ? 425 : 30, height: 30)
                             }
                             Button(action: {
                                 withAnimation {
@@ -172,24 +152,75 @@ struct ClipHistoryCategorization: View {
                             }
                             .buttonStyle(.borderless)
                         }
+                        .offset(x: isSearchVisible ? -10 : 0)
                     }
                     .frame(width: isSearchVisible ? 465 : 30, height: 30)
-                    .shadow(color: .gray, radius: 30, x: 0, y: 5)
                     .cornerRadius(25)
                 }
-                .padding(.top, 15)
-                .padding(.trailing, 15)
+                .padding([.top,.trailing], 15)
                 , alignment: .topTrailing
             )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
     }
     
-    func rotation(for itemGeometry: GeometryProxy, in containerGeometry: GeometryProxy) -> Double {
+    @ViewBuilder
+    private func renderSection(title: String, items: [ClipboardHistory], geometry: GeometryProxy) -> some View {
+        GeometryReader { itemGeometry in
+            VStack(alignment: .leading) {
+                Text(title)
+                    .font(.title.monospaced())
+                    .padding(.leading, 16)
+                
+                ZStack(alignment: .topLeading) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 12) {
+                            ForEach(items) { item in
+                                CardPreviewView(item: item, keyboardShortcut: "none")
+                                    .environmentObject(apps)
+                            }
+                            .offset(x: 12)
+                        }
+                    }
+                }
+            }
+            .rotation3DEffect(.init(degrees: rotation(for: itemGeometry, in: geometry)),
+                              axis: (x: 1, y: 0, z: 0),
+                              anchor: .center
+            )
+        }
+        .frame(height: 130)
+    }
+    
+    private func rotation(for itemGeometry: GeometryProxy, in containerGeometry: GeometryProxy) -> Double {
         let containerMidY = containerGeometry.frame(in: .global).midY
         let itemMidY = itemGeometry.frame(in: .global).midY
         let offset = itemMidY - containerMidY
         let progress = offset / containerGeometry.size.height
         let degree = progress * rotation
         return degree
+    }
+    
+    private func undo() {
+        undoManager?.undo()
+    }
+    
+    private func redo() {
+        undoManager?.redo()
+    }
+}
+
+struct EmptyStateView: View {
+    var body: some View {
+        VStack(alignment: .center) {
+            Image(.clipchopFill)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 24)
+            Text("No Clipboard History Available")
+        }
+        .foregroundStyle(.blendMode(.overlay))
+        .frame(width: 476, height: 130)
+        .padding(.all, 12)
     }
 }

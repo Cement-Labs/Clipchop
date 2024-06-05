@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import SFSafeSymbols
 import Defaults
 
@@ -18,10 +19,11 @@ struct ClipboardBehaviorsSection: View {
     @State private var isDeleteHistoryAlertPresented = false
     @State private var isApplyPreservationTimeAlertPresented = false
     
-    @State private var cachedPreservationPeriod: HistoryPreservationPeriod = .forever
+    @State private var cachedPreservationPeriod: HistoryPreservationPeriod = .day
     @State private var cachedPreservationTime: Double = 1
     
     @Environment(\.hasTitle) private var hasTitle
+    @ObservedObject private var clipboardManager = ClipboardManager()
     
     var body: some View {
         Section {
@@ -74,9 +76,6 @@ struct ClipboardBehaviorsSection: View {
                 .disabled(historyPreservationPeriod == .forever && DefaultsStack.Group.historyPreservation.isUnchanged)
                 .animation(.easeInOut, value: DefaultsStack.Group.historyPreservation.isUnchanged)
                 
-                .onAppear {
-                    cache()
-                }
                 .alert("Apply Preservation Time", isPresented: $isApplyPreservationTimeAlertPresented) {
                     Button("Apply", role: .destructive) {
                         // TODO: Apply
@@ -117,7 +116,28 @@ struct ClipboardBehaviorsSection: View {
             .controlSize(.large)
             .alert("Clear Clipboard History", isPresented: $isDeleteHistoryAlertPresented) {
                 Button("Delete", role: .destructive) {
-                    // TODO: Delete
+                    do {
+                        let container = try ModelContainer(for: ClipboardContent.self, ClipboardHistory.self)
+                        
+                        let context = ModelContext(container)
+                        
+                        let contentFetchDescriptor = FetchDescriptor<ClipboardContent>()
+                        let allClipboardContents = try context.fetch(contentFetchDescriptor)
+                        for content in allClipboardContents {
+                            context.delete(content)
+                        }
+                        
+                        let historyFetchDescriptor = FetchDescriptor<ClipboardHistory>()
+                        let allClipboardHistories = try context.fetch(historyFetchDescriptor)
+                        for history in allClipboardHistories {
+                            context.delete(history)
+                        }
+                        
+                        try context.save()
+                        
+                    } catch {
+                        print("Failed to delete : \(error)")
+                    }
                 }
             } message: {
                 Text("This action clears all your clipboard history unrestorably, including pins.")
@@ -130,7 +150,7 @@ struct ClipboardBehaviorsSection: View {
     private func cache() {
         cachedPreservationPeriod = historyPreservationPeriod
         cachedPreservationTime = historyPreservationTime
-        
+        clipboardManager.restartPeriodicCleanup()
         DefaultsStack.shared.markDirty(.historyPreservation)
     }
     

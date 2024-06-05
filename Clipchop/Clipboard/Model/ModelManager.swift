@@ -16,11 +16,12 @@ class ModelManager {
     
     let beginningViewController = BeginningViewController()
     let clipHistoryViewController = ClipHistoryViewController()
+    let clipboardManager = ClipboardManager()
     
     init(context: ModelContext) {
         self.context = context
         
-        Self.monitor = .init(context: context, controller: clipHistoryViewController)
+        Self.monitor = .init(context: context, controller: clipHistoryViewController, clipboardManager: clipboardManager)
         Self.monitor?.start()
         
         KeyboardShortcuts.onKeyDown(for: .window) {

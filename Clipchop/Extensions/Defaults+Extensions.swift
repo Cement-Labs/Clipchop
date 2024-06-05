@@ -39,7 +39,7 @@ extension Defaults.Keys {
     
     static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
     
-    static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .forever)
+    static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .day)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
     
     static let categories = Key<[FileCategory]>("categories", default: [
@@ -65,8 +65,12 @@ extension Defaults.Keys {
             "zip", "rar", "7z", "tar", "gz", "bz2"
         ]),
         
-        .init(name: .init(localized: "Code", defaultValue: "Code Files"), types: [
+        .init(name: .init(localized: "Code Files", defaultValue: "Code Files"), types: [
             "swift", "objc", "java", "py", "cpp", "cs", "js", "ts", "html", "css", "scss", "less", "php", "rb", "pl", "go", "rs", "kt"
+        ]),
+        
+        .init(name: .init(localized: "Link", defaultValue: "Link"), types: [
+            "Link"
         ])
     ])
 

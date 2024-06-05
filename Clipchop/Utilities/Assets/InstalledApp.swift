@@ -87,4 +87,7 @@ class InstalledApps: ObservableObject {
             }
         }
     }
+    func displayName(for bundleID: String) -> String? {
+        return (systemApps + installedApps).first { $0.bundleID == bundleID }?.displayName
+    }
 }

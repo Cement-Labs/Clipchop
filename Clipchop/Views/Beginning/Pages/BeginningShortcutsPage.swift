@@ -26,7 +26,7 @@ struct BeginningShortcutsPage: View {
             }
             .font(.title)
             .bold()
-            .frame(height: 125)
+            .frame(height: 200)
             
             Form {
                 KeyboardShortcutsSection()
