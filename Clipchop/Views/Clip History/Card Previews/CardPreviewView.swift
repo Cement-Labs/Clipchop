@@ -164,10 +164,10 @@ struct CardPreviewView: View {
                         .fill( Material.ultraThin)
                         .frame(width: 80, height: 80)
                     VStack(spacing: 2) {
-                        if let bundleID = item.app, let appIcon = getAppIcon(byBundleID: bundleID) {
+                        if let bundleID = item.appId, let appIcon = getAppIcon(byBundleID: bundleID) {
                             Image(nsImage: appIcon.resized(to: .init(width: 20, height: 20)))
                         }
-                        if let bundleID = item.app, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
+                        if let bundleID = item.appId, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
                             Text(appDisplayName)
                                 .font(.system(size: 10).monospaced())
                                 .minimumScaleFactor(0.8)

@@ -4,7 +4,7 @@
 //
 //  Created by Xinshao_Air on 2024/6/2.
 //
-
+/*
 import SwiftUI
 import SwiftData
 import SFSafeSymbols
@@ -160,7 +160,6 @@ struct ClipHistoryCategorization: View {
                 .padding([.top,.trailing], 15)
                 , alignment: .topTrailing
             )
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
     }
     
@@ -224,3 +223,4 @@ struct EmptyStateView: View {
         .padding(.all, 12)
     }
 }
+*/

@@ -83,6 +83,7 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
     @Attribute(.unique)
     var id: UUID
     var app: String?
+    var appId: String?
     var pinned: Bool
     var deleted: Bool
     var time: Date?
@@ -98,7 +99,9 @@ final class ClipboardHistory: Equatable, Identifiable, Hashable {
         self.pinned = false
         self.deleted = false
         
-        self.app = ClipboardHistory.source?.bundleIdentifier
+        self.app = ClipboardHistory.source?.localizedName
+        self.appId = ClipboardHistory.source?.bundleIdentifier
+       
         self.time = Date.now
     }
     
