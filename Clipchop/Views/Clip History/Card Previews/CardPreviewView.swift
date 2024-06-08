@@ -11,6 +11,7 @@ import Defaults
 import SFSafeSymbols
 
 struct CardPreviewView: View {
+    
     private var sourceApp: NSRunningApplication? {NSWorkspace.shared.frontmostApplication}
     
     @Bindable var item: ClipboardHistory
@@ -103,18 +104,17 @@ struct CardPreviewView: View {
                             isHoveredPin = isOverPin
                         }
                     }
-                    .onTapGesture {
-                        withAnimation(Animation.easeInOut) {
-                            do{
-                                item.pinned.toggle()
-                            }
-                        }
-                    }
-                
                 Image(systemName: pinIcon)
                     .allowsHitTesting(false)
                     .rotationEffect(Angle.degrees(item.pinned ? 45 : 0))
                     .font(isHoveredPin ? .system(size: 10) : .system(size: 7.5))
+            }
+            .onTapGesture {
+                withAnimation(Animation.easeInOut) {
+                    do{
+                        item.pinned.toggle()
+                    }
+                }
             }
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .topTrailing)
             .padding(.top, 10)
@@ -156,7 +156,6 @@ struct CardPreviewView: View {
         .frame(width: 80, height: 80, alignment: .center)
         .background(backgroundColor)
         .clipShape(.rect(cornerRadius: 12.5))
-        
         .overlay(
             ZStack{
                 if showMore && isSelected {
@@ -170,9 +169,9 @@ struct CardPreviewView: View {
                         if let bundleID = item.appId, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
                             Text(appDisplayName)
                                 .font(.system(size: 10).monospaced())
-                                .minimumScaleFactor(0.8)
-                                .lineLimit(10)
-                                .fixedSize(horizontal: false, vertical: false)
+                                .minimumScaleFactor(0.1)
+                                .lineLimit(1)
+                                .padding(.horizontal, 5)
                         }
                         Text(formattedDate(from: item.time!))
                             .font(.system(size: 7.5).monospaced())
@@ -297,6 +296,7 @@ struct CardPreviewView: View {
         relativeFormatter.unitsStyle = .full
         return relativeFormatter.localizedString(for: date, relativeTo: Date())
     }
+    
     func getAppIcon(byBundleID bundleID: String) -> NSImage? {
         if let app = (apps.installedApps + apps.systemApps).first(where: { $0.bundleID == bundleID }) {
             return app.icon

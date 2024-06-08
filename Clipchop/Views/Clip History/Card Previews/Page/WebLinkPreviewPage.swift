@@ -27,11 +27,21 @@ struct WebLinkPreviewPage: NSViewRepresentable {
         let linkView = CustomLinkView(frame: .zero)
         linkView.metadata.url = url
         
-        fetchMetadata(for: urlString) { metadata in
-            DispatchQueue.main.async {
-                linkView.metadata = metadata ?? LPLinkMetadata()
+        if let cachedMetadata = MetadataCache.shared.getMetadata(for: urlString) {
+            linkView.metadata = cachedMetadata
+        } else {
+            fetchMetadata(for: urlString) { metadata in
+                DispatchQueue.main.async {
+                    if let metadata = metadata {
+                        MetadataCache.shared.setMetadata(metadata, for: urlString)
+                        linkView.metadata = metadata
+                    } else {
+                        linkView.metadata = LPLinkMetadata()
+                    }
+                }
             }
         }
+        
         return linkView
     }
     
@@ -57,3 +67,4 @@ struct WebLinkPreviewPage: NSViewRepresentable {
         }
     }
 }
+

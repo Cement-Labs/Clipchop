@@ -71,7 +71,12 @@ extension Defaults.Keys {
         
         .init(name: .init(localized: "Link", defaultValue: "Link"), types: [
             "Link"
+        ]),
+        
+        .init(name: .init(localized: "Color", defaultValue: "Color"), types: [
+            "Color"
         ])
+        
     ])
 
     static let allTypes = Key<[String]>("allTypes", default: categories.defaultValue.flatMap { $0.types })

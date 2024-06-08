@@ -16,55 +16,45 @@ struct ClipHistoryView: View {
         
     @Environment(\.modelContext) var context
     @Environment(\.undoManager) private var undoManager
+        
+    @StateObject private var apps = InstalledApps()
+    @StateObject private var viewModel = ClipHistoryViewModel()
     
     @Namespace private var animationNamespace
     
-    @State private var apps = InstalledApps()
     @State private var scrollPadding: CGFloat = 12
     @State private var initialScrollPadding: CGFloat = 12
     @State private var movethebutton = false
     @State private var isExpanded = false
+    
     @State private var searchText: String = ""
     @State private var isSearchVisible: Bool = false
+    @State private var filteredItems: [ClipboardHistory] = []
+    @State private var filteredCategories: [FileCategory] = []
     
-    var rotation: Double = 80
-    
-    var filteredCategories: [FileCategory] {
-        if searchText.isEmpty {
-            return Defaults[.categories]
-        } else {
-            return Defaults[.categories].filter { $0.name.localizedCaseInsensitiveContains(searchText) }
-        }
-    }
-
-    var filteredItems: [ClipboardHistory] {
-        items.filter { item in
-            let formatter = Formatter(contents: item.contents!)
-            return searchText.isEmpty ||
-                (item.app?.localizedCaseInsensitiveContains(searchText) ?? false) ||
-                (formatter.title?.localizedCaseInsensitiveContains(searchText) ?? false)
-        }
-    }
-
+    @State private var displayedItems: [ClipboardHistory] = []
+    @State private var currentPage: Int = 0
+    private let itemsPerPage: Int = 15
     
     private let controller = ClipHistoryViewController()
     
     var body: some View {
         clip {
             ZStack {
-                    Button(action: undo) { }
-                    .disabled(!(undoManager?.canUndo ?? false))
-                    .opacity(0)
-                    .allowsHitTesting(false)
-                    .buttonStyle(.borderless)
-                    .keyboardShortcut("z", modifiers: .command)
-                    .frame(width: 0, height: 0)
-                    Button(action: redo) { }
-                    .disabled(!(undoManager?.canRedo ?? false))
-                    .opacity(0)
-                    .allowsHitTesting(false)
-                    .buttonStyle(.borderless)
-                    .keyboardShortcut("z", modifiers: [.command, .shift])
+                Button(action: undo) { }
+                .disabled(!(undoManager?.canUndo ?? false))
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut("z", modifiers: .command)
+                Button(action: redo) { }
+                .disabled(!(undoManager?.canRedo ?? false))
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut("z", modifiers: [.command, .shift])
                 clip {
                     VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
                 }
@@ -79,50 +69,26 @@ struct ClipHistoryView: View {
                         }
                         .foregroundStyle(.blendMode(.overlay))
                     } else {
-                        if isExpanded {
-                            GeometryReader { geometry in
-                                let size = geometry.size
-                                ScrollView(.vertical) {
-                                    VStack(spacing: 0) {
+                        switch viewModel.viewState {
+                        case .expanded:
+                                ScrollView(.vertical, showsIndicators: false) {
+                                    VStack(spacing: 5) {
                                         if !filteredItems.isEmpty {
-                                            GeometryReader { itemGeometry in
-                                                VStack(alignment: .leading) {
-                                                    Text("All Type")
-                                                        .font(.title.monospaced())
-                                                        .padding(.leading, 16)
-                                                    
-                                                    ZStack(alignment: .topLeading) {
-                                                        ScrollView(.horizontal, showsIndicators: false) {
-                                                            LazyHStack(spacing: 12) {
-                                                                ForEach(filteredItems) { item in
-                                                                    CardPreviewView(item: item, keyboardShortcut: "none")
-                                                                        .environmentObject(apps)
-                                                                }
-                                                                .offset(x: 12)
-                                                            }
-                                                        }
-                                                    }
-                                                    .matchedGeometryEffect(
-                                                        id: "clipHistory",
-                                                        in: animationNamespace,
-                                                        properties: .frame,
-                                                        anchor: .center,
-                                                        isSource: true
-                                                    )
-                                                }
-                                                .rotation3DEffect(.init(degrees: rotation(for: itemGeometry, in: geometry)),
-                                                                  axis: (x: 1, y: 0, z: 0),
-                                                                  anchor: .center
+                                            renderSection(title: "All Types", items: filteredItems/*, geometry: geometry*/)
+                                                .matchedGeometryEffect(
+                                                    id: "clipHistory",
+                                                    in: animationNamespace,
+                                                    properties: .frame,
+                                                    anchor: .center,
+                                                    isSource: true
                                                 )
-                                            }
-                                            .frame(height: 130)
                                         } else {
                                             EmptyStateView()
                                         }
                                         
                                         let pinnedItems = items.filter { $0.pinned }
-                                        if !pinnedItems.isEmpty {
-                                            renderSection(title: "Pinned", items: pinnedItems, geometry: geometry)
+                                        if !pinnedItems.isEmpty && !isSearchVisible {
+                                            renderSection(title: "Pinned", items: pinnedItems/*, geometry: geometry*/)
                                         }
                                         
                                         ForEach(filteredCategories) { category in
@@ -132,75 +98,38 @@ struct ClipHistoryView: View {
                                             }
                                             
                                             if !categoryItems.isEmpty {
-                                                renderSection(title: category.name, items: categoryItems, geometry: geometry)
+                                                renderSection(title: category.name, items: categoryItems/*, geometry: geometry*/)
                                             }
                                         }
                                     }
-                                    .padding(.vertical, (size.height - 130) / 2)
-                                    .scrollTargetLayout()
+                                    .padding(.vertical, 60)
                                 }
-                                .scrollTargetBehavior(.viewAligned)
-                                .scrollIndicators(.hidden)
-                                .overlay(
-                                    VStack {
-                                        ZStack {
-                                            Button(action: undo) { }
-                                            .disabled(!(undoManager?.canUndo ?? false))
-                                            .opacity(0)
-                                            .allowsHitTesting(false)
-                                            .buttonStyle(.borderless)
-                                            .keyboardShortcut("z", modifiers: .command)
-                                            .frame(width: 0, height: 0)
-                                            Button(action: redo) { }
-                                            .disabled(!(undoManager?.canRedo ?? false))
-                                            .opacity(0)
-                                            .allowsHitTesting(false)
-                                            .buttonStyle(.borderless)
-                                            .keyboardShortcut("z", modifiers: [.command, .shift])
-                                            RoundedRectangle(cornerRadius: 30)
-                                                .fill(.thinMaterial)
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 30)
-                                                        .stroke(Color.gray, lineWidth: 0.5)
-                                                )
-                                            HStack {
-                                                if isSearchVisible {
-                                                    TextField("Search", text: $searchText)
-                                                        .padding([.leading, .horizontal], 15)
-                                                        .cornerRadius(25)
-                                                        .monospaced()
-                                                        .textFieldStyle(.plain)
-                                                        .frame(width: isSearchVisible ? 425 : 30, height: 30)
-                                                }
-                                                Button(action: {
-                                                    withAnimation {
-                                                        isSearchVisible.toggle()
-                                                    }
-                                                }) {
-                                                    Image(systemSymbol: .magnifyingglass)
-                                                        .resizable()
-                                                        .frame(width: 10, height: 10)
-                                                        .padding(5)
-                                                }
-                                                .buttonStyle(.borderless)
-                                            }
-                                            .offset(x: isSearchVisible ? -10 : 0)
-                                        }
-                                        .frame(width: isSearchVisible ? 465 : 30, height: 30)
-                                        .cornerRadius(25)
-                                    }
-                                    .padding([.top,.trailing], 15)
-                                    , alignment: .topTrailing
-                                )
-                            }
-                        } else {
+                                .overlay(searchBar().padding([.top,.trailing], 15), alignment: .topTrailing)
+                                .onAppear {
+                                    loadMoreItems()
+                                }
+                                .onDisappear {
+                                    clearResources()
+                                }
+                        case .collapsed:
                             ZStack(alignment: .topLeading) {
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 12) {
-                                        ForEach(Array(items.enumerated()), id: \.offset) { index, item in
-                                            let shortcut = index < 9 ? "\(index + 1)" : "none"
-                                            CardPreviewView(item: item, keyboardShortcut: shortcut)
+                                    LazyHStack(spacing: 12) {
+                                        ForEach(items) { item in
+                                            CardPreviewView(item: item, keyboardShortcut: "none")
                                                 .environmentObject(apps)
+                                                .onAppear {
+                                                    if item == displayedItems.last {
+                                                        loadMoreItems()
+                                                    }
+                                                }
+                                                .matchedGeometryEffect(
+                                                    id: "clipHistory",
+                                                    in: animationNamespace,
+                                                    properties: .frame,
+                                                    anchor: .center,
+                                                    isSource: true
+                                                )
                                         }
                                     }
                                     .offset(x: scrollPadding)
@@ -256,13 +185,6 @@ struct ClipHistoryView: View {
                                         alignment: .leading)
                                 }
                             }
-                            .matchedGeometryEffect(
-                                id: "clipHistory",
-                                in: animationNamespace,
-                                properties: .frame,
-                                anchor: .center,
-                                isSource: true
-                            )
                         }
                     }
                 }
@@ -271,21 +193,22 @@ struct ClipHistoryView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .onReceive(NotificationCenter.default.publisher(for: .didChangeExpansionState)) { notification in
             if let userInfo = notification.userInfo, let isExpanded = userInfo["isExpanded"] as? Bool {
-                withAnimation(.easeInOut) {
-                    self.isExpanded = isExpanded
+                withAnimation(.default) {
+                    self.viewModel.viewState = isExpanded ? .expanded : .collapsed
+                    self.isSearchVisible = false
+                    performSearch()
                 }
             }
         }
+        .onChange(of: searchText) { newValue, _ in
+            performSearch()
+        }
+        .onAppear {
+            loadMoreItems()
+        }
     }
     
-    private func rotation(for itemGeometry: GeometryProxy, in containerGeometry: GeometryProxy) -> Double {
-        let containerMidY = containerGeometry.frame(in: .global).midY
-        let itemMidY = itemGeometry.frame(in: .global).midY
-        let offset = itemMidY - containerMidY
-        let progress = offset / containerGeometry.size.height
-        let degree = progress * rotation
-        return degree
-    }
+    // MARK: - ViewBuilder
     
     @ViewBuilder
     private func clip(@ViewBuilder content: @escaping () -> some View) -> some View {
@@ -294,31 +217,87 @@ struct ClipHistoryView: View {
     }
     
     @ViewBuilder
-    private func renderSection(title: String, items: [ClipboardHistory], geometry: GeometryProxy) -> some View {
-        GeometryReader { itemGeometry in
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.title.monospaced())
-                    .padding(.leading, 16)
-                
-                ZStack(alignment: .topLeading) {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 12) {
-                            ForEach(items) { item in
-                                CardPreviewView(item: item, keyboardShortcut: "none")
-                                    .environmentObject(apps)
-                            }
-                            .offset(x: 12)
+    private func renderSection(title: String, items: [ClipboardHistory]/*, geometry: GeometryProxy*/) -> some View {
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.title.monospaced())
+                .padding(.horizontal, 24)
+                .offset(y: 8)
+            
+            ZStack(alignment: .topLeading) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 12) {
+                        ForEach(items) { item in
+                            CardPreviewView(item: item, keyboardShortcut: "none")
+                                .environmentObject(apps)
                         }
+                        .offset(x: 12)
                     }
                 }
             }
-            .rotation3DEffect(.init(degrees: rotation(for: itemGeometry, in: geometry)),
-                              axis: (x: 1, y: 0, z: 0),
-                              anchor: .center
-            )
         }
         .frame(height: 130)
+    }
+    
+    @ViewBuilder
+    private func searchBar() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 30)
+                .fill(.thinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
+            HStack {
+                if isSearchVisible {
+                    TextField("Search", text: $searchText)
+                        .padding([.leading, .horizontal], 15)
+                        .cornerRadius(25)
+                        .monospaced()
+                        .textFieldStyle(.plain)
+                        .frame(width: isSearchVisible ? 425 : 30, height: 30)
+                }
+                Button(action: {
+                    withAnimation {
+                        isSearchVisible.toggle()
+                        if !isSearchVisible {
+                            searchText = ""
+                        }
+                    }
+                }) {
+                    Image(systemSymbol: .magnifyingglass)
+                        .resizable()
+                        .frame(width: 10, height: 10)
+                        .padding(5)
+                }
+                .buttonStyle(.borderless)
+            }
+            .offset(x: isSearchVisible ? -10 : 0)
+        }
+        .frame(width: isSearchVisible ? 465 : 30, height: 30)
+        .cornerRadius(25)
+    }
+    
+    // MARK: - ModelManager
+    
+    private func loadMoreItems() {
+        let startIndex = currentPage * itemsPerPage
+        let endIndex = min(startIndex + itemsPerPage, items.count)
+        if startIndex < endIndex {
+            displayedItems.append(contentsOf: items[startIndex..<endIndex])
+            currentPage += 1
+            print("\(currentPage)")
+        }
+        print("loadMoreItems")
+    }
+    
+    func clearResources() {
+        currentPage = 0
+        searchText = ""
+        filteredItems.removeAll()
+        filteredCategories.removeAll()
+        displayedItems.removeAll()
+        print("clearResources")
     }
     
     private func undo() {
@@ -368,11 +347,38 @@ struct ClipHistoryView: View {
         }
     }
     
-    func performHapticFeedback() {
+    private func performHapticFeedback() {
         NSHapticFeedbackManager.defaultPerformer.perform(
             NSHapticFeedbackManager.FeedbackPattern.generic,
             performanceTime: NSHapticFeedbackManager.PerformanceTime.now
         )
+    }
+    
+    private func performSearch() {
+        let currentSearchText = searchText
+        DispatchQueue.global(qos: .userInitiated).async {
+            let filteredCategories: [FileCategory]
+            let filteredItems: [ClipboardHistory]
+            
+            if currentSearchText.isEmpty {
+                filteredCategories = Defaults[.categories]
+                filteredItems = items
+            } else {
+                filteredCategories = Defaults[.categories].filter { $0.name.localizedCaseInsensitiveContains(currentSearchText) }
+                filteredItems = items.filter { item in
+                    let formatter = Formatter(contents: item.contents!)
+                    return currentSearchText.isEmpty ||
+                        (item.app?.localizedCaseInsensitiveContains(currentSearchText) ?? false) ||
+                        (formatter.title?.localizedCaseInsensitiveContains(currentSearchText) ?? false) ||
+                        (formatter.contentPreview.localizedCaseInsensitiveContains(currentSearchText))
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.filteredCategories = filteredCategories
+                self.filteredItems = filteredItems
+            }
+        }
     }
 }
 

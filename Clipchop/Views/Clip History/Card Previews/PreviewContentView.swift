@@ -14,7 +14,13 @@ import QuickLookThumbnailing
 import SwiftHEXColors
 import LinkPresentation
 
-struct PreviewContentView: View {
+
+struct PreviewContentView: View, Equatable {
+    
+    static func == (lhs: PreviewContentView, rhs: PreviewContentView) -> Bool {
+        return lhs.clipboardHistory.id == rhs.clipboardHistory.id
+    }
+    
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false
     
@@ -59,7 +65,7 @@ struct PreviewContentView: View {
     }
     
     private func imageView(for image: NSImage) -> some View {
-        if let resizedImage = resizeImage(image: image) {
+        if let resizedImage = getCachedOrResizeImage(image: image, for: clipboardHistory.id) {
             return AnyView(
                 Image(nsImage: resizedImage)
                     .aspectRatio(contentMode: .fit)
@@ -141,9 +147,13 @@ struct PreviewContentView: View {
     
     private func loadThumbnail() {
         guard let fileURL = clipboardHistory.formatter.fileURLs.first else { return }
-        isThumbnailLoading = true
-        DispatchQueue.global().async {
-            self.generateAndSetThumbnail(for: fileURL)
+        if let cachedThumbnail = MetadataCache.shared.getThumbnail(for: fileURL) {
+            self.thumbnail = cachedThumbnail
+        } else {
+            isThumbnailLoading = true
+            DispatchQueue.global().async {
+                self.generateAndSetThumbnail(for: fileURL)
+            }
         }
     }
     
@@ -164,7 +174,9 @@ struct PreviewContentView: View {
                     if let error = error {
                         log(/*self,*/ "Error generating thumbnail: \(error)")
                     } else if let cgImage = thumbnail?.cgImage {
-                        self.thumbnail = NSImage(cgImage: cgImage, size: NSSize())
+                        let nsImage = NSImage(cgImage: cgImage, size: NSSize())
+                        self.thumbnail = nsImage
+                        MetadataCache.shared.setThumbnail(nsImage, for: fileURL)
                     }
                     self.isThumbnailLoading = false
                 }
@@ -173,6 +185,19 @@ struct PreviewContentView: View {
     }
     
     // MARK: - Resize Image
+    
+    private func getCachedOrResizeImage(image: NSImage, for identifier: UUID?) -> NSImage? {
+        guard let identifier = identifier else { return nil }
+        if let cachedImage = MetadataCache.shared.getResizedImage(for: identifier) {
+            return cachedImage
+        } else {
+            let resizedImage = resizeImage(image: image)
+            if let resizedImage = resizedImage {
+                MetadataCache.shared.setResizedImage(resizedImage, for: identifier)
+            }
+            return resizedImage
+        }
+    }
     
     private func resizeImage(image: NSImage) -> NSImage? {
         let maxSize: CGFloat = 80

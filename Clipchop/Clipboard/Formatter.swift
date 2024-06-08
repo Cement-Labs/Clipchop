@@ -146,6 +146,22 @@ extension Formatter {
         return result
     }
     
+    var contentPreview: String {
+        var preview = ""
+        
+        if let text = text, !text.isEmpty {
+            preview = text
+        } else if let image = image {
+            preview = "Image: \(image.size.width)x\(image.size.height)"
+        } else if let url = url {
+            preview = "URL: \(url.absoluteString)"
+        } else if !fileURLs.isEmpty {
+            preview = "Files: \(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
+        }
+        
+        return preview
+    }
+    
     func categorizeFileTypes() {
         guard let result = self.title?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() else {
             log(self, "Title is nil or empty for \(self)")

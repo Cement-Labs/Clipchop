@@ -136,6 +136,7 @@ extension ClipHistoryViewController {
     func close() {
         self.setExpansion(false)
         self.panel?.orderOut(nil)
+        log(self, "Closed")
     }
     
     func toggle(position: CGPoint) {
@@ -160,6 +161,7 @@ extension ClipHistoryViewController {
         log(self, "Collapsed")
     }
 }
+
 
 extension Notification.Name {
     static let didChangeExpansionState = Notification.Name("didChangeExpansionState")
