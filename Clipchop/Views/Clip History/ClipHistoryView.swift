@@ -26,17 +26,35 @@ struct ClipHistoryView: View {
     @State private var initialScrollPadding: CGFloat = 12
     @State private var movethebutton = false
     @State private var isExpanded = false
+    @State private var selectedTab: String = "All Types"
     
     @State private var searchText: String = ""
     @State private var isSearchVisible: Bool = false
-    @State private var filteredItems: [ClipboardHistory] = []
-    @State private var filteredCategories: [FileCategory] = []
     
     @State private var displayedItems: [ClipboardHistory] = []
     @State private var currentPage: Int = 0
     private let itemsPerPage: Int = 15
     
     private let controller = ClipHistoryViewController()
+    
+    var filteredCategories: [FileCategory] {
+        return Defaults[.categories]
+    }
+    
+    var filteredItems: [ClipboardHistory] {
+//        if searchText.isEmpty {
+            return items
+//        } 
+//        else {
+//            return items.filter { item in
+//                let formatter = Formatter(contents: item.contents!)
+//                return
+//                    (item.app?.localizedCaseInsensitiveContains(searchText) ?? false) ||
+//                    (formatter.title?.localizedCaseInsensitiveContains(searchText) ?? false) ||
+//                    (formatter.contentPreview.localizedCaseInsensitiveContains(searchText))
+//            }
+//        }
+    }
     
     var body: some View {
         clip {
@@ -71,120 +89,9 @@ struct ClipHistoryView: View {
                     } else {
                         switch viewModel.viewState {
                         case .expanded:
-                                ScrollView(.vertical, showsIndicators: false) {
-                                    VStack(spacing: 5) {
-                                        if !filteredItems.isEmpty {
-                                            renderSection(title: "All Types", items: filteredItems/*, geometry: geometry*/)
-                                                .matchedGeometryEffect(
-                                                    id: "clipHistory",
-                                                    in: animationNamespace,
-                                                    properties: .frame,
-                                                    anchor: .center,
-                                                    isSource: true
-                                                )
-                                        } else {
-                                            EmptyStateView()
-                                        }
-                                        
-                                        let pinnedItems = items.filter { $0.pinned }
-                                        if !pinnedItems.isEmpty && !isSearchVisible {
-                                            renderSection(title: "Pinned", items: pinnedItems/*, geometry: geometry*/)
-                                        }
-                                        
-                                        ForEach(filteredCategories) { category in
-                                            let categoryItems = items.filter { item in
-                                                let formatter = Formatter(contents: item.contents!)
-                                                return category.types.contains(formatter.title ?? "")
-                                            }
-                                            
-                                            if !categoryItems.isEmpty {
-                                                renderSection(title: category.name, items: categoryItems/*, geometry: geometry*/)
-                                            }
-                                        }
-                                    }
-                                    .padding(.vertical, 60)
-                                }
-                                .overlay(searchBar().padding([.top,.trailing], 15), alignment: .topTrailing)
-                                .onAppear {
-                                    loadMoreItems()
-                                }
-                                .onDisappear {
-                                    clearResources()
-                                }
+                            expandedView()
                         case .collapsed:
-                            ZStack(alignment: .topLeading) {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack(spacing: 12) {
-                                        ForEach(items) { item in
-                                            CardPreviewView(item: item, keyboardShortcut: "none")
-                                                .environmentObject(apps)
-                                                .onAppear {
-                                                    if item == displayedItems.last {
-                                                        loadMoreItems()
-                                                    }
-                                                }
-                                                .matchedGeometryEffect(
-                                                    id: "clipHistory",
-                                                    in: animationNamespace,
-                                                    properties: .frame,
-                                                    anchor: .center,
-                                                    isSource: true
-                                                )
-                                        }
-                                    }
-                                    .offset(x: scrollPadding)
-                                    .background(GeometryReader { geometry in
-                                        Color.clear
-                                            .onChange(of: geometry.frame(in: .global).minX) { newValue, _ in
-                                                let deltaFromInitial = newValue
-                                                if deltaFromInitial >= 15 && !movethebutton {
-                                                    performHapticFeedback()
-                                                    withAnimation(.spring()) {
-                                                        scrollPadding = 74
-                                                        movethebutton = true
-                                                        initialScrollPadding = scrollPadding
-                                                    }
-                                                } else if deltaFromInitial < -5 && movethebutton {
-                                                    performHapticFeedback()
-                                                    withAnimation(.spring()) {
-                                                        scrollPadding = 12
-                                                        movethebutton = false
-                                                        initialScrollPadding = scrollPadding
-                                                        
-                                                    }
-                                                }
-                                            }
-                                    })
-                                    .overlay (
-                                        VStack {
-                                            VStack(spacing: 5){
-                                                SettingsLink {
-                                                    ZStack(alignment: .center) {
-                                                        RoundedRectangle(cornerRadius: 5)
-                                                            .fill(Color.accentColor)
-                                                            .frame(width: 50, height: 38)
-                                                        Image(systemSymbol: .gearshape)
-                                                    }
-                                                }
-                                                .buttonStyle(.borderless)
-                                                ZStack {
-                                                    RoundedRectangle(cornerRadius: 5)
-                                                        .fill(.red)
-                                                        .frame(width: 50, height: 38)
-                                                    Image(systemSymbol: .trash)
-                                                }
-                                                .onTapGesture {
-                                                    showAlert()
-                                                }
-                                            }
-                                            .frame(width: 50, height: 80)
-                                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                                        }
-                                            .animation(.spring(), value: movethebutton)
-                                            .offset(x: movethebutton ? 12 : -120),
-                                        alignment: .leading)
-                                }
-                            }
+                            collapsedView()
                         }
                     }
                 }
@@ -196,12 +103,9 @@ struct ClipHistoryView: View {
                 withAnimation(.default) {
                     self.viewModel.viewState = isExpanded ? .expanded : .collapsed
                     self.isSearchVisible = false
-                    performSearch()
+                   
                 }
             }
-        }
-        .onChange(of: searchText) { newValue, _ in
-            performSearch()
         }
         .onAppear {
             loadMoreItems()
@@ -217,26 +121,148 @@ struct ClipHistoryView: View {
     }
     
     @ViewBuilder
-    private func renderSection(title: String, items: [ClipboardHistory]/*, geometry: GeometryProxy*/) -> some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .font(.title.monospaced())
-                .padding(.horizontal, 24)
-                .offset(y: 8)
-            
-            ZStack(alignment: .topLeading) {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 12) {
-                        ForEach(items) { item in
-                            CardPreviewView(item: item, keyboardShortcut: "none")
-                                .environmentObject(apps)
-                        }
-                        .offset(x: 12)
-                    }
+    private func renderSection(/*title: String, */items: [ClipboardHistory]) -> some View {
+        LazyVStack(alignment: .leading) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 5), spacing: 12) {
+                ForEach(items) { item in
+                    CardPreviewView(item: item, keyboardShortcut: "none")
+                        .environmentObject(apps)
+                        .matchedGeometryEffect(
+                            id: item.id,
+                            in: animationNamespace,
+                            properties: .frame,
+                            anchor: .center,
+                            isSource: true
+                        )
                 }
             }
+            .padding(.horizontal, 12)
         }
-        .frame(height: 130)
+    }
+    
+    @ViewBuilder
+    private func expandedView() -> some View {
+        VStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVStack {
+                    if selectedTab == "All Types" {
+                        if !filteredItems.isEmpty {
+                            ScrollView(.vertical, showsIndicators: false) {
+                                renderSection(/*title: "All Types", */items: filteredItems)
+                            }
+                        } else {
+                            EmptyStateView()
+                        }
+                    } else if selectedTab == "Pinned" {
+                        let pinnedItems = filteredItems.filter { $0.pinned }
+                        if !pinnedItems.isEmpty {
+                            ScrollView(.vertical, showsIndicators: false) {
+                                renderSection(/*title: "Pinned", */items: pinnedItems)
+                            } 
+                        } else {
+                            EmptyStateView()
+                        }
+                    } else {
+                        ForEach(filteredCategories) { category in
+                            if selectedTab == category.name {
+                                let categoryItems = items.filter { item in
+                                    let formatter = Formatter(contents: item.contents!)
+                                    return category.types.contains(formatter.title ?? "")
+                                }
+                                
+                                if !categoryItems.isEmpty {
+                                    ScrollView(.vertical, showsIndicators: false) {
+                                        renderSection(/*title: category.name, */items: categoryItems)
+                                    }
+                                } else {
+                                    EmptyStateView()
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.vertical, 60)
+            }
+            .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
+            .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
+        }
+    }
+    
+    @ViewBuilder
+    private func collapsedView() -> some View {
+        ZStack(alignment: .topLeading) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 12) {
+                    ForEach(items) { item in
+                        CardPreviewView(item: item, keyboardShortcut: "none")
+                            .environmentObject(apps)
+                            .onAppear {
+                                if item == displayedItems.last && displayedItems.count < items.count {
+                                    loadMoreItems()
+                                }
+                            }
+                            .matchedGeometryEffect(
+                                id: item.id,
+                                in: animationNamespace,
+                                properties: .frame,
+                                anchor: .center,
+                                isSource: true
+                            )
+                    }
+                }
+                .offset(x: scrollPadding)
+                .background(GeometryReader { geometry in
+                    Color.clear
+                        .onChange(of: geometry.frame(in: .global).minX) { newValue, _ in
+                            let deltaFromInitial = newValue
+                            if deltaFromInitial >= 15 && !movethebutton {
+                                performHapticFeedback()
+                                withAnimation(.spring()) {
+                                    scrollPadding = 74
+                                    movethebutton = true
+                                    initialScrollPadding = scrollPadding
+                                }
+                            } else if deltaFromInitial < -5 && movethebutton {
+                                performHapticFeedback()
+                                withAnimation(.spring()) {
+                                    scrollPadding = 12
+                                    movethebutton = false
+                                    initialScrollPadding = scrollPadding
+                                    
+                                }
+                            }
+                        }
+                })
+                .overlay (
+                    VStack {
+                        VStack(spacing: 5){
+                            SettingsLink {
+                                ZStack(alignment: .center) {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color.accentColor)
+                                        .frame(width: 50, height: 38)
+                                    Image(systemSymbol: .gearshape)
+                                }
+                            }
+                            .buttonStyle(.borderless)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(.red)
+                                    .frame(width: 50, height: 38)
+                                Image(systemSymbol: .trash)
+                            }
+                            .onTapGesture {
+                                showAlert()
+                            }
+                        }
+                        .frame(width: 50, height: 80)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                        .animation(.spring(), value: movethebutton)
+                        .offset(x: movethebutton ? 12 : -120),
+                    alignment: .leading)
+            }
+        }
     }
     
     @ViewBuilder
@@ -252,8 +278,6 @@ struct ClipHistoryView: View {
                 if isSearchVisible {
                     TextField("Search", text: $searchText)
                         .padding([.leading, .horizontal], 15)
-                        .cornerRadius(25)
-                        .monospaced()
                         .textFieldStyle(.plain)
                         .frame(width: isSearchVisible ? 425 : 30, height: 30)
                 }
@@ -271,10 +295,42 @@ struct ClipHistoryView: View {
                         .padding(5)
                 }
                 .buttonStyle(.borderless)
+                .offset(x: isSearchVisible ? -5 : 0)
             }
-            .offset(x: isSearchVisible ? -10 : 0)
         }
         .frame(width: isSearchVisible ? 465 : 30, height: 30)
+        .cornerRadius(25)
+    }
+    
+    @ViewBuilder
+    private func tagBar() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 30)
+                .fill(.thinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    TabButton(title: "All Types", selectedTab: $selectedTab)
+                    TabButton(title: "Pinned", selectedTab: $selectedTab)
+                    
+                    ForEach(filteredCategories) { category in
+                        let categoryItems = items.filter { item in
+                            let formatter = Formatter(contents: item.contents!)
+                            return category.types.contains(formatter.title ?? "")
+                        }
+                        
+                        if !categoryItems.isEmpty {
+                            TabButton(title: category.name, selectedTab: $selectedTab)
+                        }
+                    }
+                }
+            }
+        }
+        
+        .frame(width: isSearchVisible ? 0 : 425, height: 30)
         .cornerRadius(25)
     }
     
@@ -291,11 +347,10 @@ struct ClipHistoryView: View {
         print("loadMoreItems")
     }
     
+   
     func clearResources() {
         currentPage = 0
         searchText = ""
-        filteredItems.removeAll()
-        filteredCategories.removeAll()
         displayedItems.removeAll()
         print("clearResources")
     }
@@ -353,33 +408,6 @@ struct ClipHistoryView: View {
             performanceTime: NSHapticFeedbackManager.PerformanceTime.now
         )
     }
-    
-    private func performSearch() {
-        let currentSearchText = searchText
-        DispatchQueue.global(qos: .userInitiated).async {
-            let filteredCategories: [FileCategory]
-            let filteredItems: [ClipboardHistory]
-            
-            if currentSearchText.isEmpty {
-                filteredCategories = Defaults[.categories]
-                filteredItems = items
-            } else {
-                filteredCategories = Defaults[.categories].filter { $0.name.localizedCaseInsensitiveContains(currentSearchText) }
-                filteredItems = items.filter { item in
-                    let formatter = Formatter(contents: item.contents!)
-                    return currentSearchText.isEmpty ||
-                        (item.app?.localizedCaseInsensitiveContains(currentSearchText) ?? false) ||
-                        (formatter.title?.localizedCaseInsensitiveContains(currentSearchText) ?? false) ||
-                        (formatter.contentPreview.localizedCaseInsensitiveContains(currentSearchText))
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.filteredCategories = filteredCategories
-                self.filteredItems = filteredItems
-            }
-        }
-    }
 }
 
 struct EmptyStateView: View {
@@ -394,5 +422,27 @@ struct EmptyStateView: View {
         .foregroundStyle(.blendMode(.overlay))
         .frame(width: 476, height: 130)
         .padding(.all, 12)
+    }
+}
+
+struct TabButton: View {
+    let title: String
+    @Binding var selectedTab: String
+    
+    var body: some View {
+        Button(action: {
+            withAnimation(.default) {
+                selectedTab = title
+            }
+        }) {
+            Text(title)
+                .padding()
+                .background(selectedTab == title ? Color.accentColor : Color.clear)
+                .foregroundColor(selectedTab == title ? Color.white : Color.black)
+                .cornerRadius(8)
+        }
+        .frame(maxWidth: 250, maxHeight: 30)
+        .buttonStyle(.borderless)
+        .cornerRadius(25)
     }
 }

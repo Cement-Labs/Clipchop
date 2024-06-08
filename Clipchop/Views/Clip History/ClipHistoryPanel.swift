@@ -13,7 +13,7 @@ class ClipHistoryPanel: NSPanel {
     
     private let controller: ClipHistoryViewController
     
-    var clipHistoryView = ClipHistoryView()
+//    var clipHistoryView = ClipHistoryView()
     
     init(_ controller: ClipHistoryViewController) {
         self.controller = controller
@@ -48,7 +48,7 @@ class ClipHistoryPanel: NSPanel {
     
     override func close() {
         controller.close()
-        clipHistoryView.clearResources()
+//        clipHistoryView.clearResources()
     }
     
     override var canBecomeKey: Bool {
