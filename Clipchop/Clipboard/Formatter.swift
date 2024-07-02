@@ -39,6 +39,7 @@ struct Formatter {
             .filter { types.contains(NSPasteboard.PasteboardType($0.type!)) }
             .compactMap { $0.value }
     }
+    
 }
 
 extension Formatter {
@@ -168,13 +169,13 @@ extension Formatter {
             return
         }
         
-        var allTypes = Set(Defaults[.allTypes])
+        var allTypes = Set(Defaults[.allTypes].map { $0.lowercased() })
         let categories = Defaults[.categories]
         
         var categorized = false
         for category in categories {
-            if category.types.contains(where: { $0 == result }) {
-                log(self, "File type \(result) categorized under \(category)")
+            if category.types.contains(result) {
+                log(self, "File type \(result) categorized under \(category.name)")
                 categorized = true
                 break
             }

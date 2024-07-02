@@ -367,9 +367,9 @@
 		289B498A2BF9B4E3008643FA /* Card Previews */ = {
 			isa = PBXGroup;
 			children = (
-				655C56A72C11FC5500544BAE /* MetadataCache.swift */,
 				289B498B2BF9B50C008643FA /* CardPreviewView.swift */,
 				6513FF3E2BFBB939008149AB /* PreviewContentView.swift */,
+				655C56A72C11FC5500544BAE /* MetadataCache.swift */,
 				659355072BFEE94F00CA1D53 /* DragManager.swift */,
 				6513FF382BFBB800008149AB /* Page */,
 			);

@@ -99,6 +99,7 @@ struct CardPreviewView: View {
                     .fill(item.pinned ? Color.accentColor : Color.clear)
                     .scaleEffect(isHoveredPin ? 1.333 : 1)
                     .frame(width: 15, height: 15)
+                    .shadow(radius: 2.5)
                     .onHover { isOverPin in
                         withAnimation {
                             isHoveredPin = isOverPin
@@ -121,9 +122,10 @@ struct CardPreviewView: View {
             .padding(.trailing, 10)
             
             ZStack(alignment:.bottomLeading) {
-                RoundedRectangle(cornerRadius: 0)
+                RoundedRectangle(cornerRadius: 10)
                     .fill(.thickMaterial)
-                    .frame(width: 80, height: 30)
+                    .frame(width: 70, height: 30)
+                    .shadow(radius: 2.5)
                 
                 HStack{
                     if keyboardShortcut != "none" {
@@ -132,7 +134,7 @@ struct CardPreviewView: View {
                                 .fill(backgroundColor)
                                 .frame(width: 13, height: 13)
                             Text(keyboardShortcut)
-                                .font(.system(size: 10).monospaced())
+                                .font(.system(size: 10)/*.monospaced()*/)
                         }
                     }
                     VStack{
@@ -143,14 +145,15 @@ struct CardPreviewView: View {
                                 Text("Other")
                             }
                         }
-                        .font(.system(size: 12.5).monospaced())
+                        .font(.system(size: 12.5)/*.monospaced()*/)
                         .minimumScaleFactor(0.5)
                         .fixedSize(horizontal: false, vertical: true)
                         .lineLimit(1)
                     }
                 }
-                .padding(.all, 10)
+                .padding(.all, 7.5)
             }
+            .padding(.all, 5)
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
         .frame(width: 80, height: 80, alignment: .center)
@@ -186,7 +189,7 @@ struct CardPreviewView: View {
                     }
                 }
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 7.5)
+                    .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: 5)
                     .frame(width: 80, height: 80)
                     .foregroundColor(.clear)
             }
@@ -272,6 +275,7 @@ struct CardPreviewView: View {
             }
         }
     }
+    
     private func deleteItem(_ item: ClipboardHistory) {
         if let contents = item.contents {
             for content in contents {
@@ -285,6 +289,7 @@ struct CardPreviewView: View {
             print("Failed to delete item: \(error)")
         }
     }
+    
     func formattedDate(from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd HH:mm"

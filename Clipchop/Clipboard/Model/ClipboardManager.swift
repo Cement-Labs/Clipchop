@@ -59,7 +59,7 @@ class ClipboardManager: ObservableObject {
             }
             log(self, "\(cutoffDate)")
             for item in itemsToDelete {
-                context.delete(item)
+                deleteItem(item)
             }
             try context.save()
             print("Deleted old history items successfully.")

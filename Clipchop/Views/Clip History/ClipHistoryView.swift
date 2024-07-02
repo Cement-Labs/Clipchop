@@ -30,32 +30,14 @@ struct ClipHistoryView: View {
     
     @State private var searchText: String = ""
     @State private var isSearchVisible: Bool = false
-    
-    @State private var displayedItems: [ClipboardHistory] = []
-    @State private var currentPage: Int = 0
-    private let itemsPerPage: Int = 15
+    @State private var filteredItems: [ClipboardHistory] = []
     
     private let controller = ClipHistoryViewController()
     
     var filteredCategories: [FileCategory] {
         return Defaults[.categories]
     }
-    
-    var filteredItems: [ClipboardHistory] {
-//        if searchText.isEmpty {
-            return items
-//        } 
-//        else {
-//            return items.filter { item in
-//                let formatter = Formatter(contents: item.contents!)
-//                return
-//                    (item.app?.localizedCaseInsensitiveContains(searchText) ?? false) ||
-//                    (formatter.title?.localizedCaseInsensitiveContains(searchText) ?? false) ||
-//                    (formatter.contentPreview.localizedCaseInsensitiveContains(searchText))
-//            }
-//        }
-    }
-    
+        
     var body: some View {
         clip {
             ZStack {
@@ -103,12 +85,12 @@ struct ClipHistoryView: View {
                 withAnimation(.default) {
                     self.viewModel.viewState = isExpanded ? .expanded : .collapsed
                     self.isSearchVisible = false
-                   
+                    filterItems()
                 }
             }
         }
         .onAppear {
-            loadMoreItems()
+            filterItems()
         }
     }
     
@@ -148,7 +130,7 @@ struct ClipHistoryView: View {
                     if selectedTab == "All Types" {
                         if !filteredItems.isEmpty {
                             ScrollView(.vertical, showsIndicators: false) {
-                                renderSection(/*title: "All Types", */items: filteredItems)
+                                renderSection(items: items)
                             }
                         } else {
                             EmptyStateView()
@@ -157,22 +139,22 @@ struct ClipHistoryView: View {
                         let pinnedItems = filteredItems.filter { $0.pinned }
                         if !pinnedItems.isEmpty {
                             ScrollView(.vertical, showsIndicators: false) {
-                                renderSection(/*title: "Pinned", */items: pinnedItems)
-                            } 
+                                renderSection(items: pinnedItems)
+                            }
                         } else {
                             EmptyStateView()
                         }
                     } else {
                         ForEach(filteredCategories) { category in
                             if selectedTab == category.name {
-                                let categoryItems = items.filter { item in
+                                let categoryItems = filteredItems.filter { item in
                                     let formatter = Formatter(contents: item.contents!)
-                                    return category.types.contains(formatter.title ?? "")
+                                    return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
                                 }
                                 
                                 if !categoryItems.isEmpty {
                                     ScrollView(.vertical, showsIndicators: false) {
-                                        renderSection(/*title: category.name, */items: categoryItems)
+                                        renderSection(items: categoryItems)
                                     }
                                 } else {
                                     EmptyStateView()
@@ -196,11 +178,6 @@ struct ClipHistoryView: View {
                     ForEach(items) { item in
                         CardPreviewView(item: item, keyboardShortcut: "none")
                             .environmentObject(apps)
-                            .onAppear {
-                                if item == displayedItems.last && displayedItems.count < items.count {
-                                    loadMoreItems()
-                                }
-                            }
                             .matchedGeometryEffect(
                                 id: item.id,
                                 in: animationNamespace,
@@ -280,6 +257,9 @@ struct ClipHistoryView: View {
                         .padding([.leading, .horizontal], 15)
                         .textFieldStyle(.plain)
                         .frame(width: isSearchVisible ? 425 : 30, height: 30)
+                        .onChange(of: searchText) { oldValue, newValue in
+                            filterItems()
+                        }
                 }
                 Button(action: {
                     withAnimation {
@@ -319,7 +299,7 @@ struct ClipHistoryView: View {
                     ForEach(filteredCategories) { category in
                         let categoryItems = items.filter { item in
                             let formatter = Formatter(contents: item.contents!)
-                            return category.types.contains(formatter.title ?? "")
+                            return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
                         }
                         
                         if !categoryItems.isEmpty {
@@ -329,30 +309,32 @@ struct ClipHistoryView: View {
                 }
             }
         }
-        
         .frame(width: isSearchVisible ? 0 : 425, height: 30)
         .cornerRadius(25)
     }
     
     // MARK: - ModelManager
     
-    private func loadMoreItems() {
-        let startIndex = currentPage * itemsPerPage
-        let endIndex = min(startIndex + itemsPerPage, items.count)
-        if startIndex < endIndex {
-            displayedItems.append(contentsOf: items[startIndex..<endIndex])
-            currentPage += 1
-            print("\(currentPage)")
+    func filterItems() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let result: [ClipboardHistory]
+            if self.searchText.isEmpty {
+                result = self.items
+            } else {
+                let lowercasedSearchText = searchText.lowercased()
+                result = items.filter { item in
+                    guard let contents = item.contents else { return false }
+                    let formatter = Formatter(contents: contents)
+                    let appContains = item.app?.localizedCaseInsensitiveContains(lowercasedSearchText) ?? false
+                    let titleContains = formatter.title?.localizedCaseInsensitiveContains(lowercasedSearchText) ?? false
+                    let contentPreviewContains = formatter.contentPreview.localizedCaseInsensitiveContains(lowercasedSearchText)
+                    return appContains || titleContains || contentPreviewContains
+                }
+            }
+            DispatchQueue.main.async {
+                self.filteredItems = result
+            }
         }
-        print("loadMoreItems")
-    }
-    
-   
-    func clearResources() {
-        currentPage = 0
-        searchText = ""
-        displayedItems.removeAll()
-        print("clearResources")
     }
     
     private func undo() {
@@ -446,3 +428,10 @@ struct TabButton: View {
         .cornerRadius(25)
     }
 }
+
+extension String {
+    func caseInsensitiveEquals(_ other: String) -> Bool {
+        return self.lowercased() == other.lowercased()
+    }
+}
+

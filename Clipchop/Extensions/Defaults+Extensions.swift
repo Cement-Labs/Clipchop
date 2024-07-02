@@ -43,39 +43,48 @@ extension Defaults.Keys {
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
     
     static let categories = Key<[FileCategory]>("categories", default: [
+        
         .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
-            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic", "Image"
-        ]),
+            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic", "image"
+        ].map { $0.lowercased() }),
+        
         .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
             "pdf", "docx", "xlsx",
             "key", "pages", "numbers",
             "txt", "rtf", "rtfd",
             "doc", "ods", "odt", "pptx", "ppt", "xls", "csv", "html", "xml", "json"
-        ]),
+        ].map { $0.lowercased() }),
+        
         .init(name: .init(localized: "Videos", defaultValue: "Videos"), types: [
             "mp4", "mov", "avi",
             "mkv", "wmv", "flv", "mpeg", "mpg", "m4v", "webm"
-        ]),
+        ].map { $0.lowercased() }),
+        
         .init(name: .init(localized: "Audio", defaultValue: "Audio"), types: [
             "mp3", "wav", "m4a", "flac",
             "aac", "ogg", "wma", "alac", "aiff", "dsd"
-        ]),
+        ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Archives", defaultValue: "Archives"), types: [
             "zip", "rar", "7z", "tar", "gz", "bz2"
-        ]),
+        ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Code Files", defaultValue: "Code Files"), types: [
             "swift", "objc", "java", "py", "cpp", "cs", "js", "ts", "html", "css", "scss", "less", "php", "rb", "pl", "go", "rs", "kt"
-        ]),
+        ].map { $0.lowercased() }),
+        
+        .init(name: .init(localized: "3D Models", defaultValue: "3D Models"), types: [
+            "obj", "fbx", "dae", "stl", "3ds", "blend", "max", "ma", "mb", "dwg", "dxf", "skp", "step", "iges", "stp", "3dm",
+            "usd", "usda", "usdc", "usdz"
+        ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Link", defaultValue: "Link"), types: [
-            "Link"
-        ]),
+            "link"
+        ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Color", defaultValue: "Color"), types: [
-            "Color"
-        ])
+            "color"
+        ].map { $0.lowercased() })
         
     ])
 

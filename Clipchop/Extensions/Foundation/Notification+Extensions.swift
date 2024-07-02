@@ -27,3 +27,4 @@ extension Notification.Name {
         NotificationCenter.default.post(name: self, object: object, userInfo: userInfo)
     }
 }
+
