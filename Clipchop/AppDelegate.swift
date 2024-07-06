@@ -2,22 +2,24 @@
 //  AppDelegate.swift
 //  Clipchop
 //
-//  Created by KrLite on 2024/4/27.
+//  Created by Xinshao_Air on 2024/7/5.
 //
 
-import Foundation
 import AppKit
 import Defaults
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        
-        PermissionsManager.requestAccess()
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         NSApp.setActivationPolicy(.accessory)
         return false
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        NSApp.openSettings()
+        return true
     }
 }

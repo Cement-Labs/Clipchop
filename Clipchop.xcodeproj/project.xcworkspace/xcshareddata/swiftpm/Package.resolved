@@ -1,13 +1,31 @@
 {
-  "originHash" : "8044106da52f01bfc516e414529e72269dec12381977f2b032c1bdd059db1cb7",
+  "originHash" : "0f577def337b993b0e1a981164ef8c56fca8bfda5f4a22f095c094ed977f0113",
   "pins" : [
     {
       "identity" : "defaults",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/Defaults",
+      "location" : "https://github.com/sindresorhus/Defaults/",
       "state" : {
         "branch" : "main",
-        "revision" : "1064186b3d1f225543aa8450927c20e3ee34ea16"
+        "revision" : "d8a954e69ff13b0f7805f3757c8f8d0c8ef5a8cb"
+      }
+    },
+    {
+      "identity" : "fulldiskaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inket/FullDiskAccess",
+      "state" : {
+        "revision" : "846e04ea2b84fce843f47d7e7f3421189221829c",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "fuse-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krisk/fuse-swift",
+      "state" : {
+        "revision" : "26ba868691b2d8b7bf2b1322951eb591be70ccca",
+        "version" : "1.4.0"
       }
     },
     {
@@ -15,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
       "state" : {
-        "branch" : "main",
-        "revision" : "09e4a10ed6b65b3a40fe07b6bf0c84809313efc4"
+        "revision" : "2e5f15581fefb821d4b366e57d817be8bf12aa58",
+        "version" : "2.0.1"
       }
     },
     {
@@ -25,7 +43,7 @@
       "location" : "https://github.com/sindresorhus/LaunchAtLogin",
       "state" : {
         "branch" : "main",
-        "revision" : "22923d335429bfd38c52435505b06a10bcc520fd"
+        "revision" : "9a894d799269cb591037f9f9cb0961510d4dca81"
       }
     },
     {
@@ -43,7 +61,7 @@
       "location" : "https://github.com/Clipy/Sauce",
       "state" : {
         "branch" : "master",
-        "revision" : "19c4448ffedb77d9642a198a8e03da6239a44dc4"
+        "revision" : "71ff8de6292653a27fa98e901e447e47041e6fad"
       }
     },
     {
@@ -51,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/orchetect/SettingsAccess",
       "state" : {
-        "revision" : "0fd73c8b5892e88acb13adb7f36a4ba9293a0061",
-        "version" : "1.4.0"
+        "revision" : "f0b57b4c4c0de66b9f4d6c41d39f1d6ede0c9891",
+        "version" : "2.0.0"
       }
     },
     {
@@ -60,8 +78,53 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
       "state" : {
-        "revision" : "afd0a1da4ed62bab1413caa6dd6b60a7a7089ed2",
-        "version" : "5.2.0"
+        "revision" : "e2e28f4e56e1769c2ec3c61c9355fc64eb7a535a",
+        "version" : "5.3.0"
+      }
+    },
+    {
+      "identity" : "swift-algorithms",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-algorithms.git",
+      "state" : {
+        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "swifthexcolors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/thii/SwiftHEXColors",
+      "state" : {
+        "revision" : "1f886cb20fedda14a5ac75efd09bc99c95b43a18",
+        "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/swiftui-introspect",
+      "state" : {
+        "revision" : "668a65735751432b640260c56dfa621cec568368",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swiftui-windowmanagement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Wouter01/SwiftUI-WindowManagement",
+      "state" : {
+        "revision" : "adbebf5d7df325f3d7bf07dc832e5e162a9003f5",
+        "version" : "2.1.1"
       }
     }
   ],

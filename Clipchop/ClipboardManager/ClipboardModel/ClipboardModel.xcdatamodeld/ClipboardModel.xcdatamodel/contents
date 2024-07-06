@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23173.10" systemVersion="24A5279h" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ClipboardContent" representedClassName=".ClipboardContent" syncable="YES">
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Binary"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClipboardHistory" inverseName="contents" inverseEntity="ClipboardHistory"/>
+    </entity>
+    <entity name="ClipboardHistory" representedClassName=".ClipboardHistory" syncable="YES">
+        <attribute name="app" optional="YES" attributeType="String"/>
+        <attribute name="appid" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="pin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="contents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ClipboardContent" inverseName="item" inverseEntity="ClipboardContent"/>
+    </entity>
+</model>
