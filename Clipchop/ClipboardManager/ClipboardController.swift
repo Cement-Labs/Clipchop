@@ -164,10 +164,10 @@ class ClipboardController: NSObject {
             try context.save()
             let formatter = Formatter(contents: contents)
             formatter.categorizeFileTypes()
-            print("The Contents of Clipboard are changed\(ClipboardHistory(contents: contents))")
+            log(self,"The Contents of Clipboard are changed\(ClipboardHistory(contents: contents))")
         } catch {
             let nserror = error as NSError
-            print("UnSaved error \(nserror), \(nserror.userInfo)")
+            log(self, "UnSaved error \(nserror), \(nserror.userInfo)")
         }
     }
 

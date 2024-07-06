@@ -5,6 +5,7 @@
 //  Created by KrLite on 2024/5/19.
 //
 
+import AppKit
 import SwiftUI
 import Defaults
 import SFSafeSymbols
@@ -21,15 +22,19 @@ struct CardPreviewView: View {
     @State private var showMore = false
     
     @EnvironmentObject private var apps: InstalledApps
-    @Environment(\.modelContext) var context
+    @Environment(\.managedObjectContext) var context
     @Environment(\.displayScale) var displayScale
     @Environment(\.colorScheme) var colorScheme
     
     var backgroundColor: Color {
-        colorScheme == .dark ? .black : .white
+        withAnimation {
+            colorScheme == .dark ? .black : .white
+        }
     }
     var pinIcon: String {
-        item.pin ? "pin.fill" : "pin"
+        withAnimation {
+            item.pin ? "pin.fill" : "pin"
+        }
     }
     
     var keyboardShortcut: String
@@ -113,7 +118,7 @@ struct CardPreviewView: View {
             .onTapGesture {
                 withAnimation(Animation.easeInOut) {
                     do{
-                        item.pin.toggle()
+                        pinClipItem()
                     }
                 }
             }
@@ -134,7 +139,7 @@ struct CardPreviewView: View {
                                 .fill(backgroundColor)
                                 .frame(width: 13, height: 13)
                             Text(keyboardShortcut)
-                                .font(.system(size: 10)/*.monospaced()*/)
+                                .font(.system(size: 10))
                         }
                     }
                     VStack{
@@ -145,7 +150,7 @@ struct CardPreviewView: View {
                                 Text("Other")
                             }
                         }
-                        .font(.system(size: 12.5)/*.monospaced()*/)
+                        .font(.system(size: 12.5))
                         .minimumScaleFactor(0.5)
                         .fixedSize(horizontal: false, vertical: true)
                         .lineLimit(1)
@@ -200,7 +205,7 @@ struct CardPreviewView: View {
                 withAnimation(Animation.easeInOut) {
                     do{
                         self.isHoveredPin = true
-                        item.pin.toggle()
+                        pinClipItem()
                     }
                 }
                 
@@ -273,6 +278,18 @@ struct CardPreviewView: View {
                 }
                 return event
             }
+        }
+    }
+    func pinClipItem(){
+        let currentPinStatus = item.pin
+        item.pin.toggle()
+        do{
+            if context.hasChanges{
+                try context.save()
+            }
+        } catch {
+            log(self, "Failed to save pin status change: \(error)")
+            item.pin = currentPinStatus
         }
     }
     

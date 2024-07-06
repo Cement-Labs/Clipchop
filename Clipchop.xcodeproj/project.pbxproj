@@ -260,7 +260,7 @@
 				658D271E2C3831B9001D1CC3 /* View */,
 				658D26D82C382340001D1CC3 /* Utilities */,
 				650515DA2C38219700E2129D /* Extensions */,
-				658D26E72C382358001D1CC3 /* Sounds Assets */,
+				658D26D02C382340001D1CC3 /* AssetsManager */,
 				650515B92C381EA600E2129D /* Assets.xcassets */,
 				650515BB2C381EA600E2129D /* Clipchop.entitlements */,
 				650515BC2C381EA600E2129D /* Preview Content */,
@@ -330,20 +330,20 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		658D26D02C382340001D1CC3 /* Assets */ = {
+		658D26D02C382340001D1CC3 /* AssetsManager */ = {
 			isa = PBXGroup;
 			children = (
 				658D26CD2C382340001D1CC3 /* AppIcon.swift */,
 				658D26CE2C382340001D1CC3 /* Sound.swift */,
 				658D26CF2C382340001D1CC3 /* InstalledApp.swift */,
+				658D26E72C382358001D1CC3 /* Sounds Assets */,
 			);
-			path = Assets;
+			path = AssetsManager;
 			sourceTree = "<group>";
 		};
 		658D26D82C382340001D1CC3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				658D26D02C382340001D1CC3 /* Assets */,
 				658D26D12C382340001D1CC3 /* PerimissionsManager.swift */,
 				658D26D22C382340001D1CC3 /* NotificationManager.swift */,
 				658D26D32C382340001D1CC3 /* ObservationTrackingStream.swift */,
@@ -427,11 +427,11 @@
 		658D271E2C3831B9001D1CC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				658D27682C384513001D1CC3 /* ClipHistory */,
-				658D27632C383DE0001D1CC3 /* Menu Bar */,
 				658D27182C3831B0001D1CC3 /* Fundamentals */,
-				658D27412C383546001D1CC3 /* Settings */,
+				658D27632C383DE0001D1CC3 /* Menu Bar */,
+				658D27682C384513001D1CC3 /* Clip History */,
 				658D27092C38314F001D1CC3 /* Beginning */,
+				658D27412C383546001D1CC3 /* Settings */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -533,7 +533,7 @@
 			path = "Menu Bar";
 			sourceTree = "<group>";
 		};
-		658D27682C384513001D1CC3 /* ClipHistory */ = {
+		658D27682C384513001D1CC3 /* Clip History */ = {
 			isa = PBXGroup;
 			children = (
 				658D275B2C383920001D1CC3 /* ClipHistoryViewController.swift */,
@@ -542,7 +542,7 @@
 				658D27662C38450C001D1CC3 /* ClipHistoryViewModel.swift */,
 				658D27712C384552001D1CC3 /* Card Previews */,
 			);
-			path = ClipHistory;
+			path = "Clip History";
 			sourceTree = "<group>";
 		};
 		658D27702C384552001D1CC3 /* Page */ = {
