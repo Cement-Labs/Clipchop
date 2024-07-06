@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 import Defaults
 import SFSafeSymbols
 
 struct ClipHistoryView: View {
     
-    @FetchRequest(fetchRequest: ClipboardHistory.all()) private var items
-        
+    @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
+    
+    @Environment(\.managedObjectContext) private var context
+    
     @StateObject private var apps = InstalledApps()
     @StateObject private var viewModel = ClipHistoryViewModel()
     
@@ -38,6 +41,18 @@ struct ClipHistoryView: View {
     var body: some View {
         clip {
             ZStack {
+                Button(action: undo) { }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut("z", modifiers: .command)
+                Button(action: redo) { }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut("z", modifiers: [.command, .shift])
                 clip {
                     VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
                 }
@@ -335,6 +350,13 @@ struct ClipHistoryView: View {
                 self.filteredItems = result
             }
         }
+    }
+    private func undo() {
+        context.undoManager?.undo()
+    }
+    
+    private func redo() {
+        context.undoManager?.redo()
     }
     
     private func showAlert() {

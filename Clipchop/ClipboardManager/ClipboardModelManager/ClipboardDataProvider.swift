@@ -24,6 +24,8 @@ final class ClipboardDataProvider {
     private init() {
         persistentContainer = NSPersistentContainer(name: "ClipboardModel")
         
+        persistentContainer.viewContext.undoManager = UndoManager()
+        
         persistentContainer.viewContext.automaticallyMergesChangesFromParent = true
         
         persistentContainer.loadPersistentStores { _, error in

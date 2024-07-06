@@ -90,7 +90,9 @@ struct PreviewContentView: View, Equatable {
                         .scaleEffect(0.625)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .offset(y: -14)
+//                .offset(y: -14)
+                .padding(.all, 5)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             )
         } else if let colorImage = ColorPreviewPage.from(text) {
             return AnyView(
@@ -128,7 +130,9 @@ struct PreviewContentView: View, Equatable {
                 .scaleEffect(0.625)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .offset(y: -14)
+//        .offset(y: -14)
+        .padding(.all, 5)
+        
     }
     
     private func defaultView() -> some View {
