@@ -260,11 +260,11 @@
 			children = (
 				650515B52C381EA500E2129D /* ClipchopApp.swift */,
 				658D26FB2C382CF3001D1CC3 /* AppDelegate.swift */,
-				658D26F52C382674001D1CC3 /* ClipboardManager */,
+				658D26F52C382674001D1CC3 /* Clipboard */,
 				658D271E2C3831B9001D1CC3 /* View */,
 				658D26D82C382340001D1CC3 /* Utilities */,
 				650515DA2C38219700E2129D /* Extensions */,
-				658D26D02C382340001D1CC3 /* AssetsManager */,
+				658D26D02C382340001D1CC3 /* Assets */,
 				650515B92C381EA600E2129D /* Assets.xcassets */,
 				65987F142C3930D100E15897 /* Localizable.xcstrings */,
 				650515BB2C381EA600E2129D /* Clipchop.entitlements */,
@@ -281,14 +281,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		650515C42C381ECA00E2129D /* ClipboardModel */ = {
+		650515C42C381ECA00E2129D /* Data Storage */ = {
 			isa = PBXGroup;
 			children = (
 				658D26EC2C3823A0001D1CC3 /* ClipboardContent.swift */,
 				650515C82C38206500E2129D /* ClipboardHistory.swift */,
 				650515C52C381F0C00E2129D /* ClipboardModel.xcdatamodeld */,
 			);
-			path = ClipboardModel;
+			path = "Data Storage";
 			sourceTree = "<group>";
 		};
 		650515CE2C38219700E2129D /* SwiftUI */ = {
@@ -325,26 +325,27 @@
 		650515DA2C38219700E2129D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				650515D22C38219700E2129D /* Foundation */,
+				650515D62C38219700E2129D /* AppKit */,
+				650515CE2C38219700E2129D /* SwiftUI */,
 				650515D72C38219700E2129D /* Defaults+Extensions.swift */,
 				650515D82C38219700E2129D /* Defaults+Structures.swift */,
 				65987F102C390AD100E15897 /* Color+Extensions.swift */,
 				650515D92C38219700E2129D /* KeyboardShortcuts+Extensions.swift */,
-				650515CE2C38219700E2129D /* SwiftUI */,
-				650515D22C38219700E2129D /* Foundation */,
-				650515D62C38219700E2129D /* AppKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		658D26D02C382340001D1CC3 /* AssetsManager */ = {
+		658D26D02C382340001D1CC3 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				658D26E72C382358001D1CC3 /* Sounds */,
 				658D26CD2C382340001D1CC3 /* AppIcon.swift */,
 				658D26CE2C382340001D1CC3 /* Sound.swift */,
+				658D26E62C382358001D1CC3 /* SoundPlayer.swift */,
 				658D26CF2C382340001D1CC3 /* InstalledApp.swift */,
-				658D26E72C382358001D1CC3 /* Sounds Assets */,
 			);
-			path = AssetsManager;
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		658D26D82C382340001D1CC3 /* Utilities */ = {
@@ -361,37 +362,36 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		658D26E72C382358001D1CC3 /* Sounds Assets */ = {
+		658D26E72C382358001D1CC3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				658D26E32C382358001D1CC3 /* happy-pop.mp3 */,
 				658D26E42C382358001D1CC3 /* marimba-bloop.mp3 */,
 				658D26E52C382358001D1CC3 /* tap-notification.mp3 */,
-				658D26E62C382358001D1CC3 /* SoundPlayer.swift */,
 			);
-			path = "Sounds Assets";
+			path = Sounds;
 			sourceTree = "<group>";
 		};
-		658D26F52C382674001D1CC3 /* ClipboardManager */ = {
+		658D26F52C382674001D1CC3 /* Clipboard */ = {
 			isa = PBXGroup;
 			children = (
 				658D26FD2C3830E1001D1CC3 /* ClipboardManager.swift */,
 				658D26F62C3826E0001D1CC3 /* ClipboardController.swift */,
 				658D26F02C3824D5001D1CC3 /* Formatter.swift */,
-				650515C42C381ECA00E2129D /* ClipboardModel */,
-				658D26F82C382BC7001D1CC3 /* ClipboardModelManager */,
+				650515C42C381ECA00E2129D /* Data Storage */,
+				658D26F82C382BC7001D1CC3 /* Clipboard Model */,
 			);
-			path = ClipboardManager;
+			path = Clipboard;
 			sourceTree = "<group>";
 		};
-		658D26F82C382BC7001D1CC3 /* ClipboardModelManager */ = {
+		658D26F82C382BC7001D1CC3 /* Clipboard Model */ = {
 			isa = PBXGroup;
 			children = (
 				658D271F2C3831E4001D1CC3 /* ClipboardModelManager.swift */,
 				658D26EE2C3823E5001D1CC3 /* ClipboardDataProvider.swift */,
 				658D26F92C382C1A001D1CC3 /* ClipboardModelEditor.swift */,
 			);
-			path = ClipboardModelManager;
+			path = "Clipboard Model";
 			sourceTree = "<group>";
 		};
 		658D27082C38314F001D1CC3 /* Pages */ = {
@@ -900,7 +900,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 705;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = 4Z435N9MPX;
+				DEVELOPMENT_TEAM = 7XRF3J9RS4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
@@ -943,7 +943,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 705;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = 4Z435N9MPX;
+				DEVELOPMENT_TEAM = 7XRF3J9RS4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
