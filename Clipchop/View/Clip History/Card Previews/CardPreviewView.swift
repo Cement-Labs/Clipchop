@@ -101,10 +101,9 @@ struct CardPreviewView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(item.pin ? Material.ultraThin : Material.regular)
-                    .fill(item.pin ? Color.accentColor : Color.clear)
+                    .fill(item.pin ? Color.getAccent() : Color.clear)
                     .scaleEffect(isHoveredPin ? 1.333 : 1)
                     .frame(width: 15, height: 15)
-                    .shadow(radius: 2.5)
                     .onHover { isOverPin in
                         withAnimation {
                             isHoveredPin = isOverPin
@@ -194,7 +193,7 @@ struct CardPreviewView: View {
                     }
                 }
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: isSelected ? 7.5 : 0)
+                    .stroke(isSelected ? Color.getAccent() : Color.clear, lineWidth: isSelected ? 7.5 : 0)
                     .frame(width: 80, height: 80)
                     .foregroundColor(.clear)
             }

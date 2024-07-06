@@ -165,6 +165,7 @@ class ClipboardController: NSObject {
             let formatter = Formatter(contents: contents)
             formatter.categorizeFileTypes()
             log(self,"The Contents of Clipboard are changed\(ClipboardHistory(contents: contents))")
+            log(self, "\(formatter.title ?? "EMPTY")")
         } catch {
             let nserror = error as NSError
             log(self, "UnSaved error \(nserror), \(nserror.userInfo)")

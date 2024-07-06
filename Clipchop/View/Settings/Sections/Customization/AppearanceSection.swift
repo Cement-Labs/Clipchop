@@ -63,12 +63,12 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
         Section {
             withCaption("Custom accent color only applies to the clip history window.") {
                 Picker(selection: $colorStyle) {
-                    ColoredPickerRow(style: Defaults.inlineAccentColor(style: .app, customColor: .clear)) {
+                    ColoredPickerRow(style: Defaults.inlineAccentColor(style: .app, customColor: .accent)) {
                         Text("Application")
                     }
                     .tag(ColorStyle.app)
                     
-                    ColoredPickerRow(style: Defaults.inlineAccentColor(style: .system, customColor: .clear)) {
+                    ColoredPickerRow(style: Defaults.inlineAccentColor(style: .system, customColor: .blue)) {
                         Text("macOS Blue")
                     }
                     .tag(ColorStyle.system)
@@ -85,7 +85,6 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                         
                         if colorStyle == .custom {
                             ColorPicker(selection: $customAccentColor) {
-                                
                             }
                         }
                     }

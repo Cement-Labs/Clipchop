@@ -258,6 +258,9 @@ struct ClipHistoryView: View {
                         isSearchVisible.toggle()
                         if !isSearchVisible {
                             searchText = ""
+                            
+                        } else {
+                            selectedTab = "All Types"
                         }
                     }
                 }) {

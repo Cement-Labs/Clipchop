@@ -48,7 +48,7 @@ struct ClipchopApp: App {
         Defaults[.historyPreservationTime] = Defaults.Keys.historyPreservationTime.defaultValue
         
         // Resets clipboard history
-        try? clipboardModelEditor.deleteAll()
+//        try? clipboardModelEditor.deleteAll()
 #endif
         
         if !Defaults[.beginningViewShown] {

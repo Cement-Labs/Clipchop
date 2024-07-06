@@ -112,6 +112,7 @@
 		658D27772C384552001D1CC3 /* MetadataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D276B2C384552001D1CC3 /* MetadataCache.swift */; };
 		658D27782C384552001D1CC3 /* PreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D276A2C384552001D1CC3 /* PreviewContentView.swift */; };
 		658D277A2C384569001D1CC3 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27792C384569001D1CC3 /* ClipHistoryView.swift */; };
+		65987F112C390AD100E15897 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65987F102C390AD100E15897 /* Color+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +210,7 @@
 		658D276E2C384552001D1CC3 /* ColorPreviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPreviewPage.swift; sourceTree = "<group>"; };
 		658D276F2C384552001D1CC3 /* RTFPreviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTFPreviewPage.swift; sourceTree = "<group>"; };
 		658D27792C384569001D1CC3 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
+		65987F102C390AD100E15897 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 			children = (
 				650515D72C38219700E2129D /* Defaults+Extensions.swift */,
 				650515D82C38219700E2129D /* Defaults+Structures.swift */,
+				65987F102C390AD100E15897 /* Color+Extensions.swift */,
 				650515D92C38219700E2129D /* KeyboardShortcuts+Extensions.swift */,
 				650515CE2C38219700E2129D /* SwiftUI */,
 				650515D22C38219700E2129D /* Foundation */,
@@ -745,6 +748,7 @@
 				658D26E12C382340001D1CC3 /* DefaultsStack.swift in Sources */,
 				658D26E22C382340001D1CC3 /* LifecycleHandler.swift in Sources */,
 				650515E32C38219700E2129D /* NSImage+Extensions.swift in Sources */,
+				65987F112C390AD100E15897 /* Color+Extensions.swift in Sources */,
 				658D27202C3831E4001D1CC3 /* ClipboardModelManager.swift in Sources */,
 				650515E42C38219700E2129D /* View+Extensions.swift in Sources */,
 				658D26ED2C3823A0001D1CC3 /* ClipboardContent.swift in Sources */,
@@ -886,10 +890,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 705;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -903,7 +909,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -925,10 +931,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 705;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -942,7 +950,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
