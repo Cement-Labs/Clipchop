@@ -1,5 +1,5 @@
 {
-  "originHash" : "8044106da52f01bfc516e414529e72269dec12381977f2b032c1bdd059db1cb7",
+  "originHash" : "31ca69ef296906e35d1eb09450b2801ad06b5c11c0b40476f79729bb12cb599c",
   "pins" : [
     {
       "identity" : "defaults",
@@ -7,7 +7,25 @@
       "location" : "https://github.com/sindresorhus/Defaults",
       "state" : {
         "branch" : "main",
-        "revision" : "1064186b3d1f225543aa8450927c20e3ee34ea16"
+        "revision" : "d8a954e69ff13b0f7805f3757c8f8d0c8ef5a8cb"
+      }
+    },
+    {
+      "identity" : "fulldiskaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inket/FullDiskAccess",
+      "state" : {
+        "revision" : "846e04ea2b84fce843f47d7e7f3421189221829c",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "fuse-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/krisk/fuse-swift",
+      "state" : {
+        "revision" : "26ba868691b2d8b7bf2b1322951eb591be70ccca",
+        "version" : "1.4.0"
       }
     },
     {
@@ -62,6 +80,51 @@
       "state" : {
         "revision" : "afd0a1da4ed62bab1413caa6dd6b60a7a7089ed2",
         "version" : "5.2.0"
+      }
+    },
+    {
+      "identity" : "swift-algorithms",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-algorithms.git",
+      "state" : {
+        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics.git",
+      "state" : {
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "swifthexcolors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/thii/SwiftHEXColors",
+      "state" : {
+        "revision" : "1f886cb20fedda14a5ac75efd09bc99c95b43a18",
+        "version" : "1.4.1"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/swiftui-introspect",
+      "state" : {
+        "revision" : "7dc5b287f8040e4ad5038739850b758e78f77808",
+        "version" : "1.1.4"
+      }
+    },
+    {
+      "identity" : "swiftui-windowmanagement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Wouter01/SwiftUI-WindowManagement",
+      "state" : {
+        "branch" : "main",
+        "revision" : "adbebf5d7df325f3d7bf07dc832e5e162a9003f5"
       }
     }
   ],
