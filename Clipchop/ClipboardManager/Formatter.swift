@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftHEXColors
 import AppKit
 import Defaults
 
@@ -112,7 +113,7 @@ extension Formatter {
             if let url = NSURL(string: text), url.scheme != nil {
                 // Link
                 type = String(localized: "Type: Link", defaultValue: "Link")
-            } else if let _ = NSColor(named: text) {
+            } else if let _ = NSColor(hexString: text) {
                 // Hex color
                 type = String(localized: "Type: Color", defaultValue: "Color")
             }

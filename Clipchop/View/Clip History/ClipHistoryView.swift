@@ -285,6 +285,7 @@ struct ClipHistoryView: View {
                         .frame(width: 10, height: 10)
                         .padding(5)
                 }
+                .keyboardShortcut("s" ,modifiers: .command)
                 .buttonStyle(.borderless)
                 .offset(x: isSearchVisible ? -5 : 0)
             }

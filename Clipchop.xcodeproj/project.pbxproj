@@ -543,9 +543,9 @@
 			isa = PBXGroup;
 			children = (
 				658D275B2C383920001D1CC3 /* ClipHistoryViewController.swift */,
-				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
-				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
 				658D27662C38450C001D1CC3 /* ClipHistoryViewModel.swift */,
+				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
+				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
 				658D27712C384552001D1CC3 /* Card Previews */,
 			);
 			path = "Clip History";
