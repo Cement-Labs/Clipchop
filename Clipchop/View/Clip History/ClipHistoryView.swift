@@ -13,7 +13,7 @@ import SFSafeSymbols
 struct ClipHistoryView: View {
     
     @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
-    
+        
     @Environment(\.managedObjectContext) private var context
     
     @StateObject private var apps = InstalledApps()
@@ -84,6 +84,7 @@ struct ClipHistoryView: View {
             if let userInfo = notification.userInfo, let isExpanded = userInfo["isExpanded"] as? Bool {
                 withAnimation(.default) {
                     self.viewModel.viewState = isExpanded ? .expanded : .collapsed
+                    selectedTab = "All Types"
                     self.isSearchVisible = false
                     filterItems()
                     print("filterItems(onReceive)")
@@ -106,9 +107,9 @@ struct ClipHistoryView: View {
     
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
-        LazyVStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 5), spacing: 12) {
-                ForEach(items) { item in
+                ForEach(items.filter { !$0.isEmpty }) { item in
                     CardPreviewView(item: item, keyboardShortcut: "none")
                         .environmentObject(apps)
                         .matchedGeometryEffect(
@@ -182,8 +183,8 @@ struct ClipHistoryView: View {
         ZStack(alignment: .topLeading) {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 12) {
-                    ForEach(items) { item in
-                        CardPreviewView(item: item, keyboardShortcut: "none")
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
                             .environmentObject(apps)
                             .matchedGeometryEffect(
                                 id: item.id,
@@ -380,6 +381,11 @@ struct ClipHistoryView: View {
             NSHapticFeedbackManager.FeedbackPattern.generic,
             performanceTime: NSHapticFeedbackManager.PerformanceTime.now
         )
+    }
+    
+    private func getKeyboardShortcut(for index: Int) -> String {
+        guard index < 9 else { return "none" }
+        return String(index + 1)
     }
 }
 

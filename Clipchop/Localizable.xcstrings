@@ -1,0 +1,604 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%.2fs" : {
+
+    },
+    "%@ is open source." : {
+
+    },
+    "%lld Days" : {
+
+    },
+    "%lld Hours" : {
+
+    },
+    "%lld Minutes" : {
+
+    },
+    "%lld Months" : {
+
+    },
+    "%lld Years" : {
+
+    },
+    "%llu Clips, %lld Items" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$llu Clips, %2$lld Items"
+          }
+        }
+      }
+    },
+    "0" : {
+
+    },
+    "1" : {
+
+    },
+    "3D Models" : {
+
+    },
+    "30" : {
+
+    },
+    "About" : {
+
+    },
+    "Accessibility Access" : {
+
+    },
+    "Accessibility Access Alert: Content" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Accessibility Access is required for %@ to take over your clipboard."
+          }
+        }
+      }
+    },
+    "Accessibility Access Alert: Title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ Needs Accessibility Access"
+          }
+        }
+      }
+    },
+    "Accessibility Access is needed to take over your clipboard." : {
+
+    },
+    "Acknowledgements" : {
+
+    },
+    "App Development Time" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@-%2$@"
+          }
+        }
+      }
+    },
+    "App excluding" : {
+
+    },
+    "App Excluding" : {
+
+    },
+    "App icon" : {
+
+    },
+    "App Icon: Aerugo" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Aerugo"
+          }
+        }
+      }
+    },
+    "App Icon: Beta" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clipchop Beta"
+          }
+        }
+      }
+    },
+    "App Icon: Stable" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clipchop"
+          }
+        }
+      }
+    },
+    "App Version: Raw" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ Build %2$@"
+          }
+        }
+      }
+    },
+    "App Version: Semantic" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %@"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+
+    },
+    "Application" : {
+
+    },
+    "Apply" : {
+
+    },
+    "Apply Preservation Time" : {
+
+    },
+    "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
+
+    },
+    "Archives" : {
+
+    },
+    "Audio" : {
+
+    },
+    "Back" : {
+
+    },
+    "Call up the clip history window." : {
+
+    },
+    "Categorization" : {
+
+    },
+    "Category" : {
+
+    },
+    "Category Name" : {
+
+    },
+    "Changing Color Scheme" : {
+
+    },
+    "Clear clipboard history" : {
+
+    },
+    "Clear Clipboard History" : {
+
+    },
+    "Clip more to unlock more! You've already clipped %llu times." : {
+
+    },
+    "Clip sound" : {
+
+    },
+    "Clipboard" : {
+
+    },
+    "Clipboard Behaviors" : {
+
+    },
+    "Clipboard monitoring" : {
+
+    },
+    "Clipchop" : {
+
+    },
+    "Code Files" : {
+
+    },
+    "Color" : {
+
+    },
+    "Color style" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Copy to Clipboard" : {
+
+    },
+    "Copyrights" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ NNN Studio"
+          }
+        }
+      }
+    },
+    "Coyp" : {
+
+    },
+    "Custom" : {
+
+    },
+    "Custom accent color only applies to the clip history window." : {
+
+    },
+    "Customization" : {
+
+    },
+    "Dark" : {
+
+    },
+    "delete" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Documents" : {
+
+    },
+    "Exclude apps to prevent %@ copying their contents." : {
+
+    },
+    "File Extension" : {
+
+    },
+    "File Type" : {
+
+    },
+    "Footer" : {
+
+    },
+    "Forever" : {
+
+    },
+    "Full Disk Access" : {
+
+    },
+    "Full Disk Access Alert: Content" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Full Disk Access is required for %@ to generate file previews."
+          }
+        }
+      }
+    },
+    "Full Disk Access Alert: Title" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ Needs Full Disk Access"
+          }
+        }
+      }
+    },
+    "Full Disk Access is needed to generate file previews." : {
+
+    },
+    "General" : {
+
+    },
+    "Global Behaviors" : {
+
+    },
+    "GPL-3.0" : {
+
+    },
+    "Grant" : {
+
+    },
+    "Granted" : {
+
+    },
+    "Header" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Images" : {
+
+    },
+    "Insert" : {
+
+    },
+    "Keyboard Shortcuts" : {
+
+    },
+    "Later" : {
+
+    },
+    "Licenced Under GPL-3.0" : {
+
+    },
+    "Light" : {
+
+    },
+    "Limit %@'s functions in the specified apps." : {
+
+    },
+    "Link" : {
+
+    },
+    "Loading..." : {
+
+    },
+    "Log to Console (Debug)" : {
+
+    },
+    "macOS Blue" : {
+
+    },
+    "No Application Excluded" : {
+
+    },
+    "No Clipboard History Available" : {
+
+    },
+    "Open in System Settings" : {
+
+    },
+    "Open Settings…" : {
+
+    },
+    "Other" : {
+
+    },
+    "Paste sound" : {
+
+    },
+    "Paste to %@" : {
+
+    },
+    "Paste to active application" : {
+
+    },
+    "Paste to Frontmost" : {
+
+    },
+    "Permissions" : {
+
+    },
+    "Pin" : {
+
+    },
+    "Preferred color scheme" : {
+
+    },
+    "Preservation time" : {
+
+    },
+    "Quit" : {
+
+    },
+    "Quit %@" : {
+
+    },
+    "Recent Clips" : {
+
+    },
+    "Refresh States (Debug)" : {
+
+    },
+    "Restore" : {
+
+    },
+    "Search" : {
+
+    },
+    "Search Categories" : {
+
+    },
+    "Search File Types" : {
+
+    },
+    "Settings…" : {
+
+    },
+    "Shortcuts" : {
+
+    },
+    "Show %@" : {
+
+    },
+    "Shows menu bar item" : {
+
+    },
+    "Skip" : {
+
+    },
+    "Sound: Bloop" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bloop"
+          }
+        }
+      }
+    },
+    "Sound: None" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "None"
+          }
+        }
+      }
+    },
+    "Sound: Pop" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pop"
+          }
+        }
+      }
+    },
+    "Sound: Tap" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tap"
+          }
+        }
+      }
+    },
+    "Source Code" : {
+
+    },
+    "Start Using %@" : {
+
+    },
+    "Syncing" : {
+
+    },
+    "System" : {
+
+    },
+    "Test (Debug)" : {
+
+    },
+    "Test line No.%lld" : {
+
+    },
+    "This action clears all your clipboard history unrestorably, including pins." : {
+
+    },
+    "Toggle clipboard history monitoring." : {
+
+    },
+    "Tutorial" : {
+
+    },
+    "Type: Color" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Color"
+          }
+        }
+      }
+    },
+    "Type: Combined" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Type: Image" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Image"
+          }
+        }
+      }
+    },
+    "Type: Link" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Link"
+          }
+        }
+      }
+    },
+    "Type: Mixed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Multiple"
+          }
+        }
+      }
+    },
+    "Type: Text" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Text"
+          }
+        }
+      }
+    },
+    "Unpin" : {
+
+    },
+    "Update interval" : {
+
+    },
+    "Videos" : {
+
+    },
+    "Welcome to %@" : {
+
+    },
+    "When enabled, will automatically paste into the frontmost application." : {
+
+    },
+    "You can always open %@ again to access this page." : {
+
+    },
+    "You're All Set!" : {
+
+    }
+  },
+  "version" : "1.0"
+}

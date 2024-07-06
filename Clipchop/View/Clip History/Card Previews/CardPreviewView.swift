@@ -125,43 +125,43 @@ struct CardPreviewView: View {
             .padding(.top, 10)
             .padding(.trailing, 10)
             
-            if let title = item.formatter.title, title != "Link" {
-                ZStack(alignment:.bottomLeading) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.thickMaterial)
-                        .frame(width: 70, height: 30)
-                        .shadow(radius: 2.5)
-                    
-                    HStack{
-                        if keyboardShortcut != "none" {
-                            ZStack(alignment: .center){
-                                RoundedRectangle(cornerRadius: 5)
-                                    .fill(backgroundColor)
-                                    .frame(width: 13, height: 13)
-                                Text(keyboardShortcut)
-                                    .font(.system(size: 10))
-                            }
-                        }
-                        
-                        VStack{
-                            Group {
-                                if let title = item.formatter.title {
-                                    Text(title)
-                                } else {
-                                    Text("Other")
-                                }
-                            }
-                            .font(.system(size: 12.5))
-                            .minimumScaleFactor(0.5)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .lineLimit(1)
+//            if let title = item.formatter.title, title != "Link" {
+//            }
+            ZStack(alignment:.bottomLeading) {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.thickMaterial)
+                    .frame(width: 70, height: 30)
+                    .shadow(radius: 2.5)
+                
+                HStack{
+                    if keyboardShortcut != "none" {
+                        ZStack(alignment: .center){
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(backgroundColor)
+                                .frame(width: 13, height: 13)
+                            Text(keyboardShortcut)
+                                .font(.system(size: 10))
                         }
                     }
-                    .padding(.all, 7.5)
+                    
+                    VStack{
+                        Group {
+                            if let title = item.formatter.title {
+                                Text(title)
+                            } else {
+                                Text("Other")
+                            }
+                        }
+                        .font(.system(size: 12.5))
+                        .minimumScaleFactor(0.5)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(1)
+                    }
                 }
-                .padding(.all, 5)
-                .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
+                .padding(.all, 7.5)
             }
+            .padding(.all, 5)
+            .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
         .frame(width: 80, height: 80, alignment: .center)
         .background(backgroundColor)

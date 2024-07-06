@@ -70,7 +70,7 @@ class ClipboardModelManager: ObservableObject {
     
     func startPeriodicCleanup() {
         log(self, "time start, Cached preservation period: \(Defaults[.historyPreservationPeriod]), Cached preservation time: \(Defaults[.historyPreservationTime])")
-        timerCancellable = Timer.publish(every: 5, on: .main, in: .common)
+        timerCancellable = Timer.publish(every: 50, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 self?.deleteOldHistory(preservationPeriod: Defaults[.historyPreservationPeriod], preservationTime: Int(Defaults[.historyPreservationTime]))

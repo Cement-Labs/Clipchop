@@ -113,6 +113,7 @@
 		658D27782C384552001D1CC3 /* PreviewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D276A2C384552001D1CC3 /* PreviewContentView.swift */; };
 		658D277A2C384569001D1CC3 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27792C384569001D1CC3 /* ClipHistoryView.swift */; };
 		65987F112C390AD100E15897 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65987F102C390AD100E15897 /* Color+Extensions.swift */; };
+		65987F152C3930D100E15897 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 65987F142C3930D100E15897 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -211,6 +212,7 @@
 		658D276F2C384552001D1CC3 /* RTFPreviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTFPreviewPage.swift; sourceTree = "<group>"; };
 		658D27792C384569001D1CC3 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
 		65987F102C390AD100E15897 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		65987F142C3930D100E15897 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 				650515DA2C38219700E2129D /* Extensions */,
 				658D26D02C382340001D1CC3 /* AssetsManager */,
 				650515B92C381EA600E2129D /* Assets.xcassets */,
+				65987F142C3930D100E15897 /* Localizable.xcstrings */,
 				650515BB2C381EA600E2129D /* Clipchop.entitlements */,
 				650515BC2C381EA600E2129D /* Preview Content */,
 			);
@@ -627,6 +630,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 650515A92C381EA500E2129D;
 			packageReferences = (
@@ -660,6 +664,7 @@
 			files = (
 				650515BE2C381EA600E2129D /* Preview Assets.xcassets in Resources */,
 				658D26E92C382358001D1CC3 /* marimba-bloop.mp3 in Resources */,
+				65987F152C3930D100E15897 /* Localizable.xcstrings in Resources */,
 				658D26EA2C382358001D1CC3 /* tap-notification.mp3 in Resources */,
 				658D26EB2C382358001D1CC3 /* happy-pop.mp3 in Resources */,
 				650515BA2C381EA600E2129D /* Assets.xcassets in Resources */,
@@ -824,6 +829,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -878,6 +884,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -889,9 +896,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 705;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
+				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
@@ -914,10 +923,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
@@ -930,9 +939,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 705;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
+				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
@@ -955,10 +966,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;

@@ -169,3 +169,9 @@ extension ClipboardHistory {
         return request
     }
 }
+
+extension ClipboardHistory {
+    var isEmpty: Bool {
+        return contents == nil || contents?.count == 0
+    }
+}
