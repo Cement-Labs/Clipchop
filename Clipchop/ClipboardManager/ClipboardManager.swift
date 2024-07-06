@@ -15,7 +15,7 @@ class ClipboardManager {
     
     let beginningViewController = BeginningViewController()
     let clipHistoryViewController = ClipHistoryViewController()
-    let clipboardModelManager = ClipboardModelManager(context: ClipboardDataProvider.shared.viewContext)
+    let clipboardModelManager = ClipboardModelManager()
     
     init(context: NSManagedObjectContext) {
         

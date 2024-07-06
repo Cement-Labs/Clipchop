@@ -34,7 +34,7 @@ struct ClipchopApp: App {
         Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
         Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
         
-        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
+//        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
         Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
         Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
         

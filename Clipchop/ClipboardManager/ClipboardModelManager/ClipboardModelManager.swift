@@ -7,20 +7,27 @@
 
 import SwiftUI
 import Combine
+import CoreData
 import Defaults
 
 class ClipboardModelManager: ObservableObject {
     
     @Published private(set) var items: [ClipboardHistory] = []
     
-    private var provider = ClipboardDataProvider.shared
     private var cancellables = Set<AnyCancellable>()
-    private var timerCancellable: AnyCancellable?
-    
+    private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
+    private var timerCancellable: AnyCancellable?
+    private var provider = ClipboardDataProvider.shared
     
-    init(context: NSManagedObjectContext) {
-        self.context = context
+    init() {
+        container = NSPersistentContainer(name: "ClipboardModel")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                fatalError("Failed to load Core Data stack: \(error)")
+            }
+        }
+        context = container.viewContext
     }
     
     func deleteOldHistory(preservationPeriod: HistoryPreservationPeriod, preservationTime: Int) {
@@ -28,7 +35,6 @@ class ClipboardModelManager: ObservableObject {
         
         let currentDate = Date()
         let cutoffDate: Date
-        let fetchDescriptor = NSFetchRequest<ClipboardHistory>()
         
         switch preservationPeriod {
         case .minute:
@@ -44,13 +50,15 @@ class ClipboardModelManager: ObservableObject {
         default:
             return
         }
+        
+        let fetchRequest = NSFetchRequest<ClipboardHistory>(entityName: "ClipboardHistory")
+        fetchRequest.predicate = NSPredicate(format: "pin == NO AND time < %@", cutoffDate as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \ClipboardHistory.time, ascending: false)]
+        
         do {
-            let items = try context.fetch(fetchDescriptor)
-            let itemsToDelete = items.filter { item in
-                !item.pin && item.time! < cutoffDate
-            }
+            let items = try context.fetch(fetchRequest)
             log(self, "\(cutoffDate)")
-            for item in itemsToDelete {
+            for item in items {
                 try deleteItem(item)
             }
             try context.save()
@@ -61,8 +69,8 @@ class ClipboardModelManager: ObservableObject {
     }
     
     func startPeriodicCleanup() {
-        log(self, "time statr,Cached preservation period: \(Defaults[.historyPreservationPeriod]), Cached preservation time: \(Defaults[.historyPreservationTime])")
-        timerCancellable = Timer.publish(every: 100, on: .main, in: .common)
+        log(self, "time start, Cached preservation period: \(Defaults[.historyPreservationPeriod]), Cached preservation time: \(Defaults[.historyPreservationTime])")
+        timerCancellable = Timer.publish(every: 5, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 self?.deleteOldHistory(preservationPeriod: Defaults[.historyPreservationPeriod], preservationTime: Int(Defaults[.historyPreservationTime]))
@@ -72,13 +80,13 @@ class ClipboardModelManager: ObservableObject {
     func stopPeriodicCleanup() {
         timerCancellable?.cancel()
         timerCancellable = nil
-        log(self, "time stop, \(Defaults[.historyPreservationPeriod]),\(Defaults[.historyPreservationTime])")
+        log(self, "time stop, \(Defaults[.historyPreservationPeriod]), \(Defaults[.historyPreservationTime])")
     }
     
     func restartPeriodicCleanup() {
         stopPeriodicCleanup()
         startPeriodicCleanup()
-        log(self, "\(Defaults[.historyPreservationPeriod]),\(Defaults[.historyPreservationTime])")
+        log(self, "\(Defaults[.historyPreservationPeriod]), \(Defaults[.historyPreservationTime])")
     }
     
     private func deleteItem(_ item: ClipboardHistory) throws {

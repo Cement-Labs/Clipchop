@@ -22,7 +22,7 @@ struct ClipboardBehaviorsSection: View {
     @State private var cachedPreservationTime: Double = 1
     
     @Environment(\.hasTitle) private var hasTitle
-    @ObservedObject private var clipboardModelManager = ClipboardModelManager(context: ClipboardDataProvider.shared.viewContext)
+    @ObservedObject private var clipboardModelManager = ClipboardModelManager()
     
     private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
     
