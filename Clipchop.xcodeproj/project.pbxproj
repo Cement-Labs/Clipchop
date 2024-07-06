@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28B0637F2C3942310002ACFA /* ClipchopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B0637E2C3942310002ACFA /* ClipchopTests.swift */; };
 		650515B62C381EA500E2129D /* ClipchopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650515B52C381EA500E2129D /* ClipchopApp.swift */; };
 		650515BA2C381EA600E2129D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 650515B92C381EA600E2129D /* Assets.xcassets */; };
 		650515BE2C381EA600E2129D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 650515BD2C381EA600E2129D /* Preview Assets.xcassets */; };
@@ -116,7 +117,19 @@
 		65987F152C3930D100E15897 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 65987F142C3930D100E15897 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		28B063802C3942310002ACFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 650515AA2C381EA500E2129D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 650515B12C381EA500E2129D;
+			remoteInfo = Clipchop;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		28B0637C2C3942310002ACFA /* ClipchopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClipchopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28B0637E2C3942310002ACFA /* ClipchopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopTests.swift; sourceTree = "<group>"; };
 		650515B22C381EA500E2129D /* Clipchop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipchop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		650515B52C381EA500E2129D /* ClipchopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipchopApp.swift; sourceTree = "<group>"; };
 		650515B92C381EA600E2129D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -216,6 +229,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		28B063792C3942310002ACFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		650515AF2C381EA500E2129D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,10 +259,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28B0637D2C3942310002ACFA /* ClipchopTests */ = {
+			isa = PBXGroup;
+			children = (
+				28B0637E2C3942310002ACFA /* ClipchopTests.swift */,
+			);
+			path = ClipchopTests;
+			sourceTree = "<group>";
+		};
 		650515A92C381EA500E2129D = {
 			isa = PBXGroup;
 			children = (
 				650515B42C381EA500E2129D /* Clipchop */,
+				28B0637D2C3942310002ACFA /* ClipchopTests */,
 				650515B32C381EA500E2129D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -251,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				650515B22C381EA500E2129D /* Clipchop.app */,
+				28B0637C2C3942310002ACFA /* ClipchopTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -576,6 +606,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		28B0637B2C3942310002ACFA /* ClipchopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28B063822C3942310002ACFA /* Build configuration list for PBXNativeTarget "ClipchopTests" */;
+			buildPhases = (
+				28B063782C3942310002ACFA /* Sources */,
+				28B063792C3942310002ACFA /* Frameworks */,
+				28B0637A2C3942310002ACFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28B063812C3942310002ACFA /* PBXTargetDependency */,
+			);
+			name = ClipchopTests;
+			productName = ClipchopTests;
+			productReference = 28B0637C2C3942310002ACFA /* ClipchopTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		650515B12C381EA500E2129D /* Clipchop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 650515C12C381EA600E2129D /* Build configuration list for PBXNativeTarget "Clipchop" */;
@@ -618,6 +666,10 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					28B0637B2C3942310002ACFA = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 650515B12C381EA500E2129D;
+					};
 					650515B12C381EA500E2129D = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -653,11 +705,19 @@
 			projectRoot = "";
 			targets = (
 				650515B12C381EA500E2129D /* Clipchop */,
+				28B0637B2C3942310002ACFA /* ClipchopTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		28B0637A2C3942310002ACFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		650515B02C381EA500E2129D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -674,6 +734,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		28B063782C3942310002ACFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28B0637F2C3942310002ACFA /* ClipchopTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		650515AE2C381EA500E2129D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -771,7 +839,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		28B063812C3942310002ACFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 650515B12C381EA500E2129D /* Clipchop */;
+			targetProxy = 28B063802C3942310002ACFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		28B063832C3942310002ACFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7XRF3J9RS4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = studio.nnn.ClipchopTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clipchop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clipchop";
+			};
+			name = Debug;
+		};
+		28B063842C3942310002ACFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7XRF3J9RS4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = studio.nnn.ClipchopTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Clipchop.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Clipchop";
+			};
+			name = Release;
+		};
 		650515BF2C381EA600E2129D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -977,6 +1091,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		28B063822C3942310002ACFA /* Build configuration list for PBXNativeTarget "ClipchopTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28B063832C3942310002ACFA /* Debug */,
+				28B063842C3942310002ACFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		650515AD2C381EA500E2129D /* Build configuration list for PBXProject "Clipchop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
