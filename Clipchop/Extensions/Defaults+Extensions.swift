@@ -44,6 +44,8 @@ extension Defaults.Keys {
     
     static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: false)
     
+    static let removeFormatting = Key<Bool>("removeFormatting", default: false)
+    
     static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
     
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .day)

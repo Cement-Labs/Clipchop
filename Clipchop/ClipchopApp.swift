@@ -22,7 +22,7 @@ struct ClipchopApp: App {
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     
     private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
-    private let clipHistoryViewController = ClipHistoryViewController()
+    private let clipHistoryViewController = ClipHistoryPanelController()
     private let clipboardManager: ClipboardManager
     
     init() {

@@ -10,7 +10,7 @@ import Defaults
 import KeyboardShortcuts
 
 @Observable
-class ClipHistoryViewController: NSViewController, ObservableObject {
+class ClipHistoryPanelController: NSViewController, ObservableObject {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
         expanded: NSSize(width: 500, height: 260)
@@ -56,7 +56,7 @@ class ClipHistoryViewController: NSViewController, ObservableObject {
     }
 }
 
-extension ClipHistoryViewController {
+extension ClipHistoryPanelController {
     // MARK: - Animations
     
     func setExpansion(_ isExpanded: Bool, animate: Bool = true) {
@@ -100,7 +100,7 @@ extension ClipHistoryViewController {
     }
 }
 
-extension ClipHistoryViewController {
+extension ClipHistoryPanelController {
     // MARK: - Open / Close
     
     var isOpened: Bool {
@@ -145,7 +145,7 @@ extension ClipHistoryViewController {
     }
 }
 
-extension ClipHistoryViewController {
+extension ClipHistoryPanelController {
     // MARK: - Expand / Collapse
     
     func expand() {

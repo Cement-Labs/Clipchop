@@ -38,6 +38,8 @@ struct PreviewContentView: View, Equatable {
                 textView(for: text)
             } else if let url = clipboardHistory.formatter.url {
                 urlPreviewView(for: url)
+            } else if let html = clipboardHistory.formatter.htmlData {
+                htmlPreviewView(for: html)
             } else {
                 defaultView()
             }
@@ -79,7 +81,6 @@ struct PreviewContentView: View, Equatable {
             RTFPreviewPage(rtfData: rtfData)
         }
         .frame(width: 80, height: 80)
-        .background(.clear)
     }
     
     private func textView(for text: String) -> some View {
@@ -90,7 +91,6 @@ struct PreviewContentView: View, Equatable {
                         .scaleEffect(0.625)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-//                .offset(y: -14)
                 .padding(.all, 5)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             )
@@ -130,9 +130,17 @@ struct PreviewContentView: View, Equatable {
                 .scaleEffect(0.625)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-//        .offset(y: -14)
         .padding(.all, 5)
-        
+    }
+    
+    private func htmlPreviewView(for htmlData: Data) -> some View {
+        VStack {
+            HTMLPreviewPage(htmlData: htmlData)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .padding()
+        }
+        .background(Color.white)
+        .frame(width: 80, height: 80, alignment: .center)
     }
     
     private func defaultView() -> some View {
@@ -176,7 +184,7 @@ struct PreviewContentView: View, Equatable {
             QLThumbnailGenerator.shared.generateRepresentations(for: request) { thumbnail, _, error in
                 DispatchQueue.main.async {
                     if let error = error {
-                        log(/*self,*/ "Error generating thumbnail: \(error)")
+                        log(self, "Error generating thumbnail: \(error)")
                     } else if let cgImage = thumbnail?.cgImage {
                         let nsImage = NSImage(cgImage: cgImage, size: NSSize())
                         self.thumbnail = nsImage

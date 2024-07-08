@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%.2fs" : {
 
     },
@@ -228,6 +231,9 @@
     "Continue" : {
 
     },
+    "Copy as Plain Text to Clipboard" : {
+
+    },
     "Copy to Clipboard" : {
 
     },
@@ -243,6 +249,9 @@
       }
     },
     "Coyp" : {
+
+    },
+    "Coyp as plain text" : {
 
     },
     "Custom" : {
@@ -378,6 +387,12 @@
     "Other" : {
 
     },
+    "Paste as Plain Text to %@" : {
+
+    },
+    "Paste as Plain Text to Frontmost" : {
+
+    },
     "Paste sound" : {
 
     },
@@ -412,6 +427,9 @@
 
     },
     "Refresh States (Debug)" : {
+
+    },
+    "Remove format" : {
 
     },
     "Restore" : {
@@ -534,6 +552,17 @@
         }
       }
     },
+    "Type: HTML" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Text"
+          }
+        }
+      }
+    },
     "Type: Image" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -567,6 +596,17 @@
         }
       }
     },
+    "Type: RTF" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Text"
+          }
+        }
+      }
+    },
     "Type: Text" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -588,6 +628,9 @@
 
     },
     "Welcome to %@" : {
+
+    },
+    "When enabled, All font formats will be removed." : {
 
     },
     "When enabled, will automatically paste into the frontmost application." : {

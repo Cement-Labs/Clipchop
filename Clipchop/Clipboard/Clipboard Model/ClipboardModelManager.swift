@@ -57,14 +57,13 @@ class ClipboardModelManager: ObservableObject {
         
         do {
             let items = try context.fetch(fetchRequest)
-            log(self, "\(cutoffDate)")
             for item in items {
                 try deleteItem(item)
             }
             try context.save()
-            print("Deleted old history items successfully.")
+            log(self, "Deleted old history items successfully.")
         } catch {
-            print("Failed to fetch ClipboardHistory: \(error)")
+            log(self, "Failed to fetch ClipboardHistory: \(error)")
         }
     }
     

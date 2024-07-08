@@ -14,6 +14,7 @@ struct ClipboardBehaviorsSection: View {
     @Default(.historyPreservationTime) private var historyPreservationTime
     @Default(.timerInterval) private var timerInterval
     @Default(.pasteToFrontmostEnabled) private var paste
+    @Default(.removeFormatting) private var removeFormatting
     
     @State private var isDeleteHistoryAlertPresented = false
     @State private var isApplyPreservationTimeAlertPresented = false
@@ -28,8 +29,13 @@ struct ClipboardBehaviorsSection: View {
     
     var body: some View {
         Section {
+            withCaption("When enabled, All font formats will be removed.") {
+                Toggle("Remove format", isOn: $removeFormatting)
+                
+            }
             withCaption("When enabled, will automatically paste into the frontmost application.") {
                 Toggle("Paste to active application", isOn: $paste)
+                
             }
         } header: {
             if hasTitle {

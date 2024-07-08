@@ -26,6 +26,11 @@
 		650515E52C38219700E2129D /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650515CC2C38219700E2129D /* EnvironmentValues+Extensions.swift */; };
 		650515E62C38219700E2129D /* Notification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650515D12C38219700E2129D /* Notification+Extensions.swift */; };
 		650515E72C38219700E2129D /* Defaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650515D72C38219700E2129D /* Defaults+Extensions.swift */; };
+		65160A932C3B92CC004BF8BF /* EmptyStatePages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */; };
+		65160A952C3B937A004BF8BF /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A942C3B937A004BF8BF /* TabButton.swift */; };
+		65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */; };
+		65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */; };
+		65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */; };
 		658D26A42C38226E001D1CC3 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 658D26A32C38226E001D1CC3 /* Defaults */; };
 		658D26A72C38227F001D1CC3 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 658D26A62C38227F001D1CC3 /* LaunchAtLogin */; };
 		658D26AA2C38228E001D1CC3 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 658D26A92C38228E001D1CC3 /* SFSafeSymbols */; };
@@ -100,11 +105,10 @@
 		658D27582C383546001D1CC3 /* AboutSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D273E2C383546001D1CC3 /* AboutSettingsPage.swift */; };
 		658D27592C383546001D1CC3 /* ClipboardSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D273A2C383546001D1CC3 /* ClipboardSettingsPage.swift */; };
 		658D275A2C383546001D1CC3 /* FormSectionListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27282C383546001D1CC3 /* FormSectionListContainer.swift */; };
-		658D275D2C383920001D1CC3 /* ClipHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D275B2C383920001D1CC3 /* ClipHistoryViewController.swift */; };
+		658D275D2C383920001D1CC3 /* ClipHistoryPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */; };
 		658D275E2C383920001D1CC3 /* ClipHistoryPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */; };
 		658D27642C383DE0001D1CC3 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27622C383DE0001D1CC3 /* MenuBarView.swift */; };
 		658D27652C383DE0001D1CC3 /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27612C383DE0001D1CC3 /* MenuBarIconView.swift */; };
-		658D27672C38450C001D1CC3 /* ClipHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27662C38450C001D1CC3 /* ClipHistoryViewModel.swift */; };
 		658D27722C384552001D1CC3 /* WebLinkPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D276D2C384552001D1CC3 /* WebLinkPreviewPage.swift */; };
 		658D27732C384552001D1CC3 /* RTFPreviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D276F2C384552001D1CC3 /* RTFPreviewPage.swift */; };
 		658D27742C384552001D1CC3 /* CardPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27692C384552001D1CC3 /* CardPreviewView.swift */; };
@@ -150,6 +154,11 @@
 		650515D72C38219700E2129D /* Defaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Extensions.swift"; sourceTree = "<group>"; };
 		650515D82C38219700E2129D /* Defaults+Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+Structures.swift"; sourceTree = "<group>"; };
 		650515D92C38219700E2129D /* KeyboardShortcuts+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardShortcuts+Extensions.swift"; sourceTree = "<group>"; };
+		65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatePages.swift; sourceTree = "<group>"; };
+		65160A942C3B937A004BF8BF /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
+		65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLPreviewPags.swift; sourceTree = "<group>"; };
+		65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPages.swift; sourceTree = "<group>"; };
+		65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPages.swift; sourceTree = "<group>"; };
 		658D26CD2C382340001D1CC3 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		658D26CE2C382340001D1CC3 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		658D26CF2C382340001D1CC3 /* InstalledApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstalledApp.swift; sourceTree = "<group>"; };
@@ -211,11 +220,10 @@
 		658D273D2C383546001D1CC3 /* SyncingSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncingSettingsPage.swift; sourceTree = "<group>"; };
 		658D273E2C383546001D1CC3 /* AboutSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsPage.swift; sourceTree = "<group>"; };
 		658D273F2C383546001D1CC3 /* TestSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSettingsPage.swift; sourceTree = "<group>"; };
-		658D275B2C383920001D1CC3 /* ClipHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryViewController.swift; sourceTree = "<group>"; };
+		658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryPanelController.swift; sourceTree = "<group>"; };
 		658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryPanel.swift; sourceTree = "<group>"; };
 		658D27612C383DE0001D1CC3 /* MenuBarIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarIconView.swift; sourceTree = "<group>"; };
 		658D27622C383DE0001D1CC3 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
-		658D27662C38450C001D1CC3 /* ClipHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryViewModel.swift; sourceTree = "<group>"; };
 		658D27692C384552001D1CC3 /* CardPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPreviewView.swift; sourceTree = "<group>"; };
 		658D276A2C384552001D1CC3 /* PreviewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContentView.swift; sourceTree = "<group>"; };
 		658D276B2C384552001D1CC3 /* MetadataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataCache.swift; sourceTree = "<group>"; };
@@ -355,15 +363,26 @@
 		650515DA2C38219700E2129D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				650515D22C38219700E2129D /* Foundation */,
-				650515D62C38219700E2129D /* AppKit */,
-				650515CE2C38219700E2129D /* SwiftUI */,
 				650515D72C38219700E2129D /* Defaults+Extensions.swift */,
 				650515D82C38219700E2129D /* Defaults+Structures.swift */,
 				65987F102C390AD100E15897 /* Color+Extensions.swift */,
 				650515D92C38219700E2129D /* KeyboardShortcuts+Extensions.swift */,
+				650515D22C38219700E2129D /* Foundation */,
+				650515D62C38219700E2129D /* AppKit */,
+				650515CE2C38219700E2129D /* SwiftUI */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		65758C062C3AE0FF009EEB3E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */,
+				65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */,
+				65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */,
+				65160A942C3B937A004BF8BF /* TabButton.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 		658D26D02C382340001D1CC3 /* Assets */ = {
@@ -572,11 +591,11 @@
 		658D27682C384513001D1CC3 /* Clip History */ = {
 			isa = PBXGroup;
 			children = (
-				658D275B2C383920001D1CC3 /* ClipHistoryViewController.swift */,
-				658D27662C38450C001D1CC3 /* ClipHistoryViewModel.swift */,
-				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
+				658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */,
 				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
-				658D27712C384552001D1CC3 /* Card Previews */,
+				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
+				65758C062C3AE0FF009EEB3E /* Pages */,
+				658D27712C384552001D1CC3 /* Preview Cards */,
 			);
 			path = "Clip History";
 			sourceTree = "<group>";
@@ -587,11 +606,12 @@
 				658D276D2C384552001D1CC3 /* WebLinkPreviewPage.swift */,
 				658D276E2C384552001D1CC3 /* ColorPreviewPage.swift */,
 				658D276F2C384552001D1CC3 /* RTFPreviewPage.swift */,
+				65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
 		};
-		658D27712C384552001D1CC3 /* Card Previews */ = {
+		658D27712C384552001D1CC3 /* Preview Cards */ = {
 			isa = PBXGroup;
 			children = (
 				658D27692C384552001D1CC3 /* CardPreviewView.swift */,
@@ -600,7 +620,7 @@
 				658D276C2C384552001D1CC3 /* DragManager.swift */,
 				658D27702C384552001D1CC3 /* Page */,
 			);
-			path = "Card Previews";
+			path = "Preview Cards";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -774,9 +794,11 @@
 				658D270A2C38314F001D1CC3 /* BeginningTutorialPage.swift in Sources */,
 				658D270B2C38314F001D1CC3 /* BeginningView.swift in Sources */,
 				658D270C2C38314F001D1CC3 /* BeginningAllSetPage.swift in Sources */,
+				65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */,
 				658D270D2C38314F001D1CC3 /* BeginningCustomizationPage.swift in Sources */,
+				65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */,
 				658D270E2C38314F001D1CC3 /* BeginningViewController.swift in Sources */,
-				658D275D2C383920001D1CC3 /* ClipHistoryViewController.swift in Sources */,
+				658D275D2C383920001D1CC3 /* ClipHistoryPanelController.swift in Sources */,
 				658D275E2C383920001D1CC3 /* ClipHistoryPanel.swift in Sources */,
 				658D270F2C38314F001D1CC3 /* BeginningShortcutsPage.swift in Sources */,
 				658D27102C38314F001D1CC3 /* RoamingButton.swift in Sources */,
@@ -787,9 +809,9 @@
 				658D26F72C3826E6001D1CC3 /* ClipboardController.swift in Sources */,
 				658D26DC2C382340001D1CC3 /* AppIcon.swift in Sources */,
 				658D26DD2C382340001D1CC3 /* InstalledApp.swift in Sources */,
-				658D27672C38450C001D1CC3 /* ClipHistoryViewModel.swift in Sources */,
 				658D27422C383546001D1CC3 /* CopyrightsView.swift in Sources */,
 				658D27432C383546001D1CC3 /* TestSettingsPage.swift in Sources */,
+				65160A952C3B937A004BF8BF /* TabButton.swift in Sources */,
 				658D27442C383546001D1CC3 /* ExcludedAppListSection.swift in Sources */,
 				658D27452C383546001D1CC3 /* ExcludedAppsSettingsPage.swift in Sources */,
 				658D27462C383546001D1CC3 /* SyncingSettingsPage.swift in Sources */,
@@ -812,6 +834,7 @@
 				658D27642C383DE0001D1CC3 /* MenuBarView.swift in Sources */,
 				658D27652C383DE0001D1CC3 /* MenuBarIconView.swift in Sources */,
 				658D27572C383546001D1CC3 /* GeneralSettingsPage.swift in Sources */,
+				65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */,
 				658D27582C383546001D1CC3 /* AboutSettingsPage.swift in Sources */,
 				658D27592C383546001D1CC3 /* ClipboardSettingsPage.swift in Sources */,
 				658D275A2C383546001D1CC3 /* FormSectionListContainer.swift in Sources */,
@@ -827,6 +850,7 @@
 				658D26ED2C3823A0001D1CC3 /* ClipboardContent.swift in Sources */,
 				650515E52C38219700E2129D /* EnvironmentValues+Extensions.swift in Sources */,
 				650515E62C38219700E2129D /* Notification+Extensions.swift in Sources */,
+				65160A932C3B92CC004BF8BF /* EmptyStatePages.swift in Sources */,
 				658D26E82C382358001D1CC3 /* SoundPlayer.swift in Sources */,
 				650515E72C38219700E2129D /* Defaults+Extensions.swift in Sources */,
 				650515C72C381F0C00E2129D /* ClipboardModel.xcdatamodeld in Sources */,
@@ -1012,9 +1036,9 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 705;
+				CURRENT_PROJECT_VERSION = 708;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = 7XRF3J9RS4;
+				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
@@ -1055,9 +1079,9 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 705;
+				CURRENT_PROJECT_VERSION = 708;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
-				DEVELOPMENT_TEAM = 7XRF3J9RS4;
+				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;

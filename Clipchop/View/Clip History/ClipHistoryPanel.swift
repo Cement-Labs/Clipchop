@@ -11,9 +11,9 @@ import KeyboardShortcuts
 
 class ClipHistoryPanel: NSPanel {
     
-    private let controller: ClipHistoryViewController
+    private let controller: ClipHistoryPanelController
     
-    init(_ controller: ClipHistoryViewController) {
+    init(_ controller: ClipHistoryPanelController) {
         self.controller = controller
         super.init(
             contentRect: .zero,

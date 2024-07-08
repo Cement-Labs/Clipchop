@@ -142,6 +142,30 @@ extension Formatter {
             }
         }
         
+        if htmlData != nil {
+            let type = String(localized: "Type: HTML", defaultValue: "Text")
+            if result == nil {
+                result = type
+            } else {
+                result = String(
+                    format: .init(localized: "Type: Combined", defaultValue: "%1$@ (%2$@)"),
+                    result!, type
+                )
+            }
+        }
+        
+        if rtfData != nil {
+            let type = String(localized: "Type: RTF", defaultValue: "Text")
+            if result == nil {
+                result = type
+            } else {
+                result = String(
+                    format: .init(localized: "Type: Combined", defaultValue: "%1$@ (%2$@)"),
+                    result!, type
+                )
+            }
+        }
+        
         return result
     }
     

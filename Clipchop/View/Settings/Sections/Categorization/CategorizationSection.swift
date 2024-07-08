@@ -20,19 +20,18 @@ struct CategorizationSection: View {
     @Default(.categories) var categories
     @Default(.allTypes) var allTypes
     
-    @State var isInEditMode = false
-    @State var categorySearchText: String = ""
-    @State var fileTypeSearchText: String = ""
-    @State var isPopoverPresented = false
-    @State var contentType: ContentType = .category
-    @State var input: String = ""
+    @State private var isInEditMode = false
+    @State private var categorySearchText: String = ""
+    @State private var fileTypeSearchText: String = ""
+    @State private var isPopoverPresented = false
+    @State private var contentType: ContentType = .category
+    @State private var input: String = ""
+    @State private var isRenaming: FileCategory?
+    @State private var newName = ""
     
     var filteredCategories: [FileCategory] {
-        if categorySearchText.isEmpty {
-            return categories
-        } else {
-            return categories.filter { $0.name.localizedCaseInsensitiveContains(categorySearchText) }
-        }
+        let filtered = categorySearchText.isEmpty ? categories : categories.filter { $0.name.localizedCaseInsensitiveContains(categorySearchText) }
+        return filtered.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
     
     var groupedAndSortedTypes: [String: [String]] {
@@ -90,7 +89,31 @@ struct CategorizationSection: View {
                     VStack(spacing: -10){
                         ForEach(filteredCategories, id: \.self) { category in
                             Form{
-                                Section(header: Text(category.name)) {
+                                Section(header: HStack {
+                                    if isRenaming?.id == category.id {
+                                        TextField("",text: $newName, onCommit: {
+                                            renameCategory(category, newName: newName)
+                                            isRenaming = nil
+                                        })
+                                        .textFieldStyle(.roundedBorder)
+                                    } else {
+                                        Text(category.name)
+                                    }
+                                    Spacer()
+                                    Button(action: {
+                                        isRenaming = category
+                                        newName = category.name
+                                    }) {
+                                        Image(systemName: "pencil")
+                                    }
+                                    .padding(.trailing, 8)
+                                    Button(action: {
+                                        removeCategory(category)
+                                    }) {
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.red)
+                                    }
+                                }) {
                                     withCaption {
                                         //
                                     } caption: {
@@ -221,6 +244,13 @@ struct CategorizationSection: View {
     
     private func removeCategory(_ category: FileCategory) {
         categories.removeAll { $0 == category }
+    }
+    
+    private func renameCategory(_ category: FileCategory, newName: String) {
+        if let index = categories.firstIndex(of: category) {
+            categories[index].name = newName
+            Defaults[.categories] = categories
+        }
     }
     
     private func removeFileType(from category: FileCategory, _ fileType: String) {

@@ -14,6 +14,8 @@ struct CardPreviewView: View {
     
     private var sourceApp: NSRunningApplication? {NSWorkspace.shared.frontmostApplication}
     
+    @Default(.removeFormatting) private var removeFormatting
+    
     @ObservedObject var item: ClipboardHistory
     
     @State private var isSelected = false
@@ -58,7 +60,6 @@ struct CardPreviewView: View {
             
             Button("Coyp", action: {
                 self.isSelected = true
-                print("Selected: \(String(describing: keyboardShortcut))")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     withAnimation(Animation.spring(dampingFraction: 0.7)) {
                         self.isSelected = false
@@ -72,8 +73,26 @@ struct CardPreviewView: View {
             .frame(width: 0, height: 0)
             .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.command])
             
+            if !Defaults[.removeFormatting] {
+                Button("Coyp as plain text", action: {
+                    self.isSelected = true
+                    removeFormatting = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        withAnimation(Animation.spring(dampingFraction: 0.7)) {
+                            self.isSelected = false
+                        }
+                        ClipboardManager.clipboardController?.copy(item)
+                        removeFormatting = false
+                    }
+                })
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.shift, .command])
+            }
+            
             Button("Pin", action: {
-                print("Pin: \(String(describing: keyboardShortcut))")
                 withAnimation(Animation.easeInOut) {
                     do{
                         self.isHoveredPin = true
@@ -125,8 +144,6 @@ struct CardPreviewView: View {
             .padding(.top, 10)
             .padding(.trailing, 10)
             
-//            if let title = item.formatter.title, title != "Link" {
-//            }
             ZStack(alignment:.bottomLeading) {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.thickMaterial)
@@ -196,7 +213,7 @@ struct CardPreviewView: View {
                     }
                 }
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(isSelected ? Color.getAccent() : Color.clear, lineWidth: isSelected ? 7.5 : 0)
+                    .stroke(isSelected ? Color.getAccent() : Color.clear, lineWidth: isSelected ? 8 : 0)
                     .frame(width: 80, height: 80)
                     .foregroundColor(.clear)
             }
@@ -220,6 +237,7 @@ struct CardPreviewView: View {
                 Text(item.pin ? "Unpin" : "Pin")
                 Image(systemSymbol: .pin)
             }
+            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: .option)
             
             Button {
                 ClipboardManager.clipboardController?.copy(item)
@@ -234,9 +252,32 @@ struct CardPreviewView: View {
                     Text("Copy to Clipboard")
                 }
                 
-                Image(systemSymbol: .docOnDoc)
+                Image(systemSymbol: .docOnClipboard)
             }
-
+            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: .command)
+            
+            if !Defaults[.removeFormatting] {
+                Button {
+                    removeFormatting = true
+                    ClipboardManager.clipboardController?.copy(item)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        removeFormatting = false
+                    }
+                } label: {
+                    if Defaults[.pasteToFrontmostEnabled] {
+                        if let name = sourceApp?.localizedName {
+                            Text("Paste as Plain Text to \(name)")
+                        } else {
+                            Text("Paste as Plain Text to Frontmost")
+                        }
+                    } else {
+                        Text("Copy as Plain Text to Clipboard")
+                    }
+                    Image(systemSymbol: .docOnDoc)
+                }
+                .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.shift, .command])
+            }
+            
             Divider()
             
             Button {
@@ -245,6 +286,7 @@ struct CardPreviewView: View {
                 Text("Delete")
                 Image(systemSymbol: .trash)
             }
+            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: .control)
         })
         .gesture(
             TapGesture(count: 2)
