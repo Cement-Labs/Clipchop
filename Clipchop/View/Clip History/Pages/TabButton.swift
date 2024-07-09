@@ -19,7 +19,7 @@ struct TabButton: View {
         }) {
             Text(title)
                 .padding()
-                .background(selectedTab == title ? Color.accentColor : Color.clear)
+                .background(selectedTab == title ? Color.getAccent() : Color.clear)
                 .foregroundColor(selectedTab == title ? Color.white : Color.primary)
                 .cornerRadius(8)
         }

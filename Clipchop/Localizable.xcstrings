@@ -417,6 +417,9 @@
     "Preservation time" : {
 
     },
+    "Press Enter to search" : {
+
+    },
     "Quit" : {
 
     },
@@ -530,6 +533,17 @@
     "Tutorial" : {
 
     },
+    "Type: %d Folders" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%d Folders"
+          }
+        }
+      }
+    },
     "Type: Color" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -548,6 +562,17 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "Type: Folder" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Folder"
           }
         }
       }

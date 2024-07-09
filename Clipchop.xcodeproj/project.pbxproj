@@ -119,6 +119,7 @@
 		658D277A2C384569001D1CC3 /* ClipHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D27792C384569001D1CC3 /* ClipHistoryView.swift */; };
 		65987F112C390AD100E15897 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65987F102C390AD100E15897 /* Color+Extensions.swift */; };
 		65987F152C3930D100E15897 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 65987F142C3930D100E15897 /* Localizable.xcstrings */; };
+		65C48EC12C3D6C9000F75C64 /* ClipHistorySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -234,6 +235,7 @@
 		658D27792C384569001D1CC3 /* ClipHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistoryView.swift; sourceTree = "<group>"; };
 		65987F102C390AD100E15897 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		65987F142C3930D100E15897 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistorySearch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -594,6 +596,7 @@
 				658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */,
 				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
 				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
+				65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */,
 				65758C062C3AE0FF009EEB3E /* Pages */,
 				658D27712C384552001D1CC3 /* Preview Cards */,
 			);
@@ -786,6 +789,7 @@
 				658D26DA2C382340001D1CC3 /* ObservationTrackingStream.swift in Sources */,
 				658D27722C384552001D1CC3 /* WebLinkPreviewPage.swift in Sources */,
 				658D27732C384552001D1CC3 /* RTFPreviewPage.swift in Sources */,
+				65C48EC12C3D6C9000F75C64 /* ClipHistorySearch.swift in Sources */,
 				658D27742C384552001D1CC3 /* CardPreviewView.swift in Sources */,
 				658D27752C384552001D1CC3 /* ColorPreviewPage.swift in Sources */,
 				658D27762C384552001D1CC3 /* DragManager.swift in Sources */,

@@ -92,10 +92,26 @@ extension Formatter {
     var title: String? {
         var result: String? = nil
         let fileExtensions = fileURLs.map { $0.pathExtension }.sorted()
+        let folderCount = fileURLs.filter { url in
+            var isDirectory: ObjCBool = false
+            FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory)
+            return isDirectory.boolValue
+        }.count
         
         if image != nil {
             // Image
             result = String(localized: "Type: Image", defaultValue: "Image")
+        }  else if folderCount > 0 {
+            if folderCount == 1 {
+                // Single folder
+                result = String(localized: "Type: Folder", defaultValue: "Folder")
+            } else {
+                // Multiple folders
+                result = String(
+                    format: .init(localized: "Type: %d Folders", defaultValue: "%d Folders"),
+                    folderCount
+                )
+            }
         } else if !fileExtensions.isEmpty {
             if fileExtensions.count > 1 {
                 // Multiple files
@@ -170,9 +186,37 @@ extension Formatter {
     }
     
     var contentPreview: String {
+        
+        var plainTextContents = [ClipboardContent]()
+                
+        contents.forEach { content in
+            if let type = content.type {
+                let pasteboardType = NSPasteboard.PasteboardType(type)
+                switch pasteboardType {
+                case .html:
+                    if let htmlString = String(data: content.value!, encoding: .utf8) {
+                        let plainText = extractPlainTextFromHTML(htmlString)
+                        if let plainTextData = plainText.data(using: .utf8) {
+                            plainTextContents.append(ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData))
+                        }
+                    }
+                case .rtf:
+                    if let rtfString = NSAttributedString(rtf: content.value!, documentAttributes: nil)?.string {
+                        if let plainTextData = rtfString.data(using: .utf8) {
+                            plainTextContents.append(ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData))
+                        }
+                    }
+                case .string:
+                    plainTextContents.append(content)
+                default:
+                    break
+                }
+            }
+        }
+        
         var preview = ""
         
-        if let text = text, !text.isEmpty {
+        if let firstContent = plainTextContents.first, let text = String(data: firstContent.value!, encoding: .utf8), !text.isEmpty {
             preview = text
         } else if let image = image {
             preview = "Image: \(image.size.width)x\(image.size.height)"
@@ -211,6 +255,23 @@ extension Formatter {
         }
         
         Defaults[.allTypes] = Array(allTypes)
+    }
+    
+    func extractPlainTextFromHTML(_ html: String) -> String {
+        guard let data = html.data(using: .utf8) else {
+            return html
+        }
+
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+
+        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
+            return html
+        }
+
+        return attributedString.string
     }
 }
 

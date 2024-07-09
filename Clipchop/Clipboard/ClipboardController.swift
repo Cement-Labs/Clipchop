@@ -245,7 +245,7 @@ class ClipboardController: NSObject {
                     }
                 }
             }
-            
+           
             if let plainTextContent = plainTextContent {
                 contents.append(plainTextContent)
             }
@@ -315,7 +315,7 @@ extension ClipboardController {
         }
     }
     
-    func extractPlainTextFromHTML(_ html: String) -> String {
+    private func extractPlainTextFromHTML(_ html: String) -> String {
         guard let data = html.data(using: .utf8) else {
             return html
         }

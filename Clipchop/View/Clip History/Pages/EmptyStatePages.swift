@@ -16,7 +16,7 @@ struct EmptyStatePages: View {
                 .frame(height: 24)
             Text("No Clipboard History Available")
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .foregroundStyle(.blendMode(.overlay))
-        .frame(width: 476, height: 130)
     }
 }

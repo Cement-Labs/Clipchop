@@ -11,9 +11,11 @@ struct CollapsedPages: View {
     
     var items: FetchedResults<ClipboardHistory>
     var animationNamespace: Namespace.ID
+    
     @Binding var scrollPadding: CGFloat
     @Binding var initialScrollPadding: CGFloat
     @Binding var movethebutton: Bool
+    
     var clipboardModelEditor: ClipboardModelEditor
     var apps: InstalledApps
     var undo: () -> Void
@@ -64,7 +66,7 @@ struct CollapsedPages: View {
                             SettingsLink {
                                 ZStack(alignment: .center) {
                                     RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.accentColor)
+                                        .fill(Color.getAccent())
                                         .frame(width: 50, height: 38)
                                     Image(systemSymbol: .gearshape)
                                 }
