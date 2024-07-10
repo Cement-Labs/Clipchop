@@ -41,7 +41,7 @@ struct ExpandedPages: View {
                             renderSection(items: filteredItems)
                         } else {
                             EmptyStatePages()
-                                .padding(.vertical, 60)
+                                .padding(.vertical, 120)
                         }
                     } else if selectedTab == "Pinned" {
                         let pinnedItems = filteredItems.filter { $0.pin }
@@ -50,7 +50,7 @@ struct ExpandedPages: View {
                             
                         } else {
                             EmptyStatePages()
-                                .padding(.vertical, 60)
+                                .padding(.vertical, 120)
                         }
                     } else {
                         ForEach(filteredCategories) { category in
@@ -69,7 +69,7 @@ struct ExpandedPages: View {
                                     renderSection(items: categoryItems)
                                 } else {
                                     EmptyStatePages()
-                                        .padding(.vertical, 60)
+                                        .padding(.vertical, 120)
                                 }
                             }
                         }

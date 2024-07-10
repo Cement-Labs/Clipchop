@@ -31,7 +31,7 @@ struct CollapsedPages: View {
                             .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
                     }
                 }
-                .offset(x: scrollPadding)
+                .padding(.horizontal, scrollPadding)
                 .background(GeometryReader { geometry in
                     Color.clear
                         .onChange(of: geometry.frame(in: .global).minX) { newValue, _ in
