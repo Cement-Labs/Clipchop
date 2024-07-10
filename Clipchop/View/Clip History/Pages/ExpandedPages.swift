@@ -37,7 +37,7 @@ struct ExpandedPages: View {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack {
                     if selectedTab == "All Types" {
-                        if !items.isEmpty {
+                        if !filteredItems.isEmpty {
                             renderSection(items: filteredItems)
                         } else {
                             EmptyStatePages()
@@ -47,7 +47,6 @@ struct ExpandedPages: View {
                         let pinnedItems = filteredItems.filter { $0.pin }
                         if !pinnedItems.isEmpty {
                             renderSection(items: pinnedItems)
-                            
                         } else {
                             EmptyStatePages()
                                 .padding(.vertical, 120)

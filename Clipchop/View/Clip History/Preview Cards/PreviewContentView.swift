@@ -107,14 +107,14 @@ struct PreviewContentView: View, Equatable {
                         .minimumScaleFactor(0.8)
                         .lineLimit(10)
                         .fixedSize(horizontal: false, vertical: false)
-                        .foregroundColor(.primary)
+                        .foregroundColor(foregroundColor(for: colorImage))
                 }
             )
         } else {
             return AnyView(
                 VStack {
                     Text(text)
-                        .font(.system(size: 12).monospaced())
+                        .font(.system(size: 12))
                         .minimumScaleFactor(0.8)
                         .lineLimit(10)
                         .fixedSize(horizontal: false, vertical: false)
@@ -230,5 +230,12 @@ struct PreviewContentView: View, Equatable {
         newImage.unlockFocus()
         
         return newImage
+    }
+    
+    private func foregroundColor(for image: NSImage) -> Color {
+        guard let averageColor = image.averageColor else {
+            return .primary
+        }
+        return averageColor.isLight ? .secondary : Color(white: 0.9)
     }
 }
