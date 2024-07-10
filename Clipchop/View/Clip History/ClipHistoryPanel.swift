@@ -25,7 +25,7 @@ class ClipHistoryPanel: NSPanel {
         animationBehavior = .utilityWindow
         collectionBehavior = .canJoinAllSpaces
         isFloatingPanel = true
-        isMovableByWindowBackground = false
+        isMovable = true
         level = .floating
         
         backgroundColor = NSColor.clear
@@ -34,8 +34,21 @@ class ClipHistoryPanel: NSPanel {
         let clipHistoryView = ClipHistoryView()
             .environment(\.managedObjectContext, ClipboardDataProvider.shared.viewContext)
         
-        contentViewController = controller
-        contentView = NSHostingView(rootView: clipHistoryView)
+        let hostingView = NSHostingView(rootView: clipHistoryView)
+        
+        let backgroundView = DraggableBackgroundView(frame: self.frame)
+        backgroundView.autoresizingMask = [.width, .height]
+        
+        self.contentView?.addSubview(backgroundView)
+        self.contentView?.addSubview(hostingView)
+        
+        hostingView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hostingView.leadingAnchor.constraint(equalTo: self.contentView!.leadingAnchor),
+            hostingView.trailingAnchor.constraint(equalTo: self.contentView!.trailingAnchor),
+            hostingView.topAnchor.constraint(equalTo: self.contentView!.topAnchor),
+            hostingView.bottomAnchor.constraint(equalTo: self.contentView!.bottomAnchor)
+        ])
     }
     
     override func resignMain() {
@@ -68,5 +81,11 @@ class ClipHistoryPanel: NSPanel {
         default:
             super.keyDown(with: event)
         }
+    }
+}
+
+class DraggableBackgroundView: NSView {
+    override func mouseDown(with event: NSEvent) {
+        self.window?.performDrag(with: event)
     }
 }
