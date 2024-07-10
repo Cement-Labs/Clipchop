@@ -21,15 +21,15 @@ struct ExpandedPages: View {
     @Binding var selectedTab: String
     @Binding var isSearchVisible: Bool
     
-    let search = Search()
-    @State private var searchResults: [Search.SearchResult] = []
+    let clipHistorySearch = ClipHistorySearch()
+    @State private var searchResults: [ClipHistorySearch.SearchResult] = []
     
     var filteredCategories: [FileCategory] {
         return Defaults[.categories].sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
     
     var filteredItems: [ClipboardHistory] {
-        return searchResults.map { $0.object as! ClipboardHistory }
+        return clipHistorySearch.search(string: searchText, within: Array(items)).map { $0.object as! ClipboardHistory }
     }
     
     var body: some View {
@@ -38,32 +38,16 @@ struct ExpandedPages: View {
                 LazyVStack {
                     if selectedTab == "All Types" {
                         if !items.isEmpty {
-                            if isSearchVisible && filteredItems.isEmpty {
-                                VStack(alignment: .center) {
-                                    Image(systemName: "magnifyingglass.circle.fill")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(height: 24)
-                                    Text("Press Enter to search")
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                                .foregroundStyle(.blendMode(.overlay))
-                                .padding(.vertical, 60)
-                            } else {
-                                ScrollView(.vertical, showsIndicators: false) {
-                                    renderSection(items: isSearchVisible ? filteredItems : Array(items))
-                                }
-                            }
+                            renderSection(items: filteredItems)
                         } else {
                             EmptyStatePages()
                                 .padding(.vertical, 60)
                         }
                     } else if selectedTab == "Pinned" {
-                        let pinnedItems = items.filter { $0.pin }
+                        let pinnedItems = filteredItems.filter { $0.pin }
                         if !pinnedItems.isEmpty {
-                            ScrollView(.vertical, showsIndicators: false) {
-                                renderSection(items: pinnedItems)
-                            }
+                            renderSection(items: pinnedItems)
+                            
                         } else {
                             EmptyStatePages()
                                 .padding(.vertical, 60)
@@ -71,7 +55,7 @@ struct ExpandedPages: View {
                     } else {
                         ForEach(filteredCategories) { category in
                             if selectedTab == category.name {
-                                let categoryItems = items.filter { item in
+                                let categoryItems = filteredItems.filter { item in
                                     if let contentsSet = item.contents as? Set<ClipboardContent> {
                                         let contentsArray = Array(contentsSet)
                                         let formatter = Formatter(contents: contentsArray)
@@ -82,9 +66,7 @@ struct ExpandedPages: View {
                                 }
                                 
                                 if !categoryItems.isEmpty {
-                                    ScrollView(.vertical, showsIndicators: false) {
-                                        renderSection(items: categoryItems)
-                                    }
+                                    renderSection(items: categoryItems)
                                 } else {
                                     EmptyStatePages()
                                         .padding(.vertical, 60)
@@ -93,19 +75,11 @@ struct ExpandedPages: View {
                         }
                     }
                 }
-                .padding(.vertical, 60)
             }
-            .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
-            .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
+            .scrollDisabled(true)
         }
-    }
-    
-    private func performSearch() {
-        if searchText.isEmpty {
-            searchResults = []
-        } else {
-            searchResults = search.search(string: searchText, within: Array(items))
-        }
+        .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
+        .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
     }
 }
 
@@ -116,21 +90,19 @@ extension ExpandedPages {
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
         VStack(alignment: .leading) {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 5), spacing: 12) {
-                ForEach(items.filter { !$0.isEmpty }) { item in
-                    CardPreviewView(item: item, keyboardShortcut: "none")
-                        .environmentObject(apps)
-                        .matchedGeometryEffect(
-                            id: item.id,
-                            in: animationNamespace,
-                            properties: .frame,
-                            anchor: .center,
-                            isSource: true
-                        )
+            ScrollView(.vertical, showsIndicators: false) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 5), spacing: 12) {
+                    ForEach(Array(items.enumerated()).filter { !$0.element.isEmpty }, id: \.element.id) { index, item in
+                        CardPreviewView(item: item, keyboardShortcut: "none")
+                            .environmentObject(apps)
+                            .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
+                    }
                 }
+                .padding(.vertical, 60)
+                .padding(.horizontal, 12)
             }
-            .padding(.horizontal, 12)
         }
+        .frame(width: 500, height: 260)
     }
     
     @ViewBuilder
@@ -144,18 +116,16 @@ extension ExpandedPages {
                 )
             HStack {
                 if isSearchVisible {
-                    TextField("Search", text: $searchText, onCommit: performSearch)
+                    TextField("Search", text: $searchText)
                         .padding([.leading, .horizontal], 15)
                         .textFieldStyle(.plain)
-                        .frame(width: isSearchVisible ? 425 : 30, height: 30)
+                        .frame(width: 425, height: 30)
                 }
                 Button(action: {
                     withAnimation {
                         isSearchVisible.toggle()
                         if !isSearchVisible {
                             searchText = ""
-                        } else {
-                            selectedTab = "All Types"
                         }
                     }
                 }) {
@@ -169,7 +139,7 @@ extension ExpandedPages {
                 .offset(x: isSearchVisible ? -5 : 0)
             }
         }
-        .frame(width: isSearchVisible ? 465 : 30, height: 30)
+        .frame(width: isSearchVisible ? 470 : 30, height: 30)
         .cornerRadius(25)
     }
     
@@ -215,3 +185,4 @@ extension String {
         return self.lowercased() == other.lowercased()
     }
 }
+

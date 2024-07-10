@@ -21,6 +21,7 @@ struct PreviewContentView: View, Equatable {
         return lhs.clipboardHistory.id == rhs.clipboardHistory.id
     }
     
+    @Environment(\.colorScheme) var colorScheme
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false
     
@@ -135,7 +136,7 @@ struct PreviewContentView: View, Equatable {
     
     private func htmlPreviewView(for htmlData: Data) -> some View {
         VStack {
-            HTMLPreviewPage(htmlData: htmlData)
+            HTMLPreviewPage(htmlData: htmlData, colorScheme: colorScheme)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .padding()
         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 var copyrights: String {
     .init(
-        format: .init(localized: "Copyrights", defaultValue: "%@ NNN Studio"),
+        format: .init(localized: "Copyrights", defaultValue: "%@ Cement Labs"),
         appDevelopmentTime
     )
 }
@@ -37,8 +37,4 @@ struct CopyrightsView: View {
         }
         .monospaced()
     }
-}
-
-#Preview {
-    CopyrightsView()
 }

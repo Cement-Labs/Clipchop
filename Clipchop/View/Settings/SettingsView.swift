@@ -156,7 +156,3 @@ struct WindowAccessor: NSViewRepresentable {
     
     func updateNSView(_ nsView: NSView, context: Context) {}
 }
-
-#Preview {
-    SettingsView()
-}

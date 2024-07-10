@@ -243,7 +243,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%@ NNN Studio"
+            "value" : "%@ Cement Labs"
           }
         }
       }
@@ -415,9 +415,6 @@
 
     },
     "Preservation time" : {
-
-    },
-    "Press Enter to search" : {
 
     },
     "Quit" : {

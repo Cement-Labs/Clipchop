@@ -28,13 +28,7 @@ struct CollapsedPages: View {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                         CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
                             .environmentObject(apps)
-                            .matchedGeometryEffect(
-                                id: item.id,
-                                in: animationNamespace,
-                                properties: .frame,
-                                anchor: .center,
-                                isSource: true
-                            )
+                            .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
                     }
                 }
                 .offset(x: scrollPadding)
@@ -91,6 +85,7 @@ struct CollapsedPages: View {
                 )
             }
         }
+        .frame(width: 500, height: 100)
     }
     
     private func getKeyboardShortcut(for index: Int) -> String {

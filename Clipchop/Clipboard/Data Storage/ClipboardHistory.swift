@@ -175,3 +175,17 @@ extension ClipboardHistory {
         return contents == nil || contents?.count == 0
     }
 }
+
+extension ClipboardHistory: Searchable {
+    var title: String {
+        Formatter(contents: Array(self.contents as? Set<ClipboardContent> ?? [])).title ?? ""
+    }
+    
+    var value: String {
+        Formatter(contents: Array(self.contents as? Set<ClipboardContent> ?? [])).contentPreview
+    }
+    
+    var apps: String? {
+        self.app
+    }
+}

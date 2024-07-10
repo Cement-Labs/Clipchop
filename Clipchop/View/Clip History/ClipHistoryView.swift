@@ -34,9 +34,9 @@ struct ClipHistoryView: View {
     @State var searchText: String = ""
     @State var isSearchVisible: Bool = false
     @State var selectedTab: String = "All Types"
-    @State var searchResults: [Search.SearchResult] = []
+    @State var searchResults: [ClipHistorySearch.SearchResult] = []
     
-    private let search = Search()
+    private let search = ClipHistorySearch()
     private let controller = ClipHistoryPanelController()
     private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
     
@@ -44,6 +44,7 @@ struct ClipHistoryView: View {
         case expanded
         case collapsed
     }
+    
     var body: some View {
         clip {
             ZStack {
@@ -101,25 +102,22 @@ struct ClipHistoryView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .onReceive(NotificationCenter.default.publisher(for: .didChangeExpansionState)) { notification in
             if let userInfo = notification.userInfo, let isExpanded = userInfo["isExpanded"] as? Bool {
+                searchText = ""
                 withAnimation(.default) {
-                    viewState = isExpanded ? .expanded : .collapsed
-                    searchText = ""
-                    selectedTab = "All Types"
                     isSearchVisible = false
+                    selectedTab = "All Types"
+                    scrollPadding = 12
+                    initialScrollPadding = 12
                     movethebutton = false
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.default) {
+                        viewState = isExpanded ? .expanded : .collapsed
+                    }
                 }
             }
         }
     }
-    
-    // MARK: - ViewBuilder
-    
-    @ViewBuilder
-    private func clip(@ViewBuilder content: @escaping () -> some View) -> some View {
-        content()
-            .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
-    }
-    
     // MARK: - ModelManager
     
     private func undo() {
@@ -137,4 +135,10 @@ struct ClipHistoryView: View {
             searchResults = search.search(string: searchText, within: Array(items))
         }
     }
+}
+
+@ViewBuilder
+func clip(@ViewBuilder content: @escaping () -> some View) -> some View {
+    content()
+        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
 }

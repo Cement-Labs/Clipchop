@@ -9,16 +9,20 @@ import SwiftUI
 import AppKit
 
 struct HTMLPreviewPage: View {
-    
+        
     let attributedText: AttributedString
     let backgroundColor: Color
     
-    init(htmlData: Data?) {
+    static func dynamicColor(for colorScheme: ColorScheme) -> NSColor {
+        return colorScheme == .dark ? .black : .white
+    }
+    
+    init(htmlData: Data?, colorScheme: ColorScheme) {
         if let htmlData = htmlData,
            let contents = HTMLPreviewPage.attributedString(from: htmlData) {
             let adjustedContents = HTMLPreviewPage.adjustFonts(in: contents)
             attributedText = AttributedString(adjustedContents)
-            backgroundColor = HTMLPreviewPage.extractBackgroundColor(from: adjustedContents)
+            backgroundColor = HTMLPreviewPage.extractBackgroundColor(from: adjustedContents, colorScheme: colorScheme)
         } else {
             attributedText = AttributedString()
             backgroundColor = .white
@@ -38,14 +42,14 @@ struct HTMLPreviewPage: View {
         return attributedString
     }
     
-    static func extractBackgroundColor(from attributedString: NSAttributedString) -> Color {
-        var backgroundColor: NSColor = .clear
-        attributedString.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: attributedString.length)) { value, _, _ in
-            if let color = value as? NSColor {
-                backgroundColor = color
-                return
-            }
-        }
+    static func extractBackgroundColor(from attributedString: NSAttributedString, colorScheme: ColorScheme) -> Color {
+        let backgroundColor: NSColor = dynamicColor(for: colorScheme)
+//        attributedString.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: attributedString.length)) { value, _, _ in
+//            if let color = value as? NSColor {
+//                backgroundColor = color
+//                return
+//            }
+//        }
         return Color(backgroundColor)
     }
     
@@ -67,7 +71,7 @@ struct HTMLPreviewPage: View {
                 .minimumScaleFactor(0.8)
                 .lineLimit(10)
                 .fixedSize(horizontal: false, vertical: false)
-                .background(Color.clear)
+                .background(backgroundColor)
                 .padding(.all, 10)
         }
         .frame(width: 80, height: 80)

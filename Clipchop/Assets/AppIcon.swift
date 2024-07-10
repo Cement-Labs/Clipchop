@@ -63,7 +63,11 @@ extension AppIcon {
 
 extension AppIcon {
     static var defaultAppIcon: AppIcon {
-        stable
+        #if DEBUG
+        return beta
+        #else
+        return stable
+        #endif
     }
     
     static var currentAppIcon: AppIcon {
