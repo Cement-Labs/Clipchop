@@ -10,6 +10,7 @@ import AppKit
 // Code from https://github.com/p0deje/Maccy
 extension NSPasteboard.PasteboardType {
     static let jpeg = NSPasteboard.PasteboardType(rawValue: "public.jpeg")
+    static let avif = NSPasteboard.PasteboardType(rawValue: "public.avif")
     static let universalClipboard = NSPasteboard.PasteboardType(rawValue: "com.apple.is-remote-clipboard")
     
     // See http://nspasteboard.org for more details.

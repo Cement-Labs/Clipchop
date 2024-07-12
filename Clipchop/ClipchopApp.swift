@@ -31,21 +31,21 @@ struct ClipchopApp: App {
         
 #if DEBUG
         // Resets Defaults
-        Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
-        Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
+//        Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
+//        Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
         
 //        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
-        Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
-        Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
+//        Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
+//        Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
         
-        Defaults[.categories] = Defaults.Keys.categories.defaultValue
-        Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
+//        Defaults[.categories] = Defaults.Keys.categories.defaultValue
+//        Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
         
-        Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
-        Defaults[.excludedApplications] = Defaults.Keys.excludedApplications.defaultValue
+//        Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
+//        Defaults[.excludedApplications] = Defaults.Keys.excludedApplications.defaultValue
         
-        Defaults[.historyPreservationPeriod] = Defaults.Keys.historyPreservationPeriod.defaultValue
-        Defaults[.historyPreservationTime] = Defaults.Keys.historyPreservationTime.defaultValue
+//        Defaults[.historyPreservationPeriod] = Defaults.Keys.historyPreservationPeriod.defaultValue
+//        Defaults[.historyPreservationTime] = Defaults.Keys.historyPreservationTime.defaultValue
         
         // Resets clipboard history
 //        try? clipboardModelEditor.deleteAll()

@@ -46,7 +46,7 @@ extension Defaults.Keys {
     
     static let removeFormatting = Key<Bool>("removeFormatting", default: false)
     
-    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
+    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.25)
     
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .day)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)

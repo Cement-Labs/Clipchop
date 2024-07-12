@@ -101,7 +101,7 @@ struct ClipboardBehaviorsSection: View {
                         .monospaced()
                 }
                 
-                Slider(value: $timerInterval, in: 0.01...1) {
+                Slider(value: $timerInterval, in: 0.25...1) {
                     
                 } minimumValueLabel: {
                     Text("0")

@@ -25,6 +25,7 @@ class ClipboardController: NSObject {
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,
         NSPasteboard.PasteboardType.pdf.rawValue,
+        NSPasteboard.PasteboardType.avif.rawValue,
         
         NSPasteboard.PasteboardType.universalClipboard.rawValue,
         NSPasteboard.PasteboardType.tabularText.rawValue,
@@ -33,15 +34,11 @@ class ClipboardController: NSObject {
     ]
     
     init (context: NSManagedObjectContext, clipHistoryViewController: ClipHistoryPanelController, clipboardModelManager: ClipboardModelManager) {
-        changeCount = pasteboard.changeCount
-        
         self.started = true
         self.context = context
         self.clipboardModelManager = clipboardModelManager
         self.clipHistoryViewController = clipHistoryViewController
         self.changeCount = ClipboardHistory.pasteboard.changeCount
-        
-        super.init()
     }
     
     // MARK: - Clipboard Change
@@ -80,8 +77,6 @@ class ClipboardController: NSObject {
     
     // MARK: - Update clipboard history
     private func updateClipboard() {
-        
-        try! context.save()
                 
         guard pasteboard.changeCount != changeCount else {
             return
@@ -100,7 +95,6 @@ class ClipboardController: NSObject {
         var contents: [ClipboardContent] = []
         
         pasteboard.pasteboardItems?.forEach({ item in
-            
             let types = Set(item.types)
             var hasFileURL = false
             var fileURLData: Data?
@@ -155,12 +149,10 @@ class ClipboardController: NSObject {
                 if let htmlData = htmlData {
                     let content = ClipboardContent(type: NSPasteboard.PasteboardType.html.rawValue, value: htmlData)
                     contents.append(content)
-                }
-                else if let rtfData = rtfData {
+                } else if let rtfData = rtfData {
                     let content = ClipboardContent(type: NSPasteboard.PasteboardType.rtf.rawValue, value: rtfData)
                     contents.append(content)
-                }
-                else if let stringData = stringData {
+                } else if let stringData = stringData {
                     let content = ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: stringData)
                     contents.append(content)
                 }
@@ -179,6 +171,7 @@ class ClipboardController: NSObject {
         guard !contents.isEmpty else {
             return
         }
+        
         DispatchQueue.main.async {
             Notification.Name.didClip.post()
         }
@@ -245,17 +238,30 @@ class ClipboardController: NSObject {
                     }
                 }
             }
-           
+            
             if let plainTextContent = plainTextContent {
                 contents.append(plainTextContent)
             }
         }
         
-        contents.forEach { content in
+        let nonFileURLContents = contents.filter { content in
+            content.type != NSPasteboard.PasteboardType.fileURL.rawValue
+        }
+        
+        nonFileURLContents.forEach { content in
             if let type = content.type {
                 pasteboard.setData(content.value, forType: NSPasteboard.PasteboardType(type))
             }
         }
+        
+        let fileURLItems: [NSPasteboardItem] = contents.compactMap { content in
+            guard content.type == NSPasteboard.PasteboardType.fileURL.rawValue else { return nil }
+            guard let value = content.value else { return nil }
+            let pasteItem = NSPasteboardItem()
+            pasteItem.setData(value, forType: NSPasteboard.PasteboardType(content.type ?? ""))
+            return pasteItem
+        }
+        pasteboard.writeObjects(fileURLItems)
         
         DispatchQueue.main.async {
             Notification.Name.didPaste.post()

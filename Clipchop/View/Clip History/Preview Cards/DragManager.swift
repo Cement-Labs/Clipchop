@@ -14,16 +14,16 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         log( "Value is not NSSecureCoding compliant")
         return nil
     }
-
+    
     switch content.type {
     case
         UTType.plainText.identifier, UTType.text.identifier, UTType.utf8PlainText.identifier, UTType.utf16PlainText.identifier,
         UTType.emailMessage.identifier,
         UTType.utf16ExternalPlainText.identifier,UTType.utf8TabSeparatedText.identifier, UTType.url.identifier:
         
-        guard 
+        guard
             let string = String(data: data as! Data, encoding: .utf8),
-            let nsData = string.data(using: .utf8) 
+            let nsData = string.data(using: .utf8)
         else {
             print("Failed to convert data to string with UTF-8 encoding.")
             return nil
@@ -31,7 +31,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         print("type is \(String(describing: content.type))")
         return NSItemProvider(item: nsData as NSSecureCoding, typeIdentifier: content.type)
         
-    case 
+    case
         UTType.html.identifier:
         guard let data = data as? Data else {
             print("Data is not of type Data.")
@@ -66,7 +66,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
             return itemProvider
         }
         
-    case 
+    case
         UTType.rtf.identifier:
         guard let data = data as? Data else {
             print("Data is not of type Data.")
@@ -104,7 +104,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     case
         UTType.fileURL.identifier,UTType.folder.identifier, UTType.package.identifier, UTType.zip.identifier,
         
-        UTType.jpeg.identifier, UTType.png.identifier, UTType.gif.identifier, UTType.tiff.identifier, 
+        UTType.jpeg.identifier, UTType.png.identifier, UTType.gif.identifier, UTType.tiff.identifier,
         UTType.heic.identifier, UTType.aiff.identifier, UTType.heif.identifier, UTType.rawImage.identifier,
         UTType.icns.identifier, UTType.ico.identifier,
         
@@ -119,7 +119,7 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         
         print("type is \(String(describing: content.type))")
         return NSItemProvider(item: data, typeIdentifier: content.type)
-
+        
     default:
         print("Unsupported content type for dragging: \(String(describing: content.type))")
         return NSItemProvider(item: data, typeIdentifier: UTType.data.identifier)
