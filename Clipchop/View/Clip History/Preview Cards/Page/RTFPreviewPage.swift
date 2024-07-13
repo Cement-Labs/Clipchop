@@ -13,22 +13,26 @@ struct RTFPreviewPage: View {
     
     let attributedText: AttributedString
     let backgroundColor: Color
+    
+    static func dynamicColor(for colorScheme: ColorScheme) -> NSColor {
+        return colorScheme == .dark ? .black : .white
+    }
 
-    init(rtfData: Data?) {
+    init(rtfData: Data?, colorScheme: ColorScheme) {
         if
             let rtfData = rtfData,
             let contents = NSAttributedString(rtf: rtfData, documentAttributes: nil)
         {
             attributedText = .init(contents)
-            backgroundColor = RTFPreviewPage.extractBackgroundColor(from: contents)
+            backgroundColor = RTFPreviewPage.extractBackgroundColor(from: contents, colorScheme: colorScheme)
         } else {
             attributedText = .init()
             backgroundColor = .white
         }
     }
     
-    static func extractBackgroundColor(from attributedString: NSAttributedString) -> Color {
-        var backgroundColor: NSColor = .white
+    static func extractBackgroundColor(from attributedString: NSAttributedString, colorScheme: ColorScheme) -> Color {
+        var backgroundColor: NSColor = dynamicColor(for: colorScheme)
         attributedString.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: attributedString.length)) { value, _, _ in
             if let color = value as? NSColor {
                 backgroundColor = color

@@ -79,7 +79,7 @@ struct PreviewContentView: View, Equatable {
     
     private func rtfView(for rtfData: Data) -> some View {
         VStack {
-            RTFPreviewPage(rtfData: rtfData)
+            RTFPreviewPage(rtfData: rtfData, colorScheme: colorScheme)
         }
         .frame(width: 80, height: 80)
     }
