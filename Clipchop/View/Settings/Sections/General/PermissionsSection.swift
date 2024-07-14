@@ -115,9 +115,3 @@ Full Disk Access is needed to generate file previews.
         .tint(isGranted ? .secondary : .red)
     }
 }
-
-#Preview {
-    previewSection {
-        PermissionsSection()
-    }
-}

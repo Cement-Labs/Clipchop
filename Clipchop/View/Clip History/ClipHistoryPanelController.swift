@@ -156,8 +156,3 @@ extension ClipHistoryPanelController {
         setExpansion(false)
     }
 }
-
-
-extension Notification.Name {
-    static let didChangeExpansionState = Notification.Name("didChangeExpansionState")
-}

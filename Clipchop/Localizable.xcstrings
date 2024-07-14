@@ -177,6 +177,9 @@
     "Audio" : {
 
     },
+    "Automatically pastes into the currently active application when enabled." : {
+
+    },
     "Back" : {
 
     },
@@ -190,9 +193,6 @@
 
     },
     "Category Name" : {
-
-    },
-    "Changing Color Scheme" : {
 
     },
     "Clear clipboard history" : {
@@ -366,9 +366,6 @@
     "Loading..." : {
 
     },
-    "Log to Console (Debug)" : {
-
-    },
     "macOS Blue" : {
 
     },
@@ -426,10 +423,10 @@
     "Recent Clips" : {
 
     },
-    "Refresh States (Debug)" : {
+    "Remove format" : {
 
     },
-    "Remove format" : {
+    "Removes all font formats from pasted text when enabled." : {
 
     },
     "Restore" : {
@@ -513,9 +510,6 @@
 
     },
     "System" : {
-
-    },
-    "Test (Debug)" : {
 
     },
     "Test line No.%lld" : {
@@ -650,12 +644,6 @@
 
     },
     "Welcome to %@" : {
-
-    },
-    "When enabled, All font formats will be removed." : {
-
-    },
-    "When enabled, will automatically paste into the frontmost application." : {
 
     },
     "You can always open %@ again to access this page." : {

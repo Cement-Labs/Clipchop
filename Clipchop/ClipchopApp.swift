@@ -31,7 +31,7 @@ struct ClipchopApp: App {
         
 #if DEBUG
         // Resets Defaults
-//        Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
+        Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
 //        Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
         
 //        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
@@ -50,7 +50,6 @@ struct ClipchopApp: App {
         // Resets clipboard history
 //        try? clipboardModelEditor.deleteAll()
 #endif
-        
         if !Defaults[.beginningViewShown] {
             clipboardManager.beginningViewController.open()
             Defaults[.beginningViewShown] = true
@@ -63,7 +62,6 @@ struct ClipchopApp: App {
         
         Settings {
             SettingsView()
-                .environment(\.managedObjectContext, ClipboardDataProvider.shared.viewContext)
                 .frame(minHeight: 200, idealHeight: 425)
         }
         

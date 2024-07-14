@@ -37,9 +37,3 @@ struct KeyboardShortcutsSection: View {
         }
     }
 }
-
-#Preview {
-    previewSection {
-        KeyboardShortcutsSection()
-    }
-}

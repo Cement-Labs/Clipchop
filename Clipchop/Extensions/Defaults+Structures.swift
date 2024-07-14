@@ -11,9 +11,9 @@ import Defaults
 // MARK: - Preferred Color Scheme
 
 enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable {
-    case system = "system"
-    case light = "light"
-    case dark = "dark"
+    case system
+    case light
+    case dark
     
     var colorScheme: ColorScheme? {
         switch self {

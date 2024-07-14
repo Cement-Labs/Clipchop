@@ -29,11 +29,11 @@ struct ClipboardBehaviorsSection: View {
     
     var body: some View {
         Section {
-            withCaption("When enabled, All font formats will be removed.") {
+            withCaption("Removes all font formats from pasted text when enabled.") {
                 Toggle("Remove format", isOn: $removeFormatting)
                 
             }
-            withCaption("When enabled, will automatically paste into the frontmost application.") {
+            withCaption("Automatically pastes into the currently active application when enabled.") {
                 Toggle("Paste to active application", isOn: $paste)
                 
             }
@@ -143,11 +143,5 @@ struct ClipboardBehaviorsSection: View {
     private func applyCache() {
         historyPreservationPeriod = cachedPreservationPeriod
         historyPreservationTime = cachedPreservationTime
-    }
-}
-
-#Preview {
-    previewSection {
-        ClipboardBehaviorsSection()
     }
 }

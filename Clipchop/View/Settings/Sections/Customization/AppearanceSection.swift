@@ -89,8 +89,9 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                     }
                 }
             }
-            
+#if DEBUG
             PreferredColorSchemePicker()
+#endif
         } header: {
             if hasTitle {
                 Text("Color")
@@ -122,11 +123,5 @@ Clip more to unlock more! You've already clipped \(timesClipped) times.
                 .buttonStyle(.plain)
             }
         }
-    }
-}
-
-#Preview {
-    previewSection {
-        AppearanceSection()
     }
 }
