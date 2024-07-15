@@ -22,13 +22,6 @@ enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable 
         default: .none
         }
     }
-    
-    var needsReload: Bool {
-        switch self {
-        case .system: true
-        default: false
-        }
-    }
 }
 
 // MARK: - History Preservation Period

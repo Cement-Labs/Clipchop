@@ -31,7 +31,6 @@ struct SettingsView: View {
             }
         }
     }
-    
     @State private var navigation: Navigation = .general
     @State private var apps = InstalledApps()
     
@@ -99,6 +98,7 @@ struct SettingsView: View {
                     }
                 }
             }
+
             .navigationSplitViewCollapsingDisabled()
             .navigationTitle(Bundle.main.appName)
             .navigationSplitViewStyle(.prominentDetail)

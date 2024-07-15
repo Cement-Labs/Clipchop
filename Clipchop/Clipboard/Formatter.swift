@@ -225,7 +225,6 @@ extension Formatter {
         } else if !fileURLs.isEmpty {
             preview = "Files: \(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
         }
-        
         return preview
     }
     
@@ -274,4 +273,3 @@ extension Formatter {
         return attributedString.string
     }
 }
-

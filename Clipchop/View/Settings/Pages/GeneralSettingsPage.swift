@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct GeneralSettingsPage: View {
+    @Default(.preferredColorScheme) private var preferredColorScheme
     var body: some View {
         ListEmbeddedForm {
             PermissionsSection()
             
             GlobalBehaviorsSection()
         }
+        .preferredColorScheme(preferredColorScheme.colorScheme)
     }
 }
 

@@ -14,6 +14,8 @@ import SFSafeSymbols
 struct ClipHistoryView: View {
     
     @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
+    
+    @Default(.preferredColorScheme) private var preferredColorScheme
         
     @Environment(\.managedObjectContext) private var context
     
@@ -100,6 +102,8 @@ struct ClipHistoryView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .preferredColorScheme(preferredColorScheme.colorScheme)
+        .animation(.easeInOut, value: preferredColorScheme)
         .onReceive(NotificationCenter.default.publisher(for: .didChangeExpansionState)) { notification in
             if let userInfo = notification.userInfo, let isExpanded = userInfo["isExpanded"] as? Bool {
                 searchText = ""

@@ -18,7 +18,6 @@ struct PreferredColorSchemePicker: View {
             Text("Light").tag(PreferredColorScheme.light)
             Text("Dark").tag(PreferredColorScheme.dark)
         }
-        .pickerStyle(SegmentedPickerStyle())
         .onChange(of: preferredColorScheme) { _, _ in
             applyColorScheme()
         }
@@ -38,4 +37,3 @@ struct PreferredColorSchemePicker: View {
         }
     }
 }
-

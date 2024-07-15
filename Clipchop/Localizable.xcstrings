@@ -366,6 +366,9 @@
     "Loading..." : {
 
     },
+    "Log to Console (Debug)" : {
+
+    },
     "macOS Blue" : {
 
     },
@@ -421,6 +424,9 @@
 
     },
     "Recent Clips" : {
+
+    },
+    "Refresh States (Debug)" : {
 
     },
     "Remove format" : {
@@ -510,6 +516,9 @@
 
     },
     "System" : {
+
+    },
+    "Test (Debug)" : {
 
     },
     "Test line No.%lld" : {
