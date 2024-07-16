@@ -49,7 +49,7 @@ struct ClipHistoryView: View {
     
     var body: some View {
         clip {
-            ZStack {
+            ZStack(alignment: .top) {
                 
                 Button(action: undo) { }
                 .opacity(0)
@@ -109,7 +109,7 @@ struct ClipHistoryView: View {
                 searchText = ""
                 withAnimation(.default) {
                     isSearchVisible = false
-                    selectedTab = "All Types"
+                    selectedTab = NSLocalizedString("All Types", comment: "All Types")
                     scrollPadding = 12
                     initialScrollPadding = 12
                     movethebutton = false

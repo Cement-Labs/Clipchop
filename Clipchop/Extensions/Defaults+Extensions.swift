@@ -46,7 +46,7 @@ extension Defaults.Keys {
     
     static let removeFormatting = Key<Bool>("removeFormatting", default: false)
     
-    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.25)
+    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.5)
     
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .day)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
@@ -88,11 +88,11 @@ extension Defaults.Keys {
         ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Link", defaultValue: "Link"), types: [
-            "link"
+            NSLocalizedString("link", comment: "link")
         ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Color", defaultValue: "Color"), types: [
-            "color"
+            NSLocalizedString("color", comment: "color")
         ].map { $0.lowercased() })
         
     ])

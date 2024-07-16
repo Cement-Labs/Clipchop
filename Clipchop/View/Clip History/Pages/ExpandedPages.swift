@@ -36,14 +36,14 @@ struct ExpandedPages: View {
         VStack {
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack {
-                    if selectedTab == "All Types" {
+                    if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
                         if !filteredItems.isEmpty {
                             renderSection(items: filteredItems)
                         } else {
                             EmptyStatePages()
                                 .padding(.vertical, 120)
                         }
-                    } else if selectedTab == "Pinned" {
+                    } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
                         let pinnedItems = filteredItems.filter { $0.pin }
                         if !pinnedItems.isEmpty {
                             renderSection(items: pinnedItems)
@@ -153,8 +153,8 @@ extension ExpandedPages {
                 )
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    TabButton(title: "All Types", selectedTab: $selectedTab)
-                    TabButton(title: "Pinned", selectedTab: $selectedTab)
+                    TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
+                    TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
                     
                     ForEach(filteredCategories) { category in
                         let categoryItems = items.filter { item in

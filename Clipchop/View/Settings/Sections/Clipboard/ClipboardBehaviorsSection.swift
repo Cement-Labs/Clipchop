@@ -19,8 +19,8 @@ struct ClipboardBehaviorsSection: View {
     @State private var isDeleteHistoryAlertPresented = false
     @State private var isApplyPreservationTimeAlertPresented = false
     
-    @State private var cachedPreservationPeriod: HistoryPreservationPeriod = .day
-    @State private var cachedPreservationTime: Double = 1
+    @State private var initialPreservationPeriod: HistoryPreservationPeriod = .day
+    @State private var initialPreservationTime: Double = 1
     
     @Environment(\.hasTitle) private var hasTitle
     @ObservedObject private var clipboardModelManager = ClipboardModelManager()
@@ -29,13 +29,11 @@ struct ClipboardBehaviorsSection: View {
     
     var body: some View {
         Section {
-            withCaption("Removes all font formats from pasted text when enabled.") {
+            withCaption("When enabled, strips all font formatting from pasted text.") {
                 Toggle("Remove format", isOn: $removeFormatting)
-                
             }
             withCaption("Automatically pastes into the currently active application when enabled.") {
                 Toggle("Paste to active application", isOn: $paste)
-                
             }
         } header: {
             if hasTitle {
@@ -55,7 +53,7 @@ struct ClipboardBehaviorsSection: View {
                     if !DefaultsStack.Group.historyPreservation.isUnchanged {
                         HStack {
                             Button {
-                                applyCache()
+                                restoreInitialValues()
                             } label: {
                                 Image(systemSymbol: .clockArrowCirclepath)
                                 Text("Restore")
@@ -86,7 +84,7 @@ struct ClipboardBehaviorsSection: View {
                 .alert("Apply Preservation Time", isPresented: $isApplyPreservationTimeAlertPresented) {
                     Button("Apply", role: .destructive) {
                         // TODO: Apply
-                        cache()
+                        cacheCurrentValues()
                     }
                 } message: {
                     Text("Applying a new preservation time clears all the outdated clipboard history except your pins.")
@@ -116,7 +114,7 @@ struct ClipboardBehaviorsSection: View {
             Button {
                 isDeleteHistoryAlertPresented = true
             } label: {
-                Text("Clear clipboard history")
+                Text("Clear Clipboard History")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.plain)
@@ -131,17 +129,23 @@ struct ClipboardBehaviorsSection: View {
             .padding(-5)
         }
         .foregroundStyle(.red)
+        .onAppear {
+            cacheInitialValues()
+        }
     }
     
-    private func cache() {
-        cachedPreservationPeriod = historyPreservationPeriod
-        cachedPreservationTime = historyPreservationTime
+    private func cacheInitialValues() {
+        initialPreservationPeriod = historyPreservationPeriod
+        initialPreservationTime = historyPreservationTime
+    }
+    
+    private func cacheCurrentValues() {
         clipboardModelManager.restartPeriodicCleanup()
         DefaultsStack.shared.markDirty(.historyPreservation)
     }
     
-    private func applyCache() {
-        historyPreservationPeriod = cachedPreservationPeriod
-        historyPreservationTime = cachedPreservationTime
+    private func restoreInitialValues() {
+        historyPreservationPeriod = initialPreservationPeriod
+        historyPreservationTime = initialPreservationTime
     }
 }

@@ -102,17 +102,17 @@ struct CollapsedPages: View {
     
     private func showAlert() {
         let alert = NSAlert()
-        alert.messageText = "Clear Clipboard History"
-        alert.informativeText = "This action clears all your clipboard history unrestorably, including pins."
+        alert.messageText = NSLocalizedString("Clear Clipboard History", comment: "Alert message text for clearing clipboard history")
+        alert.informativeText = NSLocalizedString("This action will clear all non-pinned entries from your clipboard history irreversibly.", comment: "Informative text for alert about clearing clipboard history")
         alert.alertStyle = .warning
         
-        alert.addButton(withTitle: "Delete")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: NSLocalizedString("Delete", comment: "Delete button title"))
+        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel button title"))
         
         let response = alert.runModal()
         if response == .alertFirstButtonReturn {
             // TODO: Delete
-            try? clipboardModelEditor.deleteAll()
+            try? clipboardModelEditor.deleteAllExceptPinned()
         }
     }
 }

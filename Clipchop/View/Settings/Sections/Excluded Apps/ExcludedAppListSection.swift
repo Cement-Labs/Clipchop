@@ -20,7 +20,7 @@ struct ExcludedAppListSection: View {
     var body: some View {
         Section {
             withCaption("Limit \(Bundle.main.appName)'s functions in the specified apps.") {
-                Toggle("App excluding", isOn: $excludeAppsEnabled)
+                Toggle("App Excluding", isOn: $excludeAppsEnabled)
             }
         }
         

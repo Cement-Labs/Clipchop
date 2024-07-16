@@ -17,7 +17,9 @@ struct GlobalBehaviorsSection: View {
     
     var body: some View {
         Section {
-                LaunchAtLogin.Toggle("Starts with macOS")
+            LaunchAtLogin.Toggle {
+                Text("Starts with macOS")
+            }
             
             withCaption("""
 You can always open \(Bundle.main.appName) again to access this page.

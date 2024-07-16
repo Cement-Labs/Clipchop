@@ -29,9 +29,9 @@ struct KeyboardShortcutsSection: View {
         Section {
             KeyboardShortcuts.Recorder(for: .start) {
                 withCaption {
-                    Text("Clipboard monitoring")
+                    Text("Clipboard Monitoring")
                 } caption: {
-                    Text("Toggle clipboard history monitoring.")
+                    Text("Enable or disable monitoring of your clipboard history.")
                 }
             }
         }

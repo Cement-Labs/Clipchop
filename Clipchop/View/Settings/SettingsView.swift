@@ -17,7 +17,9 @@ struct SettingsView: View {
         case clipboard
         case categorization
         case appExcluding
+#if DEBUG
         case syncing
+#endif
         case about
         
 #if DEBUG
@@ -61,12 +63,12 @@ struct SettingsView: View {
                     Image(systemSymbol: .xmarkSeal)
                 }
                 .tag(Navigation.appExcluding)
-                
+#if DEBUG
                 NavigationEntry("Syncing") {
                     Image(systemSymbol: .checkmarkIcloud)
                 }
                 .tag(Navigation.syncing)
-                
+#endif
                 NavigationEntry("About") {
                     Image(systemSymbol: .infoCircle)
                 }
@@ -79,8 +81,8 @@ struct SettingsView: View {
                 .tag(Navigation.test)
 #endif
             }
-            .frame(width: 180) // `navigationSplitColumnWidth` doesn't work
-            .toolbar(removing: .sidebarToggle)
+            .frame(width: 180)
+//            .toolbar(removing: .sidebarToggle)
             .navigationSplitViewColumnWidth(min: 180, ideal: 180, max: 180)
         } detail: {
             contentForNavigation(navigation)
@@ -98,7 +100,6 @@ struct SettingsView: View {
                     }
                 }
             }
-
             .navigationSplitViewCollapsingDisabled()
             .navigationTitle(Bundle.main.appName)
             .navigationSplitViewStyle(.prominentDetail)
@@ -124,9 +125,10 @@ struct SettingsView: View {
         case .appExcluding:
             ExcludedAppsSettingsPage()
                 .environmentObject(apps)
-            
+#if DEBUG
         case .syncing:
             SyncingSettingsPage()
+#endif
             
         case .about:
             AboutSettingsPage()

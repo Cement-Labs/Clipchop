@@ -5,25 +5,74 @@
 
     },
     "%.2fs" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.2f 秒"
+          }
+        }
+      }
     },
     "%@ is open source." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@是开源的"
+          }
+        }
+      }
     },
     "%lld Days" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 天"
+          }
+        }
+      }
     },
     "%lld Hours" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 时"
+          }
+        }
+      }
     },
     "%lld Minutes" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分"
+          }
+        }
+      }
     },
     "%lld Months" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 月"
+          }
+        }
+      }
     },
     "%lld Years" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 年"
+          }
+        }
+      }
     },
     "%llu Clips, %lld Items" : {
       "localizations" : {
@@ -32,26 +81,74 @@
             "state" : "new",
             "value" : "%1$llu Clips, %2$lld Items"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴%1$llu次，共%2$lld个项目"
+          }
         }
       }
     },
     "0" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0"
+          }
+        }
+      }
     },
     "1" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1"
+          }
+        }
+      }
     },
     "3D Models" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D 模型"
+          }
+        }
+      }
     },
     "30" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30"
+          }
+        }
+      }
     },
     "About" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于"
+          }
+        }
+      }
     },
     "Accessibility Access" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "辅助功能访问权限"
+          }
+        }
+      }
     },
     "Accessibility Access Alert: Content" : {
       "extractionState" : "extracted_with_value",
@@ -60,6 +157,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Accessibility Access is required for %@ to take over your clipboard."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 需要无障碍访问权限以接管您的剪贴板。"
           }
         }
       }
@@ -72,14 +175,45 @@
             "state" : "new",
             "value" : "%@ Needs Accessibility Access"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 需要无障碍访问权限"
+          }
         }
       }
     },
     "Accessibility Access is needed to take over your clipboard." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要无障碍访问权限来接管您的剪贴板。"
+          }
+        }
+      }
     },
     "Acknowledgements" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "致谢"
+          }
+        }
+      }
+    },
+    "All Types" : {
+      "comment" : "All Types",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全部"
+          }
+        }
+      }
     },
     "App Development Time" : {
       "extractionState" : "extracted_with_value",
@@ -89,17 +223,34 @@
             "state" : "new",
             "value" : "%1$@-%2$@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@-%2$@"
+          }
         }
       }
     },
-    "App excluding" : {
-
-    },
     "App Excluding" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "忽略应用"
+          }
+        }
+      }
     },
-    "App icon" : {
-
+    "App Icon" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用图标"
+          }
+        }
+      }
     },
     "App Icon: Aerugo" : {
       "extractionState" : "extracted_with_value",
@@ -108,6 +259,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Aerugo"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "锈斑"
           }
         }
       }
@@ -120,6 +277,12 @@
             "state" : "new",
             "value" : "Clipchop Beta"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beta"
+          }
         }
       }
     },
@@ -129,6 +292,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Clipchop"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Clipchop"
           }
         }
@@ -142,6 +311,12 @@
             "state" : "new",
             "value" : "%1$@ Build %2$@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Build %2$@"
+          }
         }
       }
     },
@@ -153,89 +328,317 @@
             "state" : "new",
             "value" : "Version %@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版本 %@"
+          }
         }
       }
     },
     "Appearance" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主题"
+          }
+        }
+      }
     },
     "Application" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用"
+          }
+        }
+      }
     },
     "Apply" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用"
+          }
+        }
+      }
     },
     "Apply Preservation Time" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用保存期限"
+          }
+        }
+      }
     },
     "Applying a new preservation time clears all the outdated clipboard history except your pins." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设定新的保存期限会自动清除所有已过期的剪贴板历史，但您Pin住的条目将得以保留。"
+          }
+        }
+      }
     },
     "Archives" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "归档"
+          }
+        }
+      }
     },
     "Audio" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音频"
+          }
+        }
+      }
     },
     "Automatically pastes into the currently active application when enabled." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当本功能启用后，会自动将内容粘贴到当前活动的应用程序中。"
+          }
+        }
+      }
     },
     "Back" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回"
+          }
+        }
+      }
     },
     "Call up the clip history window." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "呼出剪贴板历史窗口"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "comment" : "Cancel button title",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
     },
     "Categorization" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分类"
+          }
+        }
+      }
     },
     "Category" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "类别"
+          }
+        }
+      }
     },
     "Category Name" : {
-
-    },
-    "Clear clipboard history" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "类别名称"
+          }
+        }
+      }
     },
     "Clear Clipboard History" : {
-
+      "comment" : "Alert message text for clearing clipboard history",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清除剪贴板历史记录"
+          }
+        }
+      }
     },
     "Clip more to unlock more! You've already clipped %llu times." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多剪贴，多解锁！您已进行了 %llu 次剪贴。"
+          }
+        }
+      }
     },
     "Clip sound" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制声音"
+          }
+        }
+      }
     },
     "Clipboard" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴板"
+          }
+        }
+      }
     },
     "Clipboard Behaviors" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴板功能"
+          }
+        }
+      }
     },
-    "Clipboard monitoring" : {
-
+    "Clipboard Monitoring" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴板跟踪"
+          }
+        }
+      }
     },
     "Clipchop" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clipchop"
+          }
+        }
+      }
     },
     "Code Files" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "代码文件"
+          }
+        }
+      }
+    },
+    "color" : {
+      "comment" : "color",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "颜色"
+          }
+        }
+      }
     },
     "Color" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "颜色"
+          }
+        }
+      }
     },
     "Color style" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "颜色样式"
+          }
+        }
+      }
     },
     "Continue" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "继续"
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制"
+          }
+        }
+      }
+    },
+    "Copy as plain text" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以纯文本复制"
+          }
+        }
+      }
     },
     "Copy as Plain Text to Clipboard" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以纯文本复制到剪贴板"
+          }
+        }
+      }
     },
     "Copy to Clipboard" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "复制到剪贴板"
+          }
+        }
+      }
     },
     "Copyrights" : {
       "extractionState" : "extracted_with_value",
@@ -245,53 +648,135 @@
             "state" : "new",
             "value" : "%@ Cement Labs"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Cement Labs"
+          }
         }
       }
     },
-    "Coyp" : {
-
-    },
-    "Coyp as plain text" : {
-
-    },
     "Custom" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自定义"
+          }
+        }
+      }
     },
     "Custom accent color only applies to the clip history window." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自定义强调色仅适用于剪贴板历史窗口"
+          }
+        }
+      }
     },
     "Customization" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "个性化"
+          }
+        }
+      }
     },
     "Dark" : {
-
-    },
-    "delete" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "深色模式"
+          }
+        }
+      }
     },
     "Delete" : {
-
+      "comment" : "Delete button title",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
+          }
+        }
+      }
     },
     "Documents" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文档"
+          }
+        }
+      }
+    },
+    "Enable or disable monitoring of your clipboard history." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用/禁用剪贴板历史记录跟踪。"
+          }
+        }
+      }
     },
     "Exclude apps to prevent %@ copying their contents." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "排除应用程序，以防止 %@ 复制它们的内容。"
+          }
+        }
+      }
     },
     "File Extension" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件扩展名"
+          }
+        }
+      }
     },
     "File Type" : {
-
-    },
-    "Footer" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件类型"
+          }
+        }
+      }
     },
     "Forever" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "永远"
+          }
+        }
+      }
     },
     "Full Disk Access" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完全磁盘访问权限"
+          }
+        }
+      }
     },
     "Full Disk Access Alert: Content" : {
       "extractionState" : "extracted_with_value",
@@ -300,6 +785,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Full Disk Access is required for %@ to generate file previews."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 需要完全磁盘访问权限以生成文件预览。"
           }
         }
       }
@@ -312,155 +803,508 @@
             "state" : "new",
             "value" : "%@ Needs Full Disk Access"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 需要完全磁盘访问权限"
+          }
         }
       }
     },
     "Full Disk Access is needed to generate file previews." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要全盘访问权限来生成文件预览。"
+          }
+        }
+      }
     },
     "General" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "常规"
+          }
+        }
+      }
     },
     "Global Behaviors" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全局功能"
+          }
+        }
+      }
     },
     "GPL-3.0" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPL-3.0"
+          }
+        }
+      }
     },
     "Grant" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "授权"
+          }
+        }
+      }
     },
     "Granted" : {
-
-    },
-    "Header" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已授权"
+          }
+        }
+      }
     },
     "Hello, World!" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hello，World！"
+          }
+        }
+      }
     },
     "Images" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图像"
+          }
+        }
+      }
     },
     "Insert" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "插入"
+          }
+        }
+      }
     },
     "Keyboard Shortcuts" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "键盘快捷键"
+          }
+        }
+      }
     },
     "Later" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "稍后"
+          }
+        }
+      }
     },
     "Licenced Under GPL-3.0" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "根据 GPL-3.0 许可证授权"
+          }
+        }
+      }
     },
     "Light" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "浅色模式"
+          }
+        }
+      }
     },
     "Limit %@'s functions in the specified apps." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在指定的应用程序中限制 %@ 的功能。"
+          }
+        }
+      }
+    },
+    "link" : {
+      "comment" : "link",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "链接"
+          }
+        }
+      }
     },
     "Link" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "链接"
+          }
+        }
+      }
     },
     "Loading..." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "加载中"
+          }
+        }
+      }
     },
     "Log to Console (Debug)" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log to Console (Debug)"
+          }
+        }
+      }
     },
     "macOS Blue" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS 蓝色"
+          }
+        }
+      }
     },
     "No Application Excluded" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有应用被排除"
+          }
+        }
+      }
     },
     "No Clipboard History Available" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有可用的剪贴板历史记录"
+          }
+        }
+      }
     },
     "Open in System Settings" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在系统设置中打开"
+          }
+        }
+      }
     },
     "Open Settings…" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开设置"
+          }
+        }
+      }
     },
     "Other" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "其他"
+          }
+        }
+      }
     },
     "Paste as Plain Text to %@" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以纯文本粘贴到%@"
+          }
+        }
+      }
     },
     "Paste as Plain Text to Frontmost" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以纯文本粘贴到台前"
+          }
+        }
+      }
     },
     "Paste sound" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粘贴声音"
+          }
+        }
+      }
     },
     "Paste to %@" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粘贴到%@"
+          }
+        }
+      }
     },
     "Paste to active application" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粘贴到活动用应用"
+          }
+        }
+      }
     },
     "Paste to Frontmost" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粘贴到台前"
+          }
+        }
+      }
     },
     "Permissions" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "权限"
+          }
+        }
+      }
     },
     "Pin" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "固定"
+          }
+        }
+      }
+    },
+    "Pinned" : {
+      "comment" : "Pinned",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "固定"
+          }
+        }
+      }
     },
     "Preferred color scheme" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "外观"
+          }
+        }
+      }
     },
     "Preservation time" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存时间"
+          }
+        }
+      }
     },
     "Quit" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出"
+          }
+        }
+      }
     },
     "Quit %@" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出%@"
+          }
+        }
+      }
     },
     "Recent Clips" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "近期剪贴板内容"
+          }
+        }
+      }
     },
     "Refresh States (Debug)" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh States (Debug)"
+          }
+        }
+      }
     },
     "Remove format" : {
-
-    },
-    "Removes all font formats from pasted text when enabled." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "始终以纯文本粘贴"
+          }
+        }
+      }
     },
     "Restore" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "恢复"
+          }
+        }
+      }
     },
     "Search" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索"
+          }
+        }
+      }
     },
     "Search Categories" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索类别"
+          }
+        }
+      }
     },
     "Search File Types" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索文件类型"
+          }
+        }
+      }
     },
     "Settings…" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
     },
     "Shortcuts" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快捷键"
+          }
+        }
+      }
     },
     "Show %@" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示%@"
+          }
+        }
+      }
     },
     "Shows menu bar item" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示菜单栏图标"
+          }
+        }
+      }
     },
     "Skip" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        }
+      }
     },
     "Sound: Bloop" : {
       "extractionState" : "extracted_with_value",
@@ -468,6 +1312,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Bloop"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Bloop"
           }
         }
@@ -481,6 +1331,12 @@
             "state" : "new",
             "value" : "None"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无"
+          }
         }
       }
     },
@@ -490,6 +1346,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Pop"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Pop"
           }
         }
@@ -503,35 +1365,107 @@
             "state" : "new",
             "value" : "Tap"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap"
+          }
         }
       }
     },
     "Source Code" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "源代码"
+          }
+        }
+      }
     },
     "Start Using %@" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始使用%@"
+          }
+        }
+      }
+    },
+    "Starts with macOS" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录时启动"
+          }
+        }
+      }
     },
     "Syncing" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同步"
+          }
+        }
+      }
     },
     "System" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跟随系统"
+          }
+        }
+      }
     },
     "Test (Debug)" : {
-
-    },
-    "Test line No.%lld" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test(Debug)"
+          }
+        }
+      }
     },
     "This action clears all your clipboard history unrestorably, including pins." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此操作将不可恢复地清除剪贴板的所有历史记录，包括Pin住的内容。"
+          }
+        }
+      }
     },
-    "Toggle clipboard history monitoring." : {
-
+    "This action will clear all non-pinned entries from your clipboard history irreversibly." : {
+      "comment" : "Informative text for alert about clearing clipboard history",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此操作将不可逆地清除剪贴板历史记录中所有未固定的条目。"
+          }
+        }
+      }
     },
     "Tutorial" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "教程"
+          }
+        }
+      }
     },
     "Type: %d Folders" : {
       "extractionState" : "extracted_with_value",
@@ -540,6 +1474,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%d Folders"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d 个文件夹"
           }
         }
       }
@@ -552,6 +1492,12 @@
             "state" : "new",
             "value" : "Color"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "颜色"
+          }
         }
       }
     },
@@ -561,6 +1507,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "%1$@ (%2$@)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%1$@ (%2$@)"
           }
         }
@@ -574,6 +1526,12 @@
             "state" : "new",
             "value" : "Folder"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件夹"
+          }
         }
       }
     },
@@ -584,6 +1542,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Text"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文本"
           }
         }
       }
@@ -596,6 +1560,12 @@
             "state" : "new",
             "value" : "Image"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图像"
+          }
         }
       }
     },
@@ -606,6 +1576,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Link"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "链接"
           }
         }
       }
@@ -618,6 +1594,12 @@
             "state" : "new",
             "value" : "Multiple"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多种文件"
+          }
         }
       }
     },
@@ -628,6 +1610,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Text"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文本"
           }
         }
       }
@@ -640,26 +1628,84 @@
             "state" : "new",
             "value" : "Text"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文本"
+          }
         }
       }
     },
     "Unpin" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消固定"
+          }
+        }
+      }
     },
     "Update interval" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更新间隔"
+          }
+        }
+      }
     },
     "Videos" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频"
+          }
+        }
+      }
     },
     "Welcome to %@" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "欢迎使用%@"
+          }
+        }
+      }
+    },
+    "When enabled, strips all font formatting from pasted text." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当本功能启用后，清除粘贴文本的所有字体格式。"
+          }
+        }
+      }
     },
     "You can always open %@ again to access this page." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你可以随时再次打开 %@ 来访问这个页面。"
+          }
+        }
+      }
     },
     "You're All Set!" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一切就绪！"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

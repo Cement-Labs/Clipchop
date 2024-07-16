@@ -43,4 +43,21 @@ final class ClipboardModelEditor {
             throw nsError
         }
     }
+    
+    func deleteAllExceptPinned() throws {
+        let fetchRequest = NSFetchRequest<ClipboardHistory>(entityName: "ClipboardHistory")
+        fetchRequest.predicate = NSPredicate(format: "pin == NO")
+        do {
+            let histories = try context.fetch(fetchRequest)
+            for history in histories {
+                context.delete(history)
+            }
+            try context.save()
+            print("All unpinned ClipboardHistory data deleted.")
+        } catch {
+            let nsError = error as NSError
+            print("Error deleting data: \(nsError), \(nsError.userInfo)")
+            throw nsError
+        }
+    }
 }

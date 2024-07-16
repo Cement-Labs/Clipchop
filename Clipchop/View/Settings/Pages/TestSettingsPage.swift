@@ -10,29 +10,7 @@ import SwiftUI
 struct TestSettingsPage: View {
     var body: some View {
         ListEmbeddedForm {
-            ScrollView {
-                LazyVStack(pinnedViews: [.sectionHeaders, .sectionFooters]) {
-                    Spacer(minLength: 100)
-                    
-                    Color.red.frame(height: 100)
-                    
-                    Section {
-                        ForEach(0..<100) { number in
-                            HStack {
-                                Text("Test line No.\(number)")
-                                Spacer()
-                            }
-                        }
-                        .padding()
-                    } header: {
-                        Text("Header")
-                    } footer: {
-                        Text("Footer")
-                    }
-                    
-                    Color.blue.frame(height: 100)
-                }
-            }
+//            EmptyView()
         }
     }
 }

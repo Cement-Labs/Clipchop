@@ -45,7 +45,7 @@ struct CardPreviewView: View {
     var body: some View {
         ZStack {
             // MARK: - Button Action
-            Button("delete", action:{
+            Button("Delete", action:{
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     withAnimation(.spring(dampingFraction: 0.7)){
                         try? deleteItem(item)
@@ -58,7 +58,7 @@ struct CardPreviewView: View {
             .frame(width: 0, height: 0)
             .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.control])
             
-            Button("Coyp", action: {
+            Button("Copy", action: {
                 self.isSelected = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     withAnimation(Animation.spring(dampingFraction: 0.7)) {
@@ -74,7 +74,7 @@ struct CardPreviewView: View {
             .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.command])
             
             if !Defaults[.removeFormatting] {
-                Button("Coyp as plain text", action: {
+                Button("Copy as plain text", action: {
                     self.isSelected = true
                     removeFormatting = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -161,10 +161,12 @@ struct CardPreviewView: View {
                         }
                     }
                     
-                    VStack{
+                    VStack {
                         Group {
                             if let title = item.formatter.title {
-                                Text(title)
+                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                                Text(categorizedTitle)
                             } else {
                                 Text("Other")
                             }
@@ -222,7 +224,7 @@ struct CardPreviewView: View {
         .contextMenu(menuItems: {
             Button {
                 withAnimation(Animation.easeInOut) {
-                    do{
+                    do {
                         self.isHoveredPin = true
                         pinClipItem()
                     }
@@ -237,7 +239,7 @@ struct CardPreviewView: View {
                 Text(item.pin ? "Unpin" : "Pin")
                 Image(systemSymbol: .pin)
             }
-            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: .option)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: .option)
             
             Button {
                 ClipboardManager.clipboardController?.copy(item)
@@ -251,10 +253,9 @@ struct CardPreviewView: View {
                 } else {
                     Text("Copy to Clipboard")
                 }
-                
                 Image(systemSymbol: .docOnClipboard)
             }
-            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: .command)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: .command)
             
             if !Defaults[.removeFormatting] {
                 Button {
@@ -275,7 +276,7 @@ struct CardPreviewView: View {
                     }
                     Image(systemSymbol: .docOnDoc)
                 }
-                .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.shift, .command])
+                .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, .command])
             }
             
             Divider()
@@ -286,7 +287,7 @@ struct CardPreviewView: View {
                 Text("Delete")
                 Image(systemSymbol: .trash)
             }
-            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: .control)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: .control)
         })
         .gesture(
             TapGesture(count: 2)
@@ -372,5 +373,15 @@ struct CardPreviewView: View {
             return app.displayName.replacingOccurrences(of: ".app", with: "")
         }
         return nil
+    }
+    
+    func categorizeFileExtensions(_ fileExtensions: [String]) -> String {
+        let categories = Defaults[.categories]
+        for fileExtension in fileExtensions {
+            if let category = categories.first(where: { $0.types.contains(fileExtension) }) {
+                return category.name
+            }
+        }
+        return fileExtensions.joined(separator: ", ")
     }
 }

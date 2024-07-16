@@ -23,7 +23,7 @@ struct AppearanceSection: View {
     var body: some View {
         if hasTitle {
             Section {
-                Picker("App icon", selection: $appIcon) {
+                Picker("App Icon", selection: $appIcon) {
                     ForEach(AppIcon.unlockedAppIcons, id: \.self) { icon in
                         HStack {
                             Image(nsImage: icon.image)
