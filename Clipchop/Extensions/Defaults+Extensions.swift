@@ -42,6 +42,12 @@ extension Defaults.Keys {
     
     // MARK: Clip History
     
+    static let autoCloseTimeout = Key<TimeInterval>("autoCloseTimeout", default: 60)
+    
+    static let clipboardMonitoring = Key<Bool>("clipboardMonitoring", default: false)
+    
+    static let dnd = Key<Bool>("dnd", default: false)
+    
     static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: false)
     
     static let removeFormatting = Key<Bool>("removeFormatting", default: false)

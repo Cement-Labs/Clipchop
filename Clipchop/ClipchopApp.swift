@@ -66,7 +66,7 @@ struct ClipchopApp: App {
         }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
-            MenuBarView()
+            MenuBarView(clipboardController: ClipboardManager.clipboardController!)
                 .environment(\.managedObjectContext, ClipboardDataProvider.shared.viewContext)
         }
         .menuBarExtraStyle(.menu)

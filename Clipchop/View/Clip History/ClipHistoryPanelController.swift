@@ -18,6 +18,8 @@ class ClipHistoryPanelController: NSViewController, ObservableObject {
     
     private var panel: ClipHistoryPanel?
     
+    private var closeTimer: Timer?
+    
     var isExpanded = false {
         didSet {
             NotificationCenter.default.post(name: .didChangeExpansionState, object: nil, userInfo: ["isExpanded": isExpanded])
@@ -129,11 +131,13 @@ extension ClipHistoryPanelController {
         )
         
         panel.makeKeyAndOrderFront(nil)
+        startCloseTimer()
     }
     
     func close() {
         self.setExpansion(false)
         self.panel?.orderOut(nil)
+        panelDidClose()
     }
     
     func toggle(position: CGPoint) {
@@ -142,6 +146,25 @@ extension ClipHistoryPanelController {
         } else {
             open(position: position)
         }
+    }
+    
+    func startCloseTimer() {
+        closeTimer?.invalidate()
+        let timeoutInterval = Defaults[.autoCloseTimeout]
+        closeTimer = Timer.scheduledTimer(timeInterval: timeoutInterval, target: self, selector: #selector(closeDueToInactivity), userInfo: nil, repeats: false)
+    }
+
+    @objc private func closeDueToInactivity() {
+        close()
+    }
+
+    func resetCloseTimer() {
+        startCloseTimer()
+    }
+
+    func panelDidClose() {
+        closeTimer?.invalidate()
+        closeTimer = nil
     }
 }
 

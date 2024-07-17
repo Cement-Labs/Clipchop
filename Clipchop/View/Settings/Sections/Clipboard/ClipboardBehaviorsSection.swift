@@ -10,29 +10,55 @@ import SFSafeSymbols
 import Defaults
 
 struct ClipboardBehaviorsSection: View {
+    
     @Default(.historyPreservationPeriod) private var historyPreservationPeriod
     @Default(.historyPreservationTime) private var historyPreservationTime
     @Default(.timerInterval) private var timerInterval
     @Default(.pasteToFrontmostEnabled) private var paste
     @Default(.removeFormatting) private var removeFormatting
+    @Default(.autoCloseTimeout) private var autoCloseTimeout
+    @Default(.clipboardMonitoring) private var clipboardMonitoring
     
     @State private var isDeleteHistoryAlertPresented = false
     @State private var isApplyPreservationTimeAlertPresented = false
+    @State private var showPopover = false
     
     @State private var initialPreservationPeriod: HistoryPreservationPeriod = .day
     @State private var initialPreservationTime: Double = 1
     
     @Environment(\.hasTitle) private var hasTitle
     @ObservedObject private var clipboardModelManager = ClipboardModelManager()
+    @ObservedObject var clipboardController: ClipboardController
     
     private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
     
     var body: some View {
         Section {
+            withCaption("Enable or disable monitoring of your clipboard history.") {
+                HStack {
+                    Text("Clipboard Monitoring")
+                    Button(action: {
+                        self.showPopover.toggle()
+                    }) {
+                        Image(systemSymbol: .infoCircle)
+                    }
+                    .buttonStyle(.plain)
+                    .popover(isPresented: $showPopover, arrowEdge: .top) {
+                        VStack {
+                            Text("When enabled, this feature allows \(Bundle.main.appName) to track changes in the system clipboard, offering clipboard history")
+                                .font(.body)
+                        }
+                        .frame(width: 200, height: 100)
+                        .padding()
+                    }
+                    Spacer()
+                    Toggle("", isOn: $clipboardController.started)
+                }
+            }
             withCaption("When enabled, strips all font formatting from pasted text.") {
                 Toggle("Remove format", isOn: $removeFormatting)
             }
-            withCaption("Automatically pastes into the currently active application when enabled.") {
+            withCaption("When enabled, Automatically pastes into the currently active application") {
                 Toggle("Paste to active application", isOn: $paste)
             }
         } header: {
@@ -105,6 +131,22 @@ struct ClipboardBehaviorsSection: View {
                     Text("0")
                 } maximumValueLabel: {
                     Text("1")
+                }
+                .monospaced()
+            }
+            VStack {
+                HStack {
+                    Text("Auto Close Timeout")
+                    Spacer()
+                    Text("\(Int(autoCloseTimeout))s")
+                        .monospaced()
+                }
+                Slider(value: $autoCloseTimeout, in: 10...60) {
+                    
+                } minimumValueLabel: {
+                    Text("10")
+                } maximumValueLabel: {
+                    Text("60")
                 }
                 .monospaced()
             }

@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import Defaults
 import KeyboardShortcuts
 
 class ClipboardManager {

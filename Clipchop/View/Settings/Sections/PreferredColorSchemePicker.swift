@@ -15,6 +15,7 @@ struct PreferredColorSchemePicker: View {
     var body: some View {
         Picker("Preferred color scheme", selection: $preferredColorScheme) {
             Text("System").tag(PreferredColorScheme.system)
+            Divider()
             Text("Light").tag(PreferredColorScheme.light)
             Text("Dark").tag(PreferredColorScheme.dark)
         }

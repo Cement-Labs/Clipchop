@@ -68,6 +68,21 @@ class ClipHistoryPanel: NSPanel {
         return true
     }
     
+    override func mouseDown(with event: NSEvent) {
+        controller.resetCloseTimer()
+        super.mouseDown(with: event)
+    }
+    
+    override func mouseMoved(with event: NSEvent) {
+        controller.resetCloseTimer()
+        super.mouseMoved(with: event)
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        controller.resetCloseTimer()
+        super.scrollWheel(with: event)
+    }
+    
     // MARK: - Shortcuts
     
     override func keyDown(with event: NSEvent) {

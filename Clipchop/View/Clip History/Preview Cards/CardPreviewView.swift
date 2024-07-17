@@ -56,7 +56,7 @@ struct CardPreviewView: View {
             .allowsHitTesting(false)
             .buttonStyle(.borderless)
             .frame(width: 0, height: 0)
-            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.control])
+            .applyKeyboardShortcut(keyboardShortcut, modifier: .control)
             
             Button("Copy", action: {
                 self.isSelected = true
@@ -71,7 +71,7 @@ struct CardPreviewView: View {
             .allowsHitTesting(false)
             .buttonStyle(.borderless)
             .frame(width: 0, height: 0)
-            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.command])
+            .applyKeyboardShortcut(keyboardShortcut, modifier: .command)
             
             if !Defaults[.removeFormatting] {
                 Button("Copy as plain text", action: {
@@ -89,7 +89,7 @@ struct CardPreviewView: View {
                 .allowsHitTesting(false)
                 .buttonStyle(.borderless)
                 .frame(width: 0, height: 0)
-                .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.shift, .command])
+                .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, .command])
             }
             
             Button("Pin", action: {
@@ -109,7 +109,7 @@ struct CardPreviewView: View {
             .allowsHitTesting(false)
             .buttonStyle(.borderless)
             .frame(width: 0, height: 0)
-            .keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: [.option])
+            .applyKeyboardShortcut(keyboardShortcut, modifier: .option)
             
             // MARK: - CardView
             PreviewContentView(clipboardHistory: item)

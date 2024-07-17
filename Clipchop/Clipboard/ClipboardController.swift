@@ -8,9 +8,9 @@
 import AppKit
 import Defaults
 
-class ClipboardController: NSObject {
+class ClipboardController: NSObject, ObservableObject {
     
-    private var started: Bool
+    @Published var started: Bool
     private var timer: Timer?
     private var changeCount: Int = 0
     
@@ -77,6 +77,8 @@ class ClipboardController: NSObject {
     
     // MARK: - Update clipboard history
     private func updateClipboard() {
+        
+        try? context.save()
                 
         guard pasteboard.changeCount != changeCount else {
             return
@@ -109,14 +111,14 @@ class ClipboardController: NSObject {
                 fileURLData = data
             }
             
-            if types.contains(NSPasteboard.PasteboardType.rtf),
-               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.rtf) {
-                rtfData = rtfDataTemp
-            }
-            
             if types.contains(NSPasteboard.PasteboardType.html),
                let data = item.data(forType: NSPasteboard.PasteboardType.html) {
                 htmlData = data
+            }
+            
+            if types.contains(NSPasteboard.PasteboardType.rtf),
+               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.rtf) {
+                rtfData = rtfDataTemp
             }
             
             if types.contains(NSPasteboard.PasteboardType.string),
@@ -292,7 +294,6 @@ extension ClipboardController {
     // MARK: - Monitoring Functions
     
     func start() {
-        
         clipboardModelManager.startPeriodicCleanup()
         
         timer = .scheduledTimer(withTimeInterval: Defaults[.timerInterval], repeats: true ) { [weak self] _ in
@@ -315,7 +316,6 @@ extension ClipboardController {
             stop()
             started = false
         } else {
-            pasteboard.clearContents()
             start()
             started = true
         }
@@ -325,12 +325,12 @@ extension ClipboardController {
         guard let data = html.data(using: .utf8) else {
             return html
         }
-
+        
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
-
+        
         guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
             return html
         }
