@@ -10,7 +10,6 @@ import AppKit
 // Code from https://github.com/p0deje/Maccy
 extension NSPasteboard.PasteboardType {
     static let jpeg = NSPasteboard.PasteboardType(rawValue: "public.jpeg")
-    static let avif = NSPasteboard.PasteboardType(rawValue: "public.avif")
     static let universalClipboard = NSPasteboard.PasteboardType(rawValue: "com.apple.is-remote-clipboard")
     
     // See http://nspasteboard.org for more details.
@@ -25,8 +24,12 @@ extension NSPasteboard.PasteboardType {
     // https://github.com/p0deje/Maccy/issues/613
     static let microsoftObjectLink = NSPasteboard.PasteboardType(rawValue: "com.microsoft.ObjectLink")
     static let microsoftLinkSource = NSPasteboard.PasteboardType(rawValue: "com.microsoft.Link-Source")
+        
 }
 
 extension NSPasteboard.PasteboardType {
-    static let fromClipchop = NSPasteboard.PasteboardType(rawValue: "studio.nnn.Clipchop")
+    static let fromClipchop = NSPasteboard.PasteboardType(rawValue: "labs.cement.Clipchop")
+    static let avif = NSPasteboard.PasteboardType(rawValue: "public.avif")
+    static let appleFinalCutPro = NSPasteboard.PasteboardType(rawValue: "com.apple.flexo.proFFPasteboardUTI")
+    static let appleReminders = NSPasteboard.PasteboardType(rawValue: "com.apple.reminders.reminderCopyPaste")
 }

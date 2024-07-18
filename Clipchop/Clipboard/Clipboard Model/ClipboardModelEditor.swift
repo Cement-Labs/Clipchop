@@ -26,7 +26,6 @@ final class ClipboardModelEditor {
     func deleteAll(ignoresPinned: Bool = true) throws {
         let historyFetchRequest = ClipboardHistory.fetchRequest()
         let contentFetchRequest = ClipboardContent.fetchRequest()
-        
         do {
             let histories = try context.fetch(historyFetchRequest)
             histories.forEach(context.delete(_:))

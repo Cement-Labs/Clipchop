@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SFSafeSymbols
 
 struct AboutSettingsPage: View {
     @State private var isSourcePresented = false
@@ -45,6 +46,7 @@ struct AboutSettingsPage: View {
         .toolbar {
             // Place them to the left of the quit button
             ToolbarItemGroup(placement: .cancellationAction) {
+                
                 Button {
                     isSourcePresented = true
                 } label: {

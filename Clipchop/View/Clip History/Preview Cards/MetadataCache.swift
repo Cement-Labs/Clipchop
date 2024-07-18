@@ -13,6 +13,8 @@ class MetadataCache {
     private var metadataCache: [String: LPLinkMetadata] = [:]
     private var thumbnailCache: [URL: NSImage] = [:]
     private var resizedImageCache: [UUID: NSImage] = [:]
+    private var previewCache: [String: String] = [:]
+    private var searchResultCache: [String: [ClipHistorySearch.SearchResult]] = [:]
 
     private init() {}
 
@@ -38,5 +40,21 @@ class MetadataCache {
 
     func setResizedImage(_ image: NSImage, for identifier: UUID) {
         resizedImageCache[identifier] = image
+    }
+    
+    func getPreview(for cacheKey: String) -> String? {
+        return previewCache[cacheKey]
+    }
+
+    func setPreview(_ preview: String, for cacheKey: String) {
+        previewCache[cacheKey] = preview
+    }
+    
+    func getSearchResult(for query: String) -> [ClipHistorySearch.SearchResult]? {
+        return searchResultCache[query]
+    }
+
+    func setSearchResult(_ results: [ClipHistorySearch.SearchResult], for query: String) {
+        searchResultCache[query] = results
     }
 }

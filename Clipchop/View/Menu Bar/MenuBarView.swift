@@ -25,7 +25,15 @@ struct MenuBarView: View {
                     Button {
                         ClipboardManager.clipboardController?.copy(item)
                     } label: {
-                        Text(item.formatter.title ?? "")
+                        Group {
+                            if let title = item.formatter.title {
+                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                                Text(categorizedTitle)
+                            } else {
+                                Text("Other")
+                            }
+                        }
                     }
                     .keyboardShortcut(.init(String(index + 1).first!), modifiers: .command)
                 }
@@ -50,5 +58,15 @@ struct MenuBarView: View {
             quit()
         }
         .keyboardShortcut("q", modifiers: .command)
+    }
+    
+    func categorizeFileExtensions(_ fileExtensions: [String]) -> String {
+        let categories = Defaults[.categories]
+        for fileExtension in fileExtensions {
+            if let category = categories.first(where: { $0.types.contains(fileExtension) }) {
+                return category.name
+            }
+        }
+        return fileExtensions.joined(separator: ", ")
     }
 }

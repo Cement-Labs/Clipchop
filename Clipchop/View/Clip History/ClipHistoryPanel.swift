@@ -26,7 +26,7 @@ class ClipHistoryPanel: NSPanel {
         collectionBehavior = .canJoinAllSpaces
         isFloatingPanel = true
         isMovable = true
-        level = .floating
+        level = .popUpMenu
         
         backgroundColor = NSColor.clear
         hasShadow = true

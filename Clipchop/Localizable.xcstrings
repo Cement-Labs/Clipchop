@@ -130,12 +130,12 @@
         }
       }
     },
-    "10" : {
+    "5" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "10"
+            "value" : "5"
           }
         }
       }
@@ -230,6 +230,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "致谢"
+          }
+        }
+      }
+    },
+    "Add" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加"
           }
         }
       }
@@ -922,6 +932,17 @@
         }
       }
     },
+    "images" : {
+      "comment" : "images",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图像"
+          }
+        }
+      }
+    },
     "Images" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1024,7 +1045,6 @@
       }
     },
     "Log to Console (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1139,7 +1159,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粘贴到活动用应用"
+            "value" : "粘贴到活动应用"
           }
         }
       }
@@ -1236,7 +1256,6 @@
       }
     },
     "Refresh States (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1252,6 +1271,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "始终以纯文本粘贴"
+          }
+        }
+      }
+    },
+    "Reset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置"
           }
         }
       }
@@ -1445,7 +1474,6 @@
       }
     },
     "Syncing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1466,7 +1494,6 @@
       }
     },
     "Test (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1717,12 +1744,12 @@
         }
       }
     },
-    "When enabled, Automatically pastes into the currently active application" : {
+    "When enabled, directly paste the selected item into the application you are currently using" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "当本功能启用后，会自动将内容粘贴到当前活动的应用程序中。"
+            "value" : "当本功能启用后，将选中的项目直接粘贴到您当前正在使用的应用程序中。"
           }
         }
       }

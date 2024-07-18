@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 
 func dragManager(for content: ClipboardContent) -> NSItemProvider? {
     guard let data = content.value as? NSSecureCoding else {
-        log( "Value is not NSSecureCoding compliant")
+        print( "Value is not NSSecureCoding compliant")
         return nil
     }
     
@@ -111,7 +111,8 @@ func dragManager(for content: ClipboardContent) -> NSItemProvider? {
         UTType.pdf.identifier, UTType.mpeg4Movie.identifier,UTType.quickTimeMovie.identifier, UTType.mpeg.identifier, UTType.video.identifier,
         UTType.avi.identifier, UTType.mp3.identifier, UTType.audio.identifier, UTType.wav.identifier, UTType.mpeg4Audio.identifier,
         UTType.mpeg2Video.identifier, UTType.appleProtectedMPEG4Audio.identifier, UTType.appleProtectedMPEG4Video.identifier,
-        UTType.application.identifier, UTType.calendarEvent.identifier, UTType.bookmark.identifier,
+        
+        UTType.application.identifier, UTType.calendarEvent.identifier, UTType.bookmark.identifier, UTType.toDoItem.identifier,
         
         UTType.json.identifier, UTType.content.identifier, UTType.contact.identifier,
         

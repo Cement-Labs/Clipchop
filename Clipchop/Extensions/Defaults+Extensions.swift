@@ -60,7 +60,7 @@ extension Defaults.Keys {
     static let categories = Key<[FileCategory]>("categories", default: [
         
         .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
-            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic", "image"
+            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic",  NSLocalizedString("images", comment: "images")
         ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [

@@ -29,6 +29,7 @@
 		65160A932C3B92CC004BF8BF /* EmptyStatePages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */; };
 		65160A952C3B937A004BF8BF /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A942C3B937A004BF8BF /* TabButton.swift */; };
 		65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */; };
+		654ED53C2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */; };
 		65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */; };
 		65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */; };
 		658D26A42C38226E001D1CC3 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 658D26A32C38226E001D1CC3 /* Defaults */; };
@@ -158,6 +159,7 @@
 		65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatePages.swift; sourceTree = "<group>"; };
 		65160A942C3B937A004BF8BF /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLPreviewPags.swift; sourceTree = "<group>"; };
+		654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniformTypeIdentifiers+Extension.swift"; sourceTree = "<group>"; };
 		65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPages.swift; sourceTree = "<group>"; };
 		65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPages.swift; sourceTree = "<group>"; };
 		658D26CD2C382340001D1CC3 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				650515D72C38219700E2129D /* Defaults+Extensions.swift */,
 				650515D82C38219700E2129D /* Defaults+Structures.swift */,
 				65987F102C390AD100E15897 /* Color+Extensions.swift */,
+				654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */,
 				650515D92C38219700E2129D /* KeyboardShortcuts+Extensions.swift */,
 				650515D22C38219700E2129D /* Foundation */,
 				650515D62C38219700E2129D /* AppKit */,
@@ -856,6 +859,7 @@
 				650515E62C38219700E2129D /* Notification+Extensions.swift in Sources */,
 				65160A932C3B92CC004BF8BF /* EmptyStatePages.swift in Sources */,
 				658D26E82C382358001D1CC3 /* SoundPlayer.swift in Sources */,
+				654ED53C2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift in Sources */,
 				650515E72C38219700E2129D /* Defaults+Extensions.swift in Sources */,
 				650515C72C381F0C00E2129D /* ClipboardModel.xcdatamodeld in Sources */,
 				658D26FA2C382C1A001D1CC3 /* ClipboardModelEditor.swift in Sources */,
@@ -1040,7 +1044,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 717;
+				CURRENT_PROJECT_VERSION = 718;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1083,7 +1087,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 717;
+				CURRENT_PROJECT_VERSION = 718;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

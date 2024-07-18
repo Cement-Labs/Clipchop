@@ -110,9 +110,6 @@ struct ClipHistoryView: View {
                 withAnimation(.default) {
                     isSearchVisible = false
                     selectedTab = NSLocalizedString("All Types", comment: "All Types")
-                    scrollPadding = 12
-                    initialScrollPadding = 12
-                    movethebutton = false
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     withAnimation(.default) {
@@ -120,6 +117,9 @@ struct ClipHistoryView: View {
                     }
                 }
             }
+        }
+        .onChange(of: searchText) { oldValue, newValue in
+            controller.resetCloseTimer()
         }
     }
     // MARK: - ModelManager

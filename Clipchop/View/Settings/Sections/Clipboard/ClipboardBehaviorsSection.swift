@@ -58,7 +58,7 @@ struct ClipboardBehaviorsSection: View {
             withCaption("When enabled, strips all font formatting from pasted text.") {
                 Toggle("Remove format", isOn: $removeFormatting)
             }
-            withCaption("When enabled, Automatically pastes into the currently active application") {
+            withCaption("When enabled, directly paste the selected item into the application you are currently using") {
                 Toggle("Paste to active application", isOn: $paste)
             }
         } header: {
@@ -141,10 +141,10 @@ struct ClipboardBehaviorsSection: View {
                     Text("\(Int(autoCloseTimeout))s")
                         .monospaced()
                 }
-                Slider(value: $autoCloseTimeout, in: 10...60) {
+                Slider(value: $autoCloseTimeout, in: 5...60) {
                     
                 } minimumValueLabel: {
-                    Text("10")
+                    Text("5")
                 } maximumValueLabel: {
                     Text("60")
                 }

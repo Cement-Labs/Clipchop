@@ -7,12 +7,15 @@
 
 import SwiftUI
 import SwiftHEXColors
+
 import AppKit
+import Vision
+
 import Defaults
 
 struct Formatter {
     var contents: [ClipboardContent]
-    
+        
     var universalHasImage: Bool {
         isUniversal && fileURLs.first?.pathExtension == NSPasteboard.PasteboardType.jpeg.rawValue
     }
@@ -184,11 +187,19 @@ extension Formatter {
         
         return result
     }
-    
+        
     var contentPreview: String {
+        return generateContentPreview()
+    }
+    
+    func generateContentPreview() -> String {
+        let cacheKey = contents.map { "\($0.type ?? "unknown"):\($0.value?.hashValue ?? 0)" }.joined(separator: "-")
+        if let cachedPreview = MetadataCache.shared.getPreview(for: cacheKey) {
+            return cachedPreview
+        }
         
         var plainTextContents = [ClipboardContent]()
-                
+        
         contents.forEach { content in
             if let type = content.type {
                 let pasteboardType = NSPasteboard.PasteboardType(type)
@@ -215,16 +226,42 @@ extension Formatter {
         }
         
         var preview = ""
+        let semaphore = DispatchSemaphore(value: 0)
         
         if let firstContent = plainTextContents.first, let text = String(data: firstContent.value!, encoding: .utf8), !text.isEmpty {
             preview = text
         } else if let image = image {
-            preview = "Image: \(image.size.width)x\(image.size.height)"
+            extractTextFromImage(image) { recognizedText in
+                if let text = recognizedText, !text.isEmpty {
+                    preview = text
+                } else {
+                    print("Image")
+                    preview = "Image: \(image.size.width)x\(image.size.height)"
+                }
+                semaphore.signal()
+            }
+            _ = semaphore.wait(timeout: .distantFuture)
         } else if let url = url {
             preview = "URL: \(url.absoluteString)"
         } else if !fileURLs.isEmpty {
-            preview = "Files: \(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
+            var filePreview = "Files: \(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
+            
+            for fileURL in fileURLs {
+                if let image = NSImage(contentsOf: fileURL) {
+                    extractTextFromImage(image) { recognizedText in
+                        if let text = recognizedText, !text.isEmpty {
+                            filePreview += " \(fileURL.lastPathComponent): \(text)"
+                        }
+                        MetadataCache.shared.setPreview(filePreview, for: cacheKey)
+                    }
+                    break
+                }
+            }
+            
+            preview = filePreview
         }
+        
+        MetadataCache.shared.setPreview(preview, for: cacheKey)
         return preview
     }
     
@@ -271,5 +308,43 @@ extension Formatter {
         }
 
         return attributedString.string
+    }
+    
+    func extractTextFromImage(_ image: NSImage, completion: @escaping (String?) -> Void) {
+        guard let tiffData = image.tiffRepresentation,
+              let bitmapImage = NSBitmapImageRep(data: tiffData),
+              let cgImage = bitmapImage.cgImage else {
+            completion(nil)
+            return
+        }
+        
+        let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+        let request = VNRecognizeTextRequest { (request, error) in
+            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
+                completion(nil)
+                return
+            }
+            
+            let recognizedText = observations.compactMap { $0.topCandidates(1).first?.string }.joined(separator: "\n")
+            completion(recognizedText)
+        }
+        
+        request.recognitionLanguages = ["zh-Hans", "zh-Hant", "en-US"]
+        request.recognitionLevel = .accurate
+        
+        do {
+            try requestHandler.perform([request])
+        } catch {
+            completion(nil)
+        }
+    }
+
+    func extractTextFromImageFileURL(_ fileURL: URL, completion: @escaping (String?) -> Void) {
+        guard let image = NSImage(contentsOf: fileURL) else {
+            completion(nil)
+            return
+        }
+        
+        extractTextFromImage(image, completion: completion)
     }
 }
