@@ -437,6 +437,26 @@
         }
       }
     },
+    "At the cursor" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在光标处"
+          }
+        }
+      }
+    },
+    "At the mouse" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在鼠标处"
+          }
+        }
+      }
+    },
     "Audio" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1114,6 +1134,26 @@
         }
       }
     },
+    "Panel Behaviors" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "面板功能"
+          }
+        }
+      }
+    },
+    "Panel Position" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "面板位置"
+          }
+        }
+      }
+    },
     "Paste as Plain Text to %@" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1375,6 +1415,16 @@
         }
       }
     },
+    "Some applications are not available and are displayed at the cursor." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "部分应用不支持显示在光标处。"
+          }
+        }
+      }
+    },
     "Sound: Bloop" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -1520,6 +1570,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "此操作将不可逆地清除剪贴板历史记录中所有未固定的条目。"
+          }
+        }
+      }
+    },
+    "This option will determine where your panel appears" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此选项将决定面板显示的位置。"
           }
         }
       }
@@ -1744,7 +1804,7 @@
         }
       }
     },
-    "When enabled, directly paste the selected item into the application you are currently using" : {
+    "When enabled, directly paste the selected item into the application you are currently using." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

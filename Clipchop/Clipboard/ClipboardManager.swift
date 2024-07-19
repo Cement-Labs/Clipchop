@@ -26,7 +26,17 @@ class ClipboardManager {
         Self.clipboardController?.start()
         
         KeyboardShortcuts.onKeyDown(for: .window) {
-            self.clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
+            if Defaults[.cursorPosition] != .mouseLocation {
+                if let screenCursorPosition = getIMECursorPosition() {
+                    let globalCursorPosition = convertScreenToGlobalCoordinates(screenPoint: screenCursorPosition)
+                    let adjustedPosition = CGPoint(x: globalCursorPosition.x - 20, y: globalCursorPosition.y - 28)
+                    self.clipHistoryViewController.toggle(position: adjustedPosition)
+                } else {
+                    self.clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
+                }
+            } else {
+                self.clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
+            }
         }
         
         KeyboardShortcuts.onKeyDown(for: .start) {

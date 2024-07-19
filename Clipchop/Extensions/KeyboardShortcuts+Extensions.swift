@@ -10,7 +10,7 @@ import AppKit
 
 extension KeyboardShortcuts.Name {
     
-    static let window = Self("window", default: .init(.q, modifiers: .option))
+    static let window = Self("window", default: .init(.w, modifiers: .control))
     static let start = Self("start", default: .init(.q, modifiers: .control))
     
     static let settings = Self("settings", default: .init(.comma, modifiers: .command))

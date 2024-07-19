@@ -16,7 +16,6 @@ struct ClipboardBehaviorsSection: View {
     @Default(.timerInterval) private var timerInterval
     @Default(.pasteToFrontmostEnabled) private var paste
     @Default(.removeFormatting) private var removeFormatting
-    @Default(.autoCloseTimeout) private var autoCloseTimeout
     @Default(.clipboardMonitoring) private var clipboardMonitoring
     
     @State private var isDeleteHistoryAlertPresented = false
@@ -58,9 +57,10 @@ struct ClipboardBehaviorsSection: View {
             withCaption("When enabled, strips all font formatting from pasted text.") {
                 Toggle("Remove format", isOn: $removeFormatting)
             }
-            withCaption("When enabled, directly paste the selected item into the application you are currently using") {
+            withCaption("When enabled, directly paste the selected item into the application you are currently using.") {
                 Toggle("Paste to active application", isOn: $paste)
             }
+            
         } header: {
             if hasTitle {
                 Text("Clipboard Behaviors")
@@ -131,22 +131,6 @@ struct ClipboardBehaviorsSection: View {
                     Text("0")
                 } maximumValueLabel: {
                     Text("1")
-                }
-                .monospaced()
-            }
-            VStack {
-                HStack {
-                    Text("Auto Close Timeout")
-                    Spacer()
-                    Text("\(Int(autoCloseTimeout))s")
-                        .monospaced()
-                }
-                Slider(value: $autoCloseTimeout, in: 5...60) {
-                    
-                } minimumValueLabel: {
-                    Text("5")
-                } maximumValueLabel: {
-                    Text("60")
                 }
                 .monospaced()
             }

@@ -82,3 +82,13 @@ struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
         lhs.id == rhs.id
     }
 }
+
+// MARK: Window position
+
+enum CursorPosition: String, CaseIterable, Identifiable, Defaults.Serializable {
+    case mouseLocation = "NSEvent.mouseLocation"
+    case adjustedPosition = "Adjusted Position"
+    
+    var id: String { self.rawValue }
+}
+

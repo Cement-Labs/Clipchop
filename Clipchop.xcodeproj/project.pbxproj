@@ -30,6 +30,7 @@
 		65160A952C3B937A004BF8BF /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A942C3B937A004BF8BF /* TabButton.swift */; };
 		65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */; };
 		654ED53C2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */; };
+		656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656588FE2C4A117500C4F6EA /* getCursorPosition.swift */; };
 		65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */; };
 		65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */; };
 		658D26A42C38226E001D1CC3 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 658D26A32C38226E001D1CC3 /* Defaults */; };
@@ -160,6 +161,7 @@
 		65160A942C3B937A004BF8BF /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLPreviewPags.swift; sourceTree = "<group>"; };
 		654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniformTypeIdentifiers+Extension.swift"; sourceTree = "<group>"; };
+		656588FE2C4A117500C4F6EA /* getCursorPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCursorPosition.swift; sourceTree = "<group>"; };
 		65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPages.swift; sourceTree = "<group>"; };
 		65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPages.swift; sourceTree = "<group>"; };
 		658D26CD2C382340001D1CC3 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 		658D27682C384513001D1CC3 /* Clip History */ = {
 			isa = PBXGroup;
 			children = (
+				656588FE2C4A117500C4F6EA /* getCursorPosition.swift */,
 				658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */,
 				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
 				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
@@ -839,6 +842,7 @@
 				658D27552C383546001D1CC3 /* PermissionsSection.swift in Sources */,
 				658D27562C383546001D1CC3 /* AppearanceSection.swift in Sources */,
 				658D27642C383DE0001D1CC3 /* MenuBarView.swift in Sources */,
+				656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */,
 				658D27652C383DE0001D1CC3 /* MenuBarIconView.swift in Sources */,
 				658D27572C383546001D1CC3 /* GeneralSettingsPage.swift in Sources */,
 				65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */,
@@ -1044,7 +1048,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 718;
+				CURRENT_PROJECT_VERSION = 719;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1087,7 +1091,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 718;
+				CURRENT_PROJECT_VERSION = 719;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

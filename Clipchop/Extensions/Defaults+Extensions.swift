@@ -16,6 +16,8 @@ extension Defaults.Keys {
     
     static let beginningViewShown = Key<Bool>("beginningViewShown", default: false)
     
+    static let cursorPosition = Key<CursorPosition>("cursorPosition", default: .mouseLocation)
+    
     // MARK: Appearance
     
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)
@@ -48,7 +50,7 @@ extension Defaults.Keys {
     
     static let dnd = Key<Bool>("dnd", default: false)
     
-    static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: false)
+    static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: true)
     
     static let removeFormatting = Key<Bool>("removeFormatting", default: false)
     
