@@ -9,7 +9,6 @@ import SwiftUI
 import AppKit
 
 struct HTMLPreviewPage: View {
-        
     let attributedText: AttributedString
     let backgroundColor: Color
     
@@ -44,21 +43,26 @@ struct HTMLPreviewPage: View {
     
     static func extractBackgroundColor(from attributedString: NSAttributedString, colorScheme: ColorScheme) -> Color {
         let backgroundColor: NSColor = dynamicColor(for: colorScheme)
-//        attributedString.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: attributedString.length)) { value, _, _ in
-//            if let color = value as? NSColor {
-//                backgroundColor = color
-//                return
-//            }
-//        }
         return Color(backgroundColor)
     }
     
     static func adjustFonts(in attributedString: NSAttributedString) -> NSAttributedString {
         let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
         let defaultFont = NSFont.systemFont(ofSize: 12)
+        let fontManager = NSFontManager.shared
         
         mutableAttributedString.enumerateAttribute(.font, in: NSRange(location: 0, length: attributedString.length)) { value, range, _ in
-            mutableAttributedString.addAttribute(.font, value: defaultFont, range: range)
+            if let font = value as? NSFont {
+                let fontName = font.fontName
+                
+                if let systemFont = NSFont(name: fontName, size: font.pointSize), fontManager.availableFonts.contains(systemFont.fontName) {
+                    mutableAttributedString.addAttribute(.font, value: systemFont, range: range)
+                } else {
+                    mutableAttributedString.addAttribute(.font, value: defaultFont, range: range)
+                }
+            } else {
+                mutableAttributedString.addAttribute(.font, value: defaultFont, range: range)
+            }
         }
         
         return mutableAttributedString
@@ -67,10 +71,6 @@ struct HTMLPreviewPage: View {
     var body: some View {
         VStack(alignment: .center) {
             Text(attributedText)
-                .font(.system(size: 12))
-                .minimumScaleFactor(0.8)
-                .lineLimit(10)
-                .fixedSize(horizontal: false, vertical: false)
                 .background(backgroundColor)
                 .padding(.all, 10)
         }

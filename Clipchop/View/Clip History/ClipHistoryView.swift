@@ -72,30 +72,31 @@ struct ClipHistoryView: View {
                     if items.isEmpty {
                         EmptyStatePages()
                     } else {
-                        switch viewState {
-                        case .collapsed:
-                            CollapsedPages(
-                                items: items,
-                                animationNamespace: animationNamespace,
-                                scrollPadding: $scrollPadding,
-                                initialScrollPadding: $initialScrollPadding,
-                                movethebutton: $movethebutton,
-                                clipboardModelEditor: clipboardModelEditor,
-                                apps: apps,
-                                undo: undo,
-                                redo: redo
-                            )
-                        case .expanded:
-                            ExpandedPages(
-                                items: items,
-                                animationNamespace: animationNamespace,
-                                apps: apps,
-                                undo: undo,
-                                redo: redo, 
-                                searchText: $searchText,
-                                selectedTab: $selectedTab,
-                                isSearchVisible: $isSearchVisible
-                            )
+                        Group {
+                            if viewState == .collapsed {
+                                AnyView(CollapsedPages(
+                                    items: items,
+                                    animationNamespace: animationNamespace,
+                                    scrollPadding: $scrollPadding,
+                                    initialScrollPadding: $initialScrollPadding,
+                                    movethebutton: $movethebutton,
+                                    clipboardModelEditor: clipboardModelEditor,
+                                    apps: apps,
+                                    undo: undo,
+                                    redo: redo
+                                ).id("collapsed"))
+                            } else {
+                                AnyView(ExpandedPages(
+                                    items: items,
+                                    animationNamespace: animationNamespace,
+                                    apps: apps,
+                                    undo: undo,
+                                    redo: redo,
+                                    searchText: $searchText,
+                                    selectedTab: $selectedTab,
+                                    isSearchVisible: $isSearchVisible
+                                ).id("expanded"))
+                            }
                         }
                     }
                 }
@@ -122,6 +123,7 @@ struct ClipHistoryView: View {
             controller.resetCloseTimer()
         }
     }
+    
     // MARK: - ModelManager
     
     private func undo() {

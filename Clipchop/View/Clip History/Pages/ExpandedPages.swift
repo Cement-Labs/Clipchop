@@ -29,56 +29,59 @@ struct ExpandedPages: View {
     }
     
     var filteredItems: [ClipboardHistory] {
-        return clipHistorySearch.search(string: searchText, within: Array(items)).map { $0.object as! ClipboardHistory }
+        if searchText.isEmpty {
+            return Array(items)
+        } else {
+            return clipHistorySearch.search(string: searchText, within: Array(items)).map { $0.object as! ClipboardHistory }
+        }
     }
     
     var body: some View {
-        VStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack {
-                    if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
-                        if !filteredItems.isEmpty {
-                            renderSection(items: filteredItems)
-                        } else {
-                            EmptyStatePages()
-                                .padding(.vertical, 120)
-                        }
-                    } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
-                        let pinnedItems = filteredItems.filter { $0.pin }
-                        if !pinnedItems.isEmpty {
-                            renderSection(items: pinnedItems)
-                        } else {
-                            EmptyStatePages()
-                                .padding(.vertical, 120)
-                        }
-                    } else {
-                        ForEach(filteredCategories) { category in
-                            if selectedTab == category.name {
-                                let categoryItems = filteredItems.filter { item in
-                                    if let contentsSet = item.contents as? Set<ClipboardContent> {
-                                        let contentsArray = Array(contentsSet)
-                                        let formatter = Formatter(contents: contentsArray)
-                                        return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
-                                    } else {
-                                        return false
-                                    }
-                                }
-                                
-                                if !categoryItems.isEmpty {
-                                    renderSection(items: categoryItems)
-                                } else {
-                                    EmptyStatePages()
-                                        .padding(.vertical, 120)
-                                }
+        ScrollView(.vertical, showsIndicators: false) {
+            if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
+                if !filteredItems.isEmpty {
+                    renderSection(items: filteredItems)
+                } else {
+                    EmptyStatePages()
+                        .padding(.vertical, 120)
+                }
+            } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
+                let pinnedItems = filteredItems.filter { $0.pin }
+                if !pinnedItems.isEmpty {
+                    renderSection(items: pinnedItems)
+                } else {
+                    EmptyStatePages()
+                        .padding(.vertical, 120)
+                }
+            } else {
+                ForEach(filteredCategories) { category in
+                    if selectedTab == category.name {
+                        let categoryItems = filteredItems.filter { item in
+                            if let contentsSet = item.contents as? Set<ClipboardContent> {
+                                let contentsArray = Array(contentsSet)
+                                let formatter = Formatter(contents: contentsArray)
+                                return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
+                            } else {
+                                return false
                             }
+                        }
+                        
+                        if !categoryItems.isEmpty {
+                            renderSection(items: categoryItems)
+                        } else {
+                            EmptyStatePages()
+                                .padding(.vertical, 120)
                         }
                     }
                 }
             }
-            .scrollDisabled(true)
         }
+        .scrollDisabled(true)
         .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
         .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
+        .onDisappear {
+            print("A")
+        }
     }
 }
 
@@ -88,22 +91,20 @@ extension ExpandedPages {
     
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
-        VStack(alignment: .leading) {
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 5), spacing: 12) {
-                    ForEach(Array(items.enumerated()).filter { !$0.element.isEmpty }, id: \.element.id) { index, item in
-                        CardPreviewView(item: item, keyboardShortcut: "none")
-                            .environmentObject(apps)
-                            .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
-                    }
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 5), spacing: 12) {
+                ForEach(Array(items.enumerated()).filter { !$0.element.isEmpty }, id: \.element.id) { index, item in
+                    CardPreviewView(item: item, keyboardShortcut: "none")
+                        .environmentObject(apps)
+                        .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
                 }
-                .padding(.vertical, 60)
-                .padding(.horizontal, 12)
             }
+            .padding(.vertical, 60)
+            .padding(.horizontal, 12)
         }
         .frame(width: 500, height: 260)
     }
-    
+        
     @ViewBuilder
     private func searchBar() -> some View {
         ZStack {
@@ -115,16 +116,19 @@ extension ExpandedPages {
                 )
             HStack {
                 if isSearchVisible {
-                    TextField("Search", text: $searchText)
-                        .padding([.leading, .horizontal], 15)
-                        .textFieldStyle(.plain)
-                        .frame(width: 425, height: 30)
+                    SearchFieldWrapper(searchText: $searchText, placeholder: "Search") { query in
+                        self.searchText = query
+                        self.searchResults = clipHistorySearch.search(string: query, within: Array(items))
+                    }
+                    .padding([.leading, .horizontal], 15)
+                    .frame(width: 425, height: 30)
                 }
                 Button(action: {
                     withAnimation {
                         isSearchVisible.toggle()
                         if !isSearchVisible {
                             searchText = ""
+                            searchResults = []
                         }
                     }
                 }) {
@@ -133,7 +137,7 @@ extension ExpandedPages {
                         .frame(width: 10, height: 10)
                         .padding(5)
                 }
-                .keyboardShortcut("s" ,modifiers: .command)
+                .keyboardShortcut("s", modifiers: .command)
                 .buttonStyle(.borderless)
                 .offset(x: isSearchVisible ? -5 : 0)
             }
@@ -155,7 +159,6 @@ extension ExpandedPages {
                 HStack {
                     TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
                     TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
-                    
                     ForEach(filteredCategories) { category in
                         let categoryItems = items.filter { item in
                             if let contentsSet = item.contents as? Set<ClipboardContent> {
@@ -184,4 +187,3 @@ extension String {
         return self.lowercased() == other.lowercased()
     }
 }
-

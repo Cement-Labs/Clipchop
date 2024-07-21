@@ -160,22 +160,19 @@ struct CardPreviewView: View {
                                 .font(.system(size: 10))
                         }
                     }
-                    
-                    VStack {
-                        Group {
-                            if let title = item.formatter.title {
-                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
-                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
-                                Text(categorizedTitle)
-                            } else {
-                                Text("Other")
-                            }
+                    Group {
+                        if let title = item.formatter.title {
+                            let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                            let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                            Text(categorizedTitle)
+                        } else {
+                            Text("Other")
                         }
-                        .font(.system(size: 12.5))
-                        .minimumScaleFactor(0.5)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .lineLimit(1)
                     }
+                    .font(.system(size: 12.5))
+                    .minimumScaleFactor(0.5)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
                 }
                 .padding(.all, 7.5)
             }

@@ -111,6 +111,7 @@ struct AboutSettingsPage: View {
                     AcknowledgementsView()
                 }
             }
+            
         }
     }
 }

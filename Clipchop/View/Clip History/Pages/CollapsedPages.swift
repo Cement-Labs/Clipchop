@@ -55,30 +55,28 @@ struct CollapsedPages: View {
                         }
                 })
                 .overlay(
-                    VStack {
-                        VStack(spacing: 5) {
-                            SettingsLink {
-                                ZStack(alignment: .center) {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color.getAccent())
-                                        .frame(width: 50, height: 38)
-                                    Image(systemSymbol: .gearshape)
-                                }
-                            }
-                            .buttonStyle(.borderless)
-                            ZStack {
+                    VStack(spacing: 5) {
+                        SettingsLink {
+                            ZStack(alignment: .center) {
                                 RoundedRectangle(cornerRadius: 5)
-                                    .fill(.red)
+                                    .fill(Color.getAccent())
                                     .frame(width: 50, height: 38)
-                                Image(systemSymbol: .trash)
-                            }
-                            .onTapGesture {
-                                showAlert()
+                                Image(systemSymbol: .gearshape)
                             }
                         }
+                        .buttonStyle(.borderless)
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(.red)
+                                .frame(width: 50, height: 38)
+                            Image(systemSymbol: .trash)
+                        }
+                        .onTapGesture {
+                            showAlert()
+                        }
+                    }
                         .frame(width: 50, height: 80)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
-                    }
                         .animation(.spring(), value: movethebutton)
                         .offset(x: movethebutton ? 12 : -120),
                     alignment: .leading

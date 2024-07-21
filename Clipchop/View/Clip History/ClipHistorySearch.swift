@@ -13,7 +13,7 @@ class ClipHistorySearch {
         var score: Double?
         var object: Searchable
         var titleMatches: [ClosedRange<Int>]
-
+        
         static func ==(lhs: SearchResult, rhs: SearchResult) -> Bool {
             return lhs.score == rhs.score &&
                    lhs.object.title == rhs.object.title &&
@@ -22,10 +22,10 @@ class ClipHistorySearch {
                    lhs.titleMatches == rhs.titleMatches
         }
     }
-
-    private let fuse = Fuse(threshold: 0.35)
-    private let fuzzySearchLimit = 500
-
+    
+    private let fuse = Fuse(threshold: 0.45)
+    private let fuzzySearchLimit = 5000
+    
     private let prefixMappings: [String: String] = [
         "#app ": "app",
         "#content ": "value",
