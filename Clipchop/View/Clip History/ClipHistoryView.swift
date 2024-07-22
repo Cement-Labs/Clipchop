@@ -23,10 +23,6 @@ struct ClipHistoryView: View {
     
     @Namespace private var animationNamespace
     
-    // ClipHistoryView
-    @State private var isExpanded = false
-    @State private var viewState: ViewState = .collapsed
-    
     // CollapsedPages
     @State private var scrollPadding: CGFloat = 12
     @State private var initialScrollPadding: CGFloat = 12
@@ -39,31 +35,27 @@ struct ClipHistoryView: View {
     @State var searchResults: [ClipHistorySearch.SearchResult] = []
     
     private let search = ClipHistorySearch()
-    private let controller = ClipHistoryPanelController()
     private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
     
-    enum ViewState {
-        case expanded
-        case collapsed
-    }
+    let controller: ClipHistoryPanelController
     
     var body: some View {
         clip {
             ZStack(alignment: .top) {
                 
                 Button(action: undo) { }
-                .opacity(0)
-                .allowsHitTesting(false)
-                .buttonStyle(.borderless)
-                .frame(width: 0, height: 0)
-                .keyboardShortcut("z", modifiers: .command)
+                    .opacity(0)
+                    .allowsHitTesting(false)
+                    .buttonStyle(.borderless)
+                    .frame(width: 0, height: 0)
+                    .keyboardShortcut("z", modifiers: .command)
                 
                 Button(action: redo) { }
-                .opacity(0)
-                .allowsHitTesting(false)
-                .buttonStyle(.borderless)
-                .frame(width: 0, height: 0)
-                .keyboardShortcut("z", modifiers: [.command, .shift])
+                    .opacity(0)
+                    .allowsHitTesting(false)
+                    .buttonStyle(.borderless)
+                    .frame(width: 0, height: 0)
+                    .keyboardShortcut("z", modifiers: [.command, .shift])
                 
                 clip {
                     VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
@@ -73,54 +65,63 @@ struct ClipHistoryView: View {
                         EmptyStatePages()
                     } else {
                         Group {
-                            if viewState == .collapsed {
-                                AnyView(CollapsedPages(
-                                    items: items,
-                                    animationNamespace: animationNamespace,
-                                    scrollPadding: $scrollPadding,
-                                    initialScrollPadding: $initialScrollPadding,
-                                    movethebutton: $movethebutton,
-                                    clipboardModelEditor: clipboardModelEditor,
-                                    apps: apps,
-                                    undo: undo,
-                                    redo: redo
-                                ).id("collapsed"))
+                            if controller.isExpandedforView {
+                                expandedPagesView
+                                    .id("ExpandedPages")
                             } else {
-                                AnyView(ExpandedPages(
-                                    items: items,
-                                    animationNamespace: animationNamespace,
-                                    apps: apps,
-                                    undo: undo,
-                                    redo: redo,
-                                    searchText: $searchText,
-                                    selectedTab: $selectedTab,
-                                    isSearchVisible: $isSearchVisible
-                                ).id("expanded"))
+                                collapsedPagesView
+                                    .id("CollapsedPages")
                             }
                         }
+                        .transition(.opacity)
                     }
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .preferredColorScheme(preferredColorScheme.colorScheme)
-        .animation(.easeInOut, value: preferredColorScheme)
-        .onReceive(NotificationCenter.default.publisher(for: .didChangeExpansionState)) { notification in
-            if let userInfo = notification.userInfo, let isExpanded = userInfo["isExpanded"] as? Bool {
-                searchText = ""
-                withAnimation(.default) {
-                    isSearchVisible = false
-                    selectedTab = NSLocalizedString("All Types", comment: "All Types")
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    withAnimation(.default) {
-                        viewState = isExpanded ? .expanded : .collapsed
-                    }
-                }
-            }
-        }
         .onChange(of: searchText) { oldValue, newValue in
             controller.resetCloseTimer()
+        }
+        .onChange(of: controller.isExpandedforView) { isExpanded, _ in
+            handleExpansionStateChange(isExpanded: isExpanded)
+        }
+    }
+    
+    @ViewBuilder
+    private var expandedPagesView: some View {
+        ExpandedPages(
+            items: items,
+            animationNamespace: animationNamespace,
+            apps: apps,
+            undo: undo,
+            redo: redo,
+            searchText: $searchText,
+            selectedTab: $selectedTab,
+            isSearchVisible: $isSearchVisible
+        )
+    }
+    
+    @ViewBuilder
+    private var collapsedPagesView: some View {
+        CollapsedPages(
+            items: items,
+            animationNamespace: animationNamespace,
+            scrollPadding: $scrollPadding,
+            initialScrollPadding: $initialScrollPadding,
+            movethebutton: $movethebutton,
+            clipboardModelEditor: clipboardModelEditor,
+            apps: apps,
+            undo: undo,
+            redo: redo
+        )
+    }
+    
+    private func handleExpansionStateChange(isExpanded: Bool) {
+        searchText = ""
+        withAnimation(.default) {
+            isSearchVisible = false
+            selectedTab = NSLocalizedString("All Types", comment: "All Types")
         }
     }
     

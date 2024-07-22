@@ -148,6 +148,7 @@ struct ClipboardBehaviorsSection: View {
             .alert("Clear Clipboard History", isPresented: $isDeleteHistoryAlertPresented) {
                 Button("Delete", role: .destructive) {
                     try? clipboardModelEditor.deleteAll()
+                    MetadataCache.shared.clearAllCaches()
                 }
             } message: {
                 Text("This action clears all your clipboard history unrestorably, including pins.")

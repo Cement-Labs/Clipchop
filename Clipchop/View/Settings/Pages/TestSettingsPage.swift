@@ -10,7 +10,11 @@ import SwiftUI
 struct TestSettingsPage: View {
     var body: some View {
         ListEmbeddedForm {
-//            EmptyView()
+            Button {
+                MetadataCache.shared.clearAllCaches()
+            } label: {
+                Text("clearAllCaches")
+            }
         }
     }
 }

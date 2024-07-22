@@ -89,7 +89,7 @@ struct PreviewContentView: View, Equatable {
             return AnyView(
                 VStack {
                     WebLinkPreviewPage(urlString: text)
-                        .scaleEffect(0.625)
+                        .scaleEffect(0.5)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .padding(.all, 5)
@@ -128,7 +128,7 @@ struct PreviewContentView: View, Equatable {
     private func urlPreviewView(for url: URL) -> some View {
         VStack {
             WebLinkPreviewPage(urlString: url.absoluteString)
-                .scaleEffect(0.625)
+                .scaleEffect(0.5)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.all, 5)

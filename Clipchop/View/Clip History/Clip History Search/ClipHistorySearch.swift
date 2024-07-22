@@ -23,8 +23,8 @@ class ClipHistorySearch {
         }
     }
     
-    private let fuse = Fuse(threshold: 0.45)
-    private let fuzzySearchLimit = 5000
+    private let fuse = Fuse(threshold: 0.35)
+    private let fuzzySearchLimit = 5_000
     
     private let prefixMappings: [String: String] = [
         "#app ": "app",
@@ -68,7 +68,9 @@ class ClipHistorySearch {
                     return self.fuzzySearch(for: pattern, in: normalizedTitle, of: item)
                 default:
                     return self.fuzzySearch(for: pattern, in: normalizedTitle, of: item) ??
+                    
                            self.fuzzySearch(for: pattern, in: normalizedValue, of: item) ??
+                    
                            self.fuzzySearch(for: pattern, in: normalizedApp, of: item)
                 }
             }
@@ -150,6 +152,7 @@ class ClipHistorySearch {
             return nil
         }
     }
+    
     private func normalizeString(_ string: String) -> String {
         let normalizedString = string.applyingTransform(.fullwidthToHalfwidth, reverse: false) ?? string
         return normalizedString
@@ -161,3 +164,4 @@ protocol Searchable {
     var value: String { get }
     var app: String? { get }
 }
+

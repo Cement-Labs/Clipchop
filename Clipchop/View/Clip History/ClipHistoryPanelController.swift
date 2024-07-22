@@ -20,11 +20,8 @@ class ClipHistoryPanelController: NSViewController, ObservableObject {
     
     private var closeTimer: Timer?
     
-    var isExpanded = false {
-        didSet {
-            NotificationCenter.default.post(name: .didChangeExpansionState, object: nil, userInfo: ["isExpanded": isExpanded])
-        }
-    }
+    var isExpanded = false
+    var isExpandedforView = false
     private var expansionEdge: NSRectEdge = .minY
     
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
@@ -79,25 +76,38 @@ extension ClipHistoryPanelController {
             edge = expansionEdge
         }
         
+        withAnimation(.default) {
+            isExpandedforView = isExpanded
+           print("isExpandedforView")
+        }
+        
+        resetCloseTimer()
+        
         DispatchQueue.main.async {
-            switch edge {
-            case .maxY:
-                panel.setFrame(
-                    .init(origin: frame.origin, size: targetSize),
-                    display: true, animate: animate
-                )
-            case .minY:
-                panel.setFrame(
-                    .init(
-                        origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height),
-                        size: targetSize
-                    ),
-                    display: true, animate: animate
-                )
-            default: break
+            NSAnimationContext.runAnimationGroup { context in
+                context.duration = animate ? 0.25 : 0
+                context.allowsImplicitAnimation = animate
+                
+                switch edge {
+                case .maxY:
+                    panel.animator().setFrame(
+                        .init(origin: frame.origin, size: targetSize),
+                        display: true
+                    )
+                case .minY:
+                    panel.animator().setFrame(
+                        .init(
+                            origin: .init(x: frame.origin.x, y: frame.origin.y + frame.size.height - targetSize.height),
+                            size: targetSize
+                        ),
+                        display: true
+                    )
+                default: break
+                }
+            } completionHandler: {
+                self.isExpanded = isExpanded
+                print("isExpanded")
             }
-            
-            self.isExpanded = isExpanded
         }
     }
 }

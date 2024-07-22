@@ -11,7 +11,6 @@ extension Notification.Name {
     static let didClip = Self("didClip")
     static let didPaste = Self("didPaste")
     // ClipHistory View expansion notification
-    static let didChangeExpansionState = Notification.Name("didChangeExpansionState")
 }
 
 extension Notification.Name {

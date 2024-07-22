@@ -10,6 +10,7 @@ import SwiftHEXColors
 
 import AppKit
 import Vision
+import LinkPresentation
 
 import Defaults
 
@@ -193,12 +194,17 @@ extension Formatter {
     }
     
     func generateContentPreview() -> String {
-        let cacheKey = contents.map { "\($0.type ?? "unknown"):\($0.value?.hashValue ?? 0)" }.joined(separator: "-")
+        guard let firstContent = contents.first else {
+            return ""
+        }
+        
+        let cacheKey = generateCacheKey(from: firstContent)
+        
         if let cachedPreview = MetadataCache.shared.getPreview(for: cacheKey) {
             return cachedPreview
         }
         
-        var plainTextContents = [ClipboardContent]()
+        var plainTextContents = [String]()
         
         contents.forEach { content in
             if let type = content.type {
@@ -207,42 +213,53 @@ extension Formatter {
                 case .html:
                     if let htmlString = String(data: content.value!, encoding: .utf8) {
                         let plainText = extractPlainTextFromHTML(htmlString)
-                        if let plainTextData = plainText.data(using: .utf8) {
-                            plainTextContents.append(ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData))
+                        if !plainText.isEmpty {
+                            plainTextContents.append(plainText)
                         }
                     }
                 case .rtf:
                     if let rtfString = NSAttributedString(rtf: content.value!, documentAttributes: nil)?.string {
-                        if let plainTextData = rtfString.data(using: .utf8) {
-                            plainTextContents.append(ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData))
-                        }
+                        plainTextContents.append(rtfString)
                     }
                 case .string:
-                    plainTextContents.append(content)
+                    if let text = String(data: content.value!, encoding: .utf8) {
+                        plainTextContents.append(text)
+                    }
                 default:
                     break
                 }
             }
         }
         
-        var preview = ""
+        let combinedPlainText = plainTextContents.joined(separator: "\n\n")
+        var preview = combinedPlainText
         let semaphore = DispatchSemaphore(value: 0)
         
-        if let firstContent = plainTextContents.first, let text = String(data: firstContent.value!, encoding: .utf8), !text.isEmpty {
-            preview = text
+        if let firstContent = plainTextContents.first, !firstContent.isEmpty {
+            if let url = NSURL(string: firstContent), url.scheme != nil {
+                extractMetadataFromURL(url as URL) { title in
+                    let urlPreview = title != nil ? "URL: \(title!)" : "URL: \(url.absoluteString ?? "")"
+                    MetadataCache.shared.setPreview(urlPreview, for: cacheKey)
+                }
+            } else {
+                MetadataCache.shared.setPreview(preview, for: cacheKey)
+            }
         } else if let image = image {
             extractTextFromImage(image) { recognizedText in
                 if let text = recognizedText, !text.isEmpty {
                     preview = text
                 } else {
-                    print("Image")
                     preview = "Image: \(image.size.width)x\(image.size.height)"
                 }
                 semaphore.signal()
             }
             _ = semaphore.wait(timeout: .distantFuture)
         } else if let url = url {
-            preview = "URL: \(url.absoluteString)"
+            extractMetadataFromURL(url) { title in
+                let preview = title != nil ? "URL: \(title!)" : "URL: \(url.absoluteString)"
+                MetadataCache.shared.setPreview(preview, for: cacheKey)
+
+            }
         } else if !fileURLs.isEmpty {
             var filePreview = "Files: \(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
             
@@ -293,6 +310,20 @@ extension Formatter {
         Defaults[.allTypes] = Array(allTypes)
     }
     
+    func extractMetadataFromURL(_ url: URL, completion: @escaping (String?) -> Void) {
+        let metadataProvider = LPMetadataProvider()
+        metadataProvider.startFetchingMetadata(for: url) { metadata, error in
+            if let error = error {
+                print("Error fetching metadata: \(error)")
+                completion(nil)
+            } else if let metadata = metadata, let title = metadata.title {
+                completion(title)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
     func extractPlainTextFromHTML(_ html: String) -> String {
         guard let data = html.data(using: .utf8) else {
             return html
@@ -318,6 +349,7 @@ extension Formatter {
             return
         }
         
+        print("run A")
         let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         let request = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
@@ -346,5 +378,12 @@ extension Formatter {
         }
         
         extractTextFromImage(image, completion: completion)
+    }
+    
+    func generateCacheKey(from clipboardContent: ClipboardContent) -> String {
+        guard let id = clipboardContent.item?.id else {
+            fatalError("ClipboardContent must have a valid ClipboardHistory item with an id")
+        }
+        return id.uuidString
     }
 }

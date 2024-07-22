@@ -31,6 +31,7 @@
 		65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */; };
 		654ED53C2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */; };
 		656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656588FE2C4A117500C4F6EA /* getCursorPosition.swift */; };
+		65679C9C2C4E4F8F00E583C4 /* ClipboardHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65679C9B2C4E4F8F00E583C4 /* ClipboardHistoryViewModel.swift */; };
 		65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */; };
 		65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */; };
 		658D26A42C38226E001D1CC3 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 658D26A32C38226E001D1CC3 /* Defaults */; };
@@ -164,6 +165,7 @@
 		65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLPreviewPags.swift; sourceTree = "<group>"; };
 		654ED53B2C47CD8100B37CA9 /* UniformTypeIdentifiers+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UniformTypeIdentifiers+Extension.swift"; sourceTree = "<group>"; };
 		656588FE2C4A117500C4F6EA /* getCursorPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCursorPosition.swift; sourceTree = "<group>"; };
+		65679C9B2C4E4F8F00E583C4 /* ClipboardHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryViewModel.swift; sourceTree = "<group>"; };
 		65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPages.swift; sourceTree = "<group>"; };
 		65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPages.swift; sourceTree = "<group>"; };
 		658D26CD2C382340001D1CC3 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
@@ -283,6 +285,15 @@
 				28B0637E2C3942310002ACFA /* ClipchopTests.swift */,
 			);
 			path = ClipchopTests;
+			sourceTree = "<group>";
+		};
+		650422ED2C4E0C9800006FC9 /* Clip History Search */ = {
+			isa = PBXGroup;
+			children = (
+				65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */,
+				659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */,
+			);
+			path = "Clip History Search";
 			sourceTree = "<group>";
 		};
 		650515A92C381EA500E2129D = {
@@ -417,6 +428,7 @@
 				658D26D42C382340001D1CC3 /* DefaultsStack.swift */,
 				658D26D52C382340001D1CC3 /* ViewController.swift */,
 				658D26D72C382340001D1CC3 /* LifecycleHandler.swift */,
+				656588FE2C4A117500C4F6EA /* getCursorPosition.swift */,
 				658D26D62C382340001D1CC3 /* Logger.swift */,
 				65A176122C4BF408000BACFA /* Throttler.swift */,
 			);
@@ -603,12 +615,11 @@
 		658D27682C384513001D1CC3 /* Clip History */ = {
 			isa = PBXGroup;
 			children = (
-				656588FE2C4A117500C4F6EA /* getCursorPosition.swift */,
+				65679C9B2C4E4F8F00E583C4 /* ClipboardHistoryViewModel.swift */,
 				658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */,
 				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
 				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
-				65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */,
-				659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */,
+				650422ED2C4E0C9800006FC9 /* Clip History Search */,
 				65758C062C3AE0FF009EEB3E /* Pages */,
 				658D27712C384552001D1CC3 /* Preview Cards */,
 			);
@@ -823,6 +834,7 @@
 				658D27122C38314F001D1CC3 /* BeginningHelloPage.swift in Sources */,
 				658D26DB2C382340001D1CC3 /* ViewController.swift in Sources */,
 				658D26F12C3824D5001D1CC3 /* Formatter.swift in Sources */,
+				65679C9C2C4E4F8F00E583C4 /* ClipboardHistoryViewModel.swift in Sources */,
 				658D26F72C3826E6001D1CC3 /* ClipboardController.swift in Sources */,
 				658D26DC2C382340001D1CC3 /* AppIcon.swift in Sources */,
 				658D26DD2C382340001D1CC3 /* InstalledApp.swift in Sources */,
@@ -1056,7 +1068,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 721;
+				CURRENT_PROJECT_VERSION = 722;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1099,7 +1111,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 721;
+				CURRENT_PROJECT_VERSION = 722;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

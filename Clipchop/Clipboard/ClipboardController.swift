@@ -190,7 +190,6 @@ class ClipboardController: NSObject, ObservableObject {
             try context.save()
             let formatter = Formatter(contents: contents)
             formatter.categorizeFileTypes()
-            formatter.generateContentPreview()
             log(self,"The Contents of Clipboard are changed\(ClipboardHistory(contents: contents))")
             log(self, "title = \(formatter.title ?? "EMPTY")")
         } catch {

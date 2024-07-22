@@ -31,7 +31,7 @@ class ClipHistoryPanel: NSPanel {
         backgroundColor = NSColor.clear
         hasShadow = true
         
-        let clipHistoryView = ClipHistoryView()
+        let clipHistoryView = ClipHistoryView(controller: controller)
             .environment(\.managedObjectContext, ClipboardDataProvider.shared.viewContext)
         
         let hostingView = NSHostingView(rootView: clipHistoryView)
