@@ -22,6 +22,7 @@ struct CardPreviewView: View {
     @State private var isHoveredPin = false
     @State private var data: Data?
     @State private var showMore = false
+    @State private var eventMonitor: Any?
     
     @EnvironmentObject private var apps: InstalledApps
     @Environment(\.managedObjectContext) var context
@@ -33,6 +34,7 @@ struct CardPreviewView: View {
             colorScheme == .dark ? .black : .white
         }
     }
+    
     var pinIcon: String {
         withAnimation {
             item.pin ? "pin.fill" : "pin"
@@ -180,7 +182,7 @@ struct CardPreviewView: View {
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
         .frame(width: 80, height: 80, alignment: .center)
-        .background(backgroundColor)
+        .background(Material.bar)
         .clipShape(.rect(cornerRadius: 12.5))
         .overlay(
             ZStack{
@@ -308,17 +310,23 @@ struct CardPreviewView: View {
             return NSItemProvider()
         }
         .onAppear {
-            NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+            eventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
                 if event.modifierFlags.contains(.shift) {
-                    withAnimation{
+                    withAnimation {
                         showMore = true
                     }
                 } else {
-                    withAnimation{
+                    withAnimation {
                         showMore = false
                     }
                 }
                 return event
+            }
+        }
+        .onDisappear {
+            if let monitor = eventMonitor {
+                NSEvent.removeMonitor(monitor)
+                eventMonitor = nil
             }
         }
     }

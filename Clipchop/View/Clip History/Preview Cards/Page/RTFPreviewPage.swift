@@ -50,7 +50,7 @@ struct RTFPreviewPage: View {
                 .lineLimit(10)
                 .fixedSize(horizontal: false, vertical: false)
                 .background(Color.clear)
-                .padding(.all, 10)
+                .padding(.all, 4)
         }
         .frame(width: 80, height: 80)
         .background(backgroundColor)

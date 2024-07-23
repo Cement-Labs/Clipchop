@@ -28,7 +28,7 @@ struct PreviewContentView: View, Equatable {
     let clipboardHistory: ClipboardHistory
     
     var body: some View {
-        VStack(alignment: .leading) {
+        ZStack(alignment: .top) {
             if let fileURL = clipboardHistory.formatter.fileURLs.first {
                 fileThumbnailView(for: fileURL)
             } else if let image = clipboardHistory.formatter.image {
@@ -51,16 +51,17 @@ struct PreviewContentView: View, Equatable {
     // MARK: - View Builders
     
     private func fileThumbnailView(for fileURL: URL) -> some View {
-        ZStack {
+        VStack {
             if isThumbnailLoading {
                 loadingView()
             } else if let thumbnail = thumbnail {
                 Image(nsImage: thumbnail)
                     .resizable()
                     .scaledToFit()
-                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 65, height: 65)
             }
         }
+        .padding(.vertical, 4)
         .background(
             RoundedRectangle(cornerRadius: 0)
                 .fill(Color.clear)
@@ -119,8 +120,9 @@ struct PreviewContentView: View, Equatable {
                         .lineLimit(10)
                         .fixedSize(horizontal: false, vertical: false)
                         .foregroundColor(.primary)
+                        .padding(.all, 4)
                 }
-                .frame(width: 70, height: 70)
+                .frame(width: 80, height: 80)
             )
         }
     }
@@ -138,7 +140,6 @@ struct PreviewContentView: View, Equatable {
         VStack {
             HTMLPreviewPage(htmlData: htmlData, colorScheme: colorScheme)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .padding()
         }
         .background(Color.white)
         .frame(width: 80, height: 80, alignment: .center)
@@ -172,7 +173,7 @@ struct PreviewContentView: View, Equatable {
     
     private func generateAndSetThumbnail(for fileURL: URL) {
         DispatchQueue.global(qos: .utility).async {
-            let maxDimension = 80
+            let maxDimension = 50
             let size = CGSize(width: maxDimension, height: maxDimension)
             let scale = NSScreen.main!.backingScaleFactor
             let request = QLThumbnailGenerator.Request(
@@ -199,6 +200,7 @@ struct PreviewContentView: View, Equatable {
     
     // MARK: - Resize Image
     
+    // Get cached image
     private func getCachedOrResizeImage(image: NSImage, for identifier: UUID?) -> NSImage? {
         guard let identifier = identifier else { return nil }
         if let cachedImage = MetadataCache.shared.getResizedImage(for: identifier) {
@@ -212,26 +214,30 @@ struct PreviewContentView: View, Equatable {
         }
     }
     
+    // Image preview resolution scaling
     private func resizeImage(image: NSImage) -> NSImage? {
-        let maxSize: CGFloat = 80
+        let maxSize: CGFloat = 65 // 允许的最大尺寸
+        let aspectRatio = image.size.width / image.size.height
         let newSize: NSSize
-        
-        if image.size.width > image.size.height {
-            let ratio = maxSize / image.size.width
-            newSize = NSSize(width: maxSize, height: image.size.height * ratio)
+
+        if aspectRatio > 1 {
+            newSize = NSSize(width: maxSize, height: maxSize / aspectRatio)
         } else {
-            let ratio = maxSize / image.size.height
-            newSize = NSSize(width: image.size.width * ratio, height: maxSize)
+            newSize = NSSize(width: maxSize * aspectRatio, height: maxSize)
         }
-        
+
         let newImage = NSImage(size: newSize)
         newImage.lockFocus()
-        image.draw(in: NSRect(origin: .zero, size: newSize), from: NSRect(origin: .zero, size: image.size), operation: .copy, fraction: 1)
-        newImage.unlockFocus()
+        defer { newImage.unlockFocus() }
+        image.draw(in: NSRect(origin: .zero, size: newSize),
+                   from: NSRect(origin: .zero, size: image.size),
+                   operation: .copy,
+                   fraction: 1)
         
         return newImage
     }
     
+    // Switch background Color
     private func foregroundColor(for image: NSImage) -> Color {
         guard let averageColor = image.averageColor else {
             return .primary

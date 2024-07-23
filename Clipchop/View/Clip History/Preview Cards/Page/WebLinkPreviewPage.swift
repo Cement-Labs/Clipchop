@@ -11,7 +11,7 @@ import LinkPresentation
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize {
         // The most proper size.
-        CGSize(width: 140, height: 60)
+        CGSize(width: 140, height: 70)
     }
 }
 

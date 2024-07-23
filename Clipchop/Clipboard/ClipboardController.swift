@@ -87,7 +87,7 @@ class ClipboardController: NSObject, ObservableObject {
     private func updateClipboard() {
         
         try? context.save()
-                
+        
         guard pasteboard.changeCount != changeCount else {
             return
         }
@@ -190,8 +190,10 @@ class ClipboardController: NSObject, ObservableObject {
             try context.save()
             let formatter = Formatter(contents: contents)
             formatter.categorizeFileTypes()
-            log(self,"The Contents of Clipboard are changed\(ClipboardHistory(contents: contents))")
+            
+            log(self, "The contents of Clipboard have changed \(ClipboardHistory(contents: contents))")
             log(self, "title = \(formatter.title ?? "EMPTY")")
+            formatter.generateContentPreview()
         } catch {
             let nserror = error as NSError
             log(self, "UnSaved error \(nserror), \(nserror.userInfo)")

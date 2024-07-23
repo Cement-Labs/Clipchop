@@ -73,7 +73,6 @@ struct ClipHistoryView: View {
                                     .id("CollapsedPages")
                             }
                         }
-                        .transition(.opacity)
                     }
                 }
             }

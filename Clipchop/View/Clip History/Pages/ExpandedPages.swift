@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ExyteGrid
 import Defaults
 import Fuse
 
@@ -39,67 +38,64 @@ struct ExpandedPages: View {
     
     var body: some View {
         VStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
-                    if !filteredItems.isEmpty {
-                        renderSection(items: filteredItems)
-                    } else {
-                        EmptyStatePages()
-                            .padding(.vertical, 120)
-                    }
-                } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
-                    let pinnedItems = filteredItems.filter { $0.pin }
-                    if !pinnedItems.isEmpty {
-                        renderSection(items: pinnedItems)
-                    } else {
-                        EmptyStatePages()
-                            .padding(.vertical, 120)
-                    }
+            if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
+                if !filteredItems.isEmpty {
+                    renderSection(items: filteredItems)
                 } else {
-                    ForEach(filteredCategories) { category in
-                        if selectedTab == category.name {
-                            let categoryItems = filteredItems.filter { item in
-                                if let contentsSet = item.contents as? Set<ClipboardContent> {
-                                    let contentsArray = Array(contentsSet)
-                                    let formatter = Formatter(contents: contentsArray)
-                                    return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
-                                } else {
-                                    return false
-                                }
-                            }
-                            
-                            if !categoryItems.isEmpty {
-                                renderSection(items: categoryItems)
+                    EmptyStatePages()
+                        .padding(.vertical, 24)
+                }
+            } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
+                let pinnedItems = filteredItems.filter { $0.pin }
+                if !pinnedItems.isEmpty {
+                    renderSection(items: pinnedItems)
+                } else {
+                    EmptyStatePages()
+                        .padding(.vertical, 24)
+                }
+            } else {
+                ForEach(filteredCategories) { category in
+                    if selectedTab == category.name {
+                        let categoryItems = filteredItems.filter { item in
+                            if let contentsSet = item.contents as? Set<ClipboardContent> {
+                                let contentsArray = Array(contentsSet)
+                                let formatter = Formatter(contents: contentsArray)
+                                return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
                             } else {
-                                EmptyStatePages()
-                                    .padding(.vertical, 120)
+                                return false
                             }
+                        }
+                        
+                        if !categoryItems.isEmpty {
+                            renderSection(items: categoryItems)
+                        } else {
+                            EmptyStatePages()
+                                .padding(.vertical, 24)
                         }
                     }
                 }
             }
-            .scrollDisabled(true)
         }
+        .padding(.top, 48)
         .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
         .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
     }
     
     // MARK: - Expanded ViewBuilder
-
+    
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 5), spacing: 16) {
-                ForEach(items.filter { !$0.isEmpty }, id: \.id) { item in
-                    CardPreviewView(item: item, keyboardShortcut: "none")
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 12) {
+                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                    CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
                         .environmentObject(apps)
                         .applyMatchedGeometryEffect(if: items.firstIndex(of: item) ?? 0 < 6, id: item.id, namespace: animationNamespace)
                 }
             }
-            .padding(.vertical, 60)
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 12)
         }
-        .frame(width: 500, height: 260)
+        .frame(width: 500)
     }
     
     @ViewBuilder
@@ -176,6 +172,11 @@ struct ExpandedPages: View {
         }
         .frame(width: isSearchVisible ? 0 : 425, height: 30)
         .cornerRadius(25)
+    }
+    
+    private func getKeyboardShortcut(for index: Int) -> String {
+        guard index < 9 else { return "none" }
+        return String(index + 1)
     }
 }
 

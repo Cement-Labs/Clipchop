@@ -13,7 +13,7 @@ import KeyboardShortcuts
 class ClipHistoryPanelController: NSViewController, ObservableObject {
     static let size = (
         collapsed: NSSize(width: 500, height: 100),
-        expanded: NSSize(width: 500, height: 260)
+        expanded: NSSize(width: 500, height: 150)
     )
     
     private var panel: ClipHistoryPanel?
@@ -78,7 +78,6 @@ extension ClipHistoryPanelController {
         
         withAnimation(.default) {
             isExpandedforView = isExpanded
-           print("isExpandedforView")
         }
         
         resetCloseTimer()
@@ -106,7 +105,6 @@ extension ClipHistoryPanelController {
                 }
             } completionHandler: {
                 self.isExpanded = isExpanded
-                print("isExpanded")
             }
         }
     }
@@ -120,27 +118,22 @@ extension ClipHistoryPanelController {
     }
     
     func open(position: CGPoint) {
-        guard let panel else {
-            // Initialize
+        if panel == nil {
             panel = .init(self)
-            open(position: position)
-            return
         }
         
-        panel.setFrame(
+        let frameOrigin = positionNear(position: position, size: Self.size.collapsed)
+            .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
+        
+        panel?.setFrame(
             CGRect(
-                origin: positionNear(position: position, size: Self.size.collapsed)
-                    .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
+                origin: frameOrigin,
                 size: Self.size.collapsed
             ),
             display: false
         )
-        panel.setFrameOrigin(
-            positionNear(position: position, size: Self.size.collapsed)
-                .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
-        )
         
-        panel.makeKeyAndOrderFront(nil)
+        panel?.makeKeyAndOrderFront(nil)
         startCloseTimer()
     }
     

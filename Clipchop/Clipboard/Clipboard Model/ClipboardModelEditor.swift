@@ -34,6 +34,7 @@ final class ClipboardModelEditor {
             contents.forEach(context.delete(_:))
             
             try context.save()
+            context.refreshAllObjects()
             log(self,"Deleted all clipboard data")
         } catch {
             let nsError = error as NSError
@@ -52,6 +53,7 @@ final class ClipboardModelEditor {
                 context.delete(history)
             }
             try context.save()
+            context.refreshAllObjects()
             print("All unpinned ClipboardHistory data deleted.")
         } catch {
             let nsError = error as NSError

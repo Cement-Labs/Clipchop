@@ -28,6 +28,7 @@ struct CategorizationSection: View {
     @State private var input: String = ""
     @State private var isRenaming: FileCategory?
     @State private var newName = ""
+    @State private var eventMonitor: Any?
     
     var filteredCategories: [FileCategory] {
         let filtered = categorySearchText.isEmpty ? categories : categories.filter { $0.name.localizedCaseInsensitiveContains(categorySearchText) }
@@ -224,17 +225,23 @@ struct CategorizationSection: View {
             }
         }
         .onAppear {
-            NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+            eventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
                 if event.modifierFlags.contains(.option) {
-                    withAnimation{
+                    withAnimation {
                         isInEditMode = true
                     }
                 } else {
-                    withAnimation{
+                    withAnimation {
                         isInEditMode = false
                     }
                 }
                 return event
+            }
+        }
+        .onDisappear {
+            if let monitor = eventMonitor {
+                NSEvent.removeMonitor(monitor)
+                eventMonitor = nil
             }
         }
     }
