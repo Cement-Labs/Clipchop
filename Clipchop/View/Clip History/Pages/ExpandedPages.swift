@@ -13,6 +13,7 @@ struct ExpandedPages: View {
     
     var items: FetchedResults<ClipboardHistory>
     var animationNamespace: Namespace.ID
+    
     var apps: InstalledApps
     var undo: () -> Void
     var redo: () -> Void
@@ -77,6 +78,7 @@ struct ExpandedPages: View {
             }
         }
         .padding(.top, 48)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
         .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
     }

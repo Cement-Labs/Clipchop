@@ -23,6 +23,7 @@ struct ClipHistoryView: View {
     
     @Namespace private var animationNamespace
     
+    
     // CollapsedPages
     @State private var scrollPadding: CGFloat = 12
     @State private var initialScrollPadding: CGFloat = 12
@@ -64,20 +65,37 @@ struct ClipHistoryView: View {
                     if items.isEmpty {
                         EmptyStatePages()
                     } else {
-                        Group {
-                            if controller.isExpandedforView {
-                                expandedPagesView
-                                    .id("ExpandedPages")
-                            } else {
-                                collapsedPagesView
-                                    .id("CollapsedPages")
-                            }
+                        if controller.isExpandedforView {
+                            ExpandedPages(
+                                items: items,
+                                animationNamespace: animationNamespace,
+                                apps: apps,
+                                undo: undo,
+                                redo: redo,
+                                searchText: $searchText,
+                                selectedTab: $selectedTab,
+                                isSearchVisible: $isSearchVisible
+                                
+                            )
+                        } else {
+                            CollapsedPages(
+                                items: items,
+                                animationNamespace: animationNamespace,
+                                scrollPadding: $scrollPadding,
+                                initialScrollPadding: $initialScrollPadding,
+                                movethebutton: $movethebutton,
+                                clipboardModelEditor: clipboardModelEditor,
+                                apps: apps,
+                                undo: undo,
+                                redo: redo
+                                
+                            )
                         }
                     }
                 }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .preferredColorScheme(preferredColorScheme.colorScheme)
         .onChange(of: searchText) { oldValue, newValue in
             controller.resetCloseTimer()
@@ -87,41 +105,12 @@ struct ClipHistoryView: View {
         }
     }
     
-    @ViewBuilder
-    private var expandedPagesView: some View {
-        ExpandedPages(
-            items: items,
-            animationNamespace: animationNamespace,
-            apps: apps,
-            undo: undo,
-            redo: redo,
-            searchText: $searchText,
-            selectedTab: $selectedTab,
-            isSearchVisible: $isSearchVisible
-        )
-    }
-    
-    @ViewBuilder
-    private var collapsedPagesView: some View {
-        CollapsedPages(
-            items: items,
-            animationNamespace: animationNamespace,
-            scrollPadding: $scrollPadding,
-            initialScrollPadding: $initialScrollPadding,
-            movethebutton: $movethebutton,
-            clipboardModelEditor: clipboardModelEditor,
-            apps: apps,
-            undo: undo,
-            redo: redo
-        )
-    }
-    
     private func handleExpansionStateChange(isExpanded: Bool) {
-        searchText = ""
         withAnimation(.default) {
             isSearchVisible = false
             selectedTab = NSLocalizedString("All Types", comment: "All Types")
         }
+        searchText = ""
     }
     
     // MARK: - ModelManager

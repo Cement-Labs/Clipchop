@@ -22,6 +22,8 @@ class ClipHistoryPanelController: NSViewController, ObservableObject {
     
     var isExpanded = false
     var isExpandedforView = false
+//    var cardViewPool = ViewPool()
+    
     private var expansionEdge: NSRectEdge = .minY
     
     func positionNear(position topLeft: CGPoint, size: CGSize) -> CGPoint {
