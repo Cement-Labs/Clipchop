@@ -42,7 +42,7 @@ The transition between Collapsed and Expanded can be toggled using `[` and `]`.
 
 **Clipchop** also supports double-click copying and drag-and-drop pasting[^drag_copy].
 
-[^drag_copy]: ["Drag-and-drop paste has certain limitations, as some applications may not support this feature."]
+[^drag_copy]: [`Drag-and-drop paste has certain limitations, as some applications may not support this feature.`]
 
 ## Special Features
 
@@ -54,4 +54,4 @@ The transition between Collapsed and Expanded can be toggled using `[` and `]`.
 > [!NOTE]
 > As open-source and free software, Clipchop is not available on the App Store. This means you need to manually download the application package from the [Releases](https://github.com/Cement-Labs/Clipchop/releases) page. Additionally, because it's not from an official store, you might have to allow **Clipchop** to run as an unidentified developer[^open_as_unidentified] upon first launch.
 
-[^open_as_unidentified]: ["↗ Open apps from unidentified developers"](https://support.apple.com/en-us/HT202491) 
+[^open_as_unidentified]: [`↗ Open apps from unidentified developers"](https://support.apple.com/en-us/HT202491) 
