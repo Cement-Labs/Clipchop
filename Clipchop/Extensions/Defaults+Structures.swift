@@ -11,9 +11,15 @@ import Defaults
 // MARK: - Preferred Color Scheme
 
 enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable {
+<<<<<<< HEAD
     case system = "system"
     case light = "light"
     case dark = "dark"
+=======
+    case system
+    case light
+    case dark
+>>>>>>> origin/rewrite/main
     
     var colorScheme: ColorScheme? {
         switch self {
@@ -22,6 +28,7 @@ enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable 
         default: .none
         }
     }
+<<<<<<< HEAD
     
     var needsReload: Bool {
         switch self {
@@ -29,6 +36,8 @@ enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable 
         default: false
         }
     }
+=======
+>>>>>>> origin/rewrite/main
 }
 
 // MARK: - History Preservation Period
@@ -68,6 +77,7 @@ extension HistoryPreservationPeriod: Identifiable {
 
 // MARK: - Color Style
 
+<<<<<<< HEAD
 enum ColorStyle: Int, CaseIterable, Defaults.Serializable {
     case app = 0
     case system = 1
@@ -78,6 +88,12 @@ extension ColorStyle: Identifiable {
     var id: Self {
         self
     }
+=======
+enum ColorStyle: String, Defaults.Serializable {
+    case app
+    case system
+    case custom
+>>>>>>> origin/rewrite/main
 }
 
 // MARK: Category
@@ -95,3 +111,16 @@ struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
         lhs.id == rhs.id
     }
 }
+<<<<<<< HEAD
+=======
+
+// MARK: Window position
+
+enum CursorPosition: String, CaseIterable, Identifiable, Defaults.Serializable {
+    case mouseLocation = "NSEvent.mouseLocation"
+    case adjustedPosition = "Adjusted Position"
+    
+    var id: String { self.rawValue }
+}
+
+>>>>>>> origin/rewrite/main

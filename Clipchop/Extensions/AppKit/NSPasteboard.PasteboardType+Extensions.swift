@@ -24,8 +24,19 @@ extension NSPasteboard.PasteboardType {
     // https://github.com/p0deje/Maccy/issues/613
     static let microsoftObjectLink = NSPasteboard.PasteboardType(rawValue: "com.microsoft.ObjectLink")
     static let microsoftLinkSource = NSPasteboard.PasteboardType(rawValue: "com.microsoft.Link-Source")
+<<<<<<< HEAD
 }
 
 extension NSPasteboard.PasteboardType {
     static let fromClipchop = NSPasteboard.PasteboardType(rawValue: "studio.nnn.Clipchop")
+=======
+        
+}
+
+extension NSPasteboard.PasteboardType {
+    static let fromClipchop = NSPasteboard.PasteboardType(rawValue: "labs.cement.Clipchop")
+    static let avif = NSPasteboard.PasteboardType(rawValue: "public.avif")
+    static let appleFinalCutPro = NSPasteboard.PasteboardType(rawValue: "com.apple.flexo.proFFPasteboardUTI")
+    static let appleReminders = NSPasteboard.PasteboardType(rawValue: "com.apple.reminders.reminderCopyPaste")
+>>>>>>> origin/rewrite/main
 }

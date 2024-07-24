@@ -85,3 +85,25 @@ extension View {
         Clipchop.log(self, items, separator: separator, terminator: terminator)
     }
 }
+
+extension View {
+    @ViewBuilder
+    func applyMatchedGeometryEffect(if condition: Bool, id: AnyHashable, namespace: Namespace.ID) -> some View {
+        if condition {
+            self.matchedGeometryEffect(id: id, in: namespace, properties: .frame, anchor: .center, isSource: true)
+        } else {
+            self
+        }
+    }
+}
+
+
+extension View {
+    func applyKeyboardShortcut(_ keyboardShortcut: String, modifier: EventModifiers) -> some View {
+        if keyboardShortcut != "none" {
+            return AnyView(self.keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: modifier))
+        } else {
+            return AnyView(self)
+        }
+    }
+}

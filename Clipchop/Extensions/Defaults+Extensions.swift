@@ -16,6 +16,11 @@ extension Defaults.Keys {
     
     static let beginningViewShown = Key<Bool>("beginningViewShown", default: false)
     
+<<<<<<< HEAD
+=======
+    static let cursorPosition = Key<CursorPosition>("cursorPosition", default: .mouseLocation)
+    
+>>>>>>> origin/rewrite/main
     // MARK: Appearance
     
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)
@@ -28,6 +33,7 @@ extension Defaults.Keys {
     // MARK: Excluded Applications
     
     static let excludeAppsEnabled = Key<Bool>("excludeAppsEnabled", default: true)
+<<<<<<< HEAD
     static let excludedApplications = Key<[String]>("excludedApplications", default: [
         // Keychain Access
         "com.apple.keychainaccess"
@@ -38,6 +44,33 @@ extension Defaults.Keys {
     static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: false)
     
     static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.1)
+=======
+    static let excludedApplications = Defaults.Key<[String]>("excludedApplications", default: {
+        if #available(macOS 15, *) {
+            return [
+                "com.apple.Passwords"
+            ]
+        } else {
+            return [
+                "com.apple.keychainaccess"
+            ]
+        }
+    }())
+    
+    // MARK: Clip History
+    
+    static let autoCloseTimeout = Key<TimeInterval>("autoCloseTimeout", default: 60)
+    
+    static let clipboardMonitoring = Key<Bool>("clipboardMonitoring", default: false)
+    
+    static let dnd = Key<Bool>("dnd", default: false)
+    
+    static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: true)
+    
+    static let removeFormatting = Key<Bool>("removeFormatting", default: false)
+    
+    static let timerInterval = Key<TimeInterval>("timerInterval", default: 0.5)
+>>>>>>> origin/rewrite/main
     
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .day)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
@@ -45,7 +78,11 @@ extension Defaults.Keys {
     static let categories = Key<[FileCategory]>("categories", default: [
         
         .init(name: .init(localized: "Images", defaultValue: "Images"), types: [
+<<<<<<< HEAD
             "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic", "image"
+=======
+            "jpg", "png", "gif", "jpeg", "bmp", "tiff", "svg", "webp", "ico", "heic",  NSLocalizedString("images", comment: "images")
+>>>>>>> origin/rewrite/main
         ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Documents", defaultValue: "Documents"), types: [
@@ -79,11 +116,19 @@ extension Defaults.Keys {
         ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Link", defaultValue: "Link"), types: [
+<<<<<<< HEAD
             "link"
         ].map { $0.lowercased() }),
         
         .init(name: .init(localized: "Color", defaultValue: "Color"), types: [
             "color"
+=======
+            NSLocalizedString("link", comment: "link")
+        ].map { $0.lowercased() }),
+        
+        .init(name: .init(localized: "Color", defaultValue: "Color"), types: [
+            NSLocalizedString("color", comment: "color")
+>>>>>>> origin/rewrite/main
         ].map { $0.lowercased() })
         
     ])

@@ -2,20 +2,25 @@
 //  ClipchopApp.swift
 //  Clipchop
 //
-//  Created by KrLite on 2024/4/8.
+//  Created by Xinshao_Air on 2024/7/5.
 //
 
 import SwiftUI
-import MenuBarExtraAccess
 import Defaults
 import KeyboardShortcuts
+<<<<<<< HEAD
 import SwiftData
+=======
+import MenuBarExtraAccess
+>>>>>>> origin/rewrite/main
 
 let onStreamTime = try! Date("2024-05-13T00:00:00Z", strategy: .iso8601)
 
 @main
 struct ClipchopApp: App {
+    
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+<<<<<<< HEAD
     
     @State private var isMenuBarPresented: Bool = true
     
@@ -29,12 +34,27 @@ struct ClipchopApp: App {
     init() {
         self.container = try! .init(for: ClipboardContent.self, ClipboardHistory.self)
         self.manager = .init(context: container.mainContext)
+=======
+    
+    @State var isMenuBarPresented: Bool = true
+    
+    @Default(.menuBarItemEnabled) private var menuBarItemEnabled
+    
+    private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
+    private let clipHistoryViewController = ClipHistoryPanelController()
+    private let clipboardManager: ClipboardManager
+    
+    init() {
+        
+        self.clipboardManager = .init(context: ClipboardDataProvider.shared.viewContext)
+>>>>>>> origin/rewrite/main
         
 #if DEBUG
         // Resets Defaults
         Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
         Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
         
+<<<<<<< HEAD
         Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
         Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
         Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
@@ -60,13 +80,37 @@ struct ClipchopApp: App {
             Defaults[.beginningViewShown] = true
         } else {
             // Alerts for permissions
+=======
+//        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
+//        Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
+//        Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue
+        
+//        Defaults[.categories] = Defaults.Keys.categories.defaultValue
+//        Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
+        
+//        Defaults[.excludeAppsEnabled] = Defaults.Keys.excludeAppsEnabled.defaultValue
+//        Defaults[.excludedApplications] = Defaults.Keys.excludedApplications.defaultValue
+        
+//        Defaults[.historyPreservationPeriod] = Defaults.Keys.historyPreservationPeriod.defaultValue
+//        Defaults[.historyPreservationTime] = Defaults.Keys.historyPreservationTime.defaultValue
+        
+        // Resets clipboard history
+//        try? clipboardModelEditor.deleteAll()
+#endif
+        if !Defaults[.beginningViewShown] {
+            clipboardManager.beginningViewController.open()
+            Defaults[.beginningViewShown] = true
+        } else {
+>>>>>>> origin/rewrite/main
             PermissionsManager.requestAccess()
         }
     }
     
     var body: some Scene {
+        
         Settings {
             SettingsView()
+<<<<<<< HEAD
                 .frame(minHeight: 400, idealHeight: 425)
         }
         
@@ -74,6 +118,14 @@ struct ClipchopApp: App {
             MenuBarView()
                 .modelContainer(for: ClipboardHistory.self, isUndoEnabled: true)
                 .modelContainer(for: ClipboardContent.self, isUndoEnabled: true)
+=======
+                .frame(minHeight: 200, idealHeight: 425)
+        }
+        
+        MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
+            MenuBarView(clipboardController: ClipboardManager.clipboardController!)
+                .environment(\.managedObjectContext, ClipboardDataProvider.shared.viewContext)
+>>>>>>> origin/rewrite/main
         }
         .menuBarExtraStyle(.menu)
         .menuBarExtraAccess(isPresented: $isMenuBarPresented) { menuBarItem in

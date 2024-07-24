@@ -2,10 +2,9 @@
 //  AppDelegate.swift
 //  Clipchop
 //
-//  Created by KrLite on 2024/4/27.
+//  Created by Xinshao_Air on 2024/7/5.
 //
 
-import Foundation
 import AppKit
 import Defaults
 import WindowManagement
