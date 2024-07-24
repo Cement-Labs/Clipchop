@@ -318,7 +318,7 @@
 				650515B52C381EA500E2129D /* ClipchopApp.swift */,
 				658D26FB2C382CF3001D1CC3 /* AppDelegate.swift */,
 				658D26F52C382674001D1CC3 /* Clipboard */,
-				658D271E2C3831B9001D1CC3 /* View */,
+				658D271E2C3831B9001D1CC3 /* Views */,
 				658D26D82C382340001D1CC3 /* Utilities */,
 				650515DA2C38219700E2129D /* Extensions */,
 				658D26D02C382340001D1CC3 /* Assets */,
@@ -341,6 +341,7 @@
 		650515C42C381ECA00E2129D /* Data Storage */ = {
 			isa = PBXGroup;
 			children = (
+				658D276B2C384552001D1CC3 /* MetadataCache.swift */,
 				658D26EC2C3823A0001D1CC3 /* ClipboardContent.swift */,
 				650515C82C38206500E2129D /* ClipboardHistory.swift */,
 				650515C52C381F0C00E2129D /* ClipboardModel.xcdatamodeld */,
@@ -501,7 +502,7 @@
 			path = Fundamentals;
 			sourceTree = "<group>";
 		};
-		658D271E2C3831B9001D1CC3 /* View */ = {
+		658D271E2C3831B9001D1CC3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				658D27182C3831B0001D1CC3 /* Fundamentals */,
@@ -510,7 +511,7 @@
 				658D27092C38314F001D1CC3 /* Beginning */,
 				658D27412C383546001D1CC3 /* Settings */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		658D272B2C383546001D1CC3 /* General */ = {
@@ -639,7 +640,6 @@
 			children = (
 				658D27692C384552001D1CC3 /* CardPreviewView.swift */,
 				658D276A2C384552001D1CC3 /* PreviewContentView.swift */,
-				658D276B2C384552001D1CC3 /* MetadataCache.swift */,
 				658D276C2C384552001D1CC3 /* DragManager.swift */,
 				658D27702C384552001D1CC3 /* Page */,
 			);

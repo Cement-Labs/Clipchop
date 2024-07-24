@@ -1068,7 +1068,6 @@
       }
     },
     "Log to Console (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1300,7 +1299,6 @@
       }
     },
     "Refresh States (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1530,7 +1528,6 @@
       }
     },
     "Syncing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1551,7 +1548,6 @@
       }
     },
     "Test (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
