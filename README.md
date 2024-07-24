@@ -55,5 +55,3 @@ The transition between Collapsed and Expanded can be toggled using `[` and `]`.
 > As open-source and free software, Clipchop is not available on the App Store. This means you need to manually download the application package from the [Releases](https://github.com/Cement-Labs/Clipchop/releases) page. Additionally, because it's not from an official store, you might have to allow **Clipchop** to run as an unidentified developer[^open_as_unidentified] upon first launch.
 
 [^open_as_unidentified]: ["↗ Open apps from unidentified developers"](https://support.apple.com/en-us/HT202491) 
-
-Please note that I corrected the link provided for opening apps from unidentified developers to match Apple's current support article URL structure.
