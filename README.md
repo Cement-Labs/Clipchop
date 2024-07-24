@@ -23,7 +23,7 @@
 
 > [^check_your_macos_version]: [`↗ Find out which macOS your Mac is using`](https://support.apple.com/en-us/HT201260)
 
-## Understanding Clipchop
+## Getting Started with Clipchop
 
 **Clipchop** exists in two forms - **Collapsed** and **Expanded**.
 
@@ -42,7 +42,7 @@ The transition between Collapsed and Expanded can be toggled using `[` and `]`.
 
 **Clipchop** also supports double-click copying and drag-and-drop pasting[^drag_copy].
 
-[^drag_copy]: [`Drag-and-drop paste has certain limitations, as some applications may not support this feature.`]
+[^drag_copy]: `Drag-and-drop paste has certain limitations, as some applications may not support this feature.`
 
 ## Special Features
 
