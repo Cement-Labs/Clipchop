@@ -550,7 +550,14 @@
       }
     },
     "clearAllCaches" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "clearAllCaches"
+          }
+        }
+      }
     },
     "Clip more to unlock more! You've already clipped %llu times." : {
       "localizations" : {
@@ -1328,6 +1335,16 @@
         }
       }
     },
+    "Reset Categorization." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置分类"
+          }
+        }
+      }
+    },
     "Restore" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1339,7 +1356,7 @@
       }
     },
     "Search" : {
-      "extractionState" : "stale",
+      "comment" : "Search",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1574,6 +1591,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "此操作将不可逆地清除剪贴板历史记录中所有未固定的条目。"
+          }
+        }
+      }
+    },
+    "This action will irreversibly reset all file types and file classifications." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此操作将不可逆重置全部的文件类型和文件分类。"
           }
         }
       }

@@ -29,6 +29,7 @@ struct CategorizationSection: View {
     @State private var isRenaming: FileCategory?
     @State private var newName = ""
     @State private var eventMonitor: Any?
+    @State private var showingAlert = false
     
     var filteredCategories: [FileCategory] {
         let filtered = categorySearchText.isEmpty ? categories : categories.filter { $0.name.localizedCaseInsensitiveContains(categorySearchText) }
@@ -107,13 +108,15 @@ struct CategorizationSection: View {
                                     }) {
                                         Image(systemName: "pencil")
                                     }
-                                    .padding(.trailing, 8)
+                                    .padding(.trailing, 10)
+                                    .buttonStyle(.borderless)
                                     Button(action: {
                                         removeCategory(category)
                                     }) {
                                         Image(systemName: "trash")
                                             .foregroundColor(.red)
                                     }
+                                    .buttonStyle(.borderless)
                                 }) {
                                     withCaption {
                                         //
@@ -151,14 +154,24 @@ struct CategorizationSection: View {
             ToolbarItemGroup(placement: .cancellationAction) {
                 
                 Button {
-                    Defaults[.categories] = Defaults.Keys.categories.defaultValue
-                    Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
+                    showingAlert = true
                 } label: {
                     Image(systemSymbol: .arrowClockwiseCircle)
                     Text("Reset")
                         .padding(4)
                 }
                 .controlSize(.extraLarge)
+                .alert(isPresented: $showingAlert) {
+                    Alert(
+                        title: Text("Reset Categorization."),
+                        message: Text("This action will irreversibly reset all file types and file classifications."),
+                        primaryButton: .destructive(Text("Reset")) {
+                            Defaults[.categories] = Defaults.Keys.categories.defaultValue
+                            Defaults[.allTypes] = Defaults.Keys.allTypes.defaultValue
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
                 
                 Button {
                     isPopoverPresented = true

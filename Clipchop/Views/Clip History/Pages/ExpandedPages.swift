@@ -111,7 +111,7 @@ struct ExpandedPages: View {
                 )
             HStack {
                 if isSearchVisible {
-                    SearchFieldWrapper(searchText: $searchText, placeholder: "Search") { query in
+                    SearchFieldWrapper(searchText: $searchText, placeholder: NSLocalizedString("Search", comment: "Search")) { query in
                         self.searchText = query
                         self.searchResults = clipHistorySearch.search(string: query, within: Array(items))
                     }
