@@ -27,6 +27,10 @@
 
 **Clipchop** exists in two forms - **Collapsed** and **Expanded**.
 
+<div align="center">
+  <img width="1500" src="/Docs/Contents/简体中文/Overview.png?raw=true" />
+</div>
+
 - In **Collapsed** mode, the default state, only recent clipboard entries are displayed to keep the interface clean and streamlined.
 - In **Expanded** mode, you can browse all saved clipboard content, organized by category, with support for keyword searches.
 

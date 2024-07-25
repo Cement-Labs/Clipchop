@@ -21,6 +21,7 @@ class ClipboardController: NSObject, ObservableObject {
     private let allowedPasteboardTypes: Set<String> = [
         
         NSPasteboard.PasteboardType.URL.rawValue,
+        NSPasteboard.PasteboardType.string.rawValue,
         NSPasteboard.PasteboardType.jpeg.rawValue,
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,
@@ -58,9 +59,11 @@ class ClipboardController: NSObject, ObservableObject {
         do {
             let existingItems = try context.fetch(fetchRequest)
             if !existingItems.isEmpty {
+                log(self, "OLD")
                 handleDuplicated(existingItems)
                 return false
             } else {
+                log(self, "NEW")
                 return true
             }
         } catch {
@@ -85,7 +88,6 @@ class ClipboardController: NSObject, ObservableObject {
     
     // MARK: - Update clipboard history
     private func updateClipboard() {
-        
         try? context.save()
         
         guard pasteboard.changeCount != changeCount else {
@@ -103,14 +105,15 @@ class ClipboardController: NSObject, ObservableObject {
         }
         
         var contents: [ClipboardContent] = []
+        var hasFileURL = false
+        var hasHTML = false
+        var hasRTF = false
         
-        pasteboard.pasteboardItems?.forEach({ item in
+        pasteboard.pasteboardItems?.forEach { item in
             let types = Set(item.types)
-            var hasFileURL = false
             var fileURLData: Data?
             var htmlData: Data?
             var rtfData: Data?
-            var stringData: Data?
             
             if types.contains(NSPasteboard.PasteboardType.fileURL),
                let data = item.data(forType: NSPasteboard.PasteboardType.fileURL),
@@ -121,62 +124,45 @@ class ClipboardController: NSObject, ObservableObject {
             
             if types.contains(NSPasteboard.PasteboardType.html),
                let data = item.data(forType: NSPasteboard.PasteboardType.html) {
+                hasHTML = true
                 htmlData = data
             }
             
             if types.contains(NSPasteboard.PasteboardType.rtf),
-               let rtfDataTemp = item.data(forType: NSPasteboard.PasteboardType.rtf) {
-                rtfData = rtfDataTemp
+               let data = item.data(forType: NSPasteboard.PasteboardType.rtf) {
+                hasRTF = true
+                rtfData = data
             }
             
-            if types.contains(NSPasteboard.PasteboardType.string),
-               let data = item.data(forType: NSPasteboard.PasteboardType.string) {
-                stringData = data
-            }
-            
-            if let fileURLData = fileURLData, !isNew(fileURLData) {
-                return
-            }
-            
-            if let rtfData = rtfData, !isNew(rtfData) {
-                return
-            }
-            
-            if let htmlData = htmlData, !isNew(htmlData) {
-                return
-            }
-            
-            if let stringData = stringData, !isNew(stringData) {
-                return
-            }
-            
+            // Check data type priority and avoid duplicates
             if hasFileURL {
-                if let fileData = fileURLData {
+                if let fileData = fileURLData, isNew(fileData) {
                     let fileContent = ClipboardContent(type: NSPasteboard.PasteboardType.fileURL.rawValue, value: fileData)
                     contents.append(fileContent)
                 }
-            } else {
-                if let htmlData = htmlData {
+            } else if hasHTML {
+                if let htmlData = htmlData, isNew(htmlData) {
                     let content = ClipboardContent(type: NSPasteboard.PasteboardType.html.rawValue, value: htmlData)
                     contents.append(content)
-                } else if let rtfData = rtfData {
+                }
+            } else if hasRTF {
+                if let rtfData = rtfData, isNew(rtfData) {
                     let content = ClipboardContent(type: NSPasteboard.PasteboardType.rtf.rawValue, value: rtfData)
                     contents.append(content)
-                } else if let stringData = stringData {
-                    let content = ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: stringData)
-                    contents.append(content)
                 }
-                
+            }
+            // Handle other types only if no preferred types are present
+            if !hasFileURL && !hasHTML && !hasRTF {
                 types.forEach { type in
                     if allowedPasteboardTypes.contains(type.rawValue), let data = item.data(forType: type) {
-                        if type != NSPasteboard.PasteboardType.fileURL, isNew(data) {
+                        if isNew(data) {
                             let content = ClipboardContent(type: type.rawValue, value: data)
                             contents.append(content)
                         }
                     }
                 }
             }
-        })
+        }
         
         guard !contents.isEmpty else {
             return
