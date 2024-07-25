@@ -828,6 +828,16 @@
         }
       }
     },
+    "FeedBack" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "反馈"
+          }
+        }
+      }
+    },
     "File Extension" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1880,7 +1890,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "当启用时，此功能允许 %@ 跟踪系统剪贴板的变化，提供剪贴板历史记录。"
+            "value" : "当本功能启用时，此功能允许 %@ 跟踪系统剪贴板的变化，提供剪贴板历史记录。"
           }
         }
       }

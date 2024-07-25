@@ -22,7 +22,11 @@ class ClipboardManager {
         
         self.context = context
         
-        Self.clipboardController = .init(context: context, clipHistoryViewController: clipHistoryViewController, clipboardModelManager: clipboardModelManager)
+        Self.clipboardController = .init(
+            context: context,
+            clipHistoryViewController: clipHistoryViewController,
+            clipboardModelManager: clipboardModelManager
+        )
         Self.clipboardController?.start()
         
         KeyboardShortcuts.onKeyDown(for: .window) {

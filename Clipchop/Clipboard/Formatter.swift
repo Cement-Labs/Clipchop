@@ -342,32 +342,34 @@ extension Formatter {
     }
     
     func extractTextFromImage(_ image: NSImage, completion: @escaping (String?) -> Void) {
-        guard let tiffData = image.tiffRepresentation,
-              let bitmapImage = NSBitmapImageRep(data: tiffData),
-              let cgImage = bitmapImage.cgImage else {
-            completion(nil)
-            return
-        }
-        
-        print("run A")
-        let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-        let request = VNRecognizeTextRequest { (request, error) in
-            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
+        autoreleasepool {
+            guard let tiffData = image.tiffRepresentation,
+                  let bitmapImage = NSBitmapImageRep(data: tiffData),
+                  let cgImage = bitmapImage.cgImage else {
                 completion(nil)
                 return
             }
             
-            let recognizedText = observations.compactMap { $0.topCandidates(1).first?.string }.joined(separator: "\n")
-            completion(recognizedText)
-        }
-        
-        request.recognitionLanguages = ["zh-Hans", "zh-Hant", "en-US"]
-        request.recognitionLevel = .accurate
-        
-        do {
-            try requestHandler.perform([request])
-        } catch {
-            completion(nil)
+            print("run A")
+            let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
+            let request = VNRecognizeTextRequest { (request, error) in
+                guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
+                    completion(nil)
+                    return
+                }
+                
+                let recognizedText = observations.compactMap { $0.topCandidates(1).first?.string }.joined(separator: "\n")
+                completion(recognizedText)
+            }
+            
+            request.recognitionLanguages = ["zh-Hans", "zh-Hant", "en-US"]
+            request.recognitionLevel = .accurate
+            
+            do {
+                try requestHandler.perform([request])
+            } catch {
+                completion(nil)
+            }
         }
     }
 

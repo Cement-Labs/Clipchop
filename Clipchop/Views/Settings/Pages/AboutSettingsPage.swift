@@ -48,6 +48,19 @@ struct AboutSettingsPage: View {
             ToolbarItemGroup(placement: .cancellationAction) {
                 
                 Button {
+                    if let url = URL(string: "https://github.com/Cement-Labs/Clipchop/issues") {
+                        NSWorkspace.shared.open(url)
+                    }
+                } label: {
+                    Group {
+                        Image(systemSymbol: .exclamationmarkBubble)
+                        Text("FeedBack")
+                    }
+                    .imageScale(.small)
+                    .padding(2)
+                }
+                
+                Button {
                     isSourcePresented = true
                 } label: {
                     Group {
@@ -68,7 +81,9 @@ struct AboutSettingsPage: View {
                                     .frame(width: 16)
                                 
                                 Button {
-                                    
+                                    if let url = URL(string: "https://github.com/Cement-Labs/Clipchop") {
+                                        NSWorkspace.shared.open(url)
+                                    }
                                 } label: {
                                     Text("Source Code")
                                     
@@ -82,7 +97,9 @@ struct AboutSettingsPage: View {
                                     .frame(width: 16)
                                 
                                 Button {
-                                    
+                                    if let url = URL(string: "https://github.com/Cement-Labs/Clipchop?tab=GPL-3.0-1-ov-file") {
+                                        NSWorkspace.shared.open(url)
+                                    }
                                 } label: {
                                     Text("Licenced Under GPL-3.0")
                                     

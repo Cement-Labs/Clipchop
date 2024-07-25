@@ -220,20 +220,21 @@ struct PreviewContentView: View, Equatable {
         let maxSize: CGFloat = Defaults[.displayMore] ? 92 : 65
         let aspectRatio = image.size.width / image.size.height
         let newSize: NSSize
-
+        
         if aspectRatio > 1 {
             newSize = NSSize(width: maxSize, height: maxSize / aspectRatio)
         } else {
             newSize = NSSize(width: maxSize * aspectRatio, height: maxSize)
         }
-
+        
+        // Use NSImage's drawing methods with better performance settings
         let newImage = NSImage(size: newSize)
         newImage.lockFocus()
         defer { newImage.unlockFocus() }
-        image.draw(in: NSRect(origin: .zero, size: newSize),
-                   from: NSRect(origin: .zero, size: image.size),
-                   operation: .copy,
-                   fraction: 1)
+        
+        let rect = NSRect(origin: .zero, size: newSize)
+        let imageRect = NSRect(origin: .zero, size: image.size)
+        image.draw(in: rect, from: imageRect, operation: .copy, fraction: 1.0)
         
         return newImage
     }

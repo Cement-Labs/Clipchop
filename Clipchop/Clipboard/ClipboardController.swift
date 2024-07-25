@@ -10,7 +10,16 @@ import Defaults
 
 class ClipboardController: NSObject, ObservableObject {
     
-    @Published var started: Bool
+    @Published var started: Bool = false {
+        didSet {
+            if started {
+                start()
+            } else {
+                stop()
+            }
+        }
+    }
+    
     private var timer: Timer?
     private var changeCount: Int = 0
     
@@ -292,29 +301,24 @@ extension ClipboardController {
     func start() {
         clipboardModelManager.startPeriodicCleanup()
         
-        timer = .scheduledTimer(withTimeInterval: Defaults[.timerInterval], repeats: true ) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: Defaults[.timerInterval], repeats: true) { [weak self] _ in
             self?.updateClipboard()
         }
+        
+        RunLoop.main.add(timer!, forMode: .common)
         
         log(self, "Started monitoring")
     }
     
-    
     func stop() {
         timer?.invalidate()
         timer = nil
-        
+        clipboardModelManager.stopPeriodicCleanup()
         log(self, "Stopped monitoring")
     }
     
     func toggle() {
-        if started {
-            stop()
-            started = false
-        } else {
-            start()
-            started = true
-        }
+        started.toggle()
     }
     
     private func extractPlainTextFromHTML(_ html: String) -> String {

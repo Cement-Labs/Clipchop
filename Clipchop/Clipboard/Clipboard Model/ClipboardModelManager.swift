@@ -11,7 +11,6 @@ import CoreData
 import Defaults
 
 class ClipboardModelManager: ObservableObject {
-    
     @Published private(set) var items: [ClipboardHistory] = []
     
     private var cancellables = Set<AnyCancellable>()
@@ -28,6 +27,7 @@ class ClipboardModelManager: ObservableObject {
             }
         }
         context = container.viewContext
+        context.automaticallyMergesChangesFromParent = true // Enable automatic merging of changes
     }
     
     func deleteOldHistory(preservationPeriod: HistoryPreservationPeriod, preservationTime: Int) {
@@ -72,7 +72,11 @@ class ClipboardModelManager: ObservableObject {
         timerCancellable = Timer.publish(every: 100, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                self?.deleteOldHistory(preservationPeriod: Defaults[.historyPreservationPeriod], preservationTime: Int(Defaults[.historyPreservationTime]))
+                guard let self = self else { return }
+                self.deleteOldHistory(
+                    preservationPeriod: Defaults[.historyPreservationPeriod],
+                    preservationTime: Int(Defaults[.historyPreservationTime])
+                )
             }
     }
     
