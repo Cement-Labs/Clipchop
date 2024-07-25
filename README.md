@@ -45,6 +45,8 @@ The transition between Collapsed and Expanded can be toggled using `[` and `]`.
 
 **Clipchop** enables quick actions through keyboard shortcuts:
 
+- **Summon Clipchop**: By default, use `⌥` (Option) + `w` to summon the clipboard history panel.
+- **Expand/Collapse**: Use `]` to expand the panel, and use `[` to collapse it.
 - **Copy/Paste**: Use `⌘` (Command) + number keys to select and paste a specific entry from the clipboard.
 - **Pin Clipboard History**: `⌥` (Option) + number keys quickly locks down important information to prevent accidental deletion.
 - **Delete Clipboard History**: To remove an entry, simply press `⌃` (Control) + number keys.
@@ -61,6 +63,6 @@ The transition between Collapsed and Expanded can be toggled using `[` and `]`.
 ## Installation and Running
 
 > [!NOTE]
-> As open-source and free software, Clipchop is not available on the App Store. This means you need to manually download the application package from the [Releases](https://github.com/Cement-Labs/Clipchop/releases) page. Additionally, because it's not from an official store, you might have to allow **Clipchop** to run as an unidentified developer[^open_as_unidentified] upon first launch.
+> As open-source and free software, **Clipchop** is not available on the App Store. This means you need to manually download the application package from the [Releases](https://github.com/Cement-Labs/Clipchop/releases) page. Additionally, because it's not from an official store, you might have to allow **Clipchop** to run as an unidentified developer[^open_as_unidentified] upon first launch.
 
 [^open_as_unidentified]: [`↗ Open apps from unidentified developers`](https://support.apple.com/en-us/HT202491) 
