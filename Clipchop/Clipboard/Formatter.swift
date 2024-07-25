@@ -350,7 +350,7 @@ extension Formatter {
                 return
             }
             
-            print("run A")
+            log(self, "Run OCR")
             let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
             let request = VNRecognizeTextRequest { (request, error) in
                 guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {

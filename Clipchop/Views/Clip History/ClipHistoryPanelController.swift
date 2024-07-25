@@ -160,7 +160,7 @@ extension ClipHistoryPanelController {
     }
     
     func logoutpanel() {
-        print("A")
+        log(self, "Logout panel")
         self.setExpansion(false)
         self.panel?.orderOut(nil)
         self.panel = nil
