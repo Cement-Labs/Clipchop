@@ -24,4 +24,3 @@ extension KeyboardShortcuts.Key {
         .init(self)
     }
 }
-

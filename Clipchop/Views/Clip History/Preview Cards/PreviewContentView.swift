@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppKit
+import Defaults
 
 import QuickLook
 import QuickLookThumbnailing
@@ -58,7 +59,7 @@ struct PreviewContentView: View, Equatable {
                 Image(nsImage: thumbnail)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 65, height: 65)
+                    .frame(width: Defaults[.displayMore] ? 92 : 65, height: Defaults[.displayMore] ? 92 : 65)
             }
         }
         .padding(.vertical, 4)
@@ -82,7 +83,7 @@ struct PreviewContentView: View, Equatable {
         VStack {
             RTFPreviewPage(rtfData: rtfData, colorScheme: colorScheme)
         }
-        .frame(width: 80, height: 80)
+        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
     }
     
     private func textView(for text: String) -> some View {
@@ -101,7 +102,7 @@ struct PreviewContentView: View, Equatable {
                 ZStack {
                     Image(nsImage: colorImage)
                         .resizable()
-                        .frame(width: 80, height: 80)
+                        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
                         .aspectRatio(contentMode: .fit)
                     Text(text)
                         .font(.system(size: 12).monospaced())
@@ -122,7 +123,7 @@ struct PreviewContentView: View, Equatable {
                         .foregroundColor(.primary)
                         .padding(.all, 4)
                 }
-                .frame(width: 80, height: 80)
+                .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
             )
         }
     }
@@ -142,7 +143,7 @@ struct PreviewContentView: View, Equatable {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .background(Color.white)
-        .frame(width: 80, height: 80, alignment: .center)
+        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
     }
     
     private func defaultView() -> some View {
@@ -173,7 +174,7 @@ struct PreviewContentView: View, Equatable {
     
     private func generateAndSetThumbnail(for fileURL: URL) {
         DispatchQueue.global(qos: .utility).async {
-            let maxDimension = 50
+            let maxDimension = Defaults[.displayMore] ? 92 :65
             let size = CGSize(width: maxDimension, height: maxDimension)
             let scale = NSScreen.main!.backingScaleFactor
             let request = QLThumbnailGenerator.Request(
@@ -216,7 +217,7 @@ struct PreviewContentView: View, Equatable {
     
     // Image preview resolution scaling
     private func resizeImage(image: NSImage) -> NSImage? {
-        let maxSize: CGFloat = 65 // 允许的最大尺寸
+        let maxSize: CGFloat = Defaults[.displayMore] ? 92 : 65
         let aspectRatio = image.size.width / image.size.height
         let newSize: NSSize
 

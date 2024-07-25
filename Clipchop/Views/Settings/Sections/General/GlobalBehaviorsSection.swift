@@ -14,10 +14,14 @@ struct GlobalBehaviorsSection: View {
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     @Default(.autoCloseTimeout) private var autoCloseTimeout
     @Default(.cursorPosition) private var cursorPosition
+    @Default(.displayMore) private var displayMore
     
     @Environment(\.hasTitle) private var hasTitle
     
     @State private var showPopoverMore = false
+    @State private var displayMoreChanged = false
+    
+    private var controller: ClipHistoryPanelController = ClipHistoryPanelController()
     
     var body: some View {
         Section {
@@ -63,6 +67,12 @@ You can always open \(Bundle.main.appName) again to access this page.
                         Text("At the cursor").tag(CursorPosition.adjustedPosition)
                     }
                 }
+            }
+            withCaption("This action will enlarge the panel size to display more content.") {
+                Toggle("Display More", isOn: $displayMore)
+                    .onChange(of: displayMore) { newValue, _ in
+                        controller.logoutpanel()
+                    }
             }
             VStack {
                 HStack {

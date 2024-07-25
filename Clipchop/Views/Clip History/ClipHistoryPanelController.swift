@@ -11,18 +11,27 @@ import KeyboardShortcuts
 
 @Observable
 class ClipHistoryPanelController: NSViewController, ObservableObject {
-    static let size = (
-        collapsed: NSSize(width: 500, height: 100),
-        expanded: NSSize(width: 500, height: 150)
-    )
     
+    static var size: (collapsed: NSSize, expanded: NSSize) {
+        if Defaults[.displayMore] {
+            return (
+                collapsed: NSSize(width: 700, height: 140),
+                expanded: NSSize(width: 700, height: 190)
+            )
+        } else {
+            return (
+                collapsed: NSSize(width: 500, height: 100),
+                expanded: NSSize(width: 500, height: 150)
+            )
+        }
+    }
+        
     private var panel: ClipHistoryPanel?
     
     private var closeTimer: Timer?
     
     var isExpanded = false
     var isExpandedforView = false
-//    var cardViewPool = ViewPool()
     
     private var expansionEdge: NSRectEdge = .minY
     
@@ -120,22 +129,27 @@ extension ClipHistoryPanelController {
     }
     
     func open(position: CGPoint) {
-        if panel == nil {
+        guard let panel else {
+            // Initialize
             panel = .init(self)
+            open(position: position)
+            return
         }
         
-        let frameOrigin = positionNear(position: position, size: Self.size.collapsed)
-            .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
-        
-        panel?.setFrame(
+        panel.setFrame(
             CGRect(
-                origin: frameOrigin,
+                origin: positionNear(position: position, size: Self.size.collapsed)
+                    .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
                 size: Self.size.collapsed
             ),
             display: false
         )
+        panel.setFrameOrigin(
+            positionNear(position: position, size: Self.size.collapsed)
+                .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
+        )
         
-        panel?.makeKeyAndOrderFront(nil)
+        panel.makeKeyAndOrderFront(nil)
         startCloseTimer()
     }
     
@@ -143,6 +157,26 @@ extension ClipHistoryPanelController {
         self.setExpansion(false)
         self.panel?.orderOut(nil)
         panelDidClose()
+    }
+    
+    func logoutpanel() {
+        print("A")
+        self.setExpansion(false)
+        self.panel?.orderOut(nil)
+        self.panel = nil
+        
+        if let contentView = panel?.contentView {
+            contentView.subviews.forEach { $0.removeFromSuperview() }
+            contentView.layoutSubtreeIfNeeded()
+        }
+        
+        panelDidClose()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            let newController = ClipHistoryPanelController()
+            let newPanel = ClipHistoryPanel(newController)
+            self.panel = newPanel
+        }
     }
     
     func toggle(position: CGPoint) {

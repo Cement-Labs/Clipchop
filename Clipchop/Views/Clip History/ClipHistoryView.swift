@@ -23,10 +23,9 @@ struct ClipHistoryView: View {
     
     @Namespace private var animationNamespace
     
-    
     // CollapsedPages
-    @State private var scrollPadding: CGFloat = 12
-    @State private var initialScrollPadding: CGFloat = 12
+    @State private var scrollPadding: CGFloat = Defaults[.displayMore] ? 16 : 12
+    @State private var initialScrollPadding: CGFloat = Defaults[.displayMore] ? 16 : 12
     @State private var movethebutton = false
     
     // ExpandedPages

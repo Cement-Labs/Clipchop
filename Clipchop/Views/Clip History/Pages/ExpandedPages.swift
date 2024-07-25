@@ -88,16 +88,16 @@ struct ExpandedPages: View {
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 12) {
+            LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                     CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
                         .environmentObject(apps)
                         .applyMatchedGeometryEffect(if: items.firstIndex(of: item) ?? 0 < 6, id: item.id, namespace: animationNamespace)
                 }
             }
-            .padding(.horizontal, 12)
+            .padding(.horizontal, Defaults[.displayMore] ? 16 : 12)
         }
-        .frame(width: 500)
+        .frame(width: Defaults[.displayMore] ? 700 : 500)
     }
     
     @ViewBuilder
@@ -137,7 +137,7 @@ struct ExpandedPages: View {
                 .offset(x: isSearchVisible ? -5 : 0)
             }
         }
-        .frame(width: isSearchVisible ? 470 : 30, height: 30)
+        .frame(width: isSearchVisible ?  Defaults[.displayMore] ? 668 : 470 : 30, height: 30)
         .cornerRadius(25)
     }
     
@@ -172,7 +172,7 @@ struct ExpandedPages: View {
                 }
             }
         }
-        .frame(width: isSearchVisible ? 0 : 425, height: 30)
+        .frame(width: isSearchVisible ? 0 :  Defaults[.displayMore] ? 622 : 425, height: 30)
         .cornerRadius(25)
     }
     

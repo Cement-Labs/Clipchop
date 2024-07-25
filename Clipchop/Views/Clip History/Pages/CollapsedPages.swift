@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct CollapsedPages: View {
     
@@ -22,9 +23,9 @@ struct CollapsedPages: View {
     var redo: () -> Void
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        ZStack(alignment: .center) {
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 12) {
+                LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                         CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
                             .environmentObject(apps)
@@ -46,7 +47,7 @@ struct CollapsedPages: View {
                             } else if deltaFromInitial < -5 && movethebutton {
                                 performHapticFeedback()
                                 withAnimation(.spring()) {
-                                    scrollPadding = 12
+                                    scrollPadding = Defaults[.displayMore] ? 16 : 12
                                     movethebutton = false
                                     initialScrollPadding = scrollPadding
                                     
@@ -60,7 +61,7 @@ struct CollapsedPages: View {
                             ZStack(alignment: .center) {
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color.getAccent())
-                                    .frame(width: 50, height: 38)
+                                    .frame(width: 50, height:  Defaults[.displayMore] ? 54: 38)
                                 Image(systemSymbol: .gearshape)
                             }
                         }
@@ -68,22 +69,22 @@ struct CollapsedPages: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(.red)
-                                .frame(width: 50, height: 38)
+                                .frame(width: 50, height:  Defaults[.displayMore] ? 54: 38)
                             Image(systemSymbol: .trash)
                         }
                         .onTapGesture {
                             showAlert()
                         }
                     }
-                        .frame(width: 50, height: 80)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .animation(.spring(), value: movethebutton)
-                        .offset(x: movethebutton ? 12 : -120),
+                    .frame(width: 50, height: Defaults[.displayMore] ? 112 : 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .animation(.spring(), value: movethebutton)
+                    .offset(x: movethebutton ? 12 : -120),
                     alignment: .leading
                 )
             }
         }
-        .frame(width: 500, height: 100)
+        .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
     }
     
     private func getKeyboardShortcut(for index: Int) -> String {

@@ -115,7 +115,7 @@ struct CardPreviewView: View {
             
             // MARK: - CardView
             PreviewContentView(clipboardHistory: item)
-                .frame(width: 80, height: 80, alignment: .center)
+                .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .allowsHitTesting(false)
 
@@ -149,7 +149,7 @@ struct CardPreviewView: View {
             ZStack(alignment:.bottomLeading) {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.thickMaterial)
-                    .frame(width: 70, height: 30)
+                    .frame(width: Defaults[.displayMore] ? 98 : 70, height: 30)
                     .shadow(radius: 2.5)
                 
                 HStack{
@@ -178,10 +178,10 @@ struct CardPreviewView: View {
                 }
                 .padding(.all, 7.5)
             }
-            .padding(.all, 5)
+            .padding(.all, Defaults[.displayMore] ? 7 : 5)
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
-        .frame(width: 80, height: 80, alignment: .center)
+        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
         .background(Material.bar)
         .clipShape(.rect(cornerRadius: 12.5))
         .overlay(
@@ -189,7 +189,7 @@ struct CardPreviewView: View {
                 if showMore && isSelected {
                     RoundedRectangle(cornerRadius: 15)
                         .fill( Material.ultraThin)
-                        .frame(width: 80, height: 80)
+                        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
                     VStack(spacing: 2) {
                         if let bundleID = item.appid, let appIcon = getAppIcon(byBundleID: bundleID) {
                             Image(nsImage: appIcon.resized(to: .init(width: 20, height: 20)))
@@ -215,7 +215,7 @@ struct CardPreviewView: View {
                 }
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(isSelected ? Color.getAccent() : Color.clear, lineWidth: isSelected ? 8 : 0)
-                    .frame(width: 80, height: 80)
+                    .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
                     .foregroundColor(.clear)
             }
         )

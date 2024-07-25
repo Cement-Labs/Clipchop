@@ -50,6 +50,8 @@ extension Defaults.Keys {
     
     static let dnd = Key<Bool>("dnd", default: false)
     
+    static let displayMore = Key<Bool>("displayMore", default: false)
+    
     static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: true)
     
     static let removeFormatting = Key<Bool>("removeFormatting", default: false)

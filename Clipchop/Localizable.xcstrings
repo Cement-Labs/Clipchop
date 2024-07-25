@@ -778,6 +778,16 @@
         }
       }
     },
+    "Display More" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示更多"
+          }
+        }
+      }
+    },
     "Do Not Disturb" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1591,6 +1601,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "此操作将不可逆地清除剪贴板历史记录中所有未固定的条目。"
+          }
+        }
+      }
+    },
+    "This action will enlarge the panel size to display more content." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此操作将扩大面板尺寸以显示更多内容。"
           }
         }
       }

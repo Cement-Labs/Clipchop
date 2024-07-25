@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
+import Defaults
 import AppKit
-
 
 struct RTFPreviewPage: View {
     
@@ -52,7 +52,7 @@ struct RTFPreviewPage: View {
                 .background(Color.clear)
                 .padding(.all, 4)
         }
-        .frame(width: 80, height: 80)
+        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
         .background(backgroundColor)
     }
 }

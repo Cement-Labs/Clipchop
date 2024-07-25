@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Defaults
 import AppKit
 
 struct HTMLPreviewPage: View {
@@ -78,7 +79,7 @@ struct HTMLPreviewPage: View {
                 .background(backgroundColor)
                 .padding(.all, 4)
         }
-        .frame(width: 80, height: 80)
+        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
         .background(backgroundColor)
     }
 }
