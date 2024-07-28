@@ -182,7 +182,7 @@ struct CardPreviewView: View {
             .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
         .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
-        .background(Material.bar)
+        .background(backgroundColor)
         .clipShape(.rect(cornerRadius: 12.5))
         .overlay(
             ZStack{

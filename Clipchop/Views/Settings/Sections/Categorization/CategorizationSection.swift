@@ -151,14 +151,15 @@ struct CategorizationSection: View {
 
         .padding(.horizontal)
         .toolbar {
-            ToolbarItemGroup(placement: .cancellationAction) {
-                
+            ToolbarItemGroup(placement: .automatic) {
                 Button {
                     showingAlert = true
                 } label: {
-                    Image(systemSymbol: .arrowClockwiseCircle)
-                    Text("Reset")
-                        .padding(4)
+                    HStack{
+                        Image(systemSymbol: .arrowClockwiseCircle)
+                        Text("Reset")
+                    }
+                    .frame(minWidth: 34)
                 }
                 .controlSize(.extraLarge)
                 .alert(isPresented: $showingAlert) {
@@ -176,9 +177,12 @@ struct CategorizationSection: View {
                 Button {
                     isPopoverPresented = true
                 } label: {
-                    Image(systemSymbol: .plus)
-                    Text("Add")
-                        .padding(4)
+                    HStack {
+                        Image(systemSymbol: .plus)
+                        Text("Add")
+                    }
+                    .frame(minWidth: 34)
+                    
                 }
                 .controlSize(.extraLarge)
                 .popover(isPresented: $isPopoverPresented, arrowEdge: .bottom) {
@@ -228,13 +232,6 @@ struct CategorizationSection: View {
                     .frame(minWidth: 225)
                     .padding()
                 }
-                Button {
-                    quit()
-                } label: {
-                    Text("Quit")
-                        .padding(4)
-                }
-                .controlSize(.extraLarge)
             }
         }
         .onAppear {

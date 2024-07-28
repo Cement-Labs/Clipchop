@@ -29,6 +29,12 @@
 		65160A932C3B92CC004BF8BF /* EmptyStatePages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */; };
 		65160A952C3B937A004BF8BF /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A942C3B937A004BF8BF /* TabButton.swift */; };
 		65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */; };
+		6550AD452C53E871009294E5 /* LuminareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD442C53E871009294E5 /* LuminareManager.swift */; };
+		6550AD472C53ED68009294E5 /* LuminareGeneralSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD462C53ED68009294E5 /* LuminareGeneralSettings.swift */; };
+		6550AD492C5406A1009294E5 /* LuminareCustomizationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD482C5406A1009294E5 /* LuminareCustomizationSettings.swift */; };
+		6550AD4D2C548D66009294E5 /* LuminareClipboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */; };
+		6550AD4F2C54B325009294E5 /* LuminareCategorizationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */; };
+		6550AD522C552CDB009294E5 /* Luminare in Frameworks */ = {isa = PBXBuildFile; productRef = 6550AD512C552CDB009294E5 /* Luminare */; };
 		656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656588FE2C4A117500C4F6EA /* getCursorPosition.swift */; };
 		65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */; };
 		65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */; };
@@ -123,6 +129,13 @@
 		659C227B2C4D15EA00C5C62B /* SearchFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */; };
 		65A176132C4BF408000BACFA /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A176122C4BF408000BACFA /* Throttler.swift */; };
 		65C48EC12C3D6C9000F75C64 /* ClipHistorySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */; };
+		65EDAE6F2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */; };
+		65EDAE732C55E7AB00EA0D32 /* CustomLuminareList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE722C55E7AB00EA0D32 /* CustomLuminareList.swift */; };
+		65EDAE752C55F50D00EA0D32 /* LuminareAboutSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */; };
+		65EDAE772C55FF0E00EA0D32 /* LuminareAcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE762C55FF0E00EA0D32 /* LuminareAcknowledgementsView.swift */; };
+		65EDAE792C56203B00EA0D32 /* CustomLuminarePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE782C56203B00EA0D32 /* CustomLuminarePicker.swift */; };
+		65EDAE7E2C563B1500EA0D32 /* Luminare in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDAE7D2C563B1500EA0D32 /* Luminare */; };
+		65EDAE802C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE7F2C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +174,11 @@
 		65160A922C3B92CC004BF8BF /* EmptyStatePages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStatePages.swift; sourceTree = "<group>"; };
 		65160A942C3B937A004BF8BF /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
 		65160A982C3BAE9E004BF8BF /* HTMLPreviewPags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLPreviewPags.swift; sourceTree = "<group>"; };
+		6550AD442C53E871009294E5 /* LuminareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareManager.swift; sourceTree = "<group>"; };
+		6550AD462C53ED68009294E5 /* LuminareGeneralSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareGeneralSettings.swift; sourceTree = "<group>"; };
+		6550AD482C5406A1009294E5 /* LuminareCustomizationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareCustomizationSettings.swift; sourceTree = "<group>"; };
+		6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareClipboardSettings.swift; sourceTree = "<group>"; };
+		6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareCategorizationSettings.swift; sourceTree = "<group>"; };
 		656588FE2C4A117500C4F6EA /* getCursorPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCursorPosition.swift; sourceTree = "<group>"; };
 		65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPages.swift; sourceTree = "<group>"; };
 		65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPages.swift; sourceTree = "<group>"; };
@@ -242,6 +260,12 @@
 		659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldWrapper.swift; sourceTree = "<group>"; };
 		65A176122C4BF408000BACFA /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistorySearch.swift; sourceTree = "<group>"; };
+		65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareExcludedAppsSettings.swift; sourceTree = "<group>"; };
+		65EDAE722C55E7AB00EA0D32 /* CustomLuminareList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLuminareList.swift; sourceTree = "<group>"; };
+		65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareAboutSettings.swift; sourceTree = "<group>"; };
+		65EDAE762C55FF0E00EA0D32 /* LuminareAcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareAcknowledgementsView.swift; sourceTree = "<group>"; };
+		65EDAE782C56203B00EA0D32 /* CustomLuminarePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLuminarePicker.swift; sourceTree = "<group>"; };
+		65EDAE7F2C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminarePreferredColorSchemePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +293,8 @@
 				658D26BF2C3822DD001D1CC3 /* Algorithms in Frameworks */,
 				658D26B32C3822AC001D1CC3 /* KeyboardShortcuts in Frameworks */,
 				658D26F42C3825BB001D1CC3 /* SwiftUIIntrospect in Frameworks */,
+				65EDAE7E2C563B1500EA0D32 /* Luminare in Frameworks */,
+				6550AD522C552CDB009294E5 /* Luminare in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +418,18 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		6550AD432C53E7DF009294E5 /* Luminare Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6550AD442C53E871009294E5 /* LuminareManager.swift */,
+				65EDAE762C55FF0E00EA0D32 /* LuminareAcknowledgementsView.swift */,
+				65EDAE7F2C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift */,
+				65EDAE7A2C5633F100EA0D32 /* Custom Luminare Component */,
+				65EDAE7B2C56346300EA0D32 /* Luminare Settings Pages */,
+			);
+			path = "Luminare Settings";
+			sourceTree = "<group>";
+		};
 		65758C062C3AE0FF009EEB3E /* Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +544,7 @@
 				658D27632C383DE0001D1CC3 /* Menu Bar */,
 				658D27682C384513001D1CC3 /* Clip History */,
 				658D27092C38314F001D1CC3 /* Beginning */,
+				6550AD432C53E7DF009294E5 /* Luminare Settings */,
 				658D27412C383546001D1CC3 /* Settings */,
 			);
 			path = Views;
@@ -643,6 +682,28 @@
 			path = "Preview Cards";
 			sourceTree = "<group>";
 		};
+		65EDAE7A2C5633F100EA0D32 /* Custom Luminare Component */ = {
+			isa = PBXGroup;
+			children = (
+				65EDAE722C55E7AB00EA0D32 /* CustomLuminareList.swift */,
+				65EDAE782C56203B00EA0D32 /* CustomLuminarePicker.swift */,
+			);
+			path = "Custom Luminare Component";
+			sourceTree = "<group>";
+		};
+		65EDAE7B2C56346300EA0D32 /* Luminare Settings Pages */ = {
+			isa = PBXGroup;
+			children = (
+				6550AD462C53ED68009294E5 /* LuminareGeneralSettings.swift */,
+				6550AD482C5406A1009294E5 /* LuminareCustomizationSettings.swift */,
+				6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */,
+				6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */,
+				65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */,
+				65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */,
+			);
+			path = "Luminare Settings Pages";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -691,6 +752,8 @@
 				658D26C12C3822E8001D1CC3 /* WindowManagement */,
 				658D26CB2C382301001D1CC3 /* Fuse */,
 				658D26F32C3825BB001D1CC3 /* SwiftUIIntrospect */,
+				6550AD512C552CDB009294E5 /* Luminare */,
+				65EDAE7D2C563B1500EA0D32 /* Luminare */,
 			);
 			productName = Clipchop;
 			productReference = 650515B22C381EA500E2129D /* Clipchop.app */;
@@ -739,6 +802,7 @@
 				658D26C02C3822E8001D1CC3 /* XCRemoteSwiftPackageReference "SwiftUI-WindowManagement" */,
 				658D26CA2C382301001D1CC3 /* XCRemoteSwiftPackageReference "fuse-swift" */,
 				658D26F22C3825BB001D1CC3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				65EDAE7C2C563B1500EA0D32 /* XCLocalSwiftPackageReference "../Luminare" */,
 			);
 			productRefGroup = 650515B32C381EA500E2129D /* Products */;
 			projectDirPath = "";
@@ -793,6 +857,8 @@
 				658D26EF2C3823E5001D1CC3 /* ClipboardDataProvider.swift in Sources */,
 				650515DD2C38219700E2129D /* Transision+Extensions.swift in Sources */,
 				650515DE2C38219700E2129D /* MutableCollection+Extensions.swift in Sources */,
+				6550AD4F2C54B325009294E5 /* LuminareCategorizationSettings.swift in Sources */,
+				65EDAE6F2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift in Sources */,
 				650515DF2C38219700E2129D /* NSWindow+Extensions.swift in Sources */,
 				650515E02C38219700E2129D /* Bundle+Extensions.swift in Sources */,
 				650515E12C38219700E2129D /* View+Functions.swift in Sources */,
@@ -805,6 +871,7 @@
 				658D26D92C382340001D1CC3 /* Sound.swift in Sources */,
 				658D26DA2C382340001D1CC3 /* ObservationTrackingStream.swift in Sources */,
 				658D27722C384552001D1CC3 /* WebLinkPreviewPage.swift in Sources */,
+				65EDAE772C55FF0E00EA0D32 /* LuminareAcknowledgementsView.swift in Sources */,
 				658D27732C384552001D1CC3 /* RTFPreviewPage.swift in Sources */,
 				65C48EC12C3D6C9000F75C64 /* ClipHistorySearch.swift in Sources */,
 				658D27742C384552001D1CC3 /* CardPreviewView.swift in Sources */,
@@ -823,9 +890,11 @@
 				658D275E2C383920001D1CC3 /* ClipHistoryPanel.swift in Sources */,
 				658D270F2C38314F001D1CC3 /* BeginningShortcutsPage.swift in Sources */,
 				658D27102C38314F001D1CC3 /* RoamingButton.swift in Sources */,
+				65EDAE752C55F50D00EA0D32 /* LuminareAboutSettings.swift in Sources */,
 				658D27112C38314F001D1CC3 /* BeginningPermissionsPage.swift in Sources */,
 				659C227B2C4D15EA00C5C62B /* SearchFieldWrapper.swift in Sources */,
 				658D27122C38314F001D1CC3 /* BeginningHelloPage.swift in Sources */,
+				6550AD492C5406A1009294E5 /* LuminareCustomizationSettings.swift in Sources */,
 				658D26DB2C382340001D1CC3 /* ViewController.swift in Sources */,
 				658D26F12C3824D5001D1CC3 /* Formatter.swift in Sources */,
 				658D26F72C3826E6001D1CC3 /* ClipboardController.swift in Sources */,
@@ -841,6 +910,7 @@
 				658D27482C383546001D1CC3 /* CustomizationSettingsPage.swift in Sources */,
 				658D27492C383546001D1CC3 /* PreferredColorSchemePicker.swift in Sources */,
 				658D274A2C383546001D1CC3 /* ColoredPickerRow.swift in Sources */,
+				6550AD472C53ED68009294E5 /* LuminareGeneralSettings.swift in Sources */,
 				658D274B2C383546001D1CC3 /* RoundedTagView.swift in Sources */,
 				658D274C2C383546001D1CC3 /* AcknowledgementsView.swift in Sources */,
 				658D274D2C383546001D1CC3 /* NavigationEntry.swift in Sources */,
@@ -849,12 +919,16 @@
 				658D27502C383546001D1CC3 /* GlobalBehaviorsSection.swift in Sources */,
 				658D27512C383546001D1CC3 /* InstalledAppsMenu.swift in Sources */,
 				658D27522C383546001D1CC3 /* KeyboardShortcutsSection.swift in Sources */,
+				6550AD4D2C548D66009294E5 /* LuminareClipboardSettings.swift in Sources */,
 				658D27532C383546001D1CC3 /* ClipboardBehaviorsSection.swift in Sources */,
 				658D27542C383546001D1CC3 /* CategorizationSection.swift in Sources */,
 				65A176132C4BF408000BACFA /* Throttler.swift in Sources */,
 				658D27552C383546001D1CC3 /* PermissionsSection.swift in Sources */,
+				65EDAE732C55E7AB00EA0D32 /* CustomLuminareList.swift in Sources */,
+				65EDAE792C56203B00EA0D32 /* CustomLuminarePicker.swift in Sources */,
 				658D27562C383546001D1CC3 /* AppearanceSection.swift in Sources */,
 				658D27642C383DE0001D1CC3 /* MenuBarView.swift in Sources */,
+				65EDAE802C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift in Sources */,
 				656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */,
 				658D27652C383DE0001D1CC3 /* MenuBarIconView.swift in Sources */,
 				658D27572C383546001D1CC3 /* GeneralSettingsPage.swift in Sources */,
@@ -865,6 +939,7 @@
 				658D26DE2C382340001D1CC3 /* PerimissionsManager.swift in Sources */,
 				658D26DF2C382340001D1CC3 /* NotificationManager.swift in Sources */,
 				658D26E02C382340001D1CC3 /* Logger.swift in Sources */,
+				6550AD452C53E871009294E5 /* LuminareManager.swift in Sources */,
 				658D26E12C382340001D1CC3 /* DefaultsStack.swift in Sources */,
 				658D26E22C382340001D1CC3 /* LifecycleHandler.swift in Sources */,
 				650515E32C38219700E2129D /* NSImage+Extensions.swift in Sources */,
@@ -1060,7 +1135,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 725;
+				CURRENT_PROJECT_VERSION = 728;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1081,7 +1156,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = "1.0.0-alpha.1";
+				MARKETING_VERSION = "1.0.0-alpha.2";
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1103,7 +1178,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 725;
+				CURRENT_PROJECT_VERSION = 728;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1124,7 +1199,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = "1.0.0-alpha.1";
+				MARKETING_VERSION = "1.0.0-alpha.2";
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1167,6 +1242,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		65EDAE7C2C563B1500EA0D32 /* XCLocalSwiftPackageReference "../Luminare" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Luminare;
+		};
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
 		658D26A22C38226E001D1CC3 /* XCRemoteSwiftPackageReference "Defaults" */ = {
@@ -1276,6 +1358,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6550AD512C552CDB009294E5 /* Luminare */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Luminare;
+		};
 		658D26A32C38226E001D1CC3 /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 658D26A22C38226E001D1CC3 /* XCRemoteSwiftPackageReference "Defaults" */;
@@ -1340,6 +1426,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 658D26F22C3825BB001D1CC3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = SwiftUIIntrospect;
+		};
+		65EDAE7D2C563B1500EA0D32 /* Luminare */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Luminare;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -19,7 +19,7 @@ struct AppearanceSection: View {
     @Default(.customAccentColor) private var customAccentColor
     
     @Environment(\.hasTitle) private var hasTitle
-    
+
     var body: some View {
         if hasTitle {
             Section {

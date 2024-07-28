@@ -9,17 +9,22 @@ import AppKit
 import Defaults
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    static var isActive: Bool = false
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         NSApp.setActivationPolicy(.accessory)
+        LuminareManager.fullyClose()
         return false
     }
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        NSApp.openSettings()
+//        NSApp.openSettings()
+        LuminareManager.open()
         return true
     }
 }

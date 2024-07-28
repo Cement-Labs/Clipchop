@@ -43,7 +43,13 @@ struct HTMLPreviewPage: View {
     }
     
     static func extractBackgroundColor(from attributedString: NSAttributedString, colorScheme: ColorScheme) -> Color {
-        let backgroundColor: NSColor = dynamicColor(for: colorScheme)
+        var backgroundColor: NSColor = dynamicColor(for: colorScheme)
+        attributedString.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: attributedString.length)) { value, _, _ in
+            if let color = value as? NSColor {
+                backgroundColor = color
+                return
+            }
+        }
         return Color(backgroundColor)
     }
     

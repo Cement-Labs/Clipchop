@@ -87,6 +87,8 @@ class ClipHistoryPanel: NSPanel {
     
     override func keyDown(with event: NSEvent) {
         switch KeyboardShortcuts.Shortcut(event: event) {
+        case KeyboardShortcuts.Name.settings.shortcut:
+            LuminareManager.open()
         case KeyboardShortcuts.Key.escape.shortcut:
             close()
         case KeyboardShortcuts.Name.expand.shortcut:

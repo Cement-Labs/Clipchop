@@ -32,6 +32,7 @@ struct ClipchopApp: App {
 #if DEBUG
         // Resets Defaults
         Defaults[.menuBarItemEnabled] = Defaults.Keys.menuBarItemEnabled.defaultValue
+        
 //        Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
         
 //        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
@@ -59,11 +60,6 @@ struct ClipchopApp: App {
     }
     
     var body: some Scene {
-        
-        Settings {
-            SettingsView()
-                .frame(minHeight: 200, idealHeight: 425)
-        }
         
         MenuBarExtra("Clipchop", image: "Empty", isInserted: $menuBarItemEnabled) {
             MenuBarView(clipboardController: ClipboardManager.clipboardController!)

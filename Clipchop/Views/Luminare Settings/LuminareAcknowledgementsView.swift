@@ -1,13 +1,14 @@
 //
-//  AcknowledgementsView.swift
+//  LuminareAcknowledgementsView.swift
 //  Clipchop
 //
-//  Created by KrLite on 2024/5/15.
+//  Created by Xinshao_Air on 2024/7/28.
 //
 
 import SwiftUI
+import Luminare
 
-struct AcknowledgementsView: View {
+struct LuminareAcknowledgementsView: View {
     @Environment(\.openURL) private var openURL
     
     @State private var presentedReasonPackage: String?
@@ -34,9 +35,14 @@ struct AcknowledgementsView: View {
             reason: "This is a reason."
         ),
         .init(
-            name: "FullDiskAccess", 
+            name: "FullDiskAccess",
             author: .init(name: "Mahdi Bchatnia", slug: "inket", link: URL(string: "https://github.com/inket")),
             link: URL(string: "https://github.com/inket/FullDiskAccess")!
+        ),
+        .init(
+            name: "Luminare",
+            author: .init(name: "MrKai77 ", slug: "Kai", link: URL(string: "https://github.com/MrKai77")),
+            link: URL(string: "https://github.com/MrKai77/Luminare")!
         )
     ]
     
@@ -52,8 +58,8 @@ struct AcknowledgementsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 10) {
-            ForEach(AcknowledgementsView.packages, id: \.name) { package in
+        ForEach(LuminareAcknowledgementsView.packages, id: \.name) { package in
+            VStack {
                 HStack {
                     @State var isReasonPresented = false
                     
@@ -108,8 +114,10 @@ struct AcknowledgementsView: View {
                     .buttonStyle(.plain)
                     .foregroundStyle(.secondary)
                 }
+                .padding(.horizontal, 8)
+                .padding(.trailing, 2)
+                .frame(minHeight: 42)
             }
         }
-        .padding()
     }
 }

@@ -72,6 +72,7 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     var spacing: CGFloat = 8
     var lineSpacing: CGFloat = 8
     var viewGenerator: ViewGenerator
+    var limit: Int?
     
     @State private var size: CGSize = .zero
     
@@ -86,6 +87,8 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
     
     @ViewBuilder
     private func generateContent(in geometry: GeometryProxy) -> some View {
+        let displayedModels = limit != nil ? Array(models.prefix(limit!)) : models
+        
         var width: CGFloat = direction.originalWidth(in: geometry)
         var height: CGFloat = .zero
         
@@ -95,21 +98,21 @@ struct WrappingHStack<Model, V>: View where Model: Hashable, V: View {
             }
             
             ZStack(alignment: .topLeading) {
-                ForEach(models.indices, id: \.self) { index in
-                    let model = models[index]
+                ForEach(displayedModels.indices, id: \.self) { index in
+                    let model = displayedModels[index]
                     viewGenerator(model)
                         .alignmentGuide(.leading) { dimensions in
                             direction.horizontalAlignmentGuide(
                                 width: &width, height: &height,
                                 spacing: spacing, lineSpacing: lineSpacing,
-                                in: geometry, 
-                                isLast: model == models.last,
+                                in: geometry,
+                                isLast: model == displayedModels.last,
                                 dimensions: dimensions
                             )
                         }
                         .alignmentGuide(.top) { dimensions in
                             let result = height
-                            if model == models.last {
+                            if model == displayedModels.last {
                                 // The last item
                                 height = 0
                             }

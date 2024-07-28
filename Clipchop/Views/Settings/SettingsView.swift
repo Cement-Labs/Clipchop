@@ -9,6 +9,8 @@ import SwiftUI
 import SFSafeSymbols
 import Defaults
 import SwiftUIIntrospect
+import Cocoa
+
 
 struct SettingsView: View {
     enum Navigation {
@@ -35,7 +37,7 @@ struct SettingsView: View {
     }
     @State private var navigation: Navigation = .general
     @State private var apps = InstalledApps()
-    
+
     var body: some View {
         NavigationSplitView {
             List(selection: $navigation) {
@@ -82,7 +84,7 @@ struct SettingsView: View {
 #endif
             }
             .frame(width: 180)
-//            .toolbar(removing: .sidebarToggle)
+            .toolbar(removing: .sidebarToggle)
             .navigationSplitViewColumnWidth(min: 180, ideal: 180, max: 180)
         } detail: {
             contentForNavigation(navigation)
@@ -143,6 +145,7 @@ struct SettingsView: View {
 }
 
 struct WindowAccessor: NSViewRepresentable {
+    
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
         DispatchQueue.main.async {
@@ -150,7 +153,7 @@ struct WindowAccessor: NSViewRepresentable {
                 window.toolbarStyle = .unified
                 window.titlebarAppearsTransparent = false
                 window.titlebarSeparatorStyle = .automatic
-                window.makeKeyAndOrderFront(nil)
+                window.makeKeyAndOrderFront(true)
             }
         }
         return view

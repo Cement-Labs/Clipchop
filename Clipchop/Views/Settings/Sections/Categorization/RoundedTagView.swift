@@ -19,7 +19,6 @@ struct RoundedTagView: View {
     var body: some View {
         HStack {
             Text(text)
-                .monospaced()
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(.placeholder.opacity(0.1))

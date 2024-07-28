@@ -49,6 +49,10 @@ struct MenuBarView: View {
         
         Divider()
         
+        Button("Open Luminare Settings…") {
+            LuminareManager.open()
+        }
+        
         SettingsLink {
             Text("Settings…")
         }

@@ -11,7 +11,7 @@ import SFSafeSymbols
 
 struct ExcludedAppListSection: View {
     @EnvironmentObject private var apps: InstalledApps
-    
+
     @Default(.excludeAppsEnabled) private var excludeAppsEnabled
     @Default(.excludedApplications) private var excluded
     
@@ -141,12 +141,5 @@ struct ExcludedAppListSection: View {
     private func removeSelected() {
         excluded.removeAll { selection.contains($0) }
         selection.removeAll()
-    }
-}
-
-#Preview {
-    previewSection {
-        ExcludedAppListSection()
-            .environmentObject(InstalledApps())
     }
 }

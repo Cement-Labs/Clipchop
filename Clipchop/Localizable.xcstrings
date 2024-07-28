@@ -14,12 +14,87 @@
         }
       }
     },
+    "%@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
     "%@ is open source." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@是开源的"
+          }
+        }
+      }
+    },
+    "%d Days" : {
+      "comment" : "Days",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d 天"
+          }
+        }
+      }
+    },
+    "%d Hours" : {
+      "comment" : "Hours",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d 时"
+          }
+        }
+      }
+    },
+    "%d Minutes" : {
+      "comment" : "Minutes",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d 分"
+          }
+        }
+      }
+    },
+    "%d Months" : {
+      "comment" : "Months",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d 月"
+          }
+        }
+      }
+    },
+    "%d Years" : {
+      "comment" : "Years",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d 年"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
           }
         }
       }
@@ -343,6 +418,16 @@
         }
       }
     },
+    "App Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用设置"
+          }
+        }
+      }
+    },
     "App Version: Raw" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -438,6 +523,7 @@
       }
     },
     "At the cursor" : {
+      "comment" : "At the cursor",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -448,6 +534,7 @@
       }
     },
     "At the mouse" : {
+      "comment" : "At the mouse",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -483,6 +570,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "返回"
+          }
+        }
+      }
+    },
+    "Blue" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "蓝"
           }
         }
       }
@@ -609,12 +706,32 @@
         }
       }
     },
+    "Clipboard Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴板设置"
+          }
+        }
+      }
+    },
     "Clipchop" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clipchop"
+          }
+        }
+      }
+    },
+    "Clipchop is currently still a very early version, and many things are not yet mature. Therefore, we really need you to share your feedback on GitHub, including feature suggestions, interaction recommendations, and bug reports." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clipchop目前还是一个非常早期的版本，很多功能尚未完善。因此，我们非常需要您在GitHub上分享您的反馈，包括功能建议、交互建议和bug报告。"
           }
         }
       }
@@ -758,6 +875,7 @@
       }
     },
     "Dark" : {
+      "comment" : "Dark",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -804,6 +922,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "文档"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑"
           }
         }
       }
@@ -859,6 +987,7 @@
       }
     },
     "Forever" : {
+      "comment" : "Forever",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -972,6 +1101,16 @@
         }
       }
     },
+    "Green" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绿"
+          }
+        }
+      }
+    },
     "Hello, World!" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1044,6 +1183,7 @@
       }
     },
     "Light" : {
+      "comment" : "Light",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1095,7 +1235,6 @@
       }
     },
     "Log to Console (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1141,6 +1280,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在系统设置中打开"
+          }
+        }
+      }
+    },
+    "Open Luminare Settings…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Luminare Settings…"
           }
         }
       }
@@ -1326,13 +1475,32 @@
         }
       }
     },
+    "Red" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "红"
+          }
+        }
+      }
+    },
     "Refresh States (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Refresh States (Debug)"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除"
           }
         }
       }
@@ -1373,6 +1541,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "恢复"
+          }
+        }
+      }
+    },
+    "s" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "秒"
           }
         }
       }
@@ -1566,8 +1744,17 @@
         }
       }
     },
+    "Suggest new icon" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建议新图标"
+          }
+        }
+      }
+    },
     "Syncing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1578,6 +1765,7 @@
       }
     },
     "System" : {
+      "comment" : "System",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1588,7 +1776,6 @@
       }
     },
     "Test (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1905,6 +2092,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "你可以随时再次打开 %@ 来访问这个页面。"
+          }
+        }
+      }
+    },
+    "You have collected %lld types of files" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你已经收集了%lld种文件！"
           }
         }
       }

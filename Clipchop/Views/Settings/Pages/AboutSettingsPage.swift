@@ -132,9 +132,3 @@ struct AboutSettingsPage: View {
         }
     }
 }
-
-#Preview {
-    previewPage {
-        AboutSettingsPage()
-    }
-}
