@@ -100,7 +100,7 @@ extension View {
 
 extension View {
     func applyKeyboardShortcut(_ keyboardShortcut: String, modifier: EventModifiers) -> some View {
-        if keyboardShortcut != "none" {
+        if keyboardShortcut != "none" && !modifier.isEmpty {
             return AnyView(self.keyboardShortcut(KeyEquivalent(keyboardShortcut.first!), modifiers: modifier))
         } else {
             return AnyView(self)

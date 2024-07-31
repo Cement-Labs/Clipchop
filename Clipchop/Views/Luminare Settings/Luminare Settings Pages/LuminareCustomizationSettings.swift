@@ -20,8 +20,8 @@ struct LuminareCustomizationSettings: View {
     @Default(.customAccentColor) private var customAccentColor
     
     var body: some View {
+        
         LuminareSection("Appearance") {
-            
             LuminarePicker(
                 elements: AppIcon.unlockedAppIcons,
                 selection: $appIcon

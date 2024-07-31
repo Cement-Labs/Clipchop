@@ -19,6 +19,10 @@ struct LuminareClipboardSettings: View {
     @Default(.removeFormatting) private var removeFormatting
     @Default(.clipboardMonitoring) private var clipboardMonitoring
     
+    @Default(.deleteShortcut) private var deleteShortcut
+    @Default(.copyShortcut) private var copyShortcut
+    @Default(.pinShortcut) private var pinShortcut
+    
     @State private var isDeleteHistoryAlertPresented = false
     @State private var isApplyPreservationTimeAlertPresented = false
     @State private var showPopover = false
@@ -27,52 +31,13 @@ struct LuminareClipboardSettings: View {
     @State private var initialPreservationTime: Double = 1
     
     @Environment(\.hasTitle) private var hasTitle
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject private var clipboardModelManager = ClipboardModelManager()
     @ObservedObject var clipboardController: ClipboardController
     
     private let clipboardModelEditor = ClipboardModelEditor(provider: .shared)
     
     var body: some View {
-        LuminareSection("Keyboard Shortcuts") {
-            HStack {
-                withCaption {
-                    Text("Show \(Bundle.main.appName)")
-                } caption: {
-                    Text("Call up the clip history window.")
-                }
-                .padding(.horizontal, 8)
-                .padding(.trailing, 2)
-                .frame(minHeight: 42)
-                
-                Spacer()
-                
-                KeyboardShortcuts.Recorder(for: .window) { }
-                    .padding(.horizontal, 8)
-                    .padding(.trailing, 2)
-                    .frame(minHeight: 42)
-                    .controlSize(.large)
-            }
-            
-            HStack {
-                withCaption {
-                    Text("Clipboard Monitoring")
-                } caption: {
-                    Text("Enable or disable monitoring of your clipboard history.")
-                }
-                .padding(.horizontal, 8)
-                .padding(.trailing, 2)
-                .frame(minHeight: 42)
-                
-                Spacer()
-                
-                KeyboardShortcuts.Recorder(for: .start) { }
-                    .padding(.horizontal, 8)
-                    .padding(.trailing, 2)
-                    .frame(minHeight: 42)
-                    .controlSize(.large)
-                
-            }
-        }
         LuminareSection("Clipboard Behaviors") {
             HStack {
                 withCaption {
@@ -159,7 +124,7 @@ struct LuminareClipboardSettings: View {
                                 Image(systemSymbol: .checkmarkCircleFill)
                                 Text("Apply")
                             }
-                            .tint(.accent)
+                            .tint(Color.getAccent())
                         }
                         .monospaced(false)
                         .buttonStyle(.borderless)
@@ -196,15 +161,32 @@ struct LuminareClipboardSettings: View {
             .frame(minHeight: 70)
             
             VStack {
-                LuminareValueAdjuster(
-                    "Update interval",
-                    value: $timerInterval,
-                    sliderRange: 0.25...1,
-                    suffix: "s",
-                    step: 0.25,
-                    lowerClamp: true
-                )
+                HStack {
+                    Text("Update interval")
+                    Spacer()
+                    Text("\(timerInterval, specifier: "%.2f")s")
+                        .frame(maxWidth: 150)
+                        .clipShape(Capsule())
+                        .monospaced()
+                        .fixedSize()
+                        .padding(4)
+                        .padding(.horizontal, 4)
+                        .background {
+                            ZStack {
+                                Capsule()
+                                    .strokeBorder(.quaternary, lineWidth: 1)
+                                
+                                Capsule()
+                                    .foregroundStyle(.quinary.opacity(0.5))
+                            }
+                        }
+                }
+                
+                Slider(value: $timerInterval, in: 0.25...1)
             }
+            .padding(.horizontal, 8)
+            .padding(.trailing, 2)
+            .frame(minHeight: 70)
         }
         
         LuminareSection {
@@ -250,7 +232,7 @@ struct LuminareClipboardSettings: View {
         historyPreservationTime = initialPreservationTime
     }
     
-    func periodDisplayText(for period: HistoryPreservationPeriod, with time: Int) -> String {
+    private func periodDisplayText(for period: HistoryPreservationPeriod, with time: Int) -> String {
         switch period {
         case .forever:
             return String.localizedStringWithFormat(NSLocalizedString("Forever", comment: "Forever"))
@@ -266,4 +248,5 @@ struct LuminareClipboardSettings: View {
             return String.localizedStringWithFormat(NSLocalizedString("%d Years", comment: "Years"), time)
         }
     }
+
 }

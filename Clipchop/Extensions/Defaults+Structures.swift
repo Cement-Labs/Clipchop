@@ -35,6 +35,85 @@ enum PreferredColorScheme: String, CaseIterable, Codable, Defaults.Serializable 
     }
 }
 
+// MARK: - KeyboardModifier
+
+enum KeyboardModifier: String, Codable, CaseIterable, Identifiable, Defaults.Serializable {
+    case none
+    case control
+    case command
+    case option
+    
+    var id: String { rawValue }
+    
+    var displayName: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("none", comment: "none")
+        case .control:
+            return NSLocalizedString("control ⌃", comment: "control")
+        case .command:
+            return NSLocalizedString("command ⌘", comment: "command")
+        case .option:
+            return NSLocalizedString("option ⌥", comment: "option")
+        }
+    }
+    
+    var eventModifier: EventModifiers {
+        switch self {
+        case .none:
+            return []
+        case .control:
+            return .control
+        case .command:
+            return .command
+        case .option:
+            return .option
+        }
+    }
+}
+
+enum KeyboardSwitcher: String, Codable, CaseIterable, Identifiable, Defaults.Serializable {
+    case none
+    case control
+    case option
+    
+    var id: String { rawValue }
+    
+    var switcherDisplayName: String {
+        switch self {
+        case .none:
+            return NSLocalizedString("none", comment: "none")
+        case .control:
+            return NSLocalizedString("control ⌃", comment: "control")
+        case .option:
+            return NSLocalizedString("option ⌥", comment: "option")
+        }
+    }
+    
+    var switchereventModifier: EventModifiers {
+        switch self {
+        case .none:
+            return []
+        case .control:
+            return .control
+        case .option:
+            return .option
+        }
+    }
+    
+    var switchereventNSEvent: NSEvent.ModifierFlags {
+        switch self {
+        case .none:
+            return []
+        case .control:
+            return .control
+        case .option:
+            return .option
+        }
+    }
+
+}
+
 // MARK: - History Preservation Period
 
 enum HistoryPreservationPeriod: String, CaseIterable, Defaults.Serializable {

@@ -26,13 +26,13 @@ class LuminareManager: ObservableObject {
     static let generalSettingsPage = SettingsTab("General", Image(systemSymbol: .gearshape), LuminareGeneralSettings())
     static let customizationSettingsPage = SettingsTab("Customization", Image(systemSymbol: .pencilAndOutline), LuminareCustomizationSettings())
     static let clipboardSettingsPage = SettingsTab("Clipboard", Image(systemSymbol: .clipboard), LuminareClipboardSettings(clipboardController: ClipboardManager.clipboardController!))
+    static let keyboardShortcutsSettingsPage = SettingsTab("Keyboard Shortcuts", Image(systemSymbol: .keyboard),LuminareKeyboardShortcutsSettings())
     static let categorizationSettingsPage = SettingsTab("Categorization", Image(systemSymbol: .tray2), LuminareCategorizationSettings())
     static let aboutSettingsPage = SettingsTab("About", Image(systemSymbol: .infoBubble), LuminareAboutSettings())
     
     static var luminare: LuminareSettingsWindow?
     
     static func open() {
-        print("open")
         if luminare == nil {
             shared.appExcluding = SettingsTab(
                 "App Excluding",
@@ -48,6 +48,7 @@ class LuminareManager: ObservableObject {
                     ]),
                     .init("Clipboard Settings", [
                         clipboardSettingsPage,
+                        keyboardShortcutsSettingsPage,
                         categorizationSettingsPage,
                         shared.appExcluding
                     ]),

@@ -9,20 +9,23 @@ import SwiftUI
 import Defaults
 
 extension Defaults.Keys {
-    static let timesClipped = Key<UInt>("timesClipped", default: 0)
     
-    static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
-    static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
-    
+    // MARK: BeginningView
     static let beginningViewShown = Key<Bool>("beginningViewShown", default: false)
     
+    // MARK: Panel
+    static let displayMore = Key<Bool>("displayMore", default: false)
+    static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
     static let cursorPosition = Key<CursorPosition>("cursorPosition", default: .mouseLocation)
     
     // MARK: Appearance
+    static let timesClipped = Key<UInt>("timesClipped", default: 0)
     
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
+    static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
     
+    static let dnd = Key<Bool>("dnd", default: false)
     static let appIcon = Key<AppIcon>("appIcon", default: .defaultAppIcon)
     static let clipSound = Key<Sound>("clipSound", default: .defaultClipSound)
     static let pasteSound = Key<Sound>("pasteSound", default: .defaultPasteSound)
@@ -42,15 +45,18 @@ extension Defaults.Keys {
         }
     }())
     
+    // MARK: KeyboardModifier
+    
+    static let deleteShortcut = Defaults.Key<KeyboardModifier>("deleteShortcut", default: .control)
+    static let copyShortcut = Defaults.Key<KeyboardModifier>("copyShortcut", default: .command)
+    static let pinShortcut = Defaults.Key<KeyboardModifier>("pinShortcut", default: .option)
+    
+    static let keySwitcher = Defaults.Key<KeyboardSwitcher>("keySwitcher", default: .option)
+    
     // MARK: Clip History
     
     static let autoCloseTimeout = Key<TimeInterval>("autoCloseTimeout", default: 60)
-    
     static let clipboardMonitoring = Key<Bool>("clipboardMonitoring", default: false)
-    
-    static let dnd = Key<Bool>("dnd", default: false)
-    
-    static let displayMore = Key<Bool>("displayMore", default: false)
     
     static let pasteToFrontmostEnabled = Key<Bool>("pasteToFrontmostEnabled", default: true)
     

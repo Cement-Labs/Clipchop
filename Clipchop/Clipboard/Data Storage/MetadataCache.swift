@@ -170,7 +170,7 @@ class MetadataCache {
         previewDict[key] = preview as NSString
         saveCache(from: previewDict, to: previewCacheURL)
     }
-    
+
     func getSearchResult(for query: String) -> [ClipHistorySearch.SearchResult]? {
         if let cachedData = searchResultNSCache.object(forKey: query as NSString) as Data? {
             return try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: cachedData) as? [ClipHistorySearch.SearchResult]

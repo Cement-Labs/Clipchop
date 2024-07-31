@@ -12,24 +12,77 @@ struct CollapsedPages: View {
     
     var items: FetchedResults<ClipboardHistory>
     var animationNamespace: Namespace.ID
-    
+
+    @State private var selectedIndex: Int? = nil
+
     @Binding var scrollPadding: CGFloat
     @Binding var initialScrollPadding: CGFloat
     @Binding var movethebutton: Bool
-    
+
+    @Default(.keySwitcher) var keySwitcher
+
     var clipboardModelEditor: ClipboardModelEditor
     var apps: InstalledApps
     var undo: () -> Void
     var redo: () -> Void
-    
+
     var body: some View {
         ZStack(alignment: .center) {
+            HStack {
+                Button("selectNextItem") {
+                    selectNextItem()
+                }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut(.tab, modifiers: keySwitcher.switchereventModifier)
+                
+                Button("selectPreviousItem1") {
+                    selectPreviousItem()
+                }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut("`", modifiers: keySwitcher.switchereventModifier)
+                
+                Button("selectPreviousItem2") {
+                    selectPreviousItem()
+                }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut("·", modifiers: keySwitcher.switchereventModifier)
+                
+                Button("esc") {
+                    selectedIndex = nil
+                }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut(.escape, modifiers: keySwitcher.switchereventModifier)
+            }
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                        CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
-                            .environmentObject(apps)
-                            .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
+                        CardPreviewView(item: item,
+                            isSelected: Binding(
+                                get: { self.selectedIndex == index },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.selectedIndex = index
+                                    } else if selectedIndex == index {
+                                        self.selectedIndex = nil
+                                    }
+                                }
+                            ), keyboardShortcut: getKeyboardShortcut(for: index)
+                        )
+                        .environmentObject(apps)
+                        .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
                     }
                 }
                 .padding(.horizontal, scrollPadding)
@@ -50,7 +103,6 @@ struct CollapsedPages: View {
                                     scrollPadding = Defaults[.displayMore] ? 16 : 12
                                     movethebutton = false
                                     initialScrollPadding = scrollPadding
-                                    
                                 }
                             }
                         }
@@ -61,7 +113,7 @@ struct CollapsedPages: View {
                             ZStack(alignment: .center) {
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color.getAccent())
-                                    .frame(width: 50, height:  Defaults[.displayMore] ? 54: 38)
+                                    .frame(width: 50, height: Defaults[.displayMore] ? 54 : 38)
                                 Image(systemSymbol: .gearshape)
                             }
                         }
@@ -69,7 +121,7 @@ struct CollapsedPages: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .fill(.red)
-                                .frame(width: 50, height:  Defaults[.displayMore] ? 54: 38)
+                                .frame(width: 50, height: Defaults[.displayMore] ? 54 : 38)
                             Image(systemSymbol: .trash)
                         }
                         .onTapGesture {
@@ -86,17 +138,45 @@ struct CollapsedPages: View {
         }
         .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
     }
-    
+
     private func getKeyboardShortcut(for index: Int) -> String {
         guard index < 9 else { return "none" }
         return String(index + 1)
     }
-    
+
     private func performHapticFeedback() {
         NSHapticFeedbackManager.defaultPerformer.perform(
             NSHapticFeedbackManager.FeedbackPattern.generic,
             performanceTime: NSHapticFeedbackManager.PerformanceTime.now
         )
+    }
+
+    private func selectItem(at index: Int) {
+        if index >= 0 && index < items.count {
+            selectedIndex = index
+        }
+    }
+    
+    private func selectPreviousItem() {
+        if selectedIndex == nil {
+            selectItem(at: 0)
+        } else {
+            guard let currentIndex = selectedIndex else { return }
+            let previousIndex = (currentIndex - 1 + 5) % 5
+            let actualIndex = min(previousIndex, items.count - 1)
+            selectItem(at: actualIndex)
+        }
+    }
+
+    private func selectNextItem() {
+        if selectedIndex == nil {
+            selectItem(at: 0)
+        } else {
+            guard let currentIndex = selectedIndex else { return }
+            let nextIndex = (currentIndex + 1 + 5) % 5
+            let actualIndex = min(nextIndex, items.count - 1)
+            selectItem(at: actualIndex)
+        }
     }
     
     private func showAlert() {
@@ -104,10 +184,10 @@ struct CollapsedPages: View {
         alert.messageText = NSLocalizedString("Clear Clipboard History", comment: "Alert message text for clearing clipboard history")
         alert.informativeText = NSLocalizedString("This action will clear all non-pinned entries from your clipboard history irreversibly.", comment: "Informative text for alert about clearing clipboard history")
         alert.alertStyle = .warning
-        
+
         alert.addButton(withTitle: NSLocalizedString("Delete", comment: "Delete button title"))
         alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel button title"))
-        
+
         let response = alert.runModal()
         if response == .alertFirstButtonReturn {
             // TODO: Delete
@@ -115,3 +195,4 @@ struct CollapsedPages: View {
         }
     }
 }
+

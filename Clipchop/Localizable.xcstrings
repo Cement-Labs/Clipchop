@@ -777,12 +777,34 @@
         }
       }
     },
+    "command ⌘" : {
+      "comment" : "command",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "command ⌘"
+          }
+        }
+      }
+    },
     "Continue" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "继续"
+          }
+        }
+      }
+    },
+    "control ⌃" : {
+      "comment" : "control",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "control ⌃"
           }
         }
       }
@@ -813,6 +835,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "以纯文本复制到剪贴板"
+          }
+        }
+      }
+    },
+    "Copy Shortcut" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粘贴快捷键"
           }
         }
       }
@@ -896,6 +928,16 @@
         }
       }
     },
+    "Delete Shortcut" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除快捷键"
+          }
+        }
+      }
+    },
     "Display More" : {
       "localizations" : {
         "zh-Hans" : {
@@ -945,6 +987,9 @@
           }
         }
       }
+    },
+    "esc" : {
+
     },
     "Exclude apps to prevent %@ copying their contents." : {
       "localizations" : {
@@ -1157,7 +1202,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "键盘快捷键"
+            "value" : "快捷键"
           }
         }
       }
@@ -1274,6 +1319,17 @@
         }
       }
     },
+    "none" : {
+      "comment" : "none",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无"
+          }
+        }
+      }
+    },
     "Open in System Settings" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1284,22 +1340,23 @@
         }
       }
     },
-    "Open Luminare Settings…" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Luminare Settings…"
-          }
-        }
-      }
-    },
     "Open Settings…" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "打开设置"
+          }
+        }
+      }
+    },
+    "option ⌥" : {
+      "comment" : "option",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "option ⌥"
           }
         }
       }
@@ -1414,6 +1471,16 @@
         }
       }
     },
+    "Pin Shortcut" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "固定快捷键"
+          }
+        }
+      }
+    },
     "Pinned" : {
       "comment" : "Pinned",
       "localizations" : {
@@ -1441,6 +1508,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保存时间"
+          }
+        }
+      }
+    },
+    "Quick Selection" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速选中"
           }
         }
       }
@@ -1582,6 +1659,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "搜索文件类型"
+          }
+        }
+      }
+    },
+    "selectNextItem" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selectNextItem"
+          }
+        }
+      }
+    },
+    "selectPreviousItem1" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selectPreviousItem1"
+          }
+        }
+      }
+    },
+    "selectPreviousItem2" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selectPreviousItem2"
           }
         }
       }
@@ -1822,6 +1929,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "此操作将不可逆重置全部的文件类型和文件分类。"
+          }
+        }
+      }
+    },
+    "This option only adjusts quickly selected trigger keys, toggle selected using Tab and ` " : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此选项仅调整快速选中的触发按键，切换选中使用 Tab 和 ` 。"
           }
         }
       }

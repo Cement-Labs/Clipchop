@@ -58,7 +58,7 @@ struct ClipHistoryView: View {
                     .keyboardShortcut("z", modifiers: [.command, .shift])
                 
                 clip {
-                    VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
+                    VisualEffectView(material: .popover, blendingMode: .behindWindow)
                 }
                 VStack {
                     if items.isEmpty {
@@ -74,7 +74,6 @@ struct ClipHistoryView: View {
                                 searchText: $searchText,
                                 selectedTab: $selectedTab,
                                 isSearchVisible: $isSearchVisible
-                                
                             )
                         } else {
                             CollapsedPages(
@@ -87,7 +86,6 @@ struct ClipHistoryView: View {
                                 apps: apps,
                                 undo: undo,
                                 redo: redo
-                                
                             )
                         }
                     }

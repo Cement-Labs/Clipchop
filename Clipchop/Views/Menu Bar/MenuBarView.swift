@@ -16,6 +16,8 @@ struct MenuBarView: View {
     
     @Default(.dnd) private var dnd
     
+    @Default(.copyShortcut) var copyShortcut
+    
     var body: some View {
         Text("\(Defaults[.timesClipped]) Clips, \(items.count) Items")
         
@@ -35,7 +37,7 @@ struct MenuBarView: View {
                             }
                         }
                     }
-                    .keyboardShortcut(.init(String(index + 1).first!), modifiers: .command)
+                    .keyboardShortcut(.init(String(index + 1).first!), modifiers: copyShortcut.eventModifier)
                 }
             }
             .keyboardShortcut("r", modifiers: .option)
@@ -49,12 +51,8 @@ struct MenuBarView: View {
         
         Divider()
         
-        Button("Open Luminare Settings…") {
+        Button("Settings…") {
             LuminareManager.open()
-        }
-        
-        SettingsLink {
-            Text("Settings…")
         }
         .keyboardShortcut(",", modifiers: .command)
         

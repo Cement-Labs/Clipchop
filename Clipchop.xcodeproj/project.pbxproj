@@ -136,6 +136,7 @@
 		65EDAE792C56203B00EA0D32 /* CustomLuminarePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE782C56203B00EA0D32 /* CustomLuminarePicker.swift */; };
 		65EDAE7E2C563B1500EA0D32 /* Luminare in Frameworks */ = {isa = PBXBuildFile; productRef = 65EDAE7D2C563B1500EA0D32 /* Luminare */; };
 		65EDAE802C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE7F2C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift */; };
+		65EDAE822C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE812C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,6 +267,7 @@
 		65EDAE762C55FF0E00EA0D32 /* LuminareAcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareAcknowledgementsView.swift; sourceTree = "<group>"; };
 		65EDAE782C56203B00EA0D32 /* CustomLuminarePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLuminarePicker.swift; sourceTree = "<group>"; };
 		65EDAE7F2C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminarePreferredColorSchemePicker.swift; sourceTree = "<group>"; };
+		65EDAE812C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareKeyboardShortcutsSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -697,6 +699,7 @@
 				6550AD462C53ED68009294E5 /* LuminareGeneralSettings.swift */,
 				6550AD482C5406A1009294E5 /* LuminareCustomizationSettings.swift */,
 				6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */,
+				65EDAE812C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift */,
 				6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */,
 				65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */,
 				65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */,
@@ -926,6 +929,7 @@
 				658D27552C383546001D1CC3 /* PermissionsSection.swift in Sources */,
 				65EDAE732C55E7AB00EA0D32 /* CustomLuminareList.swift in Sources */,
 				65EDAE792C56203B00EA0D32 /* CustomLuminarePicker.swift in Sources */,
+				65EDAE822C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift in Sources */,
 				658D27562C383546001D1CC3 /* AppearanceSection.swift in Sources */,
 				658D27642C383DE0001D1CC3 /* MenuBarView.swift in Sources */,
 				65EDAE802C564BFB00EA0D32 /* LuminarePreferredColorSchemePicker.swift in Sources */,
@@ -1135,7 +1139,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 728;
+				CURRENT_PROJECT_VERSION = 731;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1178,7 +1182,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 728;
+				CURRENT_PROJECT_VERSION = 731;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

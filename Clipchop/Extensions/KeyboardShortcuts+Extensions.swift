@@ -15,7 +15,6 @@ extension KeyboardShortcuts.Name {
     
     static let settings = Self("settings", default: .init(.comma, modifiers: .command))
     static let expand = Self("expand", default: .init(.rightBracket))
-    
     static let collapse = Self("collapse", default: .init(.leftBracket))
 }
 

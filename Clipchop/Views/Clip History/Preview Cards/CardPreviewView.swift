@@ -15,14 +15,20 @@ struct CardPreviewView: View {
     private var sourceApp: NSRunningApplication? {NSWorkspace.shared.frontmostApplication}
     
     @Default(.removeFormatting) private var removeFormatting
+    @Default(.deleteShortcut) var deleteShortcut
+    @Default(.copyShortcut) var copyShortcut
+    @Default(.pinShortcut) var pinShortcut
     
     @ObservedObject var item: ClipboardHistory
     
-    @State private var isSelected = false
+    @Binding var isSelected: Bool
     @State private var isHoveredPin = false
     @State private var data: Data?
     @State private var showMore = false
     @State private var eventMonitor: Any?
+    
+    @State private var autoCopyTimer: Timer?
+    @State private var isOnHover = false
     
     @EnvironmentObject private var apps: InstalledApps
     @Environment(\.managedObjectContext) var context
@@ -41,6 +47,7 @@ struct CardPreviewView: View {
         }
     }
     
+    
     var keyboardShortcut: String
     var provider = ClipboardDataProvider.shared
     
@@ -58,7 +65,7 @@ struct CardPreviewView: View {
             .allowsHitTesting(false)
             .buttonStyle(.borderless)
             .frame(width: 0, height: 0)
-            .applyKeyboardShortcut(keyboardShortcut, modifier: .control)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: deleteShortcut.eventModifier)
             
             Button("Copy", action: {
                 self.isSelected = true
@@ -66,14 +73,14 @@ struct CardPreviewView: View {
                     withAnimation(Animation.spring(dampingFraction: 0.7)) {
                         self.isSelected = false
                     }
-                    ClipboardManager.clipboardController?.copy(item)
+                    copyItem()
                 }
             })
             .opacity(0)
             .allowsHitTesting(false)
             .buttonStyle(.borderless)
             .frame(width: 0, height: 0)
-            .applyKeyboardShortcut(keyboardShortcut, modifier: .command)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: copyShortcut.eventModifier)
             
             if !Defaults[.removeFormatting] {
                 Button("Copy as plain text", action: {
@@ -83,7 +90,7 @@ struct CardPreviewView: View {
                         withAnimation(Animation.spring(dampingFraction: 0.7)) {
                             self.isSelected = false
                         }
-                        ClipboardManager.clipboardController?.copy(item)
+                        copyItem()
                         removeFormatting = false
                     }
                 })
@@ -91,7 +98,7 @@ struct CardPreviewView: View {
                 .allowsHitTesting(false)
                 .buttonStyle(.borderless)
                 .frame(width: 0, height: 0)
-                .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, .command])
+                .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, copyShortcut.eventModifier])
             }
             
             Button("Pin", action: {
@@ -111,7 +118,7 @@ struct CardPreviewView: View {
             .allowsHitTesting(false)
             .buttonStyle(.borderless)
             .frame(width: 0, height: 0)
-            .applyKeyboardShortcut(keyboardShortcut, modifier: .option)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: pinShortcut.eventModifier)
             
             // MARK: - CardView
             PreviewContentView(clipboardHistory: item)
@@ -238,10 +245,10 @@ struct CardPreviewView: View {
                 Text(item.pin ? "Unpin" : "Pin")
                 Image(systemSymbol: .pin)
             }
-            .applyKeyboardShortcut(keyboardShortcut, modifier: .option)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: pinShortcut.eventModifier)
             
             Button {
-                ClipboardManager.clipboardController?.copy(item)
+                copyItem()
             } label: {
                 if Defaults[.pasteToFrontmostEnabled] {
                     if let name = sourceApp?.localizedName {
@@ -254,7 +261,7 @@ struct CardPreviewView: View {
                 }
                 Image(systemSymbol: .docOnClipboard)
             }
-            .applyKeyboardShortcut(keyboardShortcut, modifier: .command)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: copyShortcut.eventModifier)
             
             if !Defaults[.removeFormatting] {
                 Button {
@@ -275,7 +282,7 @@ struct CardPreviewView: View {
                     }
                     Image(systemSymbol: .docOnDoc)
                 }
-                .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, .command])
+                .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, copyShortcut.eventModifier])
             }
             
             Divider()
@@ -286,7 +293,7 @@ struct CardPreviewView: View {
                 Text("Delete")
                 Image(systemSymbol: .trash)
             }
-            .applyKeyboardShortcut(keyboardShortcut, modifier: .control)
+            .applyKeyboardShortcut(keyboardShortcut, modifier: deleteShortcut.eventModifier)
         })
         .gesture(
             TapGesture(count: 2)
@@ -297,6 +304,7 @@ struct CardPreviewView: View {
         .onHover { isOver in
             withAnimation(Animation.easeInOut) {
                 self.isSelected = isOver
+                self.isOnHover = isOver
             }
         }
         .onDrag {
@@ -329,7 +337,11 @@ struct CardPreviewView: View {
                 eventMonitor = nil
             }
         }
+        .onChange(of: isSelected) { newValue, _ in
+            resetAutoCopyTimer()
+        }
     }
+    
     func pinClipItem(){
         let currentPinStatus = item.pin
         item.pin.toggle()
@@ -343,6 +355,20 @@ struct CardPreviewView: View {
         }
     }
     
+    private func copyItem() {
+        ClipboardManager.clipboardController?.copy(item)
+    }
+    
+    private func resetAutoCopyTimer() {
+        autoCopyTimer?.invalidate()
+        autoCopyTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { _ in
+            if isSelected && !isOnHover {
+                copyItem()
+                isSelected = false
+            }
+        }
+    }
+
     private func deleteItem(_ item: ClipboardHistory) throws {
         let context = provider.viewContext
         let existingItem = try context.existingObject(with: item.objectID)
@@ -390,3 +416,4 @@ struct CardPreviewView: View {
         return fileExtensions.joined(separator: ", ")
     }
 }
+

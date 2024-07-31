@@ -25,6 +25,11 @@ struct ExpandedPages: View {
     let clipHistorySearch = ClipHistorySearch()
     @State private var searchResults: [ClipHistorySearch.SearchResult] = []
     
+    @State private var filteredTags: [FileCategory] = []
+    
+    @State private var selectedIndex: Int? = nil
+    @Default(.keySwitcher) var keySwitcher
+    
     var filteredCategories: [FileCategory] {
         return Defaults[.categories].sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
@@ -38,49 +43,88 @@ struct ExpandedPages: View {
     }
     
     var body: some View {
-        VStack {
-            if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
-                if !filteredItems.isEmpty {
-                    renderSection(items: filteredItems)
+        ZStack {
+            
+            Button("selectNextItem") {
+                selectNextItem()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(.tab, modifiers: keySwitcher.switchereventModifier)
+            
+            Button("selectPreviousItem1") {
+                selectPreviousItem()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut("`", modifiers: keySwitcher.switchereventModifier)
+            
+            Button("selectPreviousItem2") {
+                selectPreviousItem()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut("·", modifiers: keySwitcher.switchereventModifier)
+            
+            Button("esc") {
+                selectedIndex = nil
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(.escape, modifiers: keySwitcher.switchereventModifier)
+            
+            VStack {
+                if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
+                    if !filteredItems.isEmpty {
+                        renderSection(items: filteredItems)
+                    } else {
+                        EmptyStatePages()
+                            .padding(.vertical, 24)
+                    }
+                } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
+                    let pinnedItems = filteredItems.filter { $0.pin }
+                    if !pinnedItems.isEmpty {
+                        renderSection(items: pinnedItems)
+                    } else {
+                        EmptyStatePages()
+                            .padding(.vertical, 24)
+                    }
                 } else {
-                    EmptyStatePages()
-                        .padding(.vertical, 24)
-                }
-            } else if selectedTab == NSLocalizedString("Pinned", comment: "Pinned") {
-                let pinnedItems = filteredItems.filter { $0.pin }
-                if !pinnedItems.isEmpty {
-                    renderSection(items: pinnedItems)
-                } else {
-                    EmptyStatePages()
-                        .padding(.vertical, 24)
-                }
-            } else {
-                ForEach(filteredCategories) { category in
-                    if selectedTab == category.name {
-                        let categoryItems = filteredItems.filter { item in
-                            if let contentsSet = item.contents as? Set<ClipboardContent> {
-                                let contentsArray = Array(contentsSet)
-                                let formatter = Formatter(contents: contentsArray)
-                                return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
-                            } else {
-                                return false
+                    ForEach(filteredCategories) { category in
+                        if selectedTab == category.name {
+                            let categoryItems = filteredItems.filter { item in
+                                if let contentsSet = item.contents as? Set<ClipboardContent> {
+                                    let contentsArray = Array(contentsSet)
+                                    let formatter = Formatter(contents: contentsArray)
+                                    return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
+                                } else {
+                                    return false
+                                }
                             }
-                        }
-                        
-                        if !categoryItems.isEmpty {
-                            renderSection(items: categoryItems)
-                        } else {
-                            EmptyStatePages()
-                                .padding(.vertical, 24)
+                            
+                            if !categoryItems.isEmpty {
+                                renderSection(items: categoryItems)
+                            } else {
+                                EmptyStatePages()
+                                    .padding(.vertical, 24)
+                            }
                         }
                     }
                 }
             }
+            .padding(.top, 48)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
+            .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
         }
-        .padding(.top, 48)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
-        .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
     }
     
     // MARK: - Expanded ViewBuilder
@@ -90,9 +134,20 @@ struct ExpandedPages: View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    CardPreviewView(item: item, keyboardShortcut: getKeyboardShortcut(for: index))
-                        .environmentObject(apps)
-                        .applyMatchedGeometryEffect(if: items.firstIndex(of: item) ?? 0 < 6, id: item.id, namespace: animationNamespace)
+                    CardPreviewView(item: item,
+                        isSelected: Binding(
+                            get: { self.selectedIndex == index },
+                            set: { isSelected in
+                                if isSelected {
+                                    self.selectedIndex = index
+                                } else if selectedIndex == index {
+                                    self.selectedIndex = nil
+                                }
+                            }
+                        ), keyboardShortcut: getKeyboardShortcut(for: index)
+                    )
+                    .environmentObject(apps)
+                    .applyMatchedGeometryEffect(if: items.firstIndex(of: item) ?? 0 < 6, id: item.id, namespace: animationNamespace)
                 }
             }
             .padding(.horizontal, Defaults[.displayMore] ? 16 : 12)
@@ -154,31 +209,65 @@ struct ExpandedPages: View {
                 HStack {
                     TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
                     TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
-                    ForEach(filteredCategories) { category in
-                        let categoryItems = items.filter { item in
-                            if let contentsSet = item.contents as? Set<ClipboardContent> {
-                                let contentsArray = Array(contentsSet)
-                                let formatter = Formatter(contents: contentsArray)
-                                return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
-                            } else {
-                                return false
-                            }
-                        }
-                        
-                        if !categoryItems.isEmpty {
-                            TabButton(title: category.name, selectedTab: $selectedTab)
-                        }
+                    ForEach(filteredTags) { category in
+                        TabButton(title: category.name, selectedTab: $selectedTab)
                     }
                 }
             }
         }
-        .frame(width: isSearchVisible ? 0 :  Defaults[.displayMore] ? 622 : 425, height: 30)
+        .onAppear(perform: setupTags)
+        .frame(width: isSearchVisible ? 0 : Defaults[.displayMore] ? 622 : 425, height: 30)
         .cornerRadius(25)
     }
+
     
     private func getKeyboardShortcut(for index: Int) -> String {
         guard index < 9 else { return "none" }
         return String(index + 1)
+    }
+    
+    private func selectItem(at index: Int) {
+        if index >= 0 && index < items.count {
+            selectedIndex = index
+        }
+    }
+    
+    private func selectPreviousItem() {
+        if selectedIndex == nil {
+            selectItem(at: 0)
+        } else {
+            guard let currentIndex = selectedIndex else { return }
+            let previousIndex = (currentIndex - 1 + 5) % 5
+            let actualIndex = min(previousIndex, items.count - 1)
+            selectItem(at: actualIndex)
+        }
+    }
+    
+    private func selectNextItem() {
+        if selectedIndex == nil {
+            selectItem(at: 0)
+        } else {
+            guard let currentIndex = selectedIndex else { return }
+            let nextIndex = (currentIndex + 1) % 5
+            let actualIndex = min(nextIndex, items.count - 1)
+            selectItem(at: actualIndex)
+        }
+    }
+    
+    private func setupTags() {
+        let filtered = Defaults[.categories].filter { category in
+            let categoryItems = items.filter { item in
+                if let contentsSet = item.contents as? Set<ClipboardContent> {
+                    let contentsArray = Array(contentsSet)
+                    let formatter = Formatter(contents: contentsArray)
+                    return category.types.contains { $0.caseInsensitiveEquals(formatter.title ?? "") }
+                } else {
+                    return false
+                }
+            }
+            return !categoryItems.isEmpty
+        }
+        filteredTags = filtered.sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
     }
 }
 
