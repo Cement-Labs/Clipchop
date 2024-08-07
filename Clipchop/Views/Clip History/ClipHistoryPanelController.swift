@@ -27,9 +27,7 @@ class ClipHistoryPanelController: NSViewController, ObservableObject {
     }
         
     private var panel: ClipHistoryPanel?
-    
     private var closeTimer: Timer?
-    
     var isExpanded = false
     var isExpandedforView = false
     
@@ -131,6 +129,7 @@ extension ClipHistoryPanelController {
     func open(position: CGPoint) {
         guard let panel else {
             // Initialize
+           
             panel = .init(self)
             open(position: position)
             return
@@ -156,6 +155,7 @@ extension ClipHistoryPanelController {
     func close() {
         self.setExpansion(false)
         self.panel?.orderOut(nil)
+        NotificationCenter.default.post(name: .panelDidClose, object: nil)
         panelDidClose()
     }
     

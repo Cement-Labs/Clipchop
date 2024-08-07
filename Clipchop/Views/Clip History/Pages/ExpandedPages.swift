@@ -11,6 +11,8 @@ import Fuse
 
 struct ExpandedPages: View {
     
+    let clipHistorySearch = ClipHistorySearch()
+    
     var items: FetchedResults<ClipboardHistory>
     var animationNamespace: Namespace.ID
     
@@ -18,17 +20,19 @@ struct ExpandedPages: View {
     var undo: () -> Void
     var redo: () -> Void
     
+    @Default(.keySwitcher) var keySwitcher
+    
+    @State private var searchResults: [ClipHistorySearch.SearchResult] = []
+    @State private var filteredTags: [FileCategory] = []
+    @State private var selectedIndex: Int? = nil
+    @State private var eventLeft: Any?
+    @State private var eventRight: Any?
+    @State private var isOnHover: Bool = false
+    @State private var shouldScroll: Bool = false
+    
     @Binding var searchText: String
     @Binding var selectedTab: String
     @Binding var isSearchVisible: Bool
-    
-    let clipHistorySearch = ClipHistorySearch()
-    @State private var searchResults: [ClipHistorySearch.SearchResult] = []
-    
-    @State private var filteredTags: [FileCategory] = []
-    
-    @State private var selectedIndex: Int? = nil
-    @Default(.keySwitcher) var keySwitcher
     
     var filteredCategories: [FileCategory] {
         return Defaults[.categories].sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
@@ -125,34 +129,55 @@ struct ExpandedPages: View {
             .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
             .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
         }
+        .onAppear {
+            setupEventMonitors()
+        }
+        .onDisappear {
+            cleanupEventMonitors()
+        }
+        .onReceive(.panelDidClose) { _ in
+            selectedIndex = nil
+        }
     }
     
     // MARK: - Expanded ViewBuilder
     
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
-                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    CardPreviewView(item: item,
-                        isSelected: Binding(
-                            get: { self.selectedIndex == index },
-                            set: { isSelected in
-                                if isSelected {
-                                    self.selectedIndex = index
-                                } else if selectedIndex == index {
-                                    self.selectedIndex = nil
-                                }
-                            }
-                        ), keyboardShortcut: getKeyboardShortcut(for: index)
-                    )
-                    .environmentObject(apps)
-                    .applyMatchedGeometryEffect(if: items.firstIndex(of: item) ?? 0 < 6, id: item.id, namespace: animationNamespace)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
+                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        CardPreviewView(
+                            item: item,
+                            isSelected: isSelectedBinding(for: index),
+                            keyboardShortcut: getKeyboardShortcut(for: index)
+                        )
+                        .id(index)
+                        .environmentObject(apps)
+                        .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
+                        .onHover { isOver in
+                            isOnHover = isOver
+                        }
+                    }
+                }
+                .padding(.horizontal, Defaults[.displayMore] ? 16 : 12)
+            }
+            .frame(width: Defaults[.displayMore] ? 700 : 500)
+            .onChange(of: selectedIndex) { new, _ in
+                if !isOnHover {
+                    shouldScroll.toggle()
                 }
             }
-            .padding(.horizontal, Defaults[.displayMore] ? 16 : 12)
+            .onChange(of: shouldScroll) { _, _ in
+                if let newIndex = selectedIndex {
+                    withAnimation {
+                        proxy.scrollTo(newIndex, anchor: .trailing)
+                    }
+                    shouldScroll = false
+                }
+            }
         }
-        .frame(width: Defaults[.displayMore] ? 700 : 500)
     }
     
     @ViewBuilder
@@ -194,6 +219,7 @@ struct ExpandedPages: View {
         }
         .frame(width: isSearchVisible ?  Defaults[.displayMore] ? 668 : 470 : 30, height: 30)
         .cornerRadius(25)
+        
     }
     
     @ViewBuilder
@@ -219,18 +245,62 @@ struct ExpandedPages: View {
         .frame(width: isSearchVisible ? 0 : Defaults[.displayMore] ? 622 : 425, height: 30)
         .cornerRadius(25)
     }
+    
+    private func setupEventMonitors() {
+        eventRight = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
+            if event.type == .keyDown && event.keyCode == 123 {
+                selectPreviousItem2()
+                return nil
+            }
+            return event
+        }
 
+        eventLeft = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
+            if event.type == .keyDown && event.keyCode == 124 {
+                selectNextItem2()
+                return nil
+            }
+            return event
+        }
+    }
+    
+    private func cleanupEventMonitors() {
+//         Remove event monitors to avoid leaks
+        if let monitor = eventRight {
+            NSEvent.removeMonitor(monitor)
+            eventRight = nil
+        }
+        if let monitor = eventLeft {
+            NSEvent.removeMonitor(monitor)
+            eventLeft = nil
+        }
+    }
+    
+    private func isSelectedBinding(for index: Int) -> Binding<Bool> {
+        Binding(
+            get: { self.selectedIndex == index },
+            set: { isSelected in
+                if isSelected {
+                    self.selectedIndex = index
+                } else if self.selectedIndex == index {
+                    self.selectedIndex = nil
+                }
+            }
+        )
+    }
     
     private func getKeyboardShortcut(for index: Int) -> String {
         guard index < 9 else { return "none" }
         return String(index + 1)
     }
     
+    
     private func selectItem(at index: Int) {
         if index >= 0 && index < items.count {
             selectedIndex = index
         }
     }
+    
     
     private func selectPreviousItem() {
         if selectedIndex == nil {
@@ -249,6 +319,28 @@ struct ExpandedPages: View {
         } else {
             guard let currentIndex = selectedIndex else { return }
             let nextIndex = (currentIndex + 1) % 5
+            let actualIndex = min(nextIndex, items.count - 1)
+            selectItem(at: actualIndex)
+        }
+    }
+    
+    private func selectPreviousItem2() {
+        if selectedIndex == nil {
+            selectItem(at: 0)
+        } else {
+            guard let currentIndex = selectedIndex else { return }
+            let previousIndex = currentIndex - 1
+            let actualIndex = max(previousIndex, 0)
+            selectItem(at: actualIndex)
+        }
+    }
+
+    private func selectNextItem2() {
+        if selectedIndex == nil {
+            selectItem(at: 0)
+        } else {
+            guard let currentIndex = selectedIndex else { return }
+            let nextIndex = currentIndex + 1
             let actualIndex = min(nextIndex, items.count - 1)
             selectItem(at: actualIndex)
         }

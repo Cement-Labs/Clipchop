@@ -46,6 +46,6 @@ struct HTMLPreviewPage: View {
         WebView(htmlContent: htmlContent)
             .allowsHitTesting(false)
             .background(backgroundColor)
-            .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 }

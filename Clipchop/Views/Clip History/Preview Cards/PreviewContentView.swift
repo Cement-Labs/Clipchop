@@ -59,7 +59,8 @@ struct PreviewContentView: View, Equatable {
                 Image(nsImage: thumbnail)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: Defaults[.displayMore] ? 92 : 65, height: Defaults[.displayMore] ? 92 : 65)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
             }
         }
         .padding(.vertical, 4)
@@ -73,7 +74,10 @@ struct PreviewContentView: View, Equatable {
         if let resizedImage = getCachedOrResizeImage(image: image, for: clipboardHistory.id) {
             return AnyView(
                 Image(nsImage: resizedImage)
+                    .resizable()
+                    .scaledToFit()
                     .aspectRatio(contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
             )
         }
         return AnyView(EmptyView())
@@ -83,7 +87,7 @@ struct PreviewContentView: View, Equatable {
         VStack {
             RTFPreviewPage(rtfData: rtfData, colorScheme: colorScheme)
         }
-        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
+        .clipShape(RoundedRectangle(cornerRadius: 7.5))
     }
     
     private func textView(for text: String) -> some View {
@@ -95,14 +99,14 @@ struct PreviewContentView: View, Equatable {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .padding(.all, 5)
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 7.5))
             )
         } else if let colorImage = ColorPreviewPage.from(text) {
             return AnyView(
                 ZStack {
                     Image(nsImage: colorImage)
                         .resizable()
-                        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
+                        .scaledToFit()
                         .aspectRatio(contentMode: .fit)
                     Text(text)
                         .font(.system(size: 12).monospaced())
@@ -111,6 +115,7 @@ struct PreviewContentView: View, Equatable {
                         .fixedSize(horizontal: false, vertical: false)
                         .foregroundColor(foregroundColor(for: colorImage))
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             )
         } else {
             return AnyView(
@@ -123,7 +128,6 @@ struct PreviewContentView: View, Equatable {
                         .foregroundColor(.primary)
                         .padding(.all, 4)
                 }
-                .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
             )
         }
     }
@@ -143,7 +147,6 @@ struct PreviewContentView: View, Equatable {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .background(Color.white)
-        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
     }
     
     private func defaultView() -> some View {

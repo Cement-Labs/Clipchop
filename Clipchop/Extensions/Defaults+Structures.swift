@@ -111,7 +111,17 @@ enum KeyboardSwitcher: String, Codable, CaseIterable, Identifiable, Defaults.Ser
             return .option
         }
     }
-
+    
+    var switcherKeyCode: Int {
+        switch self {
+        case .none:
+            return -1
+        case .control:
+            return 59
+        case .option:
+            return 58
+        }
+    }
 }
 
 // MARK: - History Preservation Period
@@ -177,7 +187,7 @@ enum ColorStyle: String, Defaults.Serializable, CaseIterable {
 }
 
 
-// MARK: Category
+// MARK: - Category
 
 struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
         var id: UUID = .init()
@@ -193,11 +203,12 @@ struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
     }
 }
 
-// MARK: Window position
+// MARK: -  Window position
 
 enum CursorPosition: String, CaseIterable, Identifiable, Defaults.Serializable {
     case mouseLocation = "NSEvent.mouseLocation"
     case adjustedPosition = "Adjusted Position"
+    case fixedPosition = "Fixed position"
     
     var displayText: String {
         switch self {
@@ -205,6 +216,8 @@ enum CursorPosition: String, CaseIterable, Identifiable, Defaults.Serializable {
             return NSLocalizedString("At the mouse", comment: "At the mouse")
         case .adjustedPosition:
             return NSLocalizedString("At the cursor", comment: "At the cursor")
+        case .fixedPosition:
+            return NSLocalizedString("At the subcenter", comment: "At the subcenter")
         }
     }
     

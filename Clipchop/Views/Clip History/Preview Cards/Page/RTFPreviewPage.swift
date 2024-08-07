@@ -52,7 +52,7 @@ struct RTFPreviewPage: View {
                 .background(Color.clear)
                 .padding(.all, 4)
         }
-        .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(backgroundColor)
     }
 }

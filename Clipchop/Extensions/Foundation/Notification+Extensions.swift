@@ -29,3 +29,7 @@ extension Notification.Name {
     }
 }
 
+extension Notification.Name {
+    static let panelDidClose = Notification.Name("panelDidClose")
+}
+

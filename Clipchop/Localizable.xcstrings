@@ -544,6 +544,17 @@
         }
       }
     },
+    "At the subcenter" : {
+      "comment" : "At the subcenter",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在固定位置"
+          }
+        }
+      }
+    },
     "Audio" : {
       "localizations" : {
         "zh-Hans" : {
@@ -989,7 +1000,14 @@
       }
     },
     "esc" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "esc"
+          }
+        }
+      }
     },
     "Exclude apps to prevent %@ copying their contents." : {
       "localizations" : {
@@ -1280,6 +1298,7 @@
       }
     },
     "Log to Console (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1563,6 +1582,7 @@
       }
     },
     "Refresh States (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1862,6 +1882,7 @@
       }
     },
     "Syncing" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1883,6 +1904,7 @@
       }
     },
     "Test (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

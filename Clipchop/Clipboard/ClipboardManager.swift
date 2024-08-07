@@ -30,17 +30,39 @@ class ClipboardManager {
         Self.clipboardController?.start()
         
         KeyboardShortcuts.onKeyDown(for: .window) {
-            if Defaults[.cursorPosition] != .mouseLocation {
+            let cursorPosition = Defaults[.cursorPosition]
+            
+            let position: CGPoint
+            
+            switch cursorPosition {
+            case .mouseLocation:
+                position = NSEvent.mouseLocation
+                
+            case .adjustedPosition:
                 if let screenCursorPosition = getIMECursorPosition() {
                     let globalCursorPosition = convertScreenToGlobalCoordinates(screenPoint: screenCursorPosition)
-                    let adjustedPosition = CGPoint(x: globalCursorPosition.x - 20, y: globalCursorPosition.y - 28)
-                    self.clipHistoryViewController.toggle(position: adjustedPosition)
+                    position = CGPoint(x: globalCursorPosition.x - 20, y: globalCursorPosition.y - 28)
                 } else {
-                    self.clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
+                    position = NSEvent.mouseLocation
                 }
-            } else {
-                self.clipHistoryViewController.toggle(position: NSEvent.mouseLocation)
+                
+            case .fixedPosition:
+                if let screen = NSScreen.main {
+                    let screenFrame = screen.frame
+                    
+                    let x = screenFrame.midX - (Defaults[.displayMore] ? 350 : 250)
+                    
+                    let y = screenFrame.minY + (Defaults[.displayMore] ? 250 : 200)
+                    
+                    let fixedPosition = CGPoint(x: x, y: y)
+                    
+                    position = fixedPosition
+                } else {
+                    position = NSEvent.mouseLocation
+                }
             }
+            
+            self.clipHistoryViewController.toggle(position: position)
         }
         
         KeyboardShortcuts.onKeyDown(for: .start) {

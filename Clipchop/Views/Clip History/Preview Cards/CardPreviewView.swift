@@ -18,6 +18,7 @@ struct CardPreviewView: View {
     @Default(.deleteShortcut) var deleteShortcut
     @Default(.copyShortcut) var copyShortcut
     @Default(.pinShortcut) var pinShortcut
+    @Default(.keySwitcher) var keySwitcher
     
     @ObservedObject var item: ClipboardHistory
     
@@ -25,9 +26,13 @@ struct CardPreviewView: View {
     @State private var isHoveredPin = false
     @State private var data: Data?
     @State private var showMore = false
-    @State private var eventMonitor: Any?
+    @State private var showPopover = false
     
-    @State private var autoCopyTimer: Timer?
+    @State private var eventMonitor: Any?
+    @State private var eventSpaceMonitor: Any?
+    @State private var eventOptionMonitor: Any?
+    @State private var eventEnterMonitor: Any?
+    
     @State private var isOnHover = false
     
     @EnvironmentObject private var apps: InstalledApps
@@ -47,6 +52,24 @@ struct CardPreviewView: View {
         }
     }
     
+    var shouldShowPopover: Binding<Bool> {
+        Binding<Bool>(
+            get: { isSelected && showPopover },
+            set: { _ in }
+        )
+    }
+    
+    private var displayText: String {
+        if item.formatter.contentPreview.count > 50 {
+            return item.formatter.title ?? "Other"
+        } else if item.formatter.contentPreview.isEmpty {
+            return "Other"
+        } else {
+            let title = item.formatter.contentPreview
+            let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+            return categorizeFileExtensions(fileExtensions)
+        }
+    }
     
     var keyboardShortcut: String
     var provider = ClipboardDataProvider.shared
@@ -317,31 +340,106 @@ struct CardPreviewView: View {
             log(self, "No suitable content found for dragging")
             return NSItemProvider()
         }
-        .onAppear {
-            eventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
-                if event.modifierFlags.contains(.shift) {
-                    withAnimation {
-                        showMore = true
-                    }
-                } else {
-                    withAnimation {
-                        showMore = false
-                    }
-                }
-                return event
+        .popover(isPresented: shouldShowPopover) {
+            VStack {
+                PreviewContentView(clipboardHistory: item)
+                    .frame(width: Defaults[.displayMore] ? 210 : 150, height: Defaults[.displayMore] ? 140 : 100 , alignment: .center)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .allowsHitTesting(false)
+                
+                Spacer()
+                
+                Text(displayText)
+                    .font(.system(size: 12.5))
+                    .minimumScaleFactor(0.5)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(2)
+                    .frame(height: 20)
             }
-        }
-        .onDisappear {
-            if let monitor = eventMonitor {
-                NSEvent.removeMonitor(monitor)
-                eventMonitor = nil
-            }
+            .padding(.all, 25)
+            .frame(width: Defaults[.displayMore] ? 245 : 175, height: Defaults[.displayMore] ? 189 : 150 , alignment: .center)
         }
         .onChange(of: isSelected) { newValue, _ in
-            resetAutoCopyTimer()
+            if !newValue {
+                showPopover = false
+            }
+         }
+        .onChange(of: keyboardShortcut) { _, _ in
+            cleanupEventMonitors()
+            setupEventMonitors()
+        }
+        .onAppear {
+            setupEventMonitors()
+        }
+        .onDisappear {
+            cleanupEventMonitors()
         }
     }
     
+    private func setupEventMonitors() {
+        // Set up event monitors when `isSelected` is true
+        eventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+            if event.modifierFlags.contains(.shift) {
+                withAnimation {
+                    showMore = true
+                }
+            } else {
+                withAnimation {
+                    showMore = false
+                }
+            }
+            return event
+        }
+
+        eventSpaceMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
+            if event.type == .keyDown && event.keyCode == 49 && isSelected {
+                withAnimation {
+                    showPopover.toggle()
+                }
+                return nil
+            }
+            return event
+        }
+        
+        eventOptionMonitor = NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
+            if event.modifierFlags.contains(keySwitcher.switchereventNSEvent) {
+                
+            } else {
+                if isSelected && event.keyCode == keySwitcher.switcherKeyCode {
+                    copyItem()
+                    isSelected = false
+                }
+            }
+            return event
+        }
+        eventEnterMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyUp]) { event in
+            if event.type == .keyUp && event.keyCode == 36 && isSelected {
+                if isSelected {
+                    copyItem()
+                    isSelected = false
+                }
+                return nil
+            }
+            return event
+        }
+    }
+    
+    private func cleanupEventMonitors() {
+//         Remove event monitors to avoid leaks
+        if let monitor = eventMonitor {
+            NSEvent.removeMonitor(monitor)
+            eventMonitor = nil
+        }
+        if let monitor = eventSpaceMonitor {
+            NSEvent.removeMonitor(monitor)
+            eventSpaceMonitor = nil
+        }
+        if let monitor = eventOptionMonitor {
+            NSEvent.removeMonitor(monitor)
+            eventOptionMonitor = nil
+        }
+    }
+        
     func pinClipItem(){
         let currentPinStatus = item.pin
         item.pin.toggle()
@@ -355,18 +453,8 @@ struct CardPreviewView: View {
         }
     }
     
-    private func copyItem() {
+    func copyItem() {
         ClipboardManager.clipboardController?.copy(item)
-    }
-    
-    private func resetAutoCopyTimer() {
-        autoCopyTimer?.invalidate()
-        autoCopyTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false) { _ in
-            if isSelected && !isOnHover {
-                copyItem()
-                isSelected = false
-            }
-        }
     }
 
     private func deleteItem(_ item: ClipboardHistory) throws {

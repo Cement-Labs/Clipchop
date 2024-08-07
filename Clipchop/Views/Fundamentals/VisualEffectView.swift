@@ -28,3 +28,4 @@ struct VisualEffectView: NSViewRepresentable {
         visualEffectView.blendingMode = blendingMode
     }
 }
+
