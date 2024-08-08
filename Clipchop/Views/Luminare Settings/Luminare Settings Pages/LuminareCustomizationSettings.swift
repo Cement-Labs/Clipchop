@@ -113,9 +113,9 @@ struct LuminareCustomizationSettings: View {
             }
             .frame(width: 80, height: 24, alignment: .trailing)
             .controlSize(.regular)
-            .onChange(of: selection.wrappedValue, perform: { newValue in
+            .onChange(of: selection.wrappedValue) { newValue, _ in
                 action(newValue, selection.wrappedValue)
-            })
+            }
             
             if selection.wrappedValue.hasSound {
                 Button {

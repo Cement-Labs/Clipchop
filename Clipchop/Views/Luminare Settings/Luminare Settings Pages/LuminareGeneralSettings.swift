@@ -24,11 +24,11 @@ struct LuminareGeneralSettings: View {
     @State private var displayMoreChanged = false
     
     @Default(.preferredColorScheme) private var preferredColorScheme
-    @Default(.cardPreviewMoreView) private var cardPreviewMoreView
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     @Default(.autoCloseTimeout) private var autoCloseTimeout
     @Default(.cursorPosition) private var cursorPosition
     @Default(.displayMore) private var displayMore
+    @Default(.hideTag) private var hideTag
     
     private var controller: ClipHistoryPanelController = ClipHistoryPanelController()
     
@@ -112,6 +112,9 @@ Full Disk Access is needed to generate file previews.
         }
         
         LuminareSection("Panel Behaviors") {
+            
+            LuminareToggle("Hide tag" ,isOn: $hideTag)
+            
             HStack {
                 withCaption {
                     Text("Display More")

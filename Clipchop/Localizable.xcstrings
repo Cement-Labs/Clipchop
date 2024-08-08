@@ -1184,6 +1184,16 @@
         }
       }
     },
+    "Hide tag" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐藏标签"
+          }
+        }
+      }
+    },
     "images" : {
       "comment" : "images",
       "localizations" : {

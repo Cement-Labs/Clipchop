@@ -238,7 +238,7 @@ extension Formatter {
         if let firstContent = plainTextContents.first, !firstContent.isEmpty {
             if let url = NSURL(string: firstContent), url.scheme != nil {
                 extractMetadataFromURL(url as URL) { title in
-                    let urlPreview = title != nil ? "URL: \(title!)" : "URL: \(url.absoluteString ?? "")"
+                    let urlPreview = title != nil ? "\(title!)" : "\(url.absoluteString ?? "")"
                     MetadataCache.shared.setPreview(urlPreview, for: cacheKey)
                 }
             } else {
@@ -249,19 +249,19 @@ extension Formatter {
                 if let text = recognizedText, !text.isEmpty {
                     preview = text
                 } else {
-                    preview = "Image: \(image.size.width)x\(image.size.height)"
+                    preview = "\(image.size.width)x\(image.size.height)"
                 }
                 semaphore.signal()
             }
             _ = semaphore.wait(timeout: .distantFuture)
         } else if let url = url {
             extractMetadataFromURL(url) { title in
-                let preview = title != nil ? "URL: \(title!)" : "URL: \(url.absoluteString)"
+                let preview = title != nil ? "\(title!)" : "\(url.absoluteString)"
                 MetadataCache.shared.setPreview(preview, for: cacheKey)
 
             }
         } else if !fileURLs.isEmpty {
-            var filePreview = "Files: \(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
+            var filePreview = "\(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
             
             for fileURL in fileURLs {
                 if let image = NSImage(contentsOf: fileURL) {

@@ -7,16 +7,17 @@
 
 import SwiftUI
 import Defaults
+import SFSafeSymbols
 import LinkPresentation
 
 class CustomLinkView: LPLinkView {
     override var intrinsicContentSize: CGSize {
         // The most proper size.
-        CGSize(width: Defaults[.displayMore] ? 200 : 140, height:  Defaults[.displayMore] ? 140 : 70)
+        CGSize(width: 210 , height: 210 )
     }
 }
 
-struct WebLinkPreviewPage: NSViewRepresentable {
+struct WebLinkPreview: NSViewRepresentable {
     typealias NSViewType = NSView
     var urlString: String
     
@@ -52,7 +53,7 @@ struct WebLinkPreviewPage: NSViewRepresentable {
         // Apply constraints
         NSLayoutConstraint.activate([
             linkView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            linkView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -32),
+            linkView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
         ])
         
         return containerView
@@ -80,3 +81,164 @@ struct WebLinkPreviewPage: NSViewRepresentable {
         }
     }
 }
+
+struct WebLinkPreviewPage: View {
+    let urlString: String
+    @State private var showWebView: Bool = false
+    @State private var metadata: LPLinkMetadata?
+    @State private var loadedImage: NSImage?
+    @State private var iconImage: NSImage?
+    
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                if geometry.size.width < 160 {
+                    if Defaults[.hideTag] {
+                        if showWebView {
+                            HStack {
+                                Image(systemSymbol: .linkCircle)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                                    .frame(maxHeight: 20)
+                                Text(metadata?.title ?? "No Title")
+                                    .font(.system(size: 7.5))
+                                    .lineLimit(5)
+                            }
+                            .frame(alignment: .center)
+                            .padding(.all, 2)
+                            .offset(y: Defaults[.hideTag] ? 0 : -10 )
+                        } else {
+                            HStack {
+                                if let image = iconImage {
+                                    Image(nsImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                                        .frame(maxHeight: 20)
+                                }
+                                Text(metadata?.title ?? "No Title")
+                                    .font(.system(size: 7.5))
+                                    .lineLimit(5)
+                            }
+                            .frame(alignment: .center)
+                            .padding(.all, 2)
+                            .offset(y: Defaults[.hideTag] ? 0 : -10 )
+                        }
+                    } else {
+                        if showWebView {
+                            HStack {
+                                Image(systemSymbol: .linkCircle)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                                    .frame(maxHeight: 20)
+                                Text(metadata?.title ?? "No Title")
+                                    .font(.system(size: 7.5))
+                                    .lineLimit(5)
+                            }
+                            .frame(alignment: .center)
+                            .padding(.all, 2)
+                            .offset(y: Defaults[.hideTag] ? 0 : -10 )
+                        } else {
+                            HStack {
+                                if let image = iconImage {
+                                    Image(nsImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .clipShape(RoundedRectangle(cornerRadius: 7.5))
+                                        .frame(maxHeight: 20)
+                                }
+                                Text(metadata?.title ?? "No Title")
+                                    .font(.system(size: 7.5))
+                                    .lineLimit(5)
+                            }
+                            .frame(alignment: .center)
+                            .padding(.all, 2)
+                            .offset(y: Defaults[.hideTag] ? 0 : -10 )
+                        }
+                    }
+                } else {
+                    WebLinkPreview(urlString: urlString)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .onAppear {
+                guard let url = URL(string: urlString) else { return }
+                MetadataService.shared.fetchMetadata(for: url) { fetchedMetadata in
+                    DispatchQueue.main.async {
+                        self.metadata = fetchedMetadata
+                        self.loadImage(from: fetchedMetadata?.imageProvider)
+                        self.loadIcon(from: fetchedMetadata?.iconProvider)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func loadImage(from provider: NSItemProvider?) {
+        guard let provider = provider else { return }
+        
+        if provider.canLoadObject(ofClass: NSImage.self) {
+            provider.loadObject(ofClass: NSImage.self) { (object, error) in
+                if let error = error {
+                    print("Error loading image: \(error)")
+                } else if let image = object as? NSImage {
+                    DispatchQueue.main.async {
+                        self.loadedImage = image
+                    }
+                }
+            }
+        } else {
+            print("Provider cannot load NSImage or NSURL")
+            showWebView = true
+        }
+    }
+
+    private func loadIcon(from provider: NSItemProvider?) {
+        guard let provider = provider else { return }
+        
+        if provider.canLoadObject(ofClass: NSImage.self) {
+            provider.loadObject(ofClass: NSImage.self) { (object, error) in
+                if let error = error {
+                    print("Error loading icon: \(error)")
+                } else if let icon = object as? NSImage {
+                    DispatchQueue.main.async {
+                        self.iconImage = icon
+                    }
+                }
+            }
+        } else {
+            print("Provider cannot load NSImage or NSURL")
+            showWebView = true
+        }
+    }
+}
+
+
+class MetadataService {
+    static let shared = MetadataService()
+
+    private init() {}
+
+    func fetchMetadata(for url: URL, completionHandler: @escaping (LPLinkMetadata?) -> Void) {
+        if let cachedMetadata = MetadataCache.shared.getMetadata(for: url.absoluteString) {
+            completionHandler(cachedMetadata)
+        } else {
+            let metadataProvider = LPMetadataProvider()
+            metadataProvider.startFetchingMetadata(for: url) { metadata, error in
+                if let error = error {
+                    print("Error fetching metadata: \(error)")
+                    completionHandler(nil)
+                } else {
+                    if let metadata = metadata {
+                        MetadataCache.shared.setMetadata(metadata, for: url.absoluteString)
+                    }
+                    completionHandler(metadata)
+                }
+            }
+        }
+    }
+}
+
+

@@ -95,10 +95,7 @@ struct PreviewContentView: View, Equatable {
             return AnyView(
                 VStack {
                     WebLinkPreviewPage(urlString: text)
-                        .scaleEffect(0.5)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding(.all, 5)
                 .clipShape(RoundedRectangle(cornerRadius: 7.5))
             )
         } else if let colorImage = ColorPreviewPage.from(text) {
@@ -135,7 +132,6 @@ struct PreviewContentView: View, Equatable {
     private func urlPreviewView(for url: URL) -> some View {
         VStack {
             WebLinkPreviewPage(urlString: url.absoluteString)
-                .scaleEffect(0.5)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .padding(.all, 5)
@@ -177,7 +173,7 @@ struct PreviewContentView: View, Equatable {
     
     private func generateAndSetThumbnail(for fileURL: URL) {
         DispatchQueue.global(qos: .utility).async {
-            let maxDimension = Defaults[.displayMore] ? 92 :65
+            let maxDimension = 128
             let size = CGSize(width: maxDimension, height: maxDimension)
             let scale = NSScreen.main!.backingScaleFactor
             let request = QLThumbnailGenerator.Request(
@@ -220,7 +216,7 @@ struct PreviewContentView: View, Equatable {
     
     // Image preview resolution scaling
     private func resizeImage(image: NSImage) -> NSImage? {
-        let maxSize: CGFloat = Defaults[.displayMore] ? 92 : 65
+        let maxSize: CGFloat = Defaults[.displayMore] ? 180 : 128
         let aspectRatio = image.size.width / image.size.height
         let newSize: NSSize
         
@@ -248,5 +244,16 @@ struct PreviewContentView: View, Equatable {
             return .primary
         }
         return averageColor.isLight ? .secondary : Color(white: 0.9)
+    }
+}
+
+extension NSImage {
+    func resize(to size: CGSize) -> NSImage {
+        let image = NSImage(size: size)
+        image.lockFocus()
+        let rect = CGRect(origin: .zero, size: size)
+        self.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1.0)
+        image.unlockFocus()
+        return image
     }
 }

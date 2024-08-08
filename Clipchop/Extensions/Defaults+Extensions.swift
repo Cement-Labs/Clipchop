@@ -15,7 +15,7 @@ extension Defaults.Keys {
     
     // MARK: Panel
     static let displayMore = Key<Bool>("displayMore", default: false)
-    static let cardPreviewMoreView = Key<Bool>("cardPreviewMoreView", default: false)
+    static let hideTag = Key<Bool>("hideTag", default: false)
     static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
     static let cursorPosition = Key<CursorPosition>("cursorPosition", default: .mouseLocation)
     

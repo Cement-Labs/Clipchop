@@ -148,16 +148,30 @@ struct ExpandedPages: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                        CardPreviewView(
-                            item: item,
-                            isSelected: isSelectedBinding(for: index),
-                            keyboardShortcut: getKeyboardShortcut(for: index)
-                        )
-                        .id(index)
-                        .environmentObject(apps)
-                        .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
-                        .onHover { isOver in
-                            isOnHover = isOver
+                        if Defaults[.hideTag] {
+                            CardPreviewView_2(
+                                item: item,
+                                isSelected: isSelectedBinding(for: index),
+                                keyboardShortcut: getKeyboardShortcut(for: index)
+                            )
+                            .id(index)
+                            .environmentObject(apps)
+                            .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
+                            .onHover { isOver in
+                                isOnHover = isOver
+                            }
+                        } else {
+                            CardPreviewView(
+                                item: item,
+                                isSelected: isSelectedBinding(for: index),
+                                keyboardShortcut: getKeyboardShortcut(for: index)
+                            )
+                            .id(index)
+                            .environmentObject(apps)
+                            .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
+                            .onHover { isOver in
+                                isOnHover = isOver
+                            }
                         }
                     }
                 }

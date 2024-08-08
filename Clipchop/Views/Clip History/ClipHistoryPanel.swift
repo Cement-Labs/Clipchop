@@ -22,7 +22,7 @@ class ClipHistoryPanel: NSPanel {
             defer: true
         )
         
-        animationBehavior = .utilityWindow
+        animationBehavior = .documentWindow
         collectionBehavior = .canJoinAllSpaces
         isFloatingPanel = true
         isMovable = true

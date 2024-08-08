@@ -1,16 +1,17 @@
 //
-//  CardPreviewView.swift
+//  CardPreviewView 2.swift
 //  Clipchop
 //
-//  Created by KrLite on 2024/5/19.
+//  Created by Xinshao_Air on 2024/8/8.
 //
+
 
 import AppKit
 import SwiftUI
 import Defaults
 import SFSafeSymbols
 
-struct CardPreviewView: View {
+struct CardPreviewView_2: View {
     
     private var sourceApp: NSRunningApplication? {NSWorkspace.shared.frontmostApplication}
     
@@ -100,7 +101,7 @@ struct CardPreviewView: View {
                         self.isCopying = false
                     }
                     copyItem()
-                   
+                    
                 }
             })
             .opacity(0)
@@ -152,68 +153,70 @@ struct CardPreviewView: View {
                 .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .allowsHitTesting(false)
-
-            ZStack {
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(item.pin ? Material.ultraThin : Material.regular)
-                    .fill(item.pin ? Color.getAccent() : Color.clear)
-                    .scaleEffect(isHoveredPin ? 1.333 : 1)
-                    .frame(width: 15, height: 15)
-                    .onHover { isOverPin in
-                        withAnimation {
-                            isHoveredPin = isOverPin
-                        }
-                    }
-                Image(systemName: pinIcon)
-                    .allowsHitTesting(false)
-                    .rotationEffect(Angle.degrees(item.pin ? 45 : 0))
-                    .font(isHoveredPin ? .system(size: 10) : .system(size: 7.5))
-            }
-            .onTapGesture {
-                withAnimation(Animation.easeInOut) {
-                    do{
-                        pinClipItem()
-                    }
-                }
-            }
-            .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .topTrailing)
-            .padding(.top, 10)
-            .padding(.trailing, 10)
             
-            ZStack(alignment:.bottomLeading) {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.thickMaterial)
-                    .frame(width: Defaults[.displayMore] ? 98 : 70, height: 25)
-                    .shadow(radius: 2.5)
-                
-                HStack{
-                    if keyboardShortcut != "none" {
-                        ZStack(alignment: .center){
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(backgroundColor)
-                                .frame(width: 13, height: 13)
-                            Text(keyboardShortcut)
-                                .font(.system(size: 10))
+            if isSelected {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(item.pin ? Material.ultraThin : Material.regular)
+                        .fill(item.pin ? Color.getAccent() : Color.clear)
+                        .scaleEffect(isHoveredPin ? 1.333 : 1)
+                        .frame(width: 15, height: 15)
+                        .onHover { isOverPin in
+                            withAnimation {
+                                isHoveredPin = isOverPin
+                            }
                         }
-                    }
-                    Group {
-                        if let title = item.formatter.title {
-                            let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
-                            let categorizedTitle = categorizeFileExtensions(fileExtensions)
-                            Text(categorizedTitle)
-                        } else {
-                            Text("Other")
-                        }
-                    }
-                    .font(.system(size: 12.5))
-                    .minimumScaleFactor(0.5)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .lineLimit(1)
+                    Image(systemName: pinIcon)
+                        .allowsHitTesting(false)
+                        .rotationEffect(Angle.degrees(item.pin ? 45 : 0))
+                        .font(isHoveredPin ? .system(size: 10) : .system(size: 7.5))
                 }
-                .padding(.all, 5)
+                .onTapGesture {
+                    withAnimation(Animation.easeInOut) {
+                        do{
+//                            pinClipItem()
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .topTrailing)
+                .padding(.top, 10)
+                .padding(.trailing, 10)
+                
+                ZStack(alignment:.bottomLeading) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.thickMaterial)
+                        .frame(width: Defaults[.displayMore] ? 98 : 70, height: 25)
+                        .shadow(radius: 2.5)
+                    
+                    HStack{
+                        if keyboardShortcut != "none" {
+                            ZStack(alignment: .center){
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(backgroundColor)
+                                    .frame(width: 13, height: 13)
+                                Text(keyboardShortcut)
+                                    .font(.system(size: 10))
+                            }
+                        }
+                        Group {
+                            if let title = item.formatter.title {
+                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                                Text(categorizedTitle)
+                            } else {
+                                Text("Other")
+                            }
+                        }
+                        .font(.system(size: 12.5))
+                        .minimumScaleFactor(0.5)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(1)
+                    }
+                    .padding(.all, 5)
+                }
+                .padding(.all, Defaults[.displayMore] ? 7 : 5)
+                .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
             }
-            .padding(.all, Defaults[.displayMore] ? 7 : 5)
-            .frame(maxWidth: .infinity,maxHeight:.infinity, alignment: .bottom)
         }
         .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
         .background(backgroundColor)
@@ -534,4 +537,3 @@ struct CardPreviewView: View {
         return fileExtensions.joined(separator: ", ")
     }
 }
-
