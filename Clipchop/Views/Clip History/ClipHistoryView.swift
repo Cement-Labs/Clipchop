@@ -42,7 +42,6 @@ struct ClipHistoryView: View {
     var body: some View {
         clip {
             ZStack(alignment: .top) {
-                
                 Button(action: undo) { }
                     .opacity(0)
                     .allowsHitTesting(false)
@@ -66,7 +65,6 @@ struct ClipHistoryView: View {
                     } else {
                         if controller.isExpandedforView {
                             ExpandedPages(
-                                items: items,
                                 animationNamespace: animationNamespace,
                                 apps: apps,
                                 undo: undo,
@@ -77,7 +75,6 @@ struct ClipHistoryView: View {
                             )
                         } else {
                             CollapsedPages(
-                                items: items,
                                 animationNamespace: animationNamespace,
                                 scrollPadding: $scrollPadding,
                                 initialScrollPadding: $initialScrollPadding,

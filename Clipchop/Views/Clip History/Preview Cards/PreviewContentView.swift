@@ -173,7 +173,7 @@ struct PreviewContentView: View, Equatable {
     
     private func generateAndSetThumbnail(for fileURL: URL) {
         DispatchQueue.global(qos: .utility).async {
-            let maxDimension = 128
+            let maxDimension = 256
             let size = CGSize(width: maxDimension, height: maxDimension)
             let scale = NSScreen.main!.backingScaleFactor
             let request = QLThumbnailGenerator.Request(
@@ -216,7 +216,7 @@ struct PreviewContentView: View, Equatable {
     
     // Image preview resolution scaling
     private func resizeImage(image: NSImage) -> NSImage? {
-        let maxSize: CGFloat = Defaults[.displayMore] ? 180 : 128
+        let maxSize: CGFloat = 256
         let aspectRatio = image.size.width / image.size.height
         let newSize: NSSize
         
@@ -244,16 +244,5 @@ struct PreviewContentView: View, Equatable {
             return .primary
         }
         return averageColor.isLight ? .secondary : Color(white: 0.9)
-    }
-}
-
-extension NSImage {
-    func resize(to size: CGSize) -> NSImage {
-        let image = NSImage(size: size)
-        image.lockFocus()
-        let rect = CGRect(origin: .zero, size: size)
-        self.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1.0)
-        image.unlockFocus()
-        return image
     }
 }

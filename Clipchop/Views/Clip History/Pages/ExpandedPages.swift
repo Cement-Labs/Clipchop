@@ -13,7 +13,7 @@ struct ExpandedPages: View {
     
     let clipHistorySearch = ClipHistorySearch()
     
-    var items: FetchedResults<ClipboardHistory>
+    @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
     var animationNamespace: Namespace.ID
     
     var apps: InstalledApps
@@ -25,10 +25,13 @@ struct ExpandedPages: View {
     @State private var searchResults: [ClipHistorySearch.SearchResult] = []
     @State private var filteredTags: [FileCategory] = []
     @State private var selectedIndex: Int? = nil
+    
     @State private var eventLeft: Any?
     @State private var eventRight: Any?
-    @State private var isOnHover: Bool = false
-    @State private var shouldScroll: Bool = false
+    @State private var eventScroll: Any?
+    
+    @State private var scrollOffset: CGFloat = 0
+    @State private var proxy: ScrollViewProxy?
     
     @Binding var searchText: String
     @Binding var selectedTab: String
@@ -137,6 +140,10 @@ struct ExpandedPages: View {
         }
         .onReceive(.panelDidClose) { _ in
             selectedIndex = nil
+            scrollOffset = 0
+            if let proxy = proxy {
+                proxy.scrollTo(Int(scrollOffset), anchor: .center)
+            }
         }
     }
     
@@ -144,7 +151,7 @@ struct ExpandedPages: View {
     
     @ViewBuilder
     private func renderSection(items: [ClipboardHistory]) -> some View {
-        ScrollViewReader { proxy in
+        ScrollViewReader { scrollViewProxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                     ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
@@ -157,9 +164,6 @@ struct ExpandedPages: View {
                             .id(index)
                             .environmentObject(apps)
                             .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
-                            .onHover { isOver in
-                                isOnHover = isOver
-                            }
                         } else {
                             CardPreviewView(
                                 item: item,
@@ -169,27 +173,14 @@ struct ExpandedPages: View {
                             .id(index)
                             .environmentObject(apps)
                             .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
-                            .onHover { isOver in
-                                isOnHover = isOver
-                            }
                         }
                     }
                 }
                 .padding(.horizontal, Defaults[.displayMore] ? 16 : 12)
             }
             .frame(width: Defaults[.displayMore] ? 700 : 500)
-            .onChange(of: selectedIndex) { new, _ in
-                if !isOnHover {
-                    shouldScroll.toggle()
-                }
-            }
-            .onChange(of: shouldScroll) { _, _ in
-                if let newIndex = selectedIndex {
-                    withAnimation {
-                        proxy.scrollTo(newIndex, anchor: .trailing)
-                    }
-                    shouldScroll = false
-                }
+            .onAppear {
+                proxy = scrollViewProxy
             }
         }
     }
@@ -276,6 +267,26 @@ struct ExpandedPages: View {
             }
             return event
         }
+        
+        eventScroll = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { event in
+            let deltaY = event.scrollingDeltaY
+            
+            let horizontalScrollAmount = deltaY / 5.0
+            
+            guard abs(horizontalScrollAmount) > 0.5 else { return event }
+
+            let itemWidth: CGFloat = Defaults[.displayMore] ? 116 : 112
+            let totalContentWidth = CGFloat(items.count) * itemWidth
+
+            if let proxy = proxy {
+               
+                withAnimation {
+                    scrollOffset = max(0, min(scrollOffset + horizontalScrollAmount, totalContentWidth))
+                    proxy.scrollTo(Int(scrollOffset), anchor: .center)
+                }
+            }
+            return event
+        }
     }
     
     private func cleanupEventMonitors() {
@@ -287,6 +298,10 @@ struct ExpandedPages: View {
         if let monitor = eventLeft {
             NSEvent.removeMonitor(monitor)
             eventLeft = nil
+        }
+        if let monitor = eventScroll {
+            NSEvent.removeMonitor(monitor)
+            eventScroll = nil
         }
     }
     
@@ -308,33 +323,31 @@ struct ExpandedPages: View {
         return String(index + 1)
     }
     
-    
     private func selectItem(at index: Int) {
         if index >= 0 && index < items.count {
             selectedIndex = index
         }
     }
     
-    
     private func selectPreviousItem() {
         if selectedIndex == nil {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let previousIndex = (currentIndex - 1 + 5) % 5
-            let actualIndex = min(previousIndex, items.count - 1)
-            selectItem(at: actualIndex)
+            let itemCount = min(items.count, 5)
+            let previousIndex = (currentIndex - 1 + itemCount) % itemCount
+            selectItem(at: previousIndex)
         }
     }
-    
+
     private func selectNextItem() {
         if selectedIndex == nil {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let nextIndex = (currentIndex + 1) % 5
-            let actualIndex = min(nextIndex, items.count - 1)
-            selectItem(at: actualIndex)
+            let itemCount = min(items.count, 5)
+            let nextIndex = (currentIndex + 1) % itemCount
+            selectItem(at: nextIndex)
         }
     }
     
@@ -343,9 +356,17 @@ struct ExpandedPages: View {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let previousIndex = currentIndex - 1
-            let actualIndex = max(previousIndex, 0)
-            selectItem(at: actualIndex)
+            let itemCount = items.count
+            
+            if itemCount == 0 { return }
+            
+            let previousIndex = currentIndex > 0 ? currentIndex - 1 : 0
+            selectItem(at: previousIndex)
+            if let newIndex = selectedIndex, let proxy = proxy  {
+                withAnimation {
+                    proxy.scrollTo(newIndex, anchor: .center)
+                }
+            }
         }
     }
 
@@ -354,9 +375,17 @@ struct ExpandedPages: View {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let nextIndex = currentIndex + 1
-            let actualIndex = min(nextIndex, items.count - 1)
-            selectItem(at: actualIndex)
+            let itemCount = items.count
+            
+            if itemCount == 0 { return }
+            
+            let nextIndex = currentIndex < itemCount - 1 ? currentIndex + 1 : itemCount - 1
+            selectItem(at: nextIndex)
+            if let newIndex = selectedIndex, let proxy = proxy  {
+                withAnimation {
+                    proxy.scrollTo(newIndex, anchor: .center)
+                }
+            }
         }
     }
     

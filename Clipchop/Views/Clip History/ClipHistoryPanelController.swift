@@ -127,29 +127,31 @@ extension ClipHistoryPanelController {
     }
     
     func open(position: CGPoint) {
-        guard let panel else {
-            // Initialize
-           
-            panel = .init(self)
-            open(position: position)
-            return
+        DispatchQueue.main.async {
+            guard let panel = self.panel else {
+                // Initialize
+                self.panel = .init(self)
+                self.open(position: position)
+                return
+            }
+            
+            panel.setFrame(
+                CGRect(
+                    origin: self.positionNear(position: position, size: Self.size.collapsed)
+                        .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
+                    size: Self.size.collapsed
+                ),
+                display: false
+            )
+            panel.setFrameOrigin(
+                self.positionNear(position: position, size: Self.size.collapsed)
+                    .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
+            )
+            
+            panel.makeKeyAndOrderFront(nil)
+            self.startCloseTimer()
+            NotificationCenter.default.post(name: .panelDidOpen, object: nil)
         }
-        
-        panel.setFrame(
-            CGRect(
-                origin: positionNear(position: position, size: Self.size.collapsed)
-                    .applying(.init(translationX: 0, y: -Self.size.collapsed.height)),
-                size: Self.size.collapsed
-            ),
-            display: false
-        )
-        panel.setFrameOrigin(
-            positionNear(position: position, size: Self.size.collapsed)
-                .applying(.init(translationX: 0, y: -Self.size.collapsed.height))
-        )
-        
-        panel.makeKeyAndOrderFront(nil)
-        startCloseTimer()
     }
     
     func close() {

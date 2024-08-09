@@ -31,5 +31,6 @@ extension Notification.Name {
 
 extension Notification.Name {
     static let panelDidClose = Notification.Name("panelDidClose")
+    static let panelDidOpen = Notification.Name("panelDidOpen")
 }
 

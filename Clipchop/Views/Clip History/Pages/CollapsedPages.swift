@@ -10,14 +10,17 @@ import Defaults
 
 struct CollapsedPages: View {
     
-    var items: FetchedResults<ClipboardHistory>
+    @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
     var animationNamespace: Namespace.ID
-
+    
     @State private var selectedIndex: Int? = nil
+    
     @State private var eventLeft: Any?
     @State private var eventRight: Any?
-    @State private var isOnHover: Bool = false
-    @State private var shouldScroll: Bool = false
+    @State private var eventScroll: Any?
+    
+    @State private var scrollOffset: CGFloat = 0
+    @State private var proxy: ScrollViewProxy?
 
     @Binding var scrollPadding: CGFloat
     @Binding var initialScrollPadding: CGFloat
@@ -69,7 +72,7 @@ struct CollapsedPages: View {
                 .frame(width: 0, height: 0)
                 .keyboardShortcut(.escape, modifiers: keySwitcher.switchereventModifier)
             }
-            ScrollViewReader { proxy in
+            ScrollViewReader { scrollViewProxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
                         ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
@@ -82,9 +85,6 @@ struct CollapsedPages: View {
                                 .id(index)
                                 .environmentObject(apps)
                                 .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
-                                .onHover { isOver in
-                                    isOnHover = isOver
-                                }
                             } else {
                                 CardPreviewView(
                                     item: item,
@@ -94,9 +94,6 @@ struct CollapsedPages: View {
                                 .id(index)
                                 .environmentObject(apps)
                                 .applyMatchedGeometryEffect(if: index < 6, id: item.id, namespace: animationNamespace)
-                                .onHover { isOver in
-                                    isOnHover = isOver
-                                }
                             }
                         }
                     }
@@ -152,31 +149,23 @@ struct CollapsedPages: View {
                         .animation(.spring(), value: movethebutton)
                         .offset(x: movethebutton ? 12 : -120), alignment: .leading)
                 }
-                .onChange(of: selectedIndex) { new, _ in
-                    if !isOnHover {
-                        shouldScroll.toggle()
-                    }
+                .onAppear {
+                    setupEventMonitors()
+                    proxy = scrollViewProxy
                 }
-                .onChange(of: shouldScroll) { _, _ in
-                    if let newIndex = selectedIndex {
-                        withAnimation {
-                            proxy.scrollTo(newIndex, anchor: .trailing)
-                        }
-                        shouldScroll = false
+                .onDisappear {
+                    cleanupEventMonitors()
+                }
+                .onReceive(.panelDidClose) { _ in
+                    selectedIndex = nil
+                    scrollOffset = 0
+                    if let proxy = proxy {
+                        proxy.scrollTo(Int(scrollOffset), anchor: .center)
                     }
                 }
             }
         }
         .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
-        .onAppear {
-            setupEventMonitors()
-        }
-        .onDisappear {
-            cleanupEventMonitors()
-        }
-        .onReceive(.panelDidClose) { _ in
-            selectedIndex = nil
-        }
     }
     
     private func setupEventMonitors() {
@@ -187,7 +176,7 @@ struct CollapsedPages: View {
             }
             return event
         }
-
+        
         eventLeft = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
             if event.type == .keyDown && event.keyCode == 124 {
                 selectNextItem2()
@@ -195,10 +184,30 @@ struct CollapsedPages: View {
             }
             return event
         }
+        
+        eventScroll = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { event in
+            let deltaY = event.scrollingDeltaY
+            
+            let horizontalScrollAmount = deltaY / 5.0
+            
+            guard abs(horizontalScrollAmount) > 0.5 else { return event }
+
+            let itemWidth: CGFloat = Defaults[.displayMore] ? 116 : 112
+            let totalContentWidth = CGFloat(items.count) * itemWidth
+
+            if let proxy = proxy {
+               
+                withAnimation {
+                    scrollOffset = max(0, min(scrollOffset + horizontalScrollAmount, totalContentWidth))
+                    proxy.scrollTo(Int(scrollOffset), anchor: .center)
+                }
+            }
+            return event
+        }
     }
     
     private func cleanupEventMonitors() {
-//         Remove event monitors to avoid leaks
+        // Remove event monitors to avoid leaks
         if let monitor = eventRight {
             NSEvent.removeMonitor(monitor)
             eventRight = nil
@@ -206,6 +215,10 @@ struct CollapsedPages: View {
         if let monitor = eventLeft {
             NSEvent.removeMonitor(monitor)
             eventLeft = nil
+        }
+        if let monitor = eventScroll {
+            NSEvent.removeMonitor(monitor)
+            eventScroll = nil
         }
     }
     
@@ -245,9 +258,9 @@ struct CollapsedPages: View {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let previousIndex = (currentIndex - 1 + 5) % 5
-            let actualIndex = min(previousIndex, items.count - 1)
-            selectItem(at: actualIndex)
+            let itemCount = min(items.count, 5)
+            let previousIndex = (currentIndex - 1 + itemCount) % itemCount
+            selectItem(at: previousIndex)
         }
     }
 
@@ -256,9 +269,9 @@ struct CollapsedPages: View {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let nextIndex = (currentIndex + 1 + 5) % 5
-            let actualIndex = min(nextIndex, items.count - 1)
-            selectItem(at: actualIndex)
+            let itemCount = min(items.count, 5)
+            let nextIndex = (currentIndex + 1) % itemCount
+            selectItem(at: nextIndex)
         }
     }
     
@@ -267,9 +280,17 @@ struct CollapsedPages: View {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let previousIndex = currentIndex - 1
-            let actualIndex = max(previousIndex, 0)
-            selectItem(at: actualIndex)
+            let itemCount = items.count
+            
+            if itemCount == 0 { return }
+            
+            let previousIndex = currentIndex > 0 ? currentIndex - 1 : 0
+            selectItem(at: previousIndex)
+            if let newIndex = selectedIndex, let proxy = proxy  {
+                withAnimation {
+                    proxy.scrollTo(newIndex, anchor: .center)
+                }
+            }
         }
     }
 
@@ -278,9 +299,17 @@ struct CollapsedPages: View {
             selectItem(at: 0)
         } else {
             guard let currentIndex = selectedIndex else { return }
-            let nextIndex = currentIndex + 1
-            let actualIndex = min(nextIndex, items.count - 1)
-            selectItem(at: actualIndex)
+            let itemCount = items.count
+            
+            if itemCount == 0 { return }
+            
+            let nextIndex = currentIndex < itemCount - 1 ? currentIndex + 1 : itemCount - 1
+            selectItem(at: nextIndex)
+            if let newIndex = selectedIndex, let proxy = proxy  {
+                withAnimation {
+                    proxy.scrollTo(newIndex, anchor: .center)
+                }
+            }
         }
     }
 
