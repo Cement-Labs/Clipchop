@@ -468,6 +468,10 @@ struct CardPreviewView: View {
             NSEvent.removeMonitor(monitor)
             eventOptionMonitor = nil
         }
+        if let monitor = eventEnterMonitor {
+            NSEvent.removeMonitor(monitor)
+            eventEnterMonitor = nil
+        }
     }
         
     func pinClipItem(){

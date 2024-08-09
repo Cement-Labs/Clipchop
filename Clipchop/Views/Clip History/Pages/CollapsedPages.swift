@@ -158,6 +158,15 @@ struct CollapsedPages: View {
                 }
                 .onReceive(.panelDidClose) { _ in
                     selectedIndex = nil
+                    cleanupEventMonitors()
+                    scrollOffset = 0
+                    if let proxy = proxy {
+                        proxy.scrollTo(Int(scrollOffset), anchor: .center)
+                    }
+                }
+                .onReceive(.panelDidOpen) { _ in
+                    selectedIndex = nil
+                    setupEventMonitors()
                     scrollOffset = 0
                     if let proxy = proxy {
                         proxy.scrollTo(Int(scrollOffset), anchor: .center)
