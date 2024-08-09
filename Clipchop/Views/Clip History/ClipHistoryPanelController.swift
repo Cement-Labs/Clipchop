@@ -155,9 +155,9 @@ extension ClipHistoryPanelController {
     }
     
     func close() {
+        NotificationCenter.default.post(name: .panelDidClose, object: nil)
         self.setExpansion(false)
         self.panel?.orderOut(nil)
-        NotificationCenter.default.post(name: .panelDidClose, object: nil)
         panelDidClose()
     }
     

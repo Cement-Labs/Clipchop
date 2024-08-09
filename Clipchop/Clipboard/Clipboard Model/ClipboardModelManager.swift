@@ -69,7 +69,7 @@ class ClipboardModelManager: ObservableObject {
     
     func startPeriodicCleanup() {
         log(self, "time start, Cached preservation period: \(Defaults[.historyPreservationPeriod]), Cached preservation time: \(Defaults[.historyPreservationTime])")
-        timerCancellable = Timer.publish(every: 100, on: .main, in: .common)
+        timerCancellable = Timer.publish(every: 600, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self else { return }

@@ -158,15 +158,6 @@ struct CollapsedPages: View {
                 }
                 .onReceive(.panelDidClose) { _ in
                     selectedIndex = nil
-                    cleanupEventMonitors()
-                    scrollOffset = 0
-                    if let proxy = proxy {
-                        proxy.scrollTo(Int(scrollOffset), anchor: .center)
-                    }
-                }
-                .onReceive(.panelDidOpen) { _ in
-                    selectedIndex = nil
-                    setupEventMonitors()
                     scrollOffset = 0
                     if let proxy = proxy {
                         proxy.scrollTo(Int(scrollOffset), anchor: .center)
@@ -297,7 +288,7 @@ struct CollapsedPages: View {
             selectItem(at: previousIndex)
             if let newIndex = selectedIndex, let proxy = proxy  {
                 withAnimation {
-                    proxy.scrollTo(newIndex, anchor: .center)
+                    proxy.scrollTo(newIndex, anchor: .trailing)
                 }
             }
         }
@@ -316,7 +307,7 @@ struct CollapsedPages: View {
             selectItem(at: nextIndex)
             if let newIndex = selectedIndex, let proxy = proxy  {
                 withAnimation {
-                    proxy.scrollTo(newIndex, anchor: .center)
+                    proxy.scrollTo(newIndex, anchor: .trailing)
                 }
             }
         }
