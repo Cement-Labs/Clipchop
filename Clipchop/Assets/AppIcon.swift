@@ -7,11 +7,13 @@
 
 import SwiftUI
 import Defaults
+import UserNotifications
 
 struct AppIcon: Hashable, Defaults.Serializable {
     var name: String?
     var assetName: String
     var unlockThreshold: Int
+    var unlockMessage: String?
     
     var image: NSImage {
         .init(named: assetName)!
@@ -57,7 +59,8 @@ extension AppIcon {
     static let aerugo = AppIcon(
         name: .init(localized: "App Icon: Aerugo", defaultValue: "Aerugo"),
         assetName: "AppIcon-Aerugo",
-        unlockThreshold: 25
+        unlockThreshold: 25,
+        unlockMessage: .init(localized: "rust", defaultValue: "\(Bundle.main.appName) will rust if you don't clip soon.")
     )
 }
 
@@ -106,5 +109,30 @@ extension AppIcon {
         )
         
         NSApp.applicationIconImage = image
+    }
+}
+
+extension AppIcon {
+    static func checkIfUnlockedNewIcon() {
+        guard Defaults[.sendNotification] else { return }
+        
+        for icon in icons where icon.unlockThreshold == Defaults[.timesClipped] {
+            let title = Bundle.main.appName
+            let body = icon.unlockMessage ?? "You've unlocked a new icon: \(icon.name ?? "Unknown")!"
+            
+            let content = UNMutableNotificationContent()
+            content.title = title
+            content.body = body
+            
+            if let imageData = NSImage(named: icon.assetName)?.tiffRepresentation,
+               let attachment = UNNotificationAttachment.create(NSData(data: imageData)) {
+                content.attachments = [attachment]
+                content.userInfo = ["icon": icon.assetName]
+            }
+            
+            content.categoryIdentifier = "icon_unlocked"
+            
+            AppDelegate.sendNotification(content)
+        }
     }
 }

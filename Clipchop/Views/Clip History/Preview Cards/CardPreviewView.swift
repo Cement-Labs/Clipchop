@@ -23,12 +23,14 @@ struct CardPreviewView: View {
     @ObservedObject var item: ClipboardHistory
     
     @Binding var isSelected: Bool
+    
     @State private var isHoveredPin = false
+    @State private var isCopying = false
     @State private var data: Data?
     @State private var showMore = false
     @State private var showPopover = false
-    @State private var isCopying = false
-    
+    @State private var showPreview = false
+   
     @State private var eventMonitor: Any?
     @State private var eventSpaceMonitor: Any?
     @State private var eventOptionMonitor: Any?
@@ -60,18 +62,6 @@ struct CardPreviewView: View {
         )
     }
     
-    private var displayText: String {
-        if item.formatter.contentPreview.count > 65 {
-            return item.formatter.title ?? "Other"
-        } else if item.formatter.contentPreview.isEmpty {
-            return "Other"
-        } else {
-            let title = item.formatter.contentPreview
-            let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
-            return categorizeFileExtensions(fileExtensions)
-        }
-    }
-    
     var keyboardShortcut: String
     var provider = ClipboardDataProvider.shared
     
@@ -95,12 +85,11 @@ struct CardPreviewView: View {
                 self.isSelected = true
                 self.isCopying = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    copyItem()
                     withAnimation(Animation.spring(dampingFraction: 0.7)) {
                         self.isSelected = false
-                        self.isCopying = false
                     }
-                    copyItem()
-                   
+                    self.isCopying = false
                 }
             })
             .opacity(0)
@@ -148,11 +137,13 @@ struct CardPreviewView: View {
             .applyKeyboardShortcut(keyboardShortcut, modifier: pinShortcut.eventModifier)
             
             // MARK: - CardView
-            PreviewContentView(clipboardHistory: item)
-                .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .allowsHitTesting(false)
-
+            if showPreview {
+                PreviewContentView(clipboardHistory: item)
+                    .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .allowsHitTesting(false)
+            }
+            
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .fill(item.pin ? Material.ultraThin : Material.regular)
@@ -355,10 +346,18 @@ struct CardPreviewView: View {
                 .frame(width: 200, height: 200, alignment: .center)
                 VStack {
                     HStack {
-                        Text(displayText)
-                            .font(.system(size: 15))
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(2)
+                        Group {
+                            if let title = item.formatter.title {
+                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                                Text(categorizedTitle)
+                            } else {
+                                Text("Other")
+                            }
+                        }
+                        .font(.system(size: 15))
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(2)
                     }
                     .frame(width: 200, height: 100, alignment: .bottomLeading)
                     VStack {
@@ -401,9 +400,17 @@ struct CardPreviewView: View {
         }
         .onAppear {
             setupEventMonitors()
+            showPreview = true
         }
         .onDisappear {
             cleanupEventMonitors()
+            showPreview = false
+        }
+        .onReceive(.panelDidClose) { _ in
+            showPreview = false
+        }
+        .onReceive(.panelDidOpen) { _ in
+            showPreview = true
         }
     }
     
@@ -435,7 +442,7 @@ struct CardPreviewView: View {
             if event.modifierFlags.contains(keySwitcher.switchereventNSEvent) {
                 
             } else {
-                if isSelected && event.keyCode == keySwitcher.switcherKeyCode && !isCopying {
+                if isSelected && event.keyCode == keySwitcher.switcherKeyCode && !isCopying{
                     copyItem()
                     isSelected = false
                 }

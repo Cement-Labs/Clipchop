@@ -19,10 +19,12 @@ struct Sound: Hashable, Defaults.Serializable {
     }
     
     func setClipSound() {
+        print("setClipSound")
         Self.setClipSound(to: self)
     }
     
     func setPasteSound() {
+        print("setPasteSound")
         Self.setPasteSound(to: self)
     }
     

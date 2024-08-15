@@ -163,16 +163,16 @@ extension ClipHistoryPanelController {
     
     func logoutpanel() {
         log(self, "Logout panel")
+        NotificationCenter.default.post(name: .panelDidLogout, object: nil)
         self.setExpansion(false)
         self.panel?.orderOut(nil)
         self.panel = nil
+        panelDidClose()
         
         if let contentView = panel?.contentView {
             contentView.subviews.forEach { $0.removeFromSuperview() }
             contentView.layoutSubtreeIfNeeded()
         }
-        
-        panelDidClose()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             let newController = ClipHistoryPanelController()

@@ -8,12 +8,15 @@
 import SwiftUI
 import Defaults
 import Fuse
+import CoreData
 
 struct ExpandedPages: View {
     
     let clipHistorySearch = ClipHistorySearch()
     
     @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
+    @Environment(\.managedObjectContext) private var context
+    
     var animationNamespace: Namespace.ID
     
     var apps: InstalledApps
@@ -26,8 +29,6 @@ struct ExpandedPages: View {
     @State private var filteredTags: [FileCategory] = []
     @State private var selectedIndex: Int? = nil
     
-    @State private var eventLeft: Any?
-    @State private var eventRight: Any?
     @State private var eventScroll: Any?
     
     @State private var scrollOffset: CGFloat = 0
@@ -88,6 +89,24 @@ struct ExpandedPages: View {
             .frame(width: 0, height: 0)
             .keyboardShortcut(.escape, modifiers: keySwitcher.switchereventModifier)
             
+            Button("selectPreviousItem2") {
+                selectPreviousItem2()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(.leftArrow, modifiers: [])
+            
+            Button("selectPreviousItem2") {
+                selectNextItem2()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(.rightArrow, modifiers: [])
+            
             VStack {
                 if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
                     if !filteredItems.isEmpty {
@@ -145,6 +164,9 @@ struct ExpandedPages: View {
                 proxy.scrollTo(Int(scrollOffset), anchor: .center)
             }
         }
+        .onReceive(.panelDidLogout) { _ in
+            cleanupEventMonitors()
+        }
     }
     
     // MARK: - Expanded ViewBuilder
@@ -154,7 +176,7 @@ struct ExpandedPages: View {
         ScrollViewReader { scrollViewProxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
-                    ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                    ForEach(Array(items.enumerated().filter { (($0.element.contents) != nil) }), id: \.element.id) { index, item in
                         if Defaults[.hideTag] {
                             CardPreviewView_2(
                                 item: item,
@@ -252,32 +274,16 @@ struct ExpandedPages: View {
     }
     
     private func setupEventMonitors() {
-        eventRight = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
-            if event.type == .keyDown && event.keyCode == 123 {
-                selectPreviousItem2()
-                return nil
-            }
-            return event
-        }
-
-        eventLeft = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
-            if event.type == .keyDown && event.keyCode == 124 {
-                selectNextItem2()
-                return nil
-            }
-            return event
-        }
-        
         eventScroll = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { event in
-            let deltaY = event.scrollingDeltaY
+            let deltaY = -event.scrollingDeltaY
             
             let horizontalScrollAmount = deltaY / 5.0
             
             guard abs(horizontalScrollAmount) > 0.5 else { return event }
-
-            let itemWidth: CGFloat = Defaults[.displayMore] ? 116 : 112
+            
+            let itemWidth: CGFloat = Defaults[.displayMore] ? 112 : 80
             let totalContentWidth = CGFloat(items.count) * itemWidth
-
+            
             if let proxy = proxy {
                
                 withAnimation {
@@ -290,15 +296,6 @@ struct ExpandedPages: View {
     }
     
     private func cleanupEventMonitors() {
-//         Remove event monitors to avoid leaks
-        if let monitor = eventRight {
-            NSEvent.removeMonitor(monitor)
-            eventRight = nil
-        }
-        if let monitor = eventLeft {
-            NSEvent.removeMonitor(monitor)
-            eventLeft = nil
-        }
         if let monitor = eventScroll {
             NSEvent.removeMonitor(monitor)
             eventScroll = nil

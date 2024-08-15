@@ -358,10 +358,18 @@ struct CardPreviewView_2: View {
                 .frame(width: 200, height: 200, alignment: .center)
                 VStack {
                     HStack {
-                        Text(displayText)
-                            .font(.system(size: 15))
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(2)
+                        Group {
+                            if let title = item.formatter.title {
+                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                                Text(categorizedTitle)
+                            } else {
+                                Text("Other")
+                            }
+                        }
+                        .font(.system(size: 15))
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(2)
                     }
                     .frame(width: 200, height: 100, alignment: .bottomLeading)
                     VStack {

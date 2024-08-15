@@ -35,6 +35,7 @@ struct ClipchopApp: App {
         
 //        Defaults[.beginningViewShown] = Defaults.Keys.beginningViewShown.defaultValue
         
+        // Times Clipped: 2731
 //        Defaults[.timesClipped] = Defaults.Keys.timesClipped.defaultValue
 //        Defaults[.clipSound] = Defaults.Keys.clipSound.defaultValue
 //        Defaults[.pasteSound] = Defaults.Keys.pasteSound.defaultValue

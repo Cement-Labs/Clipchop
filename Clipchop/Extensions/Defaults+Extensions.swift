@@ -19,15 +19,21 @@ extension Defaults.Keys {
     static let menuBarItemEnabled = Key<Bool>("menuBarItemEnabled", default: true)
     static let cursorPosition = Key<CursorPosition>("cursorPosition", default: .mouseLocation)
     
-    // MARK: Appearance
+    // MARK: individuation
     static let timesClipped = Key<UInt>("timesClipped", default: 0)
-    
+    static let sendNotification = Key<Bool>("sendNotification", default: true)
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
     
     static let dnd = Key<Bool>("dnd", default: false)
-    static let appIcon = Key<AppIcon>("appIcon", default: .defaultAppIcon)
+    static let appIcon = Key<AppIcon>("appIcon", default: {
+#if DEBUG
+        .beta
+#else
+        .defaultAppIcon
+#endif
+    })
     static let clipSound = Key<Sound>("clipSound", default: .defaultClipSound)
     static let pasteSound = Key<Sound>("pasteSound", default: .defaultPasteSound)
     
@@ -47,15 +53,12 @@ extension Defaults.Keys {
     }())
     
     // MARK: KeyboardModifier
-    
     static let deleteShortcut = Defaults.Key<KeyboardModifier>("deleteShortcut", default: .control)
     static let copyShortcut = Defaults.Key<KeyboardModifier>("copyShortcut", default: .command)
     static let pinShortcut = Defaults.Key<KeyboardModifier>("pinShortcut", default: .option)
-    
     static let keySwitcher = Defaults.Key<KeyboardSwitcher>("keySwitcher", default: .option)
     
     // MARK: Clip History
-    
     static let autoCloseTimeout = Key<TimeInterval>("autoCloseTimeout", default: 60)
     static let clipboardMonitoring = Key<Bool>("clipboardMonitoring", default: false)
     

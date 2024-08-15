@@ -7,6 +7,7 @@
 
 import AppKit
 import Defaults
+import UserNotifications
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -14,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
+        UNUserNotificationCenter.current().delegate = self
+        AppDelegate.requestNotificationAuthorization()
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -27,4 +30,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 }
-

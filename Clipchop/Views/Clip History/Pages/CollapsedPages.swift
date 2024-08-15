@@ -7,16 +7,16 @@
 
 import SwiftUI
 import Defaults
+import CoreData
 
 struct CollapsedPages: View {
     
     @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
+    @Environment(\.managedObjectContext) private var context
+    
     var animationNamespace: Namespace.ID
     
     @State private var selectedIndex: Int? = nil
-    
-    @State private var eventLeft: Any?
-    @State private var eventRight: Any?
     @State private var eventScroll: Any?
     
     @State private var scrollOffset: CGFloat = 0
@@ -71,11 +71,29 @@ struct CollapsedPages: View {
                 .buttonStyle(.borderless)
                 .frame(width: 0, height: 0)
                 .keyboardShortcut(.escape, modifiers: keySwitcher.switchereventModifier)
+                
+                Button("selectPreviousItem2") {
+                    selectPreviousItem2()
+                }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut(.leftArrow, modifiers: [])
+                
+                Button("selectPreviousItem2") {
+                    selectNextItem2()
+                }
+                .opacity(0)
+                .allowsHitTesting(false)
+                .buttonStyle(.borderless)
+                .frame(width: 0, height: 0)
+                .keyboardShortcut(.rightArrow, modifiers: [])
             }
             ScrollViewReader { scrollViewProxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: Defaults[.displayMore] ? 16 : 12) {
-                        ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                        ForEach(Array(items.enumerated().filter { (($0.element.contents) != nil) }), id: \.element.id) { index, item in
                             if Defaults[.hideTag] {
                                 CardPreviewView_2(
                                     item: item,
@@ -166,35 +184,23 @@ struct CollapsedPages: View {
             }
         }
         .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
+        .onReceive(.panelDidLogout) { _ in
+            cleanupEventMonitors()
+        }
     }
     
     private func setupEventMonitors() {
-        eventRight = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
-            if event.type == .keyDown && event.keyCode == 123 {
-                selectPreviousItem2()
-                return nil
-            }
-            return event
-        }
-        
-        eventLeft = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
-            if event.type == .keyDown && event.keyCode == 124 {
-                selectNextItem2()
-                return nil
-            }
-            return event
-        }
-        
         eventScroll = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { event in
-            let deltaY = event.scrollingDeltaY
+                        
+            let deltaY = -event.scrollingDeltaY
             
             let horizontalScrollAmount = deltaY / 5.0
             
             guard abs(horizontalScrollAmount) > 0.5 else { return event }
-
-            let itemWidth: CGFloat = Defaults[.displayMore] ? 116 : 112
+            
+            let itemWidth: CGFloat = Defaults[.displayMore] ? 112 : 80
             let totalContentWidth = CGFloat(items.count) * itemWidth
-
+            
             if let proxy = proxy {
                
                 withAnimation {
@@ -207,15 +213,6 @@ struct CollapsedPages: View {
     }
     
     private func cleanupEventMonitors() {
-        // Remove event monitors to avoid leaks
-        if let monitor = eventRight {
-            NSEvent.removeMonitor(monitor)
-            eventRight = nil
-        }
-        if let monitor = eventLeft {
-            NSEvent.removeMonitor(monitor)
-            eventLeft = nil
-        }
         if let monitor = eventScroll {
             NSEvent.removeMonitor(monitor)
             eventScroll = nil

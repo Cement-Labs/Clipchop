@@ -22,6 +22,12 @@ struct PreviewContentView: View, Equatable {
         return lhs.clipboardHistory.id == rhs.clipboardHistory.id
     }
     
+    var backgroundColor: Color {
+        withAnimation {
+            colorScheme == .dark ? .black : .white
+        }
+    }
+    
     @Environment(\.colorScheme) var colorScheme
     @State private var thumbnail: NSImage?
     @State private var isThumbnailLoading = false
@@ -29,24 +35,36 @@ struct PreviewContentView: View, Equatable {
     let clipboardHistory: ClipboardHistory
     
     var body: some View {
-        ZStack(alignment: .top) {
-            if let fileURL = clipboardHistory.formatter.fileURLs.first {
-                fileThumbnailView(for: fileURL)
-            } else if let image = clipboardHistory.formatter.image {
-                imageView(for: image)
-            } else if let rtfData = clipboardHistory.formatter.rtfData {
-                rtfView(for: rtfData)
-            } else if let text = clipboardHistory.formatter.text {
-                textView(for: text)
-            } else if let url = clipboardHistory.formatter.url {
-                urlPreviewView(for: url)
-            } else if let html = clipboardHistory.formatter.htmlData {
-                htmlPreviewView(for: html)
-            } else {
-                defaultView()
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                Group {
+                    if geometry.size.width < 160 {
+                        RoundedRectangle(cornerRadius: 0)
+                            .fill(Color.clear)
+                    } else {
+                        RoundedRectangle(cornerRadius: 0)
+                            .fill(backgroundColor)
+                    }
+                }
+                if let fileURL = clipboardHistory.formatter.fileURLs.first {
+                    fileThumbnailView(for: fileURL)
+                } else if let image = clipboardHistory.formatter.image {
+                    imageView(for: image)
+                } else if let rtfData = clipboardHistory.formatter.rtfData {
+                    rtfView(for: rtfData)
+                } else if let text = clipboardHistory.formatter.text {
+                    textView(for: text)
+                } else if let url = clipboardHistory.formatter.url {
+                    urlPreviewView(for: url)
+                } else if let html = clipboardHistory.formatter.htmlData {
+                    htmlPreviewView(for: html)
+                } else {
+                    defaultView()
+                }
             }
         }
         .onAppear(perform: loadThumbnail)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
     
     // MARK: - View Builders

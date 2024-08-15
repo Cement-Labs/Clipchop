@@ -36,6 +36,8 @@
 		6550AD4D2C548D66009294E5 /* LuminareClipboardSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */; };
 		6550AD4F2C54B325009294E5 /* LuminareCategorizationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */; };
 		6550AD522C552CDB009294E5 /* Luminare in Frameworks */ = {isa = PBXBuildFile; productRef = 6550AD512C552CDB009294E5 /* Luminare */; };
+		655DE8FF2C6AEEED002B6074 /* AppDelegate+UNNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DE8FE2C6AEEED002B6074 /* AppDelegate+UNNotifications.swift */; };
+		655DE9012C6AFF9D002B6074 /* UNNotification+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655DE9002C6AFF9D002B6074 /* UNNotification+Extensions.swift */; };
 		656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656588FE2C4A117500C4F6EA /* getCursorPosition.swift */; };
 		65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */; };
 		65758C052C3AE0EB009EEB3E /* CollapsedPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */; };
@@ -182,6 +184,8 @@
 		6550AD482C5406A1009294E5 /* LuminareCustomizationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareCustomizationSettings.swift; sourceTree = "<group>"; };
 		6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareClipboardSettings.swift; sourceTree = "<group>"; };
 		6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareCategorizationSettings.swift; sourceTree = "<group>"; };
+		655DE8FE2C6AEEED002B6074 /* AppDelegate+UNNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UNNotifications.swift"; sourceTree = "<group>"; };
+		655DE9002C6AFF9D002B6074 /* UNNotification+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNNotification+Extensions.swift"; sourceTree = "<group>"; };
 		656588FE2C4A117500C4F6EA /* getCursorPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCursorPosition.swift; sourceTree = "<group>"; };
 		65758C022C3ADBC4009EEB3E /* ExpandedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedPages.swift; sourceTree = "<group>"; };
 		65758C042C3AE0EB009EEB3E /* CollapsedPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPages.swift; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 			children = (
 				650515B52C381EA500E2129D /* ClipchopApp.swift */,
 				658D26FB2C382CF3001D1CC3 /* AppDelegate.swift */,
+				655DE8FE2C6AEEED002B6074 /* AppDelegate+UNNotifications.swift */,
 				658D26F52C382674001D1CC3 /* Clipboard */,
 				658D271E2C3831B9001D1CC3 /* Views */,
 				658D26D82C382340001D1CC3 /* Utilities */,
@@ -414,6 +419,7 @@
 				650515D72C38219700E2129D /* Defaults+Extensions.swift */,
 				650515D82C38219700E2129D /* Defaults+Structures.swift */,
 				65987F102C390AD100E15897 /* Color+Extensions.swift */,
+				655DE9002C6AFF9D002B6074 /* UNNotification+Extensions.swift */,
 				650515D92C38219700E2129D /* KeyboardShortcuts+Extensions.swift */,
 				650515D22C38219700E2129D /* Foundation */,
 				650515D62C38219700E2129D /* AppKit */,
@@ -931,6 +937,7 @@
 				658D27542C383546001D1CC3 /* CategorizationSection.swift in Sources */,
 				65A176132C4BF408000BACFA /* Throttler.swift in Sources */,
 				658D27552C383546001D1CC3 /* PermissionsSection.swift in Sources */,
+				655DE8FF2C6AEEED002B6074 /* AppDelegate+UNNotifications.swift in Sources */,
 				65EDAE732C55E7AB00EA0D32 /* CustomLuminareList.swift in Sources */,
 				65EDAE792C56203B00EA0D32 /* CustomLuminarePicker.swift in Sources */,
 				65EDAE822C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift in Sources */,
@@ -940,6 +947,7 @@
 				656588FF2C4A117500C4F6EA /* getCursorPosition.swift in Sources */,
 				658D27652C383DE0001D1CC3 /* MenuBarIconView.swift in Sources */,
 				658D27572C383546001D1CC3 /* GeneralSettingsPage.swift in Sources */,
+				655DE9012C6AFF9D002B6074 /* UNNotification+Extensions.swift in Sources */,
 				65758C032C3ADBC4009EEB3E /* ExpandedPages.swift in Sources */,
 				658D27582C383546001D1CC3 /* AboutSettingsPage.swift in Sources */,
 				658D27592C383546001D1CC3 /* ClipboardSettingsPage.swift in Sources */,
@@ -1143,7 +1151,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 809;
+				CURRENT_PROJECT_VERSION = 815;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1186,7 +1194,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 809;
+				CURRENT_PROJECT_VERSION = 815;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

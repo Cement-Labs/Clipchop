@@ -65,6 +65,7 @@ struct ClipHistoryView: View {
                     } else {
                         if controller.isExpandedforView {
                             ExpandedPages(
+//                                items: Binding.constant(items),
                                 animationNamespace: animationNamespace,
                                 apps: apps,
                                 undo: undo,
@@ -75,6 +76,7 @@ struct ClipHistoryView: View {
                             )
                         } else {
                             CollapsedPages(
+//                                items: Binding.constant(items),
                                 animationNamespace: animationNamespace,
                                 scrollPadding: $scrollPadding,
                                 initialScrollPadding: $initialScrollPadding,

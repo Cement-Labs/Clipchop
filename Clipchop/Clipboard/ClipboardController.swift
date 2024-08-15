@@ -34,8 +34,8 @@ class ClipboardController: NSObject, ObservableObject {
         NSPasteboard.PasteboardType.jpeg.rawValue,
         NSPasteboard.PasteboardType.tiff.rawValue,
         NSPasteboard.PasteboardType.png.rawValue,
-        NSPasteboard.PasteboardType.pdf.rawValue,
         NSPasteboard.PasteboardType.avif.rawValue,
+        NSPasteboard.PasteboardType.pdf.rawValue,
         
         NSPasteboard.PasteboardType.tabularText.rawValue,
         NSPasteboard.PasteboardType.multipleTextSelection.rawValue,
@@ -86,22 +86,29 @@ class ClipboardController: NSObject, ObservableObject {
             if let history = existingItem.item {
                 history.time = Date()
                 do {
-                    try context.save()
+                    DispatchQueue.main.async {
+                        do {
+                            try self.context.save()
+                            log(self, "Context saved successfully")
+                        } catch {
+                            log(self, "Error saving context: \(error)")
+                        }
+                    }
                     break
-                } catch {
-                    log(self, "Error saving context: \(error)")
                 }
             }
         }
     }
     
     // MARK: - Update clipboard history
+    
     private func updateClipboard() {
-        try? context.save()
         
         guard pasteboard.changeCount != changeCount else {
             return
         }
+        
+        try? context.save()
         
         changeCount = pasteboard.changeCount
         
@@ -179,19 +186,17 @@ class ClipboardController: NSObject, ObservableObject {
         
         DispatchQueue.main.async {
             Notification.Name.didClip.post()
-        }
-        
-        do {
-            try context.save()
-            let formatter = Formatter(contents: contents)
-            formatter.categorizeFileTypes()
-            
-            log(self, "The contents of Clipboard have changed \(ClipboardHistory(contents: contents))")
-            log(self, "title = \(formatter.title ?? "EMPTY")")
-            formatter.generateContentPreview()
-        } catch {
-            let nserror = error as NSError
-            log(self, "UnSaved error \(nserror), \(nserror.userInfo)")
+            do {
+                try self.context.save()
+                let formatter = Formatter(contents: contents)
+                formatter.categorizeFileTypes()
+                log(self, "The contents of Clipboard have changed \(ClipboardHistory(contents: contents))")
+                log(self, "title = \(formatter.title ?? "EMPTY")")
+                formatter.generateContentPreview()
+            } catch {
+                let nserror = error as NSError
+                log(self, "UnSaved error \(nserror), \(nserror.userInfo)")
+            }
         }
     }
     
@@ -235,6 +240,8 @@ class ClipboardController: NSObject, ObservableObject {
             contents = plainTextContents
         } else {
             var plainTextContent: ClipboardContent?
+            var originalHTMLContent: ClipboardContent?
+
             contents.forEach { content in
                 if let type = content.type, NSPasteboard.PasteboardType(type) == .html {
                     if let htmlString = String(data: content.value!, encoding: .utf8) {
@@ -242,8 +249,12 @@ class ClipboardController: NSObject, ObservableObject {
                         if let plainTextData = plainText.data(using: .utf8) {
                             plainTextContent = ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData)
                         }
+                        originalHTMLContent = content
                     }
                 }
+            }
+            if let originalHTMLContent = originalHTMLContent {
+                contents.append(originalHTMLContent)
             }
             
             if let plainTextContent = plainTextContent {
@@ -307,6 +318,10 @@ extension ClipboardController {
         
         RunLoop.main.add(timer!, forMode: .common)
         
+        if Defaults[.sendNotification] {
+            sendStartNotification()
+        }
+        
         log(self, "Started monitoring")
     }
     
@@ -314,6 +329,9 @@ extension ClipboardController {
         timer?.invalidate()
         timer = nil
         clipboardModelManager.stopPeriodicCleanup()
+        if Defaults[.sendNotification] {
+            sendStopNotification()
+        }
         log(self, "Stopped monitoring")
     }
     
@@ -336,5 +354,17 @@ extension ClipboardController {
         }
 
         return attributedString.string
+    }
+    
+    private func sendStartNotification() {
+        let title = NSLocalizedString("Clipboard Started", comment: "Title for start notification")
+        let body = NSLocalizedString("The clipboard monitoring has been started.", comment: "Body for start notification")
+        AppDelegate.sendNotification(title, body)
+    }
+
+    private func sendStopNotification() {
+        let title = NSLocalizedString("Clipboard Stopped", comment: "Title for stop notification")
+        let body = NSLocalizedString("The clipboard monitoring has been stopped.", comment: "Body for stop notification")
+        AppDelegate.sendNotification(title, body)
     }
 }

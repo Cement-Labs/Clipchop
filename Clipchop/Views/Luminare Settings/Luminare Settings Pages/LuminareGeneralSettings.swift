@@ -17,7 +17,6 @@ struct LuminareGeneralSettings: View {
     // Permissions
     @State private var isAccessibilityAccessGranted = false
     @State private var isFullDiskAccessGranted = false
-    @State private var launchAtLogin: Bool = LaunchAtLogin.isEnabled
     
     // Global Behaviors
     @State private var showPopoverMore = false
@@ -25,6 +24,7 @@ struct LuminareGeneralSettings: View {
     
     @Default(.preferredColorScheme) private var preferredColorScheme
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
+    @Default(.sendNotification) private var sendNotification
     @Default(.autoCloseTimeout) private var autoCloseTimeout
     @Default(.cursorPosition) private var cursorPosition
     @Default(.displayMore) private var displayMore
@@ -102,12 +102,26 @@ Full Disk Access is needed to generate file previews.
         }
         LuminareSection("Global Behaviors") {
             
-            LuminareToggle("Starts with macOS" ,isOn: $launchAtLogin)
+            HStack {
+                Text("Starts with macOS")
+                Spacer()
+                LaunchAtLogin.Toggle("")
+                .toggleStyle(.switch)
+                .controlSize(.small)
+            }
+            .padding(.horizontal, 8)
+            .padding(.trailing, 2)
+            .frame(minHeight: 34)
             
             LuminareToggle(
                 "Shows menu bar item",
                 info: .init("You can always open \(Bundle.main.appName) again to access this page.", .orange),
                 isOn: $menuBarItemEnabled
+            )
+            
+            LuminareToggle (
+                "Send Notification",
+                isOn: $sendNotification
             )
         }
         

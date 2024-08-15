@@ -22,13 +22,14 @@ struct MenuBarIconView: View {
             .symbolEffect(.bounce, value: timesClipped)
             .onReceive(.didClip) { _ in
                 if !Defaults[.dnd] {
-                    Sound.defaultClipSound.play()
+                    Sound.clipSound.play()
                 }
                 timesClipped += 1
+                AppIcon.checkIfUnlockedNewIcon()
             }
             .onReceive(.didPaste) { _ in
                 if !Defaults[.dnd] {
-                    Sound.defaultPasteSound.play()
+                    Sound.pasteSound.play()
                 }
             }
     }

@@ -727,6 +727,28 @@
         }
       }
     },
+    "Clipboard Started" : {
+      "comment" : "Title for start notification",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴板启动"
+          }
+        }
+      }
+    },
+    "Clipboard Stopped" : {
+      "comment" : "Title for stop notification",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剪贴板关闭"
+          }
+        }
+      }
+    },
     "Clipchop" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1308,7 +1330,6 @@
       }
     },
     "Log to Console (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1592,7 +1613,6 @@
       }
     },
     "Refresh States (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1648,6 +1668,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "恢复"
+          }
+        }
+      }
+    },
+    "rust" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ will rust if you don't clip soon."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "再不剪贴%@就要生锈了！"
           }
         }
       }
@@ -1719,6 +1756,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "selectPreviousItem2"
+          }
+        }
+      }
+    },
+    "Send Notification" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送通知"
           }
         }
       }
@@ -1892,7 +1939,6 @@
       }
     },
     "Syncing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1914,12 +1960,33 @@
       }
     },
     "Test (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test(Debug)"
+          }
+        }
+      }
+    },
+    "The clipboard monitoring has been started." : {
+      "comment" : "Body for start notification",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已开启剪贴板跟踪。"
+          }
+        }
+      }
+    },
+    "The clipboard monitoring has been stopped." : {
+      "comment" : "Body for stop notification",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已关闭剪贴板跟踪。"
           }
         }
       }
