@@ -310,6 +310,9 @@ extension ClipboardController {
     // MARK: - Monitoring Functions
     
     func start() {
+        
+        changeCount = pasteboard.changeCount
+        
         clipboardModelManager.startPeriodicCleanup()
         
         timer = Timer.scheduledTimer(withTimeInterval: Defaults[.timerInterval], repeats: true) { [weak self] _ in

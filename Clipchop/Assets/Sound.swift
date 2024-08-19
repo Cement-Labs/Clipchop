@@ -109,7 +109,7 @@ extension Sound {
     
     static func play(sound: Sound) {
         if sound.hasSound {
-            SoundPlayer.playSound(named: sound.assetName)
+            SoundPlayer.playSound(named: sound.assetName, volume: Defaults[.volume])
         }
     }
     

@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct EmptyStatePages: View {
+    @Default(.preferredColorScheme) private var preferredColorScheme
+    
     var body: some View {
         VStack(alignment: .center) {
             Image(.clipchopFill)
@@ -18,5 +21,6 @@ struct EmptyStatePages: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .foregroundStyle(.blendMode(.overlay))
+        .preferredColorScheme(preferredColorScheme.colorScheme)
     }
 }

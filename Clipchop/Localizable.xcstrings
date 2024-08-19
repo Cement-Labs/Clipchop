@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%.0f%%" : {
+
+    },
     "%.2fs" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1330,6 +1333,7 @@
       }
     },
     "Log to Console (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1613,6 +1617,7 @@
       }
     },
     "Refresh States (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1830,6 +1835,16 @@
         }
       }
     },
+    "Sound volume" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音量"
+          }
+        }
+      }
+    },
     "Sound: Bloop" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -1939,6 +1954,7 @@
       }
     },
     "Syncing" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1960,6 +1976,7 @@
       }
     },
     "Test (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

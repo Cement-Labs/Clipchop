@@ -18,6 +18,7 @@ struct LuminareCustomizationSettings: View {
     @Default(.pasteSound) private var pasteSound
     @Default(.colorStyle) private var colorStyle
     @Default(.customAccentColor) private var customAccentColor
+    @Default(.volume) private var volume
     
     var body: some View {
         
@@ -54,6 +55,35 @@ struct LuminareCustomizationSettings: View {
                 newSound.setPasteSound()
                 newSound.play()
             }
+        }
+        
+        LuminareSection() {
+            VStack {
+                HStack {
+                    Text("Sound volume")
+                    Spacer()
+                    Text("\(volume * 100, specifier: "%.0f")%")
+                        .frame(maxWidth: 150)
+                        .clipShape(Capsule())
+                        .monospaced()
+                        .fixedSize()
+                        .padding(4)
+                        .padding(.horizontal, 4)
+                        .background {
+                            ZStack {
+                                Capsule()
+                                    .strokeBorder(.quaternary, lineWidth: 1)
+                                
+                                Capsule()
+                                    .foregroundStyle(.quinary.opacity(0.5))
+                            }
+                        }
+                }
+                Slider(value: $volume, in: 0...1)
+            }
+            .padding(.horizontal, 8)
+            .padding(.trailing, 2)
+            .frame(minHeight: 70)
         }
         
         LuminareSection("Color") {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Defaults
+import Luminare
 
 struct MenuBarView: View {
     

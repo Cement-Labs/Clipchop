@@ -26,7 +26,13 @@ extension Defaults.Keys {
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
     
+    // MARK: - Sound
     static let dnd = Key<Bool>("dnd", default: false)
+    static let volume = Key<Float>("volume", default: 0.25)
+    static let clipSound = Key<Sound>("clipSound", default: .defaultClipSound)
+    static let pasteSound = Key<Sound>("pasteSound", default: .defaultPasteSound)
+    
+    
     static let appIcon = Key<AppIcon>("appIcon", default: {
 #if DEBUG
         .beta
@@ -34,8 +40,7 @@ extension Defaults.Keys {
         .defaultAppIcon
 #endif
     })
-    static let clipSound = Key<Sound>("clipSound", default: .defaultClipSound)
-    static let pasteSound = Key<Sound>("pasteSound", default: .defaultPasteSound)
+
     
     // MARK: Excluded Applications
     

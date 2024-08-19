@@ -27,6 +27,7 @@ struct CollapsedPages: View {
     @Binding var movethebutton: Bool
 
     @Default(.keySwitcher) var keySwitcher
+    @Default(.preferredColorScheme) private var preferredColorScheme
 
     var clipboardModelEditor: ClipboardModelEditor
     var apps: InstalledApps
@@ -183,6 +184,7 @@ struct CollapsedPages: View {
                 }
             }
         }
+        .preferredColorScheme(preferredColorScheme.colorScheme)
         .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
         .onReceive(.panelDidLogout) { _ in
             cleanupEventMonitors()
