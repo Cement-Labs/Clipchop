@@ -41,7 +41,7 @@ class ClipboardManager {
             case .adjustedPosition:
                 if let screenCursorPosition = getIMECursorPosition() {
                     let globalCursorPosition = convertScreenToGlobalCoordinates(screenPoint: screenCursorPosition)
-                    position = CGPoint(x: globalCursorPosition.x - 20, y: globalCursorPosition.y - 28)
+                    position = CGPoint(x: globalCursorPosition.x - 20, y: globalCursorPosition.y - 30)
                 } else {
                     position = NSEvent.mouseLocation
                 }
@@ -60,11 +60,19 @@ class ClipboardManager {
                 } else {
                     position = NSEvent.mouseLocation
                 }
+            case .custom:
+                if let windowPosition = UserDefaults.standard.dictionary(forKey: "windowPosition") as? [String: CGFloat] {
+                    let x = windowPosition["x"] ?? 0
+                    let y = windowPosition["y"] ?? 0
+                    let customPosition = CGPoint(x: x, y: y)
+                    position = customPosition
+                } else {
+                    position = NSEvent.mouseLocation
+                }
             }
-            
             self.clipHistoryViewController.toggle(position: position)
         }
-        
+            
         KeyboardShortcuts.onKeyDown(for: .start) {
             Self.clipboardController?.toggle()
         }

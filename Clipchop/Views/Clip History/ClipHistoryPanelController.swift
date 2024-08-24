@@ -149,16 +149,26 @@ extension ClipHistoryPanelController {
             )
             
             panel.makeKeyAndOrderFront(nil)
-            self.startCloseTimer()
+            if Defaults[.autoClose] {
+                self.startCloseTimer()
+            }
+            
             NotificationCenter.default.post(name: .panelDidOpen, object: nil)
         }
     }
     
     func close() {
         NotificationCenter.default.post(name: .panelDidClose, object: nil)
+        if let window = self.panel {
+            let frame = window.frame
+            let windowPosition = ["x": frame.origin.x, "y": frame.origin.y + frame.height]
+            UserDefaults.standard.set(windowPosition, forKey: "windowPosition")
+        }
         self.setExpansion(false)
         self.panel?.orderOut(nil)
-        panelDidClose()
+        if Defaults[.autoClose] {
+            panelDidClose()
+        }
     }
     
     func logoutpanel() {
@@ -167,7 +177,9 @@ extension ClipHistoryPanelController {
         self.setExpansion(false)
         self.panel?.orderOut(nil)
         self.panel = nil
-        panelDidClose()
+        if Defaults[.autoClose] {
+            panelDidClose()
+        }
         
         if let contentView = panel?.contentView {
             contentView.subviews.forEach { $0.removeFromSuperview() }

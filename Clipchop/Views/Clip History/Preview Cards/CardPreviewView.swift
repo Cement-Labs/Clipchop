@@ -29,7 +29,6 @@ struct CardPreviewView: View {
     @State private var data: Data?
     @State private var showMore = false
     @State private var showPopover = false
-    @State private var showPreview = false
    
     @State private var eventMonitor: Any?
     @State private var eventSpaceMonitor: Any?
@@ -55,32 +54,15 @@ struct CardPreviewView: View {
         }
     }
     
-    var shouldShowPopover: Binding<Bool> {
-        Binding<Bool>(
-            get: { isSelected && showPopover },
-            set: { _ in }
-        )
-    }
-    
     var keyboardShortcut: String
     var provider = ClipboardDataProvider.shared
+    
+    let manager = FolderManager()
     
     var body: some View {
         ZStack {
             // MARK: - Button Action
-            Button("Delete", action:{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    withAnimation(.spring(dampingFraction: 0.7)){
-                        try? deleteItem(item)
-                    }
-                }
-            })
-            .opacity(0)
-            .allowsHitTesting(false)
-            .buttonStyle(.borderless)
-            .frame(width: 0, height: 0)
-            .applyKeyboardShortcut(keyboardShortcut, modifier: deleteShortcut.eventModifier)
-            
+
             Button("Copy", action: {
                 self.isSelected = true
                 self.isCopying = true
@@ -137,12 +119,12 @@ struct CardPreviewView: View {
             .applyKeyboardShortcut(keyboardShortcut, modifier: pinShortcut.eventModifier)
             
             // MARK: - CardView
-            if showPreview {
-                PreviewContentView(clipboardHistory: item)
-                    .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .allowsHitTesting(false)
-            }
+            
+            PreviewContentView(clipboardHistory: item)
+                .frame(width: Defaults[.displayMore] ? 112 : 80, height: Defaults[.displayMore] ? 112 : 80 , alignment: .center)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .allowsHitTesting(false)
+            
             
             ZStack {
                 RoundedRectangle(cornerRadius: 5)
@@ -303,6 +285,78 @@ struct CardPreviewView: View {
                 .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, copyShortcut.eventModifier])
             }
             
+            Menu {
+                let folders = manager.allFolders()
+                ForEach(folders, id: \.self) { folder in
+
+                    let itemsInFolder = manager.items(inFolder: folder)
+                    let isItemInFolder = itemsInFolder?.contains(item.id!) ?? false
+
+                    Button {
+                        if isItemInFolder {
+                            let foldersContainingItem = folders.filter { manager.items(inFolder: $0)?.contains(item.id!) ?? false }
+                            if foldersContainingItem.count == 1 {
+                                manager.removeItem([item], fromFolder: folder)
+                                withAnimation(Animation.easeInOut) {
+                                    do {
+                                        self.isHoveredPin = true
+                                        let currentPinStatus = item.pin
+                                        item.pin = false
+                                        do {
+                                            if context.hasChanges {
+                                                try context.save()
+                                            }
+                                        } catch {
+                                            log(self, "Failed to save pin status change: \(error)")
+                                            item.pin = currentPinStatus
+                                        }
+                                    }
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    withAnimation(Animation.easeInOut) {
+                                        self.isHoveredPin = false
+                                    }
+                                }
+                            } else {
+                                manager.removeItem([item], fromFolder: folder)
+                            }
+                        } else {
+                            manager.addItem([item], toFolder: folder)
+                            withAnimation(Animation.easeInOut) {
+                                do {
+                                    self.isHoveredPin = true
+                                    let currentPinStatus = item.pin
+                                    item.pin = true
+                                    do {
+                                        if context.hasChanges {
+                                            try context.save()
+                                        }
+                                    } catch {
+                                        log(self, "Failed to save pin status change: \(error)")
+                                        item.pin = currentPinStatus
+                                    }
+                                }
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation(Animation.easeInOut) {
+                                    self.isHoveredPin = false
+                                }
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Text(folder)
+                            if isItemInFolder {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            } label: {
+                Text("Folder")
+                Image(systemSymbol: .folder)
+            }
+            
             Divider()
             
             Button {
@@ -324,6 +378,9 @@ struct CardPreviewView: View {
                 self.isSelected = isOver
                 self.isOnHover = isOver
             }
+            if !isOver {
+                showPopover = false
+            }
         }
         .onDrag {
             let clipboardContents = item.getContents()
@@ -335,7 +392,7 @@ struct CardPreviewView: View {
             log(self, "No suitable content found for dragging")
             return NSItemProvider()
         }
-        .popover(isPresented: shouldShowPopover) {
+        .popover(isPresented: $showPopover) {
             HStack(spacing: 10) {
                 VStack {
                     PreviewContentView(clipboardHistory: item)
@@ -389,28 +446,16 @@ struct CardPreviewView: View {
             .frame(width: 420, height: 210)
             .padding(.all, 7.5)
         }
-        .onChange(of: isSelected) { newValue, _ in
-            if !newValue {
-                showPopover = false
-            }
-         }
+        // Refresh the key monitor after copying the changed order to ensure that the key order is updated.
         .onChange(of: keyboardShortcut) { _, _ in
             cleanupEventMonitors()
             setupEventMonitors()
         }
         .onAppear {
             setupEventMonitors()
-            showPreview = true
         }
         .onDisappear {
             cleanupEventMonitors()
-            showPreview = false
-        }
-        .onReceive(.panelDidClose) { _ in
-            showPreview = false
-        }
-        .onReceive(.panelDidOpen) { _ in
-            showPreview = true
         }
     }
     
@@ -449,12 +494,10 @@ struct CardPreviewView: View {
             }
             return event
         }
-        eventEnterMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyUp]) { event in
-            if event.type == .keyUp && event.keyCode == 36 && isSelected {
-                if isSelected {
-                    copyItem()
-                    isSelected = false
-                }
+        eventEnterMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
+            if event.type == .keyDown && event.keyCode == 36 && isSelected {
+                copyItem()
+                isSelected = false
                 return nil
             }
             return event
@@ -462,7 +505,7 @@ struct CardPreviewView: View {
     }
     
     private func cleanupEventMonitors() {
-//         Remove event monitors to avoid leaks
+        // Remove event monitors to avoid leaks
         if let monitor = eventMonitor {
             NSEvent.removeMonitor(monitor)
             eventMonitor = nil

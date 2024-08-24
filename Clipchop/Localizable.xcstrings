@@ -5,7 +5,14 @@
 
     },
     "%.0f%%" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f% %"
+          }
+        }
+      }
     },
     "%.2fs" : {
       "localizations" : {
@@ -322,6 +329,33 @@
         }
       }
     },
+    "Add Folder" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加文件夹"
+          }
+        }
+      }
+    },
+    "Aerugo" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ will rust if you don't clip soon."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "再不剪贴 %@ 就要生锈了！"
+          }
+        }
+      }
+    },
     "All Types" : {
       "comment" : "All Types",
       "localizations" : {
@@ -400,6 +434,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beta"
+          }
+        }
+      }
+    },
+    "App Icon: HoloGram" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HoloGram"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全息图"
           }
         }
       }
@@ -536,6 +587,17 @@
         }
       }
     },
+    "At the last position" : {
+      "comment" : "At the last position",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在历史位置"
+          }
+        }
+      }
+    },
     "At the mouse" : {
       "comment" : "At the mouse",
       "localizations" : {
@@ -564,6 +626,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "音频"
+          }
+        }
+      }
+    },
+    "Auto Close" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动关闭"
           }
         }
       }
@@ -1074,6 +1146,36 @@
         }
       }
     },
+    "folder" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件夹"
+          }
+        }
+      }
+    },
+    "Folder" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件夹"
+          }
+        }
+      }
+    },
+    "Folder Name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件夹名称"
+          }
+        }
+      }
+    },
     "Forever" : {
       "comment" : "Forever",
       "localizations" : {
@@ -1219,6 +1321,23 @@
         }
       }
     },
+    "HoloGram" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ feels a lot stronger!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 感觉强大了不少！"
+          }
+        }
+      }
+    },
     "images" : {
       "comment" : "images",
       "localizations" : {
@@ -1236,6 +1355,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "图像"
+          }
+        }
+      }
+    },
+    "Important" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重要"
           }
         }
       }
@@ -1333,7 +1462,6 @@
       }
     },
     "Log to Console (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1515,6 +1643,16 @@
         }
       }
     },
+    "Personal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "个人"
+          }
+        }
+      }
+    },
     "Pin" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1562,6 +1700,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保存时间"
+          }
+        }
+      }
+    },
+    "Preview" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
           }
         }
       }
@@ -1617,7 +1765,6 @@
       }
     },
     "Refresh States (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1677,23 +1824,6 @@
         }
       }
     },
-    "rust" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%@ will rust if you don't clip soon."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "再不剪贴%@就要生锈了！"
-          }
-        }
-      }
-    },
     "s" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1745,6 +1875,16 @@
         }
       }
     },
+    "selectNextTab" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selectNextTab"
+          }
+        }
+      }
+    },
     "selectPreviousItem1" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1761,6 +1901,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "selectPreviousItem2"
+          }
+        }
+      }
+    },
+    "selectPreviousTab" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "selectPreviousTab"
           }
         }
       }
@@ -1954,7 +2104,6 @@
       }
     },
     "Syncing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1976,7 +2125,6 @@
       }
     },
     "Test (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2319,6 +2467,16 @@
         }
       }
     },
+    "Work" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "工作"
+          }
+        }
+      }
+    },
     "You can always open %@ again to access this page." : {
       "localizations" : {
         "zh-Hans" : {
@@ -2335,6 +2493,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "你已经收集了%lld种文件！"
+          }
+        }
+      }
+    },
+    "You have created %lld folders" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你已经创建了%lld个文件夹！"
           }
         }
       }

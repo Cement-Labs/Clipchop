@@ -14,7 +14,6 @@ struct LuminareKeyboardShortcutsSettings: View {
     @Default(.deleteShortcut) private var deleteShortcut
     @Default(.copyShortcut) private var copyShortcut
     @Default(.pinShortcut) private var pinShortcut
-    
     @Default(.keySwitcher) private var keySwitcher
     
     var body: some View {
@@ -25,18 +24,14 @@ struct LuminareKeyboardShortcutsSettings: View {
                 } caption: {
                     Text("Call up the clip history window.")
                 }
-                .padding(.horizontal, 8)
-                .padding(.trailing, 2)
-                .frame(minHeight: 42)
-                
                 Spacer()
                 
                 KeyboardShortcuts.Recorder(for: .window) { }
-                    .padding(.horizontal, 8)
-                    .padding(.trailing, 2)
-                    .frame(minHeight: 42)
                     .controlSize(.large)
             }
+            .padding(.horizontal, 8)
+            .padding(.trailing, 2)
+            .frame(minHeight: 42)
             
             HStack {
                 withCaption {
@@ -44,18 +39,14 @@ struct LuminareKeyboardShortcutsSettings: View {
                 } caption: {
                     Text("Enable or disable monitoring of your clipboard history.")
                 }
-                .padding(.horizontal, 8)
-                .padding(.trailing, 2)
-                .frame(minHeight: 42)
-                
                 Spacer()
                 
                 KeyboardShortcuts.Recorder(for: .start) { }
-                    .padding(.horizontal, 8)
-                    .padding(.trailing, 2)
-                    .frame(minHeight: 42)
                     .controlSize(.large)
             }
+            .padding(.horizontal, 8)
+            .padding(.trailing, 2)
+            .frame(minHeight: 42)
         }
         LuminareSection {
             HStack {

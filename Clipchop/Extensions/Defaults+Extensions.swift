@@ -25,13 +25,13 @@ extension Defaults.Keys {
     static let colorStyle = Key<ColorStyle>("colorStyle", default: .app)
     static let customAccentColor = Key<Color>("customAccentColor", default: .accentColor)
     static let preferredColorScheme = Key<PreferredColorScheme>("preferredColorScheme", default: .system)
+    static let autoClose = Key<Bool>("autoClose", default: true)
     
     // MARK: - Sound
     static let dnd = Key<Bool>("dnd", default: false)
     static let volume = Key<Float>("volume", default: 0.25)
     static let clipSound = Key<Sound>("clipSound", default: .defaultClipSound)
     static let pasteSound = Key<Sound>("pasteSound", default: .defaultPasteSound)
-    
     
     static let appIcon = Key<AppIcon>("appIcon", default: {
 #if DEBUG
@@ -75,6 +75,12 @@ extension Defaults.Keys {
     
     static let historyPreservationPeriod = Key<HistoryPreservationPeriod>("historyPreservationPeriod", default: .day)
     static let historyPreservationTime = Key<Double>("historyPreservationTime", default: 15)
+        
+    static let folders = Key<[Folder]>("folders", default: [
+        Folder(id: UUID(), name: .init(localized: "Work", defaultValue: "Work"), itemIDs: []),
+        Folder(id: UUID(), name: .init(localized: "Personal", defaultValue: "Personal"), itemIDs: []),
+        Folder(id: UUID(), name: .init(localized: "Important", defaultValue: "Important"), itemIDs: [])
+    ])
     
     static let categories = Key<[FileCategory]>("categories", default: [
         

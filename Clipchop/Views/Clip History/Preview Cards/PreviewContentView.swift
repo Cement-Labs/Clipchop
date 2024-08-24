@@ -81,7 +81,6 @@ struct PreviewContentView: View, Equatable {
                     .clipShape(RoundedRectangle(cornerRadius: 7.5))
             }
         }
-        .padding(.vertical, 4)
         .background(
             RoundedRectangle(cornerRadius: 0)
                 .fill(Color.clear)

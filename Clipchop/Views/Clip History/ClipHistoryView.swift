@@ -92,7 +92,9 @@ struct ClipHistoryView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .preferredColorScheme(preferredColorScheme.colorScheme)
         .onChange(of: searchText) { oldValue, newValue in
-            controller.resetCloseTimer()
+            if Defaults[.autoClose] {
+                controller.resetCloseTimer()
+            }
         }
         .onChange(of: controller.isExpandedforView) { isExpanded, _ in
             handleExpansionStateChange(isExpanded: isExpanded)

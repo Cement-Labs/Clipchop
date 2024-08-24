@@ -60,7 +60,14 @@ extension AppIcon {
         name: .init(localized: "App Icon: Aerugo", defaultValue: "Aerugo"),
         assetName: "AppIcon-Aerugo",
         unlockThreshold: 25,
-        unlockMessage: .init(localized: "rust", defaultValue: "\(Bundle.main.appName) will rust if you don't clip soon.")
+        unlockMessage: .init(localized: "Aerugo", defaultValue: "\(Bundle.main.appName) will rust if you don't clip soon.")
+    )
+    
+    static let holoGram = AppIcon(
+        name: .init(localized: "App Icon: HoloGram", defaultValue: "HoloGram"),
+        assetName: "AppIcon-HoloGram",
+        unlockThreshold: 50,
+        unlockMessage: .init(localized: "HoloGram", defaultValue: "\(Bundle.main.appName) feels a lot stronger!")
     )
 }
 
@@ -80,7 +87,8 @@ extension AppIcon {
     static let icons: [AppIcon] = [
         stable,
         beta,
-        aerugo
+        aerugo,
+        holoGram
     ]
 }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppKit
+import Defaults
 import KeyboardShortcuts
 
 class ClipHistoryPanel: NSPanel {
@@ -69,17 +70,23 @@ class ClipHistoryPanel: NSPanel {
     }
     
     override func mouseDown(with event: NSEvent) {
-        controller.resetCloseTimer()
+        if Defaults[.autoClose] {
+            controller.resetCloseTimer()
+        }
         super.mouseDown(with: event)
     }
     
     override func mouseMoved(with event: NSEvent) {
-        controller.resetCloseTimer()
+        if Defaults[.autoClose] {
+            controller.resetCloseTimer()
+        }
         super.mouseMoved(with: event)
     }
     
     override func scrollWheel(with event: NSEvent) {
-        controller.resetCloseTimer()
+        if Defaults[.autoClose] {
+            controller.resetCloseTimer()
+        }
         super.scrollWheel(with: event)
     }
     

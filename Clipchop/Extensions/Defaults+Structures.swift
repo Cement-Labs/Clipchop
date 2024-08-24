@@ -203,12 +203,19 @@ struct FileCategory: Hashable, Identifiable, Codable, Defaults.Serializable {
     }
 }
 
+struct Folder: Hashable, Identifiable, Codable, Defaults.Serializable {
+    let id: UUID
+    var name: String
+    var itemIDs: [UUID]
+}
+
 // MARK: -  Window position
 
 enum CursorPosition: String, CaseIterable, Identifiable, Defaults.Serializable {
     case mouseLocation = "NSEvent.mouseLocation"
     case adjustedPosition = "Adjusted Position"
     case fixedPosition = "Fixed position"
+    case custom = "Custom Position"
     
     var displayText: String {
         switch self {
@@ -218,6 +225,8 @@ enum CursorPosition: String, CaseIterable, Identifiable, Defaults.Serializable {
             return NSLocalizedString("At the cursor", comment: "At the cursor")
         case .fixedPosition:
             return NSLocalizedString("At the subcenter", comment: "At the subcenter")
+        case .custom:
+            return NSLocalizedString("At the last position", comment: "At the last position")
         }
     }
     

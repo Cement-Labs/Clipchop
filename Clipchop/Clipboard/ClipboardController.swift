@@ -232,6 +232,12 @@ class ClipboardController: NSObject, ObservableObject {
                         }
                     case .string:
                         plainTextContents.append(content)
+                    case .URL:
+                        if let urlString = String(data: content.value!, encoding: .utf8) {
+                            if let plainTextData = urlString.data(using: .utf8) {
+                                plainTextContents.append(ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData))
+                            }
+                        }
                     default:
                         break
                     }
@@ -243,13 +249,22 @@ class ClipboardController: NSObject, ObservableObject {
             var originalHTMLContent: ClipboardContent?
 
             contents.forEach { content in
-                if let type = content.type, NSPasteboard.PasteboardType(type) == .html {
-                    if let htmlString = String(data: content.value!, encoding: .utf8) {
-                        let plainText = extractPlainTextFromHTML(htmlString)
-                        if let plainTextData = plainText.data(using: .utf8) {
-                            plainTextContent = ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData)
+                if let type = content.type {
+                    let pasteboardType = NSPasteboard.PasteboardType(type)
+                    if pasteboardType == .html {
+                        if let htmlString = String(data: content.value!, encoding: .utf8) {
+                            let plainText = extractPlainTextFromHTML(htmlString)
+                            if let plainTextData = plainText.data(using: .utf8) {
+                                plainTextContent = ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData)
+                            }
+                            originalHTMLContent = content
                         }
-                        originalHTMLContent = content
+                    } else if pasteboardType == .URL {
+                        if let urlString = String(data: content.value!, encoding: .utf8) {
+                            if let plainTextData = urlString.data(using: .utf8) {
+                                plainTextContent = ClipboardContent(type: NSPasteboard.PasteboardType.string.rawValue, value: plainTextData)
+                            }
+                        }
                     }
                 }
             }
@@ -285,8 +300,9 @@ class ClipboardController: NSObject, ObservableObject {
             Notification.Name.didPaste.post()
         }
         
+        clipHistoryViewController.close()
+        
         if Defaults[.pasteToFrontmostEnabled] {
-            clipHistoryViewController.close()
             pasteToActiveApplication()
         }
     }

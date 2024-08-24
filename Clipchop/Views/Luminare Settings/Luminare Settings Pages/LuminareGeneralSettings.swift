@@ -28,6 +28,7 @@ struct LuminareGeneralSettings: View {
     @Default(.autoCloseTimeout) private var autoCloseTimeout
     @Default(.cursorPosition) private var cursorPosition
     @Default(.displayMore) private var displayMore
+    @Default(.autoClose) private var autoClose
     @Default(.hideTag) private var hideTag
     
     private var controller: ClipHistoryPanelController = ClipHistoryPanelController()
@@ -137,7 +138,7 @@ Full Disk Access is needed to generate file previews.
     This action will enlarge the panel size to display more content.
     """)
                 }
- 
+                
                 Spacer()
                 Toggle("", isOn: $displayMore)
                     .onChange(of: displayMore) { newValue, _ in
@@ -175,14 +176,22 @@ Full Disk Access is needed to generate file previews.
             .padding(.trailing, 2)
             .frame(minHeight: 42)
             
+        }
+        
+        LuminareSection() {
             VStack {
-                LuminareValueAdjuster(
-                    "Auto Close Timeout",
-                    value: $autoCloseTimeout,
-                    sliderRange: 5...60,
-                    suffix: "s",
-                    lowerClamp: true
-                )
+                LuminareToggle("Auto Close" ,isOn: $autoClose)
+            }
+            if Defaults[.autoClose] {
+                VStack {
+                    LuminareValueAdjuster(
+                        "Auto Close Timeout",
+                        value: $autoCloseTimeout,
+                        sliderRange: 5...60,
+                        suffix: "s",
+                        lowerClamp: true
+                    )
+                }
             }
         }
         .preferredColorScheme(preferredColorScheme.colorScheme)

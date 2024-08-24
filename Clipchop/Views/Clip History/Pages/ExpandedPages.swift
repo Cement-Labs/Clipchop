@@ -9,10 +9,12 @@ import SwiftUI
 import Defaults
 import Fuse
 import CoreData
+import SFSafeSymbols
 
 struct ExpandedPages: View {
     
     let clipHistorySearch = ClipHistorySearch()
+    let folderManager = FolderManager()
     
     @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
     @Environment(\.managedObjectContext) private var context
@@ -30,7 +32,7 @@ struct ExpandedPages: View {
     @State private var selectedIndex: Int? = nil
     
     @State private var eventScroll: Any?
-    
+    @State private var showBackToTop: Bool = false
     @State private var scrollOffset: CGFloat = 0
     @State private var proxy: ScrollViewProxy?
     
@@ -38,8 +40,15 @@ struct ExpandedPages: View {
     @Binding var selectedTab: String
     @Binding var isSearchVisible: Bool
     
+    @State private var isTagBarVisible: Bool = true
+    @State private var isFolderBarVisible: Bool = false
+    
     var filteredCategories: [FileCategory] {
         return Defaults[.categories].sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+    }
+    
+    var filteredFolders: [Folder] {
+        return Defaults[.folders].sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
     
     var filteredItems: [ClipboardHistory] {
@@ -107,6 +116,24 @@ struct ExpandedPages: View {
             .frame(width: 0, height: 0)
             .keyboardShortcut(.rightArrow, modifiers: [])
             
+            Button("selectPreviousTab") {
+                switchToPreviousTab()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(.leftArrow, modifiers: .command)
+            
+            Button("selectNextTab") {
+                switchToNextTab()
+            }
+            .opacity(0)
+            .allowsHitTesting(false)
+            .buttonStyle(.borderless)
+            .frame(width: 0, height: 0)
+            .keyboardShortcut(.rightArrow, modifiers: .command)
+            
             VStack {
                 if selectedTab == NSLocalizedString("All Types", comment: "All Types") {
                     if !filteredItems.isEmpty {
@@ -144,18 +171,39 @@ struct ExpandedPages: View {
                             }
                         }
                     }
+                    ForEach(folderManager.allFolders(), id: \.self) { folderName in
+                        if selectedTab == folderName {
+                            let folderItems = filteredItems.filter { item in
+                                return folderManager.items(inFolder: folderName)?.contains(item.id!) ?? false
+                            }
+                            
+                            if !folderItems.isEmpty {
+                                renderSection(items: folderItems)
+                            } else {
+                                EmptyStatePages()
+                                    .padding(.vertical, 24)
+                            }
+                        }
+                    }
                 }
             }
             .padding(.top, 48)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .overlay(searchBar().padding([.top, .trailing], 15), alignment: .topTrailing)
-            .overlay(tagBar().padding([.top, .leading], 15), alignment: .topLeading)
+            .overlay(
+                HStack(spacing: 7.5) {
+                    tagBar()
+                    folderBar()
+                    searchBar()
+                }
+                .padding([.horizontal, .top], 15),
+                alignment: .top
+            )
         }
         .onAppear {
-            setupEventMonitors()
+//            setupEventMonitors()
         }
         .onDisappear {
-            cleanupEventMonitors()
+//            cleanupEventMonitors()
         }
         .onReceive(.panelDidClose) { _ in
             selectedIndex = nil
@@ -165,7 +213,7 @@ struct ExpandedPages: View {
             }
         }
         .onReceive(.panelDidLogout) { _ in
-            cleanupEventMonitors()
+//            cleanupEventMonitors()
         }
     }
     
@@ -199,12 +247,58 @@ struct ExpandedPages: View {
                     }
                 }
                 .padding(.horizontal, Defaults[.displayMore] ? 16 : 12)
+                .background(
+                    GeometryReader { geometry -> Color in
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                let offsetX = geometry.frame(in: .named("scroll")).minX
+                                showBackToTop = offsetX < CGFloat(-9) * (Defaults[.displayMore] ? 16 : 12)
+                            }
+                        }
+                        return Color.clear
+                    }
+                )
             }
+            .overlay(backToTop().padding([.bottom, .trailing], 10).shadow(radius: 15), alignment: .bottomTrailing)
             .frame(width: Defaults[.displayMore] ? 700 : 500)
             .onAppear {
                 proxy = scrollViewProxy
             }
         }
+    }
+    
+    @ViewBuilder
+    private func backToTop() -> some View {
+        ZStack {
+            if showBackToTop {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(.thinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 30)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                    Button(action: {
+                        withAnimation {
+                            if let proxy = proxy {
+                                withAnimation {
+                                    proxy.scrollTo(Int(0), anchor: .center)
+                                }
+                            }
+                        }
+                        selectedIndex = nil
+                    }) {
+                        Image(systemSymbol: .chevronLeft)
+                            .frame(width: 10, height: 10)
+                            .padding(5)
+                    }
+                    .keyboardShortcut(.tab, modifiers: [])
+                    .buttonStyle(.borderless)
+                }
+            }
+        }
+        .frame(width: 30, height: 30)
+        .cornerRadius(25)
     }
     
     @ViewBuilder
@@ -222,16 +316,19 @@ struct ExpandedPages: View {
                         self.searchText = query
                         self.searchResults = clipHistorySearch.search(string: query, within: Array(items))
                     }
+                    .disabled(!isSearchVisible)
                     .padding([.leading, .horizontal], 15)
-                    .frame(width: 425, height: 30)
+                    .frame(width: Defaults[.displayMore] ? 623 : 365, height: 30)
                 }
                 Button(action: {
-                    withAnimation {
-                        isSearchVisible.toggle()
-                        if !isSearchVisible {
-                            searchText = ""
-                            searchResults = []
-                        }
+                    withAnimation(.smooth(duration: 0.6)) {
+                        isSearchVisible = true
+                        isTagBarVisible = false
+                        isFolderBarVisible = false
+                    }
+                    if !isSearchVisible {
+                        searchText = ""
+                        searchResults = []
                     }
                 }) {
                     Image(systemSymbol: .magnifyingglass)
@@ -244,9 +341,8 @@ struct ExpandedPages: View {
                 .offset(x: isSearchVisible ? -5 : 0)
             }
         }
-        .frame(width: isSearchVisible ?  Defaults[.displayMore] ? 668 : 470 : 30, height: 30)
+        .frame(width: isSearchVisible ? (Defaults[.displayMore] ? 668 : 395) : 30, height: 30)
         .cornerRadius(25)
-        
     }
     
     @ViewBuilder
@@ -258,19 +354,125 @@ struct ExpandedPages: View {
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(Color.gray, lineWidth: 0.5)
                 )
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
-                    TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
-                    ForEach(filteredTags) { category in
-                        TabButton(title: category.name, selectedTab: $selectedTab)
+            if isTagBarVisible {
+                ScrollViewReader { scrollProxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
+                                .id("All Types")
+                            TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
+                                .id("Pinned")
+                            ForEach(filteredTags) { category in
+                                TabButton(title: category.name, selectedTab: $selectedTab)
+                                    .id(category.name)
+                            }
+                        }
+                    }
+                    .onChange(of: selectedTab) { newValue, _ in
+                        scrollProxy.scrollTo(newValue, anchor: .center)
                     }
                 }
+            } else {
+                Button(action: {
+                    withAnimation(.smooth(duration: 0.6)) {
+                        isTagBarVisible = true
+                        isSearchVisible = false
+                        isFolderBarVisible = false
+                        selectedTab = NSLocalizedString("All Types", comment: "All Types")
+                    }
+                }) {
+                    Image(systemSymbol: .tag)
+                        .resizable()
+                        .frame(width: 10, height: 10)
+                        .padding(5)
+                }
+                .keyboardShortcut("a", modifiers: .command)
+                .frame(width: 30, height: 30)
+                .buttonStyle(.borderless)
             }
         }
         .onAppear(perform: setupTags)
-        .frame(width: isSearchVisible ? 0 : Defaults[.displayMore] ? 622 : 425, height: 30)
+        .frame(width: isTagBarVisible ? (Defaults[.displayMore] ? 622 : 395) : 30, height: 30)
         .cornerRadius(25)
+    }
+    
+    @ViewBuilder
+    private func folderBar() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 30)
+                .fill(.thinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
+            if isFolderBarVisible {
+                ScrollViewReader { scrollProxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(filteredFolders) { folder in
+                                TabButton(title: folder.name, selectedTab: $selectedTab)
+                                    .id(folder.name)
+                            }
+                        }
+                    }
+                    .onChange(of: selectedTab) { newValue, _ in
+                        scrollProxy.scrollTo(newValue, anchor: .center)
+                    }
+                }
+            } else {
+                Button(action: {
+                    withAnimation(.smooth(duration: 0.6)) {
+                        isFolderBarVisible = true
+                        isSearchVisible = false
+                        isTagBarVisible = false
+                        selectedTab = (filteredFolders.first?.name) ?? NSLocalizedString("All Types", comment: "All Types")
+                    }
+                }) {
+                    Image(systemSymbol: .folder)
+                        .resizable()
+                        .frame(width: 10, height: 10)
+                        .padding(5)
+                }
+                .keyboardShortcut("f", modifiers: .command)
+                .frame(width: 30, height: 30)
+                .buttonStyle(.borderless)
+            }
+        }
+        .frame(width: isFolderBarVisible ? (Defaults[.displayMore] ? 622 : 395) : 30, height: 30)
+        .cornerRadius(25)
+    }
+    
+    private func switchToPreviousTab() {
+        guard let currentIndex = getCurrentTabIndex(), currentIndex > 0 else {
+            return
+        }
+        let previousIndex = currentIndex - 1
+        withAnimation {
+            selectedTab = allTabs[previousIndex]
+        }
+    }
+
+    private func switchToNextTab() {
+        guard let currentIndex = getCurrentTabIndex(), currentIndex < allTabs.count - 1 else {
+            return
+        }
+        let nextIndex = currentIndex + 1
+        withAnimation {
+            selectedTab = allTabs[nextIndex]
+        }
+        
+    }
+    
+    private func getCurrentTabIndex() -> Int? {
+        return allTabs.firstIndex(of: selectedTab)
+    }
+    
+    private var allTabs: [String] {
+        if isTagBarVisible {
+            return [NSLocalizedString("All Types", comment: "All Types"), NSLocalizedString("Pinned", comment: "Pinned")] + filteredTags.map { $0.name }
+        } else {
+            return filteredFolders.map { $0.name }
+        }
     }
     
     private func setupEventMonitors() {

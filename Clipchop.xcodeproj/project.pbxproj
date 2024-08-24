@@ -132,6 +132,8 @@
 		659C227B2C4D15EA00C5C62B /* SearchFieldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */; };
 		65A176132C4BF408000BACFA /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A176122C4BF408000BACFA /* Throttler.swift */; };
 		65C48EC12C3D6C9000F75C64 /* ClipHistorySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */; };
+		65CD017E2C79B4BA007FAD9B /* FolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD017D2C79B4BA007FAD9B /* FolderManager.swift */; };
+		65CD01802C79D51B007FAD9B /* LuminareFolderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CD017F2C79D51B007FAD9B /* LuminareFolderSettings.swift */; };
 		65EDAE6F2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */; };
 		65EDAE732C55E7AB00EA0D32 /* CustomLuminareList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE722C55E7AB00EA0D32 /* CustomLuminareList.swift */; };
 		65EDAE752C55F50D00EA0D32 /* LuminareAboutSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */; };
@@ -267,6 +269,8 @@
 		659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldWrapper.swift; sourceTree = "<group>"; };
 		65A176122C4BF408000BACFA /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
 		65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistorySearch.swift; sourceTree = "<group>"; };
+		65CD017D2C79B4BA007FAD9B /* FolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManager.swift; sourceTree = "<group>"; };
+		65CD017F2C79D51B007FAD9B /* LuminareFolderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareFolderSettings.swift; sourceTree = "<group>"; };
 		65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareExcludedAppsSettings.swift; sourceTree = "<group>"; };
 		65EDAE722C55E7AB00EA0D32 /* CustomLuminareList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLuminareList.swift; sourceTree = "<group>"; };
 		65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareAboutSettings.swift; sourceTree = "<group>"; };
@@ -494,6 +498,7 @@
 			children = (
 				658D26FD2C3830E1001D1CC3 /* ClipboardManager.swift */,
 				658D26F62C3826E0001D1CC3 /* ClipboardController.swift */,
+				65CD017D2C79B4BA007FAD9B /* FolderManager.swift */,
 				658D26F02C3824D5001D1CC3 /* Formatter.swift */,
 				650515C42C381ECA00E2129D /* Data Storage */,
 				658D26F82C382BC7001D1CC3 /* Clipboard Model */,
@@ -710,6 +715,7 @@
 				6550AD4C2C548D66009294E5 /* LuminareClipboardSettings.swift */,
 				65EDAE812C567C5100EA0D32 /* LuminareKeyboardShortcutsSettings.swift */,
 				6550AD4E2C54B325009294E5 /* LuminareCategorizationSettings.swift */,
+				65CD017F2C79D51B007FAD9B /* LuminareFolderSettings.swift */,
 				65EDAE6E2C55C46800EA0D32 /* LuminareExcludedAppsSettings.swift */,
 				65EDAE742C55F50D00EA0D32 /* LuminareAboutSettings.swift */,
 			);
@@ -898,7 +904,9 @@
 				658D270D2C38314F001D1CC3 /* BeginningCustomizationPage.swift in Sources */,
 				65160A992C3BAE9E004BF8BF /* HTMLPreviewPags.swift in Sources */,
 				658D270E2C38314F001D1CC3 /* BeginningViewController.swift in Sources */,
+				65CD01802C79D51B007FAD9B /* LuminareFolderSettings.swift in Sources */,
 				658D275D2C383920001D1CC3 /* ClipHistoryPanelController.swift in Sources */,
+				65CD017E2C79B4BA007FAD9B /* FolderManager.swift in Sources */,
 				658D275E2C383920001D1CC3 /* ClipHistoryPanel.swift in Sources */,
 				658D270F2C38314F001D1CC3 /* BeginningShortcutsPage.swift in Sources */,
 				658D27102C38314F001D1CC3 /* RoamingButton.swift in Sources */,
@@ -1151,7 +1159,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 819;
+				CURRENT_PROJECT_VERSION = 822;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1172,7 +1180,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = "1.0.0-alpha.3";
+				MARKETING_VERSION = "1.0.0-alpha.4";
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1194,7 +1202,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 819;
+				CURRENT_PROJECT_VERSION = 822;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1215,7 +1223,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = "1.0.0-alpha.3";
+				MARKETING_VERSION = "1.0.0-alpha.4";
 				PRODUCT_BUNDLE_IDENTIFIER = labs.cement.Clipchop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

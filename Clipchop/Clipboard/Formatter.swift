@@ -92,6 +92,8 @@ extension Formatter {
     }
 }
 
+// MARK: - Generate title
+
 extension Formatter {
     var title: String? {
         var result: String? = nil
@@ -188,7 +190,11 @@ extension Formatter {
         
         return result
     }
-        
+}
+
+// MARK: - Generate preview
+
+extension Formatter {
     var contentPreview: String {
         return generateContentPreview()
     }
@@ -258,7 +264,7 @@ extension Formatter {
             extractMetadataFromURL(url) { title in
                 let preview = title != nil ? "\(title!)" : "\(url.absoluteString)"
                 MetadataCache.shared.setPreview(preview, for: cacheKey)
-
+                
             }
         } else if !fileURLs.isEmpty {
             var filePreview = "\(fileURLs.map { $0.lastPathComponent }.joined(separator: ", "))"
@@ -281,7 +287,11 @@ extension Formatter {
         MetadataCache.shared.setPreview(preview, for: cacheKey)
         return preview
     }
-    
+}
+
+// MARK: - Generate categorize
+
+extension Formatter {
     func categorizeFileTypes() {
         guard let result = self.title?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() else {
             log(self, "Title is nil or empty for \(self)")
@@ -309,7 +319,11 @@ extension Formatter {
         
         Defaults[.allTypes] = Array(allTypes)
     }
-    
+}
+
+// MARK: - Generate previews from HTML & Image
+
+extension Formatter {
     func extractMetadataFromURL(_ url: URL, completion: @escaping (String?) -> Void) {
         let metadataProvider = LPMetadataProvider()
         metadataProvider.startFetchingMetadata(for: url) { metadata, error in
@@ -328,16 +342,16 @@ extension Formatter {
         guard let data = html.data(using: .utf8) else {
             return html
         }
-
+        
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
-
+        
         guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
             return html
         }
-
+        
         return attributedString.string
     }
     
@@ -372,7 +386,7 @@ extension Formatter {
             }
         }
     }
-
+    
     func extractTextFromImageFileURL(_ fileURL: URL, completion: @escaping (String?) -> Void) {
         guard let image = NSImage(contentsOf: fileURL) else {
             completion(nil)
@@ -381,7 +395,11 @@ extension Formatter {
         
         extractTextFromImage(image, completion: completion)
     }
-    
+}
+
+// MARK: - Cache Key
+
+extension Formatter {
     func generateCacheKey(from clipboardContent: ClipboardContent) -> String {
         guard let id = clipboardContent.item?.id else {
             fatalError("ClipboardContent must have a valid ClipboardHistory item with an id")

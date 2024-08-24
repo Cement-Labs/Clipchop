@@ -8,6 +8,7 @@
 import SwiftUI
 import Defaults
 import CoreData
+import SFSafeSymbols
 
 struct CollapsedPages: View {
     
@@ -16,6 +17,7 @@ struct CollapsedPages: View {
     
     var animationNamespace: Namespace.ID
     
+    @State private var showBackToTop: Bool = false
     @State private var selectedIndex: Int? = nil
     @State private var eventScroll: Any?
     
@@ -167,13 +169,24 @@ struct CollapsedPages: View {
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .animation(.spring(), value: movethebutton)
                         .offset(x: movethebutton ? 12 : -120), alignment: .leading)
+                        .background(
+                            GeometryReader { geometry -> Color in
+                                DispatchQueue.main.async {
+                                    withAnimation {
+                                        let offsetX = geometry.frame(in: .named("scroll")).minX
+                                        showBackToTop = offsetX < CGFloat(-9) * (Defaults[.displayMore] ? 16 : 12)
+                                    }
+                                }
+                                return Color.clear
+                            }
+                        )
                 }
                 .onAppear {
-                    setupEventMonitors()
+//                    setupEventMonitors()
                     proxy = scrollViewProxy
                 }
                 .onDisappear {
-                    cleanupEventMonitors()
+//                    cleanupEventMonitors()
                 }
                 .onReceive(.panelDidClose) { _ in
                     selectedIndex = nil
@@ -184,11 +197,46 @@ struct CollapsedPages: View {
                 }
             }
         }
+        .overlay(backToTop().padding([.bottom, .trailing], 10).shadow(radius: 15), alignment: .bottomTrailing)
         .preferredColorScheme(preferredColorScheme.colorScheme)
         .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
         .onReceive(.panelDidLogout) { _ in
             cleanupEventMonitors()
         }
+    }
+    
+    @ViewBuilder
+    private func backToTop() -> some View {
+        ZStack {
+            if showBackToTop {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(.thinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 30)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                    Button(action: {
+                        withAnimation {
+                            if let proxy = proxy {
+                                withAnimation {
+                                    proxy.scrollTo(Int(0), anchor: .center)
+                                }
+                            }
+                        }
+                        selectedIndex = nil
+                    }) {
+                        Image(systemSymbol: .chevronLeft)
+                            .frame(width: 10, height: 10)
+                            .padding(5)
+                    }
+                    .keyboardShortcut(.tab, modifiers: [])
+                    .buttonStyle(.borderless)
+                }
+            }
+        }
+        .frame(width: 30, height: 30)
+        .cornerRadius(25)
     }
     
     private func setupEventMonitors() {

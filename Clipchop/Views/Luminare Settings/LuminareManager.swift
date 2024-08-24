@@ -28,6 +28,7 @@ class LuminareManager: ObservableObject {
     static let clipboardSettingsPage = SettingsTab("Clipboard", Image(systemSymbol: .clipboard), LuminareClipboardSettings(clipboardController: ClipboardManager.clipboardController!))
     static let keyboardShortcutsSettingsPage = SettingsTab("Keyboard Shortcuts", Image(systemSymbol: .keyboard),LuminareKeyboardShortcutsSettings())
     static let categorizationSettingsPage = SettingsTab("Categorization", Image(systemSymbol: .tray2), LuminareCategorizationSettings())
+    static let folderSettingsPage = SettingsTab("folder", Image(systemSymbol: .folder), LuminareFolderSettings())
     static let aboutSettingsPage = SettingsTab("About", Image(systemSymbol: .infoBubble), LuminareAboutSettings())
     
     static var luminare: LuminareSettingsWindow?
@@ -50,6 +51,7 @@ class LuminareManager: ObservableObject {
                         clipboardSettingsPage,
                         keyboardShortcutsSettingsPage,
                         categorizationSettingsPage,
+                        folderSettingsPage,
                         shared.appExcluding
                     ]),
                     .init("\(Bundle.main.appName)", [
