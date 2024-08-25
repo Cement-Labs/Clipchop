@@ -65,7 +65,7 @@ struct LuminareFolderSettings: View {
                                 renameFolder(folder, newName: newName)
                                 isRenaming = nil
                             })
-                            .textFieldStyle(.roundedBorder)
+                            .textFieldStyle(.plain)
                         } else {
                             Text(folder.name)
                         }
@@ -76,7 +76,7 @@ struct LuminareFolderSettings: View {
                                 newName = folder.name
                             }) {
                                 Image(systemName: "pencil")
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.black)
                             }
                             .padding(.trailing, 10)
                             .buttonStyle(.borderless)
@@ -85,7 +85,7 @@ struct LuminareFolderSettings: View {
                                 removeFolder(folder)
                             }) {
                                 Image(systemName: "trash")
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.black)
                             }
                             .buttonStyle(.borderless)
                         }

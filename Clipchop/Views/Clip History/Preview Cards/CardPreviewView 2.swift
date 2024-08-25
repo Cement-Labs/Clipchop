@@ -168,6 +168,7 @@ struct CardPreviewView_2: View {
                         .allowsHitTesting(false)
                         .rotationEffect(Angle.degrees(item.pin ? 45 : 0))
                         .font(isHoveredPin ? .system(size: 10) : .system(size: 7.5))
+                        .contentTransition(.symbolEffect(.replace))
                 }
                 .onTapGesture {
                     withAnimation(Animation.easeInOut) {
@@ -312,24 +313,49 @@ struct CardPreviewView_2: View {
                 }
                 .applyKeyboardShortcut(keyboardShortcut, modifier: [.shift, copyShortcut.eventModifier])
             }
-            
-            Menu {
-                let folders = manager.allFolders()
-                ForEach(folders, id: \.self) { folder in
-
-                    let itemsInFolder = manager.items(inFolder: folder)
-                    let isItemInFolder = itemsInFolder?.contains(item.id!) ?? false
-
-                    Button {
-                        if isItemInFolder {
-                            let foldersContainingItem = folders.filter { manager.items(inFolder: $0)?.contains(item.id!) ?? false }
-                            if foldersContainingItem.count == 1 {
-                                manager.removeItem([item], fromFolder: folder)
+            if let itemId = item.id {
+                Menu {
+                    let folders = manager.allFolders()
+                    ForEach(folders, id: \.self) { folder in
+                        
+                        let itemsInFolder = manager.items(inFolder: folder)
+                        let isItemInFolder = itemsInFolder?.contains(itemId) ?? false
+                        
+                        Button {
+                            if isItemInFolder {
+                                let foldersContainingItem = folders.filter { manager.items(inFolder: $0)?.contains(item.id!) ?? false }
+                                if foldersContainingItem.count == 1 {
+                                    manager.removeItem([item], fromFolder: folder)
+                                    withAnimation(Animation.easeInOut) {
+                                        do {
+                                            self.isHoveredPin = true
+                                            let currentPinStatus = item.pin
+                                            item.pin = false
+                                            do {
+                                                if context.hasChanges {
+                                                    try context.save()
+                                                }
+                                            } catch {
+                                                log(self, "Failed to save pin status change: \(error)")
+                                                item.pin = currentPinStatus
+                                            }
+                                        }
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        withAnimation(Animation.easeInOut) {
+                                            self.isHoveredPin = false
+                                        }
+                                    }
+                                } else {
+                                    manager.removeItem([item], fromFolder: folder)
+                                }
+                            } else {
+                                manager.addItem([item], toFolder: folder)
                                 withAnimation(Animation.easeInOut) {
                                     do {
                                         self.isHoveredPin = true
                                         let currentPinStatus = item.pin
-                                        item.pin = false
+                                        item.pin = true
                                         do {
                                             if context.hasChanges {
                                                 try context.save()
@@ -345,44 +371,20 @@ struct CardPreviewView_2: View {
                                         self.isHoveredPin = false
                                     }
                                 }
-                            } else {
-                                manager.removeItem([item], fromFolder: folder)
                             }
-                        } else {
-                            manager.addItem([item], toFolder: folder)
-                            withAnimation(Animation.easeInOut) {
-                                do {
-                                    self.isHoveredPin = true
-                                    let currentPinStatus = item.pin
-                                    item.pin = true
-                                    do {
-                                        if context.hasChanges {
-                                            try context.save()
-                                        }
-                                    } catch {
-                                        log(self, "Failed to save pin status change: \(error)")
-                                        item.pin = currentPinStatus
-                                    }
+                        } label: {
+                            HStack {
+                                Text(folder)
+                                if isItemInFolder {
+                                    Image(systemName: "checkmark")
                                 }
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                withAnimation(Animation.easeInOut) {
-                                    self.isHoveredPin = false
-                                }
-                            }
-                        }
-                    } label: {
-                        HStack {
-                            Text(folder)
-                            if isItemInFolder {
-                                Image(systemName: "checkmark")
                             }
                         }
                     }
+                } label: {
+                    Text("Folder")
+                    Image(systemSymbol: .folder)
                 }
-            } label: {
-                Text("Folder")
-                Image(systemSymbol: .folder)
             }
             
             Divider()

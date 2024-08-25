@@ -99,16 +99,6 @@
         }
       }
     },
-    "%lld" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
-          }
-        }
-      }
-    },
     "%lld Days" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1462,6 +1452,7 @@
       }
     },
     "Log to Console (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1765,6 +1756,7 @@
       }
     },
     "Refresh States (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2104,6 +2096,7 @@
       }
     },
     "Syncing" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2125,6 +2118,7 @@
       }
     },
     "Test (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2161,7 +2155,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "此操作将不可恢复地清除剪贴板的所有历史记录，包括Pin住的内容。"
+            "value" : "此操作将不可恢复地清除剪贴板的所有历史记录，包括固定住的内容。"
           }
         }
       }

@@ -55,6 +55,19 @@ class FolderManager {
     }
     
     func allFolders() -> [String] {
-        return Defaults[.folders].map { $0.name }
+        return Defaults[.folders]
+            .map { $0.name }
+            .sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+    }
+    
+    func refreshFolders(with existingItems: [ClipboardHistory]) {
+        var folders = Defaults[.folders]
+        let existingItemIDs = Set(existingItems.compactMap { $0.id })
+        
+        for index in folders.indices {
+            folders[index].itemIDs.removeAll { !existingItemIDs.contains($0) }
+        }
+        
+        Defaults[.folders] = folders
     }
 }

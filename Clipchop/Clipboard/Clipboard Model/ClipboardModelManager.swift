@@ -13,6 +13,8 @@ import Defaults
 class ClipboardModelManager: ObservableObject {
     @Published private(set) var items: [ClipboardHistory] = []
     
+    let manager = FolderManager()
+    
     private var cancellables = Set<AnyCancellable>()
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext

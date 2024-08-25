@@ -17,6 +17,8 @@ struct CollapsedPages: View {
     
     var animationNamespace: Namespace.ID
     
+    let manager = FolderManager()
+    
     @State private var showBackToTop: Bool = false
     @State private var selectedIndex: Int? = nil
     @State private var eventScroll: Any?

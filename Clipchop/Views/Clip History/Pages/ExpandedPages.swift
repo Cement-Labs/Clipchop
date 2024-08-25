@@ -35,6 +35,7 @@ struct ExpandedPages: View {
     @State private var showBackToTop: Bool = false
     @State private var scrollOffset: CGFloat = 0
     @State private var proxy: ScrollViewProxy?
+    @State private var proxy2: ScrollViewProxy?
     
     @Binding var searchText: String
     @Binding var selectedTab: String
@@ -368,8 +369,8 @@ struct ExpandedPages: View {
                             }
                         }
                     }
-                    .onChange(of: selectedTab) { newValue, _ in
-                        scrollProxy.scrollTo(newValue, anchor: .center)
+                    .onAppear {
+                        self.proxy2 = scrollProxy
                     }
                 }
             } else {
@@ -415,8 +416,8 @@ struct ExpandedPages: View {
                             }
                         }
                     }
-                    .onChange(of: selectedTab) { newValue, _ in
-                        scrollProxy.scrollTo(newValue, anchor: .center)
+                    .onAppear {
+                        self.proxy2 = scrollProxy
                     }
                 }
             } else {
@@ -449,6 +450,9 @@ struct ExpandedPages: View {
         let previousIndex = currentIndex - 1
         withAnimation {
             selectedTab = allTabs[previousIndex]
+            if let proxy = proxy2 {
+                proxy.scrollTo(selectedTab, anchor: .center)
+            }
         }
     }
 
@@ -459,8 +463,10 @@ struct ExpandedPages: View {
         let nextIndex = currentIndex + 1
         withAnimation {
             selectedTab = allTabs[nextIndex]
+            if let proxy = proxy2 {
+                proxy.scrollTo(selectedTab, anchor: .center)
+            }
         }
-        
     }
     
     private func getCurrentTabIndex() -> Int? {
