@@ -104,11 +104,11 @@ class ClipboardController: NSObject, ObservableObject {
     
     private func updateClipboard() {
         
+        try? context.save()
+        
         guard pasteboard.changeCount != changeCount else {
             return
         }
-        
-        try? context.save()
         
         changeCount = pasteboard.changeCount
         

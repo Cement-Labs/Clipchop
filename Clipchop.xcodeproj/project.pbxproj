@@ -321,15 +321,6 @@
 			path = ClipchopTests;
 			sourceTree = "<group>";
 		};
-		650422ED2C4E0C9800006FC9 /* Clip History Search */ = {
-			isa = PBXGroup;
-			children = (
-				65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */,
-				659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */,
-			);
-			path = "Clip History Search";
-			sourceTree = "<group>";
-		};
 		650515A92C381EA500E2129D = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +489,7 @@
 			children = (
 				658D26FD2C3830E1001D1CC3 /* ClipboardManager.swift */,
 				658D26F62C3826E0001D1CC3 /* ClipboardController.swift */,
+				65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */,
 				65CD017D2C79B4BA007FAD9B /* FolderManager.swift */,
 				658D26F02C3824D5001D1CC3 /* Formatter.swift */,
 				650515C42C381ECA00E2129D /* Data Storage */,
@@ -548,6 +540,7 @@
 				658D27152C3831B0001D1CC3 /* ListEmbeddedForm.swift */,
 				658D27162C3831B0001D1CC3 /* WrappingHStack.swift */,
 				658D27172C3831B0001D1CC3 /* FormNavigationLinkLabel.swift */,
+				659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */,
 			);
 			path = Fundamentals;
 			sourceTree = "<group>";
@@ -668,7 +661,6 @@
 				658D275B2C383920001D1CC3 /* ClipHistoryPanelController.swift */,
 				658D275C2C383920001D1CC3 /* ClipHistoryPanel.swift */,
 				658D27792C384569001D1CC3 /* ClipHistoryView.swift */,
-				650422ED2C4E0C9800006FC9 /* Clip History Search */,
 				65758C062C3AE0FF009EEB3E /* Pages */,
 				658D27712C384552001D1CC3 /* Preview Cards */,
 			);
@@ -1159,7 +1151,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 825;
+				CURRENT_PROJECT_VERSION = 826;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1202,7 +1194,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 825;
+				CURRENT_PROJECT_VERSION = 826;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

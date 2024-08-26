@@ -204,18 +204,18 @@ struct CardPreviewView: View {
                         }
                         if let bundleID = item.appid, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
                             Text(appDisplayName)
-                                .font(.system(size: 10).monospaced())
+                                .font(.system(size: 10))
                                 .minimumScaleFactor(0.1)
                                 .lineLimit(1)
                                 .padding(.horizontal, 5)
                         }
                         Text(formattedDate(from: item.time!))
-                            .font(.system(size: 7.5).monospaced())
+                            .font(.system(size: 7.5))
                             .minimumScaleFactor(0.8)
                             .lineLimit(10)
                             .fixedSize(horizontal: false, vertical: false)
                         Text(relativeTime(from: item.time!))
-                            .font(.system(size: 7.5).monospaced())
+                            .font(.system(size: 7.5))
                             .minimumScaleFactor(0.8)
                             .lineLimit(10)
                             .fixedSize(horizontal: false, vertical: false)
@@ -399,50 +399,64 @@ struct CardPreviewView: View {
         }
         .popover(isPresented: $showPopover) {
             HStack(spacing: 10) {
-                VStack {
-                    PreviewContentView(clipboardHistory: item)
-                        .frame(width: 200, height: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .allowsHitTesting(false)
-                }
-                .frame(width: 200, height: 200, alignment: .center)
-                VStack {
-                    HStack {
+                PreviewContentView(clipboardHistory: item)
+                    .frame(width: 200, height: 200, alignment: .center)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .allowsHitTesting(false)
+                VStack(spacing: 5) {
+                    VStack(spacing: 5) {
+                        HStack {
+                            Group {
+                                if let title = item.formatter.title {
+                                    let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                                    let categorizedTitle = categorizeFileExtensions(fileExtensions)
+                                    Text(categorizedTitle)
+                                } else {
+                                    Text("Other")
+                                }
+                            }
+                            .font(.system(size: 15))
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
+                            .frame(width: 200, alignment: .topLeading)
+                        }
                         Group {
-                            if let title = item.formatter.title {
-                                let fileExtensions = title.split(separator: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
-                                let categorizedTitle = categorizeFileExtensions(fileExtensions)
-                                Text(categorizedTitle)
-                            } else {
-                                Text("Other")
+                            let filenames = item.formatter.fileURLs.map { $0.lastPathComponent }.joined(separator: ",\n")
+                            if !filenames.isEmpty {
+                                Text("\(filenames)")
                             }
                         }
-                        .font(.system(size: 15))
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(2)
+                        .font(.system(size: 12))
+                        .minimumScaleFactor(0.8)
+                        .lineLimit(3)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .frame(width: 200, alignment: .topLeading)
                     }
                     .frame(width: 200, height: 100, alignment: .bottomLeading)
-                    VStack {
-                        HStack {
+                    VStack(spacing: 5) {
+                        HStack(spacing: 5) {
                             Text(formattedDate(from: item.time!))
                                 .font(.system(size: 12))
                                 .minimumScaleFactor(0.8)
-                                .lineLimit(10)
-                                .fixedSize(horizontal: false, vertical: false)
+                                .lineLimit(1)
                             Text(relativeTime(from: item.time!))
                                 .font(.system(size: 12))
                                 .minimumScaleFactor(0.8)
-                                .lineLimit(10)
-                                .fixedSize(horizontal: false, vertical: false)
+                                .lineLimit(1)
                         }
                         .frame(width: 200, alignment: .topLeading)
-                        if let bundleID = item.appid, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
-                            Text(appDisplayName)
-                                .font(.system(size: 12).monospaced())
-                                .minimumScaleFactor(0.1)
-                                .lineLimit(1)
-                                .frame(width: 200, alignment: .topLeading)
+                        HStack(spacing: 5) {
+                            if let bundleID = item.appid, let appIcon = getAppIcon(byBundleID: bundleID) {
+                                Image(nsImage: appIcon.resized(to: .init(width: 17.5, height: 17.5)))
+                            }
+                            if let bundleID = item.appid, let appDisplayName = getAppDisplayName(byBundleID: bundleID) {
+                                Text(appDisplayName)
+                                    .font(.system(size: 12))
+                                    .minimumScaleFactor(0.8)
+                                    .lineLimit(1)
+                            }
                         }
+                        .frame(width: 200, alignment: .topLeading)
                     }
                     .frame(width: 200, height: 100, alignment: .topLeading)
                 }

@@ -149,9 +149,8 @@ extension ClipHistoryPanelController {
             )
             
             panel.makeKeyAndOrderFront(nil)
-            if Defaults[.autoClose] {
-                self.startCloseTimer()
-            }
+            
+            self.startCloseTimer()
             
             NotificationCenter.default.post(name: .panelDidOpen, object: nil)
         }
@@ -166,9 +165,7 @@ extension ClipHistoryPanelController {
         }
         self.setExpansion(false)
         self.panel?.orderOut(nil)
-        if Defaults[.autoClose] {
-            panelDidClose()
-        }
+        panelDidClose()
     }
     
     func logoutpanel() {
@@ -177,9 +174,8 @@ extension ClipHistoryPanelController {
         self.setExpansion(false)
         self.panel?.orderOut(nil)
         self.panel = nil
-        if Defaults[.autoClose] {
-            panelDidClose()
-        }
+        panelDidClose()
+        
         
         if let contentView = panel?.contentView {
             contentView.subviews.forEach { $0.removeFromSuperview() }
@@ -202,9 +198,11 @@ extension ClipHistoryPanelController {
     }
     
     func startCloseTimer() {
-        closeTimer?.invalidate()
-        let timeoutInterval = Defaults[.autoCloseTimeout]
-        closeTimer = Timer.scheduledTimer(timeInterval: timeoutInterval, target: self, selector: #selector(closeDueToInactivity), userInfo: nil, repeats: false)
+        if Defaults[.autoClose] {
+            closeTimer?.invalidate()
+            let timeoutInterval = Defaults[.autoCloseTimeout]
+            closeTimer = Timer.scheduledTimer(timeInterval: timeoutInterval, target: self, selector: #selector(closeDueToInactivity), userInfo: nil, repeats: false)
+        }
     }
 
     @objc private func closeDueToInactivity() {
@@ -212,12 +210,16 @@ extension ClipHistoryPanelController {
     }
 
     func resetCloseTimer() {
-        startCloseTimer()
+        if Defaults[.autoClose] {
+            startCloseTimer()
+        }
     }
 
     func panelDidClose() {
-        closeTimer?.invalidate()
-        closeTimer = nil
+        if Defaults[.autoClose] {
+            closeTimer?.invalidate()
+            closeTimer = nil
+        }
     }
 }
 

@@ -243,8 +243,8 @@ struct CollapsedPages: View {
     
     private func setupEventMonitors() {
         eventScroll = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { event in
-                        
-            let deltaY = -event.scrollingDeltaY
+            
+            let deltaY = event.scrollingDeltaY
             
             let horizontalScrollAmount = deltaY / 5.0
             

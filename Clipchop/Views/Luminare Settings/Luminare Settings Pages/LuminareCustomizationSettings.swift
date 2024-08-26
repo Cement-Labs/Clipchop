@@ -27,13 +27,11 @@ struct LuminareCustomizationSettings: View {
                 elements: AppIcon.unlockedAppIcons,
                 selection: $appIcon
             ) { icon in
-                HStack {
-                    Image(nsImage: icon.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }
-                .tag(icon.assetName)
-                .padding()
+                Image(nsImage: icon.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .tag(icon.assetName)
+                    .padding(10)
             }
             .onChange(of: appIcon) { _, newIcon in
                 newIcon.setAppIcon()

@@ -9,6 +9,7 @@ import SwiftUI
 import Algorithms
 import Defaults
 
+
 struct InstalledApp: Identifiable {
     var id: String { bundleID }
     var bundleID: String
@@ -25,8 +26,11 @@ class InstalledApps: ObservableObject {
     @Published var installedApps = [InstalledApp]()
     
     init() {
+        self.ensureFinderApp()
+        
         self.startQuery(&systemQuery, in: .systemDomainMask) {
             self.queryDidFinishGathering(self.systemQuery, to: &self.systemApps, notification: $0)
+            self.ensureFinderApp()
         }
         
         self.startQuery(&localQuery, in: .localDomainMask) {
@@ -87,6 +91,26 @@ class InstalledApps: ObservableObject {
             }
         }
     }
+    
+    private func ensureFinderApp() {
+        let finderBundleID = "com.apple.finder"
+        
+        if !systemApps.contains(where: { $0.bundleID == finderBundleID }) {
+            let finderPath = "/System/Library/CoreServices/Finder.app"
+            let icon = NSWorkspace.shared.icon(forFile: finderPath)
+            let displayName = FileManager.default.displayName(atPath: finderPath)
+            let installationFolder = (finderPath as NSString).deletingLastPathComponent
+            
+            let finderApp = InstalledApp(
+                bundleID: finderBundleID,
+                icon: icon,
+                displayName: displayName,
+                installationFolder: installationFolder
+            )
+            self.systemApps.append(finderApp)
+        }
+    }
+    
     func displayName(for bundleID: String) -> String? {
         return (systemApps + installedApps).first { $0.bundleID == bundleID }?.displayName
     }

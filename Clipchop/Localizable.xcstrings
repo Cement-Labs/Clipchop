@@ -1503,6 +1503,40 @@
         }
       }
     },
+    "note" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You've clipped… uhh… I… lost count…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你已经剪贴了…额…数不过来了……"
+          }
+        }
+      }
+    },
+    "note2" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You've already clipped %llu times!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你已经剪贴了%llu次！"
+          }
+        }
+      }
+    },
     "Open in System Settings" : {
       "localizations" : {
         "zh-Hans" : {

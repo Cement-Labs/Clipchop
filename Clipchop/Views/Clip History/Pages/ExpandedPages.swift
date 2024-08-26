@@ -44,6 +44,11 @@ struct ExpandedPages: View {
     @State private var isTagBarVisible: Bool = true
     @State private var isFolderBarVisible: Bool = false
     
+    @State private var showLeftGradient = false
+    @State private var showRightGradient = false
+    @State private var showLeftGradientFolderBar = false
+    @State private var showRightGradientFolderBar = false
+    
     var filteredCategories: [FileCategory] {
         return Defaults[.categories].sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
@@ -193,7 +198,9 @@ struct ExpandedPages: View {
             .overlay(
                 HStack(spacing: 7.5) {
                     tagBar()
-                    folderBar()
+                    if !filteredFolders.isEmpty {
+                        folderBar()
+                    }
                     searchBar()
                 }
                 .padding([.horizontal, .top], 15),
@@ -319,7 +326,7 @@ struct ExpandedPages: View {
                     }
                     .disabled(!isSearchVisible)
                     .padding([.leading, .horizontal], 15)
-                    .frame(width: Defaults[.displayMore] ? 623 : 365, height: 30)
+                    .frame(width: Defaults[.displayMore] ? 575 : 365, height: 30)
                 }
                 Button(action: {
                     withAnimation(.smooth(duration: 0.6)) {
@@ -342,9 +349,10 @@ struct ExpandedPages: View {
                 .offset(x: isSearchVisible ? -5 : 0)
             }
         }
-        .frame(width: isSearchVisible ? (Defaults[.displayMore] ? 668 : 395) : 30, height: 30)
+        .frame(width: isSearchVisible ? (Defaults[.displayMore] ? 590 : 395) : 30, height: 30)
         .cornerRadius(25)
     }
+    
     
     @ViewBuilder
     private func tagBar() -> some View {
@@ -355,22 +363,57 @@ struct ExpandedPages: View {
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(Color.gray, lineWidth: 0.5)
                 )
+
             if isTagBarVisible {
                 ScrollViewReader { scrollProxy in
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
-                                .id("All Types")
-                            TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
-                                .id("Pinned")
-                            ForEach(filteredTags) { category in
-                                TabButton(title: category.name, selectedTab: $selectedTab)
-                                    .id(category.name)
+                    GeometryReader { geo in
+                        ZStack {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack {
+                                    TabButton(title: NSLocalizedString("All Types", comment: "All Types"), selectedTab: $selectedTab)
+                                        .id("All Types")
+                                        .disabled(!isTagBarVisible)
+                                    TabButton(title: NSLocalizedString("Pinned", comment: "Pinned"), selectedTab: $selectedTab)
+                                        .id("Pinned")
+                                        .disabled(!isTagBarVisible)
+                                    ForEach(filteredTags) { category in
+                                        TabButton(title: category.name, selectedTab: $selectedTab)
+                                            .id(category.name)
+                                            .disabled(!isTagBarVisible)
+                                    }
+                                }
+                                .padding(.horizontal, 2.75)
+                                .background(GeometryReader { innerGeo -> Color in
+                                    DispatchQueue.main.async {
+                                        let contentWidth = innerGeo.frame(in: .global).width
+                                        let scrollViewWidth = geo.size.width
+                                        let offsetX = geo.frame(in: .global).minX - innerGeo.frame(in: .global).minX
+
+                                        withAnimation(.easeInOut) {
+                                            showLeftGradient = offsetX > 0
+                                            showRightGradient = contentWidth > scrollViewWidth + offsetX
+                                        }
+                                    }
+                                    return Color.clear
+                                })
+                            }
+                            .onAppear {
+                                self.proxy2 = scrollProxy
+                            }
+                            
+                            if showLeftGradient {
+                                LinearGradient(gradient: Gradient(colors: [.black.opacity(0.15), .clear]), startPoint: .leading, endPoint: .trailing)
+                                    .frame(width: 40)
+                                    .allowsHitTesting(false)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .leading)
+                            }
+                            if showRightGradient {
+                                LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.15)]), startPoint: .leading, endPoint: .trailing)
+                                    .frame(width: 40)
+                                    .allowsHitTesting(false)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .trailing)
                             }
                         }
-                    }
-                    .onAppear {
-                        self.proxy2 = scrollProxy
                     }
                 }
             } else {
@@ -393,7 +436,7 @@ struct ExpandedPages: View {
             }
         }
         .onAppear(perform: setupTags)
-        .frame(width: isTagBarVisible ? (Defaults[.displayMore] ? 622 : 395) : 30, height: 30)
+        .frame(width: isTagBarVisible ? (Defaults[.displayMore] ? 590 : 395) : 30, height: 30)
         .cornerRadius(25)
     }
     
@@ -406,18 +449,50 @@ struct ExpandedPages: View {
                     RoundedRectangle(cornerRadius: 30)
                         .stroke(Color.gray, lineWidth: 0.5)
                 )
+
             if isFolderBarVisible {
                 ScrollViewReader { scrollProxy in
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(filteredFolders) { folder in
-                                TabButton(title: folder.name, selectedTab: $selectedTab)
-                                    .id(folder.name)
+                    GeometryReader { geo in
+                        ZStack {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack {
+                                    ForEach(filteredFolders) { folder in
+                                        TabButton(title: folder.name, selectedTab: $selectedTab)
+                                            .id(folder.name)
+                                            .disabled(!isFolderBarVisible)
+                                    }
+                                }
+                                .padding(.horizontal, 2.75)
+                                .background(GeometryReader { innerGeo -> Color in
+                                    DispatchQueue.main.async {
+                                        let contentWidth = innerGeo.frame(in: .global).width
+                                        let scrollViewWidth = geo.size.width
+                                        let offsetX = geo.frame(in: .global).minX - innerGeo.frame(in: .global).minX
+
+                                        withAnimation(.easeInOut) {
+                                            showLeftGradientFolderBar = offsetX > 0
+                                            showRightGradientFolderBar = contentWidth > scrollViewWidth + offsetX
+                                        }
+                                    }
+                                    return Color.clear
+                                })
+                            }
+                            .onAppear {
+                                self.proxy2 = scrollProxy
+                            }
+                            if showLeftGradientFolderBar {
+                                LinearGradient(gradient: Gradient(colors: [.black.opacity(0.15), .clear]), startPoint: .leading, endPoint: .trailing)
+                                    .frame(width: 20)
+                                    .allowsHitTesting(false)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .leading)
+                            }
+                            if showRightGradientFolderBar {
+                                LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.15)]), startPoint: .leading, endPoint: .trailing)
+                                    .frame(width: 20)
+                                    .allowsHitTesting(false)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity , alignment: .trailing)
                             }
                         }
-                    }
-                    .onAppear {
-                        self.proxy2 = scrollProxy
                     }
                 }
             } else {
@@ -439,7 +514,7 @@ struct ExpandedPages: View {
                 .buttonStyle(.borderless)
             }
         }
-        .frame(width: isFolderBarVisible ? (Defaults[.displayMore] ? 622 : 395) : 30, height: 30)
+        .frame(width: isFolderBarVisible ? (Defaults[.displayMore] ? 590 : 395) : 30, height: 30)
         .cornerRadius(25)
     }
     
@@ -483,7 +558,7 @@ struct ExpandedPages: View {
     
     private func setupEventMonitors() {
         eventScroll = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { event in
-            let deltaY = -event.scrollingDeltaY
+            let deltaY = event.scrollingDeltaY
             
             let horizontalScrollAmount = deltaY / 5.0
             

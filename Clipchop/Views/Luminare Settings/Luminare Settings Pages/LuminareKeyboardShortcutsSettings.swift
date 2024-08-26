@@ -28,6 +28,7 @@ struct LuminareKeyboardShortcutsSettings: View {
                 
                 KeyboardShortcuts.Recorder(for: .window) { }
                     .controlSize(.large)
+                    .foregroundStyle(.secondary)
             }
             .padding(.horizontal, 8)
             .padding(.trailing, 2)
@@ -43,6 +44,7 @@ struct LuminareKeyboardShortcutsSettings: View {
                 
                 KeyboardShortcuts.Recorder(for: .start) { }
                     .controlSize(.large)
+                    .foregroundStyle(.secondary)
             }
             .padding(.horizontal, 8)
             .padding(.trailing, 2)

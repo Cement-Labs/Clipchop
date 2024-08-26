@@ -23,7 +23,7 @@ struct TabButton: View {
                 .foregroundColor(selectedTab == title ? Color.white : Color.primary)
                 .cornerRadius(8)
         }
-        .frame(maxWidth: 250, maxHeight: 30)
+        .frame(maxWidth: 250, maxHeight: 25)
         .buttonStyle(.borderless)
         .cornerRadius(25)
     }
