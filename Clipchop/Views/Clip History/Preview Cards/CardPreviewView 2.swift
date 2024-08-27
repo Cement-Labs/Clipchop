@@ -495,6 +495,9 @@ struct CardPreviewView_2: View {
             cleanupEventMonitors()
             setupEventMonitors()
         }
+        .onChange(of: isSelected) { oldValue, newValue in
+            showPopover = false
+        }
         .onAppear {
             setupEventMonitors()
         }

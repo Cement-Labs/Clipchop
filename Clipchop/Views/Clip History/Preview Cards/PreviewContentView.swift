@@ -151,7 +151,6 @@ struct PreviewContentView: View, Equatable {
             WebLinkPreviewPage(urlString: url.absoluteString)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding(.all, 5)
     }
     
     private func htmlPreviewView(for htmlData: Data) -> some View {

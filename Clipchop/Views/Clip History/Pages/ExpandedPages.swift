@@ -430,7 +430,7 @@ struct ExpandedPages: View {
                         .frame(width: 10, height: 10)
                         .padding(5)
                 }
-                .keyboardShortcut("a", modifiers: .command)
+                .keyboardShortcut("d", modifiers: .command)
                 .frame(width: 30, height: 30)
                 .buttonStyle(.borderless)
             }

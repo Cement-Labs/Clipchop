@@ -1452,7 +1452,6 @@
       }
     },
     "Log to Console (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1790,7 +1789,6 @@
       }
     },
     "Refresh States (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2130,7 +2128,6 @@
       }
     },
     "Syncing" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2152,7 +2149,6 @@
       }
     },
     "Test (Debug)" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2386,7 +2382,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "多种文件"
+            "value" : "多个文件"
           }
         }
       }

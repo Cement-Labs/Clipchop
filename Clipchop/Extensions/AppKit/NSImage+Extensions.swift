@@ -44,3 +44,11 @@ extension NSImage {
         return Color(red: Double(bitmap[0]) / 255.0, green: Double(bitmap[1]) / 255.0, blue: Double(bitmap[2]) / 255.0, opacity: Double(bitmap[3]) / 255.0)
     }
 }
+
+extension NSImage {
+    func pngData() -> Data? {
+        guard let tiffRepresentation = self.tiffRepresentation else { return nil }
+        guard let bitmap = NSBitmapImageRep(data: tiffRepresentation) else { return nil }
+        return bitmap.representation(using: .png, properties: [:])
+    }
+}

@@ -8,6 +8,7 @@
 import SwiftUI
 import Defaults
 import UserNotifications
+import Intents
 
 struct AppIcon: Hashable, Defaults.Serializable {
     var name: String?

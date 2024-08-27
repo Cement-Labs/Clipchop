@@ -268,6 +268,7 @@
 		65987F142C3930D100E15897 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		659C227A2C4D15EA00C5C62B /* SearchFieldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldWrapper.swift; sourceTree = "<group>"; };
 		65A176122C4BF408000BACFA /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		65A5F2F02C7CC8AD0029A4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		65C48EC02C3D6C9000F75C64 /* ClipHistorySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipHistorySearch.swift; sourceTree = "<group>"; };
 		65CD017D2C79B4BA007FAD9B /* FolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManager.swift; sourceTree = "<group>"; };
 		65CD017F2C79D51B007FAD9B /* LuminareFolderSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuminareFolderSettings.swift; sourceTree = "<group>"; };
@@ -342,6 +343,7 @@
 		650515B42C381EA500E2129D /* Clipchop */ = {
 			isa = PBXGroup;
 			children = (
+				65A5F2F02C7CC8AD0029A4B9 /* Info.plist */,
 				650515B52C381EA500E2129D /* ClipchopApp.swift */,
 				658D26FB2C382CF3001D1CC3 /* AppDelegate.swift */,
 				655DE8FE2C6AEEED002B6074 /* AppDelegate+UNNotifications.swift */,
@@ -1151,11 +1153,12 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 826;
+				CURRENT_PROJECT_VERSION = 827;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Clipchop/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -1194,11 +1197,12 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 826;
+				CURRENT_PROJECT_VERSION = 827;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Clipchop/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Clipchop;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
