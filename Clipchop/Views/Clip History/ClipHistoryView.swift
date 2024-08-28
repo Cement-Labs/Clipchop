@@ -15,8 +15,6 @@ struct ClipHistoryView: View {
     
     @FetchRequest(fetchRequest: ClipboardHistory.all(), animation: .snappy(duration: 0.75)) private var items
     
-    @Default(.preferredColorScheme) private var preferredColorScheme
-        
     @Environment(\.managedObjectContext) private var context
     
     @StateObject private var apps = InstalledApps()
@@ -90,7 +88,6 @@ struct ClipHistoryView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .preferredColorScheme(preferredColorScheme.colorScheme)
         .onChange(of: searchText) { oldValue, newValue in
             if Defaults[.autoClose] {
                 controller.resetCloseTimer()

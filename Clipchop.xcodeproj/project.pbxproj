@@ -1153,7 +1153,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 827;
+				CURRENT_PROJECT_VERSION = 828;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;
@@ -1197,7 +1197,7 @@
 				CODE_SIGN_ENTITLEMENTS = Clipchop/Clipchop.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 827;
+				CURRENT_PROJECT_VERSION = 828;
 				DEVELOPMENT_ASSET_PATHS = "\"Clipchop/Preview Content\"";
 				DEVELOPMENT_TEAM = 4Z435N9MPX;
 				ENABLE_PREVIEWS = YES;

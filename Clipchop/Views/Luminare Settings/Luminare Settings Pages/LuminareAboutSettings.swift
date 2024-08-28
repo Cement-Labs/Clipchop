@@ -73,7 +73,11 @@ struct LuminareAboutSettings: View {
                         NSWorkspace.shared.open(url)
                     }
                 }
-
+                Button("Discuss") {
+                    if let url = URL(string: "https://qm.qq.com/q/CacoMcCblI") {
+                        NSWorkspace.shared.open(url)
+                    }
+                }
                 Button("Source Code") {
                     if let url = URL(string: "https://github.com/Cement-Labs/Clipchop") {
                         NSWorkspace.shared.open(url)

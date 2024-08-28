@@ -1036,6 +1036,16 @@
         }
       }
     },
+    "Discuss" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "讨论"
+          }
+        }
+      }
+    },
     "Display More" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1452,6 +1462,7 @@
       }
     },
     "Log to Console (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1738,6 +1749,33 @@
         }
       }
     },
+    "Preview unavailable" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预览不可用"
+          }
+        }
+      }
+    },
+    "QQ Group: Raw" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "QQ Group: 980292621"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QQ 群： 980292621"
+          }
+        }
+      }
+    },
     "Quick Selection" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1789,6 +1827,7 @@
       }
     },
     "Refresh States (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2128,6 +2167,7 @@
       }
     },
     "Syncing" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -2149,6 +2189,7 @@
       }
     },
     "Test (Debug)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {

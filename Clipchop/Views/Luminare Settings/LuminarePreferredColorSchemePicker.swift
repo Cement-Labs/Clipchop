@@ -39,7 +39,3 @@ struct LuminarePreferredColorSchemePicker: View {
         }
     }
 }
-
-#Preview {
-    LuminarePreferredColorSchemePicker()
-}

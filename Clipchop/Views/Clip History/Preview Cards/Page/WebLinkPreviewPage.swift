@@ -118,24 +118,52 @@ struct WebLinkPreviewPage: View {
 
     private var webViewContent: some View {
         VStack(spacing: 3.5) {
-            Image(systemSymbol: .linkCircle)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: Defaults[.displayMore] ? 25 : 20)
-                .foregroundStyle(.primary, .secondary)
-            if let title = metadata?.title {
-                Text(title)
-                    .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
-                    .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
-                    .padding(.horizontal, 5)
+            if let image = loadedImage {
+                Image(nsImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .frame(maxWidth: Defaults[.displayMore] ? 50 : 40)
+                    .onAppear {
+                        dominantColor = Color(image.dominantColor() ?? .clear)
+                    }
+                if let title = metadata?.title {
+                    Text(title)
+                        .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
+                        .foregroundColor(dominantColor.isLight ? .black : .white.opacity(0.9))
+                        .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
+                        .padding(.horizontal, 2)
+                        .minimumScaleFactor(0.9)
+                } else {
+                    Text(metadata?.url?.host ?? "No URL")
+                        .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
+                        .foregroundColor(dominantColor.isLight ? .black : .white.opacity(0.9))
+                        .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
+                        .padding(.horizontal, 2)
+                        .minimumScaleFactor(0.9)
+                }
             } else {
-                Text(metadata?.url?.host ?? "No URL")
-                    .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
-                    .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
-                    .padding(.horizontal, 2)
+                Image(systemSymbol: .linkCircle)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: Defaults[.displayMore] ? 25 : 20)
+                    .foregroundStyle(.primary, .secondary)
+                if let title = metadata?.title {
+                    Text(title)
+                        .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
+                        .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
+                        .padding(.horizontal, 5)
+                        .minimumScaleFactor(0.9)
+                } else {
+                    Text(metadata?.url?.host ?? "No URL")
+                        .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
+                        .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
+                        .padding(.horizontal, 2)
+                        .minimumScaleFactor(0.9)
+                }
             }
         }
-        .offset(y: Defaults[.hideTag] ? 0 : -10)
+        .offset(y: Defaults[.hideTag] ? 0 : -12.5)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
 
@@ -156,16 +184,18 @@ struct WebLinkPreviewPage: View {
                         .foregroundColor(dominantColor.isLight ? .black : .white.opacity(0.9))
                         .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
                         .padding(.horizontal, 2)
+                        .minimumScaleFactor(0.9)
                 } else {
                     Text(metadata?.url?.host ?? "No URL")
                         .font(.system(size: Defaults[.displayMore] ? 10 : 7.5))
                         .foregroundColor(dominantColor.isLight ? .black : .white.opacity(0.9))
                         .lineLimit(Defaults[.hideTag] ? 2 : Defaults[.displayMore] ? 2 : 1)
                         .padding(.horizontal, 2)
+                        .minimumScaleFactor(0.9)
                 }
             }
         }
-        .offset(y: Defaults[.hideTag] ? 0 : -10)
+        .offset(y: Defaults[.hideTag] ? 0 : -12.5)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
     }
     
@@ -194,7 +224,6 @@ struct WebLinkPreviewPage: View {
                 }
             }
         } else {
-            print("Provider cannot load NSImage")
             showWebView = true
         }
     }
@@ -213,7 +242,6 @@ struct WebLinkPreviewPage: View {
                 }
             }
         } else {
-            print("Provider cannot load NSImage")
             showWebView = true
         }
     }

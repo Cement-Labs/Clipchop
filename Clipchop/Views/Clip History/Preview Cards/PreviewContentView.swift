@@ -8,6 +8,7 @@
 import SwiftUI
 import AppKit
 import Defaults
+import SFSafeSymbols
 
 import QuickLook
 import QuickLookThumbnailing
@@ -162,15 +163,68 @@ struct PreviewContentView: View, Equatable {
     }
     
     private func defaultView() -> some View {
-        Text("Other")
-            .font(.system(size: 10).monospaced())
-            .foregroundColor(.primary)
+        GeometryReader { geometry in
+            if geometry.size.width < 180 {
+                VStack(spacing: 3.5) {
+                    Image(systemSymbol: .questionmarkCircle)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: Defaults[.displayMore] ? 25 : 20)
+                        .foregroundStyle(.primary, .secondary)
+                    Text("Preview unavailable")
+                        .font(.system(size: 10))
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                }
+                .offset(y: Defaults[.hideTag] ? 0 : -12.5)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                VStack(spacing: 3.5) {
+                    Image(systemSymbol: .questionmarkCircle)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: Defaults[.displayMore] ? 25 : 20)
+                        .foregroundStyle(.primary, .secondary)
+                    Text("Preview unavailable")
+                        .font(.system(size: 10))
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                        .padding(.horizontal, 5)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+        }
     }
     
     private func loadingView() -> some View {
-        Text("Loading...")
-            .font(.system(size: 10).monospaced())
-            .foregroundColor(.white)
+
+        GeometryReader { geometry in
+            if geometry.size.width < 180 {
+                VStack(spacing: 3.5) {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .frame(maxWidth: Defaults[.displayMore] ? 25 : 20)
+                        .foregroundStyle(.primary, .secondary)
+                    Text("Loading...")
+                        .font(.system(size: 10))
+                        .padding(.horizontal, 5)
+                }
+                .offset(y: Defaults[.hideTag] ? 0 : -12.5)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                VStack(spacing: 3.5) {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .frame(maxWidth: Defaults[.displayMore] ? 25 : 20)
+                        .foregroundStyle(.primary, .secondary)
+                    Text("Loading...")
+                        .font(.system(size: 10))
+                        .padding(.horizontal, 5)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+        }
     }
     
     // MARK: - Thumbnail Loading

@@ -31,7 +31,6 @@ struct CollapsedPages: View {
     @Binding var movethebutton: Bool
 
     @Default(.keySwitcher) var keySwitcher
-    @Default(.preferredColorScheme) private var preferredColorScheme
 
     var clipboardModelEditor: ClipboardModelEditor
     var apps: InstalledApps
@@ -200,7 +199,6 @@ struct CollapsedPages: View {
             }
         }
         .overlay(backToTop().padding([.bottom, .trailing], 10).shadow(radius: 15), alignment: .bottomTrailing)
-        .preferredColorScheme(preferredColorScheme.colorScheme)
         .frame(width: Defaults[.displayMore] ? 700 : 500, height: Defaults[.displayMore] ? 140 : 100)
         .onReceive(.panelDidLogout) { _ in
             cleanupEventMonitors()

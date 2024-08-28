@@ -22,7 +22,6 @@ struct LuminareGeneralSettings: View {
     @State private var showPopoverMore = false
     @State private var displayMoreChanged = false
     
-    @Default(.preferredColorScheme) private var preferredColorScheme
     @Default(.menuBarItemEnabled) private var menuBarItemEnabled
     @Default(.sendNotification) private var sendNotification
     @Default(.autoCloseTimeout) private var autoCloseTimeout
@@ -194,7 +193,6 @@ Full Disk Access is needed to generate file previews.
                 }
             }
         }
-        .preferredColorScheme(preferredColorScheme.colorScheme)
     }
     
     @ViewBuilder

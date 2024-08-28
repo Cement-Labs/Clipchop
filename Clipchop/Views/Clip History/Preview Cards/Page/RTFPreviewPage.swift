@@ -45,7 +45,6 @@ struct RTFPreviewPage: View {
     var body: some View {
         VStack(alignment: .center){
             Text(attributedText)
-                .font(.system(size: 12))
                 .minimumScaleFactor(0.8)
                 .lineLimit(10)
                 .fixedSize(horizontal: false, vertical: false)
