@@ -1,5 +1,5 @@
 {
-  "originHash" : "40db1801c04d7d0a92fed92550bf86ab1a2132225cbe17d31131f27964393aaf",
+  "originHash" : "4729f3c6cd2158907a5b1e656e405b44cd642707b3dd75aad824849595884dec",
   "pins" : [
     {
       "identity" : "defaults",
@@ -116,6 +116,15 @@
       "state" : {
         "revision" : "668a65735751432b640260c56dfa621cec568368",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "swiftui-variadic-views",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-variadic-views",
+      "state" : {
+        "revision" : "af67d0e85bd2b499fbfb4cda834117e7c52b12b0",
+        "version" : "1.0.0"
       }
     },
     {
